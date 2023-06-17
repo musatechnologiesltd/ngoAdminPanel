@@ -32,7 +32,7 @@ class RegisterController extends Controller
 
     public function newRegistrationList(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('register_new_list')) {
+        if (is_null($this->user) || !$this->user->can('register_list_view')) {
             abort(403, 'Sorry !! You are Unauthorized to view !');
         }
 
@@ -46,7 +46,7 @@ class RegisterController extends Controller
 
     public function revisionRegistrationList(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('register_new_list')) {
+        if (is_null($this->user) || !$this->user->can('register_list_view')) {
             abort(403, 'Sorry !! You are Unauthorized to view !');
         }
 
@@ -60,7 +60,7 @@ class RegisterController extends Controller
 
     public function alreadyRegistrationList(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('register_new_list')) {
+        if (is_null($this->user) || !$this->user->can('register_list_view')) {
             abort(403, 'Sorry !! You are Unauthorized to view !');
         }
 
@@ -81,8 +81,8 @@ class RegisterController extends Controller
         try {
 
             $r_status = DB::table('ngo_statuses')->where('user_id',$id)->value('status');
-            $name_change_status = DB::table('name_changes')->where('user_id',$id)->value('status');
-            $renew_status = DB::table('renews')->where('user_id',$id)->value('status');
+            $name_change_status = DB::table('ngo_name_changes')->where('user_id',$id)->value('status');
+            $renew_status = DB::table('ngo_renews')->where('user_id',$id)->value('status');
 
 
             $all_data_for_new_list_all = DB::table('ngo_statuses')->where('user_id',$id)->first();
@@ -94,27 +94,27 @@ class RegisterController extends Controller
             $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('user_id',$all_data_for_new_list_all->user_id)->get();
 
 
- $duration_list_all1 = DB::table('durations')->where('user_id',$all_data_for_new_list_all->user_id)->value('end_date');
-            $duration_list_all = DB::table('durations')->where('user_id',$all_data_for_new_list_all->user_id)->value('start_date');
+ $duration_list_all1 = DB::table('ngo_durations')->where('user_id',$all_data_for_new_list_all->user_id)->value('end_date');
+            $duration_list_all = DB::table('ngo_durations')->where('user_id',$all_data_for_new_list_all->user_id)->value('start_date');
 
             $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('user_id',$all_data_for_new_list_all->user_id)->get();
             $form_ngo_data_doc = DB::table('ngo_other_docs')->where('user_id',$all_data_for_new_list_all->user_id)->get();
 
             $users_info = DB::table('users')->where('id',$all_data_for_new_list_all->user_id)->first();
 
-            $all_source_of_fund = DB::table('form_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
 
-            $all_partiw = DB::table('form_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
 
 
-            $get_all_data_adviser_bank = DB::table('form_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
             ->first();
 
 
-            $get_all_data_other= DB::table('form_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
             ->get();
 
-            $get_all_data_adviser = DB::table('form_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
     ->get();
 
 
@@ -203,7 +203,7 @@ class RegisterController extends Controller
 
            $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
 
-           $duration_list_all = DB::table('durations')->where('user_id',$user_id)->latest()->first();
+           $duration_list_all = DB::table('ngo_durations')->where('user_id',$user_id)->latest()->first();
 
            //dd($user_id);
 
@@ -263,7 +263,7 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
     ]);
 
 
-    DB::table('durations')->insert(
+    DB::table('ngo_durations')->insert(
         [
         'user_id' =>$get_user_id,
         'status' =>$request->status,
@@ -331,13 +331,13 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
 
     public function sourceOfFund($id){
 
-        $form_one_data = DB::table('form_one_source_of_funds')->where('id',$id)->value('letter_file');
+        $form_one_data = DB::table('fd_one_source_of_funds')->where('id',$id)->value('letter_file');
          return view('admin.registration_list.source_of_fund',compact('form_one_data'));
     }
 
     public function otherPdfView($id){
 
-        $form_one_data = DB::table('form_one_other_pdf_lists')->where('id',$id)->value('information_type');
+        $form_one_data = DB::table('fd_one_other_pdf_lists')->where('id',$id)->value('information_type');
          return view('admin.registration_list.other_pdf_view',compact('form_one_data'));
     }
 
