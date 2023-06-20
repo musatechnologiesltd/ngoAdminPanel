@@ -80,27 +80,27 @@ class RegisterController extends Controller
 
         try {
 
-            $r_status = DB::table('ngo_statuses')->where('user_id',$id)->value('status');
-            $name_change_status = DB::table('ngo_name_changes')->where('user_id',$id)->value('status');
-            $renew_status = DB::table('ngo_renews')->where('user_id',$id)->value('status');
+            $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$id)->value('status');
+            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$id)->value('status');
+            $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$id)->value('status');
 
 
-            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('user_id',$id)->first();
-            $form_one_data = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->first();
-            $form_eight_data = DB::table('form_eights')->where('user_id',$all_data_for_new_list_all->user_id)->get();
-            $form_member_data = DB::table('ngo_member_lists')->where('user_id',$all_data_for_new_list_all->user_id)->get();
+            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$id)->first();
+            $form_one_data = DB::table('fd_one_forms')->where('id',$id)->first();
+            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$id)->get();
+            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$id)->get();
 
 
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('user_id',$all_data_for_new_list_all->user_id)->get();
+            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$id)->get();
 
 
- $duration_list_all1 = DB::table('ngo_durations')->where('user_id',$all_data_for_new_list_all->user_id)->value('end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('user_id',$all_data_for_new_list_all->user_id)->value('start_date');
+ $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$id)->value('ngo_duration_end_date');
+            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$id)->value('ngo_duration_start_date');
 
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('user_id',$all_data_for_new_list_all->user_id)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('user_id',$all_data_for_new_list_all->user_id)->get();
+            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$id)->get();
+            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$id)->get();
 
-            $users_info = DB::table('users')->where('id',$all_data_for_new_list_all->user_id)->first();
+            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
 
             $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
 
@@ -203,7 +203,7 @@ class RegisterController extends Controller
 
            $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
 
-           $duration_list_all = DB::table('ngo_durations')->where('user_id',$user_id)->latest()->first();
+           $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
 
            //dd($user_id);
 
@@ -239,7 +239,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
     'status' => $request->status
 ]);
 
-$get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_id');
+$get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_one_form_id');
 
 
 
@@ -257,7 +257,7 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
             $date = date('Y-m-d');
     $newDate = date('Y-m-d', strtotime($date. ' + 10 years'));
 
-    DB::table('fd_one_forms')->where('user_id',$get_user_id)
+    DB::table('fd_one_forms')->where('id',$get_user_id)
     ->update([
         'registration_number' => $request->reg_no_get_from_admin
     ]);
@@ -265,10 +265,10 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
 
     DB::table('ngo_durations')->insert(
         [
-        'user_id' =>$get_user_id,
-        'status' =>$request->status,
-        'end_date' =>$newDate,
-        'start_date' =>date('Y-m-d'),
+        'fd_one_form_id' =>$get_user_id,
+        'ngo_status' =>$request->status,
+        'ngo_duration_end_date' =>$newDate,
+        'ngo_duration_start_date' =>date('Y-m-d'),
         'created_at' =>Carbon::now(),
         'updated_at' =>Carbon::now(),
     ]);
@@ -304,18 +304,18 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
 
         if($id = 'plan'){
 
-            $form_one_data = DB::table('fd_one_forms')->where('user_id',$main_id)->value('plan_of_operation');
+            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('plan_of_operation');
 
         }elseif($id = 'invoice'){
 
-            $form_one_data = DB::table('fd_one_forms')->where('user_id',$main_id)->value('attach_the__supporting_papers');
+            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('attach_the__supporting_papers');
 
         }elseif($id = 'treasury_bill'){
 
-            $form_one_data = DB::table('fd_one_forms')->where('user_id',$main_id)->value('board_of_revenue_on_fees');
+            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('board_of_revenue_on_fees');
 
         }elseif($id = 'final_pdf'){
-            $form_one_data = DB::table('fd_one_forms')->where('user_id',$main_id)->value('s_pdf');
+            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('s_pdf');
         }
 
         return view('admin.registration_list.form_one_pdf',compact('form_one_data'));
@@ -324,7 +324,7 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
 
     public function formEightPdf($main_id){
 
-        $form_one_data = DB::table('form_eights')->where('user_id',$main_id)->value('s_pdf');
+        $form_one_data = DB::table('form_eights')->where('fd_one_form_id',$main_id)->value('verified_form_eight');
 
         return view('admin.registration_list.form_eight_pdf',compact('form_one_data'));
     }
@@ -337,21 +337,22 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('user_
 
     public function otherPdfView($id){
 
-        $form_one_data = DB::table('fd_one_other_pdf_lists')->where('id',$id)->value('information_type');
+        $form_one_data = DB::table('fd_one_other_pdf_lists')->where('id',$id)->value('information_pdf');
          return view('admin.registration_list.other_pdf_view',compact('form_one_data'));
     }
 
 
     public function ngoMemberDocPdfView($id){
 
-        $form_one_data = DB::table('ngo_member_nid_photos')->where('id',$id)->value('person_nid_copy');
+        $form_one_data = DB::table('ngo_member_nid_photos')->where('id',$id)->value('member_nid_copy');
+
          return view('admin.registration_list.ngo_member_doc__pdf_view',compact('form_one_data'));
     }
 
 
     public function ngoDocPdfView($id){
 
-        $form_one_data = DB::table('ngo_other_docs')->where('id',$id)->value('primary_portal');
+        $form_one_data = DB::table('ngo_other_docs')->where('id',$id)->value('pdf_file_list');
          return view('admin.registration_list.ngo_doc__pdf_view',compact('form_one_data'));
     }
 

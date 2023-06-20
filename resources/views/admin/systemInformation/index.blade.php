@@ -40,7 +40,8 @@ System Information
                                                              </div>
                                                              <div class="modal-body">
                                                                  <form method="post" action="{{ route('systemInformation.store') }}" enctype="multipart/form-data">
-                                                                     @csrf
+
+                                                                    @csrf
 
                                                                      <div class="row">
                                                                          <div class="col-md-6">
@@ -157,13 +158,13 @@ System Information
                             <tbody>
                                 @foreach($systemInformation as $key=>$allSystemInformation)
                                 <tr>
-                                    <td><img src="{{ asset('/') }}{{ $allSystemInformation->logo }}" style="height:20px;"/></td>
-                                    <td><img src="{{ asset('/') }}{{ $allSystemInformation->icon }}" style="height:20px;"/></td>
-                                    <td>{{ $allSystemInformation->name }}</td>
-                                    <td>{{ $allSystemInformation->phone }}</td>
-                                    <td>{{ $allSystemInformation->email }}</td>
-                                    <td>{{ $allSystemInformation->url }}</td>
-                                    <td>{{ $allSystemInformation->address }}</td>
+                                    <td><img src="{{ asset('/') }}{{ $allSystemInformation->system_logo }}" style="height:20px;"/></td>
+                                    <td><img src="{{ asset('/') }}{{ $allSystemInformation->system_icon }}" style="height:20px;"/></td>
+                                    <td>{{ $allSystemInformation->system_name }}</td>
+                                    <td>{{ $allSystemInformation->system_phone }}</td>
+                                    <td>{{ $allSystemInformation->system_email }}</td>
+                                    <td>{{ $allSystemInformation->system_url }}</td>
+                                    <td>{{ $allSystemInformation->system_address }}</td>
                                     <td>
                                         <a data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key+1 }}" class="btn btn-primary waves-light waves-effect  btn-sm"><i class="fa fa-pencil"></i></a>
 
@@ -183,7 +184,7 @@ System Information
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
                                                                     <label for="formrow-email-input" class="form-label"> Name</label>
-                                                                    <input type="text" name="name" value="{{ $allSystemInformation->name }}"  class="form-control" placeholder="Company Name" required>
+                                                                    <input type="text" name="name" value="{{ $allSystemInformation->system_name }}"  class="form-control" placeholder="Company Name" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
@@ -191,7 +192,7 @@ System Information
                                                                 <div class="mb-4">
                                                                     <label for="formFile" class="form-label"> Logo</label>
                                                                     <input name="logo" value="" class="form-control" type="file" id="formFile" >
-                                                                    <img src="{{ asset('/') }}{{ $allSystemInformation->logo }}" style="height:20px;"/>
+                                                                    <img src="{{ asset('/') }}{{ $allSystemInformation->system_logo }}" style="height:20px;"/>
 
                                                                 </div>
                                                             </div>
@@ -201,7 +202,7 @@ System Information
                                                                 <div class="mb-4">
                                                                     <label for="formFile" class="form-label"> Icon</label>
                                                                     <input name="icon" value="" class="form-control" type="file" id="formFile" >
-                                                                    <img src="{{ asset('/') }}{{ $allSystemInformation->icon }}" style="height:20px;"/>
+                                                                    <img src="{{ asset('/') }}{{ $allSystemInformation->system_icon }}" style="height:20px;"/>
                                                                 </div>
                                                             </div>
 
@@ -214,14 +215,14 @@ System Information
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
                                                                     <label for="formrow-inputZip" class="form-label">Phone Number</label>
-                                                                    <input name="phone" value="{{ $allSystemInformation->phone }}"   type="text" class="form-control" id="formrow-inputZip" placeholder="Phone Number" required>
+                                                                    <input name="phone" value="{{ $allSystemInformation->system_phone }}"   type="text" class="form-control" id="formrow-inputZip" placeholder="Phone Number" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
                                                                     <label for="formrow-inputZip" class="form-label">Email</label>
-                                                                    <input name="email" value="{{ $allSystemInformation->email }}"   type="email" class="form-control" id="formrow-inputZip" placeholder="Email id" required>
+                                                                    <input name="email" value="{{ $allSystemInformation->system_email }}"   type="email" class="form-control" id="formrow-inputZip" placeholder="Email id" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
@@ -230,7 +231,7 @@ System Information
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
                                                                     <label for="formrow-inputZip" class="form-label">Url</label>
-                                                                    <input name="url" value="{{ $allSystemInformation->url }}"  type="text" class="form-control" id="formrow-inputZip" placeholder="Url" required>
+                                                                    <input name="url" value="{{ $allSystemInformation->system_url }}"  type="text" class="form-control" id="formrow-inputZip" placeholder="Url" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
@@ -239,7 +240,7 @@ System Information
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
                                                                     <label for="formrow-email-input" class="form-label">Address</label>
-                                                                    <input name="address" value="{{ $allSystemInformation->address }}"   type="text" class="form-control" id="formrow-email-input" placeholder="Address" required>
+                                                                    <input name="address" value="{{ $allSystemInformation->system_address }}"   type="text" class="form-control" id="formrow-email-input" placeholder="Address" required>
                                                                 </div>
                                                             </div>
 

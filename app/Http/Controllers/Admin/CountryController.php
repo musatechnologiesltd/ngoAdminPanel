@@ -42,7 +42,7 @@ class CountryController extends Controller
         }
 
         DB::table('countries')->insert(
-            ['name_english' =>$request->name, 'name_bangla' =>$request->name_bn,'people_english' =>$request->city_eng, 'people_bangla' =>$request->city_bangla]
+            ['country_name_english' =>$request->name, 'country_name_bangla' =>$request->name_bn,'country_people_english' =>$request->city_eng, 'country_people_bangla' =>$request->city_bangla]
             );
 
 
@@ -59,7 +59,7 @@ class CountryController extends Controller
         }
         DB::table('countries')
             ->where('id', $id)
-            ->update(['name_english' =>$request->name, 'name_bangla' =>$request->name_bn,'people_english' =>$request->city_eng, 'people_bangla' =>$request->city_bangla]);
+            ->update(['country_name_english' =>$request->name, 'country_name_bangla' =>$request->name_bn,'country_people_english' =>$request->city_eng, 'country_people_bangla' =>$request->city_bangla]);
 
             return redirect()->back()->with('info','Updated Successfully');
     }

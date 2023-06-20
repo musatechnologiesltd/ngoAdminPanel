@@ -56,11 +56,11 @@ class SystemInformationController extends Controller
 
 
         $systemInformation =  new SystemInformation();
-        $systemInformation->name = $request->name;
-        $systemInformation->email = $request->email;
-        $systemInformation->address = $request->address;
-        $systemInformation->url = $request->url;
-        $systemInformation->phone = $request->phone;
+        $systemInformation->system_name = $request->name;
+        $systemInformation->system_email = $request->email;
+        $systemInformation->system_address = $request->address;
+        $systemInformation->system_url = $request->url;
+        $systemInformation->system_phone = $request->phone;
          if ($request->hasfile('logo')) {
 
 
@@ -72,7 +72,7 @@ class SystemInformationController extends Controller
             $img=Image::make($productImage)->resize(187,32);
             $img->save($imageUrl);
 
-             $systemInformation->logo =  'public/uploads/'.$imageName;
+             $systemInformation->system_logo =  'public/uploads/'.$imageName;
 
         }
         if ($request->hasfile('icon')) {
@@ -86,7 +86,7 @@ class SystemInformationController extends Controller
             $img=Image::make($productImage)->resize(50,50);
             $img->save($imageUrl);
 
-             $systemInformation->icon =  'public/uploads/'.$imageName;
+             $systemInformation->system_icon =  'public/uploads/'.$imageName;
 
         }
         $systemInformation->save();
@@ -109,11 +109,11 @@ class SystemInformationController extends Controller
 
 
         $systemInformation = SystemInformation::find($id);
-        $systemInformation->name = $request->name;
-        $systemInformation->email = $request->email;
-        $systemInformation->address = $request->address;
-        $systemInformation->phone = $request->phone;
-        $systemInformation->url = $request->url;
+        $systemInformation->system_name = $request->name;
+        $systemInformation->system_email = $request->email;
+        $systemInformation->system_address = $request->address;
+        $systemInformation->system_phone = $request->phone;
+        $systemInformation->system_url = $request->url;
          if ($request->hasfile('logo')) {
 
 
@@ -125,7 +125,7 @@ class SystemInformationController extends Controller
             $img=Image::make($productImage)->resize(187,32);
             $img->save($imageUrl);
 
-             $systemInformation->logo =  'public/uploads/'.$imageName;
+             $systemInformation->system_logo =  'public/uploads/'.$imageName;
 
         }
         if ($request->hasfile('icon')) {
@@ -139,7 +139,7 @@ class SystemInformationController extends Controller
             $img=Image::make($productImage)->resize(50,50);
             $img->save($imageUrl);
 
-             $systemInformation->icon =  'public/uploads/'.$imageName;
+             $systemInformation->system_icon =  'public/uploads/'.$imageName;
 
         }
         $systemInformation->save();

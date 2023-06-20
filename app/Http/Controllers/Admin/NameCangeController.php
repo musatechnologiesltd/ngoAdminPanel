@@ -94,8 +94,8 @@ class NameCangeController extends Controller
                 $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
 
 
-     $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('end_date');
-                $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('start_date');
+     $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
+                $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
 
                 $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
                 $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
@@ -141,13 +141,13 @@ class NameCangeController extends Controller
          ]);
 
 
-        $get_user_id = DB::table('ngo_name_changes')->where('id',$request->id)->value('user_id');
+        $get_user_id = DB::table('ngo_name_changes')->where('id',$request->id)->value('fd_one_form_id');
 
 
         $present_name_eng = DB::table('ngo_name_changes')->where('id',$request->id)->value('present_name_eng');
         $present_name_ban = DB::table('ngo_name_changes')->where('id',$request->id)->value('present_name_ban');
 
-        $form_one_data = DB::table('fd_one_forms')->where('user_id',$get_user_id)->first();
+        $form_one_data = DB::table('fd_one_forms')->where('id',$get_user_id)->first();
 
 
         if($request->status == 'Accepted'){

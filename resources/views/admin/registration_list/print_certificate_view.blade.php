@@ -105,8 +105,8 @@
         </table>
         <table class="forth_table">
             <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->start_date ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->end_date ))}}</td>
+                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
             </tr>
         </table>
         <table class="fifth_table">

@@ -52,21 +52,21 @@ Ngo Name change List | {{ $ins_name }}
 
                                 <?php
 
-                                $reg_number = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('registration_number');
-                                $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$all_data_for_new_list_all->user_id)->value('ngo_type');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
+                         $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name_ban');
+                                    $reg_name = $reg_number->organization_name_ban;
 
                                   }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name');
+                                    $reg_name = $reg_number->organization_name;
                                   }
-                                $reg_address = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_address');
+                                $reg_address =$reg_number->organization_address;
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number }}</td>
+                                <td>#{{ $reg_number->registration_number }}</td>
                                 <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
                                     <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->present_name_eng }}</td>
                                 <td>Yes</td>
@@ -75,7 +75,7 @@ Ngo Name change List | {{ $ins_name }}
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$all_data_for_new_list_all->user_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$all_data_for_new_list_all->id) }}';">View</button>
 @endif
 @if (Auth::guard('admin')->user()->can('register_list_update'))
 
@@ -83,7 +83,7 @@ Ngo Name change List | {{ $ins_name }}
 
                                     <?php
 
-                                    $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all->user_id)->value('email');
+                                    $get_email_from_user = DB::table('users')->where('id',$reg_number->user_id)->value('email');
 
                                             ?>
                                     <!-- Modal -->

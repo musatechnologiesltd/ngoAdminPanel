@@ -77,10 +77,10 @@ Country List | {{ $ins_name }}
 
                                             </td>
 
-                                                <td>{{ $user->name_english }}</td>
-                                                <td>{{ $user->name_bangla }}</td>
-                                                <td>{{ $user->people_english }}</td>
-                                                <td>{{ $user->people_bangla }}</td>
+                                                <td>{{ $user->country_name_english }}</td>
+                                                <td>{{ $user->country_name_bangla }}</td>
+                                                <td>{{ $user->country_people_english }}</td>
+                                                <td>{{ $user->country_people_bangla }}</td>
                                                 <td>
                                                   @if (Auth::guard('admin')->user()->can('countryUpdate'))
                                                       <button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg{{ $user->id }}"
@@ -103,25 +103,25 @@ Country List | {{ $ins_name }}
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12 col-sm-12">
                                                                                     <label for="name">English Name</label>
-                                                                    <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Enter Name" value="{{ $user->name_english }}">
+                                                                    <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Enter Name" value="{{ $user->country_name_english }}">
 
 
                                                                                 </div>
                                                                                 <div class="form-group col-md-12 col-sm-12">
                                                                                     <label for="email">Bangla Name</label>
-                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="name_bn" placeholder="Enter Bangla Name" value="{{ $user->name_bangla }}">
+                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="name_bn" placeholder="Enter Bangla Name" value="{{ $user->country_name_bangla }}">
                                                                                 </div>
 
 
 
                                                                                 <div class="form-group col-md-12 col-sm-12">
                                                                                     <label for="email">Citizenship</label>
-                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_eng" placeholder="Enter Citizenship" value="{{ $user->people_english }}">
+                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_eng" placeholder="Enter Citizenship" value="{{ $user->country_people_english }}">
                                                                                 </div>
 
                                                                                 <div class="form-group col-md-12 col-sm-12">
                                                                                     <label for="email">Citizenship(Bangla)</label>
-                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_bangla" placeholder="Enter Citizenship(Bangla)" value="{{ $user->people_bangla }}">
+                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_bangla" placeholder="Enter Citizenship(Bangla)" value="{{ $user->country_people_bangla }}">
                                                                                 </div>
 
 

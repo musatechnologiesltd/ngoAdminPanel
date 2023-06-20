@@ -96,14 +96,14 @@ class RenewController extends Controller
             $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
 
 
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$all_data_for_new_list_all->user_id)->get();
+            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
 
 
- $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$all_data_for_new_list_all->user_id)->value('end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$all_data_for_new_list_all->user_id)->value('start_date');
+ $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->value('ngo_duration_end_date');
+            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->value('ngo_duration_start_date');
 
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$all_data_for_new_list_all->user_id)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$all_data_for_new_list_all->user_id)->get();
+            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
+            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
 
             $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
 
@@ -149,7 +149,7 @@ class RenewController extends Controller
             'status' => $request->status
         ]);
 
-$get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('user_id');
+$get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_form_id');
 
 
         if($request->status == 'Accepted'){
@@ -159,10 +159,10 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('user_id
 
     DB::table('ngo_durations')->insert(
         [
-        'user_id' =>$get_user_id,
-        'status' =>$request->status,
-        'end_date' =>$newDate,
-        'start_date' =>date('Y-m-d'),
+        'fd_one_form_id' =>$get_user_id,
+        'ngo_status' =>$request->status,
+        'ngo_duration_end_date' =>$newDate,
+        'ngo_duration_start_date' =>date('Y-m-d'),
         'created_at' =>Carbon::now(),
         'updated_at' =>Carbon::now(),
     ]);

@@ -173,23 +173,25 @@ Dashboard
                                 @foreach($all_data_for_new_list as $all_data_for_new_list_all)
 
                                 <?php
-                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$all_data_for_new_list_all->user_id)->value('ngo_type');
+
+                                $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
+                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name_ban');
+                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
 
                                   }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name');
+                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
                                   }
 
                                   ?>
 
                                 <?php
 
-                                $reg_number = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('registration_number');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
 
-                                $reg_address = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_address');
+                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
 
                                 ?>
                             <tr>
@@ -206,7 +208,7 @@ Dashboard
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->user_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
 @endif
 @if (Auth::guard('admin')->user()->can('register_list_update'))
 
@@ -224,7 +226,7 @@ Dashboard
 
         <?php
 
-$get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all->user_id)->value('email');
+$get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('email');
 
         ?>
         <div class="modal-body">
@@ -295,18 +297,18 @@ $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all
                                 @foreach($all_data_for_new_list_name_change as $all_data_for_new_list_all)
 
                                 <?php
-
-                                $reg_number = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('registration_number');
-                         $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$all_data_for_new_list_all->user_id)->value('ngo_type');
+ $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
+                         $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name_ban');
+                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
 
                                   }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name');
+                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
                                   }
-                                $reg_address = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_address');
+                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
 
                                 ?>
                             <tr>
@@ -325,7 +327,7 @@ $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->user_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
 @endif
 @if (Auth::guard('admin')->user()->can('register_list_update'))
 
@@ -333,7 +335,7 @@ $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all
 
                                     <?php
 
-                                    $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all->user_id)->value('email');
+                                    $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('email');
 
                                             ?>
                                     <!-- Modal -->
@@ -405,18 +407,18 @@ $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all
                                 @foreach($all_data_for_new_list_renew as $all_data_for_new_list_all)
 
                                 <?php
-
-                                $reg_number = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('registration_number');
-                                 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$all_data_for_new_list_all->user_id)->value('ngo_type');
+ $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
+                                 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id', $fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name_ban');
+                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
 
                                   }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_name');
+                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
                                   }
-                                $reg_address = DB::table('fd_one_forms')->where('user_id',$all_data_for_new_list_all->user_id)->value('organization_address');
+                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
 
                                 ?>
                             <tr>
@@ -432,7 +434,7 @@ $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->user_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
 @endif
 @if (Auth::guard('admin')->user()->can('register_list_update'))
 
@@ -440,7 +442,7 @@ $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all
 
                                     <?php
 
-                                    $get_email_from_user = DB::table('users')->where('id',$all_data_for_new_list_all->user_id)->value('email');
+                                    $get_email_from_user = DB::table('users')->where('id', $fdOneFormId)->value('email');
 
                                             ?>
                                     <!-- Modal -->

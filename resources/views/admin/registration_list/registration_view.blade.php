@@ -214,12 +214,12 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td>নিবন্ধন নম্বর</td>
                                                     <td>:
 
-                                                      @if($form_one_data->registration_number_given_by_admin== 0)
-
-
-                                                      @else
+                                                      @if(empty($form_one_data->registration_number))
 
                                                       {{ $form_one_data->registration_number_given_by_admin}}
+                                                      @else
+
+                                                      {{ $form_one_data->registration_number}}
 
                                                       @endif
 
@@ -654,14 +654,14 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 @foreach($form_member_data as $key=>$all_form_member_data)
                                                 <tr>
                                                         <td>{{ $key+1 }}</td>
-                                                    <td>{{ $all_form_member_data->name }}</td>
-                                                    <td><h6> NID: {{ $all_form_member_data->nid_no }} </h6><span>DOB: {{ $all_form_member_data->dob }} </span>
+                                                    <td>{{ $all_form_member_data->member_name }}</td>
+                                                    <td><h6> NID: {{ $all_form_member_data->member_nid_no }} </h6><span>DOB: {{ $all_form_member_data->member_dob }} </span>
                                                     </td>
-                                                    <td>{{ $all_form_member_data->phone }}</td>
-                                                    <td>{{ $all_form_member_data->father_name }} </td>
-                                                    <td>{{ $all_form_member_data->present_address }}</td>
-                                                    <td>{{ $all_form_member_data->permanent_address }}</td>
-                                                    <td>{{ $all_form_member_data->name_supouse }}</td>
+                                                    <td>{{ $all_form_member_data->member_mobile }}</td>
+                                                    <td>{{ $all_form_member_data->member_father_name }} </td>
+                                                    <td>{{ $all_form_member_data->member_present_address }}</td>
+                                                    <td>{{ $all_form_member_data->member_permanent_address }}</td>
+                                                    <td>{{ $all_form_member_data->member_name_supouse }}</td>
 
                                                     <td>
 
@@ -693,33 +693,33 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 </tr>
                                                 <tr>
                                                     <td>পরিচালন পরিকল্পনা</td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->user_id,'id'=>'plan']) }}" >
+                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
                                                         <i class="fa fa-eye"></i>
                                                     </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>চালানের কপি</td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->user_id,'id'=>'invoice']) }}">
+                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td>ট্রেজারি চালানের মূলকপি</td>
-                                                    <td> <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->user_id,'id'=>'treasury_bill']) }}">
+                                                    <td> <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ ফরম - ০১ এর ফাইনাল কপি </td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->user_id,'id'=>'final_pdf']) }}">
+                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'final_pdf']) }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ ফরম - ০৮ এর ফাইনাল কপি</td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formEightPdf',['main_id'=>$form_one_data->user_id]) }}">
+                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formEightPdf',['main_id'=>$form_one_data->id]) }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a></td>
                                                 </tr>
@@ -732,6 +732,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                         <i class="fa fa-eye"></i>
                                                     </a>({{ $all_get_all_source_of_fund_data->name }})</td>
                                                 </tr>
+
                                                 @endforeach
 
                                                 @foreach($get_all_data_other as $key=>$all_get_all_data_other)
@@ -748,7 +749,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
                                             <tr>
                                                 <td>এনজিও  কর্মকর্তাদের  নথি {{ str_replace($engDATE, $bangDATE,$key+1) }}</td>
-                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_get_all_data_other->id ) }}">
+                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a></td>
                                             </tr>
