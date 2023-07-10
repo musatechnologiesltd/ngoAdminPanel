@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CivilController;
 use App\Http\Controllers\Admin\NameCangeController;
 use App\Http\Controllers\Admin\RenewController;
+use App\Http\Controllers\Admin\Fd9Controller;
+use App\Http\Controllers\Admin\Fd9OneController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +56,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('country', CountryController::class);
     Route::resource('civilInfo', CountryController::class);
 
+    Route::resource('fd9Form', Fd9Controller::class);
+    Route::resource('fd9OneForm', Fd9OneController::class);
 
 
 

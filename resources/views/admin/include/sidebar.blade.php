@@ -104,6 +104,22 @@
 
 @endif
 
+@if ($usr->can('fd9FormAdd') || $usr->can('fd9FormView') || $usr->can('fd9FormDelete') || $usr->can('fd9FormUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd9Form.index') || Route::is('fd9Form.show') ? 'active' : '' }}" href="{{ route('fd9Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>Fd9 (N-Visa)</span>
+    </a>
+</li>
+@endif
+@if ($usr->can('fd9OneFormAdd') || $usr->can('fd9OneFormView') || $usr->can('fd9OneFormDelete') || $usr->can('fd9OneFormUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd9OneForm.index') || Route::is('fd9OneForm.show') ? 'active' : '' }}" href="{{ route('fd9OneForm.index') }}">
+        <i data-feather="airplay"></i>
+        <span>Fd9.1 (Work Permit)</span>
+    </a>
+</li>
+@endif
 
                     <li class="sidebar-main-title">
                         <div>

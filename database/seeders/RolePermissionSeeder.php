@@ -48,6 +48,24 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'fd9Form',
+                'permissions' => [
+                    'fd9FormAdd',
+                    'fd9FormView',
+                    'fd9FormDelete',
+                    'fd9FormUpdate',
+                ]
+            ],
+            [
+                'group_name' => 'fd9OneForm',
+                'permissions' => [
+                    'fd9OneFormAdd',
+                    'fd9OneFormView',
+                    'fd9OneFormDelete',
+                    'fd9OneFormUpdate',
+                ]
+            ],
+            [
                 'group_name' => 'nameChange',
                 'permissions' => [
                     'name_change_add',
