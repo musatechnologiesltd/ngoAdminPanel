@@ -40,14 +40,13 @@ class SettingController extends Controller
 
         $time_dy = time().date("Ymd");
         $admin =  Admin::find($request->id);
-        $admin->name = $request->name;
+        $admin->admin_name = $request->admin_name;
         $admin->email = $request->email;
-        $admin->position = $request->position;
-        $admin->phone = $request->phone;
-         if ($request->hasfile('image')) {
+        $admin->admin_mobile = $request->admin_mobile;
+         if ($request->hasfile('admin_image')) {
 
 
-            $productImage = $request->file('image');
+            $productImage = $request->file('admin_image');
             $imageName = $time_dy.$productImage->getClientOriginalName();
             $directory = 'public/uploads/';
             $imageUrl = $directory.$imageName;
@@ -55,7 +54,22 @@ class SettingController extends Controller
             $img=Image::make($productImage)->resize(100,100);
             $img->save($imageUrl);
 
-             $admin->image =  'public/uploads/'.$imageName;
+             $admin->admin_image =  'public/uploads/'.$imageName;
+
+        }
+
+        if ($request->hasfile('admin_sign')) {
+
+
+            $productImage = $request->file('admin_sign');
+            $imageName = $time_dy.$productImage->getClientOriginalName();
+            $directory = 'public/uploads/';
+            $imageUrl = $directory.$imageName;
+
+            $img=Image::make($productImage)->resize(100,100);
+            $img->save($imageUrl);
+
+             $admin->admin_sign =  'public/uploads/'.$imageName;
 
         }
         $admin->save();

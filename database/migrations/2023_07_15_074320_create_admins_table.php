@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->string('admin_name');
+            $table->string('admin_name_ban');
             $table->string('admin_mobile');
-            $table->string('admin_position')->nullable();
-            $table->string('admin_department')->nullable();
+            $table->bigInteger('designation_list_id')->unsigned();
+            $table->foreign('designation_list_id')->references('id')->on('designation_lists')->onDelete('cascade');
+            $table->bigInteger('branch_id')->unsigned();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+           
             $table->string('admin_sign')->nullable();
             $table->string('admin_job_start_date')->nullable();
             $table->string('admin_job_end_date')->nullable();

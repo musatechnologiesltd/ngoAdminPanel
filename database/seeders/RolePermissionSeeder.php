@@ -57,6 +57,33 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'branch',
+                'permissions' => [
+                    'branchAdd',
+                    'branchView',
+                    'branchDelete',
+                    'branchUpdate',
+                ]
+            ],
+            [
+                'group_name' => 'designation',
+                'permissions' => [
+                    'designationAdd',
+                    'designationView',
+                    'designationDelete',
+                    'designationUpdate',
+                ]
+            ],
+            [
+                'group_name' => 'designationStep',
+                'permissions' => [
+                    'designationStepAdd',
+                    'designationStepView',
+                    'designationStepDelete',
+                    'designationStepUpdate',
+                ]
+            ],
+            [
                 'group_name' => 'fd9OneForm',
                 'permissions' => [
                     'fd9OneFormAdd',

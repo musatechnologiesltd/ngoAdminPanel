@@ -16,7 +16,9 @@ class UserSeeder extends Seeder
         if (is_null($user)) {
             $user = new Admin();
             $user->admin_name = "super admin";
-            $user->admin_position = "admin";
+            $user->admin_name_ban = "super admin ban";
+            $user->designation_list_id = 1;
+            $user->branch_id = 1;
             $user->email = "superadmin@gmail.com";
             $user->admin_mobile = "123456789";
             $user->password = Hash::make('12345678');

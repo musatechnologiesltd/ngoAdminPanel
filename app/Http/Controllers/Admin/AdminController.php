@@ -12,6 +12,9 @@ use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use File;
+use App\Models\Branch;
+use App\Models\DesignationList;
+use App\Models\DesignationStep;
 class AdminController extends Controller
 {
 
@@ -104,7 +107,7 @@ class AdminController extends Controller
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
 
-          
+
             $file = $request->file('image');
             $admins->admin_image =  CommonController::imageUpload($request,$file,$filePath);
 

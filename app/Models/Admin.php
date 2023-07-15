@@ -18,7 +18,9 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'admin_name','admin_mobile','admin_position','admin_department','admin_sign','admin_job_start_date','admin_job_end_date','admin_image', 'email', 'password'
+        'admin_name','admin_name_ban','admin_mobile','designation_list_id','branch_id',
+        'admin_sign','admin_job_start_date','admin_job_end_date','admin_image',
+        'email', 'password'
     ];
 
     /**
@@ -68,5 +70,18 @@ class Admin extends Authenticatable
             }
         }
         return $hasPermission;
+    }
+
+    public function branch()
+    {
+        return $this->hasOne(Branch::class,'branch_id');
+    }
+
+
+
+
+    public function designationList()
+    {
+        return $this->hasOne(DesignationList::class,'designation_list_id');
     }
 }

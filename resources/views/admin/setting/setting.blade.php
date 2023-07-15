@@ -57,24 +57,17 @@ Setting
                                                         <tr>
                                                             <th class="ps-0" scope="row">Full Name :</th>
                                                             <td class="text-muted">
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->name }}" name="name"/>
+                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}" name="name"/>
                                                                 <input type="hidden" class="form-control" value="{{ Auth::guard('admin')->user()->id }}" name="id"/>
 
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">Position :</th>
-                                                            <td class="text-muted">
 
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->position }}" name="position"/>
-                                                            </td>
-
-                                                        </tr>
                                                         <tr>
                                                             <th class="ps-0" scope="row">Mobile :</th>
                                                             <td class="text-muted">
 
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->phone }}" name="phone"/>
+                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_mobile }}" name="phone"/>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -92,10 +85,26 @@ Setting
 
                                                                 <input type="file" class="form-control"  name="image"/>
                                                                 <div class="avatar-lg">
-                                                                @if(empty(Auth::guard('admin')->user()->image))
+                                                                @if(empty(Auth::guard('admin')->user()->admin_image))
                         <img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="" style="height:50px;"/>
                         @else
-                        <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->image }}" alt="user-img" class="" style="height:50px;" />
+                        <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="user-img" class="" style="height:50px;" />
+                        @endif
+                                                                </div>
+                                                            </td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th class="ps-0" scope="row">Sign :</th>
+                                                            <td class="text-muted">
+
+                                                                <input type="file" class="form-control"  name="image"/>
+                                                                <div class="avatar-lg">
+                                                                @if(empty(Auth::guard('admin')->user()->admin_sign))
+                        <img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="" style="height:50px;"/>
+                        @else
+                        <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_sign }}" alt="user-img" class="" style="height:50px;" />
                         @endif
                                                                 </div>
                                                             </td>

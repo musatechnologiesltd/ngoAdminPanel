@@ -5,10 +5,10 @@
  <header class="main-nav">
     <div class="sidebar-user text-center"><a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a>
 
-        @if(empty(Auth::guard('admin')->user()->image))
+        @if(empty(Auth::guard('admin')->user()->admin_image))
         <img class="img-90 rounded-circle" src="{{asset('/')}}public/admin/user.png" alt="">
         @else
-        <img class="img-90 rounded-circle" src="{{asset('/')}}{{ Auth::guard('admin')->user()->image }}" alt="">
+        <img class="img-90 rounded-circle" src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="">
 
         @endif
 
@@ -17,8 +17,20 @@
 
 
         <div class="badge-bottom"><span class="badge badge-primary">New</span></div><a href="{{ route('setting.index') }}">
-            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->name }}</h6></a>
-        <p class="mb-0 font-roboto">{{ Auth::guard('admin')->user()->position }}</p>
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6></a>
+
+            <?php
+                 $designationName = DB::table('designation_lists')
+                 ->where('id',Auth::guard('admin')->user()->designation_list_id)
+                 ->value('designation_name');
+
+                 $branchName = DB::table('branches')
+                 ->where('id',Auth::guard('admin')->user()->branch_id)
+                 ->value('branch_name');
+
+            ?>
+        <p class="mb-0 font-roboto">{{ $designationName  }}</p>
+        <p class="mb-0 font-roboto">{{ $branchName  }}</p>
     </div>
     <nav>
         <div class="main-navbar">
@@ -120,6 +132,92 @@
     </a>
 </li>
 @endif
+<li class="sidebar-main-title">
+    <div>
+      <h6>Employee Info</h6>
+    </div>
+  </li>
+<!--empoyee info --->
+@if (Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('designationStepList.index'))
+
+<li class="dropdown">
+  <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>
+  <ul class="nav-submenu menu-content" style="display: block;">
+
+
+    @if ($usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
+<li >
+<a href="{{ route('branchList.index') }}" class="{{ Route::is('branchList.index')  ? 'active' : '' }}"><span>Branch List</span> </a>
+</li>
+@endif
+
+@if ($usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate'))
+<li >
+<a href="{{ route('designationList.index') }}" class="{{ Route::is('designationList.index')  ? 'active' : '' }}"><span>Designation List</span> </a>
+</li>
+@endif
+
+@if ($usr->can('designationStepAdd') || $usr->can('designationStepView') ||  $usr->can('designationStepDelete') ||  $usr->can('designationStepUpdate'))
+<li >
+<a href="{{ route('designationStepList.index') }}" class="{{ Route::is('designationStepList.index')  ? 'active' : '' }}"><span>Designation Step List</span> </a>
+</li>
+@endif
+
+
+      @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
+      <li class="">
+          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+      </li>
+      @endif
+
+
+
+
+
+
+
+
+
+
+  </ul>
+</li>
+@else
+<li class="dropdown">
+<a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>
+<ul class="nav-submenu menu-content">
+
+
+    @if ($usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
+    <li >
+    <a href="{{ route('branchList.index') }}" class="{{ Route::is('branchList.index')  ? 'active' : '' }}"><span>Branch List</span> </a>
+    </li>
+    @endif
+
+    @if ($usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate'))
+    <li >
+    <a href="{{ route('designationList.index') }}" class="{{ Route::is('designationList.index')  ? 'active' : '' }}"><span>Designation List</span> </a>
+    </li>
+    @endif
+
+    @if ($usr->can('designationStepAdd') || $usr->can('designationStepView') ||  $usr->can('designationStepDelete') ||  $usr->can('designationStepUpdate'))
+    <li >
+    <a href="{{ route('designationStepList.index') }}" class="{{ Route::is('designationStepList.index')  ? 'active' : '' }}"><span>Designation Step List</span> </a>
+    </li>
+    @endif
+
+
+          @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
+          <li class="">
+              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+          </li>
+          @endif
+
+
+</ul>
+</li>
+
+@endif
+<!-- employee info --->
 
                     <li class="sidebar-main-title">
                         <div>
@@ -138,11 +236,7 @@
                                 <a href="{{ route('systemInformation.index') }}" class="{{ Route::is('systemInformation.index') ? 'active' : '' }}" data-key="t-calendar">System Information</a>
                             </li>
                             @endif
-                            @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
-                            <li class="">
-                                <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">User</a>
-                            </li>
-                            @endif
+
                             @if ($usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate'))
                             <li class="">
                                 <a href="{{ route('role.index') }}" class="{{ Route::is('role.index') || Route::is('role.edit') || Route::is('role.create') ? 'active' : '' }}" data-key="t-nft-landing">Role </a>
@@ -154,6 +248,9 @@
                             </a>
                             </li>
                             @endif
+
+
+
 
 @if ($usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate'))
 <li >
@@ -177,11 +274,7 @@
             <a href="{{ route('systemInformation.index') }}" class="{{ Route::is('systemInformation.index') ? 'active' : '' }}" data-key="t-calendar">System Information</a>
         </li>
         @endif
-        @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
-        <li class="">
-            <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">User</a>
-        </li>
-        @endif
+
         @if ($usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate'))
         <li class="">
             <a href="{{ route('role.index') }}" class="{{ Route::is('role.index') || Route::is('role.edit') || Route::is('role.create') ? 'active' : '' }}" data-key="t-nft-landing">Role </a>

@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\NameCangeController;
 use App\Http\Controllers\Admin\RenewController;
 use App\Http\Controllers\Admin\Fd9Controller;
 use App\Http\Controllers\Admin\Fd9OneController;
+use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\DesignationController;
+use App\Http\Controllers\Admin\DesignationStepController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,11 +56,33 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.dashboard');
 
+
+    Route::resource('branchList', BranchController::class);
+    Route::resource('designationList', DesignationController::class);
+    Route::resource('designationStepList', DesignationStepController::class);
+
     Route::resource('country', CountryController::class);
     Route::resource('civilInfo', CountryController::class);
 
     Route::resource('fd9Form', Fd9Controller::class);
+
+    Route::controller(Fd9Controller::class)->group(function () {
+        Route::post('/forwardingLetterPost','forwardingLetterPost')->name('forwardingLetterPost');
+        Route::get('/fdNinePdfDownload/{id}','fdNinePdfDownload')->name('fdNinePdfDownload');
+        Route::get('/nVisaDocumentDownload/{cat}/{id}', 'nVisaDocumentDownload')->name('nVisaDocumentDownload');
+    });
+
+
+
+
+
+
     Route::resource('fd9OneForm', Fd9OneController::class);
+
+    Route::controller(Fd9OneController::class)->group(function () {
+
+        Route::get('/fd9OneDownload/{cat}/{id}', 'fd9OneDownload')->name('fd9OneDownload');
+    });
 
 
 
