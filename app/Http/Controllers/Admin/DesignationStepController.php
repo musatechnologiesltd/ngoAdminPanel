@@ -35,11 +35,11 @@ class DesignationStepController extends Controller
             abort(403, 'Sorry !! You are Unauthorized to View !');
                }
 
-          $medicineLists = DesignationStep::latest()->get();
+          $designationStepLists = DesignationStep::latest()->get();
+          $designationLists = DesignationList::latest()->get();
 
 
-
-               return view('admin.designationStepList.index',compact('medicineLists'));
+               return view('admin.designationStepList.index',compact('designationLists','designationStepLists'));
            }
 
 
@@ -49,6 +49,8 @@ class DesignationStepController extends Controller
                 abort(403, 'Sorry !! You are Unauthorized to Add !');
             }
 
+
+//dd($request->all());
             $request->validate([
                 'designation_list_id' => 'required',
                 'designation_step' => 'required',

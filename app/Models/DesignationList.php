@@ -20,8 +20,11 @@ class DesignationList extends Model
         return $this->hasMany(DesignationStep::class,'designation_list_id');
     }
 
+   
+
+
     public function branchList()
     {
-        return $this->belongsTo(Branch::class,'branch_id');
+        return $this->hasOne(Branch::class,'branch_id');
     }
 }

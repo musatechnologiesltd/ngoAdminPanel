@@ -34,11 +34,11 @@ class BranchController extends Controller
             abort(403, 'Sorry !! You are Unauthorized to View !');
                }
 
-          $medicineLists = Branch::latest()->get();
+          $branchLists = Branch::latest()->get();
 
 
 
-               return view('admin.branchList.index',compact('medicineLists'));
+               return view('admin.branchList.index',compact('branchLists'));
            }
 
 

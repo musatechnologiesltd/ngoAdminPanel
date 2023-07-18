@@ -59,6 +59,13 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('branchList', BranchController::class);
     Route::resource('designationList', DesignationController::class);
+
+    Route::controller(DesignationController::class)->group(function () {
+
+        Route::get('/getDesignationFromBranch', 'getDesignationFromBranch')->name('getDesignationFromBranch');
+    });
+
+
     Route::resource('designationStepList', DesignationStepController::class);
 
     Route::resource('country', CountryController::class);

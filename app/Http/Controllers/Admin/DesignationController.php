@@ -28,18 +28,28 @@ class DesignationController extends Controller
         });
     }
 
+    public function getDesignationFromBranch(Request $request){
+
+        $designationLists = DesignationList::where('branch_id',$request->branch_id)
+        ->latest()->get();
+
+        $data = view('admin.designationList.getDesignationFromBranch',compact('designationLists'))->render();
+        return response()->json($data);
+
+    }
+
     public function index(){
 
 
         if (is_null($this->user) || !$this->user->can('designationAdd')) {
             abort(403, 'Sorry !! You are Unauthorized to View !');
                }
+               $branchLists = Branch::latest()->get();
+          $designationLists = DesignationList::latest()->get();
 
-          $medicineLists = DesignationList::latest()->get();
 
 
-
-               return view('admin.designationList.index',compact('medicineLists'));
+               return view('admin.designationList.index',compact('branchLists','designationLists'));
            }
 
 

@@ -18,6 +18,8 @@ class Branch extends Model
 
     public function designationList()
     {
-        return $this->hasMany(DesignationList::class,'branch_id');
+        return $this->belongsTo(DesignationList::class,'branch_id');
     }
+
+   
 }

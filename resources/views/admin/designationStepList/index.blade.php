@@ -31,30 +31,35 @@ Designation Step List | {{ $ins_name }}
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Designation Information</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Designation Step Information</h4>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form class="custom-validation" action="{{ route('designationStepList.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">Designation</label>
-                    <select name="" class="form-control" id="">
-                        <option value="">X</option>
-                        <option value="">X</option>
+                    <select class="form-control" name="designation_list_id" id="" type="text" placeholder="">
+                        <option>--Please Select--</option>
+                        @foreach($designationLists as $AllDesignationLists)
+                        <option value="{{ $AllDesignationLists->id }}">{{ $AllDesignationLists->designation_name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="">Designation Step</label>
-                    <input class="form-control" id="" type="text" placeholder="">
+                    <input class="form-control" name="designation_step" id="" type="text" placeholder="">
 
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="">Designation Serial</label>
-                    <input class="form-control" id="" type="text" placeholder="">
+                    <input class="form-control" name="designation_serial" id="" type="text" placeholder="">
 
                 </div>
                 <div class="card-footer text-end">
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -65,9 +70,7 @@ Designation Step List | {{ $ins_name }}
         <!-- Individual column searching (text inputs) Starts-->
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header pb-0">
-                    <span>The searching functionality provided by DataTables is useful for quickly search through the information in the table - however the search is global, and you may wish to present controls that search on specific columns.</span>
-                </div>
+
                 <div class="card-body">
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
@@ -81,24 +84,93 @@ Designation Step List | {{ $ins_name }}
                             </tr>
                             </thead>
                             <tbody>
+                                @foreach($designationStepLists as $key=>$AllDesignationStepLists)
                             <tr>
-                                <td>#15421812</td>
-                                <td>X</td>
-                                <td>1</td>
-                                <td>1</td>
+                                <td>{{ $key+1 }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" >Edit</button>
+                                    <?php
+
+                                    $desiName = DB::table('designation_lists')
+                                    ->where('id',$AllDesignationStepLists->designation_list_id)
+                                    ->value('designation_name');
+
+
+                                        ?>
+                                        {{ $desiName }}
+
+
+                                                                    </td>
+                                <td>{{ $AllDesignationStepLists->designation_step }}</td>
+                                <td>{{ $AllDesignationStepLists->designation_serial }}</td>
+                                <td>
+                                    @if (Auth::guard('admin')->user()->can('designationStepUpdate'))
+                                    <button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg{{ $AllDesignationStepLists->id }}"
+                                    class="btn btn-primary waves-light waves-effect  btn-sm" >
+                                    <i class="fa fa-pencil"></i></button>
+
+                                      <!--  Large modal example -->
+                                      <div class="modal fade bs-example-modal-lg{{ $AllDesignationStepLists->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="myLargeModalLabel">Update Branch</h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="{{ route('designationStepList.update',$AllDesignationStepLists->id ) }}" method="POST" enctype="multipart/form-data">
+                                                          @method('PUT')
+                                                          @csrf
+                                                          <div class="mb-3">
+                                                            <label class="form-label" for="">Designation</label>
+                                                            <select class="form-control" name="designation_list_id" id="" type="text" placeholder="">
+                                                                <option>--Please Select--</option>
+                                                                @foreach($designationLists as $AllDesignationLists)
+                                                                <option value="{{ $AllDesignationLists->id }}" {{ $AllDesignationLists->id == $AllDesignationStepLists->designation_list_id ? 'selected':''  }}>{{ $AllDesignationLists->designation_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="">Designation Step</label>
+                                                            <input class="form-control" name="designation_step" value="{{ $AllDesignationStepLists->designation_step }}" id="" type="text" placeholder="">
+
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="">Designation Serial</label>
+                                                            <input class="form-control" name="designation_serial" value="{{ $AllDesignationStepLists->designation_serial }}" id="" type="text" placeholder="">
+
+                                                        </div>
+
+
+
+
+
+
+                                                          <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
+                                                      </form>
+                                                  </div>
+                                              </div><!-- /.modal-content -->
+                                          </div><!-- /.modal-dialog -->
+                                      </div><!-- /.modal -->
+
+
+@endif
+
+{{-- <button type="button" class="btn btn-primary waves-light waves-effect  btn-sm" onclick="window.location.href='{{ route('admin.users.view',$AllDesignationStepLists->id) }}'"><i class="fa fa-eye"></i></button> --}}
+
+                            @if (Auth::guard('admin')->user()->can('designationStepDelete'))
+
+<button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm" onclick="deleteTag({{ $AllDesignationStepLists->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
+              <form id="delete-form-{{ $AllDesignationStepLists->id }}" action="{{ route('designationStepList.destroy',$AllDesignationStepLists->id) }}" method="POST" style="display: none;">
+                @method('DELETE')
+                                              @csrf
+
+                                          </form>
+                                          @endif
                                 </td>
                             </tr>
-                            <tr>
-                                <td>#15421812</td>
-                                <td>X</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" >Edit</button>
-                                </td>
-                            </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>

@@ -31,6 +31,42 @@ class AdminController extends Controller
     }
 
 
+    public function create(){
+        if (is_null($this->user) || !$this->user->can('userAdd')) {
+            abort(403, 'Sorry !! You are Unauthorized to Add !');
+               }
+
+
+
+              // dd($path);
+
+              // dd(public_path().'\images');
+        $branchLists = Branch::latest()->get();
+        $users = Admin::all();
+        $roles  = Role::all();
+
+       return view('admin.user.create', compact('branchLists','users','roles'));
+    }
+
+
+    public function edit($id){
+        if (is_null($this->user) || !$this->user->can('userAdd')) {
+            abort(403, 'Sorry !! You are Unauthorized to Add !');
+               }
+
+               $designationLists = DesignationList::latest()->get();
+
+              // dd($path);
+
+              // dd(public_path().'\images');
+        $branchLists = Branch::latest()->get();
+        $user = Admin::find($id);
+        $roles  = Role::all();
+
+       return view('admin.user.edit', compact('designationLists','branchLists','user','roles'));
+    }
+
+
 
     public function index()
     {
@@ -64,9 +100,9 @@ class AdminController extends Controller
         // Validation Data
         $request->validate([
             'name' => 'required|string|max:150',
-            'position' => 'required|string|max:200',
+            'designation_list_id' => 'required|string|max:200',
             'phone' => 'required|string|size:11',
-            'department' => 'required|string|max:200',
+            'branch_id' => 'required|string|max:200',
             'admin_job_start_date' => 'required|date',
             'admin_job_end_date' => 'required|date',
             'sign' => 'required|file|mimes:jpeg,png,jpg',
@@ -76,9 +112,9 @@ class AdminController extends Controller
         ],
         [
             'name.required' => 'Name is required',
-            'position.required' => 'Position is required',
+            'designation_list_id.required' => 'designation is required',
             'phone.required' => 'Phone is required',
-            'department.required' => 'Department is required',
+            'branch_id.required' => 'branch is required',
             'admin_job_start_date.required' => 'Admin_job_start_date is required',
             'admin_job_end_date.required' => 'Admin_job_end_dateis required',
             'sign.required' => 'Sign is required',
@@ -97,8 +133,9 @@ class AdminController extends Controller
         // Create New User
         $admins = new Admin();
         $admins->admin_name = $request->name;
-        $admins->admin_position = $request->position;
-        $admins->admin_department = $request->department;
+        $admins->admin_name_ban = $request->name_ban;
+        $admins->designation_list_id = $request->designation_list_id;
+        $admins->branch_id = $request->branch_id;
         $admins->admin_job_start_date = $request->admin_job_start_date;
         $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
@@ -142,13 +179,16 @@ class AdminController extends Controller
         // Create New User
         $admins = Admin::find($id);
         $admins->admin_name = $request->name;
-        $admins->admin_position = $request->position;
-        $admins->admin_department = $request->department;
+        $admins->admin_name_ban = $request->name_ban;
+        $admins->designation_list_id = $request->designation_list_id;
+        $admins->branch_id = $request->branch_id;
         $admins->admin_job_start_date = $request->admin_job_start_date;
         $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
-        $admins->password = Hash::make($request->password);
+        if ($request->password) {
+            $admins->password = Hash::make($request->password);
+        }
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
 
