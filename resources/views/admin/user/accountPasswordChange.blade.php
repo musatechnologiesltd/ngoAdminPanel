@@ -11,7 +11,7 @@
 	<meta property="og:image" content="{{ asset('/') }}{{ $logo }}" />
     <link rel="icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
-    <title>Login | {{ $ins_name }}</title>
+    <title>Add Password | {{ $ins_name }}</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
@@ -37,6 +37,112 @@
     <link id="color" rel="stylesheet" href="{{ asset('/') }}public/admin/assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/responsive.css">
+
+
+    <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
+<script src="{{ asset('/')}}public/parsely1.js"></script>
+<style>
+
+.parsley-required{
+
+    margin-top:10px;
+}
+
+.box
+
+{
+
+ width:100%;
+
+ max-width:600px;
+
+ background-color:#f9f9f9;
+
+ border:1px solid #ccc;
+
+ border-radius:5px;
+
+ padding:16px;
+
+ margin:0 auto;
+
+}
+
+input.parsley-success,
+
+select.parsley-success,
+
+textarea.parsley-success {
+
+  color: #468847;
+
+  background-color: #DFF0D8;
+
+  border: 1px solid #D6E9C6;
+
+}
+
+input.parsley-error,
+
+select.parsley-error,
+
+textarea.parsley-error {
+
+  color: #B94A48;
+
+  background-color: #F2DEDE;
+
+  border: 1px solid #EED3D7;
+
+}
+
+
+.parsley-errors-list {
+
+  margin: 2px 0 3px;
+
+  padding: 0;
+
+  list-style-type: none;
+
+  font-size: 0.9em;
+
+  line-height: 0.9em;
+
+  opacity: 0;
+
+
+  transition: all .3s ease-in;
+
+  -o-transition: all .3s ease-in;
+
+  -moz-transition: all .3s ease-in;
+
+  -webkit-transition: all .3s ease-in;
+
+}
+
+
+.parsley-errors-list.filled {
+
+  opacity: 1;
+
+}
+
+
+
+.error,.parsley-type, .parsley-required, .parsley-equalto, .parsley-pattern, .parsley-length{
+
+ color:#ff0000;
+
+}
+
+
+
+</style>
   </head>
   <body>
     <!-- Loader starts-->
@@ -52,33 +158,37 @@
         <div class="row">
           <div class="col-12">
             <div class="login-card">
-
-              <form class="theme-form login-form" action="{{route('login.store')}}" method="post">
+              <form class="theme-form login-form" action="{{route('postPasswordChange')}}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                 @csrf
-                @include('flash_message')
-                <h4>Login</h4>
-                <h6>Welcome back! Log in to your account.</h6>
+                <input type="hidden" value="{{ $email }}" name="mainEmail" />
+                {{-- <h4>Login</h4> --}}
+                <h6>Welcome ! Add Password To Log in to your account.</h6>
+
+                  <div class="row">
+                              <div class="form-group col-md-12 col-sm-12">
+                                  <label for="password">Password</label>
+                                  <input type="password" class="form-control form-control-sm" id="password"  data-parsley-minlength="8"
+                                  data-parsley-required="true" name="password" placeholder="Enter Password" required>
+
+                                  @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
+
+                            <input type="checkbox" class="mt-2" onclick="myFunction()"> Show Password
+                              </div>
+                              <div class="form-group col-md-12 col-sm-12">
+                                  <label for="password_confirmation">Confirm Password</label>
+                                  <input type="password" class="form-control form-control-sm" data-parsley-equalto="#password"
+                                  parsley-required="true" id="password_confirmation" name="password_confirmation" placeholder="Enter Password" required>
+
+                                  <input type="checkbox" class="mt-2" onclick="myFunctionc()"> Show Password
+                              </div>
+                          </div>
+
+
+
                 <div class="form-group">
-                  <label>Email Address</label>
-                  <div class="input-group"><span class="input-group-text"><i class="icon-email"></i></span>
-                    <input class="form-control" name="email" type="email" required="" placeholder="Test@gmail.com">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
-                    <input class="form-control" type="password" id="password" name="password" required="" placeholder="*********">
-                    {{-- <div class="show-hide"><span class="show">                         </span></div> --}}
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label class="text-muted" for="checkbox1" onclick="myFunction()">Show password</label>
-                  {{-- </div><a class="link" href="forget-password.html">Forgot password?</a> --}}
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+                  <button class="btn btn-primary btn-block" type="submit">Submit</button>
                 </div>
 
                 {{-- <p>Don't have account?<a class="ms-2" href="sign-up.html">Create Account</a></p> --}}
@@ -90,7 +200,7 @@
     </section>
     <!-- page-wrapper end-->
     <!-- latest jquery-->
-    <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script>
+    {{-- <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script> --}}
     <!-- feather icon js-->
     <script src="{{ asset('/') }}public/admin/assets/js/icons/feather-icon/feather.min.js"></script>
     <script src="{{ asset('/') }}public/admin/assets/js/icons/feather-icon/feather-icon.js"></script>
@@ -118,6 +228,19 @@
           }
         }
         </script>
+
+
+<script>
+    function myFunctionc() {
+      var x = document.getElementById("password_confirmation");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+
   </body>
 </html>
 

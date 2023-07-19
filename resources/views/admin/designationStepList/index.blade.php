@@ -35,12 +35,12 @@ Designation Step List | {{ $ins_name }}
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('designationStepList.store') }}" method="post" enctype="multipart/form-data">
+                <form class="custom-validation" action="{{ route('designationStepList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">Designation</label>
-                    <select class="form-control" name="designation_list_id" id="" type="text" placeholder="">
-                        <option>--Please Select--</option>
+                    <select class="form-control" name="designation_list_id" id="" type="text" placeholder="" required>
+                        <option value="">--Please Select--</option>
                         @foreach($designationLists as $AllDesignationLists)
                         <option value="{{ $AllDesignationLists->id }}">{{ $AllDesignationLists->designation_name }}</option>
                         @endforeach
@@ -48,12 +48,12 @@ Designation Step List | {{ $ins_name }}
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="">Designation Step</label>
-                    <input class="form-control" name="designation_step" id="" type="text" placeholder="">
+                    <input class="form-control" name="designation_step" id="" type="number" placeholder="" required>
 
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="">Designation Serial</label>
-                    <input class="form-control" name="designation_serial" id="" type="text" placeholder="">
+                    <input class="form-control" name="designation_serial" id="" type="number" placeholder="" required>
 
                 </div>
                 <div class="card-footer text-end">
@@ -118,12 +118,12 @@ Designation Step List | {{ $ins_name }}
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('designationStepList.update',$AllDesignationStepLists->id ) }}" method="POST" enctype="multipart/form-data">
+                                                      <form action="{{ route('designationStepList.update',$AllDesignationStepLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="mb-3">
                                                             <label class="form-label" for="">Designation</label>
-                                                            <select class="form-control" name="designation_list_id" id="" type="text" placeholder="">
+                                                            <select class="form-control" name="designation_list_id" id="" type="text" placeholder="" required>
                                                                 <option>--Please Select--</option>
                                                                 @foreach($designationLists as $AllDesignationLists)
                                                                 <option value="{{ $AllDesignationLists->id }}" {{ $AllDesignationLists->id == $AllDesignationStepLists->designation_list_id ? 'selected':''  }}>{{ $AllDesignationLists->designation_name }}</option>
@@ -132,12 +132,12 @@ Designation Step List | {{ $ins_name }}
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="">Designation Step</label>
-                                                            <input class="form-control" name="designation_step" value="{{ $AllDesignationStepLists->designation_step }}" id="" type="text" placeholder="">
+                                                            <input class="form-control" name="designation_step" value="{{ $AllDesignationStepLists->designation_step }}" id="" type="text" placeholder="" required>
 
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="">Designation Serial</label>
-                                                            <input class="form-control" name="designation_serial" value="{{ $AllDesignationStepLists->designation_serial }}" id="" type="text" placeholder="">
+                                                            <input class="form-control" name="designation_serial" value="{{ $AllDesignationStepLists->designation_serial }}" id="" type="text" placeholder="" required>
 
                                                         </div>
 

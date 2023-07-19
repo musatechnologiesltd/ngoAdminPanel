@@ -81,7 +81,9 @@ Add Staff
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="text">Mobile Number</label>
-                                <input type="text" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" placeholder="Enter Mobile Number" required>
+                                <input  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                type = "number"
+                                maxlength = "11" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" placeholder="Enter Mobile Number" required>
 
                                 @if ($errors->has('phone'))
                               <span class="text-danger">{{ $errors->first('phone') }}</span>
@@ -121,14 +123,14 @@ Add Staff
                                     @endif
                                     </div>
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label class="form-label" for="">End Date</label>
                                         <input type="text" class="form-control" id="datepicker1"  name="admin_job_end_date" placeholder="Enter Date" required>
 
                                         @if ($errors->has('admin_job_end_date'))
                                         <span class="text-danger">{{ $errors->first('admin_job_end_date') }}</span>
                                     @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 </div>
 
@@ -148,7 +150,7 @@ Add Staff
 
                           </div>
 
-                          <div class="row">
+                          {{-- <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
                                   <label for="password">Password</label>
                                   <input type="password" class="form-control form-control-sm" id="password"  parsley-minlength="8"
@@ -166,7 +168,7 @@ Add Staff
 
 
                               </div>
-                          </div>
+                          </div> --}}
 
                           <div class="row">
                               <div class="form-group col-md-6 col-sm-12">

@@ -142,6 +142,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('permission', PermissionController::class);
     Route::resource('user', AdminController::class);
 
+    Route::controller(AdminController::class)->group(function () {
+        Route::post('/postPasswordChange', 'postPasswordChange')->name('postPasswordChange');
+        Route::get('/accountPasswordChange/{id}', 'accountPasswordChange')->name('accountPasswordChange');
+    });
+
+
+
     Route::resource('setting', SettingController::class);
 
     Route::resource('systemInformation', SystemInformationController::class);

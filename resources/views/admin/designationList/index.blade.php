@@ -35,17 +35,17 @@ Designation List | {{ $ins_name }}
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data">
+                <form class="custom-validation" action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">Designation Name</label>
-                    <input class="form-control" name="designation_name" id="" type="text" placeholder="">
+                    <input class="form-control" name="designation_name" id="" type="text" placeholder="" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="">Branch Name</label>
 
-                    <select class="form-control" name="branch_id" id="" type="text" placeholder="">
-                        <option>--Please Select--</option>
+                    <select class="form-control" name="branch_id" id="" type="text" placeholder="" required>
+                        <option value="">--Please Select--</option>
                         @foreach($branchLists as $AllBranchLists)
                         <option value="{{ $AllBranchLists->id }}">{{ $AllBranchLists->branch_name }}</option>
                         @endforeach
@@ -110,18 +110,18 @@ $branchName = DB::table('branches')->where('id',$AllDesignationLists->branch_id)
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('designationList.update',$AllDesignationLists->id ) }}" method="POST" enctype="multipart/form-data">
+                                                      <form action="{{ route('designationList.update',$AllDesignationLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="mb-3">
                                                             <label class="form-label" for="">Designation Name</label>
-                                                            <input class="form-control" name="designation_name" value="{{ $AllDesignationLists->designation_name  }}" id="" type="text" placeholder="">
+                                                            <input class="form-control" name="designation_name" value="{{ $AllDesignationLists->designation_name  }}" id="" type="text" placeholder="" required>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label" for="">Branch Name</label>
 
-                                                            <select class="form-control" name="branch_id" id="" type="text" placeholder="">
-                                                                <option>--Please Select--</option>
+                                                            <select class="form-control" name="branch_id" id="" type="text" placeholder="" required>
+                                                                <option value="">--Please Select--</option>
                                                                 @foreach($branchLists as $AllBranchLists)
                                                                 <option value="{{ $AllBranchLists->id }}"  {{ $AllDesignationLists->branch_id == $AllBranchLists->id ? 'selected':''  }}>{{ $AllBranchLists->branch_name }}</option>
                                                                 @endforeach

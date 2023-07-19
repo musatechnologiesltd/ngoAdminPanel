@@ -35,7 +35,7 @@ Branch List | {{ $ins_name }}
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('branchList.store') }}" method="post" enctype="multipart/form-data">
+                <form class="custom-validation" action="{{ route('branchList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">Branch Name</label>
@@ -94,7 +94,7 @@ Branch List | {{ $ins_name }}
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('branchList.update',$AllBranchLists->id ) }}" method="POST" enctype="multipart/form-data">
+                                                      <form action="{{ route('branchList.update',$AllBranchLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="row">

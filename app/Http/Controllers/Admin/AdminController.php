@@ -15,6 +15,7 @@ use File;
 use App\Models\Branch;
 use App\Models\DesignationList;
 use App\Models\DesignationStep;
+use Mail;
 class AdminController extends Controller
 {
 
@@ -104,11 +105,11 @@ class AdminController extends Controller
             'phone' => 'required|string|size:11',
             'branch_id' => 'required|string|max:200',
             'admin_job_start_date' => 'required|date',
-            'admin_job_end_date' => 'required|date',
+            // 'admin_job_end_date' => 'required|date',
             'sign' => 'required|file|mimes:jpeg,png,jpg',
             'image' => 'required|file|mimes:jpeg,png,jpg',
             'email' => 'required|max:100|email|unique:admins',
-            'password' => 'required|min:8|confirmed',
+            // 'password' => 'required|min:8|confirmed',
         ],
         [
             'name.required' => 'Name is required',
@@ -116,11 +117,11 @@ class AdminController extends Controller
             'phone.required' => 'Phone is required',
             'branch_id.required' => 'branch is required',
             'admin_job_start_date.required' => 'Admin_job_start_date is required',
-            'admin_job_end_date.required' => 'Admin_job_end_dateis required',
+            // 'admin_job_end_date.required' => 'Admin_job_end_dateis required',
             'sign.required' => 'Sign is required',
             'image.required' => 'Image is required',
             'email.required' => 'Email is required',
-            'password.required' => 'Password is required',
+            // 'password.required' => 'Password is required',
         ]);
 
         // $result = CommonController::imageUpload($request);
@@ -137,10 +138,10 @@ class AdminController extends Controller
         $admins->designation_list_id = $request->designation_list_id;
         $admins->branch_id = $request->branch_id;
         $admins->admin_job_start_date = $request->admin_job_start_date;
-        $admins->admin_job_end_date = $request->admin_job_end_date;
+        // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
-        $admins->password = Hash::make($request->password);
+        // $admins->password = Hash::make($request->password);
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
 
@@ -165,6 +166,13 @@ class AdminController extends Controller
         }
 
 
+
+        Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Change Account Password');
+        });
+
+
         return redirect()->route('user.index')->with('success','Created successfully!');
     }
 
@@ -183,11 +191,11 @@ class AdminController extends Controller
         $admins->designation_list_id = $request->designation_list_id;
         $admins->branch_id = $request->branch_id;
         $admins->admin_job_start_date = $request->admin_job_start_date;
-        $admins->admin_job_end_date = $request->admin_job_end_date;
+        // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
         if ($request->password) {
-            $admins->password = Hash::make($request->password);
+            // $admins->password = Hash::make($request->password);
         }
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
@@ -231,5 +239,38 @@ class AdminController extends Controller
 
 
         return redirect()->route('user.index')->with('error','Deleted successfully!');
+    }
+
+
+
+    public function accountPasswordChange($id){
+       $email = $id;
+       return view('admin.user.accountPasswordChange',compact('email'));
+
+    }
+
+
+    public function postPasswordChange(Request $request){
+
+        $request->validate([
+
+             'password' => 'required|min:8|confirmed',
+        ],
+        [
+
+             'password.required' => 'Password is required',
+        ]);
+
+
+        $adminId = Admin::where('email',$request->mainEmail)->value('id');
+
+        DB::table('admins')
+        ->where('id', $adminId)
+
+        ->update(array('password' =>Hash::make($request->password)));
+
+
+        return redirect()->route('mainLogin')->with('success','Successfully Changed!');
+
     }
 }
