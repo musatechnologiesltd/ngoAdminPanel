@@ -30,6 +30,13 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'employeeEndDate',
+                'permissions' => [
+                    'employeeEndDate.view',
+                    'employeeEndDate.edit',
+                ]
+            ],
+            [
                 'group_name' => 'systemInformation',
                 'permissions' => [
                     'systemInformationAdd',

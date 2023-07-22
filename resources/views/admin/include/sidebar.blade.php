@@ -138,7 +138,7 @@
     </div>
   </li>
 <!--empoyee info --->
-@if (Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('designationStepList.index'))
+@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('designationStepList.index'))
 
 <li class="dropdown">
   <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>
@@ -170,7 +170,11 @@
       </li>
       @endif
 
-
+ @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit'))
+          <li class="">
+              <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">Employee End Date</a>
+          </li>
+          @endif
 
 
 
@@ -209,6 +213,12 @@
           @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
           <li class="">
               <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+          </li>
+          @endif
+
+   @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit'))
+          <li class="">
+              <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">Employee End Date</a>
           </li>
           @endif
 
