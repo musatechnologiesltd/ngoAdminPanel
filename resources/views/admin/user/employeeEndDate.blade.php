@@ -22,7 +22,7 @@ Employee End Date List
 
           </ol>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -36,11 +36,11 @@ Employee End Date List
                     <div class="card-body">
                       <form class="custom-validation" action="{{ route('employeeEndDatePost') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                 @csrf
-                        
+
                           <div class="mb-3">
                                         <label class="form-label" for="">Employee</label>
                             <div class="span7">
-                                        <select class="form-control" required name="admin_id" id="admin_id" type="text" placeholder="">
+                                        <select class="form-control" required name="admin_id" id="fade" type="text" placeholder="">
                                             <option value="">--Please Select--</option>
                                             @foreach($users as $AllBranchLists)
                                             <option value="{{ $AllBranchLists->id }}" >{{ $AllBranchLists->admin_name }}</option>
@@ -51,11 +51,15 @@ Employee End Date List
                                         <span class="text-danger">{{ $errors->first('admin_id') }}</span>
                                     @endif
                                     </div>
-                        
+
+                                    <div class="mb-3" id="designation_list_id">
+
+                                    </div>
+
                       </form>
-                      
+
                   </div>
-                  
+
               </div>
                </div>
            </div>
@@ -66,9 +70,20 @@ Employee End Date List
 
  <script>
         $(document).ready(function () {
-            $("#admin_id").change(function () {
+            $("#fade").change(function () {
                 var mainId = $(this).val();
-                alert(mainId);
+                //alert(mainId);
+
+                $.ajax({
+            url: "{{ route('getAdminDetail') }}",
+            method: 'GET',
+            data: {mainId:mainId},
+            success: function(data) {
+
+              $("#designation_list_id").html('');
+              $("#designation_list_id").html(data);
+            }
+        });
             });
         });
     </script>

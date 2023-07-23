@@ -141,16 +141,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('profile', ProfileController::class);
     Route::resource('permission', PermissionController::class);
     Route::resource('user', AdminController::class);
-<<<<<<< HEAD
+
   Route::controller(AdminController::class)->group(function () {
-    
+    Route::get('/getAdminDetail', 'getAdminDetail')->name('getAdminDetail');
         Route::post('/employeeEndDatePost', 'employeeEndDatePost')->name('employeeEndDatePost');
         Route::get('/employeeEndDate', 'employeeEndDate')->name('employeeEndDate');
         Route::post('/postPasswordChange', 'postPasswordChange')->name('postPasswordChange');
         Route::get('/accountPasswordChange/{id}', 'accountPasswordChange')->name('accountPasswordChange');
-       
+
     });
-=======
+
 
     Route::controller(AdminController::class)->group(function () {
         Route::post('/postPasswordChange', 'postPasswordChange')->name('postPasswordChange');
@@ -159,7 +159,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
->>>>>>> 859c5af81e22804a2f8716e0915c6f0bc0c9a2e4
+
     Route::resource('setting', SettingController::class);
 
     Route::resource('systemInformation', SystemInformationController::class);

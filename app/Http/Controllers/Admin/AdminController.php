@@ -248,14 +248,29 @@ class AdminController extends Controller
        return view('admin.user.accountPasswordChange',compact('email'));
 
     }
-<<<<<<< HEAD
-  
+
+
   public function employeeEndDate(){
       $users = Admin::whereNull('admin_job_end_date')->latest()->get();
       return view('admin.user.employeeEndDate',compact('users'));
   }
-=======
->>>>>>> 859c5af81e22804a2f8716e0915c6f0bc0c9a2e4
+
+  public function getAdminDetail(Request $request){
+    $user = Admin::where('admin_name',$request->mainId)->first();
+    $data = view('admin.user.getAdminDetail',compact('user'))->render();
+    return response()->json($data);
+  }
+
+
+  public function employeeEndDatePost(request $request){
+
+    $admins = Admin::find($request->id);
+
+ $admins->admin_job_end_date = $request->admin_job_end_date;
+ $admins->save();
+
+ return redirect()->back()->with('info','Added successfully!');
+  }
 
 
     public function postPasswordChange(Request $request){
