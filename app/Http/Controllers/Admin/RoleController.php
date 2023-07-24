@@ -29,7 +29,8 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleView')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         $permissions = Permission::all();
@@ -43,7 +44,8 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            ///abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         $all_permissions  = Permission::all();
@@ -56,7 +58,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('roleAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         // Validation Data
@@ -82,7 +85,8 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleUpdate')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
 
@@ -97,7 +101,8 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleUpdate')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         $role = Role::find($id);
@@ -116,7 +121,8 @@ class RoleController extends Controller
     public function destroy($id)
     {
         if (is_null($this->user) || !$this->user->can('roleDelete')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         $role = Role::findById($id,'admin');

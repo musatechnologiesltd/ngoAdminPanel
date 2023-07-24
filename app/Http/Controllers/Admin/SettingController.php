@@ -25,7 +25,8 @@ class SettingController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         return view('admin.setting.setting');
@@ -35,7 +36,8 @@ class SettingController extends Controller
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         $time_dy = time().date("Ymd");

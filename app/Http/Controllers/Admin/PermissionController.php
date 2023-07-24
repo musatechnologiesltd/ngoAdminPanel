@@ -25,7 +25,8 @@ class PermissionController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('permissionView')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+           // abort(403, 'Sorry !! You are Unauthorized to View !');
+           return redirect()->route('mainLogin');
                }
 
 
@@ -38,7 +39,8 @@ class PermissionController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('permissionAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
 
@@ -72,7 +74,8 @@ class PermissionController extends Controller
         public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('permissionUpdate')) {
-                abort(403, 'Sorry !! You are Unauthorized to View !');
+                //abort(403, 'Sorry !! You are Unauthorized to View !');
+                return redirect()->route('mainLogin');
                    }
 
             Permission::where('group_name', $request->group_name)->delete();
@@ -101,7 +104,10 @@ class PermissionController extends Controller
         {
 
             if (is_null($this->user) || !$this->user->can('permissionDelete')) {
-                abort(403, 'Sorry !! You are Unauthorized to View !');
+                //abort(403, 'Sorry !! You are Unauthorized to View !');
+
+                return redirect()->route('mainLogin');
+                
                    }
 
 

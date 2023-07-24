@@ -34,7 +34,9 @@ class AdminController extends Controller
 
     public function create(){
         if (is_null($this->user) || !$this->user->can('userAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to Add !');
+           // abort(403, 'Sorry !! You are Unauthorized to Add !');
+
+           return redirect()->route('mainLogin');
                }
 
 
@@ -52,7 +54,8 @@ class AdminController extends Controller
 
     public function edit($id){
         if (is_null($this->user) || !$this->user->can('userAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to Add !');
+           // abort(403, 'Sorry !! You are Unauthorized to Add !');
+           return redirect()->route('mainLogin');
                }
 
                $designationLists = DesignationList::latest()->get();
@@ -73,7 +76,9 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userView')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+           // abort(403, 'Sorry !! You are Unauthorized to View !');
+
+           return redirect()->route('mainLogin');
                }
 
 
@@ -93,7 +98,8 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+           // abort(403, 'Sorry !! You are Unauthorized to View !');
+           return redirect()->route('mainLogin');
                }
 
                //dd($request->all());
@@ -181,7 +187,8 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userUpdate')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         // Create New User
@@ -229,7 +236,8 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userDelete')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
         $admins = Admin::find($id);

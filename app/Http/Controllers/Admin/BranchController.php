@@ -31,7 +31,8 @@ class BranchController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('branchAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
           $branchLists = Branch::latest()->get();
@@ -45,7 +46,8 @@ class BranchController extends Controller
            public function store(Request $request){
 
             if (is_null($this->user) || !$this->user->can('branchAdd')) {
-                abort(403, 'Sorry !! You are Unauthorized to Add !');
+                //abort(403, 'Sorry !! You are Unauthorized to Add !');
+                return redirect()->route('mainLogin');
             }
 
             $request->validate([
@@ -76,7 +78,8 @@ class BranchController extends Controller
         public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('branchUpdate')) {
-                abort(403, 'Sorry !! You are Unauthorized to Update !');
+                //abort(403, 'Sorry !! You are Unauthorized to Update !');
+                return redirect()->route('mainLogin');
             }
 
             $medicine = Branch::findOrFail($id);
@@ -96,7 +99,8 @@ class BranchController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('branchDelete')) {
-            abort(403, 'Sorry !! You are Unauthorized to Delete !');
+           // abort(403, 'Sorry !! You are Unauthorized to Delete !');
+           return redirect()->route('mainLogin');
         }
 
 

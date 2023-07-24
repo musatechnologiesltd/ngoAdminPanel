@@ -33,7 +33,8 @@ class RegisterController extends Controller
     public function newRegistrationList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('register_list_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -47,7 +48,8 @@ class RegisterController extends Controller
     public function revisionRegistrationList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('register_list_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -61,7 +63,8 @@ class RegisterController extends Controller
     public function alreadyRegistrationList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('register_list_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 

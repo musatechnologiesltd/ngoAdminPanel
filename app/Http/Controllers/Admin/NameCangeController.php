@@ -27,7 +27,8 @@ class NameCangeController extends Controller
     public function newNameChangeList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('name_change_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+           // abort(403, 'Sorry !! You are Unauthorized to view !');
+           return redirect()->route('mainLogin');
         }
 
 
@@ -41,7 +42,8 @@ class NameCangeController extends Controller
     public function revisionNameChangeList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('name_change_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -55,7 +57,8 @@ class NameCangeController extends Controller
     public function alreadNameChangeList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('name_change_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 

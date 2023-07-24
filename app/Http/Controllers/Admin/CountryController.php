@@ -23,7 +23,8 @@ class CountryController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('countryView')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -38,7 +39,8 @@ class CountryController extends Controller
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('countryAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
         DB::table('countries')->insert(
@@ -55,7 +57,8 @@ class CountryController extends Controller
 
     public function update(Request $request,$id){
         if (is_null($this->user) || !$this->user->can('countryUpdate')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+           // abort(403, 'Sorry !! You are Unauthorized to view !');
+           return redirect()->route('mainLogin');
         }
         DB::table('countries')
             ->where('id', $id)
@@ -69,7 +72,8 @@ class CountryController extends Controller
     {
         //dd(1);
         if (is_null($this->user) || !$this->user->can('countryDelete')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any country !');
+            //abort(403, 'Sorry !! You are Unauthorized to view any country !');
+            return redirect()->route('mainLogin');
         }
         $admins = DB::table('countries')->where('id',$id)->delete();
 

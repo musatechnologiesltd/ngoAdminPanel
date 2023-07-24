@@ -32,7 +32,8 @@ class DesignationStepController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('designationStepAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
 
           $designationStepLists = DesignationStep::latest()->get();
@@ -46,7 +47,8 @@ class DesignationStepController extends Controller
            public function store(Request $request){
 
             if (is_null($this->user) || !$this->user->can('designationStepAdd')) {
-                abort(403, 'Sorry !! You are Unauthorized to Add !');
+                //abort(403, 'Sorry !! You are Unauthorized to Add !');
+                return redirect()->route('mainLogin');
             }
 
 
@@ -80,7 +82,8 @@ class DesignationStepController extends Controller
         public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('designationStepUpdate')) {
-                abort(403, 'Sorry !! You are Unauthorized to Update !');
+                //abort(403, 'Sorry !! You are Unauthorized to Update !');
+                return redirect()->route('mainLogin');
             }
 
             $medicine = DesignationStep::findOrFail($id);
@@ -100,7 +103,8 @@ class DesignationStepController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('designationStepDelete')) {
-            abort(403, 'Sorry !! You are Unauthorized to Delete !');
+            //abort(403, 'Sorry !! You are Unauthorized to Delete !');
+            return redirect()->route('mainLogin');
         }
 
 

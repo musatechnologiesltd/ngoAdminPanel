@@ -34,7 +34,8 @@ class RenewController extends Controller
     public function newRenewList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('renew_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -48,7 +49,8 @@ class RenewController extends Controller
     public function revisionRenewList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('renew_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -62,7 +64,8 @@ class RenewController extends Controller
     public function alreadyRenewList(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('renew_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 

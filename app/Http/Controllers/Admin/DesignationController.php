@@ -42,7 +42,8 @@ class DesignationController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('designationAdd')) {
-            abort(403, 'Sorry !! You are Unauthorized to View !');
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
                }
                $branchLists = Branch::latest()->get();
           $designationLists = DesignationList::latest()->get();
@@ -56,7 +57,8 @@ class DesignationController extends Controller
            public function store(Request $request){
 
             if (is_null($this->user) || !$this->user->can('designationAdd')) {
-                abort(403, 'Sorry !! You are Unauthorized to Add !');
+                //abort(403, 'Sorry !! You are Unauthorized to Add !');
+                return redirect()->route('mainLogin');
             }
 
             $request->validate([
@@ -87,7 +89,8 @@ class DesignationController extends Controller
         public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('designationUpdate')) {
-                abort(403, 'Sorry !! You are Unauthorized to Update !');
+               // abort(403, 'Sorry !! You are Unauthorized to Update !');
+               return redirect()->route('mainLogin');
             }
 
             $medicine = DesignationList::findOrFail($id);
@@ -107,7 +110,8 @@ class DesignationController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('designationDelete')) {
-            abort(403, 'Sorry !! You are Unauthorized to Delete !');
+            //abort(403, 'Sorry !! You are Unauthorized to Delete !');
+            return redirect()->route('mainLogin');
         }
 
 

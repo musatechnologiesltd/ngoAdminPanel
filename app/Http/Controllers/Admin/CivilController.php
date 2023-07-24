@@ -22,7 +22,8 @@ class CivilController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('civil_info_view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
 
@@ -37,7 +38,8 @@ class CivilController extends Controller
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('civil_info_add')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
 
         DB::table('civilinfos')->insert(
@@ -61,7 +63,8 @@ class CivilController extends Controller
 
     public function update(Request $request){
         if (is_null($this->user) || !$this->user->can('civil_info_update')) {
-            abort(403, 'Sorry !! You are Unauthorized to view !');
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
         }
         DB::table('civilinfos')
             ->where('id', $request->id)
@@ -82,7 +85,8 @@ class CivilController extends Controller
     {
         //dd(1);
         if (is_null($this->user) || !$this->user->can('civil_info_delete')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any country !');
+           // abort(403, 'Sorry !! You are Unauthorized to view any country !');
+           return redirect()->route('mainLogin');
         }
         $admins = DB::table('civilinfos')->where('id',$id)->delete();
 
