@@ -74,6 +74,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fd9Form', Fd9Controller::class);
 
     Route::controller(Fd9Controller::class)->group(function () {
+
+        Route::post('/submitForCheck','submitForCheck')->name('submitForCheck');
+
+        Route::get('/downloadForwardingLetter/{id}','downloadForwardingLetter')->name('downloadForwardingLetter');
+        Route::post('/postForwardingLetter','postForwardingLetter')->name('postForwardingLetter');
         Route::post('/forwardingLetterPost','forwardingLetterPost')->name('forwardingLetterPost');
         Route::get('/fdNinePdfDownload/{id}','fdNinePdfDownload')->name('fdNinePdfDownload');
         Route::get('/nVisaDocumentDownload/{cat}/{id}', 'nVisaDocumentDownload')->name('nVisaDocumentDownload');

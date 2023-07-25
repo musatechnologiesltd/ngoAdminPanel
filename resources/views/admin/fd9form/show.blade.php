@@ -1009,6 +1009,67 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                             <div class="row">
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <p>Download Forwarding Letter</p>
+                                                    <p>ফরওয়ার্ডিং লেটার পিডিএফ ডাউনলোড করুন</p>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="text-center">
+                                                        <p>PDF Download (পিডিএফ ডাউনলোড )</p>
+                                                        <a class="btn btn-sm btn-success" target="_blank"
+                                                               href = '{{ route('downloadForwardingLetter',$dataFromNVisaFd9Fd1->id) }}'>
+                                                            Download Forwarding Letter
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="text-center">
+                                                        <p>PDF Upload (পিডিএফ আপলোড )</p>
+                                                        <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Upload Forwarding Letter
+                                                        </button>
+
+                                                        <!--model-->
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                              <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">PDF Upload (পিডিএফ আপলোড )</h1>
+                                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                           <input type="hidden" value="{{ $dataFromNVisaFd9Fd1->nVisaId }}" name="id" required>
+                                                                        <div class="form-group col-md-12 col-sm-12">
+                                                                            <label for="email">Forwarding Letter</label>
+                                                                            <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
+                                                                        </div>
+
+
+
+                                                                        <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
+                                                                            Submit
+                                                                         </button>
+                                                                    </form>
+
+                                                                </div>
+
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        <!--model -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="card">
                                         <div class="card-body">
                                             <table class="table table-borderless">
@@ -1090,10 +1151,10 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                         <tr>
                                                             <td>সংযুক্ত</td>
                                                             <td>:
-                                                                <button class="btn btn-outline-success"><i
+                                                                <a target="_blnak" href="{{ route('fdNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-outline-success"><i
                                                                             class="fa fa-file-pdf-o"></i>
                                                                     Open
-                                                                </button>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -1424,10 +1485,26 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'copyOfPassport','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
                                                          @endif</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>১৪</td>
+                                                    <td>ফরওয়ার্ডিং লেটার</td>
+                                                    <td>:  @if(!$dataFromNVisaFd9Fd1->forwarding_letter)
+
+                                                        @else
+
+
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'forwarding_letter','id'=>$dataFromNVisaFd9Fd1->nVisaId]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
+                                                         @endif</td>
+                                                </tr>
                                     </table>
                                 </div>
                                 <div class="card-footer text-end">
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+
+                                    <form class="custom-validation" action="{{ route('submitForCheck') }}" id="form" method="post" enctype="multipart/form-data">
+                                         @csrf
+                                         <input type="hidden" name="id" value="{{ $dataFromNVisaFd9Fd1->id }}" />
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
