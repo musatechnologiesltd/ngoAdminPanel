@@ -1500,11 +1500,25 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                 </div>
                                 <div class="card-footer text-end">
 
+                                    <?php
+
+                                    $checkTracking =DB::table('secruity_checks')
+                                    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->get();;
+
+                                    ?>
+
+                                    @if(count($checkTracking) == 0)
+
                                     <form class="custom-validation" action="{{ route('submitForCheck') }}" id="form" method="post" enctype="multipart/form-data">
                                          @csrf
                                          <input type="hidden" name="id" value="{{ $dataFromNVisaFd9Fd1->id }}" />
                                         <button class="btn btn-primary" type="submit">Submit</button>
                                     </form>
+
+                                    @else
+
+
+                                    @endif
                                 </div>
                             </div>
                         </div>

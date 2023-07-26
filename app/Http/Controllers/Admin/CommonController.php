@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
+use DB;
+use Session;
 class CommonController extends Controller
 {
     public static  function imageUpload($request,$file,$filePath){
@@ -69,5 +71,433 @@ class CommonController extends Controller
         $finalResult = str_replace($engDATE,$bangDATE,$data);
 
         return $finalResult;
+    }
+
+    public static function  generateRandomString($length = 10) {
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public static function  generateRandomInteger($length = 6) {
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public static function apiData($fd9FormId){
+
+        $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+        ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
+        ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
+        ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
+        ->where('fd9_forms.id',$fd9FormId)
+        ->first();
+        //first step
+        $randomString =CommonController::generateRandomString();
+        $wpTrackingNo = 'WPN-'.date('d').date('F').date('Y').'-'.time().CommonController::generateRandomInteger();
+        $systemUrl = DB::table('system_information')->first();
+        //dd($systemUrl->system_url.$dataFromNVisaFd9Fd1->applicant_photo);
+
+        //first step end
+
+
+        //all n visa data
+
+
+
+
+
+        $ngoStatus = DB::table('ngo_statuses')
+        ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+
+
+   $nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+   $nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+   $nVisaEmploye = DB::table('n_visa_employment_information')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+   $nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+   $nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+   $nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+    $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+   $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
+                      ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+
+//end all n visa data
+
+
+//document
+
+if(!$nVisaDocs){
+
+    $mainDoc = [
+
+    ];
+
+}else{
+
+
+    $firstCopy = DB::table('n_visa_necessary_document_for_work_permits')
+    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('nomination_letter_of_buyer');
+
+       if(empty($firstCopy)){
+
+        $firstCopyFinal = [
+            "doc_name" => "",
+            "file_public_path" => ""
+        ];
+       }else{
+
+        $firstCopyFinal = [
+            "doc_name" => "nomination_letter_of_buyer",
+            "file_public_path" => $systemUrl->system_url.'public/'.$firstCopy
+         ];
+
+       }
+
+
+    $secondCopy = DB::table('n_visa_necessary_document_for_work_permits')
+    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('registration_letter_of_board_of_investment');
+
+
+    if(empty($secondCopy)){
+
+        $secondCopyFinal = [
+            "doc_name" => "",
+            "file_public_path" => ""
+        ];
+       }else{
+
+        $secondCopyFinal = [
+            "doc_name" => "registration_letter_of_board_of_investment",
+            "file_public_path" => $systemUrl->system_url.'public/'.$secondCopy
+         ];
+
+       }
+
+
+    $thirdCopy = DB::table('n_visa_necessary_document_for_work_permits')
+    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('employee_contract_copy');
+
+    if(empty($thirdCopy)){
+
+        $thirdCopyFinal = [
+            "doc_name" => "",
+            "file_public_path" => ""
+        ];
+       }else{
+
+        $thirdCopyFinal = [
+            "doc_name" => "employee_contract_copy",
+            "file_public_path" => $systemUrl->system_url.'public/'.$thirdCopy
+         ];
+
+       }
+
+
+    $fourthCopy = DB::table('n_visa_necessary_document_for_work_permits')
+    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('board_of_the_directors_sign_letter');
+
+    if(empty($fourthCopy)){
+
+        $fourthCopyFinal = [
+            "doc_name" => "",
+            "file_public_path" => ""
+        ];
+       }else{
+
+        $fourthCopyFinal = [
+            "doc_name" => "board_of_the_directors_sign_letter",
+            "file_public_path" => $systemUrl->system_url.'public/'.$fourthCopy
+         ];
+
+       }
+
+
+    $fifthCopy = DB::table('n_visa_necessary_document_for_work_permits')
+    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('share_holder_copy');
+
+    if(empty($fifthCopy)){
+
+        $fifthCopyFinal = [
+            "doc_name" => "",
+            "file_public_path" => ""
+        ];
+       }else{
+
+        $fifthCopyFinal = [
+            "doc_name" => "share_holder_copy",
+            "file_public_path" => $systemUrl->system_url.'public/'.$fifthCopy
+         ];
+
+       }
+
+
+    $sixthCopy = DB::table('n_visa_necessary_document_for_work_permits')
+    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('passport_photocopy');
+
+
+    if(empty($sixthCopy)){
+
+        $sixthCopyFinal = [
+            "doc_name" => "",
+            "file_public_path" => ""
+        ];
+       }else{
+
+        $sixthCopyFinal = [
+            "doc_name" => "passport_photocopy",
+            "file_public_path" => $systemUrl->system_url.'public/'.$sixthCopy
+         ];
+
+       }
+////
+
+$dataNew = DB::table('n_visa_necessary_document_for_work_permits')
+->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+
+
+/////
+
+
+
+    $mainDoc = [
+
+        $firstCopyFinal,
+        $secondCopyFinal,
+        $thirdCopyFinal,
+        $fourthCopyFinal,
+        $fifthCopyFinal,
+        $sixthCopyFinal
+
+        ];
+
+
+
+
+
+}
+//end document
+
+       //compansation;
+       $annual =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Annual Bonus')->first();
+
+       $medical =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Medical Allowance')->first();
+
+       $entertainment =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Entertainment Allowance')->first();
+
+
+       $convoy =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Conveyance')->first();
+
+       $house =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','House Rent')->first();
+
+       $overseas =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Overseas Allowance')->first();
+
+
+       $basic =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Basic Salary')->first();
+
+
+
+       //condition
+
+       if(!$nVisaCompensationAndBenifits){
+
+        $com = [];
+
+       }else{
+
+
+
+     $com = [
+        "basic_salary" => [
+           "amount" =>$basic->amount,
+           "payment_type" =>$basic->payment_type,
+           "currency" =>$basic->currency
+        ],
+        "overseas_allowance" => [
+           "amount" =>$overseas->amount,
+           "payment_type" =>$overseas->payment_type,
+           "currency" =>$overseas->currency
+           ],
+        "house_rent" => [
+           "amount" =>$house->amount,
+           "payment_type" =>$house->payment_type,
+           "currency" =>$house->currency
+              ],
+        "conveyance_allowance" => [
+           "amount" =>$convoy->amount,
+           "payment_type" =>$convoy->payment_type,
+           "currency" =>$convoy->currency
+                 ],
+        "medical_allowance" => [
+           "amount" =>$medical->amount,
+           "payment_type" =>$medical->payment_type,
+           "currency" =>$medical->currency
+                    ],
+        "entertainment_allowance" => [
+           "amount" =>$entertainment->amount,
+           "payment_type" =>$entertainment->payment_type,
+           "currency" =>$entertainment->currency
+                       ],
+        "annual_bonus" => [
+           "amount" =>$annual->amount,
+           "payment_type" =>$annual->payment_type,
+           "currency" =>$annual->currency
+                          ],
+        "other_benefit" =>$dataFromNVisaFd9Fd1->other_benefit,
+        "salary_remarks" =>$dataFromNVisaFd9Fd1->salary_remarks
+                        ];
+                    }
+       //end condition
+
+       //end compansation
+
+       Session::put('request_id',$randomString);
+
+    $data = [
+      "project_code" => "ngo-oss",
+      "request_id" =>$randomString,
+      "depertment_name" => "Registration & Incentives-I (Commercial)",
+      "wp_tracking_no" => $wpTrackingNo,
+      "basic_info" => [
+            "period_validity" =>$dataFromNVisaFd9Fd1->period_validity,
+            "visa_ref_no" => $dataFromNVisaFd9Fd1->visa_ref_no,
+            "visa_category" => $dataFromNVisaFd9Fd1->visa_category,
+            "permit_efct_date" =>$dataFromNVisaFd9Fd1->permit_efct_date,
+            "applicant_photo" => $systemUrl->system_url.$dataFromNVisaFd9Fd1->applicant_photo,
+            "forwarding_letter" =>$systemUrl->system_url.'public/'.$dataFromNVisaFd9Fd1->forwarding_letter
+         ],
+      "a_particular_of_sponsor" => [
+               "org_name" =>$nVisaSponSor->org_name,
+               "org_house_no" =>$nVisaSponSor->org_house_no,
+               "org_flat_no" =>$nVisaSponSor->org_flat_no,
+               "org_fax_no" =>$nVisaSponSor->org_fax_no,
+               "org_district" =>$nVisaSponSor->org_district,
+               "org_thana" =>$nVisaSponSor->org_thana,
+               "org_road_no" =>$nVisaSponSor->org_road_no,
+               "org_post_code" =>$nVisaSponSor->org_post_code,
+               "org_phone" =>$nVisaSponSor->org_phone,
+               "org_email" =>$nVisaSponSor->org_email,
+               "nature_of_business" =>$nVisaSponSor->nature_of_business,
+               "authorized_capital" =>$nVisaSponSor->authorized_capital,
+               "paid_up_capital" =>$nVisaSponSor->paid_up_capital,
+               "remittance_received" =>$nVisaSponSor->remittance_received,
+               "org_type" =>$nVisaSponSor->org_type,
+               "industry_type" =>$nVisaSponSor->industry_type
+            ],
+      "b_particular_of_foreign_incumbent" => [
+                  "name_of_the_foreign_national" =>$nVisaForeignerInfo->name_of_the_foreign_national,
+                  "date_of_birth" =>$nVisaForeignerInfo->date_of_birth,
+                  "marital_status" =>$nVisaForeignerInfo->martial_status,
+                  "date_of_arrival" =>$nVisaEmploye->date_of_arrival_in_bangladesh,
+                  "country" =>$nVisaForeignerInfo->home_country,
+                  "nationality" =>$nVisaForeignerInfo->nationality,
+                  "passport_no" =>$nVisaForeignerInfo->passport_no,
+                  "passport_issue_date" =>$nVisaForeignerInfo->passport_issue_date,
+                  "passport_issue_place" =>$nVisaForeignerInfo->passport_issue_place,
+                  "passport_exiry_date" =>$nVisaForeignerInfo->passport_expiry_date,
+                  "house_no" =>$nVisaForeignerInfo->house_no,
+                  "home_country" =>$nVisaForeignerInfo->home_country,
+                  "flat_no" =>$nVisaForeignerInfo->flat_no,
+                  "road_no" =>$nVisaForeignerInfo->road_no,
+                  "post_code" =>$nVisaForeignerInfo->post_code,
+                  "state" =>$nVisaForeignerInfo->state,
+                  "phone" =>$nVisaForeignerInfo->phone,
+                  "fax_no" =>$nVisaForeignerInfo->fax_no,
+                  "email" =>$nVisaForeignerInfo->email,
+               ],
+      "c_employment_information" => [
+                     "employed_designation" =>$nVisaEmploye->employed_designation,
+                     "first_appointment_date" =>$nVisaEmploye->first_appoinment_date,
+                     "desired_effective_date" =>$nVisaEmploye->desired_effective_date,
+                     "desired_end_date" =>$nVisaEmploye->desired_end_date,
+                     "visa_type" =>$nVisaEmploye->visa_type,
+                     "travel_visa_cate" => "2",
+                     "visa_validity" => $nVisaEmploye->visa_validity,
+                     "brief_job_description" => $nVisaEmploye->brief_job_description,
+                     "employee_justification" => $nVisaEmploye->employee_justification,
+                  ],
+
+                  "compensation_and_benefits" =>  $com,
+
+
+      "manpower_of_the_office" => [
+                                                "local_manpower" => [
+                                                   "executive" => $nVisaManPower->local_executive,
+                                                   "supporting_staff" => $nVisaManPower->local_supporting_staff,
+                                                   "total" => $nVisaManPower->local_total
+                                                ],
+                                                "foreign_manpower" => [
+                                                      "executive" => $nVisaManPower->foreign_executive,
+                                                      "supporting_staff" => $nVisaManPower->foreign_supporting_staff,
+                                                      "total" => $nVisaManPower->foreign_total
+                                                   ],
+                                                "grand_total" => $nVisaManPower->gand_total,
+                                                "locRatio" =>$nVisaManPower->local_ratio,
+                                                "forRatio" => $nVisaManPower->foreign_ratio
+                                             ],
+      "d_workplace_address" => [
+                                                         "wp_org_house_no" =>$nVisaWorkPlace->work_house_no,
+                                                         "wp_org_flat_no" => $nVisaWorkPlace->work_flat_no,
+                                                         "wp_org_road_no" => $nVisaWorkPlace->work_road_no,
+                                                         "wp_org_district" => $nVisaWorkPlace->work_district,
+                                                         "wp_org_thana" => $nVisaWorkPlace->work_thana,
+                                                         "wp_org_email" => $nVisaWorkPlace->work_email,
+                                                         "wp_org_type" => $nVisaWorkPlace->work_org_type,
+                                                         "wp_contact_person_mobile" => $nVisaWorkPlace->contact_person_mobile_number
+                                                      ],
+      "authorized_personnel_of_the_organization" => [
+                                                            "org_name" =>$nVisaAuthPerson->auth_person_org_name,
+                                                            "org_house_no" =>$nVisaAuthPerson->auth_person_org_house_no,
+                                                            "org_flat_no" =>$nVisaAuthPerson->auth_person_org_flat_no,
+                                                            "org_road_no" =>$nVisaAuthPerson->auth_person_org_road_no,
+                                                            "org_thana" =>$nVisaAuthPerson->auth_person_org_thana,
+                                                            "org_district" =>$nVisaAuthPerson->auth_person_org_district,
+                                                            "org_post_office" =>$nVisaAuthPerson->auth_person_org_post_office,
+                                                            "org_mobile" =>$nVisaAuthPerson->auth_person_org_mobile,
+                                                            "submission_date" =>$nVisaAuthPerson->submission_date,
+                                                            "expatriate_name" =>$nVisaAuthPerson->expatriate_name,
+                                                            "expatriate_email" =>$nVisaAuthPerson->expatriate_email
+                                                         ],
+      "document_list" => $mainDoc
+   ];
+
+
+   return $data;
+
+
     }
 }
