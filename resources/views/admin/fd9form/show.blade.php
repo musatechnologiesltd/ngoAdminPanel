@@ -1360,11 +1360,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                     @if(count($checkTracking) == 0)
 
-                                    <form class="custom-validation" action="{{ route('submitForCheck') }}" id="form" method="post" enctype="multipart/form-data">
-                                         @csrf
-                                         <input type="hidden" name="id" value="{{ $dataFromNVisaFd9Fd1->id }}" />
-                                        <button class="btn btn-primary" type="submit">Submit</button>
-                                    </form>
+
 
                                     @else
 
@@ -1388,7 +1384,11 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                 <div class="col-md-12">
                                     @if(count($checkTracking) == 0)
 
-                                    <h1>Not Submitted</h1>
+                                    <form class="custom-validation" action="{{ route('submitForCheck') }}" id="form" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $dataFromNVisaFd9Fd1->id }}" />
+                                       <button class="btn btn-primary" type="submit">Submit Application</button>
+                                   </form>
 
                                     @else
                                     <h1>Application Status</h1>
