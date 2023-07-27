@@ -1516,7 +1516,29 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                     </form>
 
                                     @else
+                                    <h1>Application Status</h1>
 
+                                    <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tracking Number</th>
+                                            <th scope="col">Status Name</th>
+
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($checkTracking as $key=>$AllCheckTracking)
+                                          <tr>
+                                            <th scope="row">{{ $key+1 }}</th>
+                                            <td>{{ $AllCheckTracking->tracking_no }}</td>
+                                            <td>{{ $AllCheckTracking->statusName }}</td>
+
+                                          </tr>
+                                          @endforeach
+
+                                        </tbody>
+                                      </table>
 
                                     @endif
                                 </div>
