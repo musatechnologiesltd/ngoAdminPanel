@@ -70,6 +70,12 @@ FD-9 (N-Visa) | {{ $ins_name }}
                                     class="icofont icofont-animal-lemur"></i>Document Send
                             to Ministry of Home Affairs</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
+                        data-bs-toggle="pill" href="#pills-darkdoc1"
+                        role="tab" aria-controls="pills-darkdoc1"
+                        aria-selected="false" style=""><i
+                class="icofont icofont-animal-lemur"></i>Check Application Status</a>
+</li>
                 </ul>
                 <div class="tab-content" id="pills-darktabContent">
                     <div class="tab-pane fade active show" id="pills-darkhome"
@@ -1018,13 +1024,13 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                     <p>ফরওয়ার্ডিং লেটার পিডিএফ ডাউনলোড করুন</p>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="text-center">
+                                                    {{-- <div class="text-center">
                                                         <p>PDF Download (পিডিএফ ডাউনলোড )</p>
                                                         <a class="btn btn-sm btn-success" target="_blank"
                                                                href = '{{ route('downloadForwardingLetter',$dataFromNVisaFd9Fd1->id) }}'>
                                                             Download Forwarding Letter
                                                     </a>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="text-center">
@@ -1072,166 +1078,11 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                     <div class="card">
                                         <div class="card-body">
-                                            <table class="table table-borderless">
-                                                <tbody>
-                                                <tr>
-                                                    <td>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>এনজিও বিষয়ক ব্যুরো</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>প্রধানমন্ত্রীর কার্যালয়</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>প্লট-ই, ১৩/বি, আগারগাঁও</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>শেরেবাংলা নগর, ঢাকা-১২০৭</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="pt-4">
-                                                <table class="table table-borderless pt-4">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>স্মারক নং- {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->sarok_number) }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>বিষয় : {{ $dataFromNVisaFd9Fd1->organization_name_ban }} নামীয় সংস্থার বিদেশী নাগরিক নিয়োগে
-                                                            ছাড়পত্র প্রধানে
-                                                            মতামত।
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="pt-5">সূত্র: সংস্থার {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_date) }} {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_month_name ) }} {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_year_name) }}
-                                                            তারিখের আবেদন।
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="pt-4">
-                                                <table class="table table-borderless">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে
-                                                            বর্ণিত সংস্থায়
-                                                            নিয়োগের নিমিত্ত নিম্নবর্ণিত বিদেশী নাগরিকের
-                                                            নিয়োগ/নিরাপত্তা
-                                                            ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর কার্যালয়ের ২৫
-                                                            নভেম্বর, ২০২১
-                                                            তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
-                                                            বিভাগের মতামত
-                                                            এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে
-                                                            অনুরোধ করা
-                                                            হলো।
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="row pt-4">
-                                                <div class="col-lg-6">
-                                                    <table class="table table-borderless">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>বিদেশী নাম ও পদবী</td>
-                                                            <td>: {{ $nVisaForeignerInfo->name_of_the_foreign_national }} , {{ $nVisaEmploye->employed_designation }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>জাতীয়তা</td>
-                                                            <td>: {{ $nVisaForeignerInfo->nationality }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>পাসপোর্ট নম্বর</td>
-                                                            <td>: {{ $nVisaForeignerInfo->passport_no }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>সংযুক্ত</td>
-                                                            <td>:
-                                                                <a target="_blnak" href="{{ route('fdNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-outline-success"><i
-                                                                            class="fa fa-file-pdf-o"></i>
-                                                                    Open
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="col-lg-6"></div>
-                                            </div>
-
-                                            <div class="pt-4">
-
-                                                <?php
-                 $designationName = DB::table('designation_lists')
-                 ->where('id',Auth::guard('admin')->user()->designation_list_id)
-                 ->value('designation_name');
-
-                 $branchName = DB::table('branches')
-                 ->where('id',Auth::guard('admin')->user()->branch_id)
-                 ->value('branch_name');
-
-                 $onuLipiList = DB::table('forwarding_letter_onulipis')
-                 ->where('forwarding_letter_id',$forwardingLetterData->id)->get();
-
-
-
-            ?>
-
-                                                <table class="table table-borderless">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>{{ Auth::guard('admin')->user()->admin_name_ban }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ $designationName }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{{ $branchName }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ফোন: ৫৫০০৭৩৯৪</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="pt-4">
-                                                <table class="table table-borderless"
-                                                       style="text-align:right">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>সচিব</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>সুরক্ষা সেবা বিভাগ</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> স্বরাষ্ট্র মন্ত্রণালয়</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>বাংলাদেশ সচিবালয় , ঢাকা।</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <table class="table table-borderless">
-                                                <tbody>
-                                                <tr>
-                                                    <td>অনুলিপি:</td>
-                                                </tr>
-                                                @foreach($onuLipiList as  $key=>$allOnuLipiList)
-                                                <tr>
-                                                    <td>{{ str_replace($engDATE,$bangDATE,$key+1) }}। {{$allOnuLipiList->onulipi_name}}।
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-
-
-                                                </tbody>
-                                            </table>
+                                            <iframe src=
+                                            "{{ url('public/'.$dataFromNVisaFd9Fd1->forwarding_letter) }}"
+                                                            width="1000"
+                                                            height="800">
+                                                    </iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -1516,6 +1367,30 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                     </form>
 
                                     @else
+
+
+
+
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
+                    aria-labelledby="pills-darkdoc1-tab">
+                   <div class="mb-0 m-t-30">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    @if(count($checkTracking) == 0)
+
+                                    <h1>Not Submitted</h1>
+
+                                    @else
                                     <h1>Application Status</h1>
 
                                     <table class="table table-bordered">
@@ -1524,7 +1399,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                             <th scope="col">#</th>
                                             <th scope="col">Tracking Number</th>
                                             <th scope="col">Status Name</th>
-
+                                            <th scope="col">Action</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -1533,7 +1408,11 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                             <th scope="row">{{ $key+1 }}</th>
                                             <td>{{ $AllCheckTracking->tracking_no }}</td>
                                             <td>{{ $AllCheckTracking->statusName }}</td>
-
+<td>
+    <button  data-id = "{{ $AllCheckTracking->n_visa_id }}" class="btn btn-primary statusCheck" type="button">
+        <i class="ri-add-line align-bottom me-1"></i> Check Status
+    </button >
+</td>
                                           </tr>
                                           @endforeach
 
@@ -1542,8 +1421,14 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                     @endif
                                 </div>
+                                <div class="col-md-12" id="finalResult">
+
+                                </div>
+
                             </div>
                         </div>
+                    </div>
+                   </div>
                     </div>
                 </div>
             </div>
@@ -1555,6 +1440,27 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 @endsection
 
 @section('script')
+<script type="text/javascript">
+    $(".statusCheck").click(function () {
+
+        var mainId = $(this).attr("data-id");
+        //alert(mainId);
+
+        $.ajax({
+            url: "{{ route('statusCheck') }}",
+            method: 'GET',
+            data: {mainId:mainId},
+            success: function(data) {
+
+              $("#finalResult").html('');
+              $("#finalResult").html(data);
+            }
+        });
+
+
+
+    });
+</script>
 <script type="text/javascript">
     var i = 0;
     $("#dynamic-ar").click(function () {

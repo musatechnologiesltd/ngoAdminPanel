@@ -56,10 +56,10 @@ FD-9 (N-Visa) | {{ $ins_name }}
                                 <td><h6> {{ $allDataFromNVisaFd9Fd1->organization_name_ban }} </h6><span>Address: {{ $allDataFromNVisaFd9Fd1->organization_address }}</span></td>
                                 <td>{{ $allDataFromNVisaFd9Fd1->fd9_foreigner_name }} </td>
                                 <td class="font-success">
-@if(empty($allDataFromNVisaFd9Fd1->status))
+@if(empty($allDataFromNVisaFd9Fd1->mainStatus))
                                     Ongoing
                                     @else
-Confirmed
+                                    {{$allDataFromNVisaFd9Fd1->mainStatus}}
                                     @endif
 
                                 </td>

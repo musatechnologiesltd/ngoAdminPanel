@@ -11,6 +11,7 @@ use Mail;
 use DB;
 use Session;
 use PDF;
+use File;
 use Carbon\Carbon;
 use Response;
 use App\Models\ForwardingLetter;
@@ -26,6 +27,7 @@ class Fd9Controller extends Controller
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
     ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
     ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
     ->orderBy('fd9_forms.id','desc')
     ->get();
 
@@ -76,30 +78,62 @@ class Fd9Controller extends Controller
 
 
 
-                      $file_Name_Custome = "ForwardingLetter";
-        $pdf=PDF::loadView('admin.fd9form.downloadForwardingLetter',[
+                      $file_Name_Custome ='WPN-'.date('d').date('F').date('Y').'-'.time().CommonController::generateRandomInteger();
 
-            'ngoStatus'=>$ngoStatus,
-            'nVisaWorkPlace'=>$nVisaWorkPlace,
-            'nVisaSponSor'=>$nVisaSponSor,
-            'nVisaForeignerInfo'=>$nVisaForeignerInfo,
-            'nVisaDocs'=>$nVisaDocs,
+                    $url = public_path('uploads/forwardingLetter');
+                    //dd($url);
 
 
-            'nVisaManPower'=>$nVisaManPower,
-            'nVisaEmploye'=>$nVisaEmploye,
-            'nVisaCompensationAndBenifits'=>$nVisaCompensationAndBenifits,
-            'dataFromNVisaFd9Fd1'=>$dataFromNVisaFd9Fd1,
-            'nVisaAuthPerson'=>$nVisaAuthPerson,
+                        File::makeDirectory($url, 0777, true, true);
 
-        ],[],['format' => 'A4']);
-    return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+
+    //return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+   $previous =  DB::table('n_visas')
+   ->where('id',$dataFromNVisaFd9Fd1->nVisaId)->value('forwarding_letter');
+
+   //dd($previous);
+
+   if(empty($previous)){
+
+
+    $pdf=PDF::loadView('admin.fd9form.downloadForwardingLetter',[
+
+        'ngoStatus'=>$ngoStatus,
+        'nVisaWorkPlace'=>$nVisaWorkPlace,
+        'nVisaSponSor'=>$nVisaSponSor,
+        'nVisaForeignerInfo'=>$nVisaForeignerInfo,
+        'nVisaDocs'=>$nVisaDocs,
+
+
+        'nVisaManPower'=>$nVisaManPower,
+        'nVisaEmploye'=>$nVisaEmploye,
+        'nVisaCompensationAndBenifits'=>$nVisaCompensationAndBenifits,
+        'dataFromNVisaFd9Fd1'=>$dataFromNVisaFd9Fd1,
+        'nVisaAuthPerson'=>$nVisaAuthPerson,
+
+    ],[],['format' => 'A4'])->save($url. '/' .$file_Name_Custome.'.pdf');
+
+
+    DB::table('n_visas')->where('id',$dataFromNVisaFd9Fd1->nVisaId)
+          ->update(
+            array('forwarding_letter' =>'uploads/forwardingLetter/'.$file_Name_Custome.'.pdf')
+        );
+
+    }else{
+//dd(44);
+
+
+    }
 
 
     }
 
 
     public function show($id){
+
+        $uploadForwardingLetter = $this->downloadForwardingLetter($id);
 
 
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
@@ -263,10 +297,10 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-        $file_path = $data->system_url.'public/'.$get_file_data;
+        $file_path =url('public/'.$get_file_data);
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
-$file=$data->system_url.'public/'.$get_file_data;
+$file=url('public/'.$get_file_data);
 
         $headers = array(
                   'Content-Type: application/pdf',
@@ -340,7 +374,7 @@ public function submitForCheck(Request $request){
     ->where('fd9_forms.id',$fd9FormId)
     ->first();
 
-    //dd($dataFromNew->nVisaId);
+    //dd($data['wp_tracking_no']);
 
     //dd($jayParsedAry['data']);
     //dd($jayParsedAry['data']['tracking-no']);
@@ -389,14 +423,94 @@ $mainToken = $jsonData['access_token'];
     $newCode = new SecruityCheck();
     $newCode->n_visa_id = $dataFromNew->nVisaId;
     $newCode->request_id =  Session::get('request_id'); ;
-    $newCode->tracking_no = $trackingNumber;
+    $newCode->tracking_no =$data['wp_tracking_no'];
     $newCode->statusName = $statusName ;
     $newCode->statusId = $statusId ;
     $newCode->save();
 
 
+    DB::table('fd9_forms')->where('id', $fd9FormId)
+       ->update([
+           'status' => $statusName
+        ]);
+
+
 
 return redirect()->route('fd9Form.show',$fd9FormId)->with('success','Send Successfully');
 
+}
+
+
+public function statusCheck(Request $request){
+
+    $mainNVisaId = $request->mainId;
+
+    $form9Id = DB::table('fd9_forms')
+            ->where('n_visa_id',$mainNVisaId)->value('id');
+
+    $secruityList = DB::table('secruity_checks')
+    ->where('n_visa_id',$mainNVisaId)->first();
+
+//dd($secruityList);
+
+   $data = [
+    "project_code" => "ngo-oss",
+    "request_id" =>CommonController::generateRandomInteger(),
+    "tracking_no" => $secruityList->tracking_no,
+
+ ];
+
+
+
+
+
+    $response12 = Http::post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
+        'client_id' => 5,
+        'client_secret' => 'MS1LDLK3DPj0NGFBju55GG6KMPCtTuGOamDoZtKw',
+        'grant_type'=>'client_credentials'
+
+    ]);
+
+
+
+$jsonData = $response12->json();
+
+$mainToken = $jsonData['access_token'];
+
+
+$client = new Client();
+$url = "https://mohaapi-uat.oss.net.bd/v1/api/check-application-status";
+$response = $client->post($url,[
+    'headers' => ['Content-type' => 'application/json', 'Authorization' => 'Bearer ' . $mainToken],
+
+    'body' => json_encode($data),
+]);
+
+$response = $response->getBody()->getContents();
+
+$covertArray = json_decode($response,true);
+
+
+    $trackingNumber =$covertArray['data']['app_tracking_no'];
+    $mohaTrackingNumber =$covertArray['data']['moha_tracking_no'];
+    $statusId = $covertArray['data']['status_id'];
+    $statusName = $covertArray['data']['status_name'];
+
+
+    DB::table('fd9_forms')->where('id', $form9Id)
+    ->update([
+        'status' => $statusName
+     ]);
+
+
+     DB::table('secruity_checks')->where('n_visa_id',$mainNVisaId)
+     ->update([
+         'statusName' => $statusName,
+         'statusId' => $statusId
+      ]);
+
+
+      $data = view('admin.fd9form.statusCheck',compact('mainNVisaId'))->render();
+      return response()->json($data);
 }
 }

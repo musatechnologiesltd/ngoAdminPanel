@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::controller(Fd9Controller::class)->group(function () {
 
         Route::post('/submitForCheck','submitForCheck')->name('submitForCheck');
+        Route::get('/statusCheck','statusCheck')->name('statusCheck');
 
         Route::get('/downloadForwardingLetter/{id}','downloadForwardingLetter')->name('downloadForwardingLetter');
         Route::post('/postForwardingLetter','postForwardingLetter')->name('postForwardingLetter');
