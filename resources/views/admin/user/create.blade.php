@@ -90,7 +90,7 @@ Add Staff
                           @endif
                             </div>
 
-                            <div class="card">
+                            {{-- <div class="card">
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label class="form-label" for="">Appoint Date</label>
@@ -130,9 +130,9 @@ Add Staff
                                         @if ($errors->has('admin_job_end_date'))
                                         <span class="text-danger">{{ $errors->first('admin_job_end_date') }}</span>
                                     @endif
-                                    </div> --}}
-                                </div>
-                                </div>
+                                    </div> </div>
+                                </div> --}}
+                                 
 
 
 

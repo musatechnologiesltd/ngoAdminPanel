@@ -40,14 +40,24 @@ Branch List | {{ $ins_name }}
                 <div class="mb-3">
                     <label class="form-label" for="">Branch Name</label>
                     <input class="form-control" id="" name="branch_name" type="text" placeholder="" required>
+
+                    <input type="hidden" class="form-control form-control-sm" value="{{ $stepValue+1 }}" name="branch_step" placeholder=""  readonly>
+
+
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="">Branch Code</label>
                     <input class="form-control" id="" name="branch_code" type="text" placeholder="" required>
 
                 </div>
+
+                <div class="form-group col-md-12 col-sm-12">
+                    <label for="branch_step">Branch Step</label>
+                    <input type="text" class="form-control form-control-sm" value="{{ $stepValue+1 }}" name="branch_step1" placeholder=""  readonly>
+                </div>
+                <small class="text-danger" id="result0"></small>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" id="finalButton0" type="submit">Submit</button>
                 </div>
                 </form>
             </div>
@@ -69,6 +79,7 @@ Branch List | {{ $ins_name }}
                                 <th>ID</th>
                                 <th>Branch Name</th>
                                 <th>Branch Code</th>
+                                <th>Branch Step</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -78,6 +89,7 @@ Branch List | {{ $ins_name }}
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $AllBranchLists->branch_name }}</td>
                                 <td>{{ $AllBranchLists->branch_code }}</td>
+                                <td>{{ $AllBranchLists->branch_step }}</td>
                                 <td>
                                     @if (Auth::guard('admin')->user()->can('branchUpdate'))
                                     <button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg{{ $AllBranchLists->id }}"
@@ -110,15 +122,18 @@ Branch List | {{ $ins_name }}
                                                               </div>
 
 
-
-
+                                                              <div class="form-group col-md-12 col-sm-12">
+                                                                <label for="branch_step">Branch Step</label>
+                                                                <input type="text" class="form-control form-control-sm" id="branch_step{{ $AllBranchLists->id }}" name="branch_step" placeholder="Enter Branch Step" value="{{ $AllBranchLists->branch_step }}">
+                                                            </div>
+                                                            <small class="text-danger" id="result{{ $AllBranchLists->id  }}"></small>
 
 
                                                           </div>
 
 
 
-                                                          <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
+                                                          <button type="submit" id="finalButton{{ $AllBranchLists->id  }}" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
                                                       </form>
                                                   </div>
                                               </div><!-- /.modal-content -->
@@ -156,4 +171,46 @@ Branch List | {{ $ins_name }}
 @endsection
 
 @section('script')
+<!-- branch-->
+<script>
+    $("[id^=branch_step]").keyup(function(){
+        var main_id = $(this).attr('id');
+        var id_for_pass = main_id.slice(11);
+
+
+        //alert(2);
+
+
+        var branchStep = $('#branch_step'+id_for_pass).val();
+
+        //alert(branchStep);
+
+
+        $.ajax({
+        url: "{{ route('checkBranch') }}",
+        method: 'GET',
+        data: {branchStep:branchStep},
+        success: function(data) {
+
+            if(data >= 1){
+
+                $("#result"+id_for_pass).html('You Have Already Add This Step');
+                $("#finalButton"+id_for_pass).hide();
+
+            }else{
+
+                $("#result"+id_for_pass).html('');
+                $("#finalButton"+id_for_pass).show();
+            }
+
+
+        }
+        });
+
+
+
+        //alert(id_for_pass);
+    });
+    </script>
+<!-- end branch -->
 @endsection

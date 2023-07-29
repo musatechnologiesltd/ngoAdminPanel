@@ -58,15 +58,23 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::resource('branchList', BranchController::class);
+
+    Route::controller(BranchController::class)->group(function () {
+        Route::get('/checkBranch', 'checkBranch')->name('checkBranch');
+        Route::get('/showBranchStep', 'showBranchStep')->name('showBranchStep');
+
+    });
+
+
     Route::resource('designationList', DesignationController::class);
 
     Route::controller(DesignationController::class)->group(function () {
-
+        Route::get('/checkDesignation', 'checkDesignation')->name('checkDesignation');
         Route::get('/getDesignationFromBranch', 'getDesignationFromBranch')->name('getDesignationFromBranch');
     });
 
 
-    Route::resource('designationStepList', DesignationStepController::class);
+    Route::resource('assignedEmployee', DesignationStepController::class);
 
     Route::resource('country', CountryController::class);
     Route::resource('civilInfo', CountryController::class);

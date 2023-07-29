@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DesignationList extends Model
 {
     use HasFactory;
-    protected $fillable = ['branch_id','designation_name'];
+    protected $fillable = ['branch_id','designation_name','designation_serial'];
 
     public function admin()
     {
@@ -20,11 +20,11 @@ class DesignationList extends Model
         return $this->hasMany(DesignationStep::class,'designation_list_id');
     }
 
-   
 
 
-    public function branchList()
+
+    public function designationList()
     {
-        return $this->hasOne(Branch::class,'branch_id');
+        return $this->belongsTo(Branch::class,'branch_id');
     }
 }

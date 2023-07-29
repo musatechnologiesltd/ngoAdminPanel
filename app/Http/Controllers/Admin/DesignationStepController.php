@@ -36,11 +36,19 @@ class DesignationStepController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               $branchLists = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
+               $designationLists = DesignationList::where('id','!=',1)->
+               orderBy(
+                 Branch::select('branch_step')
+                     ->whereColumn('designation_lists.branch_id', 'branches.id'),
+                 'asc'
+             )->orderBy('designation_serial','asc')->get();
+
           $designationStepLists = DesignationStep::latest()->get();
-          $designationLists = DesignationList::latest()->get();
+          //$designationLists = DesignationList::latest()->get();
 
 
-               return view('admin.designationStepList.index',compact('designationLists','designationStepLists'));
+               return view('admin.designationStepList.index',compact('branchLists','designationLists','designationStepLists'));
            }
 
 

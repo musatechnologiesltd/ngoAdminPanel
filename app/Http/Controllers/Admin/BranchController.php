@@ -27,6 +27,29 @@ class BranchController extends Controller
         });
     }
 
+   public function checkBranch(Request $request){
+
+    $branchStep = $request->branchStep;
+
+    $designationCount = Branch::where('branch_step',$branchStep )
+    //->where('designation_serial',$designationSerial )
+    ->count();
+
+
+return $designationCount;
+
+   }
+
+
+   public function showBranchStep(Request $request){
+
+    $branchId = $request->branchId;
+    $branchStep = Branch::where('id',$branchId)->value('branch_step');
+
+    return $branchStep;
+
+   }
+
     public function index(){
 
 
@@ -35,11 +58,11 @@ class BranchController extends Controller
             return redirect()->route('mainLogin');
                }
 
-          $branchLists = Branch::latest()->get();
+          $branchLists = Branch::where('id','!=',1)->latest()->get();
 
+          $stepValue = Branch::orderBy('id','desc')->max('branch_step');
 
-
-               return view('admin.branchList.index',compact('branchLists'));
+               return view('admin.branchList.index',compact('branchLists','stepValue'));
            }
 
 

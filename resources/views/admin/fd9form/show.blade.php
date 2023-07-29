@@ -5,6 +5,7 @@ FD-9 (N-Visa) | {{ $ins_name }}
 @endsection
 
 
+
 @section('css')
 
 @endsection
@@ -1106,7 +1107,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                         </tr>
                                         @if(!$nVisaDocs)
 
-                                                <tr>
+                                                {{-- <tr>
                                                     <td>১</td>
                                                     <td>ক্রেতার প্রতিনিধি নিয়োগের ক্ষেত্রে ক্রেতার মনোনয়ন পত্রের অনুলিপি</td>
                                                     <td>
@@ -1143,210 +1144,235 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                     <td>৬</td>
                                                     <td>কর্মচারীদের জন্য ই-টাইপ ভিসা সহ পাসপোর্টের ফটোকপি/বিনিয়োগকারীদের জন্য পিআই-টাইপ ভিসা</td>
                                                     <td><button class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </button></td>
-                                                </tr>
+                                                </tr> --}}
 
                                                 @else
 
+                                                @if(empty($nVisaDocs->nomination_letter_of_buyer))
 
+
+                                                @else
                                                 <tr>
-                                                    <td>১</td>
+
                                                     <td>ক্রেতার প্রতিনিধি নিয়োগের ক্ষেত্রে ক্রেতার মনোনয়ন পত্রের অনুলিপি</td>
                                                     <td>
 
 
-                                                       @if(empty($nVisaDocs->nomination_letter_of_buyer))
 
-
-                                                       @else
 
                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
-                                                        @endif
+
 
 
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if(empty($nVisaDocs->registration_letter_of_board_of_investment))
+
+
+                                                        @else
                                                 <tr>
-                                                    <td>২</td>
+
                                                     <td>বিনিয়োগ বোর্ডের নিবন্ধন পত্রের অনুলিপি, যদি আগে জমা না দেওয়া হয়</td>
                                                     <td>
 
-                                                        @if(empty($nVisaDocs->registration_letter_of_board_of_investment))
 
-
-                                                        @else
 
                                                          <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
-                                                         @endif
+
 
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if(empty($nVisaDocs->employee_contract_copy))
+
+
+                                                @else
                                                 <tr>
-                                                    <td>৩</td>
+
                                                     <td>কর্মচারীর ক্ষেত্রে পরিষেবা চুক্তি/চুক্তি/নিয়োগ পত্রের অনুলিপি</td>
                                                     <td>
 
-                                                        @if(empty($nVisaDocs->employee_contract_copy))
 
-
-                                                        @else
 
                                                          <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
-                                                         @endif
+
 
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if(empty($nVisaDocs->board_of_the_directors_sign_lette))
+
+
+                                                        @else
                                                 <tr>
-                                                    <td>৪</td>
+
                                                     <td>বিদেশী নাগরিকদের নিয়োগ সংক্রান্ত কোম্পানির পরিচালক পর্ষদের সিদ্ধান্ত (সীমিত কোম্পানির ক্ষেত্রে) বেতন এবং অন্যান্য সুবিধা দেখায় শুধুমাত্র সভায় উপস্থিত পরিচালকদের দ্বারা স্বাক্ষরিত কোম্পানির</td>
                                                     <td>
 
-                                                        @if(empty($nVisaDocs->board_of_the_directors_sign_lette))
 
-
-                                                        @else
 
                                                          <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
-                                                         @endif
+
 
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if(empty($nVisaDocs->share_holder_copy))
+
+
+                                                @else
                                                 <tr>
-                                                    <td>৫</td>
+
                                                     <td>মেমোরেন্ডাম এবং আর্টিকেল অফ অ্যাসোসিয়েশন শেয়ারহোল্ডারদের দ্বারা যথাযথভাবে স্বাক্ষরিত এবং অন্তর্ভুক্তির শংসাপত্র সহ (লিমিটেড কোম্পানির ক্ষেত্রে), যদি আগে জমা না দেওয়া হয়</td>
                                                     <td>
-                                                        @if(empty($nVisaDocs->share_holder_copy))
 
-
-                                                        @else
 
                                                          <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
-                                                         @endif
+
                                                     </td>
                                                 </tr>
+                                                @endif
+                                                @if(empty($nVisaDocs->passport_photocopy))
+
+
+                                                @else
                                                 <tr>
-                                                    <td>৬</td>
+
                                                     <td>কর্মচারীদের জন্য ই-টাইপ ভিসা সহ পাসপোর্টের ফটোকপি/বিনিয়োগকারীদের জন্য পিআই-টাইপ ভিসা</td>
                                                     <td>
-                                                        @if(empty($nVisaDocs->passport_photocopy))
 
-
-                                                        @else
 
                                                          <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
-                                                         @endif
+
                                                     </td>
                                                 </tr>
-
-
                                                 @endif
 
-                                                <tr>
-                                                    <td>৭</td>
-                                                    <td>একাডেমিক যোগ্যতা (একাডেমিক যোগ্যতার সমর্থনে সনদপত্রের কপি সংযুক্ত করতে হবে</td>
-                                                    <td>:  @if(!$dataFromNVisaFd9Fd1->fd9_academic_qualification)
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_academic_qualification)
 
-                                                        @else
+                                                @else
+                                                <tr>
+
+                                                    <td>একাডেমিক যোগ্যতা (একাডেমিক যোগ্যতার সমর্থনে সনদপত্রের কপি সংযুক্ত করতে হবে</td>
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'academicQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif
+
                                                         </td>
                                                 </tr>
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_technical_and_other_qualifications_if_any)
+
+                                                        @else
                                                 <tr>
-                                                    <td>৮</td>
+
                                                     <td>কারিগরি ও অন্যান্য যোগ্যতা যদি থাকে (প্রাসঙ্গিক সনদপত্রের কপি সংযুক্ত করতে
                                                         হবে)
                                                     </td>
-                                                    <td>: @if(!$dataFromNVisaFd9Fd1->fd9_technical_and_other_qualifications_if_any)
-
-                                                        @else
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'techQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>৯</td>
-                                                    <td>অতীত অভিজ্ঞতা এবং যে কাজে তাঁকে নিয়োগ দেয়া হচ্ছে তাতে তার দক্ষতা (প্রমাণকসহ)
+
                                                     </td>
-                                                    <td>: @if(!$dataFromNVisaFd9Fd1->fd9_past_experience)
+                                                </tr>
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_past_experience)
 
                                                         @else
+                                                <tr>
+
+                                                    <td>অতীত অভিজ্ঞতা এবং যে কাজে তাঁকে নিয়োগ দেয়া হচ্ছে তাতে তার দক্ষতা (প্রমাণকসহ)
+                                                    </td>
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'pastExperience','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif</td>
-                                                </tr>
 
+                                                        </td>
+                                                </tr>
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_offered_post)
+
+                                                @else
                                                 <tr>
-                                                    <td>১০</td>
+
                                                     <td>যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (নিয়োগপত্র কপি ও চুক্তিপত্র সংযুক্ত
                                                         করতে হবে)
                                                     </td>
-                                                    <td>:  @if(!$dataFromNVisaFd9Fd1->fd9_offered_post)
-
-                                                        @else
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif</td>
+                                                         </td>
                                                 </tr>
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_name_of_proposed_project)
+
+                                                        @else
                                                 <tr>
-                                                    <td>১১</td>
+
                                                     <td>যে প্রকল্পে তাকে নিয়োগের প্রস্থাব করা হয়েছে তার নাম ও মেয়াদ ব্যুরোর অনুমোদন
                                                         পত্র সংযুক্ত করতে হবে)
                                                     </td>
-                                                    <td>: @if(!$dataFromNVisaFd9Fd1->fd9_name_of_proposed_project)
-
-                                                        @else
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'proposedProject','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif</td>
+                                                         </td>
                                                 </tr>
+                                                @endif
 
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo)
 
-
+                                                @else
                                                 <tr>
-                                                    <td>১২</td>
-                                                    <td>বিদেশি নাগরিকের পাসপোর্ট সাইজের ছবি</td>
-                                                    <td>: @if(!$dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo)
 
-                                                        @else
+                                                    <td>বিদেশি নাগরিকের পাসপোর্ট সাইজের ছবি</td>
+                                                    <td>:
 
                                                         <img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
 
-        @endif
+
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>১৩</td>
-                                                    <td>পাসপোর্টের কপি সংযুক্ত</td>
-                                                    <td>:  @if(!$dataFromNVisaFd9Fd1->fd9_copy_of_passport)
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->fd9_copy_of_passport)
 
                                                         @else
+                                                <tr>
+
+                                                    <td>পাসপোর্টের কপি সংযুক্ত</td>
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'copyOfPassport','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>১৪</td>
-                                                    <td>ফরওয়ার্ডিং লেটার</td>
-                                                    <td>:  @if(!$dataFromNVisaFd9Fd1->forwarding_letter)
 
-                                                        @else
+                                                        </td>
+                                                </tr>
+                                                @endif
+                                                @if(!$dataFromNVisaFd9Fd1->forwarding_letter)
+
+                                                @else
+                                                <tr>
+
+                                                    <td>ফরওয়ার্ডিং লেটার</td>
+                                                    <td>:
 
 
                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'forwarding_letter','id'=>$dataFromNVisaFd9Fd1->nVisaId]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-                                                         @endif</td>
+                                                         </td>
                                                 </tr>
+                                                @endif
                                     </table>
                                 </div>
                                 <div class="card-footer text-end">

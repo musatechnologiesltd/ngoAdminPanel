@@ -138,7 +138,7 @@
     </div>
   </li>
 <!--empoyee info --->
-@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('designationStepList.index'))
+@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('designationStepList.index'))
 
 <li class="dropdown">
   <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>
@@ -157,18 +157,20 @@
 </li>
 @endif
 
-@if ($usr->can('designationStepAdd') || $usr->can('designationStepView') ||  $usr->can('designationStepDelete') ||  $usr->can('designationStepUpdate'))
-<li >
-<a href="{{ route('designationStepList.index') }}" class="{{ Route::is('designationStepList.index')  ? 'active' : '' }}"><span>Designation Step List</span> </a>
-</li>
-@endif
+
 
 
       @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
       <li class="">
-          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
       </li>
       @endif
+
+@if ($usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit'))
+<li >
+<a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>Assigned Employee</span> </a>
+</li>
+@endif
 
  @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit'))
           <li class="">
@@ -203,16 +205,18 @@
     </li>
     @endif
 
-    @if ($usr->can('designationStepAdd') || $usr->can('designationStepView') ||  $usr->can('designationStepDelete') ||  $usr->can('designationStepUpdate'))
-    <li >
-    <a href="{{ route('designationStepList.index') }}" class="{{ Route::is('designationStepList.index')  ? 'active' : '' }}"><span>Designation Step List</span> </a>
-    </li>
-    @endif
+
 
 
           @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
           <li class="">
-              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+          </li>
+          @endif
+
+          @if ($usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit'))
+          <li >
+          <a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>Assigned Employee</span> </a>
           </li>
           @endif
 

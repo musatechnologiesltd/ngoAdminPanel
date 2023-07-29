@@ -45,12 +45,47 @@ class DesignationController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
-               $branchLists = Branch::latest()->get();
-          $designationLists = DesignationList::latest()->get();
+               $branchLists = Branch::where('id','!=',1)->latest()->get();
+          $designationLists = DesignationList::where('id','!=',1)->
+          orderBy(
+            Branch::select('branch_step')
+                ->whereColumn('designation_lists.branch_id', 'branches.id'),
+            'asc'
+        )->orderBy('designation_serial','asc')->get();
+
+
+        //   $users = User::orderBy(
+        //     Company::select('name')
+        //         ->whereColumn('companies.user_id', 'users.id'),
+        //     'asc'
+        // )->get();
+
+
+
 
 
 
                return view('admin.designationList.index',compact('branchLists','designationLists'));
+           }
+
+
+           public function checkDesignation(Request $request){
+
+            $branchId = $request->branchId;
+            $designationName = $request->designationName;
+            $designationStep = $request->designationStep;
+            $designationSerial = $request->designationSerial;
+          //  dd($designationStep);
+
+            $designationCount = DesignationList::where('branch_id',$branchId)
+                                 //->where('designation_name',$designationName)
+                                // ->where('designation_step',$designationStep )
+                                 ->where('designation_serial',$designationSerial )
+                                 ->count();
+
+
+                    return $designationCount;
+
            }
 
 
@@ -67,12 +102,18 @@ class DesignationController extends Controller
               ]);
 
 
-
+              //dd($request->all());
 
              $input = $request->all();
 
-             DesignationList::create($input);
+            // DesignationList::create($input);
 
+
+             $dataInsert = new DesignationList();
+             $dataInsert->branch_id = $request->branch_id;
+             $dataInsert->designation_name = $request->designation_name;
+             $dataInsert->designation_serial = $request->serial_part_one.'.'.$request->serial_pert_two;
+             $dataInsert->save();
 
 
 
@@ -92,6 +133,9 @@ class DesignationController extends Controller
                // abort(403, 'Sorry !! You are Unauthorized to Update !');
                return redirect()->route('mainLogin');
             }
+
+
+            dd($request->all());
 
             $medicine = DesignationList::findOrFail($id);
 

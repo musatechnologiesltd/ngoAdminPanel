@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('designation_list_id')->unsigned();
             $table->foreign('designation_list_id')->references('id')->on('designation_lists')->onDelete('cascade');
-            $table->string('designation_step');
-            $table->string('designation_serial');
+            $table->string('designation_step')->nullable();
+            $table->string('designation_serial')->nullable();
             $table->timestamps();
         });
     }

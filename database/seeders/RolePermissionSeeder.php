@@ -37,6 +37,13 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'assignedEmployee',
+                'permissions' => [
+                    'assignedEmployee.view',
+                    'assignedEmployee.edit',
+                ]
+            ],
+            [
                 'group_name' => 'systemInformation',
                 'permissions' => [
                     'systemInformationAdd',

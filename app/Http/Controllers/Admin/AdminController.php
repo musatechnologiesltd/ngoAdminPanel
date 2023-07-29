@@ -87,7 +87,7 @@ class AdminController extends Controller
 
               // dd(public_path().'\images');
 
-        $users = Admin::all();
+        $users = Admin::where('id','!=',1)->get();
         $roles  = Role::all();
 
        return view('admin.user.index', compact('users','roles'));
@@ -107,10 +107,10 @@ class AdminController extends Controller
         // Validation Data
         $request->validate([
             'name' => 'required|string|max:150',
-            'designation_list_id' => 'required|string|max:200',
+            //'designation_list_id' => 'required|string|max:200',
             'phone' => 'required|string|size:11',
-            'branch_id' => 'required|string|max:200',
-            'admin_job_start_date' => 'required|date',
+           // 'branch_id' => 'required|string|max:200',
+           // 'admin_job_start_date' => 'required|date',
             // 'admin_job_end_date' => 'required|date',
             'sign' => 'required|file|mimes:jpeg,png,jpg',
             'image' => 'required|file|mimes:jpeg,png,jpg',
@@ -119,10 +119,10 @@ class AdminController extends Controller
         ],
         [
             'name.required' => 'Name is required',
-            'designation_list_id.required' => 'designation is required',
+           // 'designation_list_id.required' => 'designation is required',
             'phone.required' => 'Phone is required',
-            'branch_id.required' => 'branch is required',
-            'admin_job_start_date.required' => 'Admin_job_start_date is required',
+             // 'branch_id.required' => 'branch is required',
+            //'admin_job_start_date.required' => 'Admin_job_start_date is required',
             // 'admin_job_end_date.required' => 'Admin_job_end_dateis required',
             'sign.required' => 'Sign is required',
             'image.required' => 'Image is required',
@@ -141,9 +141,9 @@ class AdminController extends Controller
         $admins = new Admin();
         $admins->admin_name = $request->name;
         $admins->admin_name_ban = $request->name_ban;
-        $admins->designation_list_id = $request->designation_list_id;
-        $admins->branch_id = $request->branch_id;
-        $admins->admin_job_start_date = $request->admin_job_start_date;
+        $admins->designation_list_id = 1;
+        $admins->branch_id = 1;
+        //$admins->admin_job_start_date = $request->admin_job_start_date;
         // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
@@ -195,9 +195,9 @@ class AdminController extends Controller
         $admins = Admin::find($id);
         $admins->admin_name = $request->name;
         $admins->admin_name_ban = $request->name_ban;
-        $admins->designation_list_id = $request->designation_list_id;
-        $admins->branch_id = $request->branch_id;
-        $admins->admin_job_start_date = $request->admin_job_start_date;
+        $admins->designation_list_id = 1;
+        $admins->branch_id = 1;
+        //$admins->admin_job_start_date = $request->admin_job_start_date;
         // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;

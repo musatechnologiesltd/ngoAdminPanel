@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('branch_id')->unsigned();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('designation_name');
+            $table->string('designation_serial');
             $table->timestamps();
         });
     }
