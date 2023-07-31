@@ -272,9 +272,15 @@ class AdminController extends Controller
 
   public function employeeEndDatePost(request $request){
 
-    $admins = Admin::find($request->id);
 
+    $getTheValue = Admin::where('id',$request->id)->value('admin_job_start_date');
+
+    $admins = Admin::find($request->id);
+ $admins->admin_job_end_start_date =$getTheValue;
  $admins->admin_job_end_date = $request->admin_job_end_date;
+ $admins->admin_job_start_date = $request->admin_job_start_date;
+//  $admins->designation_list_id = $request->designation_list_id;
+//  $admins->branch_id = $request->branch_id;
  $admins->save();
 
  return redirect()->back()->with('info','Added successfully!');

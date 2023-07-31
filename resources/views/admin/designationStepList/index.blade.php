@@ -30,18 +30,23 @@ Assigned User List | {{ $ins_name }}
 
 <!-- Container-fluid starts-->
 <div class="container-fluid list-products">
+
     <div class="row">
         <!-- Individual column searching (text inputs) Starts-->
+        @include('flash_message')
         <div class="col-sm-12">
             <div class="card">
 
                 <div class="card-body">
 
-                    @foreach($branchLists as $AllBranchLists)
+                    @foreach($branchLists as $key=>$AllBranchLists)
+
+                    <input type="hidden" name="branchId[]" value="{{ $AllBranchLists->id }}"/>
 
                     <?php
 
-
+$designationList = DB::table('designation_lists')->where('branch_id',$AllBranchLists->id)
+                ->orderBy('designation_serial','asc')->get();
                      ?>
                     <div class="card">
 
@@ -54,25 +59,96 @@ Assigned User List | {{ $ins_name }}
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                      <th scope="col">#</th>
+                                        <th scope="col">#</th>
                                       <th scope="col">Designation Name</th>
                                       <th scope="col">Staff Name</th>
                                       <th scope="col">Start Date</th>
+                                      <th scope="col">Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
+                                    @foreach($designationList as $j=>$AllDesignationList)
+                                    <form class="custom-validation" action="{{ route('assignedEmployee.store') }}" method="post" id="form" data-parsley-validate="" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="branchId" value="{{ $AllBranchLists->id }}"/>
+                                    <?php
+
+                                   $adminId =  DB::table('admins')->where('designation_list_id',$AllDesignationList->id)
+                                               ->orderBy('id','desc')->value('id');
+
+                                               $adminDate =  DB::table('admins')->where('designation_list_id',$AllDesignationList->id)
+                                               ->orderBy('id','desc')->value('admin_job_start_date');
+                                    ?>
+                                    <input type="hidden" name="designation_list_id" value="{{ $AllDesignationList->id }}" />
                                     <tr>
-                                      <th scope="row">1</th>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
+                                        <td>
+
+                                            @if(empty($adminDate))
+
+                                            <input type="checkbox" id="checkMain{{ $AllDesignationList->id }}" class=""/>
+
+                                            @else
+
+                                            <input type="checkbox" id="checkMain{{ $AllDesignationList->id }}" class="" checked/>
+                                            @endif
+
+
+                                        </td>
+
+                                      <td>{{ $AllDesignationList->designation_name }}</td>
+                                      <td>
+
+                                        @if(empty($adminDate))
+
+                                        <select class="form-control" name="adminId"  id="adminId{{ $AllDesignationList->id }}">
+                                            <option value="">--Please Select --</option>
+                                            @foreach($users_as as $allusers)
+
+
+                                            <option value="{{ $allusers->id }}">{{ $allusers->admin_name }}</option>
+
+                                            @endforeach
+                                            </select>
+@else
+
+<select class="form-control" name="adminId" disabled id="adminId{{ $AllDesignationList->id }}">
+    <option value="">--Please Select --</option>
+    @foreach($users as $allusers)
+
+
+    <option value="{{ $allusers->id }}" {{ $allusers->id == $adminId ? 'selected':'' }}>{{ $allusers->admin_name }}</option>
+
+    @endforeach
+    </select>
+@endif
+
+
+
+
+
+
+                                    </td>
+                                      <td>
+
+                                        @if(empty($adminDate))
+                                        <input type="text" class="form-control datepicker23" value="{{ $adminDate }}" id="admin_job_start_date{{ $AllDesignationList->id }}"  name="admin_job_start_date" placeholder="Enter Date" >
+                                        @else
+                                        <input type="text" class="form-control datepicker23" value="{{ $adminDate }}" id="admin_job_start_date{{ $AllDesignationList->id }}"   name="admin_job_start_date" placeholder="Enter Date" disabled>
+                                        @endif
+                                      </td>
+
+                                      <td>
+                                        @if(empty($adminDate))
+                                        <button type="submit"  class="btn btn-primary btn-sm" id="bMain{{ $AllDesignationList->id }}"><i class="fa fa-pencil"></i></button>
+                                        @else
+                                        <button type="submit"  class="btn btn-primary btn-sm" id="bMain{{ $AllDesignationList->id }}" disabled><i class="fa fa-pencil"></i></button>
+                                        @endif
+
+                                    </td>
+
                                     </tr>
-                                    <tr>
-                                      <th scope="row">2</th>
-                                      <td>Jacob</td>
-                                      <td>Thornton</td>
-                                      <td>@fat</td>
-                                    </tr>
+                                </form>
+@endforeach
 
                                   </tbody>
                             </table>
@@ -87,11 +163,45 @@ Assigned User List | {{ $ins_name }}
         </div>
         <!-- Individual column searching (text inputs) Ends-->
     </div>
+
+
+
 </div>
 <!-- Container-fluid Ends-->
 @endsection
 
 
 @section('script')
+
+<!-- designation -->
+<script>
+    $("[id^=checkMain]").click(function(){
+         var main_id = $(this).attr('id');
+         var id_for_pass = main_id.slice(9);
+
+
+
+        if($(this).is(":checked")){
+                //alert(id_for_pass);
+                $("#bMain"+id_for_pass).attr("disabled", true);
+                $("#adminId"+id_for_pass).attr("disabled", true);
+                $("#admin_job_start_date"+id_for_pass).attr("disabled", true);
+            }
+            else if($(this).is(":not(:checked)")){
+                //alert(id_for_pass);
+                $("#bMain"+id_for_pass).removeAttr("disabled");
+                $("#adminId"+id_for_pass).removeAttr("disabled");
+                $("#admin_job_start_date"+id_for_pass).removeAttr("disabled");
+            }
+
+
+
+
+
+        //alert(id_for_pass);
+    });
+    </script>
+<!-- end designation -->
+
 @endsection
 

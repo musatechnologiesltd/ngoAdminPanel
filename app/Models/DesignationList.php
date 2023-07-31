@@ -23,7 +23,7 @@ class DesignationList extends Model
 
 
 
-    public function designationList()
+    public function branchList()
     {
         return $this->belongsTo(Branch::class,'branch_id');
     }

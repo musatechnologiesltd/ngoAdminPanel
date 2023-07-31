@@ -16,14 +16,12 @@ return new class extends Migration
             $table->string('admin_name');
             $table->string('admin_name_ban');
             $table->string('admin_mobile');
-            $table->bigInteger('designation_list_id')->unsigned();
-            $table->foreign('designation_list_id')->references('id')->on('designation_lists')->onDelete('cascade');
-            $table->bigInteger('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-
+            $table->string('designation_list_id')->nullable();
+            $table->string('branch_id')->nullable();
             $table->string('admin_sign')->nullable();
             $table->string('admin_job_start_date')->nullable();
             $table->string('admin_job_end_date')->nullable();
+            $table->string('admin_job_end_start_date')->nullable();
             $table->text('admin_image')->nullable();
             $table->string('email')->unique();
             $table->timestamp('admin_email_verified_at')->nullable();
