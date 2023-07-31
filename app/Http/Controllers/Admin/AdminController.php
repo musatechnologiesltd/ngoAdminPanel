@@ -259,12 +259,12 @@ class AdminController extends Controller
 
 
   public function employeeEndDate(){
-      $users = Admin::whereNull('admin_job_end_date')->latest()->get();
+      $users = Admin::latest()->get();
       return view('admin.user.employeeEndDate',compact('users'));
   }
 
   public function getAdminDetail(Request $request){
-    $user = Admin::where('admin_name',$request->mainId)->first();
+    $user = Admin::where('id',$request->mainId)->first();
     $data = view('admin.user.getAdminDetail',compact('user'))->render();
     return response()->json($data);
   }

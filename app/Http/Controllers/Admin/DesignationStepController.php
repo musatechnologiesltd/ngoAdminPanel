@@ -77,17 +77,17 @@ class DesignationStepController extends Controller
 
 
 
+             $dateFormate = date('Y-m-d', strtotime($request->admin_job_start_date));
 
 
 
-
-                // dd(ee);
+                //dd($dateFormate);
 
 
                 $newData = Admin::find($request->adminId);
                 $newData->branch_id = $request->branchId;
                 $newData->designation_list_id = $request->designation_list_id;
-                $newData->admin_job_start_date = $request->admin_job_start_date;
+                $newData->admin_job_start_date = $dateFormate;
                 $newData->save();
 
 

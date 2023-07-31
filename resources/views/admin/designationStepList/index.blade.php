@@ -89,7 +89,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
 
                                             @else
 
-                                            <input type="checkbox" id="checkMain{{ $AllDesignationList->id }}" class="" checked/>
+                                            <input type="checkbox" id="checkMain{{ $AllDesignationList->id }}" class="" checked disabled/>
                                             @endif
 
 
@@ -100,7 +100,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
 
                                         @if(empty($adminDate))
 
-                                        <select class="form-control" name="adminId"  id="adminId{{ $AllDesignationList->id }}">
+                                        <select class="form-control" style="display: none;" name="adminId"  id="adminId{{ $AllDesignationList->id }}">
                                             <option value="">--Please Select --</option>
                                             @foreach($users_as as $allusers)
 
@@ -131,17 +131,17 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                       <td>
 
                                         @if(empty($adminDate))
-                                        <input type="text" class="form-control datepicker23" value="{{ $adminDate }}" id="admin_job_start_date{{ $AllDesignationList->id }}"  name="admin_job_start_date" placeholder="Enter Date" >
+                                        <input type="text" style="display: none;" class="form-control datepicker233" value="{{ $adminDate }}" id="admin_job_start_date{{ $AllDesignationList->id }}"  name="admin_job_start_date" placeholder="Enter Date" >
                                         @else
-                                        <input type="text" class="form-control datepicker23" value="{{ $adminDate }}" id="admin_job_start_date{{ $AllDesignationList->id }}"   name="admin_job_start_date" placeholder="Enter Date" disabled>
+                                        <input type="text" class="form-control datepicker233" value="{{ date('d-m-Y', strtotime($adminDate)) }}" id="admin_job_start_date{{ $AllDesignationList->id }}"   name="admin_job_start_date" placeholder="Enter Date" disabled>
                                         @endif
                                       </td>
 
                                       <td>
                                         @if(empty($adminDate))
-                                        <button type="submit"  class="btn btn-primary btn-sm" id="bMain{{ $AllDesignationList->id }}"><i class="fa fa-pencil"></i></button>
+                                        <button type="submit"  class="btn btn-primary btn-sm" id="bMain{{ $AllDesignationList->id }}" style="display: none;"><i class="fa fa-hand-o-right"></i></button>
                                         @else
-                                        <button type="submit"  class="btn btn-primary btn-sm" id="bMain{{ $AllDesignationList->id }}" disabled><i class="fa fa-pencil"></i></button>
+                                        <button type="submit"  class="btn btn-primary btn-sm" id="bMain{{ $AllDesignationList->id }}" disabled><i class="fa fa-hand-o-right"></i></button>
                                         @endif
 
                                     </td>
@@ -179,19 +179,26 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
          var main_id = $(this).attr('id');
          var id_for_pass = main_id.slice(9);
 
+         $("#bMain"+id_for_pass).hide();
+         $("#adminId"+id_for_pass).hide();
+         $("#admin_job_start_date"+id_for_pass).hide();
+
+
 
 
         if($(this).is(":checked")){
                 //alert(id_for_pass);
-                $("#bMain"+id_for_pass).attr("disabled", true);
-                $("#adminId"+id_for_pass).attr("disabled", true);
-                $("#admin_job_start_date"+id_for_pass).attr("disabled", true);
+                $("#bMain"+id_for_pass).show();
+         $("#adminId"+id_for_pass).show();
+         $("#admin_job_start_date"+id_for_pass).show();
+
+
             }
             else if($(this).is(":not(:checked)")){
                 //alert(id_for_pass);
-                $("#bMain"+id_for_pass).removeAttr("disabled");
-                $("#adminId"+id_for_pass).removeAttr("disabled");
-                $("#admin_job_start_date"+id_for_pass).removeAttr("disabled");
+                $("#bMain"+id_for_pass).hide();
+         $("#adminId"+id_for_pass).hide();
+         $("#admin_job_start_date"+id_for_pass).hide();
             }
 
 

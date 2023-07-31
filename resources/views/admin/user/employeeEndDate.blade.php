@@ -89,7 +89,7 @@ Employee End Date List
     </script>
 
 
-    <script>
+    {{-- <script>
       window.onload = function () {
         $('#basic').editableSelect();
         $('#default').editableSelect({ effects: 'default' });
@@ -103,5 +103,5 @@ Employee End Date List
           }
         });
       }
-    </script>
+    </script> --}}
 @endsection

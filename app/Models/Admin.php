@@ -20,7 +20,7 @@ class Admin extends Authenticatable
     protected $fillable = [
         'admin_name','admin_name_ban','admin_mobile','designation_list_id','branch_id',
         'admin_sign','admin_job_start_date','admin_job_end_date','admin_image',
-        'email', 'password'
+        'email', 'password','admin_job_end_start_date'
     ];
 
     /**

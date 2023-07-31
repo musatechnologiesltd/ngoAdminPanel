@@ -138,7 +138,7 @@
     </div>
   </li>
 <!--empoyee info --->
-@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('designationStepList.index'))
+@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('assignedEmployee.index'))
 
 <li class="dropdown">
   <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>

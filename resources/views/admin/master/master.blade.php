@@ -303,6 +303,16 @@
    });
      </script>
 
+<script>
+    $(function(){
+       $(".datepicker233").datepicker({
+           dateFormat: "dd-mm-yy",
+           changeMonth: true,
+           changeYear: true
+       });
+   });
+     </script>
+
      <script>
         $(document).ready(function() {
     $('.js-example-basic-multiple').select2();
