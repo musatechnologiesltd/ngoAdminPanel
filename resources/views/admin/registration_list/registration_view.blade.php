@@ -165,14 +165,26 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     class="icofont icofont-animal-lemur"></i>Document</a>
                                     </li>
 
-                                    @if($renew_status = "Accepted" || $name_change_status = "Accepted" || $r_status = "Accepted" )
+                                    @if($renew_status == "Accepted" || $name_change_status == "Accepted" || $r_status == "Accepted" )
                                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                                         data-bs-toggle="pill" href="#pills-darkdoc1"
                                         role="tab" aria-controls="pills-darkdoc1"
                                         aria-selected="false" style=""><i
                                 class="icofont icofont-animal-lemur"></i>Print Certificate</a>
                 </li>
-                                     @endif
+
+                @else
+
+                <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
+                    data-bs-toggle="pill" href="#pills-darkdoc1"
+                    role="tab" aria-controls="pills-darkdoc1"
+                    aria-selected="false" style=""><i
+            class="icofont icofont-animal-lemur"></i>Status Update</a>
+             </li>
+
+
+
+                @endif
 
                                 </ul>
                                 <div class="tab-content" id="pills-darktabContent">
@@ -844,6 +856,8 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                         </div>
                                     </div>
 
+                                    @if($renew_status == "Accepted" || $name_change_status == "Accepted" || $r_status == "Accepted" )
+
                                     <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
                                          aria-labelledby="pills-darkdoc1-tab">
                                         <div class="mb-0 m-t-30">
@@ -967,6 +981,53 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 <!---vvvvvvvvv-->
                                         </div>
                                     </div>
+                                    @else
+                                    <?php
+                                    $fdOneFormId = DB::table('fd_one_forms')->where('id',$form_one_data->id)->value('user_id');
+                                    $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('email');
+
+                                            ?>
+                                    <!--new-->
+
+                                    <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
+                                         aria-labelledby="pills-darkdoc1-tab">
+                                        <div class="mb-0 m-t-30">
+                                            <form action="{{ route('updateStatusRegForm') }}" method="post">
+                                                @csrf
+
+
+                                                <input type="hidden" value="{{ $all_data_for_new_list_all->id }}" name="id" />
+
+                                                <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
+
+                                                <label>Status:</label>
+                                                <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
+
+                                                    <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
+                                                    <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
+                                                    <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
+
+                                                </select>
+
+<div id="rValue" style="display:none;">
+                                                <label>Registration ID:</label>
+                                                @if($all_data_for_new_list_all->reg_id == 0)
+                                                <input type="text" value=""  name="reg_no_get_from_admin" class="form-control form-control-sm" />
+
+@else
+<input type="text" value="{{ $all_data_for_new_list_all->reg_id }}"  name="reg_no_get_from_admin" class="form-control form-control-sm" />
+@endif
+</div>
+
+                                                <button type="submit" class="btn btn-primary mt-5">Update</button>
+
+                                              </form>
+                                        </div>
+                                    </div>
+
+                                    <!--add new -->
+
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -982,4 +1043,18 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
 
 @section('script')
+<script>
+    $(document).ready(function(){
+      $("#regStatus").change(function(){
+        var valmain = $(this).val();
+
+        if(valmain == 'Accepted'){
+           $('#rValue').show();
+        }
+        else{
+            $('#rValue').hide();
+        }
+      });
+    });
+    </script>
 @endsection
