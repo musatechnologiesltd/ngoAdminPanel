@@ -214,9 +214,9 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td>নিবন্ধন নম্বর</td>
                                                     <td>:
 
-                                                      @if(empty($form_one_data->registration_number))
+                                                      @if($form_one_data->registration_number == 0)
 
-                                                      {{ $form_one_data->registration_number_given_by_admin}}
+
                                                       @else
 
                                                       {{ $form_one_data->registration_number}}
@@ -446,6 +446,9 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                         নাম,শাখা ও বিস্তারিত ঠিকানা)
                                                     </td>
                                                 </tr>
+                                                @if(!$get_all_data_adviser_bank)
+
+                                                @else
                                                 <tr>
                                                     <td></td>
                                                     <td>(ক)</td>
@@ -476,6 +479,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td>বিস্তারিত ঠিকানা</td>
                                                     <td>: {{ $get_all_data_adviser_bank->bank_address }}</td>
                                                 </tr>
+                                                @endif
                                                 <tr>
                                                     <td>৮.</td>
                                                     <td colspan="2">অন্য কোন গুরুত্বপূর্ণ তথ্য যা আবেদনকারী
@@ -762,7 +766,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
                                             <tr>
                                                 <td>এনজিওর নথি {{ str_replace($engDATE, $bangDATE,$key+1) }}</td>
-                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_get_all_data_other->id ) }}">
+                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a></td>
                                             </tr>
@@ -842,12 +846,15 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
         <td>:
 
 
-          @if($form_one_data->registration_number_given_by_admin == 0)
+        
+
+
+          @if($form_one_data->registration_number == 0)
+
 
           @else
 
-
-          {{ $form_one_data->registration_number_given_by_admin}}
+          {{ $form_one_data->registration_number}}
 
           @endif
 

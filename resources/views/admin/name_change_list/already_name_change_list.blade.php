@@ -66,7 +66,7 @@ Ngo Name change List | {{ $ins_name }}
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number->registration_number }}</td>
+                                <td>#{{ $reg_number->registration_number_given_by_admin }}</td>
                                 <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
                                     <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->present_name_eng }}</td>
                                 <td>Yes</td>

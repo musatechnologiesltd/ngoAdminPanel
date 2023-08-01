@@ -47,7 +47,7 @@ Ngo Registration List | {{ $ins_name }}
                             </tr>
                             </thead>
                             <tbody>
-                              
+
 
                                 @foreach($all_data_for_new_list as $all_data_for_new_list_all)
 
@@ -68,7 +68,7 @@ Ngo Registration List | {{ $ins_name }}
 
                                 <?php
 
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
 
                                 $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
 

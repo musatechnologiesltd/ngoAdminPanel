@@ -65,7 +65,7 @@ Ngo Renew List | {{ $ins_name }}
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number->registration_number }}</td>
+                                <td>#{{ $reg_number->registration_number_given_by_admin }}</td>
                                 <td><h6> NGO Name: {{ $reg_name  }}</h6><span>Address: {{ $reg_address }}</td>
                                 <td>Yes</td>
                                 <td class="font-success">{{ $all_data_for_new_list_all->status }}</td>
