@@ -305,20 +305,25 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_on
 
     public function formOnePdf($main_id,$id){
 
-        if($id = 'plan'){
+
+        if($id == 'plan'){
 
             $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('plan_of_operation');
 
-        }elseif($id = 'invoice'){
+        }elseif($id == 'invoice'){
 
-            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('attach_the__supporting_papers');
+          //dd($id);
 
-        }elseif($id = 'treasury_bill'){
+            $form_one_data1 = DB::table('fd_one_forms')->where('id',$main_id)->first();
+
+        $form_one_data = $form_one_data1->attach_the__supporting_paper;
+
+        }elseif($id == 'treasury_bill'){
 
             $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('board_of_revenue_on_fees');
 
-        }elseif($id = 'final_pdf'){
-            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('s_pdf');
+        }elseif($id == 'final_pdf'){
+            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('verified_fd_one_form');
         }
 
         return view('admin.registration_list.form_one_pdf',compact('form_one_data'));

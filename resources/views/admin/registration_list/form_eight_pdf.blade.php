@@ -35,13 +35,13 @@ FD-08 Form | {{ $ins_name }}
             data='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
             type="application/pdf"
             width="500"
-            height="678"
+            height="900"
           >
 
             <iframe
               src='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
               width="500"
-              height="678"
+              height="900"
             >
             <p>This browser does not support PDF!</p>
             </iframe>

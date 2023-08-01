@@ -764,8 +764,23 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
                                             @foreach($form_ngo_data_doc as $key=>$all_form_member_data_doc)
 
+
+
                                             <tr>
-                                                <td>এনজিওর নথি {{ str_replace($engDATE, $bangDATE,$key+1) }}</td>
+                                                @if($key+1 == 1)
+                                                <td>কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি</td>
+                                                @elseif($key+1 == 2)
+                                                <td>গঠনতন্ত্রের সত্যায়িত অনুলিপি</td>
+                                                @elseif($key+1 == 3)
+                                                <td>সংস্থার কার্যক্রম প্রতিবেদন</td>
+                                                @elseif($key+1 == 4)
+                                                <td>দাতা সংস্হার প্রতিশুতিপত্র</td>
+                                                @elseif($key+1 == 5)
+<td>সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি</td>
+                                                @elseif($key+1 == 6)
+                                                <td>সংস্থার সাধারণ সদস্যদের নামের তালিকা</td>
+
+                                                @endif
                                                 <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a></td>
@@ -846,7 +861,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
         <td>:
 
 
-        
+
 
 
           @if($form_one_data->registration_number == 0)
