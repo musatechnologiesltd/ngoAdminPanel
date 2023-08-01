@@ -53,7 +53,7 @@ class DesignationStepController extends Controller
           $designationStepLists = DesignationStep::latest()->get();
           //$designationLists = DesignationList::latest()->get();
           $users = Admin::where('id','!=',1)->get();
-          $users_as = Admin::where('id','!=',1)->whereNull('admin_job_start_date')->get();
+          $users_as = Admin::where('id','!=',1)->get();
 
                return view('admin.designationStepList.index',compact('users_as','users','branchLists','designationLists','designationStepLists'));
            }

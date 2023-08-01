@@ -77,6 +77,11 @@ class Admin extends Authenticatable
         return $this->hasOne(Branch::class,'branch_id');
     }
 
+    public function jobHistory()
+    {
+        return $this->hasMany(JobHistory::class,'admin_id');
+    }
+
 
 
 

@@ -16,6 +16,7 @@ use App\Models\Branch;
 use App\Models\DesignationList;
 use App\Models\DesignationStep;
 use Mail;
+use App\Models\JobHistory;
 class AdminController extends Controller
 {
 
@@ -273,15 +274,22 @@ class AdminController extends Controller
   public function employeeEndDatePost(request $request){
 
 
-    $getTheValue = Admin::where('id',$request->id)->value('admin_job_start_date');
+    $getTheAdminValue = Admin::where('id',$request->id)->first();
 
-    $admins = Admin::find($request->id);
- $admins->admin_job_end_start_date =$getTheValue;
+ $admins = Admin::find($request->id);
+ $admins->admin_job_end_start_date =$getTheAdminValue->admin_job_start_date;
  $admins->admin_job_end_date = $request->admin_job_end_date;
  $admins->admin_job_start_date = $request->admin_job_start_date;
 //  $admins->designation_list_id = $request->designation_list_id;
 //  $admins->branch_id = $request->branch_id;
  $admins->save();
+
+
+ $jobHistory = new JobHistory();
+ $jobHistory->admin_id  = $request->id;
+ $jobHistory->designation_list_id  =$getTheAdminValue->designation_list_id;
+ $jobHistory->start_date  = $getTheAdminValue->admin_job_start_date;
+ $jobHistory->end_date  = $request->admin_job_end_date;
 
  return redirect()->back()->with('info','Added successfully!');
   }
