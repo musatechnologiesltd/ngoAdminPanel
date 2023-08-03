@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Ngo Name change List | {{ $ins_name }}
+পুনর্বিবেচনা নাম পরিবর্তনের তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@ Ngo Name change List | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>New NGO Name change List</h3>
+                <h3>পুনর্বিবেচনা নাম পরিবর্তনের তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">NGO Name change</li>
-                    <li class="breadcrumb-item">New NGO Name change List</li>
+                    <li class="breadcrumb-item">এনজিওর নাম পরিবর্তন</li>
+                    <li class="breadcrumb-item">পুনর্বিবেচনা নাম পরিবর্তনের তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -38,13 +38,13 @@ Ngo Name change List | {{ $ins_name }}
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>UserID</th>
-                                <th>Previous NGO Name (Bangla & English)</th>
-                                <th>Request NGO Name  (Bangla & English)</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
+                                <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
+                                <th>পেমেন্ট</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,12 +66,39 @@ Ngo Name change List | {{ $ins_name }}
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number->registration_number_given_by_admin }}</td>
-                                <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
-                                    <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->present_name_eng }}</td>
-                                <td>Yes</td>
-                                <td class="font-success"><button class="btn btn-secondary btn-xs" type="button">{{ $all_data_for_new_list_all->status }}</button></td>
-                                <td>{{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}</td>
+
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number_given_by_admin) }}</td>
+                                <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
+                                <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->present_name_eng }}</td>
+                                <td>হ্যাঁ</td>
+                                <td class="font-success">
+
+                                    @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
+                                    @endif
+                                </td>
+                                <td>
+
+
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
+
+
+                                </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))

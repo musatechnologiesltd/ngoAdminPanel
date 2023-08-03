@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Source Of Fund | {{ $ins_name }}
+তহবিলের উৎস | {{ $ins_name }}
 @endsection
 
 
@@ -15,11 +15,11 @@ Source Of Fund | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Source Of Fund </h3>
+                <h3>তহবিলের উৎস</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">PDF</li>
+                    <li class="breadcrumb-item">তহবিলের উৎস</li>
+                    <li class="breadcrumb-item active">পিডিএফ</li>
                 </ol>
             </div>
             <div class="col-sm-6">

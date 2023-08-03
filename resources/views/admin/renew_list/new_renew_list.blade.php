@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Ngo Renew List | {{ $ins_name }}
+নতুন নবায়ন অনুরোধের তালিকা  | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@ Ngo Renew List | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>New NGO Renew List</h3>
+                <h3>নতুন নবায়ন অনুরোধের  তালিকা </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">NGO Renew</li>
-                    <li class="breadcrumb-item">New NGO Renew List</li>
+                    <li class="breadcrumb-item">এনজিও নবায়ন</li>
+                    <li class="breadcrumb-item">নতুন নবায়ন অনুরোধের তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -38,12 +38,12 @@ Ngo Renew List | {{ $ins_name }}
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>UserID</th>
-                                <th>NGO Name & Address</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>এনজিওর নাম ও ঠিকানা</th>
+                                <th>পেমেন্ট</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -65,11 +65,35 @@ Ngo Renew List | {{ $ins_name }}
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number->registration_number_given_by_admin }}</td>
-                                <td><h6> NGO Name: {{ $reg_name  }}</h6><span>Address: {{ $reg_address }}</td>
-                                <td>Yes</td>
-                                <td class="font-success"><button class="btn btn-secondary btn-xs" type="button">{{ $all_data_for_new_list_all->status }}</button></td>
-                                <td>{{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}</td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number_given_by_admin) }}</td>
+                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                <td>হ্যাঁ</td>
+                                <td class="font-success">
+
+                                    @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
+                                    @endif
+                                </td>
+                                <td>
+
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
+
+                                </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))

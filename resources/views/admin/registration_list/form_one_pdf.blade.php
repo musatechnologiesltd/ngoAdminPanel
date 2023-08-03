@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-FD-01 Form 22| {{ $ins_name }}
+এফডি -০১ ফর্ম| {{ $ins_name }}
 @endsection
 
 
@@ -15,11 +15,11 @@ FD-01 Form 22| {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>FD-01 Form</h3>
+                <h3>এফডি -০১ ফর্ম</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">PDF</li>
+                    <li class="breadcrumb-item">এফডি -০১ ফর্ম </li>
+                    <li class="breadcrumb-item active">পিডিএফ</li>
                 </ol>
             </div>
             <div class="col-sm-6">

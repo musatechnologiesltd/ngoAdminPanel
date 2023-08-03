@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Other PDF| {{ $ins_name }}
+কর্মকর্তাদের তথ্যের পিডিএফ | {{ $ins_name }}
 @endsection
 
 
@@ -15,11 +15,11 @@ Other PDF| {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Other PDF </h3>
+                <h3>কর্মকর্তাদের তথ্যের পিডিএফ </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">PDF</li>
+                    <li class="breadcrumb-item">কর্মকর্তাদের তথ্যের পিডিএফ </li>
+                    <li class="breadcrumb-item active">পিডিএফ</li>
                 </ol>
             </div>
             <div class="col-sm-6">

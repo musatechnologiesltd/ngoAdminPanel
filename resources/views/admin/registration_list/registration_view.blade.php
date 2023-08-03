@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Ngo Registration View | {{ $ins_name }}
+এনজিও নিবন্ধন এর  বিস্তারিত  | {{ $ins_name }}
 @endsection
 
 
@@ -10,24 +10,16 @@ Ngo Registration View | {{ $ins_name }}
 @endsection
 
 @section('body')
-<?php
-$engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','March','April',
-      'May','June','July','August','September','October','November','December','Saturday','Sunday',
-      'Monday','Tuesday','Wednesday','Thursday','Friday');
-      $bangDATE = array('১','২','৩','৪','৫','৬','৭','৮','৯','০','জানুয়ারী','ফেব্রুয়ারী','মার্চ','এপ্রিল','মে',
-      'জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর','শনিবার','রবিবার','সোমবার','মঙ্গলবার','
-      বুধবার','বৃহস্পতিবার','শুক্রবার'
-      );
-?>
+
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>NGO Registration Information</h3>
+                <h3>এনজিও নিবন্ধন তথ্য</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">User Profile</li>
+                    <li class="breadcrumb-item">এনজিও নিবন্ধন তথ্য</li>
+                    <li class="breadcrumb-item active">এনজিও প্রোফাইল</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -76,16 +68,33 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                         <div class="follow-num">
 
 
-                                            {{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}
+                                            {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
 
 
 
                                         </div>
-                                        <span>Submit Date </span>
+                                        <span>জমাদানের তারিখ</span>
                                     </li>
                                     <li>
-                                        <div class="follow-num">{{ $all_data_for_new_list_all->status}}</div>
-                                        <span>Status</span>
+                                        <div class="follow-num"> @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                            <button class="btn btn-secondary " type="button">
+                                                গৃহীত
+
+                                            </button>
+                                            @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                            <button class="btn btn-secondary " type="button">
+                                                চলমান
+
+                                            </button>
+                                            @else
+                                            <button class="btn btn-secondary " type="button">
+                                                প্রত্যাখ্যান
+
+                                            </button>
+                                            @endif</div>
+                                        <span>স্ট্যাটাস</span>
                                     </li>
                                 </ul>
                             </div>
@@ -100,14 +109,14 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                     <div class="userpro-box">
                       <div class="user-designation">
                     	<h4>{{ $form_one_data->name_of_head_in_bd }}</h4>
-                    	<h5>Address:  @if($getNgoType == 'Foreign')
+                    	<h5>ঠিকানা:  @if($getNgoType == 'Foreign')
                                 {{ $form_one_data->address_of_head_office_eng }}
                                 @else
 
                          {{ $form_one_data->address_of_head_office }}
                                 @endif</h5>
-                    	<h5>Mobile Number:    {{ $form_one_data->phone }}</h5>
-                    	<h5>Email Address:    {{ $form_one_data->email }}</h5>
+                    	<h5>মোবাইল নম্বর:    {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}</h5>
+                    	<h5>ইমেইল:    {{ $form_one_data->email }}</h5>
                       </div>
                     </div>
                   </div>
@@ -128,7 +137,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                     <div class="col-sm-12">
                         <div class="card height-equal">
                             <div class="card-header pb-0">
-                                <h5>NGO Registration All Information</h5>
+                                <h5>এনজিও নিবন্ধন সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
@@ -136,24 +145,23 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                             data-bs-toggle="pill" href="#pills-darkhome"
                                                             role="tab" aria-controls="pills-darkhome"
                                                             aria-selected="true" style=""><i
-                                                    class="icofont icofont-ui-home"></i>FD-01</a></li>
+                                                    class="icofont icofont-ui-home"></i>এফডি -০১ ফর্ম</a></li>
                                     <li class="nav-item"><a class="nav-link" id="pills-darkprofile-tab"
                                                             data-bs-toggle="pill" href="#pills-darkprofile"
                                                             role="tab" aria-controls="pills-darkprofile"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-man-in-glasses"></i>Form 08</a>
+                                                    class="icofont icofont-man-in-glasses"></i>এফডি -০৮ ফর্ম</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
                                                             data-bs-toggle="pill" href="#pills-darkcontact"
                                                             role="tab" aria-controls="pills-darkcontact"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-contacts"></i>Committee
-                                            Member</a></li>
+                                                    class="icofont icofont-contacts"></i>কমিটির সদস্যবৃন্দ</a></li>
                                     <li class="nav-item"><a class="nav-link" id="pills-darkinfo-tab"
                                                             data-bs-toggle="pill" href="#pills-darkinfo"
                                                             role="tab" aria-controls="pills-darkinfo"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-address-book"></i>Other's Member</a>
+                                                    class="icofont icofont-address-book"></i>অন্যান্য সদস্য</a>
                                     </li>
 
 
@@ -162,7 +170,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                             data-bs-toggle="pill" href="#pills-darkdoc"
                                                             role="tab" aria-controls="pills-darkdoc"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-animal-lemur"></i>Document</a>
+                                                    class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
                                     </li>
 
 
@@ -173,7 +181,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                         data-bs-toggle="pill" href="#pills-darkdoc1"
                                         role="tab" aria-controls="pills-darkdoc1"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-animal-lemur"></i>Print Certificate</a>
+                                class="icofont icofont-animal-lemur"></i>সার্টিফিকেট প্রিন্ট করুন </a>
                 </li>
 
                 @else
@@ -182,7 +190,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                     data-bs-toggle="pill" href="#pills-darkdoc1"
                     role="tab" aria-controls="pills-darkdoc1"
                     aria-selected="false" style=""><i
-            class="icofont icofont-animal-lemur"></i>Status Update</a>
+            class="icofont icofont-animal-lemur"></i>স্টেটাস আপডেট করুন </a>
              </li>
 
 
@@ -234,7 +242,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
                                                       @else
 
-                                                      {{ $form_one_data->registration_number}}
+                                                      {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number)}}
 
                                                       @endif
 
@@ -275,7 +283,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td></td>
                                                     <td></td>
                                                     <td>গ) ঠিকানা,মোবাইল নম্বর, ইমেইল</td>
-                                                    <td>:{{ $form_one_data->address }}, {{ $form_one_data->phone }}, {{ $form_one_data->email }}</td>
+                                                    <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -350,7 +358,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td colspan="2">অঙ্গীকারকৃত অনুদানের পরিমাণ (বৈদেশিক
                                                         মুদ্রা/বাংলাদেশ টাকায়)
                                                     </td>
-                                                    <td>: {{ $form_one_data->annual_budget }}</td>
+                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->annual_budget) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>৪.</td>
@@ -362,8 +370,8 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 @foreach($all_partiw as $key=>$all_all_parti)
                                                 <tr>
                                                     <td></td>
-                                                    <td>{{ str_replace($engDATE, $bangDATE, $key+1 )}}.</td>
-                                                    <td>কর্মকর্তা {{ str_replace($engDATE, $bangDATE, $key+1 )}}</td>
+                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
+                                                    <td>কর্মকর্তা {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -395,7 +403,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td></td>
                                                     <td>(ঙ)</td>
                                                     <td>যোগদানের তারিখ</td>
-                                                    <td>: {{ $all_all_parti->date_of_join }}</td>
+                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->date_of_join) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -437,8 +445,8 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 @foreach($get_all_data_adviser as $key=>$all_get_all_data_adviser)
                                                 <tr>
                                                     <td></td>
-                                                    <td>{{ str_replace($engDATE, $bangDATE, $key+1 )}}.</td>
-                                                    <td>পরামর্শক {{ str_replace($engDATE, $bangDATE, $key+1 )}}</td>
+                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
+                                                    <td>পরামর্শক {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -468,7 +476,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     <td></td>
                                                     <td>(ক)</td>
                                                     <td>হিসাব নম্বর</td>
-                                                    <td>: {{ $get_all_data_adviser_bank->account_number }}</td>
+                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_adviser_bank->account_number) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -559,11 +567,11 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
          <?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
 
 
-         {{  $start_date_one }}
+         {{  App\Http\Controllers\Admin\CommonController::englishToBangla($start_date_one) }}
 
 
         </td>
-        <td>{{ $all_all_parti->nid_no }} & {{ $all_all_parti->phone }}</td>
+        <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->nid_no) }} & {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->phone) }}</td>
         <td>{{ $all_all_parti->father_name }}</td>
         <td>{{ $all_all_parti->present_address }}</td>
         <td>{{ $all_all_parti->permanent_address }}</td>
@@ -625,12 +633,12 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 <tr>
                                                    <td>{{ $key+1 }}</td>
                                                     <td>{{ $all_all_parti->name }}</td>
-                                                    <td><h6> NID No: {{$all_all_parti->nid_no }}</h6><span>DOB: <?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
+                                                    <td><h6> NID No: {{App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->nid_no) }}</h6><span>DOB: <?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
 
 
-                                                        {{  $start_date_one }}</span>
+                                                        {{  App\Http\Controllers\Admin\CommonController::englishToBangla($start_date_one )}}</span>
                                                     </td>
-                                                    <td>{{ $all_all_parti->phone }}</td>
+                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->phone) }}</td>
                                                     <td>{{ $all_all_parti->father_name }}</td>
                                                     <td>{{ $all_all_parti->present_address }}</td>
                                                     <td>{{ $all_all_parti->permanent_address }}</td>
@@ -674,9 +682,9 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 <tr>
                                                         <td>{{ $key+1 }}</td>
                                                     <td>{{ $all_form_member_data->member_name }}</td>
-                                                    <td><h6> NID: {{ $all_form_member_data->member_nid_no }} </h6><span>DOB: {{ $all_form_member_data->member_dob }} </span>
+                                                    <td><h6> NID: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_form_member_data->member_nid_no) }} </h6><span>DOB: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_form_member_data->member_dob) }} </span>
                                                     </td>
-                                                    <td>{{ $all_form_member_data->member_mobile }}</td>
+                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_form_member_data->member_mobile) }}</td>
                                                     <td>{{ $all_form_member_data->member_father_name }} </td>
                                                     <td>{{ $all_form_member_data->member_present_address }}</td>
                                                     <td>{{ $all_form_member_data->member_permanent_address }}</td>
@@ -757,7 +765,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 @foreach($get_all_data_other as $key=>$all_get_all_data_other)
 
                                                 <tr>
-                                                <td>অন্যান্য পিডিএফ কপি {{ str_replace($engDATE, $bangDATE,$key+1) }}</td>
+                                                <td>অন্যান্য পিডিএফ কপি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
                                                 <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a></td>
@@ -767,7 +775,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                             @foreach($form_member_data_doc as $key=>$all_form_member_data_doc)
 
                                             <tr>
-                                                <td>এনজিও  কর্মকর্তাদের  নথি {{ str_replace($engDATE, $bangDATE,$key+1) }}</td>
+                                                <td>এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
                                                 <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a></td>
@@ -893,7 +901,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
           @else
 
-          {{ $form_one_data->registration_number}}
+          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number)}}
 
           @endif
 
@@ -925,7 +933,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
           @else
 
-          {{date('d-m-Y', strtotime($duration_list_all ))}}
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all )))}}
           @endif
 
       </td>
@@ -941,7 +949,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
 
           @else
-          {{date('d-m-Y', strtotime($duration_list_all1 ))}}
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
       @endif
       </td>
     </tr>
@@ -951,11 +959,11 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
            @if($form_one_data->registration_number_given_by_admin == 0)
            <button type="button" disabled class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Print
+            প্রিন্ট করুন
             </button>
           @else
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Print
+                প্রিন্ট করুন
             </button>
           @endif
 
@@ -964,7 +972,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Print Certificate</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">সার্টিফিকেট প্রিন্ট করুন </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -976,7 +984,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                         <input type="date" name="main_date" value="<?php   echo  date('Y-m-d'); ?>" class="form-control"/>
 
                         <button type="submit" class="btn btn-primary mt-4" type="submit">
-                            Print
+                            প্রিন্ট করুন
                           </button>
                     </form>
                   </div>
@@ -1012,17 +1020,17 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
 
-                                                <label>Status:</label>
+                                                <label>স্টেটাস:</label>
                                                 <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
-                                                    <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
-                                                    <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
-                                                    <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
+                                                    <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+                                                    <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
 
 <div id="rValue" style="display:none;">
-                                                <label>Registration ID:</label>
+                                                <label>রেজিস্ট্রেশন নম্বর :</label>
                                                 @if($all_data_for_new_list_all->reg_id == 0)
                                                 <input type="text" value=""  name="reg_no_get_from_admin" class="form-control form-control-sm" />
 
@@ -1031,7 +1039,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 @endif
 </div>
 
-                                                <button type="submit" class="btn btn-primary mt-5">Update</button>
+                                                <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
 
                                               </form>
 
