@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Permission
+পারমিশন তালিকা
 @endsection
 
 
@@ -10,10 +10,10 @@ Permission
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Permission List</h3>
+          <h3>পারমিশন</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Permission List</li>
+            <li class="breadcrumb-item">পারমিশন তালিকা</li>
 
           </ol>
         </div>
@@ -23,7 +23,7 @@ Permission
         <div class="col-sm-6 mt-5">
             @if (Auth::guard('admin')->user()->can('permissionAdd'))
             <button class="btn btn-primary add-btn" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="ri-add-line align-bottom me-1"></i>  Add Permission
+                <i class="ri-add-line align-bottom me-1"></i>পারমিশন যোগ করুন 
                                                 </button>
 
 
@@ -31,7 +31,7 @@ Permission
                                                     <div class="modal-dialog">
                                                       <div class="modal-content">
                                                         <div class="modal-header">
-                                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Permission</h1>
+                                                          <h1 class="modal-title fs-5" id="exampleModalLabel">পারমিশন যোগ করুন</h1>
                                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -41,8 +41,8 @@ Permission
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="mb-4">
-                                                                            <label for="formrow-email-input" class="form-label">Group Name</label>
-                                                                            <input type="text" name="group_name"  class="form-control" placeholder="Company Name" required>
+                                                                            <label for="formrow-email-input" class="form-label">গ্রুপের নাম</label>
+                                                                            <input type="text" name="group_name"  class="form-control" placeholder="গ্রুপের নাম" required>
                                                                             <small></small>
                                                                         </div>
                                                                     </div>
@@ -50,13 +50,13 @@ Permission
 
                                                                         <table class="table table-bordered" id="dynamicAddRemove">
                                                                             <tr>
-                                                                                <th>Permission Name</th>
-                                                                                <th>Action</th>
+                                                                                <th>পারমিশন নাম</th>
+                                                                                <th>কার্যকলাপ</th>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td><input type="text" name="name[]" placeholder="Enter Ename" id="name0" class="form-control" />
+                                                                                <td><input type="text" name="name[]" placeholder="পারমিশন নাম" id="name0" class="form-control" />
                                                                                 </td>
-                                                                                <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Add Subject</button></td>
+                                                                                <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">নতুন যোগ করুন </button></td>
                                                                             </tr>
                                                                         </table>
 
@@ -72,7 +72,7 @@ Permission
 
 
                                                                 <div>
-                                                                    <button type="submit" class="btn btn-primary w-md">Save Changes</button>
+                                                                    <button type="submit" class="btn btn-primary w-md mt-4">জমা দিন</button>
                                                                 </div>
 
 
@@ -99,10 +99,10 @@ Permission
                             <thead>
                                 <tr>
 
-                                    <th>Group Name</th>
-                                    <th>Permission List</th>
+                                    <th>গ্রুপের নাম</th>
+                                    <th>পারমিশন নাম</th>
 
-                                    <th>Action</th>
+                                    <th>কার্যকলাপ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,7 +148,7 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mb-4">
-                                                                    <label for="formrow-email-input" class="form-label">Group Name</label>
+                                                                    <label for="formrow-email-input" class="form-label">গ্রুপের নাম</label>
                                                                     <input type="text" name="group_name" value="{{ $allPermissionGroup->group_name }}"  class="form-control" placeholder="Group Name" required>
                                                                     <small></small>
                                                                 </div>
@@ -157,21 +157,21 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
 
                                                                 <table class="table table-bordered" id="dynamicAddRemovee{{ $key+1 }}">
                                                                     <tr>
-                                                                        <th>Permission Name</th>
-                                                                        <th>Action</th>
+                                                                        <th>পারমিশন নাম</th>
+                                                                        <th>কার্যকলাপ</th>
                                                                     </tr>
                                                                     @foreach($permissionList as $j=>$allPermissionList)
                                                                     @if($j == 0 )
                                                                     <tr id="mDelete{{ $j+50000 }}">
                                                                         <td><input type="text" name="name[]" value="{{ $allPermissionList->name }}" placeholder="Enter Ename" id="name{{ $j+50000 }}" class="form-control" />
                                                                         </td>
-                                                                        <td><button type="button" name="add" id="dynamic-arr{{ $key+1 }}" class="btn btn-outline-primary">Add Subject</button></td>
+                                                                        <td><button type="button" name="add" id="dynamic-arr{{ $key+1 }}" class="btn btn-outline-primary">নতুন যোগ করুন </button></td>
                                                                     </tr>
                                                                     @else
                                                                     <tr id="mDelete{{ $j+50000 }}">
                                                                         <td><input type="text" name="name[]" value="{{ $allPermissionList->name }}" placeholder="Enter Ename" id="name{{ $j+50000 }}" class="form-control" />
                                                                         </td>
-                                                                        <td><button type="button" id="remove-input-fieldd{{ $j+50000 }}" class="btn btn-outline-danger">Delete</button></td>
+                                                                        <td><button type="button" id="remove-input-fieldd{{ $j+50000 }}" class="btn btn-outline-danger">মুছে ফেলুন </button></td>
                                                                     </tr>
 
                                                                     @endif
@@ -193,7 +193,7 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
 
 
                                                         <div>
-                                                            <button type="submit" class="btn btn-primary w-md">Save Changes</button>
+                                                            <button type="submit" class="btn btn-primary w-md mt-3">আপডেট করুন</button>
                                                         </div>
 
 
@@ -239,7 +239,7 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
     var i = 0;
     $("#dynamic-ar").click(function () {
         ++i;
-        $("#dynamicAddRemove").append('<tr><td><input type="text" name="name[]" id="name'+i+'" placeholder="Enter Name" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
+        $("#dynamicAddRemove").append('<tr><td><input type="text" name="name[]" id="name'+i+'" placeholder="পারমিশন নাম" class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">মুছে ফেলুন </button></td></tr>'
             );
     });
     $(document).on('click', '.remove-input-field', function () {
@@ -255,7 +255,7 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
         var main_id = $(this).attr('id');
         var id_for_pass = main_id.slice(11);
 
-        $("#dynamicAddRemovee"+id_for_pass).append('<tr id="mDelete'+i+'"><td><input type="text" name="name[]" id="name'+i+'" placeholder="Enter Name" class="form-control" /></td><td><button type="button" id="remove-input-field'+i+'" class="btn btn-outline-danger">Delete</button></td></tr>'
+        $("#dynamicAddRemovee"+id_for_pass).append('<tr id="mDelete'+i+'"><td><input type="text" name="name[]" id="name'+i+'" placeholder="পারমিশন নাম" class="form-control" /></td><td><button type="button" id="remove-input-field'+i+'" class="btn btn-outline-danger">মুছে ফেলুন </button></td></tr>'
             );
     });
 

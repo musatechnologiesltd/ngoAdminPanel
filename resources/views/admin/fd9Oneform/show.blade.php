@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-FD-9 (N-Visa) | {{ $ins_name }}
+ওয়ার্ক পারমিট | {{ $ins_name }}
 @endsection
 
 
@@ -28,11 +28,11 @@ FD-9 (N-Visa) | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Working Permit List</h3>
+                <h3>ওয়ার্ক পারমিট</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">FD-09(01)</li>
-                    <li class="breadcrumb-item">FD-09(01) List</li>
+                    <li class="breadcrumb-item">এফডি৯.১ (ওয়ার্ক পারমিট)</li>
+                    <li class="breadcrumb-item">ওয়ার্কিং পারমিটের বিবরণ </li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -101,7 +101,7 @@ FD-9 (N-Visa) | {{ $ins_name }}
 
                                  $extension = pathinfo($file_path, PATHINFO_EXTENSION);
                                  ?>
-                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
+                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                  @endif
                                  {{-- <a href="{{ route('niyogPotroDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
 </td>
@@ -120,7 +120,7 @@ FD-9 (N-Visa) | {{ $ins_name }}
 
                                  $extension = pathinfo($file_path, PATHINFO_EXTENSION);
                                  ?>
-                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
+                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                  @endif
                                  {{-- <a href="{{ route('formNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
 </td>
@@ -146,7 +146,7 @@ FD-9 (N-Visa) | {{ $ins_name }}
 
                             $extension = pathinfo($file_path, PATHINFO_EXTENSION);
                             ?>
-                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
+                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                             @endif
 {{-- <a href="{{ route('nVisaCopyDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a>, --}}
                             {{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->arrival_date_in_nvisa))) }}</td>

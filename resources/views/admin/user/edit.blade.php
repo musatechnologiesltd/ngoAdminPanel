@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Edit User List
+কর্মকর্তার তথ্য আপডেট করুন
 @endsection
 
 
@@ -14,10 +14,10 @@ Edit User List
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Staff List</h3>
+          <h3>কর্মকর্তার তথ্য</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Edit Staff</li>
+            <li class="breadcrumb-item">কর্মকর্তার তথ্য আপডেট করুন</li>
 
           </ol>
         </div>
@@ -52,8 +52,8 @@ Edit User List
 
                                                   <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
-                                  <label for="name">Name</label>
-                                  <input type="text" class="form-control" id="name" name="name" data-parsley-maxlength="150" value="{{ $user->admin_name }}" placeholder="Enter Name" required>
+                                  <label for="name">নাম (ইংরেজি)</label>
+                                  <input type="text" class="form-control" id="name" name="name" data-parsley-maxlength="150" value="{{ $user->admin_name }}" placeholder="নাম (ইংরেজি)" required>
 
                                   @if ($errors->has('name'))
                                   <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -64,8 +64,8 @@ Edit User List
 
 
                               <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">Name (নাম)</label>
-                                <input type="text" class="form-control" id="name_ban" name="name_ban" data-parsley-maxlength="150" value="{{ $user->admin_name_ban }}" placeholder="Enter Name" required>
+                                <label for="name">নাম</label>
+                                <input type="text" class="form-control" id="name_ban" name="name_ban" data-parsley-maxlength="150" value="{{ $user->admin_name_ban }}" placeholder="নাম" required>
 
                                 @if ($errors->has('name_ban'))
                                 <span class="text-danger">{{ $errors->first('name_ban') }}</span>
@@ -74,18 +74,18 @@ Edit User List
 
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control form-control-sm" data-parsley-maxlength="100" id="email" value="{{ $user->email }}" name="email" placeholder="Enter Email" required>
+                                <label for="email">ইমেইল</label>
+                                <input type="text" class="form-control form-control-sm" data-parsley-maxlength="100" id="email" value="{{ $user->email }}" name="email" placeholder="ইমেইল" required>
 
                                 @if ($errors->has('email'))
                               <span class="text-danger">{{ $errors->first('email') }}</span>
                           @endif
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="text">Mobile Number</label>
+                                <label for="text">মোবাইল নম্বর</label>
                                 <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                 type = "number"
-                                maxlength = "11" class="form-control form-control-sm" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" value="{{ $user->admin_mobile }}" placeholder="Enter Mobile Number" required>
+                                maxlength = "11" class="form-control form-control-sm" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" value="{{ $user->admin_mobile }}" placeholder="মোবাইল নম্বর" required>
 
                                 @if ($errors->has('phone'))
                               <span class="text-danger">{{ $errors->first('phone') }}</span>
@@ -178,7 +178,7 @@ Edit User List
 
                           <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password">Assign Role</label>
+                                  <label for="password">রোল বরাদ্দ করুন</label>
                                   <select name="roles[]" id="roles" multiple="multiple"  class="form-control form-control-sm js-example-basic-multiple" required>
                                       @foreach ($roles as $role)
                   <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
@@ -186,7 +186,7 @@ Edit User List
                                   </select>
                               </div>
                                <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password_confirmation">Profile Image</label>
+                                  <label for="password_confirmation">প্রোফাইল ছবি</label>
                                   <input type="file" class="form-control form-control-sm" id="" name="image" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" >
                                   <img src="{{ asset('/') }}{{ $user->admin_image }}" style="height:30px;"/>
                                   @if ($errors->has('image'))
@@ -197,7 +197,7 @@ Edit User List
                               </div>
 
                               <div class="form-group col-md-12 col-sm-12">
-                                <label for="password_confirmation">Signature</label>
+                                <label for="password_confirmation">স্বাক্ষর</label>
                                 <input type="file" class="form-control form-control-sm" id="" name="sign" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" >
                                 <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:30px;"/>
                                 @if ($errors->has('sign'))
@@ -223,7 +223,7 @@ Edit User List
                                               <div class="form-group mb-4">
                                                   <div>
                                                       <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                                         Update
+                                                        আপডেট করুন
                                                       </button>
                                                   </div>
                                               </div>

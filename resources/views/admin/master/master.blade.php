@@ -242,14 +242,14 @@
 <script type="text/javascript">
     function deleteTag(id) {
         swal({
-            title: 'Are you sure?',
-            text: "You will not be able to revert this!",
+            title: 'আপনি কি এ ব্যাপারে নিশ্চিত?',
+            text: "আপনি এটি ফিরিয়ে আনতে পারবেন না!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
+            confirmButtonText: 'হ্যাঁ, এটি মুছুন!',
+            cancelButtonText: 'না, বাতিল করুন!',
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
             buttonsStyling: false,
@@ -263,8 +263,8 @@
                 result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Cancelled',
-                    'Your data is safe :)',
+                    'বাতিল করা হয়েছে',
+                    'আপনার ডেটা নিরাপদ :)',
                     'error'
                 )
             }

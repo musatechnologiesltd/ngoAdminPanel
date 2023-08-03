@@ -117,7 +117,7 @@
                     <td>:
                         <a target="_blnak" href="{{ route('fdNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-outline-success"><i
                                     class="fa fa-file-pdf-o"></i>
-                            Open
+                            দেখুন
                         </a>
                     </td>
                 </tr>

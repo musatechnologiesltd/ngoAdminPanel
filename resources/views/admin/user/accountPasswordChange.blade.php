@@ -11,7 +11,7 @@
 	<meta property="og:image" content="{{ asset('/') }}{{ $logo }}" />
     <link rel="icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
-    <title>Add Password | {{ $ins_name }}</title>
+    <title>পাসওয়ার্ড যোগ করুন | {{ $ins_name }}</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
@@ -162,33 +162,33 @@ textarea.parsley-error {
                 @csrf
                 <input type="hidden" value="{{ $email }}" name="mainEmail" />
                 {{-- <h4>Login</h4> --}}
-                <h6>Welcome ! Add Password To Log in to your account.</h6>
+                <h6>স্বাগত ! আপনার অ্যাকাউন্টে লগ ইন করতে পাসওয়ার্ড যোগ করুন.</h6>
 
                   <div class="row">
                               <div class="form-group col-md-12 col-sm-12">
-                                  <label for="password">Password</label>
+                                  <label for="password">পাসওয়ার্ড</label>
                                   <input type="password" class="form-control form-control-sm" id="password"  data-parsley-minlength="8"
-                                  data-parsley-required="true" name="password" placeholder="Enter Password" required>
+                                  data-parsley-required="true" name="password" placeholder="পাসওয়ার্ড" required>
 
                                   @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
 
-                            <input type="checkbox" class="mt-2" onclick="myFunction()"> Show Password
+                            <input type="checkbox" class="mt-2" onclick="myFunction()"> পাসওয়ার্ড দেখুন
                               </div>
                               <div class="form-group col-md-12 col-sm-12">
-                                  <label for="password_confirmation">Confirm Password</label>
+                                  <label for="password_confirmation">পাসওয়ার্ড নিশ্চিত করুন</label>
                                   <input type="password" class="form-control form-control-sm" data-parsley-equalto="#password"
-                                  parsley-required="true" id="password_confirmation" name="password_confirmation" placeholder="Enter Password" required>
+                                  parsley-required="true" id="password_confirmation" name="password_confirmation" placeholder="পাসওয়ার্ড" required>
 
-                                  <input type="checkbox" class="mt-2" onclick="myFunctionc()"> Show Password
+                                  <input type="checkbox" class="mt-2" onclick="myFunctionc()"> পাসওয়ার্ড দেখুন
                               </div>
                           </div>
 
 
 
                 <div class="form-group">
-                  <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                  <button class="btn btn-primary btn-block" type="submit">জমা দিন </button>
                 </div>
 
                 {{-- <p>Don't have account?<a class="ms-2" href="sign-up.html">Create Account</a></p> --}}

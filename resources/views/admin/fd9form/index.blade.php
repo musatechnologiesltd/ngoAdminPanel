@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-FD-9 (N-Visa) | {{ $ins_name }}
+এফডি৯ (এন-ভিসা) | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@ FD-9 (N-Visa) | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Foreign National Employment Letter Attestation Form</h3>
+                <h3>বিদেশী কর্মকর্তার নিয়োগ পত্রের প্রত্যয়নপত্র</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">FD-09</li>
-                    <li class="breadcrumb-item">FD-09 List</li>
+                    <li class="breadcrumb-item">এফডি৯ (এন-ভিসা)</li>
+                    <li class="breadcrumb-item">এফডি৯ (এন-ভিসা) তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -40,32 +40,32 @@ FD-9 (N-Visa) | {{ $ins_name }}
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>NGOID</th>
-                                <th>NGO Name & Address</th>
-                                <th>Foreigner Name</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>এনজিও নিবন্ধন নম্বর</th>
+                                <th>এনজিওর নাম & ঠিকানা</th>
+                                <th>বিদেশীর নাম</th>
+                                <th>স্টেটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
 
                                 @foreach($dataFromNVisaFd9Fd1 as $allDataFromNVisaFd9Fd1)
                             <tr>
-                                <td>#{{ $allDataFromNVisaFd9Fd1->registration_number }}</td>
-                                <td><h6> {{ $allDataFromNVisaFd9Fd1->organization_name_ban }} </h6><span>Address: {{ $allDataFromNVisaFd9Fd1->organization_address }}</span></td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allDataFromNVisaFd9Fd1->registration_number) }}</td>
+                                <td><h6> {{ $allDataFromNVisaFd9Fd1->organization_name_ban }} </h6><span>ঠিকানা: {{ $allDataFromNVisaFd9Fd1->organization_address }}</span></td>
                                 <td>{{ $allDataFromNVisaFd9Fd1->fd9_foreigner_name }} </td>
                                 <td class="font-success">
 @if(empty($allDataFromNVisaFd9Fd1->mainStatus))
-                                    Ongoing
+চলমান
                                     @else
                                     {{$allDataFromNVisaFd9Fd1->mainStatus}}
                                     @endif
 
                                 </td>
-                                <td>{{ $allDataFromNVisaFd9Fd1->created_at }}</td>
+                                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allDataFromNVisaFd9Fd1->created_at) }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allDataFromNVisaFd9Fd1->id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allDataFromNVisaFd9Fd1->id) }}';">বিস্তারিত দেখুন</button>
                                 </td>
                             </tr>
                             @endforeach

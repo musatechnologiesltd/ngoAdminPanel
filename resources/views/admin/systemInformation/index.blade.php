@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-System Information
+সিস্টেম এর তথ্য 
 @endsection
 
 
@@ -10,10 +10,10 @@ System Information
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>System Information</h3>
+          <h3>সিস্টেম এর তথ্য </h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">System Information</li>
+            <li class="breadcrumb-item">সিস্টেম এর তথ্য </li>
 
           </ol>
         </div>
@@ -27,7 +27,7 @@ System Information
             @else
 
                  <button class="btn btn-primary add-btn" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                     <i class="ri-add-line align-bottom me-1"></i>  Add Information
+                     <i class="ri-add-line align-bottom me-1"></i> তথ্য যোগ করুন
                                                      </button>
 
 
@@ -35,7 +35,7 @@ System Information
                                                          <div class="modal-dialog">
                                                            <div class="modal-content">
                                                              <div class="modal-header">
-                                                               <h1 class="modal-title fs-5" id="exampleModalLabel">Add Information</h1>
+                                                               <h1 class="modal-title fs-5" id="exampleModalLabel">তথ্য যোগ করুন</h1>
                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                              </div>
                                                              <div class="modal-body">
@@ -46,14 +46,14 @@ System Information
                                                                      <div class="row">
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
-                                                                                 <label for="formrow-email-input" class="form-label"> Name</label>
-                                                                                 <input type="text" name="name"  class="form-control" placeholder="Company Name" required>
+                                                                                 <label for="formrow-email-input" class="form-label"> নাম</label>
+                                                                                 <input type="text" name="name"  class="form-control" placeholder="নাম" required>
                                                                                  <small></small>
                                                                              </div>
                                                                          </div>
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
-                                                                                 <label for="formFile" class="form-label"> Logo</label>
+                                                                                 <label for="formFile" class="form-label">লোগো</label>
                                                                                  <input name="logo" value="" class="form-control" type="file" id="formFile" required>
 
                                                                              </div>
@@ -62,7 +62,7 @@ System Information
 
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
-                                                                                 <label for="formFile" class="form-label"> Icon</label>
+                                                                                 <label for="formFile" class="form-label"> আইকন</label>
                                                                                  <input name="icon" value="" class="form-control" type="file" id="formFile" required>
 
                                                                              </div>
@@ -76,24 +76,15 @@ System Information
 
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
-                                                                                 <label for="formrow-inputZip" class="form-label">Phone Number</label>
-                                                                                 <input name="phone"  type="text" class="form-control" id="formrow-inputZip" placeholder="Phone Number" required>
+                                                                                 <label for="formrow-inputZip" class="form-label">ফোন নম্বর</label>
+                                                                                 <input name="phone"  type="text" class="form-control" id="formrow-inputZip" placeholder="ফোন নম্বর" required>
                                                                                  <small></small>
                                                                              </div>
                                                                          </div>
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
-                                                                                 <label for="formrow-inputZip" class="form-label">Email</label>
-                                                                                 <input name="email"  type="email" class="form-control" id="formrow-inputZip" placeholder="Email id" required>
-                                                                                 <small></small>
-                                                                             </div>
-                                                                         </div>
-
-
-                                                                         <div class="col-md-6">
-                                                                             <div class="mb-4">
-                                                                                 <label for="formrow-inputZip" class="form-label">Url</label>
-                                                                                 <input name="url"  type="text" class="form-control" id="formrow-inputZip" placeholder="Url" required>
+                                                                                 <label for="formrow-inputZip" class="form-label">ইমেইল</label>
+                                                                                 <input name="email"  type="email" class="form-control" id="formrow-inputZip" placeholder="ইমেইল" required>
                                                                                  <small></small>
                                                                              </div>
                                                                          </div>
@@ -101,8 +92,17 @@ System Information
 
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
-                                                                                 <label for="formrow-email-input" class="form-label">Address</label>
-                                                                                 <input name="address"  type="text" class="form-control" id="formrow-email-input" placeholder="Address" required>
+                                                                                 <label for="formrow-inputZip" class="form-label">ইউআরএল</label>
+                                                                                 <input name="url"  type="text" class="form-control" id="formrow-inputZip" placeholder="ইউআরএল" required>
+                                                                                 <small></small>
+                                                                             </div>
+                                                                         </div>
+
+
+                                                                         <div class="col-md-6">
+                                                                             <div class="mb-4">
+                                                                                 <label for="formrow-email-input" class="form-label">ঠিকানা</label>
+                                                                                 <input name="address"  type="text" class="form-control" id="formrow-email-input" placeholder="ঠিকানা" required>
                                                                              </div>
                                                                          </div>
 
@@ -115,7 +115,7 @@ System Information
 
 
                                                                      <div>
-                                                                         <button type="submit" class="btn btn-primary w-md">Save Changes</button>
+                                                                         <button type="submit" class="btn btn-primary w-md">জমা দিন </button>
                                                                      </div>
 
 
@@ -145,14 +145,14 @@ System Information
                         <table id="basic-1" class="display table table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>Icon</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Url</th>
-                                    <th>Address</th>
-                                    <th>Action</th>
+                                    <th>লোগো</th>
+                                    <th>আইকন</th>
+                                    <th>নাম</th>
+                                    <th>ফোন নম্বর</th>
+                                    <th>ইমেইল</th>
+                                    <th>ইউআরএল</th>
+                                    <th>ঠিকানা</th>
+                                    <th>কার্যকলাপ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -161,7 +161,7 @@ System Information
                                     <td><img src="{{ asset('/') }}{{ $allSystemInformation->system_logo }}" style="height:20px;"/></td>
                                     <td><img src="{{ asset('/') }}{{ $allSystemInformation->system_icon }}" style="height:20px;"/></td>
                                     <td>{{ $allSystemInformation->system_name }}</td>
-                                    <td>{{ $allSystemInformation->system_phone }}</td>
+                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allSystemInformation->system_phone) }}</td>
                                     <td>{{ $allSystemInformation->system_email }}</td>
                                     <td>{{ $allSystemInformation->system_url }}</td>
                                     <td>{{ $allSystemInformation->system_address }}</td>
@@ -173,7 +173,7 @@ System Information
                                             <div class="modal-dialog">
                                               <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Update Information</h1>
+                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">আপডেট করুন </h1>
                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -183,14 +183,14 @@ System Information
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
-                                                                    <label for="formrow-email-input" class="form-label"> Name</label>
-                                                                    <input type="text" name="name" value="{{ $allSystemInformation->system_name }}"  class="form-control" placeholder="Company Name" required>
+                                                                    <label for="formrow-email-input" class="form-label"> নাম</label>
+                                                                    <input type="text" name="name" value="{{ $allSystemInformation->system_name }}"  class="form-control" placeholder="নাম" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
-                                                                    <label for="formFile" class="form-label"> Logo</label>
+                                                                    <label for="formFile" class="form-label"> লোগো</label>
                                                                     <input name="logo" value="" class="form-control" type="file" id="formFile" >
                                                                     <img src="{{ asset('/') }}{{ $allSystemInformation->system_logo }}" style="height:20px;"/>
 
@@ -200,7 +200,7 @@ System Information
 
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
-                                                                    <label for="formFile" class="form-label"> Icon</label>
+                                                                    <label for="formFile" class="form-label"> আইকন</label>
                                                                     <input name="icon" value="" class="form-control" type="file" id="formFile" >
                                                                     <img src="{{ asset('/') }}{{ $allSystemInformation->system_icon }}" style="height:20px;"/>
                                                                 </div>
@@ -214,24 +214,15 @@ System Information
 
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
-                                                                    <label for="formrow-inputZip" class="form-label">Phone Number</label>
-                                                                    <input name="phone" value="{{ $allSystemInformation->system_phone }}"   type="text" class="form-control" id="formrow-inputZip" placeholder="Phone Number" required>
+                                                                    <label for="formrow-inputZip" class="form-label">ফোন নম্বর</label>
+                                                                    <input name="phone" value="{{ $allSystemInformation->system_phone }}"   type="text" class="form-control" id="formrow-inputZip" placeholder="ফোন নম্বর" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
-                                                                    <label for="formrow-inputZip" class="form-label">Email</label>
-                                                                    <input name="email" value="{{ $allSystemInformation->system_email }}"   type="email" class="form-control" id="formrow-inputZip" placeholder="Email id" required>
-                                                                    <small></small>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="col-md-6">
-                                                                <div class="mb-4">
-                                                                    <label for="formrow-inputZip" class="form-label">Url</label>
-                                                                    <input name="url" value="{{ $allSystemInformation->system_url }}"  type="text" class="form-control" id="formrow-inputZip" placeholder="Url" required>
+                                                                    <label for="formrow-inputZip" class="form-label">ইমেইল</label>
+                                                                    <input name="email" value="{{ $allSystemInformation->system_email }}"   type="email" class="form-control" id="formrow-inputZip" placeholder="ইমেইল" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>
@@ -239,8 +230,17 @@ System Information
 
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
-                                                                    <label for="formrow-email-input" class="form-label">Address</label>
-                                                                    <input name="address" value="{{ $allSystemInformation->system_address }}"   type="text" class="form-control" id="formrow-email-input" placeholder="Address" required>
+                                                                    <label for="formrow-inputZip" class="form-label">ইউআরএল</label>
+                                                                    <input name="url" value="{{ $allSystemInformation->system_url }}"  type="text" class="form-control" id="formrow-inputZip" placeholder="ইউআরএল" required>
+                                                                    <small></small>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="mb-4">
+                                                                    <label for="formrow-email-input" class="form-label">ঠিকানা</label>
+                                                                    <input name="address" value="{{ $allSystemInformation->system_address }}"   type="text" class="form-control" id="formrow-email-input" placeholder="ঠিকানা" required>
                                                                 </div>
                                                             </div>
 
@@ -253,7 +253,7 @@ System Information
 
 
                                                         <div>
-                                                            <button type="submit" class="btn btn-primary w-md">Save Changes</button>
+                                                            <button type="submit" class="btn btn-primary w-md">আপডেট করুন</button>
                                                         </div>
 
 

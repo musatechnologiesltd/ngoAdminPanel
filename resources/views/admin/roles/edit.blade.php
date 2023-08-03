@@ -2,7 +2,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Update Role
+রোল আপডেট করুন 
 @endsection
 
 
@@ -12,10 +12,10 @@ Update Role
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Update Role </h3>
+          <h3>রোল</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Update Role </li>
+            <li class="breadcrumb-item">রোল আপডেট করুন </li>
 
           </ol>
         </div>
@@ -38,8 +38,8 @@ Update Role
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="name">Role Name</label>
-        <input type="text" class="form-control form-control-sm" id="name" value="{{ $role->name }}" name="name" placeholder="Enter a Role Name">
+                            <label for="name">রোল এর নাম </label>
+        <input type="text" class="form-control form-control-sm" id="name" value="{{ $role->name }}" name="name" placeholder="রোল এর নাম">
 
                         </div>
 
@@ -83,7 +83,7 @@ Update Role
                             @endforeach
 
 
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update Role</button>
+                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">আপডেট করুন </button>
                     </form>
 
                                     </div>

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-User List
+কর্মকর্তাদের তালিকা  | {{ $ins_name }}
 @endsection
 
 
@@ -14,10 +14,10 @@ User List
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Staff List</h3>
+          <h3>কর্মকর্তাদের তালিকা </h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Staff List</li>
+            <li class="breadcrumb-item">কর্মকর্তাদের তালিকা </li>
 
           </ol>
         </div>
@@ -27,7 +27,7 @@ User List
         <div class="col-sm-6 mt-3">
             @if (Auth::guard('admin')->user()->can('userAdd'))
             <a  href="{{ route('user.create') }}" class="btn btn-primary add-btn" type="button">
-                <i class="ri-add-line align-bottom me-1"></i>  Add User
+                <i class="ri-add-line align-bottom me-1"></i> কর্মকর্তার তথ্য যোগ করুন
             </a>
                                                 @endif
         </div>
@@ -49,18 +49,18 @@ User List
                             <thead>
                                 <tr>
 
-                                    <th>SL</th>
-                                    <th>Image</th>
-                                    <th>Signature</th>
-                                    <th>Name</th>
-                                    <th>Designation</th>
-                                    <th>Branch</th>
-                                   <th>Mobile Number</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Start Date</th>
+                                    <th>ক্র: নং:</th>
+                                    <th>ছবি</th>
+                                    <th>স্বাক্ষর</th>
+                                    <th>নাম</th>
+                                    <th>উপাধি</th>
+                                    <th>শাখা</th>
+                                   <th>মোবাইল নম্বর</th>
+                                    <th>ইমেইল</th>
+                                    <th>রোল</th>
+                                    <th>শুরুর তারিখ</th>
                                     {{-- <th>End Date</th> --}}
-                                    <th>Action</th>
+                                    <th>কার্যকলাপ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,7 +112,7 @@ User List
 
                                             ?>
                                             {{ $branchName }}</td>
-                                    <td>{{ $user->admin_mobile }}</td>
+                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($user->admin_mobile) }}</td>
 
                                     <td>{{ $user->email }}</td>
                                     <td>
@@ -122,7 +122,7 @@ User List
                                         </span>
                                         @endforeach
                                     </td>
-                                    <td>{{ $user->admin_job_start_date }}</td>
+                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($user->admin_job_start_date) }}</td>
 
                                     {{-- <td>{{ $user->admin_job_end_date }}</td> --}}
 

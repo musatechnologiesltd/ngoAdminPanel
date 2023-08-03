@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Add Staff
+কর্মকর্তার তথ্য যোগ করুন
 @endsection
 
 
@@ -14,10 +14,10 @@ Add Staff
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Staff List</h3>
+          <h3>কর্মকর্তার তথ্য</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Add Staff</li>
+            <li class="breadcrumb-item">কর্মকর্তার তথ্য যোগ করুন</li>
 
           </ol>
         </div>
@@ -50,8 +50,8 @@ Add Staff
 
                                                   <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
-                                  <label for="name">Name</label>
-                                  <input type="text" class="form-control" id="name" name="name" data-parsley-maxlength="150" placeholder="Enter Name" required>
+                                  <label for="name">নাম (ইংরেজি)</label>
+                                  <input type="text" class="form-control" id="name" name="name" data-parsley-maxlength="150" placeholder="নাম (ইংরেজি)" required>
 
                                   @if ($errors->has('name'))
                                   <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -62,8 +62,8 @@ Add Staff
 
 
                               <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">Name (নাম)</label>
-                                <input type="text" class="form-control" id="name_ban" name="name_ban" data-parsley-maxlength="150" placeholder="Enter Name" required>
+                                <label for="name">নাম</label>
+                                <input type="text" class="form-control" id="name_ban" name="name_ban" data-parsley-maxlength="150" placeholder="নাম" required>
 
                                 @if ($errors->has('name_ban'))
                                 <span class="text-danger">{{ $errors->first('name_ban') }}</span>
@@ -72,18 +72,18 @@ Add Staff
 
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control form-control-sm" data-parsley-maxlength="100" id="email" name="email" placeholder="Enter Email" required>
+                                <label for="email">ইমেইল</label>
+                                <input type="text" class="form-control form-control-sm" data-parsley-maxlength="100" id="email" name="email" placeholder="ইমেইল" required>
 
                                 @if ($errors->has('email'))
                               <span class="text-danger">{{ $errors->first('email') }}</span>
                           @endif
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="text">Mobile Number</label>
+                                <label for="text">মোবাইল নম্বর</label>
                                 <input  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                 type = "number"
-                                maxlength = "11" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" placeholder="Enter Mobile Number" required>
+                                maxlength = "11" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" placeholder="মোবাইল নম্বর" required>
 
                                 @if ($errors->has('phone'))
                               <span class="text-danger">{{ $errors->first('phone') }}</span>
@@ -172,7 +172,7 @@ Add Staff
 
                           <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password">Assign Role</label>
+                                  <label for="password">রোল বরাদ্দ করুন</label>
                                   <select name="roles[]" id="roles" multiple="multiple"  class="form-control form-control-sm js-example-basic-multiple" required>
                                       @foreach ($roles as $role)
                   <option value="{{ $role->name }}">{{ $role->name }}</option>
@@ -180,7 +180,7 @@ Add Staff
                                   </select>
                               </div>
                                <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password_confirmation">Profile Image</label>
+                                  <label for="password_confirmation">প্রোফাইল ছবি</label>
                                   <input type="file" class="form-control form-control-sm" id="" name="image" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" required>
 
                                   @if ($errors->has('image'))
@@ -191,7 +191,7 @@ Add Staff
                               </div>
 
                               <div class="form-group col-md-12 col-sm-12">
-                                <label for="password_confirmation">Signature</label>
+                                <label for="password_confirmation">স্বাক্ষর</label>
                                 <input type="file" class="form-control form-control-sm" id="" name="sign" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" required>
 
                                 @if ($errors->has('sign'))
@@ -217,7 +217,7 @@ Add Staff
                                               <div class="form-group mb-4">
                                                   <div>
                                                       <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                                         Submit
+                                                        জমা দিন 
                                                       </button>
                                                   </div>
                                               </div>

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Designation List | {{ $ins_name }}
+পদবী তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,14 +14,14 @@ Designation List | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Designation</h3>
+                <h3>পদবী</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Designation List</li>
+                    <li class="breadcrumb-item">পদবী তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">Add Designation List</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">পদবী যোগ করুন</button>
             </div>
         </div>
     </div>
@@ -31,17 +31,17 @@ Designation List | {{ $ins_name }}
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Designation Information</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">পদবী তথ্য</h4>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="custom-validation" action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="">Branch Name</label>
+                        <label class="form-label" for="">শাখার নাম</label>
 
                         <select class="form-control" name="branch_id" id="branch_id0" type="text" placeholder="" required>
-                            <option value="">--Please Select--</option>
+                            <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
                             @foreach($branchLists as $AllBranchLists)
                             <option value="{{ $AllBranchLists->id }}">{{ $AllBranchLists->branch_name }}</option>
                             @endforeach
@@ -49,7 +49,7 @@ Designation List | {{ $ins_name }}
                         <input class="form-control" name="serial_part_one"  id="hidden_value0" type="hidden" step="0.01"  placeholder="" required readonly>
                     </div>
                 <div class="mb-3">
-                    <label class="form-label" for="">Designation Name</label>
+                    <label class="form-label" for="">পদবী নাম</label>
                     <input class="form-control" name="designation_name" id="designation_name0" type="text" placeholder="" required>
                 </div>
 
@@ -57,7 +57,7 @@ Designation List | {{ $ins_name }}
 
 
                 <div class="mb-3">
-                    <label class="form-label" for="">Designation Serial</label>
+                    <label class="form-label" for="">পদবীর ক্রম</label>
 
                     <div class="row">
                         <div class="col-md-2">
@@ -73,7 +73,7 @@ Designation List | {{ $ins_name }}
                 </div>
                 <small class="text-danger" id="result0"></small>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" id="finalButton0" type="submit">Submit</button>
+                    <button class="btn btn-primary" id="finalButton0" type="submit">জমা দিন</button>
                 </div>
                 </form>
             </div>
@@ -92,12 +92,12 @@ Designation List | {{ $ins_name }}
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Branch Name</th>
-                                <th>Designation Name</th>
+                                <th>ক্র: নং:</th>
+                                <th>শাখার নাম</th>
+                                <th>পদবী নাম</th>
 
-                                <th>Designation Serial</th>
-                                <th>Action</th>
+                                <th>পদবীর ক্রম</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -117,7 +117,7 @@ Designation List | {{ $ins_name }}
                                                                     </td>
                                 <td>{{ $AllDesignationLists->designation_name }}</td>
 
-                                <td>{{ $AllDesignationLists->designation_serial }}</td>
+                                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($AllDesignationLists->designation_serial) }}</td>
                                 <td>
                                     @if (Auth::guard('admin')->user()->can('designationUpdate'))
                                     <button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg{{ $AllDesignationLists->id }}"
@@ -129,7 +129,7 @@ Designation List | {{ $ins_name }}
                                           <div class="modal-dialog modal-lg">
                                               <div class="modal-content">
                                                   <div class="modal-header">
-                                                      <h5 class="modal-title" id="myLargeModalLabel">Update Branch</h5>
+                                                      <h5 class="modal-title" id="myLargeModalLabel">আপডেট করুন</h5>
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                       </button>
                                                   </div>
@@ -138,10 +138,10 @@ Designation List | {{ $ins_name }}
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="mb-3">
-                                                            <label class="form-label" for="">Branch Name</label>
+                                                            <label class="form-label" for="">শাখার নাম</label>
 
                                                             <select class="form-control" name="branch_id" id="branch_id{{ $AllDesignationLists->id }}" type="text" placeholder="" required>
-                                                                <option value="">--Please Select--</option>
+                                                                <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
                                                                 @foreach($branchLists as $AllBranchLists)
                                                                 <option value="{{ $AllBranchLists->id }}"  {{ $AllDesignationLists->branch_id == $AllBranchLists->id ? 'selected':''  }}>{{ $AllBranchLists->branch_name }}</option>
                                                                 @endforeach
@@ -151,14 +151,14 @@ Designation List | {{ $ins_name }}
 
                                                         </div>
                                                           <div class="mb-3">
-                                                            <label class="form-label" for="">Designation Name</label>
+                                                            <label class="form-label" for="">পদবী নাম</label>
                                                             <input class="form-control" name="designation_name" value="{{ $AllDesignationLists->designation_name  }}" id="designation_name{{ $AllDesignationLists->id }}" type="text" placeholder="" required>
                                                         </div>
 
 
 
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="">Designation Serial</label>
+                                                            <label class="form-label" for="">পদবীর ক্রম</label>
                                                             <input class="form-control" name="designation_serial" value="{{ $AllDesignationLists->designation_serial }}" id="designation_serial{{ $AllDesignationLists->id  }}" type="number" step="0.01" placeholder="" required>
 
                                                         </div>
@@ -166,7 +166,7 @@ Designation List | {{ $ins_name }}
 
                                                         <small class="text-danger" id="result{{ $AllDesignationLists->id  }}"></small>
 
-                                                          <button type="submit" id="finalButton{{ $AllDesignationLists->id  }}" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
+                                                          <button type="submit" id="finalButton{{ $AllDesignationLists->id  }}" class="btn btn-primary mt-4 pr-4 pl-4">আপডেট করুন</button>
                                                       </form>
                                                   </div>
                                               </div><!-- /.modal-content -->

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Branch List | {{ $ins_name }}
+শাখার  তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,14 +14,14 @@ Branch List | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Branch</h3>
+                <h3>শাখা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Branch</li>
+                    <li class="breadcrumb-item">শাখার  তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">Add Branch</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">শাখা যোগ করুন</button>
             </div>
         </div>
     </div>
@@ -31,14 +31,14 @@ Branch List | {{ $ins_name }}
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Branch Information</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">শাখা তথ্য</h4>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="custom-validation" action="{{ route('branchList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                 <div class="mb-3">
-                    <label class="form-label" for="">Branch Name</label>
+                    <label class="form-label" for="">শাখার নাম</label>
                     <input class="form-control" id="" name="branch_name" type="text" placeholder="" required>
 
                     <input type="hidden" class="form-control form-control-sm" value="{{ $stepValue+1 }}" name="branch_step" placeholder=""  readonly>
@@ -46,18 +46,18 @@ Branch List | {{ $ins_name }}
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="">Branch Code</label>
+                    <label class="form-label" for="">শাখা কোড</label>
                     <input class="form-control" id="" name="branch_code" type="text" placeholder="" required>
 
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12">
-                    <label for="branch_step">Branch Step</label>
+                    <label for="branch_step">শাখা ধাপ</label>
                     <input type="text" class="form-control form-control-sm" value="{{ $stepValue+1 }}" name="branch_step1" placeholder=""  readonly>
                 </div>
                 <small class="text-danger" id="result0"></small>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" id="finalButton0" type="submit">Submit</button>
+                    <button class="btn btn-primary" id="finalButton0" type="submit">জমা দিন </button>
                 </div>
                 </form>
             </div>
@@ -76,11 +76,11 @@ Branch List | {{ $ins_name }}
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Branch Name</th>
-                                <th>Branch Code</th>
-                                <th>Branch Step</th>
-                                <th>Action</th>
+                                <th>ক্র: নং:</th>
+                                <th>শাখার নাম</th>
+                                <th>শাখা কোড</th>
+                                <th>শাখা ধাপ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -88,8 +88,8 @@ Branch List | {{ $ins_name }}
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $AllBranchLists->branch_name }}</td>
-                                <td>{{ $AllBranchLists->branch_code }}</td>
-                                <td>{{ $AllBranchLists->branch_step }}</td>
+                                <td>{{  App\Http\Controllers\Admin\CommonController::englishToBangla($AllBranchLists->branch_code) }}</td>
+                                <td>{{  App\Http\Controllers\Admin\CommonController::englishToBangla($AllBranchLists->branch_step) }}</td>
                                 <td>
                                     @if (Auth::guard('admin')->user()->can('branchUpdate'))
                                     <button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg{{ $AllBranchLists->id }}"
@@ -101,7 +101,7 @@ Branch List | {{ $ins_name }}
                                           <div class="modal-dialog modal-lg">
                                               <div class="modal-content">
                                                   <div class="modal-header">
-                                                      <h5 class="modal-title" id="myLargeModalLabel">Update Branch</h5>
+                                                      <h5 class="modal-title" id="myLargeModalLabel">শাখার তথ্য আপডেট করুন </h5>
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                       </button>
                                                   </div>
@@ -111,20 +111,20 @@ Branch List | {{ $ins_name }}
                                                           @csrf
                                                           <div class="row">
                                                               <div class="form-group col-md-12 col-sm-12">
-                                                                  <label for="name">Branch Name</label>
-                                                  <input type="text" class="form-control form-control-sm" id="name" name="branch_name" placeholder="Enter Name" value="{{ $AllBranchLists->branch_name}}">
+                                                                  <label for="name">শাখার নাম</label>
+                                                  <input type="text" class="form-control form-control-sm" id="name" name="branch_name" placeholder="শাখার নাম" value="{{ $AllBranchLists->branch_name}}">
 
 
                                                               </div>
                                                               <div class="form-group col-md-12 col-sm-12">
-                                                                  <label for="email">Branch Code</label>
-                                                                  <input type="text" class="form-control form-control-sm" id="email" name="branch_code" placeholder="Enter Branch Code" value="{{ $AllBranchLists->branch_code }}">
+                                                                  <label for="email">শাখা কোড</label>
+                                                                  <input type="text" class="form-control form-control-sm" id="email" name="branch_code" placeholder="শাখা কোড" value="{{ $AllBranchLists->branch_code }}">
                                                               </div>
 
 
                                                               <div class="form-group col-md-12 col-sm-12">
-                                                                <label for="branch_step">Branch Step</label>
-                                                                <input type="text" class="form-control form-control-sm" id="branch_step{{ $AllBranchLists->id }}" name="branch_step" placeholder="Enter Branch Step" value="{{ $AllBranchLists->branch_step }}">
+                                                                <label for="branch_step">শাখা ধাপ</label>
+                                                                <input type="text" class="form-control form-control-sm" id="branch_step{{ $AllBranchLists->id }}" name="branch_step" placeholder="শাখা ধাপ" value="{{ $AllBranchLists->branch_step }}">
                                                             </div>
                                                             <small class="text-danger" id="result{{ $AllBranchLists->id  }}"></small>
 
@@ -133,7 +133,7 @@ Branch List | {{ $ins_name }}
 
 
 
-                                                          <button type="submit" id="finalButton{{ $AllBranchLists->id  }}" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
+                                                          <button type="submit" id="finalButton{{ $AllBranchLists->id  }}" class="btn btn-primary mt-4 pr-4 pl-4">আপডেট করুন</button>
                                                       </form>
                                                   </div>
                                               </div><!-- /.modal-content -->

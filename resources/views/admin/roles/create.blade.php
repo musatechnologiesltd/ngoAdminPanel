@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Create Role
+রোল যোগ করুন 
 @endsection
 
 
@@ -12,10 +12,10 @@ Create Role
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Create Role </h3>
+          <h3>রোল</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Create Role </li>
+            <li class="breadcrumb-item">রোল যোগ করুন </li>
 
           </ol>
         </div>
@@ -38,8 +38,8 @@ Create Role
                                     <div class="card-body">
 
                                       <div class="form-group">
-                            <label for="name">Role Name</label>
-                            <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Enter a Role Name">
+                            <label for="name">রোল এর নাম </label>
+                            <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="রোল এর নাম">
                         </div>
 
                         <div class="form-group mt-3">
@@ -96,7 +96,7 @@ Create Role
                                     <div class="form-group mb-4">
                                         <div>
                                             <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                                Submit
+                                                জমা দিন
                                             </button>
                                         </div>
                                     </div>

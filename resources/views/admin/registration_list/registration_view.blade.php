@@ -618,16 +618,16 @@
                                         <div class="mb-0 m-t-30">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                  <th>Sl</th>
-                                                    <th>Name</th>
-                                                    <th>NID No. & DOB</th>
-                                                    <th>Mobile</th>
-                                                    <th>Fathers Name</th>
-                                                    <th>Present Address</th>
-                                                    <th>Permanent Address</th>
-                                                    <th>Name of Spouse</th>
+                                                     <th>ক্র: নং:</th>
+                                                    <th>নাম</th>
+                                                    <th>এনআইডি নম্বর এবং জন্ম তারিখ </th>
+                                                    <th>মোবাইল নম্বর</th>
+                                                    <th>পিতার নাম</th>
+                                                    <th>বর্তমান ঠিকানা</th>
+                                                    <th>স্থায়ী ঠিকানা</th>
+                                                    <th>স্ত্রীর নাম</th>
 
-                                                    <th>Signature & Date</th>
+                                                    <th>স্বাক্ষর এবং তারিখ</th>
                                                 </tr>
                                                 @foreach($form_eight_data as $key=>$all_all_parti)
                                                 <tr>
@@ -667,16 +667,16 @@
                                         <div class="mb-0 m-t-30">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                      <th>Sl</th>
-                                                    <th>Name</th>
-                                                    <th>NID No. & DOB</th>
-                                                    <th>Mobile</th>
-                                                    <th>Fathers Name</th>
-                                                    <th>Present Address</th>
-                                                    <th>Permanent Address</th>
-                                                    <th>Name of Spouse</th>
+                                                      <th>ক্র: নং:</th>
+                                                    <th>নাম</th>
+                                                    <th>এনআইডি নম্বর এবং জন্ম তারিখ </th>
+                                                    <th>মোবাইল নম্বর</th>
+                                                    <th>পিতার নাম</th>
+                                                    <th>বর্তমান ঠিকানা</th>
+                                                    <th>স্থায়ী ঠিকানা</th>
+                                                    <th>স্ত্রীর নাম</th>
 
-                                                    <th>Signature & Date</th>
+                                                    <th>স্বাক্ষর এবং তারিখ</th>
                                                 </tr>
                                                 @foreach($form_member_data as $key=>$all_form_member_data)
                                                 <tr>
@@ -715,8 +715,8 @@
                                         <div class="mb-0 m-t-30">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th>File name</th>
-                                                    <th>File view</th>
+                                                    <th>নথির নাম</th>
+                                                    <th>নথি দেখুন</th>
                                                 </tr>
                                                 <tr>
                                                     <td>পরিচালন পরিকল্পনা</td>

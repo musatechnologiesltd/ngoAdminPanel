@@ -28,7 +28,7 @@
         <div class="col-sm-6">
             @if (Auth::guard('admin')->user()->can('countryAdd'))
             <button class="btn btn-primary dropdown-toggle waves-effect  btn-sm waves-light mt-5" type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg">
-                                                    <i class="far fa-calendar-plus  mr-2"></i> Add New Country
+                                                    <i class="far fa-calendar-plus  mr-2"></i> নতুন দেশ যোগ করুন
                                                 </button>
                                                 @endif
         </div>
@@ -42,7 +42,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-header pb-0">
-            <h5>Country List</h5>
+            <h5>দেশের তালিকা</h5>
           </div>
           <div class="card-body">
             @include('flash_message')
@@ -51,13 +51,13 @@
                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                     <thead>
                                                         <tr>
-                                                           <th>SL</th>
+                                                           <th>ক্র: নং:</th>
 
-                                                <th>Name</th>
-                                                <th>Name Bangla</th>
-                                                <th>Citizenship</th>
-                                                <th>Citizenship (Bangla)</th>
-                                                <th>Action</th>
+                                                <th>নাম (ইংরেজি)</th>
+                                                <th>নাম (বাংলা)</th>
+                                                <th>নাগরিকত্ব (ইংরেজি)</th>
+                                                <th>নাগরিকত্ব (বাংলা)</th>
+                                                <th>কার্যকলাপ</th>
                                                         </tr>
                                                     </thead>
 
@@ -92,7 +92,7 @@
                                                             <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="myLargeModalLabel">Update Country</h5>
+                                                                        <h5 class="modal-title" id="myLargeModalLabel">দেশ আপডেট করুন</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                                         </button>
                                                                     </div>
@@ -102,26 +102,26 @@
                                                                             @csrf
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12 col-sm-12">
-                                                                                    <label for="name">English Name</label>
-                                                                    <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Enter Name" value="{{ $user->country_name_english }}">
+                                                                                    <label for="name">নাম (ইংরেজি)</label>
+                                                                    <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="নাম (ইংরেজি)" value="{{ $user->country_name_english }}">
 
 
                                                                                 </div>
                                                                                 <div class="form-group col-md-12 col-sm-12">
-                                                                                    <label for="email">Bangla Name</label>
-                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="name_bn" placeholder="Enter Bangla Name" value="{{ $user->country_name_bangla }}">
+                                                                                    <label for="email">নাম (বাংলা)</label>
+                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="name_bn" placeholder="নাম (বাংলা)" value="{{ $user->country_name_bangla }}">
                                                                                 </div>
 
 
 
                                                                                 <div class="form-group col-md-12 col-sm-12">
-                                                                                    <label for="email">Citizenship</label>
-                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_eng" placeholder="Enter Citizenship" value="{{ $user->country_people_english }}">
+                                                                                    <label for="email">নাগরিকত্ব (ইংরেজি)</label>
+                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_eng" placeholder="নাগরিকত্ব (ইংরেজি)" value="{{ $user->country_people_english }}">
                                                                                 </div>
 
                                                                                 <div class="form-group col-md-12 col-sm-12">
-                                                                                    <label for="email">Citizenship(Bangla)</label>
-                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_bangla" placeholder="Enter Citizenship(Bangla)" value="{{ $user->country_people_bangla }}">
+                                                                                    <label for="email">নাগরিকত্ব (বাংলা)</label>
+                                                                                    <input type="text" class="form-control form-control-sm" id="email" name="city_bangla" placeholder="নাগরিকত্ব (বাংলা)" value="{{ $user->country_people_bangla }}">
                                                                                 </div>
 
 
@@ -129,7 +129,7 @@
 
 
 
-                                                                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update</button>
+                                                                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">আপডেট করুন </button>
                                                                         </form>
                                                                     </div>
                                                                 </div><!-- /.modal-content -->
@@ -177,7 +177,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myLargeModalLabel">Add New Country</h5>
+                <h5 class="modal-title" id="myLargeModalLabel">নতুন দেশ যোগ করুন</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -193,23 +193,23 @@
 
                                       <div class="row">
                   <div class="form-group col-md-12 col-sm-12">
-                      <label for="name">English Name</label>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                      <label for="name">নাম (ইংরেজি)</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="নাম (ইংরেজি)">
                   </div>
 
                   <div class="form-group col-md-12 col-sm-12">
-                    <label for="position">Bangla Name</label>
-                    <input type="text" class="form-control" id="position" name="name_bn" placeholder="Enter Bangla Name">
+                    <label for="position">নাম (বাংলা)</label>
+                    <input type="text" class="form-control" id="position" name="name_bn" placeholder="নাম (বাংলা)">
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12">
-                    <label for="email">Citizenship</label>
-                    <input type="text" class="form-control form-control-sm" id="email" name="city_eng" placeholder="Enter Citizenship" >
+                    <label for="email">নাগরিকত্ব (ইংরেজি)</label>
+                    <input type="text" class="form-control form-control-sm" id="email" name="city_eng" placeholder="নাগরিকত্ব (ইংরেজি)" >
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12">
-                    <label for="email">Citizenship(Bangla)</label>
-                    <input type="text" class="form-control form-control-sm" id="email" name="city_bangla" placeholder="Enter Citizenship(Bangla)">
+                    <label for="email">নাগরিকত্ব (বাংলা)</label>
+                    <input type="text" class="form-control form-control-sm" id="email" name="city_bangla" placeholder="নাগরিকত্ব (বাংলা)">
                 </div>
 
 
@@ -230,7 +230,7 @@
                                   <div class="form-group mb-4">
                                       <div>
                                           <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                             Submit
+                                            জমা দিন
                                           </button>
                                       </div>
                                   </div>
@@ -273,38 +273,38 @@
          }
      </script>
 
-      <script type="text/javascript">
-        function deleteTag(id) {
-            swal({
-                title: 'Are you sure?',
-                text: "You will not be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-                    event.preventDefault();
-                    document.getElementById('delete-form-'+id).submit();
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    swal(
-                        'Cancelled',
-                        'Your data is safe :)',
-                        'error'
-                    )
-                }
-            })
-        }
-    </script>
+<script type="text/javascript">
+    function deleteTag(id) {
+        swal({
+            title: 'আপনি কি এ ব্যাপারে নিশ্চিত?',
+            text: "আপনি এটি ফিরিয়ে আনতে পারবেন না!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'হ্যাঁ, এটি মুছুন!',
+            cancelButtonText: 'না, বাতিল করুন!',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                event.preventDefault();
+                document.getElementById('delete-form-'+id).submit();
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'বাতিল করা হয়েছে',
+                    'আপনার ডেটা নিরাপদ :)',
+                    'error'
+                )
+            }
+        })
+    }
+</script>
 @endsection
 
 

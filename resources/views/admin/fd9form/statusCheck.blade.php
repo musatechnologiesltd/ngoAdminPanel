@@ -6,7 +6,7 @@ $checkTracking =DB::table('secruity_checks')
 ?>
   @if(count($checkTracking) == 0)
 
-  <h1>Not Submitted</h1>
+  <h1>এখনো জমা দেওয়া হয়নি</h1>
 
   @else
 
@@ -15,8 +15,8 @@ $checkTracking =DB::table('secruity_checks')
       <thead>
         <tr>
 
-          <th scope="col">Tracking Number</th>
-          <th scope="col">Status Name</th>
+          <th scope="col">ট্র্যাকিং নম্বর</th>
+          <th scope="col">স্ট্যাটাসের নাম</th>
 
         </tr>
       </thead>

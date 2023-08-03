@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Employee End Date List
+কর্মকর্তাদের শেষ কর্মদিবসের তালিকা 
 @endsection
 
 
@@ -15,10 +15,10 @@ Employee End Date List
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Employee End Date List</h3>
+          <h3>কর্মকর্তাদের শেষ কর্মদিবসের তালিকা </h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Employee End Date List</li>
+            <li class="breadcrumb-item">কর্মকর্তাদের শেষ কর্মদিবসের তালিকা </li>
 
           </ol>
         </div>
@@ -38,10 +38,10 @@ Employee End Date List
                                 @csrf
 
                           <div class="mb-3">
-                                        <label class="form-label" for="">Employee</label>
+                                        <label class="form-label" for="">কর্মকর্তার নাম </label>
                             <div class="span7">
                                         <select class="form-control" required name="admin_id" id="fade" type="text" placeholder="">
-                                            <option value="">--Please Select--</option>
+                                            <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
                                             @foreach($users as $AllBranchLists)
                                             <option value="{{ $AllBranchLists->id }}" >{{ $AllBranchLists->admin_name }}</option>
                                             @endforeach

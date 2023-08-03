@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Role
+রোল তালিকা 
 @endsection
 
 
@@ -11,10 +11,10 @@ Role
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Role List</h3>
+          <h3>রোল</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">Role List</li>
+            <li class="breadcrumb-item">রোল তালিকা </li>
 
           </ol>
         </div>
@@ -23,7 +23,7 @@ Role
         </div>
         <div class="col-sm-6">
             @if (Auth::guard('admin')->user()->can('roleAdd'))
-            <a href="{{ route('role.create') }}" type="button"  class="btn btn-raised btn-primary waves-effect  btn-sm  mt-5" >Add New Role</a>
+            <a href="{{ route('role.create') }}" type="button"  class="btn btn-raised btn-primary waves-effect  btn-sm  mt-5" >রোল যোগ করুন </a>
              @endif
          </div>
         </div>
@@ -41,10 +41,10 @@ Role
                             <thead>
                                 <tr>
 
-                                        <th>sl</th>
-                                        <th>Role Name</th>
-                                        <th >Permission List</th>
-                                        <th>Action</th>
+                                        <th>ক্র: নং:</th>
+                                        <th>রোল এর নাম </th>
+                                        <th >পারমিশন তালিকা </th>
+                                        <th>কার্যকলাপ</th>
                                 </tr>
                             </thead>
                             <tbody>

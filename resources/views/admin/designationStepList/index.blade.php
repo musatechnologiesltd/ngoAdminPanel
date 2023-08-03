@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Assigned User List | {{ $ins_name }}
+কর্মকর্তাদের নিয়োগের তালিকা  | {{ $ins_name }}
 @endsection
 
 
@@ -14,10 +14,10 @@ Assigned User List | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Assigned User</h3>
+                <h3>কর্মকর্তা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">Assigned User List</li>
+                    <li class="breadcrumb-item">কর্মকর্তাদের নিয়োগের তালিকা </li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -60,10 +60,10 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                      <th scope="col">Designation Name</th>
-                                      <th scope="col">Staff Name</th>
-                                      <th scope="col">Start Date</th>
-                                      <th scope="col">Action</th>
+                                      <th scope="col">পদবী</th>
+                                      <th scope="col">কর্মকর্তার নাম</th>
+                                      <th scope="col">শুরুর তারিখ</th>
+                                      <th scope="col">কার্যকলাপ</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -101,7 +101,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                         @if(empty($adminDate))
 
                                         <select class="form-control" style="display: none;" name="adminId"  id="adminId{{ $AllDesignationList->id }}">
-                                            <option value="">--Please Select --</option>
+                                            <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
                                             @foreach($users_as as $allusers)
 
 
@@ -112,7 +112,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
 @else
 
 <select class="form-control" name="adminId" disabled id="adminId{{ $AllDesignationList->id }}">
-    <option value="">--Please Select --</option>
+    <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
     @foreach($users as $allusers)
 
 
@@ -133,7 +133,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                         @if(empty($adminDate))
                                         <input type="text" style="display: none;" class="form-control datepicker233" value="{{ $adminDate }}" id="admin_job_start_date{{ $AllDesignationList->id }}"  name="admin_job_start_date" placeholder="Enter Date" >
                                         @else
-                                        <input type="text" class="form-control datepicker233" value="{{ date('d-m-Y', strtotime($adminDate)) }}" id="admin_job_start_date{{ $AllDesignationList->id }}"   name="admin_job_start_date" placeholder="Enter Date" disabled>
+                                        <input type="text" class="form-control datepicker233" value="{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($adminDate))) }}" id="admin_job_start_date{{ $AllDesignationList->id }}"   name="admin_job_start_date" placeholder="Enter Date" disabled>
                                         @endif
                                       </td>
 
