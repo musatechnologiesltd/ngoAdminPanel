@@ -84,6 +84,8 @@ class RenewController extends Controller
 
              try {
 
+                $mainIdR = DB::table('ngo_renews')->where('id',$id)->first();
+
                 $fdOneFormId = DB::table('ngo_renews')->where('id',$id)->first();
 
                 $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
@@ -137,7 +139,7 @@ class RenewController extends Controller
 
 
 
-        return view('admin.registration_list.registration_view',compact('duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+        return view('admin.renew_list.view',compact('mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
     }
 
 

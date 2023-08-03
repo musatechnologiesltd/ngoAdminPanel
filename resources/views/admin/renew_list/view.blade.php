@@ -167,7 +167,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
 
 
-                                    @if($name_change_status == "Accepted")
+                                    @if($renew_status == "Accepted")
 
 
                                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
@@ -862,7 +862,8 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
 
 
 
-                                    @if($name_change_status == "Accepted")
+                                    @if($renew_status == "Accepted")
+
 
 
 
@@ -1006,16 +1007,15 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                         <div class="mb-0 m-t-30">
 
 
-
-                                            <form action="{{ route('updateStatusNameChangeForm') }}" method="post">
+                                            <form action="{{ route('updateStatusRenewForm') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" value="{{ $getformOneId->id }}" name="id" />
+                                                <input type="hidden" value="{{ $mainIdR->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
                                                 <select class="form-control form-control-sm" name="status" >
 
-                                                    <option value="Ongoing" {{ $getformOneId->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
-                                                    <option value="Accepted" {{ $getformOneId->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
-                                                    <option value="Rejected" {{ $getformOneId->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
+                                                    <option value="Ongoing" {{ $mainIdR->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
+                                                    <option value="Accepted" {{ $mainIdR->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
+                                                    <option value="Rejected" {{ $mainIdR->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
 
                                                 </select>
 

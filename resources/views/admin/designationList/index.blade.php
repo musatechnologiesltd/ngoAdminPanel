@@ -16,7 +16,7 @@ Designation List | {{ $ins_name }}
             <div class="col-sm-6">
                 <h3>Designation</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">Designation List</li>
                 </ol>
             </div>

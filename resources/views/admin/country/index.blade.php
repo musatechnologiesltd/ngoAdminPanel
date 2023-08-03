@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Country List | {{ $ins_name }}
+দেশের তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -15,10 +15,10 @@ Country List | {{ $ins_name }}
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Country List</h3>
+          <h3>দেশের তালিকা</h3>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">Country List</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
+            <li class="breadcrumb-item">দেশের তালিকা</li>
 
           </ol>
         </div>

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Setting
+সেটিং
 @endsection
 
 
@@ -10,10 +10,10 @@ Setting
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>Setting </h3>
+          <h3>সেটিং </h3>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">Setting</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
+            <li class="breadcrumb-item">সেটিং</li>
 
           </ol>
         </div>
@@ -47,7 +47,7 @@ Setting
 
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title mb-3">Info</h5>
+                                            <h5 class="card-title mb-3">তথ্য</h5>
                                             @include('flash_message')
                                             <form action="{{ route('setting.store') }}" method="post" enctype="multipart/form-data">
                                                 @csrf
@@ -55,32 +55,32 @@ Setting
                                                 <table class="table table-borderless mb-0">
                                                     <tbody>
                                                         <tr>
-                                                            <th class="ps-0" scope="row">Full Name :</th>
+                                                            <th class="ps-0" scope="row">পুরো নাম:</th>
                                                             <td class="text-muted">
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}" name="name"/>
+                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}" name="পুরো নাম"/>
                                                                 <input type="hidden" class="form-control" value="{{ Auth::guard('admin')->user()->id }}" name="id"/>
 
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <th class="ps-0" scope="row">Mobile :</th>
+                                                            <th class="ps-0" scope="row">মোবাইল নম্বর:</th>
                                                             <td class="text-muted">
 
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_mobile }}" name="phone"/>
+                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_mobile }}" name="মোবাইল নম্বর"/>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="ps-0" scope="row">E-mail :</th>
+                                                            <th class="ps-0" scope="row">ই-মেইল:</th>
                                                             <td class="text-muted">
 
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->email }}" name="email"/>
+                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->email }}" name="ই-মেইল"/>
                                                             </td>
 
                                                         </tr>
 
                                                         <tr>
-                                                            <th class="ps-0" scope="row">Image :</th>
+                                                            <th class="ps-0" scope="row">ছবি:</th>
                                                             <td class="text-muted">
 
                                                                 <input type="file" class="form-control"  name="image"/>
@@ -96,7 +96,7 @@ Setting
                                                         </tr>
 
                                                         <tr>
-                                                            <th class="ps-0" scope="row">Sign :</th>
+                                                            <th class="ps-0" scope="row">স্বাক্ষর:</th>
                                                             <td class="text-muted">
 
                                                                 <input type="file" class="form-control"  name="image"/>

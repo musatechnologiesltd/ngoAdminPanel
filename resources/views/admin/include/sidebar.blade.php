@@ -3,7 +3,7 @@
  @endphp
 
  <header class="main-nav">
-    <div class="sidebar-user text-center"><a class="setting-primary" href="javascript:void(0)"><i data-feather="settings"></i></a>
+    <div class="sidebar-user text-center"><a class="setting-primary" href="{{ route('setting.index') }}"><i data-feather="settings"></i></a>
 
         @if(empty(Auth::guard('admin')->user()->admin_image))
         <img class="img-90 rounded-circle" src="{{asset('/')}}public/admin/user.png" alt="">
@@ -38,36 +38,36 @@
             <div id="mainnav">
                 <ul class="nav-menu custom-scrollbar">
                     <li class="back-btn">
-                        <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                        <div class="mobile-back text-end"><span>পেছনে</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>General</h6>
+                            <h6>সাধারণ</h6>
                         </div>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i data-feather="home"></i>
-                            <span>Dashboard</span>
+                            <span>ড্যাশবোর্ড</span>
                         </a>
                     </li>
 
 
                     @if (Route::is('newRegistrationList') ||  Route::is('revisionRegistrationList') || Route::is('alreadyRegistrationList') || Route::is('registrationView'))
 
-                    <li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>Ngo Registration</span></a>
+                    <li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন </span></a>
                         <ul class="nav-submenu menu-content" style="display: block;">
-                            <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">New Registration</a></li>
-                            <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">Revision Registration</a></li>
-                            <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">Already Registered</a></li>
+                            <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">নতুন নিবন্ধন </a></li>
+                            <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">পুনর্বিবেচনা নিবন্ধন </a></li>
+                            <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">ইতিমধ্যে নিবন্ধিত </a></li>
                         </ul>
                     </li>
 @else
-<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Ngo Registration</span></a>
+<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন </span></a>
     <ul class="nav-submenu menu-content">
-        <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">New Registration</a></li>
-        <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">Revision Registration</a></li>
-        <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">Already Registered</a></li>
+        <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">নতুন নিবন্ধন </a></li>
+        <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">পুনর্বিবেচনা নিবন্ধন </a></li>
+        <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">ইতিমধ্যে নিবন্ধিত </a></li>
     </ul>
 </li>
 
@@ -78,19 +78,19 @@
 
 @if (Route::is('newNameChangeList') ||  Route::is('revisionNameChangeList') || Route::is('alreadNameChangeList') || Route::is('nameChangeView'))
 
-<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>Ngo Name Change</span></a>
+<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নাম পরিবর্তন </span></a>
     <ul class="nav-submenu menu-content" style="display: block;">
-        <li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}">New name_change</a></li>
-        <li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}">Revision name_change</a></li>
-        <li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">Already Changed</a></li>
+        <li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}">নতুন নাম পরিবর্তনের </a></li>
+        <li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}">পুনর্বিবেচনা নাম পরিবর্তনের </a></li>
+        <li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">ইতিমধ্যে পরিবর্তিত নাম </a></li>
     </ul>
 </li>
 @else
-<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Ngo Name Change</span></a>
+<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নাম পরিবর্তন </span></a>
 <ul class="nav-submenu menu-content">
-<li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}">New Name Change</a></li>
-<li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}">Revision Name Change</a></li>
-<li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">Already Changed</a></li>
+<li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}">নতুন নাম পরিবর্তনের </a></li>
+<li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}"> পুনর্বিবেচনা নাম পরিবর্তনের </a></li>
+<li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">ইতিমধ্যে পরিবর্তিত নাম </a></li>
 </ul>
 </li>
 
@@ -98,19 +98,19 @@
 
 @if (Route::is('newRenewList') ||  Route::is('revisionRenewList') || Route::is('alreadyRenewList') || Route::is('renewView'))
 
-<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>Ngo Renew</span></a>
+<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও পুনর্নবীকরণ</span></a>
     <ul class="nav-submenu menu-content" style="display: block;">
-        <li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">New Renew</a></li>
-        <li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">Revision Renew</a></li>
-        <li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">Already Renewed</a></li>
+        <li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">নতুন এনজিও পুনর্নবীকরণ</a></li>
+        <li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">এনজিও পুনর্নবীকরণ এর পুনর্বিবেচনা</a></li>
+        <li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">ইতিমধ্যে পুনর্নবীকরণ করা হয়েছে</a></li>
     </ul>
 </li>
 @else
-<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Ngo Renew</span></a>
+<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও পুনর্নবীকরণ</span></a>
 <ul class="nav-submenu menu-content">
-<li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">New Renew</a></li>
-<li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">Revision Renew</a></li>
-<li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">Already Renewed</a></li>
+<li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">নতুন এনজিও পুনর্নবীকরণ</a></li>
+<li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">এনজিও পুনর্নবীকরণ এর পুনর্বিবেচনা</a></li>
+<li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">ইতিমধ্যে পুনর্নবীকরণ করা হয়েছে</a></li>
 </ul>
 </li>
 
@@ -120,7 +120,7 @@
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('fd9Form.index') || Route::is('fd9Form.show') ? 'active' : '' }}" href="{{ route('fd9Form.index') }}">
         <i data-feather="airplay"></i>
-        <span>Fd9 (N-Visa)</span>
+        <span>এফডি৯ (এন-ভিসা)</span>
     </a>
 </li>
 @endif
@@ -128,32 +128,32 @@
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('fd9OneForm.index') || Route::is('fd9OneForm.show') ? 'active' : '' }}" href="{{ route('fd9OneForm.index') }}">
         <i data-feather="airplay"></i>
-        <span>Fd9.1 (Work Permit)</span>
+        <span>এফডি৯.১ (ওয়ার্ক পারমিট)</span>
     </a>
 </li>
 @endif
 <li class="sidebar-main-title">
     <div>
-      <h6>Employee Info</h6>
+      <h6>কর্মকর্তারদের তথ্য</h6>
     </div>
   </li>
 <!--empoyee info --->
 @if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('assignedEmployee.index'))
 
 <li class="dropdown">
-  <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>
+  <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>কর্মকর্তাদের তালিকা</span></a>
   <ul class="nav-submenu menu-content" style="display: block;">
 
 
     @if ($usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
 <li >
-<a href="{{ route('branchList.index') }}" class="{{ Route::is('branchList.index')  ? 'active' : '' }}"><span>Branch List</span> </a>
+<a href="{{ route('branchList.index') }}" class="{{ Route::is('branchList.index')  ? 'active' : '' }}"><span>শাখার তালিকা</span> </a>
 </li>
 @endif
 
 @if ($usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate'))
 <li >
-<a href="{{ route('designationList.index') }}" class="{{ Route::is('designationList.index')  ? 'active' : '' }}"><span>Designation List</span> </a>
+<a href="{{ route('designationList.index') }}" class="{{ Route::is('designationList.index')  ? 'active' : '' }}"><span>পদবীর তালিকা</span> </a>
 </li>
 @endif
 
@@ -162,19 +162,19 @@
 
       @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
       <li class="">
-          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তার তথ্য যোগ করুন </a>
       </li>
       @endif
 
 @if ($usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit'))
 <li >
-<a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>Assigned Employee</span> </a>
+<a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>কর্মকর্তাদের নিয়োগ দিন</span> </a>
 </li>
 @endif
 
  @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit'))
           <li class="">
-              <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">Employee End Date</a>
+              <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের শেষ কর্মদিবস </a>
           </li>
           @endif
 
@@ -189,19 +189,19 @@
 </li>
 @else
 <li class="dropdown">
-<a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Employee</span></a>
+<a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>কর্মকর্তাদের তালিকা</span></a>
 <ul class="nav-submenu menu-content">
 
 
     @if ($usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
     <li >
-    <a href="{{ route('branchList.index') }}" class="{{ Route::is('branchList.index')  ? 'active' : '' }}"><span>Branch List</span> </a>
+    <a href="{{ route('branchList.index') }}" class="{{ Route::is('branchList.index')  ? 'active' : '' }}"><span>শাখার তালিকা</span> </a>
     </li>
     @endif
 
     @if ($usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate'))
     <li >
-    <a href="{{ route('designationList.index') }}" class="{{ Route::is('designationList.index')  ? 'active' : '' }}"><span>Designation List</span> </a>
+    <a href="{{ route('designationList.index') }}" class="{{ Route::is('designationList.index')  ? 'active' : '' }}"><span>পদবীর তালিকা</span> </a>
     </li>
     @endif
 
@@ -210,19 +210,19 @@
 
           @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
           <li class="">
-              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">Employee List</a>
+              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তার তথ্য যোগ করুন </a>
           </li>
           @endif
 
           @if ($usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit'))
           <li >
-          <a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>Assigned Employee</span> </a>
+          <a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>কর্মকর্তাদের নিয়োগ দিন</span> </a>
           </li>
           @endif
 
    @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit'))
           <li class="">
-              <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">Employee End Date</a>
+              <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের শেষ কর্মদিবস </a>
           </li>
           @endif
 
@@ -235,30 +235,30 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                          <h6>Other</h6>
+                          <h6>অন্যান্য তথ্য</h6>
                         </div>
                       </li>
 
                       @if (Route::is('admin.civil_info') || Route::is('country.index') || Route::is('systemInformation.index') ||  Route::is('user.index') || Route::is('role.index') || Route::is('role.create') || Route::is('role.edit') || Route::is('permission.index'))
 
                       <li class="dropdown">
-                        <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="settings"></i><span>Setting</span></a>
+                        <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="settings"></i><span>সেটিং </span></a>
                         <ul class="nav-submenu menu-content" style="display: block;">
 
                             @if ($usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
                             <li class="">
-                                <a href="{{ route('systemInformation.index') }}" class="{{ Route::is('systemInformation.index') ? 'active' : '' }}" data-key="t-calendar">System Information</a>
+                                <a href="{{ route('systemInformation.index') }}" class="{{ Route::is('systemInformation.index') ? 'active' : '' }}" data-key="t-calendar">জেনারেল সেটিং</a>
                             </li>
                             @endif
 
                             @if ($usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate'))
                             <li class="">
-                                <a href="{{ route('role.index') }}" class="{{ Route::is('role.index') || Route::is('role.edit') || Route::is('role.create') ? 'active' : '' }}" data-key="t-nft-landing">Role </a>
+                                <a href="{{ route('role.index') }}" class="{{ Route::is('role.index') || Route::is('role.edit') || Route::is('role.create') ? 'active' : '' }}" data-key="t-nft-landing">রোল</a>
                             </li>
                             @endif
                             @if ($usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate'))
                             <li class="">
-                                <a href="{{ route('permission.index') }}" class="{{ Route::is('permission.index') ? 'active' : '' }}"><span data-key="t-job">Permission</span>
+                                <a href="{{ route('permission.index') }}" class="{{ Route::is('permission.index') ? 'active' : '' }}"><span data-key="t-job">পারমিশন</span>
                             </a>
                             </li>
                             @endif
@@ -268,7 +268,7 @@
 
 @if ($usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate'))
 <li >
-       <a href="{{ route('country.index') }}" class="{{ Route::is('country.index')  ? 'active' : '' }}"><span>Country</span> </a>
+       <a href="{{ route('country.index') }}" class="{{ Route::is('country.index')  ? 'active' : '' }}"><span>দেশের তালিকা</span> </a>
    </li>
 @endif
 
@@ -279,30 +279,30 @@
                     </li>
 @else
 <li class="dropdown">
-    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="settings"></i><span>Setting</span></a>
+    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="settings"></i><span>সেটিং </span></a>
     <ul class="nav-submenu menu-content">
 
 
         @if ($usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
         <li class="">
-            <a href="{{ route('systemInformation.index') }}" class="{{ Route::is('systemInformation.index') ? 'active' : '' }}" data-key="t-calendar">System Information</a>
+            <a href="{{ route('systemInformation.index') }}" class="{{ Route::is('systemInformation.index') ? 'active' : '' }}" data-key="t-calendar">জেনারেল সেটিং</a>
         </li>
         @endif
 
         @if ($usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate'))
         <li class="">
-            <a href="{{ route('role.index') }}" class="{{ Route::is('role.index') || Route::is('role.edit') || Route::is('role.create') ? 'active' : '' }}" data-key="t-nft-landing">Role </a>
+            <a href="{{ route('role.index') }}" class="{{ Route::is('role.index') || Route::is('role.edit') || Route::is('role.create') ? 'active' : '' }}" data-key="t-nft-landing">রোল</a>
         </li>
         @endif
         @if ($usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate'))
         <li class="">
-            <a href="{{ route('permission.index') }}" class="{{ Route::is('permission.index') ? 'active' : '' }}"><span data-key="t-job">Permission</span>
+            <a href="{{ route('permission.index') }}" class="{{ Route::is('permission.index') ? 'active' : '' }}"><span data-key="t-job">পারমিশন</span>
         </a>
         </li>
         @endif
         @if ($usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate'))
 <li >
-       <a href="{{ route('country.index') }}" class="{{ Route::is('country.index')  ? 'active' : '' }}"><span>Country</span> </a>
+       <a href="{{ route('country.index') }}" class="{{ Route::is('country.index')  ? 'active' : '' }}"><span>দেশের তালিকা</span> </a>
    </li>
 @endif
 

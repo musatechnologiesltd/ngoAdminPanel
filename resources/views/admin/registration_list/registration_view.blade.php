@@ -25,7 +25,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
             <div class="col-sm-6">
                 <h3>NGO Registration Information</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">Users</li>
                     <li class="breadcrumb-item active">User Profile</li>
                 </ol>
@@ -165,7 +165,10 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                     class="icofont icofont-animal-lemur"></i>Document</a>
                                     </li>
 
-                                    @if($renew_status == "Accepted" || $name_change_status == "Accepted" || $r_status == "Accepted" )
+
+
+                                    @if($r_status == "Accepted")
+
                                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                                         data-bs-toggle="pill" href="#pills-darkdoc1"
                                         role="tab" aria-controls="pills-darkdoc1"
@@ -856,7 +859,14 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                         </div>
                                     </div>
 
-                                    @if($renew_status == "Accepted" || $name_change_status == "Accepted" || $r_status == "Accepted" )
+
+
+                                    @if($r_status == "Accepted" )
+
+
+
+
+
 
                                     <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
                                          aria-labelledby="pills-darkdoc1-tab">
@@ -992,6 +1002,8 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                     <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
                                          aria-labelledby="pills-darkdoc1-tab">
                                         <div class="mb-0 m-t-30">
+
+
                                             <form action="{{ route('updateStatusRegForm') }}" method="post">
                                                 @csrf
 
@@ -1022,6 +1034,7 @@ $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','M
                                                 <button type="submit" class="btn btn-primary mt-5">Update</button>
 
                                               </form>
+
                                         </div>
                                     </div>
 

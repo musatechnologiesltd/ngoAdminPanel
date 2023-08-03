@@ -13,7 +13,7 @@ Role
         <div class="col-sm-6">
           <h3>Role List</h3>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
             <li class="breadcrumb-item">Role List</li>
 
           </ol>

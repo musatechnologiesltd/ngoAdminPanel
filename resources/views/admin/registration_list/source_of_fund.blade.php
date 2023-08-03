@@ -17,7 +17,7 @@ Source Of Fund | {{ $ins_name }}
             <div class="col-sm-6">
                 <h3>Source Of Fund </h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">Users</li>
                     <li class="breadcrumb-item active">PDF</li>
                 </ol>

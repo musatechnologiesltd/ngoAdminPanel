@@ -13,13 +13,13 @@ $usr = Auth::guard('admin')->user();
         </div>
         <div class="left-menu-header col">
             <ul>
-                <li>
+                {{-- <li>
                     <form class="form-inline search-form">
                         <div class="search-bg"><i class="fa fa-search"></i>
                             <input class="form-control-plaintext" placeholder="Search here.....">
                         </div>
                     </form><span class="d-sm-none mobile-search search-bg"><i class="fa fa-search"></i></span>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <div class="nav-right col pull-right right-menu p-0">
@@ -28,7 +28,7 @@ $usr = Auth::guard('admin')->user();
                     <div class="notification-box"><i data-feather="bell"></i><span class="dot-animated"></span></div>
                     <ul class="notification-dropdown onhover-show-div">
                         <li>
-                            <p class="f-w-700 mb-0">You have {{ count($ongoingNgoStatus) + count($ongoingNgoRenewStatus) + count($ongoingNgoNameChangeStatus) }} Notifications<span class="pull-right badge badge-primary badge-pill">{{ count($ongoingNgoStatus) + count($ongoingNgoRenewStatus) + count($ongoingNgoNameChangeStatus) }} </span></p>
+                            <p class="f-w-700 mb-0">আপনার কাছে {{ count($ongoingNgoStatus) + count($ongoingNgoRenewStatus) + count($ongoingNgoNameChangeStatus) }} টি নোটিফিকেশন এসেছে <span class="pull-right badge badge-primary badge-pill">{{ count($ongoingNgoStatus) + count($ongoingNgoRenewStatus) + count($ongoingNgoNameChangeStatus) }} </span></p>
                         </li>
 
                         @foreach($ongoingNgoStatus as $all_ongoingNgoStatus)
@@ -37,7 +37,7 @@ $usr = Auth::guard('admin')->user();
                         <li class="noti-primary">
                             <div class="media"><span class="notification-bg bg-light-primary"><i data-feather="activity"> </i></span>
                                 <div class="media-body">
-                                    <p> New Ngo Registration Request</p>
+                                    <p>নতুন এনজিও নিবন্ধন অনুরোধ</p>
                                 </div>
                             </div>
                         </li>
@@ -51,7 +51,7 @@ $usr = Auth::guard('admin')->user();
                         <li class="noti-success">
                             <div class="media"><span class="notification-bg bg-light-primary"><i data-feather="activity"> </i></span>
                                 <div class="media-body">
-                                    <p>New Ngo Renew Request </p>
+                                    <p>নতুন এনজিও রিনিউ অনুরোধ</p>
                                 </div>
                             </div>
                         </li>
@@ -64,7 +64,7 @@ $usr = Auth::guard('admin')->user();
                         <li class="noti-primary">
                             <div class="media"><span class="notification-bg bg-light-primary"><i data-feather="activity"> </i></span>
                                 <div class="media-body">
-                                    <p>New Ngo Name Change Request </p>
+                                    <p>নতুন এনজিও নাম পরিবর্তনের অনুরোধ</p>
                                 </div>
                             </div>
                         </li>
@@ -83,7 +83,7 @@ $usr = Auth::guard('admin')->user();
                 <li class="onhover-dropdown p-0">
                     <button class="btn btn-primary-light" type="button"><a href="{{ route('admin.logout.submit') }}"
                         onclick="event.preventDefault();
-                                      document.getElementById('admin-logout-form').submit();"><i data-feather="log-out"></i>Log out</a></button>
+                                      document.getElementById('admin-logout-form').submit();"><i data-feather="log-out"></i>লগ আউট</a></button>
                                        <form id="admin-logout-form" action="{{ route('admin.logout.submit') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

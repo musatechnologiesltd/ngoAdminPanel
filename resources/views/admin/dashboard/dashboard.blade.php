@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Dashboard
+ড্যাশবোর্ড
 @endsection
 
 
@@ -25,8 +25,8 @@ Dashboard
                             </div>
                         </div>
                         <div class="card-body text-center p-t-0">
-                            <h3 class="font-light">Wellcome Back, {{ Auth::guard('admin')->user()->name }}!!</h3>
-                            <p>we are glad that you are visite this dashboard.</p>
+                            <h3 class="font-light">ফিরে আসার জন্য স্বাগতম, {{ Auth::guard('admin')->user()->name }}!!</h3>
+                            <p>আমরা আনন্দিত যে আপনি এই ড্যাশবোর্ড পরিদর্শন করছেন.</p>
                             {{-- <button class="btn btn-light">Update Your Profile</button> --}}
                         </div>
                         <div class="confetti">
@@ -59,7 +59,7 @@ Dashboard
                                 <i class="fa fa-history"></i>
                             </div>
                             <h5>{{ $totalRenewNgoRequest }}</h5>
-                            <p>Total Renew Request</p>
+                            <p>মোট পুনর্নবীকরণ অনুরোধ</p>
 
 
                             <div class="parrten">
@@ -75,7 +75,7 @@ Dashboard
                                 <i class="fa fa-power-off"></i>
                             </div>
                             <h5>{{ $totalRejectedRenewNgoRequest }}</h5>
-                            <p>Total Rejected Renew Request</p>
+                            <p>মোট প্রত্যাখ্যান পুনর্নবীকরণ অনুরোধ</p>
 
                             <div class="parrten">
                                 <i class="fa fa-power-off"></i>
@@ -102,7 +102,7 @@ Dashboard
                                 <i class="fa fa-align-left"></i>
                             </div>
                             <h5>{{ $totalRegisteredNgo }}</h5>
-                            <p>Total Ngo Register</p>
+                            <p>মোট এনজিও রেজিস্টার</p>
 
                             <div class="parrten">
                                 <i class="fa fa-align-left"></i>
@@ -120,7 +120,7 @@ Dashboard
                                 <i class="fa fa-file"></i>
                             </div>
                             <h5>{{ $totalRenewNgoRequest }}</h5>
-                            <p>Total Ngo Renew</p>
+                            <p>মোট এনজিও পুনর্নবীকরণ</p>
 
                             <div class="parrten">
                                 <i class="fa fa-file"></i>
@@ -137,7 +137,7 @@ Dashboard
                                 <i class="fa fa-file-text-o"></i>
                             </div>
                             <h5>{{ $totalNameChangeNgoRequest }}</h5>
-                            <p>Total Ngo Name Change</p>
+                            <p>মোট এনজিও নাম পরিবর্তন</p>
 
                             <div class="parrten">
                                 <i class="fa fa-file-text-o"></i>
@@ -154,19 +154,19 @@ Dashboard
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-  New Registration List
+    নতুন এনজিও  নিবন্ধন তালিকা
               </div>
                 <div class="card-body">
                   <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>Tracking Number</th>
-                                <th>NGO Name & Address</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>এনজিওর নাম ও ঠিকানা</th>
+                                <th>পেমেন্ট</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -189,75 +189,48 @@ Dashboard
 
                                 <?php
 
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
 
                                 $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number }}</td>
-                                <td><h6> NGO Name: {{ $reg_name  }}</h6><span>Address: {{ $reg_address }}</td>
-                                <td>Yes</td>
-                                <td class="font-success">{{ $all_data_for_new_list_all->status }}</td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
+                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                <td>হ্যাঁ</td>
+                                <td class="font-success">
+
+                                    @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
+                                    @endif
+                                </td>
                                 <td>
 
 
-                                    {{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
 
                                 </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
-@if (Auth::guard('admin')->user()->can('register_list_update'))
 
-                                    <button class="btn btn-secondary btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $all_data_for_new_list_all->id }}" data-original-title="btn btn-danger btn-xs" title="">{{ $all_data_for_new_list_all->status }}</button>
-
-
-                                    <!-- Modal -->
-<div class="modal fade" id="exampleModal{{ $all_data_for_new_list_all->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <?php
-
-$get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('email');
-
-        ?>
-        <div class="modal-body">
-          <form action="{{ route('updateStatusRegForm') }}" method="post">
-            @csrf
-
-
-            <input type="hidden" value="{{ $all_data_for_new_list_all->id }}" name="id" />
-
-            <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
-
-            <label>Registration ID:</label>
-            <input type="text" value="" name="reg_no_get_from_admin" class="form-control form-control-sm" />
-
-            <select class="form-control form-control-sm mt-4" name="status" >
-
-                <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
-                <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
-                <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
-
-            </select>
-
-            <button type="submit" class="btn btn-primary mt-5">Update</button>
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  @endif
 
                                 </td>
                             </tr>
@@ -277,20 +250,20 @@ $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('emai
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-  New Name Change List
+    নতুন এনজিও  নাম পরিবর্তনের তালিকা
               </div>
                 <div class="card-body">
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-2">
                             <thead>
                             <tr>
-                                <th>Tracking Number</th>
-                                <th>Previous NGO Name (Bangla & English)</th>
-                                <th>Request NGO Name  (Bangla & English)</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
+                                <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
+                                <th>পেমেন্ট</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -298,7 +271,7 @@ $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('emai
 
                                 <?php
  $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
                          $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
@@ -312,62 +285,44 @@ $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('emai
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number }}</td>
-                                <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
-                                    <td><h6> NGO Name (Bangla): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>NGO Name (English): {{ $all_data_for_new_list_all->present_name_eng }}</td>
-                                <td>Yes</td>
-                                <td class="font-success">{{ $all_data_for_new_list_all->status }}</td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
+                                <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
+                                <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->present_name_eng }}</td>
+                                <td>হ্যাঁ</td>
+                                <td class="font-success">
+
+                                    @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
+                                    @endif
+                                </td>
                                 <td>
 
 
-                                    {{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
 
 
                                 </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
-@if (Auth::guard('admin')->user()->can('register_list_update'))
 
-                                    <button class="btn btn-secondary btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $all_data_for_new_list_all->id }}" data-original-title="btn btn-danger btn-xs" title="">{{ $all_data_for_new_list_all->status }}</button>
-
-                                    <?php
-
-                                    $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('email');
-
-                                            ?>
-                                    <!-- Modal -->
-<div class="modal fade" id="exampleModal{{ $all_data_for_new_list_all->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{{ route('updateStatusNameChangeForm') }}" method="post">
-            @csrf
-            <input type="hidden" value="{{ $all_data_for_new_list_all->id }}" name="id" />
-            <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
-            <select class="form-control form-control-sm" name="status" >
-
-                <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
-                <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
-                <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
-
-            </select>
-
-            <button type="submit" class="btn btn-primary mt-5">Update</button>
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  @endif
 
                                 </td>
                             </tr>
@@ -388,19 +343,19 @@ $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('emai
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-  New Ngo Renew List
+    নতুন এনজিও  পুনর্নবীকরণ তালিকা
               </div>
                 <div class="card-body">
                    <div class="table-responsive product-table">
                         <table class="display" id="basic-3">
                             <thead>
                             <tr>
-                                <th>Tracking Number</th>
-                                <th>NGO Name & Address</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>এনজিওর নাম ও ঠিকানা</th>
+                                <th>পেমেন্ট</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -408,7 +363,7 @@ $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('emai
 
                                 <?php
  $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id', $fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
@@ -422,59 +377,41 @@ $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('emai
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number }}</td>
-                                <td><h6> NGO Name: {{ $reg_name  }}</h6><span>Address: {{ $reg_address }}</td>
-                                <td>Yes</td>
-                                <td class="font-success">{{ $all_data_for_new_list_all->status }}</td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
+                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                <td>হ্যাঁ</td>
+                                <td class="font-success">
+
+                                    @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
+                                    @endif
+                                </td>
                                 <td>
 
-                                    {{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
 
                                 </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
-@if (Auth::guard('admin')->user()->can('register_list_update'))
 
-                                    <button class="btn btn-secondary btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $all_data_for_new_list_all->id }}" data-original-title="btn btn-danger btn-xs" title="">{{ $all_data_for_new_list_all->status }}</button>
-
-                                    <?php
-
-                                    $get_email_from_user = DB::table('users')->where('id', $fdOneFormId)->value('email');
-
-                                            ?>
-                                    <!-- Modal -->
-<div class="modal fade" id="exampleModal{{ $all_data_for_new_list_all->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{{ route('updateStatusRenewForm') }}" method="post">
-            @csrf
-            <input type="hidden" value="{{ $all_data_for_new_list_all->id }}" name="id" />
-            <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
-            <select class="form-control form-control-sm" name="status" >
-
-                <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
-                <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
-                <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
-
-            </select>
-
-            <button type="submit" class="btn btn-primary mt-5">Update</button>
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  @endif
 
                                 </td>
                             </tr>

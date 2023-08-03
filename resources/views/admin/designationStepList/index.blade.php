@@ -16,7 +16,7 @@ Assigned User List | {{ $ins_name }}
             <div class="col-sm-6">
                 <h3>Assigned User</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">Assigned User List</li>
                 </ol>
             </div>

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-Ngo Registration List | {{ $ins_name }}
+ইতিমধ্যে নিবন্ধিত তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@ Ngo Registration List | {{ $ins_name }}
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Rejected NGO Registration List</h3>
+                <h3>ইতিমধ্যে নিবন্ধিত</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">NGO Registration</li>
-                    <li class="breadcrumb-item">New NGO Registration List</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
+                    <li class="breadcrumb-item">এনজিও নিবন্ধন</li>
+                    <li class="breadcrumb-item">ইতিমধ্যে নিবন্ধিত তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -38,12 +38,12 @@ Ngo Registration List | {{ $ins_name }}
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>UserID</th>
-                                <th>NGO Name & Address</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th>Submit date</th>
-                                <th>Action</th>
+                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>এনজিওর নাম ও ঠিকানা</th>
+                                <th>পেমেন্ট</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>জমাদানের তারিখ</th>
+                                <th>কার্যকলাপ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -72,20 +72,40 @@ Ngo Registration List | {{ $ins_name }}
 
                                 ?>
                             <tr>
-                                <td>#{{ $reg_number }}</td>
-                                <td><h6> NGO Name: {{ $reg_name  }}</h6><span>Address: {{ $reg_address }}</td>
-                                <td>Yes</td>
-                                <td class="font-success"><button class="btn btn-secondary btn-xs" type="button">{{ $all_data_for_new_list_all->status }}</button></td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
+                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                <td>হ্যাঁ</td>
+                                <td class="font-success">
+
+                                    @if($all_data_for_new_list_all->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
+                                    @endif
+                                </td>
                                 <td>
 
 
-                                    {{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
 
                                 </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 

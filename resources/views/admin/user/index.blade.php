@@ -16,7 +16,7 @@ User List
         <div class="col-sm-6">
           <h3>Staff List</h3>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
             <li class="breadcrumb-item">Staff List</li>
 
           </ol>

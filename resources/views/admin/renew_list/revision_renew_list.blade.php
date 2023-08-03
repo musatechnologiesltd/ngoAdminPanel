@@ -16,7 +16,7 @@ Ngo Renew List | {{ $ins_name }}
             <div class="col-sm-6">
                 <h3>New NGO Renew List</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">NGO Renew</li>
                     <li class="breadcrumb-item">New NGO Renew List</li>
                 </ol>
@@ -68,52 +68,14 @@ Ngo Renew List | {{ $ins_name }}
                                 <td>#{{ $reg_number->registration_number_given_by_admin }}</td>
                                 <td><h6> NGO Name: {{ $reg_name  }}</h6><span>Address: {{ $reg_address }}</td>
                                 <td>Yes</td>
-                                <td class="font-success">{{ $all_data_for_new_list_all->status }}</td>
+                                <td class="font-success"><button class="btn btn-secondary btn-xs" type="button">{{ $all_data_for_new_list_all->status }}</button></td>
                                 <td>{{ date('d-M-y', strtotime($all_data_for_new_list_all->created_at)) }}</td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$all_data_for_new_list_all->id) }}';">View</button>
 @endif
-@if (Auth::guard('admin')->user()->can('register_list_update'))
 
-                                    <button class="btn btn-secondary btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $all_data_for_new_list_all->id }}" data-original-title="btn btn-danger btn-xs" title="">{{ $all_data_for_new_list_all->status }}</button>
-
-                                    <?php
-
-                                    $get_email_from_user = DB::table('users')->where('id',$reg_number->user_id)->value('email');
-
-                                            ?>
-                                    <!-- Modal -->
-<div class="modal fade" id="exampleModal{{ $all_data_for_new_list_all->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{{ route('updateStatusRenewForm') }}" method="post">
-            @csrf
-            <input type="hidden" value="{{ $all_data_for_new_list_all->id }}" name="id" />
-            <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
-            <select class="form-control form-control-sm" name="status" >
-
-                <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>Ongoing</option>
-                <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>Accepted</option>
-                <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>Rejected</option>
-
-            </select>
-
-            <button type="submit" class="btn btn-primary mt-5">Update</button>
-
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  @endif
 
                                 </td>
                             </tr>

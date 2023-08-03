@@ -16,7 +16,7 @@ FD-9 (N-Visa) | {{ $ins_name }}
             <div class="col-sm-6">
                 <h3>Working Permit List</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">FD-09(01)</li>
                     <li class="breadcrumb-item">FD-09(01) List</li>
                 </ol>
