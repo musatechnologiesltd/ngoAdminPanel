@@ -84,7 +84,7 @@ class NameCangeController extends Controller
 
 
                 $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
-                $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
+                $name_change_status = DB::table('ngo_name_changes')->where('id',$id)->value('status');
                 $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
 
 
