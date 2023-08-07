@@ -125,6 +125,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
+    Route::get('/nameChangeDoc/{id}', [NameCangeController::class, 'nameChangeDoc'])->name('nameChangeDoc');
     Route::get('/newNameChangeList', [NameCangeController::class, 'newNameChangeList'])->name('newNameChangeList');
     Route::get('/revisionNameChangeList', [NameCangeController::class, 'revisionNameChangeList'])->name('revisionNameChangeList');
     Route::get('/alreadNameChangeList', [NameCangeController::class, 'alreadNameChangeList'])->name('alreadNameChangeList');

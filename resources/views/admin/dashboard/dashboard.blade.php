@@ -320,7 +320,7 @@
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 
@@ -409,7 +409,7 @@
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 

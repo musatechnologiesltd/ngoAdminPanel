@@ -77,6 +77,8 @@ class NameCangeController extends Controller
 
              try {
 
+                $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$id)->get();
+
                 $getformOneId = DB::table('ngo_name_changes')->where('id',$id)->first();
 
                 $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
@@ -132,7 +134,7 @@ class NameCangeController extends Controller
 
 
 
-        return view('admin.name_change_list.name_change_view',compact('getformOneId','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+        return view('admin.name_change_list.name_change_view',compact('allNameChangeDoc','getformOneId','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
     }
 
 
@@ -167,5 +169,18 @@ class NameCangeController extends Controller
         });
 
         return redirect()->back()->with('success','Updated Successfully');
+    }
+
+
+    public function nameChangeDoc($id){
+
+
+
+            $form_one_data = DB::table('name_change_docs')->where('id',$id)->value('pdf_file_list');
+
+
+
+        return view('admin.name_change_list.nameChangeDoc',compact('form_one_data'));
+
     }
 }
