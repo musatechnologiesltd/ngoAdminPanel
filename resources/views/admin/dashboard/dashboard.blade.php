@@ -154,7 +154,7 @@
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-    নতুন এনজিও  নিবন্ধন তালিকা
+    এনজিও নিবন্ধন আবেদনের তালিকা
               </div>
                 <div class="card-body">
                   <div class="table-responsive product-table">
@@ -250,7 +250,7 @@
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-    নতুন এনজিও  নাম পরিবর্তনের তালিকা
+    এনজিও নাম পরিবর্তনের তালিকা
               </div>
                 <div class="card-body">
                     <div class="table-responsive product-table">
@@ -343,7 +343,7 @@
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-    নতুন এনজিও  পুনর্নবীকরণ তালিকা
+    এনজিও নিবন্ধন নবায়ন তালিকা
               </div>
                 <div class="card-body">
                    <div class="table-responsive product-table">

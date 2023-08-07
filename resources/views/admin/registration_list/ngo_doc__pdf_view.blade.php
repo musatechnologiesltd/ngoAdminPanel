@@ -30,7 +30,7 @@
 <div class="container-fluid">
     <div class="user-profile">
         <div class="row">
-
+         
             <object
             data='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
             type="application/pdf"

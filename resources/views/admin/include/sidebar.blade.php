@@ -57,17 +57,17 @@
 
                     <li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন </span></a>
                         <ul class="nav-submenu menu-content" style="display: block;">
-                            <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">নতুন নিবন্ধন </a></li>
-                            <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">পুনর্বিবেচনা নিবন্ধন </a></li>
-                            <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">ইতিমধ্যে নিবন্ধিত </a></li>
+                            <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">নিবন্ধন আবেদন </a></li>
+                            <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">নিবন্ধন পুনর্বিবেচনা </a></li>
+                            <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">নিবন্ধন </a></li>
                         </ul>
                     </li>
 @else
 <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন </span></a>
     <ul class="nav-submenu menu-content">
-        <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">নতুন নিবন্ধন </a></li>
-        <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">পুনর্বিবেচনা নিবন্ধন </a></li>
-        <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">ইতিমধ্যে নিবন্ধিত </a></li>
+        <li><a href="{{ route('newRegistrationList') }}"  class="{{ Route::is('newRegistrationList')  ? 'active' : '' }}">নিবন্ধন আবেদন  </a></li>
+        <li><a href="{{ route('revisionRegistrationList') }}" class="{{ Route::is('revisionRegistrationList')  ? 'active' : '' }}">নিবন্ধন পুনর্বিবেচনা </a></li>
+        <li><a href="{{ route('alreadyRegistrationList') }}" class="{{ Route::is('alreadyRegistrationList')  ? 'active' : '' }}">নিবন্ধন </a></li>
     </ul>
 </li>
 
@@ -78,19 +78,19 @@
 
 @if (Route::is('newNameChangeList') ||  Route::is('revisionNameChangeList') || Route::is('alreadNameChangeList') || Route::is('nameChangeView'))
 
-<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নাম পরিবর্তন </span></a>
+<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও'র নাম পরিবর্তন </span></a>
     <ul class="nav-submenu menu-content" style="display: block;">
-        <li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}">নতুন নাম পরিবর্তনের </a></li>
-        <li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}">পুনর্বিবেচনা নাম পরিবর্তনের </a></li>
-        <li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">ইতিমধ্যে পরিবর্তিত নাম </a></li>
+        <li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}"> নাম পরিবর্তনের আবেদন</a></li>
+        <li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}"> নাম পরিবর্তন পুনর্বিবেচনা </a></li>
+        <li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">নাম পরিবর্তন  </a></li>
     </ul>
 </li>
 @else
-<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নাম পরিবর্তন </span></a>
+<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও'র নাম পরিবর্তন </span></a>
 <ul class="nav-submenu menu-content">
-<li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}">নতুন নাম পরিবর্তনের </a></li>
-<li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}"> পুনর্বিবেচনা নাম পরিবর্তনের </a></li>
-<li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">ইতিমধ্যে পরিবর্তিত নাম </a></li>
+<li><a href="{{ route('newNameChangeList') }}"  class="{{ Route::is('newNameChangeList')  ? 'active' : '' }}"> নাম পরিবর্তনের আবেদন</a></li>
+<li><a href="{{ route('revisionNameChangeList') }}" class="{{ Route::is('revisionNameChangeList')  ? 'active' : '' }}">  নাম পরিবর্তন পুনর্বিবেচনা  </a></li>
+<li><a href="{{ route('alreadNameChangeList') }}" class="{{ Route::is('alreadNameChangeList')  ? 'active' : '' }}">নাম পরিবর্তন </a></li>
 </ul>
 </li>
 
@@ -98,19 +98,19 @@
 
 @if (Route::is('newRenewList') ||  Route::is('revisionRenewList') || Route::is('alreadyRenewList') || Route::is('renewView'))
 
-<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও পুনর্নবীকরণ</span></a>
+<li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন নবায়ন</span></a>
     <ul class="nav-submenu menu-content" style="display: block;">
-        <li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">নতুন এনজিও পুনর্নবীকরণ</a></li>
-        <li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">এনজিও পুনর্নবীকরণ এর পুনর্বিবেচনা</a></li>
-        <li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">ইতিমধ্যে পুনর্নবীকরণ করা হয়েছে</a></li>
+        <li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">নিবন্ধন নবায়ন আবেদন </a></li>
+        <li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">নিবন্ধন নবায়ন পুনর্বিবেচনা</a></li>
+        <li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">নিবন্ধন নবায়ন</a></li>
     </ul>
 </li>
 @else
-<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও পুনর্নবীকরণ</span></a>
+<li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন নবায়ন</span></a>
 <ul class="nav-submenu menu-content">
-<li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">নতুন এনজিও পুনর্নবীকরণ</a></li>
-<li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">এনজিও পুনর্নবীকরণ এর পুনর্বিবেচনা</a></li>
-<li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">ইতিমধ্যে পুনর্নবীকরণ করা হয়েছে</a></li>
+<li><a href="{{ route('newRenewList') }}"  class="{{ Route::is('newRenewList')  ? 'active' : '' }}">নিবন্ধন নবায়ন আবেদন </a></li>
+<li><a href="{{ route('revisionRenewList') }}" class="{{ Route::is('revisionRenewList')  ? 'active' : '' }}">নিবন্ধন নবায়ন পুনর্বিবেচনা</a></li>
+<li><a href="{{ route('alreadyRenewList') }}" class="{{ Route::is('alreadyRenewList')  ? 'active' : '' }}">নিবন্ধন নবায়ন</a></li>
 </ul>
 </li>
 

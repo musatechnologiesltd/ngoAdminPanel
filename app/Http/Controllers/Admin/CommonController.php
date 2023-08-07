@@ -128,12 +128,51 @@ class CommonController extends Controller
 
    $nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+      
+      //dd($nVisaCompensationAndBenifits);
 
    $nVisaEmploye = DB::table('n_visa_employment_information')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
 
    $nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+
+      if(!$nVisaManPower){
+
+        $com1 = [
+           "local_manpower" => [
+                                                   "executive" => '',
+                                                   "supporting_staff" =>'',
+                                                   "total" =>''
+                                                ],
+                                                "foreign_manpower" => [
+                                                      "executive" =>'',
+                                                      "supporting_staff" =>'',
+                                                      "total" =>''
+                                                   ],
+                                                "grand_total" =>'',
+                                                "locRatio" =>'',
+                                                "forRatio" =>''
+                                             ];
+
+      }else{
+
+         $com1 =  [
+           "local_manpower" => [
+                                                   "executive" => $nVisaManPower->local_executive,
+                                                   "supporting_staff" => $nVisaManPower->local_supporting_staff,
+                                                   "total" => $nVisaManPower->local_total
+                                                ],
+                                                "foreign_manpower" => [
+                                                      "executive" => $nVisaManPower->foreign_executive,
+                                                      "supporting_staff" => $nVisaManPower->foreign_supporting_staff,
+                                                      "total" => $nVisaManPower->foreign_total
+                                                   ],
+                                                "grand_total" => $nVisaManPower->gand_total,
+                                                "locRatio" =>$nVisaManPower->local_ratio,
+                                                "forRatio" => $nVisaManPower->foreign_ratio
+                                             ];
+      }
 
    $nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
@@ -335,7 +374,46 @@ $dataNew = DB::table('n_visa_necessary_document_for_work_permits')
 
        if(!$nVisaCompensationAndBenifits){
 
-        $com = [];
+        $com = [ "basic_salary" => [
+           "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+        ],
+        "overseas_allowance" => [
+           "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+           ],
+        "house_rent" => [
+       "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+              ],
+        "conveyance_allowance" => [
+         "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+                 ],
+        "medical_allowance" => [
+          "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+                    ],
+        "entertainment_allowance" => [
+             "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+                       ],
+        "annual_bonus" => [
+          "amount" =>'',
+           "payment_type" =>'',
+           "currency" =>''
+                          ],
+        "other_benefit" =>$dataFromNVisaFd9Fd1->other_benefit,
+        "salary_remarks" =>$dataFromNVisaFd9Fd1->salary_remarks
+                        ];
+         
+         //dd($com);
 
        }else{
 
@@ -454,21 +532,7 @@ $dataNew = DB::table('n_visa_necessary_document_for_work_permits')
                   "compensation_and_benefits" =>  $com,
 
 
-      "manpower_of_the_office" => [
-                                                "local_manpower" => [
-                                                   "executive" => $nVisaManPower->local_executive,
-                                                   "supporting_staff" => $nVisaManPower->local_supporting_staff,
-                                                   "total" => $nVisaManPower->local_total
-                                                ],
-                                                "foreign_manpower" => [
-                                                      "executive" => $nVisaManPower->foreign_executive,
-                                                      "supporting_staff" => $nVisaManPower->foreign_supporting_staff,
-                                                      "total" => $nVisaManPower->foreign_total
-                                                   ],
-                                                "grand_total" => $nVisaManPower->gand_total,
-                                                "locRatio" =>$nVisaManPower->local_ratio,
-                                                "forRatio" => $nVisaManPower->foreign_ratio
-                                             ],
+      "manpower_of_the_office" =>$com1,
       "d_workplace_address" => [
                                                          "wp_org_house_no" =>$nVisaWorkPlace->work_house_no,
                                                          "wp_org_flat_no" => $nVisaWorkPlace->work_flat_no,

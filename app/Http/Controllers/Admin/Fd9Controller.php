@@ -236,71 +236,130 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         if($cat == 'nomination'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('nomination_letter_of_buyer');
+          
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+          
         }elseif($cat == 'investment'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('registration_letter_of_board_of_investment');
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'contract'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('employee_contract_copy');
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'directors'){
 
             $get_file_data =DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('board_of_the_directors_sign_letter');
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'shareHolder'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('share_holder_copy');
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'passportCopy'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('passport_photocopy');
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'academicQualification'){
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_academic_qualification');
+          
+           $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'techQualification'){
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_technical_and_other_qualifications_if_any');
+          
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'pastExperience'){
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_past_experience');
+          
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'offeredPost'){
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_offered_post');
+          
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'proposedProject'){
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_name_of_proposed_project');
+          
+          
+       $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }elseif($cat == 'copyOfPassport'){
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_copy_of_passport');
+          
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
 
         }
         elseif($cat == 'forwarding_letter'){
 
             $get_file_data = DB::table('n_visas')->where('id', $id)
             ->value('forwarding_letter');
+          
+          
+       $file_path =url('public/'.$get_file_data);
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=url('public/'.$get_file_data);
 
         }
 
 
 
 
-        $file_path =url('public/'.$get_file_data);
-        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-
-$file=url('public/'.$get_file_data);
 
         $headers = array(
                   'Content-Type: application/pdf',

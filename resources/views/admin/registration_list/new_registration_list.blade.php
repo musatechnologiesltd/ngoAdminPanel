@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-নতুন নিবন্ধন তালিকা | {{ $ins_name }}
+নিবন্ধন আবেদন তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>নতুন নিবন্ধন </h3>
+                <h3>নিবন্ধন আবেদন তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">এনজিও নিবন্ধন</li>
-                    <li class="breadcrumb-item">নতুন নিবন্ধন তালিকা</li>
+                    <li class="breadcrumb-item">নিবন্ধন আবেদন তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
