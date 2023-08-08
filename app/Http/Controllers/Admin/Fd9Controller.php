@@ -133,7 +133,7 @@ class Fd9Controller extends Controller
 
     public function show($id){
 
-        $uploadForwardingLetter = $this->downloadForwardingLetter($id);
+
 
 
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
@@ -236,12 +236,12 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         if($cat == 'nomination'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('nomination_letter_of_buyer');
-          
+
              $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
 $file=$data->system_url.'public/'.$get_file_data;
-          
+
         }elseif($cat == 'investment'){
 
             $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('registration_letter_of_board_of_investment');
@@ -286,7 +286,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_academic_qualification');
-          
+
            $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -296,7 +296,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_technical_and_other_qualifications_if_any');
-          
+
              $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -306,7 +306,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_past_experience');
-          
+
              $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -316,7 +316,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_offered_post');
-          
+
              $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -326,8 +326,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_name_of_proposed_project');
-          
-          
+
+
        $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -337,7 +337,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_copy_of_passport');
-          
+
              $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -348,8 +348,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('n_visas')->where('id', $id)
             ->value('forwarding_letter');
-          
-          
+
+
        $file_path =url('public/'.$get_file_data);
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
@@ -411,7 +411,7 @@ public function forwardingLetterPost(Request $request){
 
 
     }
-
+    $uploadForwardingLetter = $this->downloadForwardingLetter($request->fd9_id);
     return redirect()->back()->with('success','Created successfully!');
 
 }
