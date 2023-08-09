@@ -149,6 +149,8 @@ class Fd9Controller extends Controller
 
      //dd($dataFromNVisaFd9Fd1->nVisaId);
 
+     $statusData = SecruityCheck::where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('created_at');
+
 $nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
                    ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
 
@@ -176,7 +178,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-         return view('admin.fd9form.show',compact('ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show',compact('statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 

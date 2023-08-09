@@ -12,6 +12,120 @@
             font-size: 14px;
 
         }
+
+        .forwarding_letter p
+{
+    text-align: center;
+    font-size: 16px;
+    line-height: .8;
+}
+
+.forwarding_number
+{
+    width: 100%;
+    font-size: 14px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.forwarding_number .first_number
+{
+    width: 70%;
+}
+
+.forwarding_number .second_number
+{
+    text-align: right;
+}
+
+.forwarding_subject
+{
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.forwarding_subject tr td
+{
+    padding-bottom: 20px;
+}
+
+.forwarding_subject .first_subject
+{
+    width: 8%;
+}
+
+.forwarding_mainBody
+{
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.forwarding_mainBody tr td
+{
+    text-indent: 40px;
+}
+
+.forwarding_table
+{
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.forwarding_table td, th {
+    border: 1px solid;
+    text-align: center;
+    padding: 10px;
+}
+
+.forwarding_sincere
+{
+    width: 100%;
+    font-size: 14px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.forwarding_sincere tr td
+{
+    text-align: center;
+}
+
+.forwarding_sincere .first_sincere
+{
+    width: 60%;
+}
+
+.forwarding_secretary
+{
+    width: 100%;
+    font-size: 14px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.forwarding_secretary tr td
+{
+    text-align: left;
+}
+
+.forwarding_copy
+{
+    width: 100%;
+    font-size: 14px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.first_copy
+{
+    width: 6%;
+}
     </style>
 </head>
 <body>
@@ -36,166 +150,137 @@
 
 
  ?>
-    <table class="table table-borderless">
-        <tbody>
-        <tr>
-            <td>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</td>
-        </tr>
-        <tr>
-            <td>এনজিও বিষয়ক ব্যুরো</td>
-        </tr>
-        <tr>
-            <td>প্রধানমন্ত্রীর কার্যালয়</td>
-        </tr>
-        <tr>
-            <td>প্লট-ই, ১৩/বি, আগারগাঁও</td>
-        </tr>
-        <tr>
-            <td>শেরেবাংলা নগর, ঢাকা-১২০৭</td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="pt-4">
-        <table class="table table-borderless pt-4">
-            <tbody>
-            <tr>
-                <td>স্মারক নং- {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->sarok_number) }}</td>
-            </tr>
-            <tr>
-                <td>বিষয় : {{ $dataFromNVisaFd9Fd1->organization_name_ban }} নামীয় সংস্থার বিদেশী নাগরিক নিয়োগে
-                    ছাড়পত্র প্রধানে
-                    মতামত।
-                </td>
-            </tr>
-            <tr>
-                <td class="pt-5">সূত্র: সংস্থার {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_date) }} {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_month_name ) }} {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_year_name) }}
-                    তারিখের আবেদন।
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="pt-4">
-        <table class="table table-borderless">
-            <tbody>
-            <tr>
-                <td>উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে
-                    বর্ণিত সংস্থায়
-                    নিয়োগের নিমিত্ত নিম্নবর্ণিত বিদেশী নাগরিকের
-                    নিয়োগ/নিরাপত্তা
-                    ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর কার্যালয়ের ২৫
-                    নভেম্বর, ২০২১
-                    তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
-                    বিভাগের মতামত
-                    এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে
-                    অনুরোধ করা
-                    হলো।
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <div class="row pt-4">
-        <div class="col-lg-6">
-            <table class="table table-borderless">
-                <tbody>
-                <tr>
-                    <td>বিদেশী নাম ও পদবী</td>
-                    <td>: {{ $nVisaForeignerInfo->name_of_the_foreign_national }} , {{ $nVisaEmploye->employed_designation }}</td>
-                </tr>
-                <tr>
-                    <td>জাতীয়তা</td>
-                    <td>: {{ $nVisaForeignerInfo->nationality }}</td>
-                </tr>
-                <tr>
-                    <td>পাসপোর্ট নম্বর</td>
-                    <td>: {{ $nVisaForeignerInfo->passport_no }}</td>
-                </tr>
-                <tr>
-                    <td>সংযুক্ত</td>
-                    <td>:
-                        <a target="_blnak" href="{{ route('fdNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-outline-success"><i
-                                    class="fa fa-file-pdf-o"></i>
-                            দেখুন
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+<!-- new -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="forwarding_letter">
+                        <p>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+                        <p>এনজিও বিষয়ক ব্যুরো </p>
+                        <p>প্রধানমন্ত্রী কার্যালয় </p>
+                        <p>প্লট-ই, ১৩/বি, আগারগাঁও </p>
+                        <p>শেরেবাংলা নগর, ঢাকা-১২০৭</p>
+                    </div>
+
+                    <table class="forwarding_number">
+                        <tr>
+                            <td class="first_number">স্মারক নং: {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->sarok_number) }}</td>
+
+                            @if(empty($statusData))
+
+                            @else
+                             <td class="second_number">তারিখ: {{ str_replace($engDATE,$bangDATE,$statusData->format('d/m/Y')) }}</td>
+                             @endif
+                        </tr>
+                    </table>
+
+                    <table class="forwarding_subject">
+                        <tr>
+                            <td class="first_subject">বিষয়:</td>
+                            <td>"{{ $dataFromNVisaFd9Fd1->organization_name_ban }}" নামীয় সংস্থার বিদেশী নাগরিক নিয়োগে
+                                ছাড়পত্র প্রদানে মতামত।
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>সূত্র:</td>
+                            <td>সংস্থার {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_date) }} {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_month_name ) }} {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->apply_year_name) }} তারিখের আবেদন।</td>
+                        </tr>
+                    </table>
+
+                    <table class="forwarding_mainBody">
+                        <tr>
+                            <td>
+                                উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে বর্ণিত সংস্থার নিয়োগের নিমিত্তে
+                                নিম্নবর্ণিত বিদেশী নাগরিকের নিয়োগ/নিরাপত্তা ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর
+                                কার্যালয়ের ২৫ নভেম্বর, ২০২১ তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
+                                বিভাগের মতামত এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে অনুরোধ করা
+                                হলো।
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="forwarding_table">
+                        <tr>
+                            <th>বিদেশী নাম ও পদবি</th>
+                            <th>জাতীয়তা </th>
+                            <th>পাসপোর্ট নম্বর</th>
+                        </tr>
+                        <tr>
+                            <td>{{ $nVisaForeignerInfo->name_of_the_foreign_national }} , <br>{{ $nVisaEmploye->employed_designation }}</td>
+                            <td>{{ $nVisaForeignerInfo->nationality }}</td>
+                            <td>{{ $nVisaForeignerInfo->passport_no }}</td>
+                        </tr>
+                    </table>
+                    <?php
+                    $designationName = DB::table('designation_lists')
+                    ->where('id',Auth::guard('admin')->user()->designation_list_id)
+                    ->value('designation_name');
+
+                    $branchName = DB::table('branches')
+                    ->where('id',Auth::guard('admin')->user()->branch_id)
+                    ->value('branch_name');
+
+                    $onuLipiList = DB::table('forwarding_letter_onulipis')
+                    ->where('forwarding_letter_id',$forwardingLetterData->id)->get();
+
+
+
+                    ?>
+                    <table class="forwarding_sincere">
+                        <tr>
+                            <td class="first_sincere"></td>
+                            <td>
+                                {{ Auth::guard('admin')->user()->admin_name_ban }}<br>
+                                {{ $designationName }}<br>
+                                {{ $branchName }}<br>
+                                ফোন: ৫৫০০৭৩৯৪ <br>
+                                Email: {{ Auth::guard('admin')->user()->email }}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="forwarding_secretary">
+                        <tr>
+                            <td>
+                                সচিব <br>
+                                সুরক্ষা সেবা বিভাগ <br>
+                                স্বরাষ্ট্র মন্ত্রণালয় <br>
+                                বাংলাদেশ সচিবালয়, ঢাকা
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="forwarding_copy">
+                        <tr>
+                            <td colspan="2">অনুলিপি</td>
+                        </tr>
+                        @foreach($onuLipiList as  $key=>$allOnuLipiList)
+                        <tr>
+                            <td class="first_copy">{{ str_replace($engDATE,$bangDATE,$key+1)}})</td>
+                            <td>{{$allOnuLipiList->onulipi_name}}</td>
+                        </tr>
+                        @endforeach
+
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6"></div>
     </div>
-
-    <div class="pt-4">
-
-        <?php
-$designationName = DB::table('designation_lists')
-->where('id',Auth::guard('admin')->user()->designation_list_id)
-->value('designation_name');
-
-$branchName = DB::table('branches')
-->where('id',Auth::guard('admin')->user()->branch_id)
-->value('branch_name');
-
-$onuLipiList = DB::table('forwarding_letter_onulipis')
-->where('forwarding_letter_id',$forwardingLetterData->id)->get();
+</div>
+<!-- end new code -->
 
 
 
-?>
-
-        <table class="table table-borderless">
-            <tbody>
-            <tr>
-                <td>{{ Auth::guard('admin')->user()->admin_name_ban }}</td>
-            </tr>
-            <tr>
-                <td>{{ $designationName }}</td>
-            </tr>
-            <tr>
-                <td>{{ $branchName }}</td>
-            </tr>
-            <tr>
-                <td>ফোন: ৫৫০০৭৩৯৪</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="pt-4">
-        <table class="table table-borderless"
-               style="text-align:right">
-            <tbody>
-            <tr>
-                <td>সচিব</td>
-            </tr>
-            <tr>
-                <td>সুরক্ষা সেবা বিভাগ</td>
-            </tr>
-            <tr>
-                <td> স্বরাষ্ট্র মন্ত্রণালয়</td>
-            </tr>
-            <tr>
-                <td>বাংলাদেশ সচিবালয় , ঢাকা।</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <table class="table table-borderless">
-        <tbody>
-        <tr>
-            <td>অনুলিপি:</td>
-        </tr>
-        @foreach($onuLipiList as  $key=>$allOnuLipiList)
-        <tr>
-            <td>{{ str_replace($engDATE,$bangDATE,$key+1) }}। {{$allOnuLipiList->onulipi_name}}।
-            </td>
-        </tr>
-        @endforeach
 
 
-        </tbody>
-    </table>
+
+
+
+
 </div>
 </body>
 </html>

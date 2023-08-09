@@ -3,11 +3,20 @@
  @endphp
 
  <header class="main-nav">
-    <div class="sidebar-user text-center"><a class="setting-primary" href="{{ route('setting.index') }}"><i data-feather="settings"></i></a>
+    <div class="sidebar-user text-center">
+        @if ($usr->can('profile.edit'))
+        <a class="setting-primary" href="{{ route('setting.index') }}"><i data-feather="settings"></i>
+        </a>
+        @else
+        <a class="setting-primary" href="#"><i data-feather="settings"></i>
+        </a>
+        @endif
 
         @if(empty(Auth::guard('admin')->user()->admin_image))
+
         <img class="img-90 rounded-circle" src="{{asset('/')}}public/admin/user.png" alt="">
         @else
+
         <img class="img-90 rounded-circle" src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="">
 
         @endif
@@ -16,8 +25,17 @@
 
 
 
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div><a href="{{ route('setting.index') }}">
-            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6></a>
+        <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
+        @if ($usr->can('profile.view'))
+        <a href="{{ route('profile.index') }}">
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
+        </a>
+        @else
+        <a href="#">
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
+        </a>
+        @endif
+
 
             <?php
                  $designationName = DB::table('designation_lists')
@@ -52,7 +70,7 @@
                         </a>
                     </li>
 
-
+                    @if ($usr->can('register_list_add') || $usr->can('register_list_view') || $usr->can('register_list_delete') || $usr->can('register_list_update'))
                     @if (Route::is('newRegistrationList') ||  Route::is('revisionRegistrationList') || Route::is('alreadyRegistrationList') || Route::is('registrationView'))
 
                     <li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন </span></a>
@@ -72,10 +90,11 @@
 </li>
 
 @endif
+@endif
 
 
 
-
+@if ($usr->can('name_change_add') || $usr->can('name_change_view') || $usr->can('name_change_delete') || $usr->can('name_change_update'))
 @if (Route::is('newNameChangeList') ||  Route::is('revisionNameChangeList') || Route::is('alreadNameChangeList') || Route::is('nameChangeView'))
 
 <li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও'র নাম পরিবর্তন </span></a>
@@ -95,7 +114,8 @@
 </li>
 
 @endif
-
+@endif
+@if ($usr->can('renew_add') || $usr->can('renew_view') || $usr->can('renew_delete') || $usr->can('renew_update'))
 @if (Route::is('newRenewList') ||  Route::is('revisionRenewList') || Route::is('alreadyRenewList') || Route::is('renewView'))
 
 <li class="dropdown"><a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="airplay"></i><span>এনজিও নিবন্ধন নবায়ন</span></a>
@@ -115,6 +135,7 @@
 </li>
 
 @endif
+@endif
 
 @if ($usr->can('fd9FormAdd') || $usr->can('fd9FormView') || $usr->can('fd9FormDelete') || $usr->can('fd9FormUpdate'))
 <li class="dropdown">
@@ -132,6 +153,7 @@
     </a>
 </li>
 @endif
+@if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit') || $usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit') || $usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate')|| $usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate') || $usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
 <li class="sidebar-main-title">
     <div>
       <h6>কর্মকর্তারদের তথ্য</h6>
@@ -231,7 +253,10 @@
 </li>
 
 @endif
+@endif
 <!-- employee info --->
+
+@if ($usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate') || $usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate') || $usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate') || $usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
 
                     <li class="sidebar-main-title">
                         <div>
@@ -310,6 +335,7 @@
     </ul>
 </li>
 
+@endif
 @endif
 
                 </ul>

@@ -21,7 +21,9 @@
                 </ol>
             </div>
             <div class="col-sm-6">
+                <div class="text-end">
                 <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">শাখা যোগ করুন</button>
+                </div>
             </div>
         </div>
     </div>

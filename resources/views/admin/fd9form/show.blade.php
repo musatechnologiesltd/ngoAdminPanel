@@ -1075,7 +1075,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                         <div class="card-body">
                                             <iframe src=
                                             "{{ url('public/'.$dataFromNVisaFd9Fd1->forwarding_letter) }}"
-                                                            width="1000"
+                                                            width="100%"
                                                             height="800">
                                                     </iframe>
                                         </div>

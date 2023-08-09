@@ -24,11 +24,16 @@
         <div class="col-sm-6">
 
         </div>
+        <div class="col-sm-6">
+
+        </div>
         <div class="col-sm-6 mt-3">
             @if (Auth::guard('admin')->user()->can('userAdd'))
+            <div class="text-end">
             <a  href="{{ route('user.create') }}" class="btn btn-primary add-btn" type="button">
                 <i class="ri-add-line align-bottom me-1"></i> কর্মকর্তার তথ্য যোগ করুন
             </a>
+            </div>
                                                 @endif
         </div>
       </div>
