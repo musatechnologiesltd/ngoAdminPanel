@@ -176,7 +176,7 @@ class AdminController extends Controller
 
         Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
             $message->to($request->email);
-            $message->subject('Change Account Password');
+            $message->subject('NGOAB Password Set');
         });
 
 
