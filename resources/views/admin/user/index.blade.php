@@ -21,13 +21,8 @@
 
           </ol>
         </div>
-        <div class="col-sm-6">
 
-        </div>
-        <div class="col-sm-6">
-
-        </div>
-        <div class="col-sm-6 mt-3">
+        <div class="col-sm-6 ">
             @if (Auth::guard('admin')->user()->can('userAdd'))
             <div class="text-end">
             <a  href="{{ route('user.create') }}" class="btn btn-primary add-btn" type="button">

@@ -165,7 +165,7 @@ class NameCangeController extends Controller
         }
         Mail::send('emails.passwordResetEmail', ['id' => $request->status], function($message) use($request){
             $message->to($request->email);
-            $message->subject('NGO AB');
+            $message->subject('NGOAB Registration Service || Ngo Name Chnage Status');
         });
 
         return redirect()->back()->with('success','Updated Successfully');

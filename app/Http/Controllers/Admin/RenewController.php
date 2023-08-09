@@ -186,7 +186,7 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
 
         Mail::send('emails.passwordResetEmail', ['id' => $request->status], function($message) use($request){
             $message->to($request->email);
-            $message->subject('NGO AB');
+            $message->subject('NGOAB Registration Service || Ngo Renew Status');
         });
 
         return redirect()->back()->with('success','Updated Successfully');
