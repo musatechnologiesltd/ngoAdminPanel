@@ -352,45 +352,45 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                     <div class="row">
                                         <div class="col-lg-6 col-sm-12">
                                             <div class="others_inner_section">
-                                                <h5>নিরাপত্তা ছাড়পত্রের জন্য আবেদন</h5>
+                                                <h5>Application for Security Clearance</h5>
                                                 <div class="notice_underline"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            সাধারণ তথ্য
+                                            Basic Information
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-9 col-sm-12">
                                                     <table class="table table-bordered">
                                                         <tr>
-                                                            <td>প্রস্তাবিত অনুমোদনের সময়কাল</td>
-                                                            <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromNVisaFd9Fd1->period_validity) }}</td>
+                                                            <td>Approved permission period</td>
+                                                            <td>:{{ $dataFromNVisaFd9Fd1->period_validity }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>কার্যকর এর তারিখ</td>
-                                                            <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->permit_efct_date))) }}</td>
+                                                            <td>Effective Date</td>
+                                                            <td>:{{ date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->permit_efct_date)) }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>জারি করা ওয়ার্ক পারমিট এর রেফারেন্স নং</td>
-                                                            <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromNVisaFd9Fd1->visa_ref_no) }}</td>
+                                                            <td>Ref no. of issued work permit</td>
+                                                            <td>:{{ $dataFromNVisaFd9Fd1->visa_ref_no }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>ভিসার সুপারিশ পত্র</td>
+                                                            <td>Received Visa Recommendation Lette</td>
                                                             <td>:{{ $dataFromNVisaFd9Fd1->visa_recomendation_letter_received_way	 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>ভিসার সুপারিশ পত্রের রেফারেন্স নং</td>
-                                                            <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromNVisaFd9Fd1->visa_recomendation_letter_ref_no)	 }}</td>
+                                                            <td>Ref no. of Visa Recommendation Letter</td>
+                                                            <td>:{{ $dataFromNVisaFd9Fd1->visa_recomendation_letter_ref_no	 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>ডিপার্টমেন্ট</td>
+                                                            <td>Department in</td>
                                                             <td>:{{ $dataFromNVisaFd9Fd1->department_in	 }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>ওয়ার্ক পারমিটের ধরন</td>
+                                                            <td>Work Permit type</td>
                                                             <td>:{{ $dataFromNVisaFd9Fd1->visa_category	 }}</td>
                                                         </tr>
 
@@ -410,163 +410,163 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                     </div>
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            ক . স্পনসর/নিয়োগকর্তার বিশেষ বিবরণ
+                                            A. PARTICULAR OF SPONSOR/EMPLOYER
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td colspan="2">এন্টারপ্রাইজের নাম (সংস্থা/কোম্পানী) : {{ $nVisaSponSor->org_name }}</td>
+                                                    <td colspan="2">Name of the enterprise (organization/company): {{ $nVisaSponSor->org_name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="background-color: #d4d4d4">এন্টারপ্রাইজের ঠিকানা (শুধুমাত্র বাংলাদেশ)</td>
+                                                    <td colspan="2" style="background-color: #d4d4d4">Address of the enterprise (Bangladesh Only)</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>বাড়ি/প্লট/হোল্ডিং/গ্রাম: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->org_house_no) }}  </td>
-                                                    <td>ফ্ল্যাট/অ্যাপার্টমেন্ট/ফ্লোর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->org_flat_no) }}</td>
+                                                    <td>House/Plot/Holding/Village:: {{ $nVisaSponSor->org_house_no }}  </td>
+                                                    <td>Flat/Apartment/Floor: {{ $nVisaSponSor->org_flat_no }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>রাস্তার নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->org_road_no) }}</td>
-                                                    <td>পোস্ট/জিপ কোড: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->org_post_code) }}</td>
+                                                    <td>Road Number: {{ $nVisaSponSor->org_road_no }}</td>
+                                                    <td>Post/Zip Code: {{ $nVisaSponSor->org_post_code }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>পোস্ট অফিস: {{ $nVisaSponSor->org_post_office }}</td>
-                                                    <td>টেলিফোন নম্বর: {{ $nVisaSponSor->org_phone }}</td>
+                                                    <td>Post Office: {{ $nVisaSponSor->org_post_office }}</td>
+                                                    <td>Telephone Number: {{ $nVisaSponSor->org_phone }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>শহর/জেলা: {{ $nVisaSponSor->org_district }}</td>
-                                                    <td>থানা/উপজেলা: {{ $nVisaSponSor->org_thana }}</td>
+                                                    <td>City/District: {{ $nVisaSponSor->org_district }}</td>
+                                                    <td>Thana/Upazilla: {{ $nVisaSponSor->org_thana }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>ফ্যাক্স নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->org_fax_no) }}</td>
-                                                    <td>ইমেল: {{ $nVisaSponSor->org_email }}</td>
+                                                    <td>Fax Number: {{ $nVisaSponSor->org_fax_no }}</td>
+                                                    <td>Email: {{ $nVisaSponSor->org_email }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">সংগঠনের ধরন: এনজিও</td>
+                                                    <td colspan="2">Type of the Organization: NGO</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">ব্যবসার প্রকৃতি: {{ $nVisaSponSor->nature_of_business }}</td>
+                                                    <td colspan="2">Nature of buisness: {{ $nVisaSponSor->nature_of_business }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">স্বীকৃত মূলধন: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->authorized_capital) }}</td>
+                                                    <td colspan="2">Authorized Capital: {{ $nVisaSponSor->authorized_capital }}</td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td colspan="2">পরিশোধিত মূলধন: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->paid_up_capital) }}</td>
+                                                    <td colspan="2">Paid up capital: {{ $nVisaSponSor->paid_up_capital }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>গত ১২ মাসে প্রাপ্ত রেমিট্যান্স: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaSponSor->remittance_received) }}</td>
-                                                    <td>শিল্পের ধরন:এনজিও </td>
+                                                    <td>Remittance received during last 12 months: {{ $nVisaSponSor->remittance_received }}</td>
+                                                    <td>Type of Industry:NGO </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>কোম্পানি বোর্ডের সুপারিশ: {{ $nVisaSponSor->recommendation_of_company_board }}</td>
-                                                    <td>স্থানীয়, বিদেশী বা যৌথ উদ্যোগ কোম্পানি কিনা: {{ $nVisaSponSor->company_share }}</td>
+                                                    <td>Recommendation of Company Boards: {{ $nVisaSponSor->recommendation_of_company_board }}</td>
+                                                    <td>Whether local, foreign or joint venture company (if joint venture, percentage of local and foreign investment is to be shown): {{ $nVisaSponSor->company_share }}</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            খ. বিদেশী দায়িত্বশীল এর বিশেষ বিবরণ
+                                            B. PARTICULARS OF FOREIGN INCUMBENT
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td colspan="2">বিদেশী নাগরিকের নাম: {{ $nVisaForeignerInfo->name_of_the_foreign_national }}</td>
+                                                    <td colspan="2">Name of the foreign national: {{ $nVisaForeignerInfo->name_of_the_foreign_national }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>জাতীয়তা: {{ $nVisaForeignerInfo->nationality  }}</td>
-                                                    <td>পাসপোর্ট নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->passport_no) }}</td>
+                                                    <td>Nationality: {{ $nVisaForeignerInfo->nationality  }}</td>
+                                                    <td>Passport Number: {{ $nVisaForeignerInfo->passport_no }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>ইস্যু তারিখ : {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->passport_issue_date) }}</td>
-                                                    <td>ইস্যু স্থান: {{ $nVisaForeignerInfo->passport_issue_place }} </td>
+                                                    <td>Date of Issue: {{ $nVisaForeignerInfo->passport_issue_date }}</td>
+                                                    <td>Place of Issue: {{ $nVisaForeignerInfo->passport_issue_place }} </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">মেয়াদ শেষ হওয়ার তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->passport_expiry_date) }}</td>
+                                                    <td colspan="2">Expiry Date: {{ $nVisaForeignerInfo->passport_expiry_date }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="background-color: #d4d4d4">স্থায়ী ঠিকানা</td>
+                                                    <td colspan="2" style="background-color: #d4d4d4">Permanent Address</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>দেশ: {{ $nVisaForeignerInfo->home_country }}</td>
-                                                    <td>বাড়ি/প্লট/হোল্ডিং নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->house_no) }}</td>
+                                                    <td>Country: {{ $nVisaForeignerInfo->home_country }}</td>
+                                                    <td>House/Plot/Holding Number: {{ $nVisaForeignerInfo->house_no }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>ফ্ল্যাট/অ্যাপার্টমেন্ট/ফ্লোর নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->flat_no) }}</td>
-                                                    <td>রাস্তার নাম/রাস্তার নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->road_no) }} </td>
+                                                    <td>Flat/Apartment/Floor Number: {{ $nVisaForeignerInfo->flat_no }}</td>
+                                                    <td>Road Name/Road Number: {{ $nVisaForeignerInfo->road_no }} </td>
                                                 </tr>
                                                 <tr>
                                                     <td><b></b> </td>
                                                     <td><b></b> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>পোস্ট/জিপ কোড: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->post_code) }}</td>
-                                                    <td>রাজ্য/প্রদেশ: {{ $nVisaForeignerInfo->state }}</td>
+                                                    <td>Post/Zip Code: {{ $nVisaForeignerInfo->post_code }}</td>
+                                                    <td>State/Province: {{ $nVisaForeignerInfo->state }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>টেলিফোন নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->phone) }}</td>
-                                                    <td>শহর: {{ $nVisaForeignerInfo->city }}</td>
+                                                    <td>Telephone Number: {{ $nVisaForeignerInfo->phone }}</td>
+                                                    <td>City: {{ $nVisaForeignerInfo->city }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>ফ্যাক্স নম্বর:  {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->fax_no) }}</td>
-                                                    <td>ইমেল: {{ $nVisaForeignerInfo->email }}</td>
+                                                    <td>Fax Number:  {{ $nVisaForeignerInfo->fax_no }}</td>
+                                                    <td>Email: {{ $nVisaForeignerInfo->email }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>জন্ম তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaForeignerInfo->date_of_birth) }}</td>
-                                                    <td>বৈবাহিক অবস্থা: {{ $nVisaForeignerInfo->martial_status }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="card mt-3 ">
-                                        <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            গ.কর্মসংস্থান এর তথ্য
-                                        </div>
-                                        <div class="card-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td>নিয়োগকৃত পদের নাম (পদবী): {{ $nVisaEmploye->employed_designation }}</td>
-                                                    <td>বাংলাদেশে আগমনের তারিখ:  {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaEmploye->date_of_arrival_in_bangladesh) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ভিসার ধরন: N-Visa </td>
-                                                    <td>প্রথম নিয়োগের তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaEmploye->first_appoinment_date) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>কাঙ্খিত কার্যকরী তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaEmploye->desired_effective_date) }}</td>
-                                                    <td>শেষ তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaEmploye->desired_end_date) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>পছন্দসই সময়কাল: {{ $nVisaEmploye->visa_validity }}</td>
-                                                    <td>সংক্ষিপ্ত কাজের বিবরণ: {{ $nVisaEmploye->brief_job_description }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">কর্মচারী ন্যায্যতা: {{ $nVisaEmploye->employee_justification }} </td>
+                                                    <td>Date of Birth: {{ $nVisaForeignerInfo->date_of_birth }}</td>
+                                                    <td>Marital Status: {{ $nVisaForeignerInfo->martial_status }}</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            ঘ. কর্মস্থলের ঠিকানা
+                                            C. EMPLOYMENT INFORMATION
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td>বাড়ি/প্লট/হোল্ডিং/গ্রাম:  {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaWorkPlace->work_house_no) }}</td>
-                                                    <td>ফ্ল্যাট/অ্যাপার্টমেন্ট/ফ্লোর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaWorkPlace->work_flat_no) }}</td>
+                                                    <td>Name of the post employed for (Designation):: {{ $nVisaEmploye->employed_designation }}</td>
+                                                    <td>Date of arrival in Bangladesh:  {{ $nVisaEmploye->date_of_arrival_in_bangladesh }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>রাস্তার নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaWorkPlace->work_road_no) }} </td>
-                                                    <td>শহর/জেলা: {{ $nVisaWorkPlace->work_district }}</td>
+                                                    <td>Type of visa: N-Visa </td>
+                                                    <td>Date of first assignment: {{ $nVisaEmploye->first_appoinment_date }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>থানা/উপজেলা: {{ $nVisaWorkPlace->work_thana }} </td>
-                                                    <td>ইমেইল: {{ $nVisaWorkPlace->work_email }}</td>
+                                                    <td>Desired Effective Date: {{ $nVisaEmploye->desired_effective_date }}</td>
+                                                    <td>Desired End Date: {{ $nVisaEmploye->desired_end_date }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>প্রতিষ্ঠানের ধরন: এনজিও</td>
-                                                    <td>যোগাযোগ ব্যক্তির মোবাইল নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaWorkPlace->contact_person_mobile_number) }}</td>
+                                                    <td>Desired Duration: {{ $nVisaEmploye->visa_validity }}</td>
+                                                    <td>Brief job description: {{ $nVisaEmploye->brief_job_description }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">Employee Justification: {{ $nVisaEmploye->employee_justification }} </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="card mt-3 ">
+                                        <div class="card-header bg-primary d-flex justify-content-between align-items-center">
+                                            D. WORKPLACE ADDRESS
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td>House/Plot/Holding/Village::  {{ $nVisaWorkPlace->work_house_no }}</td>
+                                                    <td>Flat/Apartment/Floor: {{ $nVisaWorkPlace->work_flat_no }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Road Number: {{ $nVisaWorkPlace->work_road_no }} </td>
+                                                    <td>City/District: {{ $nVisaWorkPlace->work_district }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thana/Upazilla: {{ $nVisaWorkPlace->work_thana }} </td>
+                                                    <td>Email: {{ $nVisaWorkPlace->work_email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type of Organization: এনজিও</td>
+                                                    <td>Contact Person Mobile Number: {{ $nVisaWorkPlace->contact_person_mobile_number }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -611,77 +611,77 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 @if(!$mainDatac)
 <div class="card mt-3 ">
     <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-        ঙ. ক্ষতিপূরণ এবং বেনিফিট
+        E.COMPENSATION AND BENIFITS
     </div>
     <div class="card-body">
-        কোন তথ্য নেই
+        No Information Available
     </div>
 </div>
 @else
 <div class="card mt-3 ">
     <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-        ঙ. ক্ষতিপূরণ এবং বেনিফিট
+        E.COMPENSATION AND BENIFITS
     </div>
     <div class="card-body">
         <table class="table table-bordered">
             <tr>
-                <td><b>বেতন কাঠামো</b></td>
-                <td colspan="3"><b>স্থানীয়ভাবে প্রদেয়</b></td>
+                <td><b>Salary Structure</b></td>
+                <td colspan="3"><b>Payble Locally</b></td>
             </tr>
             <tr>
                 <td></td>
-                <td>পারিশ্রমিক</td>
-                <td>পরিমাণ</td>
-                <td>মুদ্রা</td>
+                <td>Payment</td>
+                <td>Amount</td>
+                <td>Currency</td>
             </tr>
             <tr>
-                <td>ক. মূল বেতন</td>
+                <td>a. Basic Salary</td>
                 <td>{{ $basic->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($basic->amount) }}</td>
+                <td>{{ $basic->amount }}</td>
                 <td>{{ $basic->currency }}</td>
             </tr>
             <tr>
-                <td>খ. বিদেশী ভাতা</td>
+                <td>b. Overseas allowance</td>
                 <td>{{ $overseas->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($overseas->amount) }}</td>
+                <td>{{ $overseas->amount }}</td>
                 <td>{{ $overseas->currency }}</td>
             </tr>
             <tr>
-                <td>গ. বাড়ি ভাড়া/বাসস্থান</td>
+                <td>c. House rent/Accommodation</td>
                 <td>{{ $house->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($house->amount) }}</td>
+                <td>{{ $house->amount }}</td>
                 <td>{{ $house->currency }}</td>
             </tr>
             <tr>
-                <td>ঘ. পরিবহন</td>
+                <td>d. Conveyance</td>
                 <td>{{ $convoy->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($convoy->amount) }}</td>
+                <td>{{ $convoy->amount }}</td>
                 <td>{{ $convoy->currency }}</td>
             </tr>
             <tr>
-                <td>ঙ. বিনোদন ভাতা</td>
+                <td>e. Entertainmemt allowance</td>
                 <td>{{ $entertainment->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($entertainment->amount) }}</td>
+                <td>{{ $entertainment->amount }}</td>
                 <td>{{ $entertainment->currency }}</td>
             </tr>
             <tr>
-                <td>চ. চিকিৎসা ভাতা</td>
+                <td>f. Medical allowance<</td>
                 <td>{{ $medical->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($medical->amount) }}</td>
+                <td>{{ $medical->amount }}</td>
                 <td>{{ $medical->currency }}</td>
             </tr>
             <tr>
-                <td>ছ. বার্ষিক বোনাস</td>
+                <td>g. Annual Bonus</td>
                 <td>{{ $annual->payment_type }}</td>
-                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($annual->amount) }}</td>
+                <td>{{ $annual->amount }}</td>
                 <td>{{ $annual->currency }}</td>
             </tr>
             <tr>
-                <td>জ. অন্যান্য প্রান্তিক সুবিধা, যদি থাকে</td>
+                <td>h. Other fringe benefits, if any/td>
                 <td colspan="3">{{ $dataFromNVisaFd9Fd1->other_benefit }}</td>
             </tr>
             <tr>
-                <td>ঝ. কোনো বিশেষ মন্তব্য</td>
+                <td>i. Any Particular Comments of remarks</td>
                 <td colspan="3">{{ $dataFromNVisaFd9Fd1->salary_remarks }}</td>
             </tr>
         </table>
@@ -697,26 +697,26 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            চ. অফিসের জনবল
+                                            F. Manpower of the office
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td colspan="3"><b>স্থানীয় (ক)</b></td>
-                                                    <td colspan="3"><b>বিদেশী (খ)</b></td>
-                                                    <td rowspan="2"><b>সর্বমোট
-                                                        (ক+খ)</b></td>
-                                                    <td colspan="2"><b>অনুপাত</b></td>
+                                                    <td colspan="3"><b>Local (a)</b></td>
+                                                    <td colspan="3"><b>Foreign  (b)</b></td>
+                                                    <td rowspan="2"><b>Grand Total
+                                                        (a+b)</b></td>
+                                                    <td colspan="2"><b>Ratio</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>এক্সিকিউটিভ</td>
-                                                    <td>সাপোর্টিং স্টাফ</td>
-                                                    <td>মোট</td>
-                                                    <td>এক্সিকিউটিভ</td>
-                                                    <td>সাপোর্টিং স্টাফ</td>
-                                                    <td>মোট</td>
-                                                    <td>স্থানীয়</td>
-                                                    <td>বিদেশী</td>
+                                                    <td>Executive</td>
+                                                    <td>Supporting Staff </td>
+                                                    <td>Total</td>
+                                                    <td>Executive</td>
+                                                    <td>Supporting Staff</td>
+                                                    <td>Total</td>
+                                                    <td>Local </td>
+                                                    <td>Foreign</td>
                                                 </tr>
                                                 @if(!$nVisaManPower)
                                                 <tr>
@@ -748,21 +748,21 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                     </div>
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            ছ. ওয়ার্ক পারমিটের জন্য প্রয়োজনীয় নথি (পিডিএফ)
+                                            G. Necessary Document for Work Permit (PDF)
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tbody>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>প্রয়োজনীয় সংযুক্তি</th>
-                                                    <th>সংযুক্ত ফাইল (পিডিএফ)</th>
-                                                </tr>
+                                                    <tr>
+                                                        <th>#</th>
+                <th>Required Attachment</th>
+                <th>Action</th>
+                                                    </tr>
                                                 @if(!$nVisaDocs)
 
                                                 <tr>
-                                                    <td>১</td>
-                                                    <td>ক্রেতার প্রতিনিধি নিয়োগের ক্ষেত্রে ক্রেতার মনোনয়ন পত্রের অনুলিপি</td>
+                                                    <td>1</td>
+                                                    <td>Copy of buyer's nomination letter in case of employment of buyer;s representative</td>
                                                     <td>
 
 
@@ -774,28 +774,28 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>২</td>
-                                                    <td>বিনিয়োগ বোর্ডের নিবন্ধন পত্রের অনুলিপি, যদি আগে জমা না দেওয়া হয়</td>
+                                                    <td>2</td>
+                                                    <td>Copy of registration letter of board of investment, if not submitted earlier</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৩</td>
-                                                    <td>কর্মচারীর ক্ষেত্রে পরিষেবা চুক্তি/চুক্তি/নিয়োগ পত্রের অনুলিপি</td>
+                                                    <td>3</td>
+                                                    <td>Copy of service contract/agreement/ appointment letter in case of employee</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৪</td>
-                                                    <td>বিদেশী নাগরিকদের নিয়োগ সংক্রান্ত কোম্পানির পরিচালক পর্ষদের সিদ্ধান্ত (সীমিত কোম্পানির ক্ষেত্রে) বেতন এবং অন্যান্য সুবিধা দেখায় শুধুমাত্র সভায় উপস্থিত পরিচালকদের দ্বারা স্বাক্ষরিত কোম্পানির</td>
+                                                    <td>4</td>
+            <td>Decision of the board of the directors of the company regarding employment of foreign nationals (In case of limited company) showing salary & other facility only signed by directors present in the meeting</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৫</td>
-                                                    <td>মেমোরেন্ডাম এবং আর্টিকেল অফ অ্যাসোসিয়েশন শেয়ারহোল্ডারদের দ্বারা যথাযথভাবে স্বাক্ষরিত এবং অন্তর্ভুক্তির শংসাপত্র সহ (লিমিটেড কোম্পানির ক্ষেত্রে), যদি আগে জমা না দেওয়া হয়</td>
+                                                    <td>5</td>
+            <td>	Memorandum & Articles of Association of the company duly signed by shareholders along with certificate of incorporation (In case of limited company), if not sumitted earlier</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৬</td>
-                                                    <td>কর্মচারীদের জন্য ই-টাইপ ভিসা সহ পাসপোর্টের ফটোকপি/বিনিয়োগকারীদের জন্য পিআই-টাইপ ভিসা</td>
+                                                    <td>6</td>
+            <td>Photocopy of passport with E-type visa for employees/PI-type visa for Investors</td>
                                                     <td></td>
                                                 </tr>
 
@@ -803,8 +803,8 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
 
                                                 <tr>
-                                                    <td>১</td>
-                                                    <td>ক্রেতার প্রতিনিধি নিয়োগের ক্ষেত্রে ক্রেতার মনোনয়ন পত্রের অনুলিপি</td>
+                                                    <td>1</td>
+                                                    <td>Copy of buyer's nomination letter in case of employment of buyer;s representative</td>
                                                     <td>
 
 
@@ -813,7 +813,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                                        @else
 
-                                                        <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                         @endif
 
@@ -821,8 +821,8 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>২</td>
-                                                    <td>বিনিয়োগ বোর্ডের নিবন্ধন পত্রের অনুলিপি, যদি আগে জমা না দেওয়া হয়</td>
+                                                    <td>2</td>
+                                                    <td>Copy of registration letter of board of investment, if not submitted earlier</td>
                                                     <td>
 
                                                         @if(empty($nVisaDocs->registration_letter_of_board_of_investment))
@@ -830,15 +830,15 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                                         @else
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                          @endif
 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৩</td>
-                                                    <td>কর্মচারীর ক্ষেত্রে পরিষেবা চুক্তি/চুক্তি/নিয়োগ পত্রের অনুলিপি</td>
+                                                    <td>3</td>
+                                                    <td>Copy of service contract/agreement/ appointment letter in case of employee</td>
                                                     <td>
 
                                                         @if(empty($nVisaDocs->employee_contract_copy))
@@ -846,15 +846,15 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                                         @else
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                          @endif
 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৪</td>
-                                                    <td>বিদেশী নাগরিকদের নিয়োগ সংক্রান্ত কোম্পানির পরিচালক পর্ষদের সিদ্ধান্ত (সীমিত কোম্পানির ক্ষেত্রে) বেতন এবং অন্যান্য সুবিধা দেখায় শুধুমাত্র সভায় উপস্থিত পরিচালকদের দ্বারা স্বাক্ষরিত কোম্পানির</td>
+                                                    <td>4</td>
+                                                    <td>Decision of the board of the directors of the company regarding employment of foreign nationals (In case of limited company) showing salary & other facility only signed by directors present in the meeting</td>
                                                     <td>
 
                                                         @if(empty($nVisaDocs->board_of_the_directors_sign_lette))
@@ -862,36 +862,36 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                                         @else
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                          @endif
 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৫</td>
-                                                    <td>মেমোরেন্ডাম এবং আর্টিকেল অফ অ্যাসোসিয়েশন শেয়ারহোল্ডারদের দ্বারা যথাযথভাবে স্বাক্ষরিত এবং অন্তর্ভুক্তির শংসাপত্র সহ (লিমিটেড কোম্পানির ক্ষেত্রে), যদি আগে জমা না দেওয়া হয়</td>
+                                                    <td>5</td>
+                                                    <td>	Memorandum & Articles of Association of the company duly signed by shareholders along with certificate of incorporation (In case of limited company), if not sumitted earlier</td>
                                                     <td>
                                                         @if(empty($nVisaDocs->share_holder_copy))
 
 
                                                         @else
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুনgg </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                          @endif
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>৬</td>
-                                                    <td>কর্মচারীদের জন্য ই-টাইপ ভিসা সহ পাসপোর্টের ফটোকপি/বিনিয়োগকারীদের জন্য পিআই-টাইপ ভিসা</td>
+                                                    <td>6</td>
+                                                    <td>Photocopy of passport with E-type visa for employees/PI-type visa for Investors</td>
                                                     <td>
                                                         @if(empty($nVisaDocs->passport_photocopy))
 
 
                                                         @else
 
-                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                          @endif
                                                     </td>
@@ -904,32 +904,32 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                     </div>
                                     <div class="card mt-3 ">
                                         <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                            জ. প্রতিষ্ঠানের অনুমোদিত ব্যক্তি
+                                            H. Authorized Personal of the organization
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td>প্রতিষ্ঠানের নাম: {{ $nVisaAuthPerson->auth_person_org_name }}</td>
-                                                    <td>প্রতিষ্ঠানের বাড়ি নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaAuthPerson->auth_person_org_house_no) }}</td>
+                                                    <td>Organization Name: {{ $nVisaAuthPerson->auth_person_org_name }}</td>
+                                                    <td>Organization House No: {{ $nVisaAuthPerson->auth_person_org_house_no }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>প্রতিষ্ঠানের ফ্ল্যাট নং: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaAuthPerson->auth_person_org_flat_no) }}</td>
-                                                    <td>প্রতিষ্ঠানের রোড নং: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaAuthPerson->auth_person_org_road_no) }}</td>
+                                                    <td>Organization Flat No: {{ $nVisaAuthPerson->auth_person_org_flat_no }}</td>
+                                                    <td>Organization Road No: {{ $nVisaAuthPerson->auth_person_org_road_no }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>প্রতিষ্ঠানের থানা: {{ $nVisaAuthPerson->auth_person_org_thana }}</td>
-                                                    <td>প্রতিষ্ঠানের ডাকঘর: {{ $nVisaAuthPerson->auth_person_org_post_office }}</td>
+                                                    <td>Organization Thana: {{ $nVisaAuthPerson->auth_person_org_thana }}</td>
+                                                    <td>Organization Post Office: {{ $nVisaAuthPerson->auth_person_org_post_office }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>প্রতিষ্ঠানের জেলা: {{ $nVisaAuthPerson->auth_person_org_district }}</td>
-                                                    <td>প্রতিষ্ঠানের মোবাইল: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaAuthPerson->auth_person_org_mobile) }}</td>
+                                                    <td>Organization District: {{ $nVisaAuthPerson->auth_person_org_district }}</td>
+                                                    <td>Organization Mobile: {{ $nVisaAuthPerson->auth_person_org_mobile }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>জমা দেওয়ার তারিখ:  {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nVisaAuthPerson->submission_date) }}</td>
-                                                    <td>প্রবাসীর নাম: {{ $nVisaAuthPerson->expatriate_name }}</td>
+                                                    <td>Submission Date:  {{ $nVisaAuthPerson->submission_date }}</td>
+                                                    <td>Expatriate Name: {{ $nVisaAuthPerson->expatriate_name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>প্রবাসী ইমেইল: {{ $nVisaAuthPerson->expatriate_email }}</td>
+                                                    <td>Expatriate Emai: {{ $nVisaAuthPerson->expatriate_email }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -1154,7 +1154,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 ff
 
 
-                                                        <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
 
 
@@ -1173,7 +1173,7 @@ ff
 
 
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
 
 
@@ -1191,7 +1191,7 @@ ff
 
 
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
 
 
@@ -1209,7 +1209,7 @@ ff
 
 
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
 
 
@@ -1226,7 +1226,7 @@ ff
                                                     <td>
 
 
-                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন hh</a>
+                                                         <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open</a>
 
 
                                                     </td>
@@ -1242,7 +1242,7 @@ ff
                                                     <td>
 
 
-                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                         <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
 
                                                     </td>
@@ -1259,7 +1259,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'academicQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'academicQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                         </td>
                                                 </tr>
@@ -1275,7 +1275,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'techQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'techQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                     </td>
                                                 </tr>
@@ -1290,7 +1290,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'pastExperience','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'pastExperience','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                         </td>
                                                 </tr>
@@ -1306,7 +1306,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
                                                          </td>
                                                 </tr>
                                                 @endif
@@ -1321,7 +1321,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'proposedProject','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'proposedProject','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
                                                          </td>
                                                 </tr>
                                                 @endif
@@ -1349,7 +1349,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'copyOfPassport','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'copyOfPassport','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                                         </td>
                                                 </tr>
@@ -1363,7 +1363,7 @@ ff
                                                     <td>:
 
 
-                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'forwarding_letter','id'=>$dataFromNVisaFd9Fd1->nVisaId]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'forwarding_letter','id'=>$dataFromNVisaFd9Fd1->nVisaId]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
                                                          </td>
                                                 </tr>
                                                 @endif
