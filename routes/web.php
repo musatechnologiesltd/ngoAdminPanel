@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Fd9OneController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\DesignationStepController;
+use App\Http\Controllers\Admin\NoticeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.dashboard');
 
 
+    Route::resource('noticeList', NoticeController::class);
     Route::resource('branchList', BranchController::class);
 
     Route::controller(BranchController::class)->group(function () {
@@ -111,6 +113,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::post('/updateStatusRegForm', [RegisterController::class, 'updateStatusRegForm'])->name('updateStatusRegForm');
     Route::get('/printCertificateView', [RegisterController::class, 'printCertificateView'])->name('printCertificateView');
+
+    Route::get('/printCertificateViewDemo', [RegisterController::class, 'printCertificateViewDemo'])->name('printCertificateViewDemo');
 
 
     Route::get('/formOnePdf/{main_id}/{id}', [RegisterController::class, 'formOnePdf'])->name('formOnePdf');

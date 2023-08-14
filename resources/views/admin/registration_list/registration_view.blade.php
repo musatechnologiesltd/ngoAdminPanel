@@ -967,6 +967,18 @@
             </button>
           @endif
 
+
+          <form action="{{ route('printCertificateViewDemo') }}" method="get">
+
+            <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
+
+            <input type="hidden" name="main_date" value="<?php   echo  date('Y-m-d'); ?>" class="form-control"/>
+
+            <button type="submit" class="btn btn-primary mt-4" type="submit">
+                ডেমো
+              </button>
+        </form>
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">

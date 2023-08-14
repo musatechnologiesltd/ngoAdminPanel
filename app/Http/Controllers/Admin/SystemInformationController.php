@@ -62,6 +62,7 @@ class SystemInformationController extends Controller
         $systemInformation->system_email = $request->email;
         $systemInformation->system_address = $request->address;
         $systemInformation->system_url = $request->url;
+        $systemInformation->system_admin_url = $request->admin_url;
         $systemInformation->system_phone = $request->phone;
          if ($request->hasfile('logo')) {
 
@@ -117,6 +118,7 @@ class SystemInformationController extends Controller
         $systemInformation->system_address = $request->address;
         $systemInformation->system_phone = $request->phone;
         $systemInformation->system_url = $request->url;
+        $systemInformation->system_admin_url = $request->admin_url;
          if ($request->hasfile('logo')) {
 
 

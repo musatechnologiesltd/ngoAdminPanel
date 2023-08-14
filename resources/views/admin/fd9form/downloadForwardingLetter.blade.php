@@ -234,6 +234,11 @@
                         <tr>
                             <td class="first_sincere"></td>
                             <td>
+                                @if(empty(Auth::guard('admin')->user()->admin_sign))
+
+                                @else
+                           <img src="{{ Auth::guard('admin')->user()->admin_sign }}" style="height: 50px" /><br>
+                                @endif
                                 {{ Auth::guard('admin')->user()->admin_name_ban }}<br>
                                 {{ $designationName }}<br>
                                 {{ $branchName }}<br>
