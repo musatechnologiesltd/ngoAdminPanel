@@ -25,7 +25,7 @@
 
 
 
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
+        <div class="badge-bottom"></div>
         @if ($usr->can('profile.view'))
         <a href="{{ route('profile.index') }}">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>

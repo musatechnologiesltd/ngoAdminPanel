@@ -38,7 +38,7 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
                                 <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
                                 <th>পেমেন্ট</th>
@@ -67,7 +67,7 @@
                                 ?>
                             <tr>
 
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number_given_by_admin) }}</td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number) }}</td>
                                 <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
                                 <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->present_name_eng }}</td>
                                 <td>হ্যাঁ</td>

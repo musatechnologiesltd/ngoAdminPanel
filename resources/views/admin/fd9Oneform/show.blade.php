@@ -43,141 +43,172 @@
   <!-- Container-fluid starts-->
   <div class="container-fluid">
     <div class="user-profile">
-
+        @include('flash_message')
         <div class="card">
-            <div class="card-body">
-                <div class="text-center">
-                    <h5>এফডি-৯(১) ফরম</h5>
-                    <p>বিদেশি বিশেষজ্ঞ, উপদেষ্টা, কর্মকর্তা বা স্বেচ্ছাসেবী এর ওয়ার্ক পারমিটের
-                        (কার্যানুমতি)
-                        আবেদন ফরম</p>
+        <div class="card-body">
+            <ul class="nav nav-dark" id="pills-darktab" role="tablist">
+                <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
+                                        data-bs-toggle="pill" href="#pills-darkhome"
+                                        role="tab" aria-controls="pills-darkhome"
+                                        aria-selected="true" style=""><i
+                                class="icofont icofont-ui-home"></i>এফডি-৯(১) ফরম</a></li>
+                <li class="nav-item"><a class="nav-link" id="pills-darkprofile-tab"
+                                        data-bs-toggle="pill" href="#pills-darkprofile"
+                                        role="tab" aria-controls="pills-darkprofile"
+                                        aria-selected="false" style=""><i
+                                class="icofont icofont-man-in-glasses"></i>নথিপত্র</a>
+                </li>
+
+
+                <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
+                    data-bs-toggle="pill" href="#pills-darkdoc1"
+                    role="tab" aria-controls="pills-darkdoc1"
+                    aria-selected="false" style=""><i
+            class="icofont icofont-animal-lemur"></i>স্টেটাস আপডেট করুন </a>
+             </li>
+
+
+
+            </ul>
+            <div class="tab-content" id="pills-darktabContent">
+                <div class="tab-pane fade active show" id="pills-darkhome"
+                     role="tabpanel" aria-labelledby="pills-darkhome-tab">
+                    <div class="mb-0 m-t-30">
+                        @if(!$dataFromNVisaFd9Fd1->verified_fd_nine_one_form)
+                        এনজিও প্রধান নির্বাহীর স্বাক্ষরকৃত পিডিএফ জমা দেয়নি
+                        @else
+                        <object
+                        data='{{ $ins_url }}{{ 'public/'.$dataFromNVisaFd9Fd1->verified_fd_nine_one_form}}'
+                        type="application/pdf"
+                        width="100%"
+                        height="678"
+                      >
+
+                        <iframe
+                          src='{{ $ins_url }}{{ 'public/'.$dataFromNVisaFd9Fd1->verified_fd_nine_one_form}}'
+                          width="100%"
+                          height="900"
+                        >
+                        <p>This browser does not support PDF!</p>
+                        </iframe>
+                      </object>
+
+                        @endif
+                    </div>
+
                 </div>
-
-                <div>
-                    <p>বরাবর <br>
-                        মহাপরিচালক <br>
-                        এনজিও বিষয় ব্যুরো, ঢাকা <br>
-                        জনাব,</p>
-                    {{-- <p>নিষয়ঃ </p> --}}
-                </div>
-            </div>
-            <div class="card-body fd0901_text_style">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>বিষয়:</td>
-                            <td>{{ $dataFromNVisaFd9Fd1->organization_name_ban }} সংস্থার বিদেশি বিশেষজ্ঞউপদেষ্টা/কর্মকর্ত/সেচ্ছাসেবী "<span>{{ $dataFromNVisaFd9Fd1->foreigner_name_for_subject }}</span>" এর
-                                ওয়ার্ক পারমিট প্রসঙ্গে।
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>সূত্র: এনজিও বিষয়ক ব্যুরোর স্মারক নম্বর <span>{{ $dataFromNVisaFd9Fd1->sarok_number }}</span> তারিখ <span>{{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->application_date))) }}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p class="mt-3 mb-2">
-                    উপর্যুক্ত বিষয় ও সূত্রের বরাতে "<span>{{ $dataFromNVisaFd9Fd1->institute_name }}</span>" সংস্থার "<span>{{ $dataFromNVisaFd9Fd1->prokolpo_name }}</span>" প্রকল্পের আওতায় "<span>{{ $dataFromNVisaFd9Fd1->designation_name }}</span>" হিসেবে বিদেশী বিশেষজ্ঞ/
-                    উপদেষ্টা/কর্মকর্তা/স্বেচ্ছাসেবী <span>{{ $dataFromNVisaFd9Fd1->foreigner_name_for_body }}</span> কে <span>{{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_from_date))) }}</span> খ্রি: হতে <span>{{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_to_date))) }}</span> পর্যন্ত সময়ের জন্য নিয়োগ করা হয়েছে। সংস্থার অনুকূলে
-                    উক্ত ব্যাক্তির অনুমোদিত সময়ের জন্য ওয়ার্ক পারমিট ইস্যু করার জন্য ওয়ার্ক পারমিট ইস্যু করার
-                    জন্য একসাথে নিম্ন বর্ণিত কাগজপত্র সংযুক্ত করা হল:
-                </p>
-
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td>০১</td>
-                            <td>নিয়োগপত্র সত্যায়ন প্রমাণক</td>
-                            <td>: @if(!$dataFromNVisaFd9Fd1->attestation_of_appointment_letter)
-
-                                @else
-
- <?php
-
-                                 $file_path = url($dataFromNVisaFd9Fd1->attestation_of_appointment_letter);
-                                 $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-
-                                 $extension = pathinfo($file_path, PATHINFO_EXTENSION);
-                                 ?>
-                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
-                                 @endif
-                                 {{-- <a href="{{ route('niyogPotroDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
-</td>
-                        </tr>
-                        <tr>
-                            <td>০২</td>
-                            <td>ফর্ম ৯ এর কপি</td>
-                            <td>:  @if(!$dataFromNVisaFd9Fd1->copy_of_form_nine)
-
-                                @else
-
- <?php
-
-                                 $file_path = url($dataFromNVisaFd9Fd1->copy_of_form_nine);
-                                 $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-
-                                 $extension = pathinfo($file_path, PATHINFO_EXTENSION);
-                                 ?>
-                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
-                                 @endif
-                                 {{-- <a href="{{ route('formNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
-</td>
-                        </tr>
-                        <tr>
-                            <td>০৩</td>
-                            <td>ছবি</td>
-                            <td>:<img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>০৪</td>
-                            <td>এন ভিসা নিয়ে আগমনের তারিখ (প্রমানসহ)</td>
-                            <td>:
-
-                                @if(!$dataFromNVisaFd9Fd1->copy_of_nvisa)
-
-                           @else
-
-<?php
-
-                            $file_path = url($dataFromNVisaFd9Fd1->copy_of_nvisa);
-                            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-
-                            $extension = pathinfo($file_path, PATHINFO_EXTENSION);
-                            ?>
-                            <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
-                            @endif
-{{-- <a href="{{ route('nVisaCopyDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a>, --}}
-                            {{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->arrival_date_in_nvisa))) }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p class="mb-3">এমতবস্থায়, অত্র সংস্থার উল্লেখিত পদে <span>{{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }}</span> হতে <span>{{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }}</span> মেয়াদে উক্ত বিদেশি কর্মকর্তাকে ওয়ার্ক পারমিট ইস্যু করার জন্য বিনীত অনুরধ করেছি।</p>
-
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12"></div>
-                    <div class="col-lg-6 col-sm-12">
+                <div class="tab-pane fade" id="pills-darkprofile" role="tabpanel"
+                     aria-labelledby="pills-darkprofile-tab">
+                    <div class="mb-0 m-t-30">
+                      <div class="table-responsive">
                         <table class="table table-borderless">
                             <tbody>
-                            <tr>
-                                <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
-                            </tr>
-                            <tr>
-                                <td>নামঃ</td>
-                            </tr>
-                            <tr>
-                                <td>পদবীঃ</td>
-                            </tr>
-                            <tr>
-                                <td>তারিখঃ</td>
-                            </tr>
+                                <tr>
+                                    <td>০১</td>
+                                    <td>নিয়োগপত্র সত্যায়ন প্রমাণক</td>
+                                    <td>: @if(!$dataFromNVisaFd9Fd1->attestation_of_appointment_letter)
+
+                                        @else
+
+         <?php
+
+                                         $file_path = url($dataFromNVisaFd9Fd1->attestation_of_appointment_letter);
+                                         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+                                         $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                                         ?>
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                         @endif
+                                         {{-- <a href="{{ route('niyogPotroDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
+        </td>
+                                </tr>
+                                <tr>
+                                    <td>০২</td>
+                                    <td>ফর্ম ৯ এর কপি</td>
+                                    <td>:  @if(!$dataFromNVisaFd9Fd1->copy_of_form_nine)
+
+                                        @else
+
+         <?php
+
+                                         $file_path = url($dataFromNVisaFd9Fd1->copy_of_form_nine);
+                                         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+                                         $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                                         ?>
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                         @endif
+                                         {{-- <a href="{{ route('formNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
+        </td>
+                                </tr>
+                                <tr>
+                                    <td>০৩</td>
+                                    <td>ছবি</td>
+                                    <td>:<img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td>০৪</td>
+                                    <td>এন ভিসা নিয়ে আগমনের তারিখ (প্রমানসহ)</td>
+                                    <td>:
+
+                                        @if(!$dataFromNVisaFd9Fd1->copy_of_nvisa)
+
+                                   @else
+
+        <?php
+
+                                    $file_path = url($dataFromNVisaFd9Fd1->copy_of_nvisa);
+                                    $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+                                    $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                                    ?>
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                    @endif
+        {{-- <a href="{{ route('nVisaCopyDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a>, --}}
+                                    {{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->arrival_date_in_nvisa))) }}</td>
+                                </tr>
                             </tbody>
                         </table>
+                      </div>
                     </div>
                 </div>
+
+
+
+                <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
+                aria-labelledby="pills-darkdoc1-tab">
+               <div class="mb-0 m-t-30">
+
+
+                   <form action="{{ route('statusUpdateForFd9One') }}" method="post">
+                       @csrf
+
+
+                       <input type="hidden" value="{{ $dataFromNVisaFd9Fd1->mainId }}" name="id" />
+
+
+
+                       <label>স্টেটাস:</label>
+                       <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
+
+                           <option value="Ongoing" {{ $dataFromNVisaFd9Fd1->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+                           <option value="Accepted" {{ $dataFromNVisaFd9Fd1->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                           <option value="Rejected" {{ $dataFromNVisaFd9Fd1->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
+
+                       </select>
+
+
+
+                       <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
+
+                     </form>
+
+               </div>
+           </div>
+
+
             </div>
+        </div>
         </div>
     </div>
     <!-- profile post end-->

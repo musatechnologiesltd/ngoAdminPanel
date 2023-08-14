@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fd9OneForm', Fd9OneController::class);
 
     Route::controller(Fd9OneController::class)->group(function () {
-
+        Route::post('/statusUpdateForFd9One', 'statusUpdateForFd9One')->name('statusUpdateForFd9One');
         Route::get('/fd9OneDownload/{cat}/{id}', 'fd9OneDownload')->name('fd9OneDownload');
     });
 

@@ -915,13 +915,13 @@
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $form_one_data->organization_name }}</td>
+        <td>: {{ $form_one_data->organization_name_ban }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(iii)</td>
         <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $form_one_data->address_of_head_office_eng }}</td>
+        <td>: {{ $form_one_data->address_of_head_office }}</td>
     </tr>
 
     <tr>

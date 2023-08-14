@@ -257,7 +257,7 @@
                         <table class="display" id="basic-2">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
                                 <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
                                 <th>পেমেন্ট</th>
@@ -271,7 +271,7 @@
 
                                 <?php
  $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
                          $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
@@ -350,7 +350,7 @@
                         <table class="display" id="basic-3">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>পেমেন্ট</th>
                                 <th>স্ট্যাটাস</th>
@@ -363,7 +363,7 @@
 
                                 <?php
  $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id', $fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
