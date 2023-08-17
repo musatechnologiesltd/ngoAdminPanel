@@ -314,7 +314,9 @@
 
                                                         @else
 
-সংযুক্ত
+                                                        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
+                                                            <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                        </a>
 
                                                         @endif
                                                     </td>
@@ -348,7 +350,11 @@
 
 
 
-                                                    সংযুক্ত
+
+
+                                                    <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" >
+                                                        <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                    </a>
 
                                                         @endif</td>
                                                 </tr>
@@ -425,13 +431,15 @@
                                                         কিনা (চালানের কপি সংযুক্ত করতে
                                                         হবে)
                                                     </td>
-                                                    <td>:  @if(empty($form_one_data->attach_the__supporting_papers))
+                                                    <td>:  @if(empty($form_one_data->attach_the__supporting_paper))
 
                                                         @else
 
 
 
-                                                      সংযুক্ত
+                                                        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" >
+                                                            <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                        </a>
 
                                                         @endif</td>
                                                 </tr>
@@ -511,13 +519,15 @@
                                                     </td>
                                                     <td>: @foreach($get_all_data_other as $all_get_all_data_other)
 
-                                                        @if(empty($all_get_all_data_other->information_type))
+                                                        @if(empty($all_get_all_data_other->information_pdf))
 
                                                         @else
 
 
 
-                                                     সংযুক্ত
+                                                        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" >
+                                                            <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                        </a>
                                                         @endif
 
 

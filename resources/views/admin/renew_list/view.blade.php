@@ -323,7 +323,7 @@
                                                         @if(empty($renewInfoData->foregin_pdf))
 
                                                         @else
-                                                        সংযুক্ত
+                                                        <a target="_blank"  href="{{ route('foreginPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
 @endif
 
@@ -341,7 +341,7 @@
                                                         @if(empty($renewInfoData->yearly_budget))
 
                                                         @else
-                                                        সংযুক্ত
+                                                        <a target="_blank"  href="{{ route('yearlyBudgetPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
 @endif</td>
                                                 </tr>
@@ -434,7 +434,7 @@
                                                         @if(empty($renewInfoData->copy_of_chalan))
 
                                                         @else
-                                                        সংযুক্ত
+                                                        <a target="_blank"  href="{{ route('copyOfChalanPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
 @endif</td>
                                                 </tr>
@@ -450,7 +450,7 @@
                                                         @if(empty($renewInfoData->due_vat_pdf))
 
                                                         @else
-                                                        সংযুক্ত
+                                                        <a target="_blank"  href="{{ route('dueVatPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
 @endif</td>
                                                 </tr>
@@ -507,7 +507,7 @@
                                                         @if(empty($renewInfoData->change_ac_number))
 
                                                         @else
-                                                        সংযুক্ত
+                                                        <a target="_blank"  href="{{ route('changeAcNumberDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
 @endif</td>
                                                 </tr>
@@ -706,6 +706,11 @@
                                                     <th>নথির নাম</th>
                                                     <th>নথি দেখুন</th>
                                                 </tr>
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষরকৃত এফডি - ৮ ফরম </td>
+                                                    <td><a target="_blank"  href="{{ route('verifiedFdEightDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a></td>
+                                                </tr>
+
                                                 <tr>
                                                     <td>পরিচালন পরিকল্পনা</td>
                                                     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >

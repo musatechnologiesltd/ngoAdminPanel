@@ -144,6 +144,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/updateStatusRenewForm', [RenewController::class, 'updateStatusRenewForm'])->name('updateStatusRenewForm');
 
 
+    Route::controller(RenewController::class)->group(function () {
+
+    Route::get('changeAcNumberDownload/{id}', 'changeAcNumberDownload')->name('changeAcNumberDownload');
+    Route::get('dueVatPdfDownload/{id}', 'dueVatPdfDownload')->name('dueVatPdfDownload');
+    Route::get('copyOfChalanPdfDownload/{id}', 'copyOfChalanPdfDownload')->name('copyOfChalanPdfDownload');
+    Route::get('yearlyBudgetPdfDownload/{id}', 'yearlyBudgetPdfDownload')->name('yearlyBudgetPdfDownload');
+    Route::get('foreginPdfDownload/{id}', 'foreginPdfDownload')->name('foreginPdfDownload');
+    Route::get('verifiedFdEightDownload/{id}', 'verifiedFdEightDownload')->name('verifiedFdEightDownload');
+
+});
 
 
     Route::get('/newRegistrationList', [RegisterController::class, 'newRegistrationList'])->name('newRegistrationList');

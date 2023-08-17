@@ -217,9 +217,11 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         ->value('verified_fd_nine_form');
 
         $file_path = $data->system_url.'public/'.$get_file_data;
-                                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
         $file=$data->system_url.'public/'.$get_file_data;
+
+        //dd($file);
 
         $headers = array(
                   'Content-Type: application/pdf',
