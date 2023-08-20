@@ -150,7 +150,7 @@
                                         data-bs-toggle="pill" href="#pills-darkprofile"
                                         role="tab" aria-controls="pills-darkprofile"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-man-in-glasses"></i>ফরম নং - ৮</a>
+                                class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
                                         data-bs-toggle="pill" href="#pills-darkcontact"
@@ -161,7 +161,7 @@
                                         data-bs-toggle="pill" href="#pills-darkinfo"
                                         role="tab" aria-controls="pills-darkinfo"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-address-book"></i>অন্যান্য সদস্য</a>
+                                class="icofont icofont-address-book"></i>সাধারণ সদস্যের তালিকা </a>
                 </li>
 
 
@@ -234,7 +234,7 @@
                                                 <tr>
                                                     <td></td>
                                                     <td>(iii)</td>
-                                                    <td>নিবন্ধন নম্বর</td>
+                                                    <td>ডাইরি নম্বর </td>
                                                     <td>:
 
                                                       @if($form_one_data->registration_number == 0)
@@ -966,7 +966,7 @@
     <tr>
         <td></td>
         <td>(i)</td>
-        <td>নিবন্ধন নম্বর</td>
+        <td>ডাইরি নম্বর </td>
         <td>:
 
 

@@ -33,6 +33,42 @@ class AdminController extends Controller
     }
 
 
+    public function forgetPassword(){
+
+        return view('admin.user.forgetPassword');
+    }
+
+
+    public function checkMailForPassword(Request $request){
+
+        $email = $request->mainId;
+
+        $checkMail = Admin::where('email',$email)->count();
+
+        return $checkMail;
+    }
+
+
+    public function checkMailPost(Request $request){
+
+           
+
+        Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('NGOAB Password Set');
+        });
+
+
+        return redirect()->route('newEmailNotify')->with('success','Email Send successfully!');
+
+
+    }
+
+    public function newEmailNotify(){
+
+        return view('admin.user.newEmailNotify');
+    }
+
     public function create(){
         if (is_null($this->user) || !$this->user->can('userAdd')) {
            // abort(403, 'Sorry !! You are Unauthorized to Add !');

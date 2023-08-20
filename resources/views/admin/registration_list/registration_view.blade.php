@@ -150,7 +150,7 @@
                                                             data-bs-toggle="pill" href="#pills-darkprofile"
                                                             role="tab" aria-controls="pills-darkprofile"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-man-in-glasses"></i>এফডি -০৮ ফর্ম</a>
+                                                    class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
                                                             data-bs-toggle="pill" href="#pills-darkcontact"
@@ -161,7 +161,7 @@
                                                             data-bs-toggle="pill" href="#pills-darkinfo"
                                                             role="tab" aria-controls="pills-darkinfo"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-address-book"></i>অন্যান্য সদস্য</a>
+                                                    class="icofont icofont-address-book"></i>সাধারণ সদস্যের তালিকা </a>
                                     </li>
 
 
@@ -1053,11 +1053,11 @@
 
 <div id="rValue" style="display:none;">
                                                 <label>রেজিস্ট্রেশন নম্বর :</label>
-                                                @if($all_data_for_new_list_all->reg_id == 0)
+                                                @if($form_one_data->registration_number == 0)
                                                 <input type="text" value=""  name="reg_no_get_from_admin" class="form-control form-control-sm" />
 
 @else
-<input type="text" value="{{ $all_data_for_new_list_all->reg_id }}"  name="reg_no_get_from_admin" class="form-control form-control-sm" />
+<input type="text" value="{{ $form_one_data->registration_number }}"  name="reg_no_get_from_admin" class="form-control form-control-sm" />
 @endif
 </div>
 

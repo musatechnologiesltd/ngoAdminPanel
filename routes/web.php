@@ -90,6 +90,11 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/downloadForwardingLetter/{id}','downloadForwardingLetter')->name('downloadForwardingLetter');
         Route::post('/postForwardingLetter','postForwardingLetter')->name('postForwardingLetter');
+
+        Route::post('/postForwardingLetterForEdit','postForwardingLetterForEdit')->name('postForwardingLetterForEdit');
+
+
+
         Route::post('/forwardingLetterPost','forwardingLetterPost')->name('forwardingLetterPost');
         Route::get('/fdNinePdfDownload/{id}','fdNinePdfDownload')->name('fdNinePdfDownload');
         Route::get('/nVisaDocumentDownload/{cat}/{id}', 'nVisaDocumentDownload')->name('nVisaDocumentDownload');
@@ -182,6 +187,17 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::controller(AdminController::class)->group(function () {
+
+        Route::post('/checkMailPost', 'checkMailPost')->name('checkMailPost');
+        Route::get('/forgetPassword', 'forgetPassword')->name('forgetPassword');
+        Route::get('/checkMailForPassword', 'checkMailForPassword')->name('checkMailForPassword');
+
+
+        Route::get('/newEmailNotify', 'newEmailNotify')->name('newEmailNotify');
+
+
+
+
         Route::post('/postPasswordChange', 'postPasswordChange')->name('postPasswordChange');
         Route::get('/accountPasswordChange/{id}', 'accountPasswordChange')->name('accountPasswordChange');
     });

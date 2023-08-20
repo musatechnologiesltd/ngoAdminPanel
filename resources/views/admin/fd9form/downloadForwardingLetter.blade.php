@@ -170,10 +170,10 @@
                         <tr>
                             <td class="first_number">স্মারক নং: {{ str_replace($engDATE,$bangDATE,$forwardingLetterData->sarok_number) }}</td>
 
-                            @if(empty($statusData))
+                            @if(empty($forwardingLettreDate))
 
                             @else
-                             <td class="second_number">তারিখ: {{ str_replace($engDATE,$bangDATE,$statusData->format('d/m/Y')) }}</td>
+                             <td class="second_number">তারিখ: {{ str_replace($engDATE,$bangDATE,$forwardingLettreDate->format('d/m/Y')) }}</td>
                              @endif
                         </tr>
                     </table>
@@ -194,11 +194,17 @@
                     <table class="forwarding_mainBody">
                         <tr>
                             <td>
+
+                                @if(empty($editCheck))
                                 উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে বর্ণিত সংস্থার নিয়োগের নিমিত্তে
                                 নিম্নবর্ণিত বিদেশী নাগরিকের নিয়োগ/নিরাপত্তা ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর
                                 কার্যালয়ের ২৫ নভেম্বর, ২০২১ তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
                                 বিভাগের মতামত এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে অনুরোধ করা
                                 হলো।
+                                @else
+
+                                {!!$editCheck!!}
+                                @endif
                             </td>
                         </tr>
                     </table>
@@ -251,10 +257,17 @@
                     <table class="forwarding_secretary">
                         <tr>
                             <td>
+
+                                @if(empty($editCheck))
+
                                 সচিব <br>
                                 সুরক্ষা সেবা বিভাগ <br>
                                 স্বরাষ্ট্র মন্ত্রণালয় <br>
                                 বাংলাদেশ সচিবালয়, ঢাকা
+                                @else
+
+                                {!!$editCheck1!!}
+                                @endif
                             </td>
                         </tr>
                     </table>

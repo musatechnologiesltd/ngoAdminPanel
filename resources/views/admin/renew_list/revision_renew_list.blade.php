@@ -38,7 +38,7 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>নিবন্ধন নম্বর</th>
+                                <th>ডাইরি নম্বর </th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>পেমেন্ট</th>
                                 <th>স্ট্যাটাস</th>

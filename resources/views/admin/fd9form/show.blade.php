@@ -66,7 +66,7 @@
                                             data-bs-toggle="pill" href="#pills-darkdoc"
                                             role="tab" aria-controls="pills-darkdoc"
                                             aria-selected="false" style=""><i
-                                    class="icofont icofont-animal-lemur"></i>নথি স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</a>
+                                    class="icofont icofont-animal-lemur"></i>নথি সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                         data-bs-toggle="pill" href="#pills-darkdoc1"
@@ -999,7 +999,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
                                         </div>
                                         <div class="card-footer text-end">
-                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                            <button class="btn btn-primary" type="submit">জমা দিন </button>
                                         </div>
                                     </form>
                                     </div>
@@ -1016,7 +1016,100 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
 
-                                                    <p>ফরওয়ার্ডিং লেটার পিডিএফ ডাউনলোড করুন</p>
+                                                    <p>ফরওয়ার্ডিং লেটার পিডিএফ এডিট করুন</p>
+
+
+                                                    <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                                        এডিট করুন
+                                                    </button>
+
+                                                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h1 class="modal-title fs-5" id="exampleModalLabel">ফরওয়ার্ডিং লেটার </h1>
+                                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                <form class="custom-validation" action="{{ route('postForwardingLetterForEdit') }}" id="form" method="post" enctype="multipart/form-data">
+                                                                    @csrf
+
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label"
+                                                                               for="exampleFormControlInput1">পিডিএফ বডি পার্ট এক </label>
+
+                                                                               @if(empty($editCheck))
+                                                                        <textarea class="form-control summernote" name="pdf_body_one" required id="" type="text"
+                                                                               >
+                                                                               উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে বর্ণিত সংস্থার নিয়োগের নিমিত্তে
+                                                                               নিম্নবর্ণিত বিদেশী নাগরিকের নিয়োগ/নিরাপত্তা ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর
+                                                                               কার্যালয়ের ২৫ নভেম্বর, ২০২১ তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
+                                                                               বিভাগের মতামত এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে অনুরোধ করা
+                                                                               হলো।
+
+                                                                            </textarea>
+                                                                            @else
+
+                                                                            <textarea class="form-control summernote" name="pdf_body_one" required id="" type="text"
+                                                                            >
+                                                                            {!! $editCheck !!}
+
+                                                                         </textarea>
+                                                                            @endif
+
+                                                                               <input class="form-control" value="{{ $dataFromNVisaFd9Fd1->id }}" name="fd9_id" required id="" type="hidden"
+                                                                               placeholder="13456798">
+
+
+                                                                    </div>
+
+
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label"
+                                                                               for="exampleFormControlInput1">পিডিএফ বডি পার্ট দুই  </label>
+
+                                                                               @if(empty($editCheck1))
+                                                                               <textarea class="form-control summernote" name="pdf_body_two" required id="" type="text"
+                                                                              >
+
+                                                                              সচিব <br>
+                                                                              সুরক্ষা সেবা বিভাগ <br>
+                                                                              স্বরাষ্ট্র মন্ত্রণালয় <br>
+                                                                              বাংলাদেশ সচিবালয়, ঢাকা
+                                                                            </textarea>
+
+                                                                            @else
+
+
+                                                                            <textarea class="form-control summernote" name="pdf_body_two" required id="" type="text"
+                                                                            >
+
+                                                                           {!! $editCheck1 !!}
+                                                                          </textarea>
+
+                                                                            @endif
+
+
+
+
+                                                                    </div>
+                                                                    <div class="card-footer text-end">
+                                                                        <button class="btn btn-primary" type="submit">জমা দিন </button>
+                                                                    </div>
+                                                                </form>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     {{-- <div class="text-center">
@@ -1090,8 +1183,8 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                         <div class="mb-0 m-t-30">
                             <div class="card">
                                 <div class="card-header pb-0">
-                                    <h5>নথিপত্র স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</h5>
-                                    <span>স্বরাষ্ট্র মন্ত্রণালয়ে পাঠানোর আগে অনুগ্রহ করে সমস্ত নথি দেখুন করুন</span>
+                                    <h5>নথিপত্র সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</h5>
+                                    <span>সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠানোর আগে অনুগ্রহ করে সমস্ত নথি দেখুন করুন</span>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered">
