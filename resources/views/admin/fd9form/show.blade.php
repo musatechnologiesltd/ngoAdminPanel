@@ -27,7 +27,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>বিদেশী কর্মকর্তার নিয়োগ পত্রের প্রত্যয়নপত্র</h3>
+                <h3>বিদেশী কর্মকর্তার নিয়োগ পত্রের সত্যায়ন পত্র </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">এফডি৯ (এন-ভিসা)</li>
@@ -989,7 +989,7 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                                                                 <tr>
                                                                     <td><input required type="text" name="name[]" placeholder="Enter Ename" id="name0" class="form-control" />
                                                                     </td>
-                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">Add </button></td>
+                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">নতুন যুক্ত করুন</button></td>
                                                                 </tr>
                                                             </table>
 
@@ -1095,6 +1095,36 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
 
 
                                                                     </div>
+
+                                                                    <div class="mb-3">
+
+                                                                        <div class="col-md-12">
+
+                                                                            <table class="table table-bordered" id="dynamicAddRemove">
+                                                                                <tr>
+                                                                                    <th>অনুলিপি</th>
+                                                                                    <th>কার্যকলাপ</th>
+                                                                                </tr>
+                                                                                @foreach($forwardingLetterOnulipi as $key=>$allForwardingLetterOnulipi)
+                                                                             @if($key == 0)
+                                                                                <tr>
+                                                                                    <td><input required type="text" value="{{ $allForwardingLetterOnulipi->onulipi_name }}" name="name[]" placeholder="অনুলিপি" id="name{{ $key+4000 }}" class="form-control" />
+                                                                                    </td>
+                                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">নতুন যুক্ত করুন </button></td>
+                                                                                </tr>
+                                                                                @else
+                                                                                <tr>
+                                                                                    <td><input required type="text" value="{{ $allForwardingLetterOnulipi->onulipi_name }}" name="name[]" placeholder="অনুলিপি" id="name{{ $key+4000 }}" class="form-control" />
+                                                                                    </td>
+                                                                                    <td><button type="button" class="btn btn-sm btn-outline-danger remove-input-field">মুছে ফেলুন</button></td>
+                                                                                </tr>
+                                                                                @endif
+                                                                                @endforeach
+                                                                            </table>
+
+                                                                        </div>
+                                                                </div>
+
                                                                     <div class="card-footer text-end">
                                                                         <button class="btn btn-primary" type="submit">জমা দিন </button>
                                                                     </div>
@@ -1578,7 +1608,7 @@ ff
     var i = 0;
     $("#dynamic-ar").click(function () {
         ++i;
-        $("#dynamicAddRemove").append('<tr><td><input type="text" required name="name[]" id="name'+i+'" placeholder="Enter Name" class="form-control" /></td><td><button type="button" class="btn btn-sm btn-outline-danger remove-input-field">Delete</button></td></tr>'
+        $("#dynamicAddRemove").append('<tr><td><input type="text" required name="name[]" id="name'+i+'" placeholder="অনুলিপি" class="form-control" /></td><td><button type="button" class="btn btn-sm btn-outline-danger remove-input-field">মুছে ফেলুন</button></td></tr>'
             );
     });
     $(document).on('click', '.remove-input-field', function () {

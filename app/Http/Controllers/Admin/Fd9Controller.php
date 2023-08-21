@@ -57,6 +57,9 @@ class Fd9Controller extends Controller
 ->orderBy('id','desc')->value('id');
 
 
+               $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+                      ->get();
+
 $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 ->orderBy('id','desc')->value('pdf_part_one');
 
@@ -165,7 +168,8 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
      $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
      ->orderBy('id','desc')->value('id');
 
-
+     $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+     ->get();
      $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
      ->orderBy('id','desc')->value('pdf_part_one');
 
@@ -210,7 +214,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-         return view('admin.fd9form.show',compact('editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show',compact('forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 
@@ -224,6 +228,22 @@ $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$request->fd9
 
 $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 ->orderBy('id','desc')->value('id');
+
+
+$number=count($request->name);
+ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)->delete();
+if($number >0){
+    for($i=0;$i<$number;$i++){
+
+        $forwardingLetterPostON = new ForwardingLetterOnulipi();
+        $forwardingLetterPostON->forwarding_letter_id = $forwardId;
+        $forwardingLetterPostON->onulipi_name  =$request->name[$i];
+        $forwardingLetterPostON->save();
+
+    }
+
+}
+
 
 if(empty($editCheck)){
 

@@ -14,7 +14,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>বিদেশী কর্মকর্তার নিয়োগ পত্রের প্রত্যয়নপত্র</h3>
+                <h3>বিদেশী কর্মকর্তার নিয়োগ পত্রের সত্যায়ন পত্র </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">এফডি৯ (এন-ভিসা)</li>
