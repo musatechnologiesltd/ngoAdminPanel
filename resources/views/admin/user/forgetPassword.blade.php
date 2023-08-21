@@ -11,7 +11,7 @@
 	<meta property="og:image" content="{{ asset('/') }}{{ $logo }}" />
     <link rel="icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
-    <title>লগ ইন | {{ $ins_name }}</title>
+    <title>পাসওয়ার্ড পরিবর্তন করুন | {{ $ins_name }}</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
@@ -53,32 +53,32 @@
           <div class="col-12">
             <div class="login-card">
 
-              <form class="theme-form login-form" action="{{route('login.store')}}" method="post">
+              <form class="theme-form login-form" action="{{route('checkMailPost')}}" method="post">
                 @csrf
                 @include('flash_message')
-                <h4>লগ ইন</h4>
-                <h6>ফিরে আসার জন্য স্বাগতম! আপনার অ্যাকাউন্টে লগ ইন করুন।</h6>
+                <h4>পাসওয়ার্ড পরিবর্তন করুন </h4>
+                {{-- <h6>ফিরে আসার জন্য স্বাগতম! আপনার অ্যাকাউন্টে লগ ইন করুন।</h6> --}}
                 <div class="form-group">
                   <label>ইমেইল এড্রেস</label>
                   <div class="input-group"><span class="input-group-text"><i class="icon-email"></i></span>
-                    <input class="form-control" name="email" type="email" required="" placeholder="Test@gmail.com">
+                    <input class="form-control" name="email" id="mainEmail" type="email" required="" placeholder="Test@gmail.com">
                   </div>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label>পাসওয়ার্ড</label>
                   <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
                     <input class="form-control" type="password" id="password" name="password" required="" placeholder="*********">
                     {{-- <div class="show-hide"><span class="show">                         </span></div> --}}
-                  </div>
-                </div>
-                <div class="form-group">
+                  {{-- </div>
+                </div> --}}
+                {{-- <div class="form-group">
                   <div class="checkbox">
                     <input id="checkbox1" type="checkbox">
                     <label class="text-muted" for="checkbox1" onclick="myFunction()">পাসওয়ার্ড দেখুন </label>
-              </div><a class="link" href="{{ route('forgetPassword') }}">পাসওয়ার্ড ভুলে গেছেন?</a>
-                </div>
+              </div><a class="link" href="{{ route('forgetPassword') }}">Forgot password?</a>
+                </div> --}}
                 <div class="form-group">
-                  <button class="btn btn-primary btn-block" type="submit">সাইন ইন করুন</button>
+                  <button class="btn btn-primary btn-block" id="finalValue" type="submit">জমা দিন</button>
                 </div>
 
                 {{-- <p>Don't have account?<a class="ms-2" href="sign-up.html">Create Account</a></p> --}}
@@ -118,6 +118,35 @@
           }
         }
         </script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#mainEmail").keyup(function () {
+            var mainId = $(this).val();
+            //alert(mainId);
+
+            $.ajax({
+        url: "{{ route('checkMailForPassword') }}",
+        method: 'GET',
+        data: {mainId:mainId},
+        success: function(data) {
+
+            //alert(data);
+
+         if(data == 0){
+
+            $('#finalValue').attr('disabled','disabled');
+
+         }else{
+            $('#finalValue').removeAttr('disabled');
+
+         }
+        }
+    });
+        });
+    });
+</script>
   </body>
 </html>
 

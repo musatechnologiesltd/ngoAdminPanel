@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('system_email');
             $table->text('system_address');
             $table->text('system_url');
+            $table->text('system_admin_url')->nullable();
             $table->string('system_logo');
             $table->string('system_icon');
             $table->timestamps();

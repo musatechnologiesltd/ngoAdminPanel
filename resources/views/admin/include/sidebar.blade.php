@@ -25,7 +25,7 @@
 
 
 
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
+        <div class="badge-bottom"></div>
         @if ($usr->can('profile.view'))
         <a href="{{ route('profile.index') }}">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
@@ -256,7 +256,7 @@
 @endif
 <!-- employee info --->
 
-@if ($usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate') || $usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate') || $usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate') || $usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
+@if ($usr->can('noticeAdd') || $usr->can('noticeView') ||  $usr->can('noticeDelete') ||  $usr->can('noticeUpdate') || $usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate') || $usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate') || $usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate') || $usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
 
                     <li class="sidebar-main-title">
                         <div>
@@ -264,7 +264,7 @@
                         </div>
                       </li>
 
-                      @if (Route::is('admin.civil_info') || Route::is('country.index') || Route::is('systemInformation.index') ||  Route::is('user.index') || Route::is('role.index') || Route::is('role.create') || Route::is('role.edit') || Route::is('permission.index'))
+                      @if (Route::is('noticeList.index') || Route::is('admin.civil_info') || Route::is('country.index') || Route::is('systemInformation.index') ||  Route::is('user.index') || Route::is('role.index') || Route::is('role.create') || Route::is('role.edit') || Route::is('permission.index'))
 
                       <li class="dropdown">
                         <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="settings"></i><span>সেটিং </span></a>
@@ -297,7 +297,11 @@
    </li>
 @endif
 
-
+@if ($usr->can('noticeAdd') || $usr->can('noticeView') ||  $usr->can('noticeDelete') ||  $usr->can('noticeUpdate'))
+<li >
+       <a href="{{ route('noticeList.index') }}" class="{{ Route::is('noticeList.index')  ? 'active' : '' }}"><span>নোটিশ বোর্ড</span> </a>
+   </li>
+@endif
 
 
                         </ul>
@@ -328,6 +332,12 @@
         @if ($usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate'))
 <li >
        <a href="{{ route('country.index') }}" class="{{ Route::is('country.index')  ? 'active' : '' }}"><span>দেশের তালিকা</span> </a>
+   </li>
+@endif
+
+@if ($usr->can('noticeAdd') || $usr->can('noticeView') ||  $usr->can('noticeDelete') ||  $usr->can('noticeUpdate'))
+<li >
+       <a href="{{ route('noticeList.index') }}" class="{{ Route::is('noticeList.index')  ? 'active' : '' }}"><span>নোটিশ বোর্ড</span> </a>
    </li>
 @endif
 

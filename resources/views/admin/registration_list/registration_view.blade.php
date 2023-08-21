@@ -150,7 +150,7 @@
                                                             data-bs-toggle="pill" href="#pills-darkprofile"
                                                             role="tab" aria-controls="pills-darkprofile"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-man-in-glasses"></i>এফডি -০৮ ফর্ম</a>
+                                                    class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
                                                             data-bs-toggle="pill" href="#pills-darkcontact"
@@ -161,7 +161,7 @@
                                                             data-bs-toggle="pill" href="#pills-darkinfo"
                                                             role="tab" aria-controls="pills-darkinfo"
                                                             aria-selected="false" style=""><i
-                                                    class="icofont icofont-address-book"></i>অন্যান্য সদস্য</a>
+                                                    class="icofont icofont-address-book"></i>সাধারণ সদস্যের তালিকা </a>
                                     </li>
 
 
@@ -314,7 +314,9 @@
 
                                                         @else
 
-সংযুক্ত
+                                                        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
+                                                            <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                        </a>
 
                                                         @endif
                                                     </td>
@@ -348,7 +350,11 @@
 
 
 
-                                                    সংযুক্ত
+
+
+                                                    <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" >
+                                                        <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                    </a>
 
                                                         @endif</td>
                                                 </tr>
@@ -425,13 +431,15 @@
                                                         কিনা (চালানের কপি সংযুক্ত করতে
                                                         হবে)
                                                     </td>
-                                                    <td>:  @if(empty($form_one_data->attach_the__supporting_papers))
+                                                    <td>:  @if(empty($form_one_data->attach_the__supporting_paper))
 
                                                         @else
 
 
 
-                                                      সংযুক্ত
+                                                        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" >
+                                                            <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                        </a>
 
                                                         @endif</td>
                                                 </tr>
@@ -511,13 +519,15 @@
                                                     </td>
                                                     <td>: @foreach($get_all_data_other as $all_get_all_data_other)
 
-                                                        @if(empty($all_get_all_data_other->information_type))
+                                                        @if(empty($all_get_all_data_other->information_pdf))
 
                                                         @else
 
 
 
-                                                     সংযুক্ত
+                                                        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" >
+                                                            <i class="fa fa-file-pdf-o"></i> দেখুন
+                                                        </a>
                                                         @endif
 
 
@@ -913,13 +923,13 @@
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $form_one_data->organization_name }}</td>
+        <td>: {{ $form_one_data->organization_name_ban }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(iii)</td>
         <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $form_one_data->address_of_head_office_eng }}</td>
+        <td>: {{ $form_one_data->address_of_head_office }}</td>
     </tr>
 
     <tr>
@@ -966,6 +976,18 @@
                 প্রিন্ট করুন
             </button>
           @endif
+
+
+          <form action="{{ route('printCertificateViewDemo') }}" method="get">
+
+            <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
+
+            <input type="hidden" name="main_date" value="<?php   echo  date('Y-m-d'); ?>" class="form-control"/>
+
+            <button type="submit" class="btn btn-primary mt-4" type="submit">
+                ডেমো
+              </button>
+        </form>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1031,11 +1053,11 @@
 
 <div id="rValue" style="display:none;">
                                                 <label>রেজিস্ট্রেশন নম্বর :</label>
-                                                @if($all_data_for_new_list_all->reg_id == 0)
+                                                @if($form_one_data->registration_number == 0)
                                                 <input type="text" value=""  name="reg_no_get_from_admin" class="form-control form-control-sm" />
 
 @else
-<input type="text" value="{{ $all_data_for_new_list_all->reg_id }}"  name="reg_no_get_from_admin" class="form-control form-control-sm" />
+<input type="text" value="{{ $form_one_data->registration_number }}"  name="reg_no_get_from_admin" class="form-control form-control-sm" />
 @endif
 </div>
 

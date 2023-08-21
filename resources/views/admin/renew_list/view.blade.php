@@ -145,12 +145,12 @@
                                         data-bs-toggle="pill" href="#pills-darkhome"
                                         role="tab" aria-controls="pills-darkhome"
                                         aria-selected="true" style=""><i
-                                class="icofont icofont-ui-home"></i>এফডি -০১ ফর্ম</a></li>
+                                class="icofont icofont-ui-home"></i>এফডি -৮ ফরম</a></li>
                 <li class="nav-item"><a class="nav-link" id="pills-darkprofile-tab"
                                         data-bs-toggle="pill" href="#pills-darkprofile"
                                         role="tab" aria-controls="pills-darkprofile"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-man-in-glasses"></i>এফডি -০৮ ফর্ম</a>
+                                class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
                                         data-bs-toggle="pill" href="#pills-darkcontact"
@@ -161,7 +161,7 @@
                                         data-bs-toggle="pill" href="#pills-darkinfo"
                                         role="tab" aria-controls="pills-darkinfo"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-address-book"></i>অন্যান্য সদস্য</a>
+                                class="icofont icofont-address-book"></i>সাধারণ সদস্যের তালিকা </a>
                 </li>
 
 
@@ -211,13 +211,11 @@
                                                   <?php
  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
                              // dd($getngoForLanguage);
-                                  if($getngoForLanguage =='দেশিও'){
+
 
                                     $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
 
-                                  }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name');
-                                  }
+
                                                   ?>
                                                 <tr>
                                                     <td></td>
@@ -229,12 +227,12 @@
                                                     <td></td>
                                                     <td>(ii)</td>
                                                     <td>সংস্থার ঠিকানা</td>
-                                                    <td>: {{ $form_one_data->organization_address }}</td>
+                                                    <td>: {{ $form_one_data->organization_address}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>(iii)</td>
-                                                    <td>নিবন্ধন নম্বর</td>
+                                                    <td>ডাইরি নম্বর </td>
                                                     <td>:
 
                                                       @if($form_one_data->registration_number == 0)
@@ -263,6 +261,18 @@
                                                 </tr>
                                                 <tr>
                                                     <td></td>
+                                                    <td></td>
+                                                    <td>টেলিফোন নম্বর ,মোবাইল নম্বর ,ইমেইল  ও ওয়েব এড্রেস</td>
+                                                    <td>:
+                                                        @if(!$renewInfoData)
+
+                                                        @else
+                                                        {{ App\Http\Controllers\Admin\CommonController::englishToBangla($renewInfoData->phone_new) }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($renewInfoData->mobile_new) }},{{ $renewInfoData->email_new }},{{ $renewInfoData->web_site_name }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
                                                     <td>(vi)</td>
                                                     <td>বাংলাদেশস্থ সংস্থা প্রধানের তথ্যাদি</td>
                                                     <td></td>
@@ -282,8 +292,8 @@
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
-                                                    <td>গ) ঠিকানা,মোবাইল নম্বর, ইমেইল</td>
-                                                    <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
+                                                    <td>গ) ঠিকানা,টেলিফোন নম্বর ,মোবাইল নম্বর, ইমেইল</td>
+                                                    <td>:{{ $form_one_data->address }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($renewInfoData->mobile) }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -299,67 +309,44 @@
                                                     <td>ঙ) পেশা (বর্তমান পেশা উল্লেখ করতে হবে)</td>
                                                     <td>: {{ $form_one_data->profession }}</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>২.</td>
-                                                    <td colspan="3">প্রস্তাবিত কার্যক্রমের ক্ষেত্র
-                                                        (বিস্তারিত বিবরণ সংযুক্ত করতে হবে):
+                                                    <td colspan="2">বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ (প্রকল্প ওয়ারী তথাদির সংক্ষিপ্তসার সংযুক্ত করতে হবে)
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>ক</td>
-                                                    <td>(i) পরিচালন পরিকল্পনা (Plan of Operation)</td>
                                                     <td>:
-                                                        @if(empty($form_one_data->plan_of_operation))
+
+                                                        @if(!$renewInfoData)
+
 
                                                         @else
+                                                        @if(empty($renewInfoData->foregin_pdf))
 
-সংযুক্ত
-
+                                                        @else
+                                                        <a target="_blank"  href="{{ route('foreginPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
+@endif
+
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>(ii) প্রকল্প এলাকা (জেলা ও উপজেলা)</td>
-                                                    <td>: {{ $form_one_data->district }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>খ</td>
-                                                    <td>তহবিলের উৎস</td>
-                                                    <td></td>
-                                                </tr>
-                                                @foreach($all_source_of_fund as $all_get_all_source_of_fund_data)
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>(i) দাতা/দাতা সংস্থাসমূহের নাম ও ঠিকানা</td>
-                                                    <td>: {{ $all_get_all_source_of_fund_data->name }},{{ $all_get_all_source_of_fund_data->address }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>(ii) দাতা /দাতাসংস্থার অঙ্গীকারপত্রের কপি</td>
-                                                    <td>: @if(empty($all_get_all_source_of_fund_data->letter_file))
 
-                                                        @else
-
-
-
-                                                    সংযুক্ত
-
-                                                        @endif</td>
-                                                </tr>
-                                                @endforeach
                                                 <tr>
                                                     <td>৩.</td>
-                                                    <td colspan="2">অঙ্গীকারকৃত অনুদানের পরিমাণ (বৈদেশিক
-                                                        মুদ্রা/বাংলাদেশ টাকায়)
+                                                    <td colspan="2">সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট (উৎসসহ)
                                                     </td>
-                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->annual_budget) }}</td>
+                                                    <td>:          @if(!$renewInfoData)
+
+
+                                                        @else
+                                                        @if(empty($renewInfoData->yearly_budget))
+
+                                                        @else
+                                                        <a target="_blank"  href="{{ route('yearlyBudgetPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        @endif
+@endif</td>
                                                 </tr>
+
+
                                                 <tr>
                                                     <td>৪.</td>
                                                     <td colspan="3">কর্মকর্তাদের তথ্যাদি পৃথক কাগজে
@@ -414,6 +401,21 @@
                                                 <tr>
                                                     <td></td>
                                                     <td>(ছ)</td>
+                                                    <td>মোবাইল নম্বর </td>
+                                                    <td>: {{ $all_all_parti->salary_statement }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td>(জ)</td>
+                                                    <td>ইমেইল এড্রেস</td>
+                                                    <td>: {{ $all_all_parti->salary_statement }}</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td>(ঝ)</td>
                                                     <td>সম্পৃক্ত অন্য পেশার বিবরণ</td>
                                                     <td>: {{ $all_all_parti->other_occupation }}</td>
                                                 </tr>
@@ -425,43 +427,34 @@
                                                         কিনা (চালানের কপি সংযুক্ত করতে
                                                         হবে)
                                                     </td>
-                                                    <td>:  @if(empty($form_one_data->attach_the__supporting_papers))
+                                                    <td>: @if(!$renewInfoData)
+
 
                                                         @else
+                                                        @if(empty($renewInfoData->copy_of_chalan))
 
-
-
-                                                      সংযুক্ত
-
-                                                        @endif</td>
+                                                        @else
+                                                        <a target="_blank"  href="{{ route('copyOfChalanPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        @endif
+@endif</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>৬.</td>
-                                                    <td colspan="3">নিয়োগের জন্য প্রস্তাবিত
-                                                        পরামর্শক/পরামর্শকগণের নাম এবং বিস্তারিত
-                                                        তথ্য(যদি থাকে)
+                                                    <td colspan="2">তফসিল -১ এ বর্ণিত যেকোন ফি এর ভ্যাট বকেয়া থাকলে পরিশোধ হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)
                                                     </td>
+                                                    <td>: @if(!$renewInfoData)
+
+
+                                                        @else
+                                                        @if(empty($renewInfoData->due_vat_pdf))
+
+                                                        @else
+                                                        <a target="_blank"  href="{{ route('dueVatPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                                        @endif
+@endif</td>
                                                 </tr>
-                                                @foreach($get_all_data_adviser as $key=>$all_get_all_data_adviser)
-                                                <tr>
-                                                    <td></td>
-                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
-                                                    <td>পরামর্শক {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ক)</td>
-                                                    <td>নাম</td>
-                                                    <td>: {{ $all_get_all_data_adviser->name }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(খ)</td>
-                                                    <td>বিস্তারিত বর্ণনা</td>
-                                                    <td>: {{ $all_get_all_data_adviser->information	 }}</td>
-                                                </tr>
-                                                @endforeach
+
                                                 <tr>
                                                     <td>৭.</td>
                                                     <td colspan="3">মাদার একাউন্ট এর বিস্তারিত বিবরণ (হিসাব
@@ -505,23 +498,18 @@
                                                 @endif
                                                 <tr>
                                                     <td>৮.</td>
-                                                    <td colspan="2">অন্য কোন গুরুত্বপূর্ণ তথ্য যা আবেদনকারী
-                                                        উল্লেখ করতে ইচ্ছুক (পৃথক
-                                                        কাগজে সংযুক্ত করতে হবে)
+                                                    <td colspan="2">ব্যাংক হিসাব নম্বর পরিবর্তন হয়ে থাকলে ব্যুরোর অনুমোদনপত্রের কপি সংযুক্ত করতে হবে
                                                     </td>
-                                                    <td>: @foreach($get_all_data_other as $all_get_all_data_other)
+                                                    <td>: @if(!$renewInfoData)
 
-                                                        @if(empty($all_get_all_data_other->information_type))
 
                                                         @else
+                                                        @if(empty($renewInfoData->change_ac_number))
 
-
-
-                                                     সংযুক্ত
+                                                        @else
+                                                        <a target="_blank"  href="{{ route('changeAcNumberDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                                                         @endif
-
-
-                                                                        @endforeach</td>
+@endif</td>
                                                 </tr>
 
                                                 </tbody>
@@ -719,6 +707,11 @@
                                                     <th>নথি দেখুন</th>
                                                 </tr>
                                                 <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষরকৃত এফডি - ৮ ফরম </td>
+                                                    <td><a target="_blank"  href="{{ route('verifiedFdEightDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a></td>
+                                                </tr>
+
+                                                <tr>
                                                     <td>পরিচালন পরিকল্পনা</td>
                                                     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
                                                         <i class="fa fa-eye"></i>
@@ -891,7 +884,7 @@
     <tr>
         <td></td>
         <td>(i)</td>
-        <td>নিবন্ধন নম্বর</td>
+        <td>ডাইরি নম্বর </td>
         <td>:
 
 
@@ -915,13 +908,13 @@
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $form_one_data->organization_name }}</td>
+        <td>: {{ $form_one_data->organization_name_ban }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(iii)</td>
         <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $form_one_data->address_of_head_office_eng }}</td>
+        <td>: {{ $form_one_data->address_of_head_office }}</td>
     </tr>
 
     <tr>

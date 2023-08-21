@@ -257,7 +257,7 @@
                         <table class="display" id="basic-2">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>ডাইরি নম্বর</th>
                                 <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
                                 <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
                                 <th>পেমেন্ট</th>
@@ -271,7 +271,7 @@
 
                                 <?php
  $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
                          $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
@@ -320,7 +320,7 @@
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$all_data_for_new_list_all->id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 
@@ -350,7 +350,7 @@
                         <table class="display" id="basic-3">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>ডাইরি নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>পেমেন্ট</th>
                                 <th>স্ট্যাটাস</th>
@@ -363,7 +363,7 @@
 
                                 <?php
  $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
+                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id', $fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
                                   if($getngoForLanguage =='দেশিও'){
@@ -409,7 +409,7 @@
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$all_data_for_new_list_all->id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 

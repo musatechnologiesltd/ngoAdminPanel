@@ -62,6 +62,15 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'notice',
+                'permissions' => [
+                    'noticeAdd',
+                    'noticeView',
+                    'noticeDelete',
+                    'noticeUpdate',
+                ]
+            ],
+            [
                 'group_name' => 'fd9Form',
                 'permissions' => [
                     'fd9FormAdd',

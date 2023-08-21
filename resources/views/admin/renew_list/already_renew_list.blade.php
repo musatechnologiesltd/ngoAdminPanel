@@ -38,7 +38,7 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>ডাইরি নম্বর </th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>পেমেন্ট</th>
                                 <th>স্ট্যাটাস</th>
@@ -65,7 +65,7 @@
 
                                 ?>
                             <tr>
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number_given_by_admin) }}</td>
+                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number) }}</td>
                                 <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">

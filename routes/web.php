@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Fd9OneController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\DesignationStepController;
+use App\Http\Controllers\Admin\NoticeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.dashboard');
 
 
+    Route::resource('noticeList', NoticeController::class);
     Route::resource('branchList', BranchController::class);
 
     Route::controller(BranchController::class)->group(function () {
@@ -88,6 +90,11 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/downloadForwardingLetter/{id}','downloadForwardingLetter')->name('downloadForwardingLetter');
         Route::post('/postForwardingLetter','postForwardingLetter')->name('postForwardingLetter');
+
+        Route::post('/postForwardingLetterForEdit','postForwardingLetterForEdit')->name('postForwardingLetterForEdit');
+
+
+
         Route::post('/forwardingLetterPost','forwardingLetterPost')->name('forwardingLetterPost');
         Route::get('/fdNinePdfDownload/{id}','fdNinePdfDownload')->name('fdNinePdfDownload');
         Route::get('/nVisaDocumentDownload/{cat}/{id}', 'nVisaDocumentDownload')->name('nVisaDocumentDownload');
@@ -101,7 +108,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fd9OneForm', Fd9OneController::class);
 
     Route::controller(Fd9OneController::class)->group(function () {
-
+        Route::post('/statusUpdateForFd9One', 'statusUpdateForFd9One')->name('statusUpdateForFd9One');
         Route::get('/fd9OneDownload/{cat}/{id}', 'fd9OneDownload')->name('fd9OneDownload');
     });
 
@@ -111,6 +118,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::post('/updateStatusRegForm', [RegisterController::class, 'updateStatusRegForm'])->name('updateStatusRegForm');
     Route::get('/printCertificateView', [RegisterController::class, 'printCertificateView'])->name('printCertificateView');
+
+    Route::get('/printCertificateViewDemo', [RegisterController::class, 'printCertificateViewDemo'])->name('printCertificateViewDemo');
 
 
     Route::get('/formOnePdf/{main_id}/{id}', [RegisterController::class, 'formOnePdf'])->name('formOnePdf');
@@ -140,6 +149,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/updateStatusRenewForm', [RenewController::class, 'updateStatusRenewForm'])->name('updateStatusRenewForm');
 
 
+    Route::controller(RenewController::class)->group(function () {
+
+    Route::get('changeAcNumberDownload/{id}', 'changeAcNumberDownload')->name('changeAcNumberDownload');
+    Route::get('dueVatPdfDownload/{id}', 'dueVatPdfDownload')->name('dueVatPdfDownload');
+    Route::get('copyOfChalanPdfDownload/{id}', 'copyOfChalanPdfDownload')->name('copyOfChalanPdfDownload');
+    Route::get('yearlyBudgetPdfDownload/{id}', 'yearlyBudgetPdfDownload')->name('yearlyBudgetPdfDownload');
+    Route::get('foreginPdfDownload/{id}', 'foreginPdfDownload')->name('foreginPdfDownload');
+    Route::get('verifiedFdEightDownload/{id}', 'verifiedFdEightDownload')->name('verifiedFdEightDownload');
+
+});
 
 
     Route::get('/newRegistrationList', [RegisterController::class, 'newRegistrationList'])->name('newRegistrationList');
@@ -168,6 +187,17 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::controller(AdminController::class)->group(function () {
+
+        Route::post('/checkMailPost', 'checkMailPost')->name('checkMailPost');
+        Route::get('/forgetPassword', 'forgetPassword')->name('forgetPassword');
+        Route::get('/checkMailForPassword', 'checkMailForPassword')->name('checkMailForPassword');
+
+
+        Route::get('/newEmailNotify', 'newEmailNotify')->name('newEmailNotify');
+
+
+
+
         Route::post('/postPasswordChange', 'postPasswordChange')->name('postPasswordChange');
         Route::get('/accountPasswordChange/{id}', 'accountPasswordChange')->name('accountPasswordChange');
     });

@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 <ul>
     <li>নাম: {{ $user->admin_name }}</li>
     <li>ইমেইল: {{ $user->email }}</li>
@@ -36,5 +40,10 @@
 
 
                                     <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                        জমা দিন 
+                                        জমা দিন
                                      </button>
+                                     <script>
+                                        $( function() {
+                                          $( ".datepicker233" ).datepicker();
+                                        } );
+                                        </script>

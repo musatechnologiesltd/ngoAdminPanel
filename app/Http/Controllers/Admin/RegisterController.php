@@ -231,6 +231,37 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
     }
 
 
+    public function printCertificateViewDemo(Request $request){
+//dd(11);
+        $user_id = $request->user_id;
+
+        $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
+
+        $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+        //dd($user_id);
+
+        $newyear = date('y', strtotime($request->main_date));
+
+        $newmonth = date('F', strtotime($request->main_date));
+
+
+        $newdate = date('d', strtotime($request->main_date));
+
+        $word = $this->numberToWord($newyear);
+        $word1 = $this->numberToWord($newdate);
+        //dd($word1);
+
+        //dd($newdate);
+$mainDate = $request->main_date;
+        $file_Name_Custome = 'certificate';
+        $pdf=PDF::loadView('admin.registration_list.printCertificateViewDemo',['newyear'=>$newyear,
+'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
+'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
+return $pdf->stream($file_Name_Custome.''.'.pdf');
+ }
+
+
     public function updateStatusRegForm(Request $request){
 
         // $data_save = DB::table('ngo_statuses')->find($request->id);

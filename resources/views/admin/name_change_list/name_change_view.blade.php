@@ -141,16 +141,16 @@
                             </div>
                             <div class="card-body">
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
+                                    {{-- <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                         data-bs-toggle="pill" href="#pills-darkhome"
                                         role="tab" aria-controls="pills-darkhome"
                                         aria-selected="true" style=""><i
-                                class="icofont icofont-ui-home"></i>এফডি -০১ ফর্ম</a></li>
-                <li class="nav-item"><a class="nav-link" id="pills-darkprofile-tab"
+                                class="icofont icofont-ui-home"></i>এফডি -০১ ফর্ম</a></li> --}}
+                <li class="nav-item"><a class="nav-link active" id="pills-darkprofile-tab"
                                         data-bs-toggle="pill" href="#pills-darkprofile"
                                         role="tab" aria-controls="pills-darkprofile"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-man-in-glasses"></i>এফডি -০৮ ফর্ম</a>
+                                class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
                                         data-bs-toggle="pill" href="#pills-darkcontact"
@@ -161,7 +161,7 @@
                                         data-bs-toggle="pill" href="#pills-darkinfo"
                                         role="tab" aria-controls="pills-darkinfo"
                                         aria-selected="false" style=""><i
-                                class="icofont icofont-address-book"></i>অন্যান্য সদস্য</a>
+                                class="icofont icofont-address-book"></i>সাধারণ সদস্যের তালিকা </a>
                 </li>
 
 
@@ -199,7 +199,7 @@
 
                                 </ul>
                                 <div class="tab-content" id="pills-darktabContent">
-                                    <div class="tab-pane fade active show" id="pills-darkhome"
+                                    <div class="tab-pane fade" id="pills-darkhome"
                                          role="tabpanel" aria-labelledby="pills-darkhome-tab">
                                         <div class="mb-0 m-t-30">
                                             <table class="table table-bordered">
@@ -234,7 +234,7 @@
                                                 <tr>
                                                     <td></td>
                                                     <td>(iii)</td>
-                                                    <td>নিবন্ধন নম্বর</td>
+                                                    <td>ডাইরি নম্বর </td>
                                                     <td>:
 
                                                       @if($form_one_data->registration_number == 0)
@@ -529,7 +529,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="tab-pane fade" id="pills-darkprofile" role="tabpanel"
+                                    <div class="tab-pane fade active show" id="pills-darkprofile" role="tabpanel"
                                          aria-labelledby="pills-darkprofile-tab">
                                         <div class="mb-0 m-t-30">
                                           <div class="table-responsive">
@@ -966,7 +966,7 @@
     <tr>
         <td></td>
         <td>(i)</td>
-        <td>নিবন্ধন নম্বর</td>
+        <td>ডাইরি নম্বর </td>
         <td>:
 
 
@@ -990,13 +990,13 @@
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $form_one_data->organization_name }}</td>
+        <td>: {{ $form_one_data->organization_name_ban }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(iii)</td>
         <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $form_one_data->address_of_head_office_eng }}</td>
+        <td>: {{ $form_one_data->address_of_head_office }}</td>
     </tr>
 
     <tr>

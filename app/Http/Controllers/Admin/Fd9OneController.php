@@ -20,6 +20,7 @@ class Fd9OneController extends Controller
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
+       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId')
        ->orderBy('fd9_one_forms.id','desc')
        ->get();
 
@@ -28,11 +29,28 @@ class Fd9OneController extends Controller
 
        }
 
+
+       public function statusUpdateForFd9One(Request $request){
+
+
+        DB::table('fd9_one_forms')->where('id',$request->id)
+        ->update([
+            'status' => $request->status
+        ]);
+
+
+        return redirect()->back()->with('success','Updated successfully!');
+
+
+
+       }
+
        public function show($id){
 
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
         ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
+        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId')
         ->orderBy('fd9_one_forms.id','desc')
         ->where('fd9_one_forms.id',$id)
         ->first();

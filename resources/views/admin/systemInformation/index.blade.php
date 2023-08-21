@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-সিস্টেম এর তথ্য 
+সিস্টেম এর তথ্য
 @endsection
 
 
@@ -98,6 +98,14 @@
                                                                              </div>
                                                                          </div>
 
+                                                                         <div class="col-md-6">
+                                                                            <div class="mb-4">
+                                                                                <label for="formrow-inputZip" class="form-label">অ্যাডমিন ইউআরএল</label>
+                                                                                <input name="admin_url"  type="text" class="form-control" id="formrow-inputZip" placeholder="ইউআরএল" required>
+                                                                                <small></small>
+                                                                            </div>
+                                                                        </div>
+
 
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
@@ -151,6 +159,7 @@
                                     <th>ফোন নম্বর</th>
                                     <th>ইমেইল</th>
                                     <th>ইউআরএল</th>
+                                    <th>অ্যাডমিন ইউআরএল</th>
                                     <th>ঠিকানা</th>
                                     <th>কার্যকলাপ</th>
                                 </tr>
@@ -164,6 +173,7 @@
                                     <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allSystemInformation->system_phone) }}</td>
                                     <td>{{ $allSystemInformation->system_email }}</td>
                                     <td>{{ $allSystemInformation->system_url }}</td>
+                                    <td>{{ $allSystemInformation->system_admin_url }}</td>
                                     <td>{{ $allSystemInformation->system_address }}</td>
                                     <td>
                                         <a data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key+1 }}" class="btn btn-primary waves-light waves-effect  btn-sm"><i class="fa fa-pencil"></i></a>
@@ -232,6 +242,14 @@
                                                                 <div class="mb-4">
                                                                     <label for="formrow-inputZip" class="form-label">ইউআরএল</label>
                                                                     <input name="url" value="{{ $allSystemInformation->system_url }}"  type="text" class="form-control" id="formrow-inputZip" placeholder="ইউআরএল" required>
+                                                                    <small></small>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="mb-4">
+                                                                    <label for="formrow-inputZip" class="form-label">অ্যাডমিন ইউআরএল</label>
+                                                                    <input name="admin_url"  type="text" value="{{ $allSystemInformation->system_admin_url }}" class="form-control" id="formrow-inputZip" placeholder="ইউআরএল" required>
                                                                     <small></small>
                                                                 </div>
                                                             </div>

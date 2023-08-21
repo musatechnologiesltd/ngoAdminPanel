@@ -14,6 +14,7 @@ use PDF;
 use File;
 use Carbon\Carbon;
 use Response;
+use App\Models\Fd9ForwardingLetterEdit;
 use App\Models\ForwardingLetter;
 use App\Models\ForwardingLetterOnulipi;
 use App\Models\SecruityCheck;
@@ -45,6 +46,28 @@ class Fd9Controller extends Controller
         ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
         ->where('fd9_forms.id',$id)
         ->first();
+
+
+
+        $forwardingLettreDate = ForwardingLetter::where('fd9_form_id',$id)
+        ->orderBy('id','desc')->value('updated_at');
+
+
+        $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
+->orderBy('id','desc')->value('id');
+
+
+               $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+                      ->get();
+
+$editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+->orderBy('id','desc')->value('pdf_part_one');
+
+
+$editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+->orderBy('id','desc')->value('pdf_part_two');
+
+//dd($editCheck);
 
 
         $ngoStatus = DB::table('ngo_statuses')
@@ -95,11 +118,13 @@ class Fd9Controller extends Controller
 
    //dd($previous);
 
-   if(empty($previous)){
+
 
 
     $pdf=PDF::loadView('admin.fd9form.downloadForwardingLetter',[
-
+        'forwardingLettreDate'=>$forwardingLettreDate,
+'editCheck'=>$editCheck,
+'editCheck1'=>$editCheck1,
         'ngoStatus'=>$ngoStatus,
         'nVisaWorkPlace'=>$nVisaWorkPlace,
         'nVisaSponSor'=>$nVisaSponSor,
@@ -121,11 +146,7 @@ class Fd9Controller extends Controller
             array('forwarding_letter' =>'uploads/forwardingLetter/'.$file_Name_Custome.'.pdf')
         );
 
-    }else{
-//dd(44);
 
-
-    }
 
 
     }
@@ -142,6 +163,21 @@ class Fd9Controller extends Controller
      ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
      ->where('fd9_forms.id',$id)
      ->first();
+
+
+     $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
+     ->orderBy('id','desc')->value('id');
+
+     $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+     ->get();
+     $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_one');
+
+
+     $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_two');
+
+
 
 
      $ngoStatus = DB::table('ngo_statuses')
@@ -178,7 +214,58 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-         return view('admin.fd9form.show',compact('statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show',compact('forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+
+    }
+
+    public function postForwardingLetterForEdit(Request $request){
+
+//dd($request->all());
+
+$forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$request->fd9_id)
+->orderBy('id','desc')->value('id');
+
+
+$editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+->orderBy('id','desc')->value('id');
+
+
+$number=count($request->name);
+ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)->delete();
+if($number >0){
+    for($i=0;$i<$number;$i++){
+
+        $forwardingLetterPostON = new ForwardingLetterOnulipi();
+        $forwardingLetterPostON->forwarding_letter_id = $forwardId;
+        $forwardingLetterPostON->onulipi_name  =$request->name[$i];
+        $forwardingLetterPostON->save();
+
+    }
+
+}
+
+
+if(empty($editCheck)){
+
+
+        $saveData = new Fd9ForwardingLetterEdit();
+        $saveData->forwarding_letter_id  = $forwardId;
+        $saveData->pdf_part_one =$request->pdf_body_one;
+        $saveData->pdf_part_two=$request->pdf_body_two;
+        $saveData->save();
+
+}else{
+
+    Fd9ForwardingLetterEdit::where('forwarding_letter_id', $forwardId)
+    ->update([
+        'pdf_part_one' => $request->pdf_body_one,
+        'pdf_part_two' => $request->pdf_body_two
+     ]);
+
+}
+
+    $uploadForwardingLetter = $this->downloadForwardingLetter($request->fd9_id);
+    return redirect()->back()->with('success','Updated successfully!');
 
     }
 
@@ -217,9 +304,11 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         ->value('verified_fd_nine_form');
 
         $file_path = $data->system_url.'public/'.$get_file_data;
-                                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
         $file=$data->system_url.'public/'.$get_file_data;
+
+        //dd($file);
 
         $headers = array(
                   'Content-Type: application/pdf',

@@ -12,6 +12,7 @@ use App\Models\Namechange;
 use App\Models\Renew;
 use App\Models\Duration;
 use Carbon\Carbon;
+use Response;
 class RenewController extends Controller
 {
     public $user;
@@ -101,6 +102,13 @@ class RenewController extends Controller
             $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
 
 
+
+            $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->first();
+
+            //dd($renewInfoData);
+
+
+
             $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
 
 
@@ -139,7 +147,7 @@ class RenewController extends Controller
 
 
 
-        return view('admin.renew_list.view',compact('mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+        return view('admin.renew_list.view',compact('renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
     }
 
 
@@ -191,4 +199,150 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
 
         return redirect()->back()->with('success','Updated Successfully');
     }
+
+
+    public function foreginPdfDownload($id){
+
+        $data = DB::table('system_information')->first();
+
+        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('foregin_pdf');
+
+        $file_path = $data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        // return Response::download($file,$filename.'.pdf', $headers);
+
+        return Response::make(file_get_contents($file), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+    }
+
+    public function yearlyBudgetPdfDownload($id){
+
+        $data = DB::table('system_information')->first();
+
+        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('yearly_budget');
+
+        $file_path = $data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        // return Response::download($file,$filename.'.pdf', $headers);
+
+        return Response::make(file_get_contents($file), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+    }
+
+    public function copyOfChalanPdfDownload($id){
+
+        $data = DB::table('system_information')->first();
+
+
+        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('copy_of_chalan');
+
+        $file_path = $data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        // return Response::download($file,$filename.'.pdf', $headers);
+
+        return Response::make(file_get_contents($file), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+
+    }
+
+    public function dueVatPdfDownload($id){
+
+        $data = DB::table('system_information')->first();
+
+
+        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('due_vat_pdf');
+
+        $file_path = $data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        // return Response::download($file,$filename.'.pdf', $headers);
+
+        return Response::make(file_get_contents($file), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+    }
+        public function changeAcNumberDownload($id){
+
+            $data = DB::table('system_information')->first();
+
+            $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('change_ac_number');
+
+            $file_path = $data->system_url.'public/'.$get_file_data;
+            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+    $file=$data->system_url.'public/'.$get_file_data;
+
+            $headers = array(
+                      'Content-Type: application/pdf',
+                    );
+
+            // return Response::download($file,$filename.'.pdf', $headers);
+
+            return Response::make(file_get_contents($file), 200, [
+                'content-type'=>'application/pdf',
+            ]);
+
+        }
+
+
+        public function verifiedFdEightDownload($id){
+
+            //dd(11);
+
+            $data = DB::table('system_information')->first();
+
+
+            $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('verified_form');
+
+
+
+
+            $file_path = $data->system_url.'public/'.$get_file_data;
+            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+    $file=$data->system_url.'public/'.$get_file_data;
+
+
+
+            $headers = array(
+                      'Content-Type: application/pdf',
+                    );
+
+            // return Response::download($file,$filename.'.pdf', $headers);
+
+            return Response::make(file_get_contents($file), 200, [
+                'content-type'=>'application/pdf',
+            ]);
+
+        }
 }

@@ -40,7 +40,7 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>এনজিও নিবন্ধন নম্বর</th>
+                                <th>এনজিও ডাইরি নম্বর </th>
                                 <th>এনজিওর নাম & ঠিকানা</th>
                                 <th>বিদেশীর নাম</th>
                                 <th>স্টেটাস</th>
@@ -65,7 +65,7 @@ Confirmed
                                 </td>
                                 <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allDataFromNVisaFd9Fd1->created_at) }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allDataFromNVisaFd9Fd1->id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allDataFromNVisaFd9Fd1->mainId) }}';">বিস্তারিত দেখুন</button>
                                 </td>
                             </tr>
                             @endforeach
