@@ -390,7 +390,7 @@
                                                     <td></td>
                                                     <td>(ঙ)</td>
                                                     <td>যোগদানের তারিখ</td>
-                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->date_of_join) }}</td>
+                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($all_all_parti->date_of_join))) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -402,14 +402,14 @@
                                                     <td></td>
                                                     <td>(ছ)</td>
                                                     <td>মোবাইল নম্বর </td>
-                                                    <td>: {{ $all_all_parti->salary_statement }}</td>
+                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->mobile) }}</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td></td>
                                                     <td>(জ)</td>
                                                     <td>ইমেইল এড্রেস</td>
-                                                    <td>: {{ $all_all_parti->salary_statement }}</td>
+                                                    <td>: {{ $all_all_parti->email }}</td>
                                                 </tr>
 
 
