@@ -297,7 +297,7 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                         <tr>
                                             <td>২২.</td>
                                             <td>এ প্রকল্পে কতজন বিদেশির পদের সংস্থান রয়েছে এবং কর্মরত কতজন</td>
-                                            <td>: {{ $dataFromNVisaFd9Fd1->fd9_post_available_for_foreigner_and_working }}</td>
+                                            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromNVisaFd9Fd1->fd9_post_available_for_foreigner_and_working) }}</td>
                                         </tr>
                                         <tr>
                                             <td>২৩.</td>
@@ -307,7 +307,7 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                         <tr>
                                             <td>২৪.</td>
                                             <td>সংস্থায় বর্তমানে কতজন বিদেশি নাগরিক কর্মরত আছেন</td>
-                                            <td>: {{ $dataFromNVisaFd9Fd1->fd9_total_foreigner_working }}</td>
+                                            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromNVisaFd9Fd1->fd9_total_foreigner_working) }}</td>
                                         </tr>
                                         <tr>
                                             <td>২৫.</td>

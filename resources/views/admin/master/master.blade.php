@@ -58,8 +58,8 @@
         </style>
         @yield('css')
 
-        <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script>
-
+        {{-- <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script> --}}
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
         <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
 <script src="{{ asset('/')}}public/parsely1.js"></script>
@@ -310,9 +310,17 @@
        $(".datepicker233").datepicker({
            dateFormat: "dd-mm-yy",
            changeMonth: true,
-           changeYear: true
+           changeYear: true,
+           calendarWeeks: true,
+    todayHighlight: true,
+    autoclose: true
        });
    });
+
+
+ 
+
+
      </script>
 
      <script>
