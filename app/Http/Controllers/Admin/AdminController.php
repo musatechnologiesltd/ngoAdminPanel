@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function checkMailPost(Request $request){
 
-           
+
 
         Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
             $message->to($request->email);
@@ -309,12 +309,16 @@ class AdminController extends Controller
 
   public function employeeEndDatePost(request $request){
 
+//dd($request->all());
+
+$admin_job_end_date = date('Y-m-d', strtotime($request->admin_job_end_date));
+
 
     $getTheAdminValue = Admin::where('id',$request->id)->first();
 
  $admins = Admin::find($request->id);
  $admins->admin_job_end_start_date =$getTheAdminValue->admin_job_start_date;
- $admins->admin_job_end_date = $request->admin_job_end_date;
+ $admins->admin_job_end_date = $admin_job_end_date;
  $admins->admin_job_start_date = $request->admin_job_start_date;
 //  $admins->designation_list_id = $request->designation_list_id;
 //  $admins->branch_id = $request->branch_id;
@@ -325,7 +329,7 @@ class AdminController extends Controller
  $jobHistory->admin_id  = $request->id;
  $jobHistory->designation_list_id  =$getTheAdminValue->designation_list_id;
  $jobHistory->start_date  = $getTheAdminValue->admin_job_start_date;
- $jobHistory->end_date  = $request->admin_job_end_date;
+ $jobHistory->end_date  = $admin_job_end_date;
 
  return redirect()->back()->with('info','Added successfully!');
   }

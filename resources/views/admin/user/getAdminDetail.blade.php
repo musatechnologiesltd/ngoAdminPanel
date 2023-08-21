@@ -43,7 +43,11 @@
                                         জমা দিন
                                      </button>
                                      <script>
-                                        $( function() {
-                                          $( ".datepicker233" ).datepicker();
-                                        } );
-                                        </script>
+                                        $(function(){
+                                           $(".datepicker233").datepicker({
+                                               dateFormat: "dd-mm-yy",
+                                               changeMonth: true,
+                                               changeYear: true
+                                           });
+                                       });
+                                         </script>

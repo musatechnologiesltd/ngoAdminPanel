@@ -15,4 +15,9 @@ class ForwardingLetter extends Model
     {
         return $this->hasMany(ForwardingLetterOnulipi::class,'forwarding_letter_id');
     }
+
+    public function fd9ForwardingLetterEdit()
+    {
+        return $this->hasMany(Fd9ForwardingLetterEdit::class,'forwarding_letter_id');
+    }
 }
