@@ -71,6 +71,15 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'post',
+                'permissions' => [
+                    'postAdd',
+                    'postView',
+                    'postDelete',
+                    'postUpdate',
+                ]
+            ],
+            [
                 'group_name' => 'fd9Form',
                 'permissions' => [
                     'fd9FormAdd',

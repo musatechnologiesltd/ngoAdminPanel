@@ -53,7 +53,7 @@
                                     <th>ছবি</th>
                                     <th>স্বাক্ষর</th>
                                     <th>নাম</th>
-                                    <th>উপাধি</th>
+                                    <th>পদবী</th>
                                     <th>শাখা</th>
                                    <th>মোবাইল নম্বর</th>
                                     <th>ইমেইল</th>
@@ -96,7 +96,12 @@
 
                                     <td>{{ $user->admin_name }}</td>
 
-                                    <td>     <?php
+                                    <td>
+@if($user->designation_list_id == 1)
+
+@else
+
+                                        <?php
 
                                         $desiName = DB::table('designation_lists')
                                         ->where('id',$user->designation_list_id)
@@ -104,14 +109,25 @@
 
 
                                             ?>
-                                            {{ $desiName }}</td>
-                                    <td><?php
+                                            {{ $desiName }}
+@endif
+
+                                        </td>
+                                    <td>
+                                        @if($user->branch_id == 1)
+
+                                        @else
+
+                                        <?php
 
                                         $branchName = DB::table('branches')->where('id',$user->branch_id)->value('branch_name');
 
 
                                             ?>
-                                            {{ $branchName }}</td>
+                                            {{ $branchName }}
+@endif
+
+                                        </td>
                                     <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($user->admin_mobile) }}</td>
 
                                     <td>{{ $user->email }}</td>

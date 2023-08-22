@@ -58,9 +58,11 @@ return $designationCount;
             return redirect()->route('mainLogin');
                }
 
-          $branchLists = Branch::where('id','!=',1)->latest()->get();
+          $branchLists = Branch::where('id','!=',1)->get();
 
           $stepValue = Branch::orderBy('id','desc')->max('branch_step');
+
+          //dd($stepValue);
 
                return view('admin.branchList.index',compact('branchLists','stepValue'));
            }

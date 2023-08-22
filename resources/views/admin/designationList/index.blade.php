@@ -180,6 +180,9 @@
 
 {{-- <button type="button" class="btn btn-primary waves-light waves-effect  btn-sm" onclick="window.location.href='{{ route('admin.users.view',$AllDesignationLists->id) }}'"><i class="fa fa-eye"></i></button> --}}
 
+@if($AllDesignationLists->id == 2)
+
+@else
                             @if (Auth::guard('admin')->user()->can('designationDelete'))
 
 <button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm" onclick="deleteTag({{ $AllDesignationLists->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
@@ -188,6 +191,7 @@
                                               @csrf
 
                                           </form>
+                                          @endif
                                           @endif
                                 </td>
                             </tr>

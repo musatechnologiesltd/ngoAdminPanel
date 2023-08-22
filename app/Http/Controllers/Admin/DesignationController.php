@@ -45,7 +45,7 @@ class DesignationController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
-               $branchLists = Branch::where('id','!=',1)->latest()->get();
+               $branchLists = Branch::where('id','!=',1)->get();
           $designationLists = DesignationList::where('id','!=',1)->
           orderBy(
             Branch::select('branch_step')
@@ -135,7 +135,7 @@ class DesignationController extends Controller
             }
 
 
-            dd($request->all());
+           // dd($request->all());
 
             $medicine = DesignationList::findOrFail($id);
 

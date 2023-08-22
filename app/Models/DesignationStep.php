@@ -10,8 +10,5 @@ class DesignationStep extends Model
     use HasFactory;
     protected $fillable = ['designation_list_id','designation_step','designation_serial'];
 
-    public function designationListMain()
-    {
-        return $this->belongsTo(DesignationList::class,'designation_list_id');
-    }
+   
 }

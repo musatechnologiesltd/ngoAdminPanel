@@ -16,6 +16,7 @@ use App\Models\Branch;
 use App\Models\Admin;
 use App\Models\DesignationList;
 use App\Models\DesignationStep;
+use App\Models\AdminDesignationHistory;
 class DesignationStepController extends Controller
 {
     public $user;
@@ -91,6 +92,12 @@ class DesignationStepController extends Controller
                 $newData->save();
 
 
+
+                $saveHistoryData = new AdminDesignationHistory();
+                $saveHistoryData->admin_id = $request->adminId;
+                $saveHistoryData->admin_job_start_date = $dateFormate;
+                $saveHistoryData->designation_list_id = $request->designation_list_id;
+                $saveHistoryData->save();
 
 
             //   }
