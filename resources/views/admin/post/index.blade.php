@@ -59,7 +59,7 @@
                                             {{-- সিধান্তঃ <span style="color:blue;"> বিধি মোতাবেক বাবস্থা নিন। </span> --}}
                                         </td>
                                         <td style="text-align:right;">
-                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('dakBranchList.show',$allStatusData->id) }}';">View</button>
+                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">View</button>
                                         </td>
                                     </tr>
                                     @endforeach

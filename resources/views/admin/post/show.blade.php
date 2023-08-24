@@ -103,7 +103,7 @@
                                     <button class="btn btn-primary"><i class="fa fa-send"></i>
                                         প্রেরন
                                     </button>
-                                    <a class="btn btn-outline-success me-2" href = "{{ route('createSeal') }}"><i class="fa fa-plus"></i> নতুন
+                                    <a class="btn btn-outline-success me-2" href = "{{ route('createSeal',$id) }}"><i class="fa fa-plus"></i> নতুন
                                         সিল বানান
                                     </a>
                                 </div>
@@ -129,22 +129,40 @@
                                                 <th>জ্ঞাতার্থে অনুলিপি</th>
                                                 <th>দৃষ্টি আকর্ষণ</th>
                                             </tr>
+                                            @foreach($allRegistrationDak as $showAllRegistrationDak)
+
+                                            <?php
+                                            $adminName = DB::table('admins')
+                                            ->where('id',$showAllRegistrationDak->receiver_admin_id)->value('admin_name_ban');
+
+                                            $designationId = DB::table('admin_designation_histories')
+                                            ->where('admin_id',$showAllRegistrationDak->receiver_admin_id)
+                                            ->value('designation_list_id');
+
+                                            $designationName = DB::table('designation_lists')
+                                            ->where('id',$designationId)->value('designation_name');
+
+                                            $branchId = DB::table('designation_lists')
+                                            ->where('id',$designationId)->value('branch_id');
+
+                                            $branchName = DB::table('branches')
+                                            ->where('id',$branchId)->value('branch_name');
+?>
                                             <tr>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <button class="btn btn-outline-success"><i class="fa fa-trash"></i></button>
                                                     </div>
                                                 </td>
-                                                <td>মহাপরিচালক, মহাপরিচালক মহোদয়ের শাখা, এঞ্জিও বিশয়ক
-                                                    ব্যুরো
+                                                <td>{{ $branchName }}, {{ $designationName }}
                                                 </td>
-                                                <td>শেখ মোঃ মনিরুজ্জামান</td>
+                                                <td>{{ $adminName }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div>
                                                             <div class="md-radio">
-                                                                <input id="5" type="radio" name="">
-                                                                <label for="5"></label>
+                                                                <input  id="mul{{ $showAllRegistrationDak->id }}" type="radio" name="main_prapok">
+                                                                <label for="mul{{ $showAllRegistrationDak->id }}"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -152,9 +170,9 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
-                                                            <input id="check" class="custom_check"
-                                                                   type="checkbox"/>
-                                                            <label for="check" style="--d: 30px">
+                                                            <input id="check{{ $showAllRegistrationDak->id }}" class="custom_check"
+                                                                   type="checkbox" name="karjo_onulipi"/>
+                                                            <label for="check{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
                                                                 </svg>
@@ -165,9 +183,9 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
-                                                            <input id="check1" class="custom_check"
-                                                                   type="checkbox"/>
-                                                            <label for="check1" style="--d: 30px">
+                                                            <input id="icheck{{ $showAllRegistrationDak->id }}" class="custom_check"
+                                                                   type="checkbox" name="info_onulipi"/>
+                                                            <label for="icheck{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
                                                                 </svg>
@@ -178,9 +196,9 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
-                                                            <input id="check2" class="custom_check"
-                                                                   type="checkbox"/>
-                                                            <label for="check2" style="--d: 30px">
+                                                            <input id="echeck{{ $showAllRegistrationDak->id }}" class="custom_check"
+                                                                   type="checkbox" name="eye_onulipi"/>
+                                                            <label for="echeck{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
                                                                 </svg>
@@ -189,66 +207,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <button class="btn btn-outline-success"><i class="fa fa-trash"></i></button>
-                                                    </div>
-                                                </td>
-                                                <td>মহাপরিচালক, মহাপরিচালক মহোদয়ের শাখা, এঞ্জিও বিশয়ক
-                                                    ব্যুরো
-                                                </td>
-                                                <td>শেখ মোঃ মনিরুজ্জামান</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <div class="md-radio">
-                                                                <input id="1" type="radio" name="">
-                                                                <label for="1"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="custom_checkbox">
-                                                            <input id="check3" class="custom_check"
-                                                                   type="checkbox"/>
-                                                            <label for="check3" style="--d: 30px">
-                                                                <svg viewBox="0,0,50,50">
-                                                                    <path d="M5 30 L 20 45 L 45 5"></path>
-                                                                </svg>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="custom_checkbox">
-                                                            <input id="check4" class="custom_check"
-                                                                   type="checkbox"/>
-                                                            <label for="check4" style="--d: 30px">
-                                                                <svg viewBox="0,0,50,50">
-                                                                    <path d="M5 30 L 20 45 L 45 5"></path>
-                                                                </svg>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="custom_checkbox">
-                                                            <input id="check5" class="custom_check"
-                                                                   type="checkbox"/>
-                                                            <label for="check5" style="--d: 30px">
-                                                                <svg viewBox="0,0,50,50">
-                                                                    <path d="M5 30 L 20 45 L 45 5"></path>
-                                                                </svg>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @endforeach
+
                                         </table>
                                     </div>
                                 </div>
@@ -266,5 +226,11 @@
 
 
 @section('script')
+
+<script>
+
+$(document).on('click', '.passBranch1', function(){
+});
+</script>
 
 @endsection

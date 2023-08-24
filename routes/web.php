@@ -68,7 +68,14 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::controller(PostController::class)->group(function () {
-        Route::get('/createSeal', 'createSeal')->name('createSeal');
+        Route::get('/createSeal/{id}', 'createSeal')->name('createSeal');
+
+        Route::post('/dakListFirstStep', 'dakListFirstStep')->name('dakListFirstStep');
+
+        Route::get('/showDataAll/{status}/{id}', 'showDataAll')->name('showDataAll');
+
+        Route::get('/showDataDesignationWise', 'showDataDesignationWise')->name('showDataDesignationWise');
+        Route::get('/showDataBranchWise', 'showDataBranchWise')->name('showDataBranchWise');
 
     });
 
