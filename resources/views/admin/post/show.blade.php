@@ -35,7 +35,8 @@
                 <div class="card-header pb-0">
                     <h5>ডাক প্রেরণ করুন</h5>
                 </div>
-                <form class="form theme-form">
+                <form class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                    @csrf
                     <div class="card-body">
                         <h5>সিধান্তঃ বিধি মোতাবেক বাবস্থা নিন।</h5>
                         <div class="nothi_header_box">
@@ -43,69 +44,78 @@
                         </div>
                         <div class="form-group mt-3 m-checkbox-inline mb-0 custom-radio-ml">
                             <div class="radio radio-primary">
-                                <input id="radioinline1" type="radio" name="radio1" value="option1">
+                                <input id="radioinline1" type="radio" class="decision_list" name="decision_list" value="বিধি মোতাবেক বাবস্থা নিন">
                                 <label class="mb-0" for="radioinline1">বিধি মোতাবেক বাবস্থা নিন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="radioinline2" type="radio" name="radio1" value="option1">
+                                <input id="radioinline2" type="radio" class="decision_list" name="decision_list" value="নথিতে উপস্থাপন করুন">
                                 <label class="mb-0" for="radioinline2">নথিতে উপস্থাপন করুন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="radioinline3" type="radio" name="radio1" value="option1">
+                                <input id="radioinline3" type="radio" class="decision_list" name="decision_list" value="নথিজাত করুন">
                                 <label class="mb-0" for="radioinline3">নথিজাত করুন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="radioinline4" type="radio" name="radio1" value="option1">
-                                <label class="mb-0" for="radioinline4">সিধান্ত নিজে নিন</label>
+                                <input id="own_decision" type="radio" class="decision_list" name="decision_list" value="সিধান্ত নিজে নিন">
+                                <label class="mb-0" for="own_decision">সিধান্ত নিজে নিন</label>
                             </div>
                         </div>
-                        <select class="form-select digits mt-3" id="exampleFormControlSelect9">
-                            <option>দেখলাম কাজ শুরু হচ্ছে</option>
-                            <option>পেশ করুন</option>
-                            <option>তদন্ত পূর্বক প্রতিবেদন দিবেন</option>
-                            <option>দেখলাম পেশ করুন</option>
-                            <option>নথিজাত করুন</option>
+                        <select class="form-select digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail" >
+                            <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
+                            <option value="দেখলাম কাজ শুরু হচ্ছে">দেখলাম কাজ শুরু হচ্ছে</option>
+                            <option value="পেশ করুন">পেশ করুন</option>
+                            <option value="তদন্ত পূর্বক প্রতিবেদন দিবেন">তদন্ত পূর্বক প্রতিবেদন দিবেন</option>
+                            <option value="দেখলাম পেশ করুন">দেখলাম পেশ করুন</option>
+                            <option value="নথিজাত করুন">নথিজাত করুন</option>
                         </select>
                         <div class="nothi_header_box">
-                            <span>বিধি মোতাবেক ব্যবস্থা নিন</span>
+                            <span id="result_one">বিধি মোতাবেক ব্যবস্থা নিন</span>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-sm-12">
                                 <div class="mb-3">
                                     <label class="form-label"
                                            for="exampleInputPassword21">অগ্রাধিকার</label>
-                                    <select class="form-select digits" id="exampleFormControlSelect9">
-                                        <option>সর্বচ্চ অগ্রাধিকার</option>
-                                        <option>অবিলম্বে</option>
-                                        <option>জরুরী</option>
+                                    <select class="form-select digits" name="priority_list" id="exampleFormControlSelect9" required>
+                                        <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
+                                        <option value="সর্বচ্চ অগ্রাধিকার">সর্বচ্চ অগ্রাধিকার</option>
+                                        <option value="অবিলম্বে">অবিলম্বে</option>
+                                        <option value="জরুরী">জরুরী</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="exampleInputPassword21">গোপনীয়তা</label>
-                                    <select class="form-select digits" id="exampleFormControlSelect9">
-                                        <option>গোপনীয়তা বাছাই করুন</option>
-                                        <option>অতি গোপনীয়তা</option>
-                                        <option>বিশেষ গোপনীয়</option>
-                                        <option>গোপনীয়</option>
-                                        <option>সিমিত</option>
+                                    <select class="form-select digits" name="secret_list" id="exampleFormControlSelect9" required>
+
+                                        <option value="">গোপনীয়তা বাছাই করুন</option>
+                                        <option value="অতি গোপনীয়তা">অতি গোপনীয়তা</option>
+                                        <option value="বিশেষ গোপনীয়">বিশেষ গোপনীয়</option>
+                                        <option value="গোপনীয়">গোপনীয়</option>
+                                        <option value="সিমিত">সিমিত</option>
                                     </select>
                                 </div>
+                                <input value="{{ $mainstatus}}" type="hidden" name="mainstatus"/>
                             </div>
                         </div>
                         <div class=" nothi_header_box">
-                            <span>বিধি মোতাবেক ব্যবস্থা নিন</span>
+                            <span id="result_two">বিধি মোতাবেক ব্যবস্থা নিন</span>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row-reverse bd-highlight">
-                                    <button class="btn btn-primary"><i class="fa fa-send"></i>
+                                    <button  type="submit" class="btn btn-primary"><i class="fa fa-send"></i>
                                         প্রেরন
                                     </button>
-                                    <a class="btn btn-outline-success me-2" href = "{{ route('createSeal',$id) }}"><i class="fa fa-plus"></i> নতুন
+
+
+                                    <a class="btn btn-outline-success me-2" href = "{{ route('createSeal',['status'=>$mainstatus,'id'=>$id]) }}"><i class="fa fa-plus"></i> নতুন
                                         সিল বানান
                                     </a>
+
+
+
                                 </div>
                                 <ul class="nav nav-tabs" id="icon-tab" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="icon-home-tab"
@@ -150,18 +160,30 @@
 ?>
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex justify-content-center">
+                                                    {{-- <div class="d-flex justify-content-center">
                                                         <button class="btn btn-outline-success"><i class="fa fa-trash"></i></button>
+                                                    </div> --}}
+
+
+                                                    <div class="d-flex justify-content-center">
+                                                    <a  href="{{ route('deleteMemberList',$showAllRegistrationDak->id) }}" type="button" class="btn btn-outline-success"  ><i class="fa fa-trash"></i></a>
+
                                                     </div>
+
+
                                                 </td>
                                                 <td>{{ $branchName }}, {{ $designationName }}
                                                 </td>
                                                 <td>{{ $adminName }}</td>
                                                 <td>
+
+                                                    <input value="{{ $showAllRegistrationDak->id }}" type="hidden" name="receiverId[{{ $showAllRegistrationDak->id }}]"/>
+
+
                                                     <div class="d-flex justify-content-center">
                                                         <div>
                                                             <div class="md-radio">
-                                                                <input  id="mul{{ $showAllRegistrationDak->id }}" type="radio" name="main_prapok">
+                                                                <input class="main_prapok" data-mid ="{{ $showAllRegistrationDak->id }}" id="mul{{ $showAllRegistrationDak->id }}" value="1" type="radio" name="main_prapok{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]">
                                                                 <label for="mul{{ $showAllRegistrationDak->id }}"></label>
                                                             </div>
                                                         </div>
@@ -170,8 +192,8 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
-                                                            <input id="check{{ $showAllRegistrationDak->id }}" class="custom_check"
-                                                                   type="checkbox" name="karjo_onulipi"/>
+                                                            <input id="check{{ $showAllRegistrationDak->id }}" class="custom_check karjo_onulipi"
+                                                                   type="checkbox" name="karjo_onulipi{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]" value="1" data-mid="{{ $showAllRegistrationDak->id }}" />
                                                             <label for="check{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
@@ -183,8 +205,8 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
-                                                            <input id="icheck{{ $showAllRegistrationDak->id }}" class="custom_check"
-                                                                   type="checkbox" name="info_onulipi"/>
+                                                            <input id="icheck{{ $showAllRegistrationDak->id }}" class="custom_check info_onulipi"
+                                                                   type="checkbox" name="info_onulipi{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]" value="1" data-mid = "{{ $showAllRegistrationDak->id }}" />
                                                             <label for="icheck{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
@@ -196,8 +218,8 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
-                                                            <input id="echeck{{ $showAllRegistrationDak->id }}" class="custom_check"
-                                                                   type="checkbox" name="eye_onulipi"/>
+                                                            <input id="echeck{{ $showAllRegistrationDak->id }}" class="custom_check eye_onulipi"
+                                                                   type="checkbox" data-mid = "{{ $showAllRegistrationDak->id }}[]" value="1"  name="eye_onulipi{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]"/>
                                                             <label for="echeck{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
@@ -229,8 +251,105 @@
 
 <script>
 
-$(document).on('click', '.passBranch1', function(){
+$(document).on('click', '.main_prapok', function(){
+
+    var mainPrapokId = $(this).data('mid');
+
+
+    if($(this).is(':checked')){
+
+    $("#check"+mainPrapokId).prop('checked', false);
+    $("#icheck"+mainPrapokId).prop('checked', false);
+    $("#echeck"+mainPrapokId).prop('checked', false);
+    }
 });
+
+/////
+//karjo_onulipi
+$(document).on('click', '.karjo_onulipi', function(){
+
+    var mainPrapokId = $(this).data('mid');
+
+
+
+    if($(this).is(':checked')){
+
+
+$("#check"+mainPrapokId).prop('checked', true);
+$("#mul"+mainPrapokId).prop('checked', false);
+$("#icheck"+mainPrapokId).prop('checked', false);
+$("#echeck"+mainPrapokId).prop('checked', false);
+
+
+}
+
+});
+
+//info_onulipi
+
+$(document).on('click', '.info_onulipi', function(){
+
+var mainPrapokId = $(this).data('mid');
+
+
+
+if($(this).is(':checked')){
+
+
+$("#check"+mainPrapokId).prop('checked', false);
+$("#mul"+mainPrapokId).prop('checked', false);
+$("#icheck"+mainPrapokId).prop('checked', true);
+$("#echeck"+mainPrapokId).prop('checked', false);
+
+
+}
+
+});
+
+
+//eye_onulipi
+
+$(document).on('click', '.eye_onulipi', function(){
+
+var mainPrapokId = $(this).data('mid');
+
+
+
+if($(this).is(':checked')){
+
+
+$("#check"+mainPrapokId).prop('checked', false);
+$("#mul"+mainPrapokId).prop('checked', false);
+$("#icheck"+mainPrapokId).prop('checked', false);
+$("#echeck"+mainPrapokId).prop('checked', true);
+
+
+}
+
+});
+
+//decision list
+
+$(document).on('click', '.decision_list', function(){
+
+    var decisionVal = $(this).val();
+
+    $('#result_one').html(decisionVal);
+    $('#result_two').html(decisionVal);
+
+    if(decisionVal == 'সিধান্ত নিজে নিন'){
+
+        $('#decision_list_detail').show();
+
+
+    }else{
+        $('#decision_list_detail').hide();
+
+    }
+
+
+});
+
 </script>
 
 @endsection

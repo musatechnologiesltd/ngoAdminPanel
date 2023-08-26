@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ngo_registration_daks', function (Blueprint $table) {
+        Schema::create('ngo_f_d_nine_daks', function (Blueprint $table) {
             $table->id();
             $table->string('sender_admin_id')->nullable();
             $table->string('receiver_admin_id')->nullable();
-            $table->string('registration_status_id')->nullable();
+            $table->string('f_d_nine_status_id')->nullable();
             $table->string('original_recipient')->nullable();
             $table->string('copy_of_work')->nullable();
             $table->string('informational_purposes')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ngo_registration_daks');
+        Schema::dropIfExists('ngo_f_d_nine_daks');
     }
 };

@@ -49,6 +49,12 @@
 
                                      $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 
+                                     $decesionNameId = DB::table('ngo_registration_daks')
+                        ->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
+
+                                     $decesionName = DB::table('dak_details')
+                        ->where('id',$decesionNameId)->value('decision_list');
+
                                         ?>
                                     <tr>
                                         <td style="text-align:left;">
@@ -56,25 +62,125 @@
                                             প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                             প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
                                             বিষয়ঃ <b> এনজিও নিবন্ধনের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                                            {{-- সিধান্তঃ <span style="color:blue;"> বিধি মোতাবেক বাবস্থা নিন। </span> --}}
+                                            {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                         </td>
                                         <td style="text-align:right;">
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">View</button>
                                         </td>
                                     </tr>
                                     @endforeach
-                                    {{-- <tr>
-                                        <td style="text-align:left;">
-                                            উৎসঃ মনির হোসেন <br>
-                                            প্রেরকঃ মোঃ মনির হোসেন <span class="p-4"><i class="fa fa-user"></i>
-                                            প্রাপকঃ মোঃ খরশেদ আলম </span>  <br>
-                                            বিষয়ঃ <b> বিজ্ঞপ্তি/নোটিশ ০৪ জুন ২০২৩ </b> <br>
-                                            সিধান্তঃ <span style="color:blue;"> বিধি মোতাবেক বাবস্থা নিন। </span>
-                                        </td>
-                                        <td style="text-align:right;">
-                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = 'nothi_view.php';">View</button>
-                                        </td>
-                                    </tr> --}}
+
+                                    @foreach($all_data_for_renew_list as $allStatusData)
+
+                                    <?php
+
+                                 $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+                                 $decesionNameId = DB::table('ngo_renew_daks')
+                    ->where('renew_status_id',$allStatusData->id)->value('dak_detail_id');
+
+                                 $decesionName = DB::table('dak_details')
+                    ->where('id',$decesionNameId)->value('decision_list');
+
+                                    ?>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+                                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                        প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
+                                        বিষয়ঃ <b> এনজিও নিবন্ধন নবায়নের নোটিশ                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                        {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
+                                    </td>
+                                    <td style="text-align:right;">
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">View</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+
+
+                                @foreach($all_data_for_name_changes_list as $allStatusData)
+
+                                <?php
+
+                             $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+                             $decesionNameId = DB::table('ngo_name_change_daks')
+                ->where('name_change_status_id',$allStatusData->id)->value('dak_detail_id');
+
+                             $decesionName = DB::table('dak_details')
+                ->where('id',$decesionNameId)->value('decision_list');
+
+                                ?>
+                            <tr>
+                                <td style="text-align:left;">
+                                    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+                                    প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                    প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
+                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                    {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
+                                </td>
+                                <td style="text-align:right;">
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">View</button>
+                                </td>
+                            </tr>
+                            @endforeach
+
+
+                            @foreach($dataFdNine as $allStatusData)
+
+                            <?php
+
+                         $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+                         $decesionNameId = DB::table('ngo_f_d_nine_daks')
+            ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
+
+                         $decesionName = DB::table('dak_details')
+            ->where('id',$decesionNameId)->value('decision_list');
+
+                            ?>
+                        <tr>
+                            <td style="text-align:left;">
+                                উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+                                প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
+                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা) নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
+                            </td>
+                            <td style="text-align:right;">
+                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">View</button>
+                            </td>
+                        </tr>
+                        @endforeach
+
+
+                        @foreach($dataFdNineOne as $allStatusData)
+
+                        <?php
+
+                     $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+                     $decesionNameId = DB::table('ngo_f_d_nine_daks')
+        ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
+
+                     $decesionName = DB::table('dak_details')
+        ->where('id',$decesionNameId)->value('decision_list');
+
+                        ?>
+                    <tr>
+                        <td style="text-align:left;">
+                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+                            প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                            প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
+                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ                                      {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                            {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
+                        </td>
+                        <td style="text-align:right;">
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">View</button>
+                        </td>
+                    </tr>
+                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

@@ -68,9 +68,17 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::controller(PostController::class)->group(function () {
-        Route::get('/createSeal/{id}', 'createSeal')->name('createSeal');
+
+        Route::get('/deleteMemberList/{id}', 'deleteMemberList')->name('deleteMemberList');
+
+
+        Route::get('/createSeal/{status}/{id}', 'createSeal')->name('createSeal');
+
+
+
 
         Route::post('/dakListFirstStep', 'dakListFirstStep')->name('dakListFirstStep');
+        Route::post('/dakListSecondStep', 'dakListSecondStep')->name('dakListSecondStep');
 
         Route::get('/showDataAll/{status}/{id}', 'showDataAll')->name('showDataAll');
 
