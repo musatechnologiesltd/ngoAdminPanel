@@ -634,48 +634,76 @@ $mainDatac =DB::table('n_visa_compensation_and_benifits')
                 <td>Amount</td>
                 <td>Currency</td>
             </tr>
+            @if(!$basic)
+
+            @else
             <tr>
                 <td>a. Basic Salary</td>
                 <td>{{ $basic->payment_type }}</td>
                 <td>{{ $basic->amount }}</td>
                 <td>{{ $basic->currency }}</td>
             </tr>
+            @endif
+            @if(!$overseas)
+
+            @else
             <tr>
                 <td>b. Overseas allowance</td>
                 <td>{{ $overseas->payment_type }}</td>
                 <td>{{ $overseas->amount }}</td>
                 <td>{{ $overseas->currency }}</td>
             </tr>
+            @endif
+            @if(!$house)
+
+            @else
             <tr>
                 <td>c. House rent/Accommodation</td>
                 <td>{{ $house->payment_type }}</td>
                 <td>{{ $house->amount }}</td>
                 <td>{{ $house->currency }}</td>
             </tr>
+            @endif
+            @if(!$convoy)
+
+            @else
             <tr>
                 <td>d. Conveyance</td>
                 <td>{{ $convoy->payment_type }}</td>
                 <td>{{ $convoy->amount }}</td>
                 <td>{{ $convoy->currency }}</td>
             </tr>
+            @endif
+            @if(!$entertainment)
+
+            @else
             <tr>
                 <td>e. Entertainmemt allowance</td>
                 <td>{{ $entertainment->payment_type }}</td>
                 <td>{{ $entertainment->amount }}</td>
                 <td>{{ $entertainment->currency }}</td>
             </tr>
+            @endif
+            @if(!$medical)
+
+            @else
             <tr>
                 <td>f. Medical allowance<</td>
                 <td>{{ $medical->payment_type }}</td>
                 <td>{{ $medical->amount }}</td>
                 <td>{{ $medical->currency }}</td>
             </tr>
+            @endif
+            @if(!$annual)
+
+            @else
             <tr>
                 <td>g. Annual Bonus</td>
                 <td>{{ $annual->payment_type }}</td>
                 <td>{{ $annual->amount }}</td>
                 <td>{{ $annual->currency }}</td>
             </tr>
+            @endif
             <tr>
                 <td>h. Other fringe benefits, if any/td>
                 <td colspan="3">{{ $dataFromNVisaFd9Fd1->other_benefit }}</td>

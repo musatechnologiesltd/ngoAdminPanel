@@ -128,7 +128,7 @@ class CommonController extends Controller
 
    $nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
-      
+
       //dd($nVisaCompensationAndBenifits);
 
    $nVisaEmploye = DB::table('n_visa_employment_information')
@@ -346,27 +346,102 @@ $dataNew = DB::table('n_visa_necessary_document_for_work_permits')
 
        //compansation;
        $annual =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Annual Bonus')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Annual Bonus')->value('amount');
+
+
+       $annual1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Annual Bonus')->value('payment_type');
+
+
+       $annual2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Annual Bonus')->value('currency');
 
        $medical =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Medical Allowance')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Medical Allowance')->value('amount');
+
+       $medical1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Medical Allowance')->value('payment_type');
+
+       $medical2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Medical Allowance')->value('currency');
 
        $entertainment =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Entertainment Allowance')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Entertainment Allowance')->value('amount');
+
+
+       $entertainment1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Entertainment Allowance')->value('payment_type');
+
+
+       $entertainment2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Entertainment Allowance')->value('currency');
 
 
        $convoy =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Conveyance')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Conveyance')->value('amount');
+
+
+       $convoy1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Conveyance')->value('payment_type');
+
+       $convoy2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Conveyance')->value('currency');
 
        $house =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','House Rent')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','House Rent')->value('amount');
+
+
+       $house1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','House Rent')->value('payment_type');
+
+
+       $house2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','House Rent')->value('currency');
+
+
 
        $overseas =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Overseas Allowance')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Overseas Allowance')->value('amount');
 
+
+       $overseas1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Overseas Allowance')->value('payment_type');
+
+       $overseas2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Overseas Allowance')->value('currency');
+
+
+//dd($overseas);
 
        $basic =DB::table('n_visa_compensation_and_benifits')
-       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->where('salary_category','Basic Salary')->first();
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Basic Salary')->value('amount');
+
+       $basic1 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Basic Salary')->value('payment_type');
+
+       $basic2 =DB::table('n_visa_compensation_and_benifits')
+       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)
+       ->where('salary_category','Basic Salary')->value('currency');
 
 
 
@@ -412,48 +487,52 @@ $dataNew = DB::table('n_visa_necessary_document_for_work_permits')
         "other_benefit" =>$dataFromNVisaFd9Fd1->other_benefit,
         "salary_remarks" =>$dataFromNVisaFd9Fd1->salary_remarks
                         ];
-         
+
          //dd($com);
 
        }else{
 
 
 
+
      $com = [
         "basic_salary" => [
-           "amount" =>$basic->amount,
-           "payment_type" =>$basic->payment_type,
-           "currency" =>$basic->currency
+
+           "amount" =>$basic,
+           "payment_type" =>$basic1,
+           "currency" =>$basic2
+
         ],
+
         "overseas_allowance" => [
-           "amount" =>$overseas->amount,
-           "payment_type" =>$overseas->payment_type,
-           "currency" =>$overseas->currency
+           "amount" =>$overseas,
+           "payment_type" =>$overseas1,
+           "currency" =>$overseas2
            ],
         "house_rent" => [
-           "amount" =>$house->amount,
-           "payment_type" =>$house->payment_type,
-           "currency" =>$house->currency
+           "amount" =>$house,
+           "payment_type" =>$house1,
+           "currency" =>$house2
               ],
         "conveyance_allowance" => [
-           "amount" =>$convoy->amount,
-           "payment_type" =>$convoy->payment_type,
-           "currency" =>$convoy->currency
+           "amount" =>$convoy,
+           "payment_type" =>$convoy1,
+           "currency" =>$convoy2
                  ],
         "medical_allowance" => [
-           "amount" =>$medical->amount,
-           "payment_type" =>$medical->payment_type,
-           "currency" =>$medical->currency
+           "amount" =>$medical,
+           "payment_type" =>$medical1,
+           "currency" =>$medical2
                     ],
         "entertainment_allowance" => [
-           "amount" =>$entertainment->amount,
-           "payment_type" =>$entertainment->payment_type,
-           "currency" =>$entertainment->currency
+           "amount" =>$entertainment,
+           "payment_type" =>$entertainment1,
+           "currency" =>$entertainment2
                        ],
         "annual_bonus" => [
-           "amount" =>$annual->amount,
-           "payment_type" =>$annual->payment_type,
-           "currency" =>$annual->currency
+           "amount" =>$annual,
+           "payment_type" =>$annual1,
+           "currency" =>$annual2
                           ],
         "other_benefit" =>$dataFromNVisaFd9Fd1->other_benefit,
         "salary_remarks" =>$dataFromNVisaFd9Fd1->salary_remarks
