@@ -90,101 +90,478 @@ class PostController extends Controller
 
         //dd($inputAllData);
 
-         if(count($receiverId) >0){
+        if($request->mainstatus == 'registration'){
 
-            foreach($receiverId as $key => $allReceiverId){
+            ////
 
-                if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
 
 
-                    $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
-                }else{
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
 
-                    $karjoOnulipi = '';
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    $regDakData = NgoRegistrationDak::find($inputAllData['receiverId'][$key]);
+                    $regDakData->original_recipient =$mainPrapok;
+                    $regDakData->copy_of_work =$karjoOnulipi;
+                    $regDakData->informational_purposes =$infoOnulipi;
+                    $regDakData->attraction_attention =$eyeOnulipi;
+                    $regDakData->dak_detail_id = $dakDetailId;
+                    $regDakData->status = 1;
+                    $regDakData->save();
+
+
+
+                    //dd($main_prapok);
                 }
 
 
-                if (array_key_exists('main_prapok'.$key, $inputAllData)){
 
 
-                    $mainPrapok = $inputAllData['main_prapok'.$key][$key];
-                }else{
 
-                    $mainPrapok = '';
+
+            }
+            ////
+
+        }elseif($request->mainstatus == 'renew'){
+
+            ////
+
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    $regDakData = NgoRenewDak::find($inputAllData['receiverId'][$key]);
+                    $regDakData->original_recipient =$mainPrapok;
+                    $regDakData->copy_of_work =$karjoOnulipi;
+                    $regDakData->informational_purposes =$infoOnulipi;
+                    $regDakData->attraction_attention =$eyeOnulipi;
+                    $regDakData->dak_detail_id = $dakDetailId;
+                    $regDakData->status = 1;
+                    $regDakData->save();
+
+
+
+                    //dd($main_prapok);
                 }
 
 
-                if (array_key_exists('info_onulipi'.$key, $inputAllData)){
-
-
-                    $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
-                }else{
-
-                    $infoOnulipi = '';
-                }
-
-
-                if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
-
-
-                    $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
-                }else{
-
-                    $eyeOnulipi = '';
-                }
-
-
-                $regDakData = NgoRegistrationDak::find($inputAllData['receiverId'][$key]);
-                $regDakData->original_recipient =$mainPrapok;
-                $regDakData->copy_of_work =$karjoOnulipi;
-                $regDakData->informational_purposes =$infoOnulipi;
-                $regDakData->attraction_attention =$eyeOnulipi;
-                $regDakData->dak_detail_id = $dakDetailId;
-                $regDakData->status = 1;
-                $regDakData->save();
 
 
 
-                //dd($main_prapok);
+
             }
 
 
+            ///
+
+        }elseif($request->mainstatus == 'nameChange'){
+
+            /////
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    $regDakData = NgoNameChangeDak::find($inputAllData['receiverId'][$key]);
+                    $regDakData->original_recipient =$mainPrapok;
+                    $regDakData->copy_of_work =$karjoOnulipi;
+                    $regDakData->informational_purposes =$infoOnulipi;
+                    $regDakData->attraction_attention =$eyeOnulipi;
+                    $regDakData->dak_detail_id = $dakDetailId;
+                    $regDakData->status = 1;
+                    $regDakData->save();
+
+
+
+                    //dd($main_prapok);
+                }
 
 
 
 
+
+
+            }
+            ////
+
+        }elseif($request->mainstatus == 'fdNine'){
+            /////
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
+                    $regDakData->original_recipient =$mainPrapok;
+                    $regDakData->copy_of_work =$karjoOnulipi;
+                    $regDakData->informational_purposes =$infoOnulipi;
+                    $regDakData->attraction_attention =$eyeOnulipi;
+                    $regDakData->dak_detail_id = $dakDetailId;
+                    $regDakData->status = 1;
+                    $regDakData->save();
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+
+            ////
+
+        }elseif($request->mainstatus == 'fdNineOne'){
+
+            /////
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                    $regDakData->original_recipient =$mainPrapok;
+                    $regDakData->copy_of_work =$karjoOnulipi;
+                    $regDakData->informational_purposes =$infoOnulipi;
+                    $regDakData->attraction_attention =$eyeOnulipi;
+                    $regDakData->dak_detail_id = $dakDetailId;
+                    $regDakData->status = 1;
+                    $regDakData->save();
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+            //////
         }
+
+
 
         return redirect()->route('dakBranchList.index')->with('success','Send Successfully!');
     }
 
     public function dakListFirstStep(Request $request){
 
-        // dd($request->all());
+        //dd($request->all());
 
 
          $number=count($request->admin_id);
 
-    if($number >0){
-        for($i=0;$i<$number;$i++){
+         if($request->mainStatusNew == 'registration'){
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
 
 
 
 
-         $regDakData = new NgoRegistrationDak();
-         $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
-         $regDakData->receiver_admin_id = $request->admin_id[$i];
-         $regDakData->registration_status_id =$request->main_id;
-         $regDakData->status = 0;
-         $regDakData->save();
+                 $regDakData = new NgoRegistrationDak();
+                 $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+                 $regDakData->receiver_admin_id = $request->admin_id[$i];
+                 $regDakData->registration_status_id =$request->main_id;
+                 $regDakData->status = 0;
+                 $regDakData->save();
 
-        }
-
-
-    }
+                }
 
 
-    return redirect('admin/showDataAll/registration/'.$request->main_id);
+            }
+
+         }elseif($request->mainStatusNew == 'renew'){
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
+
+
+
+
+                 $regDakData = new NgoRenewDak();
+                 $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+                 $regDakData->receiver_admin_id = $request->admin_id[$i];
+                 $regDakData->renew_status_id =$request->main_id;
+                 $regDakData->status = 0;
+                 $regDakData->save();
+
+                }
+
+
+            }
+
+         }elseif($request->mainStatusNew == 'nameChange'){
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
+
+
+
+
+                 $regDakData = new NgoNameChangeDak();
+                 $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+                 $regDakData->receiver_admin_id = $request->admin_id[$i];
+                 $regDakData->name_change_status_id =$request->main_id;
+                 $regDakData->status = 0;
+                 $regDakData->save();
+
+                }
+
+
+            }
+
+         }elseif($request->mainStatusNew == 'fdNine'){
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
+
+
+
+
+                 $regDakData = new NgoFDNineDak();
+                 $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+                 $regDakData->receiver_admin_id = $request->admin_id[$i];
+                 $regDakData->f_d_nine_status_id =$request->main_id;
+                 $regDakData->status = 0;
+                 $regDakData->save();
+
+                }
+
+
+            }
+
+         }elseif($request->mainStatusNew == 'fdNineOne'){
+
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
+
+
+
+
+                 $regDakData = new NgoFDNineOneDak();
+                 $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+                 $regDakData->receiver_admin_id = $request->admin_id[$i];
+                 $regDakData->f_d_nine_one_status_id =$request->main_id;
+                 $regDakData->status = 0;
+                 $regDakData->save();
+
+                }
+
+
+            }
+             // return redirect('admin/showDataAll/'.$request->mainstatus.'/'.$request->main_id);
+         }
+
+
+
+         return redirect('admin/showDataAll/'.$request->mainStatusNew.'/'.$request->main_id);
+
 
 
     }
@@ -271,7 +648,7 @@ class PostController extends Controller
         $mainstatus = $request->mainstatus;
         $totalBranch = $request->totalBranch;
         $totalDesi= $request->totalDesi;
-
+$mainStatusNew = $request->mainStatusNew;
       $id = $request->mainId;
         //dd($totalDesi);
 
@@ -306,7 +683,7 @@ class PostController extends Controller
 
     $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
 
-        $data = view('admin.post.showDataDesignationWise',compact('id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
+        $data = view('admin.post.showDataDesignationWise',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
         return response()->json($data);
     }
     }

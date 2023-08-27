@@ -53,7 +53,7 @@
                         ->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
 
                                      $decesionName = DB::table('dak_details')
-                        ->where('id',$decesionNameId)->value('decision_list');
+                        ->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
 
                                         ?>
                                     <tr>
@@ -80,7 +80,7 @@
                     ->where('renew_status_id',$allStatusData->id)->value('dak_detail_id');
 
                                  $decesionName = DB::table('dak_details')
-                    ->where('id',$decesionNameId)->value('decision_list');
+                    ->where('id',$decesionNameId)->where('status','renew')->value('decision_list');
 
                                     ?>
                                 <tr>
@@ -108,7 +108,7 @@
                 ->where('name_change_status_id',$allStatusData->id)->value('dak_detail_id');
 
                              $decesionName = DB::table('dak_details')
-                ->where('id',$decesionNameId)->value('decision_list');
+                ->where('id',$decesionNameId)->where('status','nameChange')->value('decision_list');
 
                                 ?>
                             <tr>
@@ -136,7 +136,7 @@
             ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
 
                          $decesionName = DB::table('dak_details')
-            ->where('id',$decesionNameId)->value('decision_list');
+            ->where('id',$decesionNameId)->where('status','fdNine')->value('decision_list');
 
                             ?>
                         <tr>
@@ -164,7 +164,8 @@
         ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
 
                      $decesionName = DB::table('dak_details')
-        ->where('id',$decesionNameId)->value('decision_list');
+        ->where('id',$decesionNameId)
+        ->where('status','fdNineOne')->value('decision_list');
 
                         ?>
                     <tr>

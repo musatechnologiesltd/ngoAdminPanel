@@ -1,5 +1,9 @@
 <form class="custom-validation" action="{{ route('dakListFirstStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
     @csrf
+
+  
+    <input type="hidden" value="{{ $mainStatusNew }}" name="mainStatusNew"/>
+
     <table class="table table-bordered">
         <tr>
             <th>#</th>

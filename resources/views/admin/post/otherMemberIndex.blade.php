@@ -62,7 +62,7 @@ $formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registrat
 
 
                         $decesionName = DB::table('dak_details')
-                        ->where('id',$allStatusData->dak_detail_id)->value('decision_list');
+                        ->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
                                         ?>
                                     <tr>
                                         <td style="text-align:left;">
@@ -103,7 +103,7 @@ $formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_statu
 
 
                     $decesionName = DB::table('dak_details')
-                    ->where('id',$allStatusData->dak_detail_id)->value('decision_list');
+                    ->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
                                     ?>
                                 <tr>
                                     <td style="text-align:left;">
@@ -145,7 +145,7 @@ $formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_
 
 
                 $decesionName = DB::table('dak_details')
-                ->where('id',$allStatusData->dak_detail_id)->value('decision_list');
+                ->where('id',$allStatusData->dak_detail_id)->where('status','nameChange')->value('decision_list');
                                 ?>
                             <tr>
                                 <td style="text-align:left;">
@@ -189,7 +189,7 @@ $formOneDataId = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9
 
 
             $decesionName = DB::table('dak_details')
-            ->where('id',$allStatusData->dak_detail_id)->value('decision_list');
+            ->where('id',$allStatusData->dak_detail_id)->where('status','fdNine')->value('decision_list');
                             ?>
                         <tr>
                             <td style="text-align:left;">
@@ -231,7 +231,7 @@ $formOneDataId = DB::table('fd9_one_forms')->where('id',$allStatusData->f_d_nine
 
 
         $decesionName = DB::table('dak_details')
-        ->where('id',$allStatusData->dak_detail_id)->value('decision_list');
+        ->where('id',$allStatusData->dak_detail_id)->where('status','fdNineOne')->value('decision_list');
                         ?>
                     <tr>
                         <td style="text-align:left;">

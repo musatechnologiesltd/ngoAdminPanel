@@ -133,6 +133,8 @@ ul {
                                                     কর্মরত {{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalDesignationWorking) }} জন</h6>
                                                 <ul class="treeview">
                                                     <input type="hidden" value="{{ $id }}" id="main_id" name="main_id"/>
+                                                    <input type="hidden" value="{{ $mainstatus }}" id="mainstatus" name="mainstatus"/>
+
                                                     @foreach($totalBranchList as $key=>$allTotalBranchList)
 
                                                     <?php
@@ -337,6 +339,11 @@ $(document).on('click', '.passBranch1', function(){
     var mainstatus = $(this).data('status');
 
 
+    var mainStatusNew = $('#mainstatus').val();
+
+
+
+
     var totalBranch = $('input[name="branch_name[]"]:checked').map(function (idx, ele) {
    return $(ele).val();
 }).get();
@@ -359,7 +366,7 @@ console.log(totalDesi);
 $.ajax({
         url: "{{ route('showDataDesignationWise') }}",
         method: 'GET',
-        data: {mainId:mainId,mainstatus:mainstatus,totalBranch:totalBranch,totalDesi:totalDesi},
+        data: {mainStatusNew:mainStatusNew,mainId:mainId,mainstatus:mainstatus,totalBranch:totalBranch,totalDesi:totalDesi},
         success: function(data) {
 
 
