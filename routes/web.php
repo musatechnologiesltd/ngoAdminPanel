@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\DesignationStepController;
 use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,31 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('noticeList', NoticeController::class);
     Route::resource('branchList', BranchController::class);
+
+
+
+    Route::resource('dakBranchList', PostController::class);
+
+
+    Route::controller(PostController::class)->group(function () {
+
+        Route::get('/deleteMemberList/{id}', 'deleteMemberList')->name('deleteMemberList');
+
+
+        Route::get('/createSeal/{status}/{id}', 'createSeal')->name('createSeal');
+
+
+
+
+        Route::post('/dakListFirstStep', 'dakListFirstStep')->name('dakListFirstStep');
+        Route::post('/dakListSecondStep', 'dakListSecondStep')->name('dakListSecondStep');
+
+        Route::get('/showDataAll/{status}/{id}', 'showDataAll')->name('showDataAll');
+
+        Route::get('/showDataDesignationWise', 'showDataDesignationWise')->name('showDataDesignationWise');
+        Route::get('/showDataBranchWise', 'showDataBranchWise')->name('showDataBranchWise');
+
+    });
 
     Route::controller(BranchController::class)->group(function () {
         Route::get('/checkBranch', 'checkBranch')->name('checkBranch');

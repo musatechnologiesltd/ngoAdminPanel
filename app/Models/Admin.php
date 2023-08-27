@@ -72,10 +72,7 @@ class Admin extends Authenticatable
         return $hasPermission;
     }
 
-    public function branch()
-    {
-        return $this->hasOne(Branch::class,'branch_id');
-    }
+
 
     public function jobHistory()
     {
@@ -85,8 +82,5 @@ class Admin extends Authenticatable
 
 
 
-    public function designationList()
-    {
-        return $this->hasOne(DesignationList::class,'designation_list_id');
-    }
+   
 }

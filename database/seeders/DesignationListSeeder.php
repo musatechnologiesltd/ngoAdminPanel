@@ -18,7 +18,7 @@ class DesignationListSeeder extends Seeder
             $user = new DesignationList();
             $user->branch_id =  $user1->id;
             $user->designation_name	 = "super admin";
-            $user->designation_step	 =1;
+           // $user->designation_step	 =1;
             $user->designation_serial	 =1;
             $user->save();
 

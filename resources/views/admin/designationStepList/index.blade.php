@@ -73,10 +73,10 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                         <input type="hidden" name="branchId" value="{{ $AllBranchLists->id }}"/>
                                     <?php
 
-                                   $adminId =  DB::table('admins')->where('designation_list_id',$AllDesignationList->id)
-                                               ->orderBy('id','desc')->value('id');
+                                   $adminId =  DB::table('admin_designation_histories')->where('designation_list_id',$AllDesignationList->id)
+                                               ->orderBy('id','desc')->value('admin_id');
 
-                                               $adminDate =  DB::table('admins')->where('designation_list_id',$AllDesignationList->id)
+                                               $adminDate =  DB::table('admin_designation_histories')->where('designation_list_id',$AllDesignationList->id)
                                                ->orderBy('id','desc')->value('admin_job_start_date');
                                     ?>
                                     <input type="hidden" name="designation_list_id" value="{{ $AllDesignationList->id }}" />
@@ -105,7 +105,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                             @foreach($users_as as $allusers)
 
 
-                                            <option value="{{ $allusers->id }}">{{ $allusers->admin_name }}</option>
+                                            <option value="{{ $allusers->id }}">{{ $allusers->admin_name_ban }}</option>
 
                                             @endforeach
                                             </select>
@@ -116,7 +116,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
     @foreach($users as $allusers)
 
 
-    <option value="{{ $allusers->id }}" {{ $allusers->id == $adminId ? 'selected':'' }}>{{ $allusers->admin_name }}</option>
+    <option value="{{ $allusers->id }}" {{ $allusers->id == $adminId ? 'selected':'' }}>{{ $allusers->admin_name_ban }}</option>
 
     @endforeach
     </select>

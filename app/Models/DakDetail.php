@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DesignationList extends Model
+class DakDetail extends Model
 {
     use HasFactory;
-    protected $fillable = ['branch_id','designation_name','designation_serial'];
 
 
+    protected $fillable = ['sender_id','decision_list','decision_list_detail','priority_list','secret_list','status'];
 
-  
 }

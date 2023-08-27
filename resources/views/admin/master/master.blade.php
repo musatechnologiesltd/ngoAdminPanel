@@ -48,6 +48,10 @@
     <link id="color" rel="stylesheet" href="{{ asset('/') }}public/admin/assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/responsive.css">
+
+
+<!-- Plugins css start-->
+<link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/tree.css">
     <style>
 
         .swal2-confirm{
@@ -238,6 +242,11 @@
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+ <!-- Plugins JS start-->
+<script src="{{ asset('/') }}public/admin/assets/js/tree/jstree.min.js"></script>
+<script src="{{ asset('/') }}public/admin/assets/js/tree/tree.js"></script>
+<!-- Plugins JS Ends-->
+
 <!-- Theme js-->
 <script src="{{ asset('/') }}public/admin/assets/js/script.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
@@ -318,7 +327,7 @@
    });
 
 
- 
+
 
 
      </script>

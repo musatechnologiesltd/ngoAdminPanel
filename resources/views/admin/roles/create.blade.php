@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-রোল যোগ করুন 
+রোল যোগ করুন
 @endsection
 
 
@@ -52,7 +52,7 @@
                       <div class="row">
                           <div class="col-md-3">
                               <div class="form-group">
-<input type="checkbox" id="{{ $i }}Management" value="{{ $group->name }}" onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)" class="filled-in" />
+<input type="checkbox" id="{{ $i }}Management" value="{{ $group->name }}" onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)" name="groupName[]" class="filled-in bbb" />
                             <label for="checkPermission">{{ $group->name }}</label>
                               </div>
                           </div>
@@ -65,7 +65,7 @@
                               <div class="form-group">
 
 
-                              <input type="checkbox" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}" class="filled-in" />
+                              <input type="checkbox" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}" class="filled-in bbb" />
                             <label for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
 
 
@@ -147,6 +147,38 @@
             }
             implementAllChecked();
          }
+
+         //nnnn
+
+
+//          $(document).on('click', '.bbb', function(){
+
+
+// var mainstatus = $(this).data('status');
+
+
+// var totalBranch = $('input[name="groupName[]"]:checked').map(function (idx, ele) {
+// return $(ele).val();
+// }).get();
+
+
+// var totalDesi = $('input[name="permissions[]"]:checked').map(function (idx, ele) {
+// return $(ele).val();
+// }).get();
+
+
+
+
+
+// console.log(totalBranch);
+// console.log(totalDesi);
+
+
+
+
+
+
+// });
 
 </script>
 

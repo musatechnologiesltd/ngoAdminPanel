@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-কর্মকর্তাদের শেষ কর্মদিবসের তালিকা 
+কর্মকর্তাদের শেষ কর্মদিবসের তালিকা
 @endsection
 
 
@@ -43,7 +43,7 @@
                                         <select class="form-control" required name="admin_id" id="fade" type="text" placeholder="">
                                             <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
                                             @foreach($users as $AllBranchLists)
-                                            <option value="{{ $AllBranchLists->id }}" >{{ $AllBranchLists->admin_name }}</option>
+                                            <option value="{{ $AllBranchLists->id }}" >{{ $AllBranchLists->admin_name_ban }}</option>
                                             @endforeach
                                         </select>
                             </div>

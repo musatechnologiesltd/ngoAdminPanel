@@ -6,7 +6,12 @@
     <li>নাম: {{ $user->admin_name }}</li>
     <li>ইমেইল: {{ $user->email }}</li>
     <li>মোবাইল নম্বর: {{ $user->admin_mobile }}</li>
-    <li>উপাধি: <?php
+    <li>উপাধি এবং শাখা: <?php
+
+
+
+$designationIdList = DB::table('admin_designation_histories')->where('admin_id',$user->id)
+->get();
 
         $desiName = DB::table('designation_lists')
         ->where('id',$user->designation_list_id)
@@ -14,14 +19,40 @@
 
 
             ?>
-            {{ $desiName }}</li>
-    <li>শাখা: <?php
+
+            @foreach($designationIdList as $allDesignationIdList)
+
+            <?php
+ $desiName = DB::table('designation_lists')
+        ->where('id',$allDesignationIdList->designation_list_id)
+        ->value('designation_name');
+
+
+        $branchId = DB::table('designation_lists')
+        ->where('id',$allDesignationIdList->designation_list_id)
+        ->value('branch_id');
+
+
+
+        $brnachName = DB::table('branches')
+        ->where('id',$branchId)
+        ->value('branch_name');
+
+
+
+
+            ?>
+            {{ $desiName }} <b>({{ $brnachName }})</b>,<br>
+             @endforeach
+
+        </li>
+    {{-- <li>শাখা: <?php
 
         $branchName = DB::table('branches')->where('id',$user->branch_id)->value('branch_name');
 
 
             ?>
-            {{ $branchName }}</li>
+            {{ $branchName }}</li> --}}
 
     <li>চাকরি শুরুর তারিখ: {{ $user->admin_job_start_date }}</li>
     <li>চাকরির শেষ তারিখ: {{ $user->admin_job_end_date }}</li>
@@ -30,6 +61,40 @@
 </ul>
 <input type="hidden" value="{{ $user->id }}" class="form-control"   name="id" placeholder="Enter Date" required>
            <div class="mb-3">
+
+            <label class="form-label" for="">যে পদ থেকে অব্যাহতি দিবেন তার নাম </label>
+                                        <select class="form-control "  name="desi_id" placeholder="চাকরির শেষ তারিখ" required>
+                                         <option value="">-- একটা নির্বাচন করুন --</option>
+                                         @foreach($designationIdList as $allDesignationIdList)
+
+                                         <?php
+                                         $desiName = DB::table('designation_lists')
+                                                ->where('id',$allDesignationIdList->designation_list_id)
+                                                ->value('designation_name');
+
+
+                                                $branchId = DB::table('designation_lists')
+                                                ->where('id',$allDesignationIdList->designation_list_id)
+                                                ->value('branch_id');
+
+
+
+                                                $brnachName = DB::table('branches')
+                                                ->where('id',$branchId)
+                                                ->value('branch_name');
+
+
+
+
+                                                    ?>
+
+                                         <option value="{{ $allDesignationIdList->id }}">{{ $desiName }} <b>({{ $brnachName }})</b></option>
+
+                                         @endforeach
+                                        </select>
+
+
+
                                         <label class="form-label" for="">চাকরির শেষ তারিখ</label>
                                         <input type="text" class="form-control datepicker233" id="datepicker1"  name="admin_job_end_date" placeholder="চাকরির শেষ তারিখ" required>
 

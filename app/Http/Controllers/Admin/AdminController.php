@@ -17,6 +17,7 @@ use App\Models\DesignationList;
 use App\Models\DesignationStep;
 use Mail;
 use App\Models\JobHistory;
+use App\Models\AdminDesignationHistory;
 class AdminController extends Controller
 {
 
@@ -184,7 +185,7 @@ class AdminController extends Controller
         // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
-        // $admins->password = Hash::make($request->password);
+       // $admins->password = Hash::make(12345678);
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
 
@@ -296,7 +297,7 @@ class AdminController extends Controller
 
 
   public function employeeEndDate(){
-      $users = Admin::latest()->get();
+      $users = Admin::where('id','!=',1)->latest()->get();
       return view('admin.user.employeeEndDate',compact('users'));
   }
 
@@ -330,6 +331,12 @@ $admin_job_end_date = date('Y-m-d', strtotime($request->admin_job_end_date));
  $jobHistory->designation_list_id  =$getTheAdminValue->designation_list_id;
  $jobHistory->start_date  = $getTheAdminValue->admin_job_start_date;
  $jobHistory->end_date  = $admin_job_end_date;
+
+
+AdminDesignationHistory::where('id',$request->desi_id)->delete();
+
+
+
 
  return redirect()->back()->with('info','Added successfully!');
   }
