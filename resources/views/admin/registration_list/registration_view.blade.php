@@ -796,9 +796,13 @@
 
 
                                             @foreach($form_ngo_data_doc as $key=>$all_form_member_data_doc)
+                                           <?php
 
+$ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
 
+                                           ?>
 
+@if($ngoTypeInfo == 'দেশিও')
                                             <tr>
                                                 @if($key+1 == 1)
                                                 <td>কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি</td>
@@ -809,7 +813,7 @@
                                                 @elseif($key+1 == 4)
                                                 <td>দাতা সংস্হার প্রতিশুতিপত্র</td>
                                                 @elseif($key+1 == 5)
-<td>সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি</td>
+                                             <td>সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি</td>
                                                 @elseif($key+1 == 6)
                                                 <td>সংস্থার সাধারণ সদস্যদের নামের তালিকা</td>
 
@@ -818,6 +822,28 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a></td>
                                             </tr>
+                                            @else
+                                            <tr>
+                                                @if($key+1 == 1)
+                                                <td>Certificate Of Incorporation in the Country Of Origin</td>
+                                                @elseif($key+1 == 2)
+                                                <td>Constitution</td>
+                                                @elseif($key+1 == 3)
+                                                <td>Activities Report</td>
+                                                @elseif($key+1 == 4)
+                                                <td>Decision Of the Committee/Board To Open Office In Bangladesh</td>
+                                                @elseif($key+1 == 5)
+                                             <td>Deed Of Agreement Stamp Of TK.300/-with the landlord in Support Of Opening the Office In Bangladesh</td>
+                                                @elseif($key+1 == 6)
+                                                <td>Letter Of Intent</td>
+
+                                                @endif
+                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a></td>
+                                            </tr>
+
+                                            @endif
 
                                             @endforeach
 
