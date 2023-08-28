@@ -178,14 +178,19 @@
                                                 <td>
 
                                                     <input value="{{ $showAllRegistrationDak->id }}" type="hidden" name="receiverId[{{ $showAllRegistrationDak->id }}]"/>
-
+                                                    <input value="{{ $showAllRegistrationDak->id }}" type="hidden" name="receiverIdAjax[]"/>
 
                                                     <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <div class="md-radio">
-                                                                <input class="main_prapok" data-mid ="{{ $showAllRegistrationDak->id }}" id="mul{{ $showAllRegistrationDak->id }}" value="1" type="radio" name="main_prapok{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]">
-                                                                <label for="mul{{ $showAllRegistrationDak->id }}"></label>
-                                                            </div>
+
+
+                                                        <div class="custom_checkbox">
+                                                            <input id="mmcheck{{ $showAllRegistrationDak->id }}" class="custom_check main_prapok"
+                                                                   type="checkbox" name="main_prapok{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]" value="1" data-mid="{{ $showAllRegistrationDak->id }}" />
+                                                            <label for="mmcheck{{ $showAllRegistrationDak->id }}" style="--d: 30px">
+                                                                <svg viewBox="0,0,50,50">
+                                                                    <path d="M5 30 L 20 45 L 45 5"></path>
+                                                                </svg>
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -219,7 +224,7 @@
                                                     <div class="d-flex justify-content-center">
                                                         <div class="custom_checkbox">
                                                             <input id="echeck{{ $showAllRegistrationDak->id }}" class="custom_check eye_onulipi"
-                                                                   type="checkbox" data-mid = "{{ $showAllRegistrationDak->id }}[]" value="1"  name="eye_onulipi{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]"/>
+                                                                   type="checkbox" data-mid = "{{ $showAllRegistrationDak->id }}" value="1"  name="eye_onulipi{{ $showAllRegistrationDak->id }}[{{ $showAllRegistrationDak->id }}]"/>
                                                             <label for="echeck{{ $showAllRegistrationDak->id }}" style="--d: 30px">
                                                                 <svg viewBox="0,0,50,50">
                                                                     <path d="M5 30 L 20 45 L 45 5"></path>
@@ -255,13 +260,57 @@ $(document).on('click', '.main_prapok', function(){
 
     var mainPrapokId = $(this).data('mid');
 
+    $('input.main_prapok').not(this).prop('checked', false);
+
+
 
     if($(this).is(':checked')){
 
-    $("#check"+mainPrapokId).prop('checked', false);
-    $("#icheck"+mainPrapokId).prop('checked', false);
-    $("#echeck"+mainPrapokId).prop('checked', false);
-    }
+
+$("#check"+mainPrapokId).prop('checked', false);
+$("#icheck"+mainPrapokId).prop('checked', false);
+$("#echeck"+mainPrapokId).prop('checked', false);
+
+
+}
+
+
+
+// //     alert(mainPrapokId);
+
+
+//     var receiver_id_ajax = $('input[name="receiverIdAjax[]"]').map(function (idx, ele) {
+//    return $(ele).val();
+// }).get();
+
+// var receiver_id_ajax_new = $.grep(receiver_id_ajax, function(value) {
+//   return value != mainPrapokId;
+// });
+
+// //alert(y);
+
+// for (var i = 0; i < receiver_id_ajax_new.length; i++) {
+
+
+//     $("#check"+receiver_id_ajax_new[i] << 0).removeAttr('disabled');
+//     $("#icheck"+receiver_id_ajax_new[i] << 0).removeAttr('disabled');
+//     $("#echeck"+receiver_id_ajax_new[i] << 0).removeAttr('disabled');
+
+// }
+
+
+//     if($(this).is(':checked')){
+
+//     $("#check"+mainPrapokId).attr('disabled', 'disabled');
+//     $("#icheck"+mainPrapokId).attr('disabled', 'disabled');
+//     $("#echeck"+mainPrapokId).attr('disabled', 'disabled');
+//     }else{
+
+//     $("#check"+mainPrapokId).removeAttr('disabled');
+//     $("#icheck"+mainPrapokId).removeAttr('disabled');
+//     $("#echeck"+mainPrapokId).removeAttr('disabled');
+
+//     }
 });
 
 /////
@@ -276,7 +325,7 @@ $(document).on('click', '.karjo_onulipi', function(){
 
 
 $("#check"+mainPrapokId).prop('checked', true);
-$("#mul"+mainPrapokId).prop('checked', false);
+$("#mmcheck"+mainPrapokId).prop('checked', false);
 $("#icheck"+mainPrapokId).prop('checked', false);
 $("#echeck"+mainPrapokId).prop('checked', false);
 
@@ -297,7 +346,7 @@ if($(this).is(':checked')){
 
 
 $("#check"+mainPrapokId).prop('checked', false);
-$("#mul"+mainPrapokId).prop('checked', false);
+$("#mmcheck"+mainPrapokId).prop('checked', false);
 $("#icheck"+mainPrapokId).prop('checked', true);
 $("#echeck"+mainPrapokId).prop('checked', false);
 
@@ -313,13 +362,13 @@ $(document).on('click', '.eye_onulipi', function(){
 
 var mainPrapokId = $(this).data('mid');
 
-
+//alert(mainPrapokId);
 
 if($(this).is(':checked')){
 
 
 $("#check"+mainPrapokId).prop('checked', false);
-$("#mul"+mainPrapokId).prop('checked', false);
+$("#mmcheck"+mainPrapokId).prop('checked', false);
 $("#icheck"+mainPrapokId).prop('checked', false);
 $("#echeck"+mainPrapokId).prop('checked', true);
 

@@ -65,7 +65,8 @@
                                             {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                         </td>
                                         <td style="text-align:right;">
-                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">View</button>
+                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -92,7 +93,8 @@
                                         {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                     </td>
                                     <td style="text-align:right;">
-                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">View</button>
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -120,7 +122,8 @@
                                     {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                 </td>
                                 <td style="text-align:right;">
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">View</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -148,7 +151,8 @@
                                 {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                             </td>
                             <td style="text-align:right;">
-                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">View</button>
+                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->id) }}';">দেখুন</button>
                             </td>
                         </tr>
                         @endforeach
@@ -177,7 +181,8 @@
                             {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                         </td>
                         <td style="text-align:right;">
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">View</button>
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->id) }}';">দেখুন</button>
                         </td>
                     </tr>
                     @endforeach
