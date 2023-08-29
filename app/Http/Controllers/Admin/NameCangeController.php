@@ -163,7 +163,7 @@ class NameCangeController extends Controller
                 'organization_name_ban' => $present_name_ban,
              ]);
         }
-        Mail::send('emails.passwordResetEmail', ['id' => $request->status], function($message) use($request){
+        Mail::send('emails.passwordResetEmailName', ['id' => $request->status,'ngoId'=>$form_one_data->id], function($message) use($request){
             $message->to($request->email);
             $message->subject('NGOAB Registration Service || Ngo Name Chnage Status');
         });
