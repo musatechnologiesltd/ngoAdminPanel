@@ -319,7 +319,7 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_on
 
 
 
-        Mail::send('emails.passwordResetEmail', ['id' => $request->status], function($message) use($request){
+        Mail::send('emails.passwordResetEmail', ['id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
             $message->to($request->email);
             $message->subject('NGOAB Registration Service || Ngo Approved Status');
         });
