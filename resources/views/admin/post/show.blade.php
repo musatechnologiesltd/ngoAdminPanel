@@ -34,6 +34,7 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <h5>ডাক প্রেরণ করুন</h5>
+                    @include('flash_message')
                 </div>
                 <form class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
@@ -44,30 +45,32 @@
                         </div>
                         <div class="form-group mt-3 m-checkbox-inline mb-0 custom-radio-ml">
                             <div class="radio radio-primary">
-                                <input id="radioinline1" type="radio" class="decision_list" name="decision_list" value="বিধি মোতাবেক বাবস্থা নিন">
+                                <input id="radioinline1" type="radio" class="decision_list" name="decision_list" value="বিধি মোতাবেক বাবস্থা নিন" required>
                                 <label class="mb-0" for="radioinline1">বিধি মোতাবেক বাবস্থা নিন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="radioinline2" type="radio" class="decision_list" name="decision_list" value="নথিতে উপস্থাপন করুন">
+                                <input id="radioinline2" type="radio" class="decision_list" name="decision_list" value="নথিতে উপস্থাপন করুন" required>
                                 <label class="mb-0" for="radioinline2">নথিতে উপস্থাপন করুন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="radioinline3" type="radio" class="decision_list" name="decision_list" value="নথিজাত করুন">
+                                <input id="radioinline3" type="radio" class="decision_list" name="decision_list" value="নথিজাত করুন" required>
                                 <label class="mb-0" for="radioinline3">নথিজাত করুন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="own_decision" type="radio" class="decision_list" name="decision_list" value="সিধান্ত নিজে নিন">
+                                <input id="own_decision" type="radio" class="decision_list" name="decision_list" value="সিধান্ত নিজে নিন" required>
                                 <label class="mb-0" for="own_decision">সিধান্ত নিজে নিন</label>
                             </div>
                         </div>
-                        <select class="form-select digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail" >
+
+                        <input type="text" placeholder="সিধান্ত নিজে নিন" class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>
+                        {{-- <select class="form-select digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail" >
                             <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
                             <option value="দেখলাম কাজ শুরু হচ্ছে">দেখলাম কাজ শুরু হচ্ছে</option>
                             <option value="পেশ করুন">পেশ করুন</option>
                             <option value="তদন্ত পূর্বক প্রতিবেদন দিবেন">তদন্ত পূর্বক প্রতিবেদন দিবেন</option>
                             <option value="দেখলাম পেশ করুন">দেখলাম পেশ করুন</option>
                             <option value="নথিজাত করুন">নথিজাত করুন</option>
-                        </select>
+                        </select> --}}
                         <div class="nothi_header_box">
                             <span id="result_one">বিধি মোতাবেক ব্যবস্থা নিন</span>
                         </div>

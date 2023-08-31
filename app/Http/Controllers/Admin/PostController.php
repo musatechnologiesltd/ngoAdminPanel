@@ -68,6 +68,15 @@ class PostController extends Controller
 
     public function dakListSecondStep(Request $request){
 
+        //dd($request->karjo_onulipi2);
+
+        $inputAllData=$request->all();
+
+        // if(empty($request->karjo_onulipi2)){
+
+        //     //dd(22);
+
+       // }
 
         //dd($request->all());
 
@@ -84,7 +93,7 @@ class PostController extends Controller
 
              $dakDetailId = $dakDetail->id;
 
-        $inputAllData=$request->all();
+
 
         $receiverId = $inputAllData['receiverId'];
 
@@ -138,14 +147,57 @@ class PostController extends Controller
                     }
 
 
-                    $regDakData = NgoRegistrationDak::find($inputAllData['receiverId'][$key]);
-                    $regDakData->original_recipient =$mainPrapok;
-                    $regDakData->copy_of_work =$karjoOnulipi;
-                    $regDakData->informational_purposes =$infoOnulipi;
-                    $regDakData->attraction_attention =$eyeOnulipi;
-                    $regDakData->dak_detail_id = $dakDetailId;
-                    $regDakData->status = 1;
-                    $regDakData->save();
+
+
+
+                    // $regDakData = NgoRegistrationDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = NgoRegistrationDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = NgoRegistrationDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
 
 
 
@@ -209,14 +261,54 @@ class PostController extends Controller
                     }
 
 
-                    $regDakData = NgoRenewDak::find($inputAllData['receiverId'][$key]);
-                    $regDakData->original_recipient =$mainPrapok;
-                    $regDakData->copy_of_work =$karjoOnulipi;
-                    $regDakData->informational_purposes =$infoOnulipi;
-                    $regDakData->attraction_attention =$eyeOnulipi;
-                    $regDakData->dak_detail_id = $dakDetailId;
-                    $regDakData->status = 1;
-                    $regDakData->save();
+                    // $regDakData = NgoRenewDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = NgoRenewDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = NgoRenewDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
 
 
 
@@ -236,6 +328,8 @@ class PostController extends Controller
         }elseif($request->mainstatus == 'nameChange'){
 
             /////
+
+
 
             if(count($receiverId) >0){
 
@@ -281,14 +375,47 @@ class PostController extends Controller
                     }
 
 
-                    $regDakData = NgoNameChangeDak::find($inputAllData['receiverId'][$key]);
-                    $regDakData->original_recipient =$mainPrapok;
-                    $regDakData->copy_of_work =$karjoOnulipi;
-                    $regDakData->informational_purposes =$infoOnulipi;
-                    $regDakData->attraction_attention =$eyeOnulipi;
-                    $regDakData->dak_detail_id = $dakDetailId;
-                    $regDakData->status = 1;
-                    $regDakData->save();
+//dd($mainPrapok);
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = NgoNameChangeDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = NgoNameChangeDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
 
 
 
@@ -349,14 +476,57 @@ class PostController extends Controller
                     }
 
 
-                    $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
-                    $regDakData->original_recipient =$mainPrapok;
-                    $regDakData->copy_of_work =$karjoOnulipi;
-                    $regDakData->informational_purposes =$infoOnulipi;
-                    $regDakData->attraction_attention =$eyeOnulipi;
-                    $regDakData->dak_detail_id = $dakDetailId;
-                    $regDakData->status = 1;
-                    $regDakData->save();
+                    // $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
+
+
 
 
 
@@ -420,14 +590,54 @@ class PostController extends Controller
                     }
 
 
-                    $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
-                    $regDakData->original_recipient =$mainPrapok;
-                    $regDakData->copy_of_work =$karjoOnulipi;
-                    $regDakData->informational_purposes =$infoOnulipi;
-                    $regDakData->attraction_attention =$eyeOnulipi;
-                    $regDakData->dak_detail_id = $dakDetailId;
-                    $regDakData->status = 1;
-                    $regDakData->save();
+                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
 
 
 
