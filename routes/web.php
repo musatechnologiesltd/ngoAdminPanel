@@ -184,6 +184,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('foreginPdfDownload/{id}', 'foreginPdfDownload')->name('foreginPdfDownload');
     Route::get('verifiedFdEightDownload/{id}', 'verifiedFdEightDownload')->name('verifiedFdEightDownload');
 
+
+    Route::get('renewalFileDownload/{title}/{id}', 'renewalFileDownload')->name('renewalFileDownload');
+
+
+    Route::get('changeAcNumberDownloadOld/{id}', 'changeAcNumberDownloadOld')->name('changeAcNumberDownloadOld');
+    Route::get('dueVatPdfDownloadOld/{id}', 'dueVatPdfDownloadOld')->name('dueVatPdfDownloadOld');
+    Route::get('copyOfChalanPdfDownloadOld/{id}', 'copyOfChalanPdfDownloadOld')->name('copyOfChalanPdfDownloadOld');
+    Route::get('yearlyBudgetPdfDownloadOld/{id}', 'yearlyBudgetPdfDownloadOld')->name('yearlyBudgetPdfDownloadOld');
+    Route::get('foreginPdfDownloadOld/{id}', 'foreginPdfDownloadOld')->name('foreginPdfDownloadOld');
+    Route::get('verifiedFdEightDownloadOld/{id}', 'verifiedFdEightDownloadOld')->name('verifiedFdEightDownloadOld');
+
 });
 
 
