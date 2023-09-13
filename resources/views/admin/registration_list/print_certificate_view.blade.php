@@ -80,12 +80,29 @@
     </style>
 </head>
 <body>
+<?php
+  $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
 
+?>
 <div class="pdf_back">
     <div class="content">
         <table class="first_table">
             <tr>
-                <td style="padding-left:32%;">{{ $form_one_data->registration_number }}</td>
+                <td style="padding-left:32%;">
+
+
+                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+                    
+{{ $ngoTypeData->registration }}
+
+                    @else
+
+                    {{ $form_one_data->registration_number }}
+
+                    @endif
+
+
+                </td>
                 <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($mainDate ))}}</td>
             </tr>
         </table>
