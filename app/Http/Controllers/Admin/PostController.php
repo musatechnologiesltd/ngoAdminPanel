@@ -34,12 +34,22 @@ class PostController extends Controller
             $all_data_for_renew_list = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
             $all_data_for_name_changes_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
 
-            $dataFdNine = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-            ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
-            ->whereNull('fd9_forms.status')->orderBy('fd9_forms.id','desc')->get();
+            // $dataFdNine = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
+            // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
+            // ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
+            // ->whereNull('fd9_forms.status')->orderBy('fd9_forms.id','desc')->get();
 
-            $dataFdNineOne = DB::table('fd9_one_forms')->whereNull('status')->latest()->get();
+            $dataFdNineOne = DB::table('fd9_one_forms')
+            ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
+            ->whereNull('fd9_one_forms.status')
+            ->orderBY('fd9_one_forms.id','desc')
+            ->get();
+
+            $dataFdNine = DB::table('fd9_forms')->whereNull('status')->latest()->get();
+
+
 
             return view('admin.post.index',compact('dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
         }else{

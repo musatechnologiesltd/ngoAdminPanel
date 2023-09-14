@@ -313,7 +313,7 @@
     </tr>
     <tr>
         <td></td>
-        <td>(i)</td>
+        <td>(ii)</td>
         <td>সংস্থার নাম</td>
         <td>: {{ $form_one_data->organization_name_ban }}</td>
     </tr>
@@ -322,6 +322,26 @@
     <tr>
         <td></td>
         <td>(iii)</td>
+        <td>মেয়াদ শুরু </td>
+        <td>:
+<?php
+
+$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
+$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+?>
+
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}
+
+
+      </td>
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>(iv)</td>
         <td>শেষ নবায়ন তারিখ</td>
         <td>:
 
@@ -408,10 +428,7 @@
         <td colspan="3"><!-- Button trigger modal -->
 
 
-            @if($ngoTypeData->ngo_type_new_old == 'Old')
 
-
-            @else
 
            @if($form_one_data->registration_number_given_by_admin == 0)
            <button type="button" disabled class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -434,7 +451,7 @@
                 ডেমো
               </button>
         </form>
-        @endif
+
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

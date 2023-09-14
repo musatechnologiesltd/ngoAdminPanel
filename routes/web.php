@@ -111,6 +111,12 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(Fd9Controller::class)->group(function () {
 
+
+        Route::post('/statusUpdateForFd9', 'statusUpdateForFd9')->name('statusUpdateForFd9');
+
+
+
+
         Route::post('/submitForCheck','submitForCheck')->name('submitForCheck');
         Route::get('/statusCheck','statusCheck')->name('statusCheck');
 

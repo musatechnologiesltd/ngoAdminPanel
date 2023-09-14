@@ -141,7 +141,7 @@
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('fd9Form.index') || Route::is('fd9Form.show') ? 'active' : '' }}" href="{{ route('fd9Form.index') }}">
         <i data-feather="airplay"></i>
-        <span>এফডি৯ (এন-ভিসা)</span>
+        <span>এফডি - ৯ ফরম </span>
     </a>
 </li>
 @endif
@@ -149,7 +149,7 @@
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('fd9OneForm.index') || Route::is('fd9OneForm.show') ? 'active' : '' }}" href="{{ route('fd9OneForm.index') }}">
         <i data-feather="airplay"></i>
-        <span>এফডি৯.১ (ওয়ার্ক পারমিট)</span>
+        <span>এফডি- ৯.১(ওয়ার্ক পারমিট)</span>
     </a>
 </li>
 @endif

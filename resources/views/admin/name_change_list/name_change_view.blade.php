@@ -870,6 +870,26 @@
     <tr>
         <td></td>
         <td>(iii)</td>
+        <td>মেয়াদ শুরু </td>
+        <td>:
+<?php
+
+$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
+$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+?>
+
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}
+
+
+      </td>
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>(iv)</td>
         <td>শেষ নবায়ন তারিখ</td>
         <td>:
 
@@ -950,6 +970,7 @@
       @endif
       </td>
     </tr>
+    @endif
     <tr>
         <td></td>
         <td colspan="3"><!-- Button trigger modal -->
@@ -990,7 +1011,7 @@
               </div>
             </div></td>
     </tr>
-    @endif
+
     </tbody>
 </table>
 

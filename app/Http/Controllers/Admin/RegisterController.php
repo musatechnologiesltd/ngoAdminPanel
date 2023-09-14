@@ -212,10 +212,13 @@ class RegisterController extends Controller
 
     public function printCertificateView(Request $request){
 
+        //dd(11);
+
            $user_id = $request->user_id;
 
            $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
-
+           $ngoTypeData = DB::table('ngo_type_and_languages')
+           ->where('user_id',$form_one_data->user_id)->first();
            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
 
            //dd($user_id);
@@ -234,7 +237,7 @@ class RegisterController extends Controller
            //dd($newdate);
 $mainDate = $request->main_date;
            $file_Name_Custome = 'certificate';
-           $pdf=PDF::loadView('admin.registration_list.print_certificate_view',['newyear'=>$newyear,
+           $pdf=PDF::loadView('admin.registration_list.print_certificate_view',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
 'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
@@ -243,10 +246,15 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
     public function printCertificateViewDemo(Request $request){
 //dd(11);
+
+
+
+
         $user_id = $request->user_id;
 
         $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
-
+        $ngoTypeData = DB::table('ngo_type_and_languages')
+        ->where('user_id',$form_one_data->user_id)->first();
         $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
 
         //dd($user_id);
@@ -265,7 +273,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
         //dd($newdate);
 $mainDate = $request->main_date;
         $file_Name_Custome = 'certificate';
-        $pdf=PDF::loadView('admin.registration_list.printCertificateViewDemo',['newyear'=>$newyear,
+        $pdf=PDF::loadView('admin.registration_list.printCertificateViewDemo',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
 'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
