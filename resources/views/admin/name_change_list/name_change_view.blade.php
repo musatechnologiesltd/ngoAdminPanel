@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এনজিও নিবন্ধন এর  বিস্তারিত  | {{ $ins_name }}
+এনজিও নাম পরিবর্তন  এর  বিস্তারিত  | {{ $ins_name }}
 @endsection
 
 
@@ -15,10 +15,10 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>এনজিও নিবন্ধন তথ্য</h3>
+                <h3>এনজিও নাম পরিবর্তন  তথ্য</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">এনজিও নিবন্ধন তথ্য</li>
+                    <li class="breadcrumb-item">এনজিও নাম পরিবর্তন  তথ্য</li>
                     <li class="breadcrumb-item active">এনজিও প্রোফাইল</li>
                 </ol>
             </div>
@@ -47,7 +47,7 @@
                         <?php
 
                        $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-
+                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
 
                         ?>
                         <div class="user-designation">
@@ -61,6 +61,22 @@
                                 @endif
                                 <!--<h6>{{ $form_one_data->email }}</h6>-->
                                <!-- <p>{{ $form_one_data->phone }}</p> -->
+
+
+                               @if($getNgoType == 'Foreign')
+                               <h6>বিদেশী এনজিও </h6>
+                               @else
+                               <h6>দেশি এনজিও </h6>
+
+                               @endif
+                               @if($ngoTypeData->ngo_type_new_old == 'Old')
+                               <h6>এনজিও'র ধরন : পুরাতন</h6>
+                               @else
+
+                               <h6>এনজিও'র ধরন : নতুন</h6>
+                               @endif
+
+
                             </div>
                             <div class="follow">
                                 <ul class="follow-list">
@@ -137,32 +153,33 @@
                     <div class="col-sm-12">
                         <div class="card height-equal">
                             <div class="card-header pb-0">
-                                <h5>এনজিও নিবন্ধন সমস্ত তথ্য</h5>
+                                <h5>এনজিও নাম পরিবর্তন  সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
-                                    {{-- <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
-                                        data-bs-toggle="pill" href="#pills-darkhome"
-                                        role="tab" aria-controls="pills-darkhome"
-                                        aria-selected="true" style=""><i
-                                class="icofont icofont-ui-home"></i>এফডি -০১ ফর্ম</a></li> --}}
+
+
+                                    @if($getNgoType == 'Foreign')
+
+                                    <li class="nav-item"><a class="nav-link active" id="pills-darkdoc-tab"
+                                        data-bs-toggle="pill" href="#pills-darkdoc"
+                                        role="tab" aria-controls="pills-darkdoc"
+                                        aria-selected="false" style=""><i
+                                class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
+                </li>
+
+
+
+
+
+                                    @else
                 <li class="nav-item"><a class="nav-link active" id="pills-darkprofile-tab"
                                         data-bs-toggle="pill" href="#pills-darkprofile"
                                         role="tab" aria-controls="pills-darkprofile"
                                         aria-selected="false" style=""><i
                                 class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" id="pills-darkcontact-tab"
-                                        data-bs-toggle="pill" href="#pills-darkcontact"
-                                        role="tab" aria-controls="pills-darkcontact"
-                                        aria-selected="false" style=""><i
-                                class="icofont icofont-contacts"></i>কমিটির সদস্যবৃন্দ</a></li>
-                <li class="nav-item"><a class="nav-link" id="pills-darkinfo-tab"
-                                        data-bs-toggle="pill" href="#pills-darkinfo"
-                                        role="tab" aria-controls="pills-darkinfo"
-                                        aria-selected="false" style=""><i
-                                class="icofont icofont-address-book"></i>সাধারণ সদস্যের তালিকা </a>
-                </li>
+
 
 
 
@@ -172,6 +189,8 @@
                                         aria-selected="false" style=""><i
                                 class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
                 </li>
+
+                @endif
 
 
 
@@ -199,338 +218,20 @@
 
                                 </ul>
                                 <div class="tab-content" id="pills-darktabContent">
-                                    <div class="tab-pane fade" id="pills-darkhome"
-                                         role="tabpanel" aria-labelledby="pills-darkhome-tab">
-                                        <div class="mb-0 m-t-30">
-                                            <table class="table table-bordered">
-                                                <tbody>
-                                                <tr>
-                                                    <td>১.</td>
-                                                    <td colspan="3">সংস্থার বিবরণ:</td>
-                                                </tr>
-                                                  <?php
- $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-                             // dd($getngoForLanguage);
-                                  if($getngoForLanguage =='দেশিও'){
-
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
-
-                                  }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name');
-                                  }
-                                                  ?>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(i)</td>
-                                                    <td>সংস্থার নাম</td>
-                                                    <td>: {{ $reg_name }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ii)</td>
-                                                    <td>সংস্থার ঠিকানা</td>
-                                                    <td>: {{ $form_one_data->organization_address }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(iii)</td>
-                                                    <td>ডাইরি নম্বর </td>
-                                                    <td>:
-
-                                                      @if($form_one_data->registration_number == 0)
-
-
-                                                      @else
-
-                                                      {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number)}}
-
-                                                      @endif
-
-
-                                                  </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(iv)</td>
-                                                    <td>কোন দেশীয় সংস্থা</td>
-                                                    <td>: {{ $form_one_data->country_of_origin }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(v)</td>
-                                                    <td>প্রধান কার্যালয়ের ঠিকানা</td>
-                                                    <td>: {{ $form_one_data->address_of_head_office }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(vi)</td>
-                                                    <td>বাংলাদেশস্থ সংস্থা প্রধানের তথ্যাদি</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>ক) নাম</td>
-                                                    <td>: {{ $form_one_data->name_of_head_in_bd }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>খ) পূর্ণকালীন/ খণ্ডকালীন</td>
-                                                    <td>: {{ $form_one_data->job_type }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>গ) ঠিকানা,মোবাইল নম্বর, ইমেইল</td>
-                                                    <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>ঘ) নাগরিকত্ব (পূর্বতন নাগরিকত্ব যদি থাকে তাও উল্লেখ
-                                                        করতে হবে)
-                                                    </td>
-                                                    <td>: {{ $form_one_data->citizenship }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>ঙ) পেশা (বর্তমান পেশা উল্লেখ করতে হবে)</td>
-                                                    <td>: {{ $form_one_data->profession }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>২.</td>
-                                                    <td colspan="3">প্রস্তাবিত কার্যক্রমের ক্ষেত্র
-                                                        (বিস্তারিত বিবরণ সংযুক্ত করতে হবে):
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>ক</td>
-                                                    <td>(i) পরিচালন পরিকল্পনা (Plan of Operation)</td>
-                                                    <td>:
-                                                        @if(empty($form_one_data->plan_of_operation))
-
-                                                        @else
-
-সংযুক্ত
-
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>(ii) প্রকল্প এলাকা (জেলা ও উপজেলা)</td>
-                                                    <td>: {{ $form_one_data->district }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>খ</td>
-                                                    <td>তহবিলের উৎস</td>
-                                                    <td></td>
-                                                </tr>
-                                                @foreach($all_source_of_fund as $all_get_all_source_of_fund_data)
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>(i) দাতা/দাতা সংস্থাসমূহের নাম ও ঠিকানা</td>
-                                                    <td>: {{ $all_get_all_source_of_fund_data->name }},{{ $all_get_all_source_of_fund_data->address }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>(ii) দাতা /দাতাসংস্থার অঙ্গীকারপত্রের কপি</td>
-                                                    <td>: @if(empty($all_get_all_source_of_fund_data->letter_file))
-
-                                                        @else
 
 
 
-                                                    সংযুক্ত
+                                    @if($getNgoType == 'Foreign')
+                                    <div class="tab-pane fade " id="pills-darkprofile" role="tabpanel"
+                                    aria-labelledby="pills-darkprofile-tab">
+                                    @else
 
-                                                        @endif</td>
-                                                </tr>
-                                                @endforeach
-                                                <tr>
-                                                    <td>৩.</td>
-                                                    <td colspan="2">অঙ্গীকারকৃত অনুদানের পরিমাণ (বৈদেশিক
-                                                        মুদ্রা/বাংলাদেশ টাকায়)
-                                                    </td>
-                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->annual_budget) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>৪.</td>
-                                                    <td colspan="3">কর্মকর্তাদের তথ্যাদি পৃথক কাগজে
-                                                        [ঊর্ধ্বতন ৫(পাঁচ) জন কর্মকর্তার]
-                                                        উপস্থাপন করতে হবে
-                                                    </td>
-                                                </tr>
-                                                @foreach($all_partiw as $key=>$all_all_parti)
-                                                <tr>
-                                                    <td></td>
-                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
-                                                    <td>কর্মকর্তা {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ক)</td>
-                                                    <td>নাম</td>
-                                                    <td>: {{ $all_all_parti->name }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(খ)</td>
-                                                    <td>পদবি</td>
-                                                    <td>: {{ $all_all_parti->position }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(গ)</td>
-                                                    <td>ঠিকানা</td>
-                                                    <td>: {{ $all_all_parti->address }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ঘ)</td>
-                                                    <td>নাগরিকত্ব (দ্বৈত নাগরিকত্ব থাকলে উল্লেখ করতে হবে)
-                                                    </td>
-                                                    <td>: {{ $all_all_parti->citizenship }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ঙ)</td>
-                                                    <td>যোগদানের তারিখ</td>
-                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->date_of_join) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(চ)</td>
-                                                    <td>বেতন ভাতাদি</td>
-                                                    <td>: {{ $all_all_parti->salary_statement }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ছ)</td>
-                                                    <td>সম্পৃক্ত অন্য পেশার বিবরণ</td>
-                                                    <td>: {{ $all_all_parti->other_occupation }}</td>
-                                                </tr>
-                                                @endforeach
-
-                                                <tr>
-                                                    <td>৫.</td>
-                                                    <td colspan="2">নিবন্ধন ফি ও ভ্যাট পরিশোধ করা হয়েছে
-                                                        কিনা (চালানের কপি সংযুক্ত করতে
-                                                        হবে)
-                                                    </td>
-                                                    <td>:  @if(empty($form_one_data->attach_the__supporting_papers))
-
-                                                        @else
-
-
-
-                                                      সংযুক্ত
-
-                                                        @endif</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>৬.</td>
-                                                    <td colspan="3">নিয়োগের জন্য প্রস্তাবিত
-                                                        পরামর্শক/পরামর্শকগণের নাম এবং বিস্তারিত
-                                                        তথ্য(যদি থাকে)
-                                                    </td>
-                                                </tr>
-                                                @foreach($get_all_data_adviser as $key=>$all_get_all_data_adviser)
-                                                <tr>
-                                                    <td></td>
-                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
-                                                    <td>পরামর্শক {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ক)</td>
-                                                    <td>নাম</td>
-                                                    <td>: {{ $all_get_all_data_adviser->name }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(খ)</td>
-                                                    <td>বিস্তারিত বর্ণনা</td>
-                                                    <td>: {{ $all_get_all_data_adviser->information	 }}</td>
-                                                </tr>
-                                                @endforeach
-                                                <tr>
-                                                    <td>৭.</td>
-                                                    <td colspan="3">মাদার একাউন্ট এর বিস্তারিত বিবরণ (হিসাব
-                                                        নম্বর, ধরণ, ব্যাংকের
-                                                        নাম,শাখা ও বিস্তারিত ঠিকানা)
-                                                    </td>
-                                                </tr>
-                                                @if(!$get_all_data_adviser_bank)
-
-                                                @else
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ক)</td>
-                                                    <td>হিসাব নম্বর</td>
-                                                    <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_adviser_bank->account_number) }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(খ)</td>
-                                                    <td>ধরণ</td>
-                                                    <td>: {{ $get_all_data_adviser_bank->account_type }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(গ)</td>
-                                                    <td>ব্যাংকের নাম</td>
-                                                    <td>: {{ $get_all_data_adviser_bank->name_of_bank }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ঘ)</td>
-                                                    <td>শাখা</td>
-                                                    <td>: {{ $get_all_data_adviser_bank->branch_name_of_bank }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>(ঙ)</td>
-                                                    <td>বিস্তারিত ঠিকানা</td>
-                                                    <td>: {{ $get_all_data_adviser_bank->bank_address }}</td>
-                                                </tr>
-                                                @endif
-                                                <tr>
-                                                    <td>৮.</td>
-                                                    <td colspan="2">অন্য কোন গুরুত্বপূর্ণ তথ্য যা আবেদনকারী
-                                                        উল্লেখ করতে ইচ্ছুক (পৃথক
-                                                        কাগজে সংযুক্ত করতে হবে)
-                                                    </td>
-                                                    <td>: @foreach($get_all_data_other as $all_get_all_data_other)
-
-                                                        @if(empty($all_get_all_data_other->information_type))
-
-                                                        @else
-
-
-
-                                                     সংযুক্ত
-                                                        @endif
-
-
-                                                                        @endforeach</td>
-                                                </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
                                     <div class="tab-pane fade active show" id="pills-darkprofile" role="tabpanel"
                                          aria-labelledby="pills-darkprofile-tab">
+
+@endif
+
+
                                         <div class="mb-0 m-t-30">
                                           <div class="table-responsive">
                                             <table class="table table-bordered overflow-scroll">
@@ -613,332 +314,505 @@
                                           </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-darkcontact" role="tabpanel"
-                                         aria-labelledby="pills-darkcontact-tab">
-                                        <div class="mb-0 m-t-30">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <th>ক্র: নং:</th>
-                                                    <th>নাম</th>
-                                                    <th>এনআইডি নম্বর এবং জন্ম তারিখ </th>
-                                                    <th>মোবাইল নম্বর</th>
-                                                    <th>পিতার নাম</th>
-                                                    <th>বর্তমান ঠিকানা</th>
-                                                    <th>স্থায়ী ঠিকানা</th>
-                                                    <th>স্ত্রীর নাম</th>
-
-                                                    <th>স্বাক্ষর এবং তারিখ</th>
-                                                </tr>
-                                                @foreach($form_eight_data as $key=>$all_all_parti)
-                                                <tr>
-                                                   <td>{{ $key+1 }}</td>
-                                                    <td>{{ $all_all_parti->name }}</td>
-                                                    <td><h6> NID No: {{App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->nid_no) }}</h6><span>DOB: <?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
 
 
-                                                        {{  App\Http\Controllers\Admin\CommonController::englishToBangla($start_date_one) }}</span>
-                                                    </td>
-                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->phone) }}</td>
-                                                    <td>{{ $all_all_parti->father_name }}</td>
-                                                    <td>{{ $all_all_parti->present_address }}</td>
-                                                    <td>{{ $all_all_parti->permanent_address }}</td>
-                                                    <td>{{ $all_all_parti->name_supouse }}</td>
+                                    @if($getNgoType == 'Foreign')
 
-                                                    <td>
-
-                                                        @if($all_all_parti->verified_form_eight == 0)
+                                    <div class="tab-pane fade active show" id="pills-darkdoc" role="tabpanel"
+                                    aria-labelledby="pills-darkdoc-tab">
 
 
-                                                        @else
+                                    @else
 
-                                                        Attached
-
-                                                        @endif
-
-
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-darkinfo" role="tabpanel"
-                                         aria-labelledby="pills-darkinfo-tab">
-                                        <div class="mb-0 m-t-30">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <th>ক্র: নং:</th>
-                                                    <th>নাম</th>
-                                                    <th>এনআইডি নম্বর এবং জন্ম তারিখ </th>
-                                                    <th>মোবাইল নম্বর</th>
-                                                    <th>পিতার নাম</th>
-                                                    <th>বর্তমান ঠিকানা</th>
-                                                    <th>স্থায়ী ঠিকানা</th>
-                                                    <th>স্ত্রীর নাম</th>
-
-                                                    <th>স্বাক্ষর এবং তারিখ</th>
-                                                </tr>
-                                                @foreach($form_member_data as $key=>$all_form_member_data)
-                                                <tr>
-                                                        <td>{{ $key+1 }}</td>
-                                                    <td>{{ $all_form_member_data->member_name }}</td>
-                                                    <td><h6> NID: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_form_member_data->member_nid_no) }} </h6><span>DOB: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_form_member_data->member_dob) }} </span>
-                                                    </td>
-                                                    <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_form_member_data->member_mobile) }}</td>
-                                                    <td>{{ $all_form_member_data->member_father_name }} </td>
-                                                    <td>{{ $all_form_member_data->member_present_address }}</td>
-                                                    <td>{{ $all_form_member_data->member_permanent_address }}</td>
-                                                    <td>{{ $all_form_member_data->member_name_supouse }}</td>
-
-                                                    <td>
-
-
-                                                        @if($all_form_member_data->verified_file == 0)
-
-
-                                                        @else
-
-                                                        Attached
-
-                                                        @endif
-
-
-
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </table>
-                                        </div>
-                                    </div>
                                     <div class="tab-pane fade" id="pills-darkdoc" role="tabpanel"
                                          aria-labelledby="pills-darkdoc-tab">
+
+                                         @endif
+
+
+
+
                                         <div class="mb-0 m-t-30">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th>নথির নাম</th>
+
                                                     <th>নথি দেখুন</th>
                                                 </tr>
-                                                <tr>
-                                                    <td>পরিচালন পরিকল্পনা</td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
-                                                        <i class="fa fa-eye"></i>
-                                                    </a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>চালানের কপি</td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ট্রেজারি চালানের মূলকপি</td>
-                                                    <td> <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a></td>
-                                                </tr>
 
-                                                <tr>
-                                                    <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ ফরম - ০১ এর ফাইনাল কপি </td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'final_pdf']) }}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a></td>
-                                                </tr>
 
-                                                <tr>
-                                                    <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ ফরম - ০৮ এর ফাইনাল কপি</td>
-                                                    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formEightPdf',['main_id'=>$form_one_data->id]) }}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a></td>
-                                                </tr>
-                                                @foreach($all_source_of_fund as $all_get_all_source_of_fund_data)
+                                                @if($getNgoType == 'Foreign')
+
+
+
+                                                @foreach($allNameChangeDoc as $key=>$AllNameChangeInfoDoc)
+
+
+
+                                                @if(($key+1) ==1)
+
                                                 <tr>
                                                     <td>
-                                                    সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি(দাতা সংস্থার নাম)
-                                                    </td>
-                                                    <td> <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>({{ $all_get_all_source_of_fund_data->name }})</td>
-                                                </tr>
+
+
+                                                <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                    ০২টি জাতীয় পত্রিকায় ( বাংলা ও ইংরেজী পত্রিকায় "নাম পরিবর্তন বিষয়ে বিজ্ঞাপনের মূলকপি
+                                               </a>
+                                            </td>
+
+                                        </tr>
+
+                                                @elseif(($key+1) ==2)
+
+                                                <tr>
+                                                    <td>
+                                                <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                    নাম পরিবর্তন ফি বাবদ-২৬,০০০/- (ছাব্বিশ হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপি এবং ১৫% ভ্যাট (কোড নং - ১-১১৩৩ -০০৩৫ - ০৩১১) প্রদানপূর্বক চালানের মূলকপিসহ
+                                               </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==3)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সংশ্লিষ্ট দেশের বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টির তালিকা ( সংশ্লিষ্ট দেশের পিস অব জাস্টিস কর্তৃক নোটারীকৃত )
+                                           </a>
+
+                                        </td>
+
+                                    </tr>
+                                               @elseif(($key+1) ==4)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                               নাম পরিবর্তন বিষয়ে সংশ্লিষ্ট দেশের বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টির সিদ্ধান্তের কপি  (সংশ্লিষ্ট দেশের পিস অব জাস্টিস কর্তৃক নোটারীকৃত মূলকপিসহ )
+                                               </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==5)
+
+                                               <tr>
+                                                <td>
+
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                ৩০০/তিনশত) টাকার স্টাম্পে নাম পরিবর্তনের বিষয়ে এফিডেবিট এর কপি
+                                                </a>
+
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==6)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                এনজিও বিষয়ক ব্যুরোর মুল সনদপত্র
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==7)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সংস্থার পরিবর্তিত নামের সনদপত্র /ইনকর্পোরেটর সার্টিফিকেট (সংশ্লিষ্ট দেশের নোটারীকৃত মূলকপি )
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==8)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সংস্থার পরিবর্তিত নামের বাই লজ (By Laws)/গঠনতন্ত্রের কপি (সংশ্লিষ্ট দেশের পিস অব জাস্টিস কতৃক নোটারীকৃত মূলকপিসহ )
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==9)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সংস্থার পূর্ববর্তী নামের সকল দায় -দায়িত্ব বর্তমানে পরিবর্তিত নামের সংস্থার উপর বর্তাইবে মর্মে অঙ্গীকার নামা (সংস্থার প্রধান কতৃক স্বাক্ষরিত )
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==10)
+
+
+                                               <tr>
+                                                <td>
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                ২০১০-২০১১ অর্থবছর হতে হালনাগাদ পর্যন্ত সংস্থার নিবন্ধন/নিবন্ধন নবায়ন /নাম পরিবর্তন /গঠনতন্ত্রের যে কোনো ধারা পরিবর্তনের বিষয়ের দাখিলকৃত ফি এর ১৫% বকেয়া ভ্যাট (যদি ইতিমধ্যে প্রদান করা হয়ে না থাকে ) সংশ্লিষ্ট কোডে
+                                                জমাপূর্বক চালানের মুলকপিসহ
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==11)
+                                               <tr>
+                                                <td>
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                গঠনতন্ত্র পরিবর্তন ফি বাবদ-১৩,০০০/ (তের হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপি এবং ১৫% ভ্যাট (কোড নং - ১-১১৩৩ -০০৩৫ - ০৩১১) প্রদানপূর্বক চালানের মূলকপিসহ
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+
+                                               @elseif(($key+1) ==12)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিতো গঠনতন্ত্রের সত্যায়িত কপি
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==13)
+
+                                               <tr>
+                                                <td>
+
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সংস্থার চেয়ারম্যান ও সেক্রেটারি কর্তৃক যৌথ স্বাক্ষরিত গঠনতন্ত্র পরিচ্ছন্ন কপি
+                                                </a>
+                                            </td>
+
+                                        </tr>
+
+
+                                               @elseif(($key+1) ==14)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ফি জমা প্রদানের চালানের মূলকপি
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==15)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ও সংযোজনের বিষয়ে সাধারণ সভার কার্যবিবরণীর সত্যায়িত কপি
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==16)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                পূর্ব গঠনতন্ত্র ও বর্তমান গঠনতন্ত্রের তুলনামূলক বিবরণী (প্রতি পাতায় সভাপতি ও সম্পাদকের যৌথ স্বাক্ষরসহ)
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @endif
+
+
+
 
                                                 @endforeach
 
-                                                @foreach($get_all_data_other as $key=>$all_get_all_data_other)
+
+
+
+
+                                                @else
+                                                @foreach($allNameChangeDoc as $key=>$AllNameChangeInfoDoc)
+
+
+
+                                                @if(($key+1) ==1)
+
+<tr>
+                                               <td>
+
+                                                <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                    ০২টি জাতীয় পত্রিকায় ( বাংলা ও ইংরেজী পত্রিকায় "নাম পরিবর্তন বিষয়ে বিজ্ঞাপনের মূলকপি
+                                               </a>
+                                            </td>
+                                        </tr>
+
+
+                                                @elseif(($key+1) ==2)
+
 
                                                 <tr>
-                                                <td>অন্যান্য পিডিএফ কপি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
-                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
+                                                    <td>
+
+
+                                                <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                    নাম পরিবর্তন ফি বাবদ-২৬,০০০/- (ছাব্বিশ হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপি এবং ১৫% ভ্যাট (কোড নং - ১-১১৩৩ -০০৩৫ - ০৩১১) প্রদানপূর্বক চালানের মূলকপিসহ
+                                               </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==3)
+
+
+<tr>
+                                               <td>
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                ফরম -৮ মোতাবেক নির্বাহী কমিটির তালিকা
+                                           </a>
+
+
+                                        </td>
+
+                                    </tr>
+
+
+                                               @elseif(($key+1) ==4)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                নির্বাহী কমিটির সদস্যদের ভোটার আইডি কার্ডের ফটোকপিসহ সত্যায়িত পাসপোর্ট সাইজের ছবি
+                                               </a>
+
+                                            </td>
+
+                                        </tr>
+
+
+                                               @elseif(($key+1) ==5)
+
+                                               <tr>
+                                                <td>
+
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                ৩০০/তিনশত) টাকার স্টাম্পে নাম পরিবর্তনের বিষয়ে এফিডেবিট এর কপি
+                                                </a>
+
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==6)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                এনজিও বিষয়ক ব্যুরোর মুল সনদপত্র
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==7)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                পরিবর্তিত নামে প্রাথমিক নিবন্ধন প্রদানকারী কর্তৃপক্ষের সত্যায়িত সনদপত্রের কপি
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==8)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                প্রাথমিক নিবন্ধন প্রদানকারী কর্তৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকার সত্যায়িত কপি
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+
+                                               @elseif(($key+1) ==9)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সর্বশেষ সাধারণ সদস্যদের তালিকা
+                                                </a>
+
+                                                @elseif(($key+1) == 10)
+
+                                                <tr>
+                                                    <td>
+
+                                                <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                    নাম পরিবর্তন সংক্রান্ত বিষয়ে সাধারণ সভার কা্যবিবরণীর (উপস্থিত সদস্যদের তালিকাসহ) সত্যায়িত কপি
+                                                    </a>
+
+                                                </td>
+
                                             </tr>
-                                            @endforeach
+                                                    @elseif(($key+1) == 11)
 
-                                            @foreach($form_member_data_doc as $key=>$all_form_member_data_doc)
+                                                    <tr>
+                                                        <td>
 
-                                            <tr>
-                                                <td>এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
-                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
+                                                    <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                        পূর্ববর্তী নামের সকল দায়-দায়িত্ব বর্তমানে পরিবর্তিত নামের সংস্থার উপর বর্তাইবে মর্মে অংগীকার নামা (সভাপতি ও সাধারণ সম্পাদক কর্তৃক স্বাক্ষরিত)।
+                                                        </a>
 
-                                            @endforeach
+                                                        @elseif(($key+1) == 12)
 
+                                                        <tr>
+                                                            <td>
 
+                                                        <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                            দাখিলকৃত চালানের ডপর ১৫% ভ্যাট নির্ধারিত কোডে জমাপূর্বক চালানের মূলকলিসহ (কোড নং-১-১১৩৩-০০৩৫-০৩১১)
+                                                            </a>
 
-                                            @foreach($form_ngo_data_doc as $key=>$all_form_member_data_doc)
+                                                        </td>
 
+                                                    </tr>
 
-
-                                            <tr>
-                                                @if($key+1 == 1)
-                                                <td>কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি</td>
-                                                @elseif($key+1 == 2)
-                                                <td>গঠনতন্ত্রের সত্যায়িত অনুলিপি</td>
-                                                @elseif($key+1 == 3)
-                                                <td>সংস্থার কার্যক্রম প্রতিবেদন</td>
-                                                @elseif($key+1 == 4)
-                                                <td>দাতা সংস্হার প্রতিশুতিপত্র</td>
-                                                @elseif($key+1 == 5)
-<td>সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি</td>
-                                                @elseif($key+1 == 6)
-                                                <td>সংস্থার সাধারণ সদস্যদের নামের তালিকা</td>
-
-                                                @endif
-                                                <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
-
-                                            @endforeach
-
-                                            <?php
+                                               @elseif(($key+1) ==13)
 
 
+                                               <tr>
+                                                <td>
 
-                                            ?>
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                ২০১০-২০১১ অর্থবছর হতে হালনাগাদ পর্যন্ত সংস্থার নিবন্ধন/নিবন্ধন নবায়ন /নাম পরিবর্তন /গঠনতন্ত্রের যে কোনো ধারা পরিবর্তনের বিষয়ের দাখিলকৃত ফি এর ১৫% বকেয়া ভ্যাট (যদি ইতিমধ্যে প্রদান করা হয়ে না থাকে ) সংশ্লিষ্ট কোডে
+                                                জমাপূর্বক চালানের মুলকপিসহ
+                                                </a>
+                                            </td>
 
-@if(count($form_member_data_doc_renew) == 0)
-
-
-@else
-@foreach($form_member_data_doc_renew as $all)
-                                            <tr>
-                                                <td>বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ (প্রকল্প ওয়ারী তথাদির সংক্ষিপ্তসার সংযুক্ত করতে হবে)</td>
-                                                <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'f']) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
+                                        </tr>
+                                               @elseif(($key+1) ==14)
 
 
-                                            <tr>
-                                                <td>সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট (উৎসসহ)</td>
-                                                <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'y']) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                গঠনতন্ত্র পরিবর্তন ফি বাবদ-১৩,০০০/ (তের হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপি এবং ১৫% ভ্যাট (কোড নং - ১-১১৩৩ -০০৩৫ - ০৩১১) প্রদানপূর্বক চালানের মূলকপিসহ
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==15)
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিতো গঠনতন্ত্রের সত্যায়িত কপি
+                                                </a>
 
 
-                                            <tr>
-                                                <td>নিবন্ধন ফি ও ভ্যাট পরিশোধ করা হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)</td>
-                                                <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'c']) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
+                                               @elseif(($key+1) ==16)
 
 
-                                            <tr>
-                                                <td>তফসিল-১ এ বর্ণিত যেকোন ফি এর ভ্যাট বকেয়া থাকলে পরিশোধ করা হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)</td>
-                                                <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'d']) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
+                                               <tr>
+                                                <td>
 
 
-                                            <tr>
-                                                <td>ব্যাংক হিসাব নম্বর পরিবর্তন হয়ে থাকলে ব্যুরোর অনুমদনপত্রের কপি সংযুক্ত করতে হবে</td>
-                                                <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'ch']) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a></td>
-                                            </tr>
-                                            @endforeach
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                সংস্থার চেয়ারম্যান ও সেক্রেটারি কর্তৃক যৌথ স্বাক্ষরিত গঠনতন্ত্র পরিচ্ছন্ন কপি
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==17)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ফি জমা প্রদানের চালানের মূলকপি
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                               @elseif(($key+1) ==18)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ও সংযোজনের বিষয়ে সাধারণ সভার কার্যবিবরণীর সত্যায়িত কপি
+                                                </a>
+                                               @elseif(($key+1) ==19)
+
+
+                                               <tr>
+                                                <td>
+
+                                               <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
+                                                পূর্ব গঠনতন্ত্র ও বর্তমান গঠনতন্ত্রের তুলনামূলক বিবরণী (প্রতি পাতায় সভাপতি ও সম্পাদকের যৌথ স্বাক্ষরসহ)
+                                                </a>
+
+
+                                            </td>
+
+                                               </tr>
+                                               @endif
+
+
+
+
+                                                @endforeach
                                             @endif
-
-                                            @foreach($allNameChangeDoc as $key=>$allAllNameChangeDoc)
-@if(count($allNameChangeDoc) == 8)
-
-<tr>
-
-    @if($key+1 == 1)
-    <td> ০২টি জাতীয় পত্রিকায় ( বাংলা ও ইংরেজী পত্রিকায় "নাম পরিবর্তন বিষয়ে বিজ্ঞাপনের মূলকপি</td>
-    @elseif($key+1 == 2)
-<td> নাম পরিবর্তন ফি বাবদ-২৬,০০০/- (ছাব্বিশ হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপিসহ অনুলিপি</td>
-    @elseif($key+1 == 3)
-<td>  গঠনতন্ত্র পরিবর্তন ফি বাবদ-১৩,০০০/ (তের হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপিসহ</td>
-    @elseif($key+1 == 4)
-
-<td> সংশ্লিষ্ট দেশের বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টির তালিকা ( সংশ্লিষ্ট দেশের পিস অব জাস্টিস কর্তৃক নোটারীকৃত )</td>
-    @elseif($key+1 == 5)
-
-<td> নাম পরিবর্তন বিষয়ে সংশ্লিষ্ট দেশের বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টির সিদ্ধান্তের কপি  (সংশ্লিষ্ট দেশের পিস অব জাস্টিস কর্তৃক নোটারীকৃত মূলকপিসহ )</td>
-    @elseif($key+1 == 6)
-<td> ৩০০/তিনশত) টাকার স্টাম্পে নাম পরিবর্তনের বিষয়ে এফিডেবিট এর কপি</td>
-
-    @elseif($key+1 == 7)
-<td>  এনজিও বিষয়ক ব্যুরোর মুল সনদপত্র</td>
-    @elseif($key+1 == 8)
-
-<td> সংস্থার পরিবর্তিত নামের সনদপত্র /ইনকর্পোরেটর সার্টিফিকেট (সংশ্লিষ্ট দেশের নোটারীকৃত মূলকপি )</td>
-    @endif
-
-
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('nameChangeDoc',['id'=>$allAllNameChangeDoc->id])  }}">
-        <i class="fa fa-eye"></i>
-    </a></td>
-</tr>
-@else
-
-<tr>
-    @if($key+1 == 1)
-    <td>    ০২টি জাতীয় পত্রিকায় ( বাংলা ও ইংরেজী পত্রিকায় "নাম পরিবর্তন বিষয়ে বিজ্ঞাপনের মূলকপি</td>
-    @elseif($key+1 == 2)
-<td> নাম পরিবর্তন ফি বাবদ-২৬,০০০/- (ছাব্বিশ হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপিসহ অনুলিপি</td>
-    @elseif($key+1 == 3)
-<td>  গঠনতন্ত্র পরিবর্তন ফি বাবদ-১৩,০০০/ (তের হাজার) টাকার (কোড নং-১-০৩২৩-০০০০- ১৮৩৬) চালানের মূলকপিসহ</td>
-    @elseif($key+1 == 4)
-
-<td> ৩০০/তিনশত) টাকার স্টাম্পে নাম পরিবর্তনের বিষয়ে এফিডেবিট এর কপি</td>
-    @elseif($key+1 == 5)
-<td>  এনজিও বিষয়ক ব্যুরোর মুল সনদপত্র</td>
-
-    @elseif($key+1 == 6)
-<td> পরিবর্তিত নামে প্রাথমিক নিবন্ধন প্রদানকারী কর্তৃপক্ষের সত্যায়িত সনদপত্রের কপি</td>
-
-    @elseif($key+1 == 7)
-<td> প্রাথমিক নিবন্ধন প্রদানকারী কর্তৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকার সত্যায়িত কপি</td>
-    @elseif($key+1 == 8)
-<td>নাম পরিবর্তন সংক্রান্ত বিষয়ে সাধারণ সভার কা্যবিবরণীর (উপস্থিত সদস্যদের তালিকাসহ)</td>
-    @elseif($key+1 == 9)
-
-<td>পূর্ববর্তী নামের সকল দায়-দায়িত্ব বর্তমানে পরিবর্তিত নামের সংস্থার উপর বর্তাইবে মর্মে অংগীকার নামা (সভাপতি ও সাধারণ সম্পাদক কর্তৃক স্বাক্ষরিত)।</td>
-    @elseif($key+1 == 10)
-<td>  দাখিলকৃত চালানের ডপর ১৫% ভ্যাট নির্ধারিত কোডে জমাপূর্বক চালানের মূলকলিসহ (কোড নং-১-১১৩৩-০০৩৫-০৩১১)</td>
-    @elseif($key+1 == 11)
-<td>২০১০-২০১১ অর্থবছর হতে হালনাগাদ পর্যন্ত সংস্থার নিবন্ধন/নিবন্ধন নবায়ন/নাম পরিবর্তন/গঠনতন্ত্রের যে কোন ধারা পরিবর্তনের বিষয়ে দাখিলকৃত ফি এর উপর ১৫% বকেয়া ভ্যাট (যদি ইতোমধ্যে প্রদান না করা হয়ে থাকে) সংশ্লিষ্ট কোডে জমাপূর্বক চালানের মুলকপিসহ</td>
-
-
-
-    @endif
-
-
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('nameChangeDoc',['id'=>$allAllNameChangeDoc->id]) }}">
-        <i class="fa fa-eye"></i>
-    </a></td>
-</tr>
-@endif
-
-
-
-                                            @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -963,6 +837,72 @@
         <td>১.</td>
         <td colspan="3">সংস্থার বিবরণ:</td>
     </tr>
+
+    @if($ngoTypeData->ngo_type_new_old == 'Old')
+    <tr>
+        <td></td>
+        <td>(i)</td>
+        <td>নিবন্ধন নম্বর</td>
+        <td>:
+
+
+
+
+
+
+
+          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}
+
+
+
+
+
+      </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>(i)</td>
+        <td>সংস্থার নাম</td>
+        <td>: {{ $form_one_data->organization_name_ban }}</td>
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>(iii)</td>
+        <td>মেয়াদ শুরু </td>
+        <td>:
+<?php
+
+$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
+$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+?>
+
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}
+
+
+      </td>
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>(iv)</td>
+        <td>শেষ নবায়ন তারিখ</td>
+        <td>:
+
+
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}
+
+
+      </td>
+    </tr>
+
+
+    @else
     <tr>
         <td></td>
         <td>(i)</td>
@@ -1030,6 +970,7 @@
       @endif
       </td>
     </tr>
+    @endif
     <tr>
         <td></td>
         <td colspan="3"><!-- Button trigger modal -->
@@ -1070,6 +1011,7 @@
               </div>
             </div></td>
     </tr>
+
     </tbody>
 </table>
 

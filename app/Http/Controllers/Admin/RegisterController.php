@@ -38,7 +38,8 @@ class RegisterController extends Controller
         }
 
 
-        $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Ongoing')->latest()->get();
+        $all_data_for_new_list = DB::table('ngo_statuses')
+        ->where('status','Ongoing')->orWhere('status','Old Ngo Renew')->latest()->get();
 
 
       return view('admin.registration_list.new_registration_list',compact('all_data_for_new_list'));
@@ -90,6 +91,12 @@ class RegisterController extends Controller
 
             $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$id)->first();
             $form_one_data = DB::table('fd_one_forms')->where('id',$id)->first();
+
+
+            $ngoTypeData = DB::table('ngo_type_and_languages')
+            ->where('user_id',$form_one_data->user_id)->first();
+
+
             $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$id)->get();
             $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$id)->get();
 
@@ -131,8 +138,11 @@ class RegisterController extends Controller
         }
 
 
-
-        return view('admin.registration_list.registration_view',compact('duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+        if($ngoTypeData->ngo_type == 'দেশিও'){
+ return view('admin.registration_list.registration_view',compact('ngoTypeData','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+    }else{
+        return view('admin.registration_list.foreign.registration_view',compact('ngoTypeData','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+    }
     }
 
 
@@ -202,10 +212,13 @@ class RegisterController extends Controller
 
     public function printCertificateView(Request $request){
 
+        //dd(11);
+
            $user_id = $request->user_id;
 
            $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
-
+           $ngoTypeData = DB::table('ngo_type_and_languages')
+           ->where('user_id',$form_one_data->user_id)->first();
            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
 
            //dd($user_id);
@@ -224,7 +237,7 @@ class RegisterController extends Controller
            //dd($newdate);
 $mainDate = $request->main_date;
            $file_Name_Custome = 'certificate';
-           $pdf=PDF::loadView('admin.registration_list.print_certificate_view',['newyear'=>$newyear,
+           $pdf=PDF::loadView('admin.registration_list.print_certificate_view',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
 'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
@@ -233,10 +246,15 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
     public function printCertificateViewDemo(Request $request){
 //dd(11);
+
+
+
+
         $user_id = $request->user_id;
 
         $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
-
+        $ngoTypeData = DB::table('ngo_type_and_languages')
+        ->where('user_id',$form_one_data->user_id)->first();
         $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
 
         //dd($user_id);
@@ -255,7 +273,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
         //dd($newdate);
 $mainDate = $request->main_date;
         $file_Name_Custome = 'certificate';
-        $pdf=PDF::loadView('admin.registration_list.printCertificateViewDemo',['newyear'=>$newyear,
+        $pdf=PDF::loadView('admin.registration_list.printCertificateViewDemo',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
 'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
@@ -264,9 +282,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
     public function updateStatusRegForm(Request $request){
 
-        // $data_save = DB::table('ngo_statuses')->find($request->id);
-        // $data_save->status = $request->status;
-        // $data_save->save();
+      //dd($request->all());
 
         DB::table('ngo_statuses')->where('id',$request->id)
 ->update([
@@ -282,6 +298,15 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_on
 //DB::table('DB::table('fd_one_forms')->')->where('user_id',$get_user_id)->first();
 
 
+if($request->ngotype == 'old'){
+
+    Mail::send('emails.oldRenew', ['id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+        $message->to($request->email);
+        $message->subject('NGOAB Registration Service || Old Ngo Approved Status');
+    });
+
+
+}else{
 
 
 
@@ -325,7 +350,7 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_on
         });
 
 
-
+    }
 
 
 
@@ -355,6 +380,8 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_on
 
         }elseif($id == 'final_pdf'){
             $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('verified_fd_one_form');
+        }elseif($id == 'final_pdf_eight'){
+            $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('verified_fd_eight_form_old');
         }
 
         return view('admin.registration_list.form_one_pdf',compact('form_one_data'));

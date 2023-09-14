@@ -51,8 +51,31 @@
                             <tbody>
 
                                 @foreach($dataFromNVisaFd9Fd1 as $allDataFromNVisaFd9Fd1)
+
+                                <?php
+
+                                $form_one_data = DB::table('fd_one_forms')->where('id',$allDataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+
+                                $ngoTypeData = DB::table('ngo_type_and_languages')
+                                ->where('user_id',$form_one_data->user_id)->first();
+
+                                                                ?>
+
+
                             <tr>
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allDataFromNVisaFd9Fd1->registration_number) }}</td>
+                                <td>
+
+                                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration) }}
+                                    @else
+
+                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number) }}
+                                     @endif
+
+
+                                </td>
                                 <td><h6> {{ $allDataFromNVisaFd9Fd1->organization_name_ban }} </h6><span>Address: {{ $allDataFromNVisaFd9Fd1->organization_address }}</span></td>
                                 <td>{{ $allDataFromNVisaFd9Fd1->foreigner_name_for_subject }} </td>
                                 <td class="font-success">

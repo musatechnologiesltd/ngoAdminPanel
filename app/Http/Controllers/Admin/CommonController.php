@@ -19,7 +19,7 @@ class CommonController extends Controller
         }
 
 
-        $extension = time().mt_rand(1000000000, 9999999999).$file->getClientOriginalName();
+        $extension = date('Y-d-m').time().mt_rand(1000000000, 9999999999).".".$file->getClientOriginalExtension();
         $filename = $extension;
         $file->move('public/uploads/'.$filePath.'/', $filename);
         $imageUrl =  'public/uploads/'.$filePath.'/'.$filename;
@@ -41,7 +41,7 @@ class CommonController extends Controller
         }
 
 
-        $extension = time().mt_rand(1000000000, 9999999999).$file->getClientOriginalName();
+        $extension = date('Y-d-m').time().mt_rand(1000000000, 9999999999).".".$file->getClientOriginalExtension();
         $filename = $extension;
         $file->move('public/uploads/'.$filePath.'/', $filename);
         $imageUrl =  'uploads/'.$filePath.'/'.$filename;
@@ -97,11 +97,11 @@ class CommonController extends Controller
 
     public static function apiData($fd9FormId){
 
-        $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
-        ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-        ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-        ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
-        ->where('fd9_forms.id',$fd9FormId)
+        $dataFromNVisaFd9Fd1 =DB::table('fd9_one_forms')
+        ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
+        ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
+        ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
+        ->where('fd9_one_forms.id',$fd9FormId)
         ->first();
         //first step
         $randomString =CommonController::generateRandomString();

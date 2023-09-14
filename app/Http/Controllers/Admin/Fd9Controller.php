@@ -23,12 +23,32 @@ use GuzzleHttp\Client;
 use App\Http\Controllers\Admin\CommonController;
 class Fd9Controller extends Controller
 {
+
+
+
+
+    public function statusUpdateForFd9(Request $request){
+
+
+        DB::table('fd9_forms')->where('id',$request->id)
+        ->update([
+            'status' => $request->status
+        ]);
+
+
+        return redirect()->back()->with('success','Updated successfully!');
+
+
+
+       }
+
+
+
     public function index(){
 
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
-    ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-    ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
+     ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+     ->select('fd_one_forms.*','fd9_forms.*')
     ->orderBy('fd9_forms.id','desc')
     ->get();
 
@@ -40,11 +60,11 @@ class Fd9Controller extends Controller
     public function downloadForwardingLetter($id){
 
 
-        $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
-        ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-        ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-        ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
-        ->where('fd9_forms.id',$id)
+        $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
+        ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
+        ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
+        ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
+        ->where('fd9_one_forms.id',$id)
         ->first();
 
 
@@ -158,10 +178,9 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 
 
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
-     ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-     ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-     ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
-     ->where('fd9_forms.id',$id)
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_forms.*')
+    ->where('fd9_forms.id',$id)
      ->first();
 
 
@@ -178,43 +197,44 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
      ->orderBy('id','desc')->value('pdf_part_two');
 
 
-
+     $ngoTypeData = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
 
      $ngoStatus = DB::table('ngo_statuses')
      ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
 
-     //dd($dataFromNVisaFd9Fd1->nVisaId);
+     //dd($dataFromNVisaFd9Fd1->id);
 
-     $statusData = SecruityCheck::where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->value('created_at');
+     $statusData = SecruityCheck::where('n_visa_id',$dataFromNVisaFd9Fd1->id)->value('created_at');
 
 $nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 $nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->get();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->get();
 
 $nVisaEmploye = DB::table('n_visa_employment_information')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 $nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 $nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 $nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
  $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
-                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 
 
 
-         return view('admin.fd9form.show',compact('forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show_new',compact('ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 
@@ -469,7 +489,7 @@ $file=url('public/'.$get_file_data);
 
 public function forwardingLetterPost(Request $request){
 
-
+//dd(234);
     $request->validate([
         'sarok_number' => 'required|string|max:150'
     ]);
@@ -517,11 +537,11 @@ public function submitForCheck(Request $request){
 
     $data = CommonController::apiData($fd9FormId);
 
-    $dataFromNew = DB::table('fd9_forms')
-    ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-    ->select('fd_one_forms.*','fd9_forms.*','n_visas.*','n_visas.id as nVisaId')
-    ->where('fd9_forms.id',$fd9FormId)
+    $dataFromNew =DB::table('fd9_one_forms')
+    ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
+    ->where('fd9_one_forms.id',$fd9FormId)
     ->first();
 
     //dd($data['wp_tracking_no']);
@@ -579,14 +599,14 @@ $mainToken = $jsonData['access_token'];
     $newCode->save();
 
 
-    DB::table('fd9_forms')->where('id', $fd9FormId)
+    DB::table('fd9_one_forms')->where('id', $fd9FormId)
        ->update([
            'status' => $statusName
         ]);
 
 
 
-return redirect()->route('fd9Form.show',$fd9FormId)->with('success','Send Successfully');
+return redirect()->route('fd9OneForm.show',$fd9FormId)->with('success','Send Successfully');
 
 }
 

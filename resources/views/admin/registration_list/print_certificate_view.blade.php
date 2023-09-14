@@ -80,12 +80,29 @@
     </style>
 </head>
 <body>
+<?php
+  $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
 
+?>
 <div class="pdf_back">
     <div class="content">
         <table class="first_table">
             <tr>
-                <td style="padding-left:32%;">{{ $form_one_data->registration_number }}</td>
+                <td style="padding-left:32%;">
+
+
+                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+{{ $ngoTypeData->registration }}
+
+                    @else
+
+                    {{ $form_one_data->registration_number }}
+
+                    @endif
+
+
+                </td>
                 <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($mainDate ))}}</td>
             </tr>
         </table>
@@ -104,10 +121,26 @@
             </tr>
         </table>
         <table class="forth_table">
+            @if($ngoTypeData->ngo_type_new_old == 'Old')
+            <?php
+
+            $lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+            $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+            ?>
+
+            <tr>
+                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($newdate ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($ngoTypeData->last_renew_date ))}}</td>
+            </tr>
+
+
+            @else
             <tr>
                 <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
                 <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
             </tr>
+            @endif
         </table>
         <table class="fifth_table">
             <tr>

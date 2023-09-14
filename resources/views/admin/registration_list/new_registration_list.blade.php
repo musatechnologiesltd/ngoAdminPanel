@@ -56,6 +56,14 @@
                                 $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
                                   $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                              // dd($getngoForLanguage);
+
+
+                             $ngoOldNew = DB::table('ngo_type_and_languages')
+                             ->where('user_id',$fdOneFormId)
+                             ->value('ngo_type_new_old');
+
+
+
                                   if($getngoForLanguage =='দেশিও'){
 
                                     $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
@@ -75,7 +83,18 @@
                                 ?>
                             <tr>
                                 <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
-                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                <td><h6>
+
+                                    এনজিও'র নাম: {{ $reg_name  }} <br>
+                                    @if($ngoOldNew == 'Old')
+                                    এনজিও'র ধরন : পুরাতন
+                                    @else
+
+                                    এনজিও'র ধরন : নতুন
+                                    @endif
+
+
+                                </h6><span>ঠিকানা: {{ $reg_address }}</td>
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 
@@ -91,11 +110,18 @@
                                         চলমান
 
                                     </button>
-                                    @else
+                                    @elseif($all_data_for_new_list_all->status == 'Rejected')
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         প্রত্যাখ্যান
 
                                     </button>
+
+                                    @else
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        চলমান
+
+                                    </button>
+
                                     @endif
                                 </td>
                                 <td>

@@ -14,6 +14,8 @@ use Carbon\Carbon;
 use Response;
 use App\Models\ForwardingLetter;
 use App\Models\ForwardingLetterOnulipi;
+use App\Models\Fd9ForwardingLetterEdit;
+use App\Models\SecruityCheck;
 class Fd9OneController extends Controller
 {
     public function index(){
@@ -55,8 +57,80 @@ class Fd9OneController extends Controller
         ->where('fd9_one_forms.id',$id)
         ->first();
 
+
+        $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$dataFromNVisaFd9Fd1->mainId)
+     ->orderBy('id','desc')->value('id');
+
+     $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+     ->get();
+     $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_one');
+
+
+     $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_two');
+
+
+     $ngoTypeData = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+
+     $ngoStatus = DB::table('ngo_statuses')
+     ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //dd($dataFromNVisaFd9Fd1->id);
+
+
+
+     $nVisabasicInfo = DB::table('n_visas')
+     ->where('fd9_one_form_id',$dataFromNVisaFd9Fd1->mainId)->first();
+
+     $statusData = SecruityCheck::where('n_visa_id',$nVisabasicInfo->id)->value('created_at');
+
+
+
+$nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->get();
+
+$nVisaEmploye = DB::table('n_visa_employment_information')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+ $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
         //dd($dataFromNVisaFd9Fd1);
-            return view('admin.fd9Oneform.show',compact('dataFromNVisaFd9Fd1'));
+            return view('admin.fd9Oneform.show',
+            compact(
+'nVisabasicInfo',
+                'dataFromNVisaFd9Fd1',
+                'ngoTypeData',
+                'forwardingLetterOnulipi',
+                'editCheck1','editCheck','statusData',
+                'ngoStatus',
+                'nVisaWorkPlace',
+                'nVisaSponSor',
+                'nVisaForeignerInfo',
+                'nVisaDocs','nVisaManPower',
+                'nVisaEmploye',
+                'nVisaCompensationAndBenifits',
+                'nVisaAuthPerson'
+
+
+            ));
 
 
        }

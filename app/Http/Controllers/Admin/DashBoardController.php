@@ -50,7 +50,7 @@ class DashBoardController extends Controller
                $totalNameChangeNgoRequest = DB::table('ngo_name_changes')->count();
                $totalRejectedNameChangeNgoRequest = DB::table('ngo_name_changes')->where('status','Rejected')->count();
 
-       $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Ongoing')->latest()->limit(5)->get();
+       $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Ongoing')->orWhere('status','Old Ngo Renew')->latest()->limit(5)->get();
        $all_data_for_new_list_name_change = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->limit(5)->get();
        $all_data_for_new_list_renew = DB::table('ngo_renews')->where('status','Ongoing')->latest()->limit(5)->get();
                return view('admin.dashboard.dashboard',compact(
