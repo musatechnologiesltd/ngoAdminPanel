@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এফডি৯ (এন-ভিসা) | {{ $ins_name }}
+11এফডি৯ (এন-ভিসা) | {{ $ins_name }}
 @endsection
 
 
@@ -64,7 +64,7 @@
                                     class="icofont icofont-contacts"></i>ফরওয়ার্ডিং লেটার</a>
                     </li>
 
-                    
+
                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc-tab"
                                             data-bs-toggle="pill" href="#pills-darkdoc"
                                             role="tab" aria-controls="pills-darkdoc"
@@ -342,6 +342,42 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                         </tr>
                                         </tbody>
                                     </table>
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-12"></div>
+                                        <div class="col-lg-6 col-sm-12">
+                                            <table class="table table-borderless">
+
+                                                <tr>
+                                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>নামঃ {{  $dataFromNVisaFd9Fd1->chief_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chief_desi }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->chiefDate)->toDateString() )))}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1522,6 +1558,9 @@ ff
                                                 </tr>
                                                 @endif
                                     </table>
+
+
+
                                 </div>
                                 <div class="card-footer text-end">
 

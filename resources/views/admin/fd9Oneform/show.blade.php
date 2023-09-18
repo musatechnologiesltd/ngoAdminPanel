@@ -93,26 +93,134 @@
                 <div class="tab-pane fade active show" id="pills-darkhome"
                      role="tabpanel" aria-labelledby="pills-darkhome-tab">
                     <div class="mb-0 m-t-30">
-                        @if(!$dataFromNVisaFd9Fd1->verified_fd_nine_one_form)
-                        এনজিও প্রধান নির্বাহীর স্বাক্ষরকৃত পিডিএফ জমা দেয়নি
-                        @else
-                        <object
-                        data='{{ $ins_url }}{{ 'public/'.$dataFromNVisaFd9Fd1->verified_fd_nine_one_form}}'
-                        type="application/pdf"
-                        width="100%"
-                        height="678"
-                      >
 
-                        <iframe
-                          src='{{ $ins_url }}{{ 'public/'.$dataFromNVisaFd9Fd1->verified_fd_nine_one_form}}'
-                          width="100%"
-                          height="900"
-                        >
-                        <p>This browser does not support PDF!</p>
-                        </iframe>
-                      </object>
 
-                        @endif
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4>এফডি-৯(১) ফরম</h4>
+                                <h5>বিদেশি বিশেষজ্ঞ, উপদেষ্টা, কর্মকর্তা বা স্বেচ্ছাসেবী এর ওয়ার্ক পারমিটের (কার্যানুমতি)
+                                    আবেদন ফরম</h5>
+
+                            </div>
+
+                            <div>
+                                <p>বরাবর <br>
+                                    মহাপরিচালক <br>
+                                    এনজিও বিষয় ব্যুরো, ঢাকা <br>
+                                    জনাব,</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card-body fd0901_text_style">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>বিষয়:</td>
+                                    <td>"{{ $dataFromNVisaFd9Fd1->institute_name }}" সংস্থার বিদেশি বিশেষজ্ঞউপদেষ্টা/কর্মকর্ত/সেচ্ছাসেবী "{{ $dataFromNVisaFd9Fd1->foreigner_name_for_subject }}" এর
+                                        ওয়ার্ক পারমিট প্রসঙ্গে।
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>সূত্র: এনজিও বিষয়ক ব্যুরোর স্মারক নম্বর {{ $dataFromNVisaFd9Fd1->sarok_number }} তারিখ {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->application_date))) }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <p class="mt-3 mb-2">
+                                উপর্যুক্ত বিষয় ও সূত্রের বরাতে "{{ $dataFromNVisaFd9Fd1->institute_name }}" সংস্থার "{{ $dataFromNVisaFd9Fd1->prokolpo_name }}" প্রকল্পের আওতায় "{{ $dataFromNVisaFd9Fd1->designation_name }}" হিসেবে বিদেশী বিশেষজ্ঞ/
+                                উপদেষ্টা/কর্মকর্তা/স্বেচ্ছাসেবী {{ $dataFromNVisaFd9Fd1->foreigner_name_for_body }} কে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_from_date))) }} খ্রি: হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_to_date))) }} পর্যন্ত সময়ের জন্য নিয়োগ করা হয়েছে। সংস্থার অনুকূলে
+                                উক্ত ব্যাক্তির অনুমোদিত সময়ের জন্য ওয়ার্ক পারমিট ইস্যু করার জন্য ওয়ার্ক পারমিট ইস্যু করার
+                                জন্য একসাথে নিম্ন বর্ণিত কাগজপত্র সংযুক্ত করা হল:
+                            </p>
+
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>০১</td>
+                                    <td>নিয়োগপত্র সত্যায়ন প্রমাণক</td>
+                                     <td> :@if(!$dataFromNVisaFd9Fd1->attestation_of_appointment_letter)
+
+                                        @else
+
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                         @endif</td>
+                                </tr>
+
+                                <tr>
+                                    <td>০২</td>
+                            <td>ফর্ম ৯ এর কপি</td>
+                                     <td>:@if(!$dataFromNVisaFd9Fd1->copy_of_form_nine)
+
+                                        @else
+
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                         @endif</td>
+                                </tr>
+
+                                <tr>
+                                    <td>০৩</td>
+                            <td>ছবি</td>
+                                     <td>:<img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
+                                </tr>
+
+                                <tr>
+                                    <td>০৪</td>
+                                    <td>এন ভিসা নিয়ে আগমনের তারিখ (প্রমানসহ)</td>
+                                     <td> @if(!$dataFromNVisaFd9Fd1->copy_of_nvisa)
+
+                                        @else
+
+                                         <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>,
+                                         @endif
+
+                                         {{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->arrival_date_in_nvisa))) }}</td>
+                                </tr>
+
+                            </table>
+
+                            <p class="mb-3">এমতবস্থায়, অত্র সংস্থার উল্লেখিত পদে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} মেয়াদে উক্ত বিদেশি কর্মকর্তাকে ওয়ার্ক পারমিট ইস্যু করার জন্য বিনীত অনুরধ করেছি।</p>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12"></div>
+                        <div class="col-lg-6 col-sm-12">
+                            <table class="table table-borderless">
+
+                                <tr>
+                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->chiefSign}}"/></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->chiefSeal}}"/></td>
+                                </tr>
+
+                                <tr>
+                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                </tr>
+                                <tr>
+                                    <td>নামঃ {{  $dataFromNVisaFd9Fd1->chiefName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chiefDesi }}</td>
+                                </tr>
+                                <tr>
+                                    <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->chiefDate)->toDateString() )))}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                        </div>
+
+
+
+
                     </div>
 
                 </div>
@@ -290,7 +398,7 @@
                                             <td>Email: {{ $nVisaSponSor->org_email }}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">Type of the Organization: NGO</td>
+                                            <td colspan="2">Type of the Organization: Admin</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Nature of buisness: {{ $nVisaSponSor->nature_of_business }}</td>
@@ -304,7 +412,7 @@
                                         </tr>
                                         <tr>
                                             <td>Remittance received during last 12 months: {{ $nVisaSponSor->remittance_received }}</td>
-                                            <td>Type of Industry:NGO </td>
+                                            <td>Type of Industry:Admin </td>
                                         </tr>
                                         <tr>
                                             <td>Recommendation of Company Boards: {{ $nVisaSponSor->recommendation_of_company_board }}</td>

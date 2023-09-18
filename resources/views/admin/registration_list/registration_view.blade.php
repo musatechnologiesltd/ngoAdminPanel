@@ -312,11 +312,41 @@
         <td>
 
 
+            <img src="{{ $ins_url }}{{ $all_all_parti->job_sign}}" alt="" style="height:30px;"> <br>
+            <?php   echo date("d/m/Y", strtotime($all_all_parti->created_at)); ?>
+
+
         </td>
 
     </tr>
     @endforeach
                                             </table>
+
+
+                                            
+
+                                            <table style="margin-top: 60px; border:none !important;">
+                                                <tr>
+                                                    <td style="text-align: center; border:none !important;">
+                                                        <img src="{{ $ins_url }}{{ $signDataNew->signature_one}}" alt="" style="height:30px;"> <br>
+                                                       <?php   echo date("d/m/Y", strtotime($signDataNew->updated_at)); ?> <br>
+                                                        <img src="{{ $ins_url }}{{ $signDataNew->seal_one}}" alt="" style="height:30px;"> <br>
+                                                        <span class="bt">({{ $signDataNew->name_one }})</span> <br>
+                                                        {{ $signDataNew->designation_one}}
+                                                    </td>
+                                                    <td></td>
+                                                    <td style="text-align: center; border:none !important;">
+                                                        <img src="{{ $ins_url }}{{ $signDataNew->signature_two}}" alt="" style="height:30px;"> <br>
+                                                     <?php   echo date("d/m/Y", strtotime($signDataNew->updated_at)); ?> <br>
+                                                        <img src="{{ $ins_url }}{{ $signDataNew->seal_two}}" alt="" style="height:30px;"> <br>
+                                                        <span class="bt">({{ $signDataNew->name_two}})</span> <br>
+                                                        {{ $signDataNew->designation_two}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+
+
                                           </div>
                                         </div>
 

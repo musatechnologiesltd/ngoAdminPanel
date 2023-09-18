@@ -88,7 +88,7 @@ class PostController extends Controller
 
        // }
 
-        //dd($request->all());
+        ///dd($inputAllData);
 
 
              $dakDetail = new DakDetail();
@@ -98,6 +98,19 @@ class PostController extends Controller
              $dakDetail->priority_list =$request->priority_list;
              $dakDetail->secret_list =$request->secret_list;
              $dakDetail->status =$request->mainstatus;
+             $dakDetail->access_id =$request->access_id;
+             $dakDetail->comment =$request->comment;
+             $filePath = 'DakDocument';
+        if ($request->hasfile('main_file')) {
+
+
+            $file = $request->file('main_file');
+            $dakDetail->main_file =  CommonController::pdfUpload($request,$file,$filePath);
+
+        }
+
+
+
              $dakDetail->save();
 
 
@@ -914,6 +927,31 @@ $mainStatusNew = $request->mainStatusNew;
         NgoRegistrationDak::where('id',$id)->delete();
 
         return redirect()->back();
+    }
+
+
+
+
+    public function main_doc_download($id){
+
+        $data = DB::table('system_information')->first();
+
+        $get_file_data = DB::table('dak_details')->where('id',$id)->value('main_file');
+
+        $file_path = $data->system_admin_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_admin_url.'public/'.$get_file_data;
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        // return Response::download($file,$filename.'.pdf', $headers);
+
+        return Response::make(file_get_contents($file), 200, [
+            'content-type'=>'application/pdf',
+        ]);
     }
 
 

@@ -43,7 +43,7 @@
                                 <table class="display" id="basic-1">
                                     <tbody>
 
-                                        @foreach($all_data_for_new_list as $allStatusData)
+                                        @foreach($all_data_for_new_list as $i=>$allStatusData)
 
                                         <?php
 
@@ -67,11 +67,197 @@
                                         <td style="text-align:right;">
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">পাঠান</button>
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
+
+
+                                                         <!--new code-->
+                             <button type="button" class="btn btn-primary btn-xs"
+                             data-bs-toggle="modal"
+                             data-original-title="" data-bs-target="#myModalrenew{{ $i }}">
+                             ডাক গতিবিধি
+                     </button>
+
+
+                     <!-- Modal -->
+                     <div class="modal right fade bd-example-modal-lg"
+                     id="myModalrenew{{ $i }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    ডাক গতিবিধি</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
+                                    @if(!$dakDetail)
+
+                                    @else
+
+                                    <?php
+
+$mainDetail = DB::table('ngo_registration_daks')
+->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+
+                                    ?>
+
+@foreach($mainDetail as  $key=>$allMainDetail)
+
+
+<?php
+
+
+
+$senderName = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$senderImage = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiName = DB::table('designation_lists')
+       ->where('id',$desiId)->value('designation_name');
+
+
+       $branchName = DB::table('branches')
+       ->where('id',$branchId)->value('branch_name');
+
+
+       //receiver
+
+       $receiverName = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$receiverImage = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiNames = DB::table('designation_lists')
+       ->where('id',$desiIds)->value('designation_name');
+
+
+       $branchNames = DB::table('branches')
+       ->where('id',$branchIds)->value('branch_name');
+
+
+
+?>
+
+                                <div class="d-flex mb-2">
+                                    <div class="flex-shrink-0 tracking_img">
+
+                                        @if($key == 0)
+
+                                        @if(empty($senderImage))
+
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $senderImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+                                        @else
+
+                                        @if(empty($receiverImage))
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $receiverImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+
+                                        @endif
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="card" style="border:2px solid #979797">
+                                            <div class="card-body">
+                                                <div class="tracking_box">
+                                                    <h5>বিষয়ঃ এনজিও নিবন্ধনের নোটিশ </h5>
+                                                    @if(!$dakDetail->main_file)
+
+                                                    @else
+
+
+                                                    <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+                                                     @endif
+
+
+
+
+
+                                                    <hr>
+                                                    <ul>
+                                                        <li>প্রেরক : {{ $senderName }}</li>
+                                                        <li>প্রাপক : {{ $receiverName }}</li>
+                                                    </ul>
+                                                    <hr>
+                                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @endforeach
+
+                                @endif
+
+
+
+                            </div><!-- modal-content -->
+                        </div><!-- modal-dialog -->
+                    </div><!-- modal -->
+                             <!--end new code -->
+
+
+
+
+
+
+
                                         </td>
                                     </tr>
                                     @endforeach
 
-                                    @foreach($all_data_for_renew_list as $allStatusData)
+                                    @foreach($all_data_for_renew_list as $r=>$allStatusData)
 
                                     <?php
 
@@ -94,13 +280,195 @@
                                     </td>
                                     <td style="text-align:right;">
                                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->id) }}';">দেখুন</button>
+
+
+
+
+                                       <!--new code-->
+                             <button type="button" class="btn btn-primary btn-xs"
+                             data-bs-toggle="modal"
+                             data-original-title="" data-bs-target="#myModalrenew{{ $r }}">
+                             ডাক গতিবিধি
+                     </button>
+
+
+                     <!-- Modal -->
+                     <div class="modal right fade bd-example-modal-lg"
+                     id="myModalrenew{{ $r }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    ডাক গতিবিধি</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
+                                    @if(!$dakDetail)
+
+                                    @else
+
+                                    <?php
+
+$mainDetail = DB::table('ngo_renew_daks')
+->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+
+                                    ?>
+
+@foreach($mainDetail as  $key=>$allMainDetail)
+
+
+<?php
+
+
+
+$senderName = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$senderImage = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiName = DB::table('designation_lists')
+       ->where('id',$desiId)->value('designation_name');
+
+
+       $branchName = DB::table('branches')
+       ->where('id',$branchId)->value('branch_name');
+
+
+       //receiver
+
+       $receiverName = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$receiverImage = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiNames = DB::table('designation_lists')
+       ->where('id',$desiIds)->value('designation_name');
+
+
+       $branchNames = DB::table('branches')
+       ->where('id',$branchIds)->value('branch_name');
+
+
+
+?>
+
+                                <div class="d-flex mb-2">
+                                    <div class="flex-shrink-0 tracking_img">
+
+                                        @if($key == 0)
+
+                                        @if(empty($senderImage))
+
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $senderImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+                                        @else
+
+                                        @if(empty($receiverImage))
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $receiverImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+
+                                        @endif
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="card" style="border:2px solid #979797">
+                                            <div class="card-body">
+                                                <div class="tracking_box">
+                                                    <h5>বিষয়ঃ এনজিও নিবন্ধন নবায়নের নোটিশ  </h5>
+                                                    @if(!$dakDetail->main_file)
+
+                                                    @else
+
+
+                                                    <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+                                                     @endif
+
+
+
+
+
+                                                    <hr>
+                                                    <ul>
+                                                        <li>প্রেরক : {{ $senderName }}</li>
+                                                        <li>প্রাপক : {{ $receiverName }}</li>
+                                                    </ul>
+                                                    <hr>
+                                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @endforeach
+
+                                @endif
+
+
+
+                            </div><!-- modal-content -->
+                        </div><!-- modal-dialog -->
+                    </div><!-- modal -->
+                             <!--end new code -->
+
                                     </td>
                                 </tr>
                                 @endforeach
 
 
-                                @foreach($all_data_for_name_changes_list as $allStatusData)
+                                @foreach($all_data_for_name_changes_list as $k=>$allStatusData)
 
                                 <?php
 
@@ -123,13 +491,195 @@
                                 </td>
                                 <td style="text-align:right;">
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->id) }}';">দেখুন</button>
+
+
+
+                                       <!--new code-->
+                             <button type="button" class="btn btn-primary btn-xs"
+                             data-bs-toggle="modal"
+                             data-original-title="" data-bs-target="#myModalnameChange{{ $k }}">
+                             ডাক গতিবিধি
+                     </button>
+
+
+                     <!-- Modal -->
+                     <div class="modal right fade bd-example-modal-lg"
+                     id="myModalnameChange{{ $k }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    ডাক গতিবিধি</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
+                                    @if(!$dakDetail)
+
+                                    @else
+
+                                    <?php
+
+$mainDetail = DB::table('ngo_name_change_daks')
+->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+
+                                    ?>
+
+@foreach($mainDetail as  $key=>$allMainDetail)
+
+
+<?php
+
+
+
+$senderName = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$senderImage = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiName = DB::table('designation_lists')
+       ->where('id',$desiId)->value('designation_name');
+
+
+       $branchName = DB::table('branches')
+       ->where('id',$branchId)->value('branch_name');
+
+
+       //receiver
+
+       $receiverName = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$receiverImage = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiNames = DB::table('designation_lists')
+       ->where('id',$desiIds)->value('designation_name');
+
+
+       $branchNames = DB::table('branches')
+       ->where('id',$branchIds)->value('branch_name');
+
+
+
+?>
+
+                                <div class="d-flex mb-2">
+                                    <div class="flex-shrink-0 tracking_img">
+
+                                        @if($key == 0)
+
+                                        @if(empty($senderImage))
+
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $senderImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+                                        @else
+
+                                        @if(empty($receiverImage))
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $receiverImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+
+                                        @endif
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="card" style="border:2px solid #979797">
+                                            <div class="card-body">
+                                                <div class="tracking_box">
+                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তনের নোটিশ  </h5>
+                                                    @if(!$dakDetail->main_file)
+
+                                                    @else
+
+
+                                                    <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+                                                     @endif
+
+
+
+
+
+                                                    <hr>
+                                                    <ul>
+                                                        <li>প্রেরক : {{ $senderName }}</li>
+                                                        <li>প্রাপক : {{ $receiverName }}</li>
+                                                    </ul>
+                                                    <hr>
+                                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @endforeach
+
+                                @endif
+
+
+
+                            </div><!-- modal-content -->
+                        </div><!-- modal-dialog -->
+                    </div><!-- modal -->
+                             <!--end new code -->
+
+
                                 </td>
                             </tr>
                             @endforeach
 
 
-                            @foreach($dataFdNine as $allStatusData)
+                            @foreach($dataFdNine as $m=>$allStatusData)
 
                             <?php
 
@@ -153,16 +703,196 @@
                             <td style="text-align:right;">
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">পাঠান</button>
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->id) }}';">দেখুন</button>
+
+
+                                 <!--new code-->
+                             <button type="button" class="btn btn-primary btn-xs"
+                             data-bs-toggle="modal"
+                             data-original-title="" data-bs-target="#myModalfd9{{ $m }}">
+                             ডাক গতিবিধি
+                     </button>
+
+
+                     <!-- Modal -->
+                     <div class="modal right fade bd-example-modal-lg"
+                     id="myModalfd9{{ $m }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    ডাক গতিবিধি</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
+                                    @if(!$dakDetail)
+
+                                    @else
+
+                                    <?php
+
+$mainDetail = DB::table('ngo_f_d_nine_daks')
+->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+
+                                    ?>
+
+@foreach($mainDetail as  $key=>$allMainDetail)
+
+
+<?php
+
+
+
+$senderName = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$senderImage = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiName = DB::table('designation_lists')
+       ->where('id',$desiId)->value('designation_name');
+
+
+       $branchName = DB::table('branches')
+       ->where('id',$branchId)->value('branch_name');
+
+
+       //receiver
+
+       $receiverName = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$receiverImage = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiNames = DB::table('designation_lists')
+       ->where('id',$desiIds)->value('designation_name');
+
+
+       $branchNames = DB::table('branches')
+       ->where('id',$branchIds)->value('branch_name');
+
+
+
+?>
+
+                                <div class="d-flex mb-2">
+                                    <div class="flex-shrink-0 tracking_img">
+
+                                        @if($key == 0)
+
+                                        @if(empty($senderImage))
+
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $senderImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+                                        @else
+
+                                        @if(empty($receiverImage))
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $receiverImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+
+                                        @endif
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="card" style="border:2px solid #979797">
+                                            <div class="card-body">
+                                                <div class="tracking_box">
+                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা) নোটিশ </h5>
+                                                    @if(!$dakDetail->main_file)
+
+                                                    @else
+
+
+                                                    <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+                                                     @endif
+
+
+
+
+
+                                                    <hr>
+                                                    <ul>
+                                                        <li>প্রেরক : {{ $senderName }}</li>
+                                                        <li>প্রাপক : {{ $receiverName }}</li>
+                                                    </ul>
+                                                    <hr>
+                                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @endforeach
+
+                                @endif
+
+
+
+                            </div><!-- modal-content -->
+                        </div><!-- modal-dialog -->
+                    </div><!-- modal -->
+                             <!--end new code -->
                             </td>
                         </tr>
                         @endforeach
 
 
-                        @foreach($dataFdNineOne as $allStatusData)
+                        @foreach($dataFdNineOne as $f=>$allStatusData)
 
                         <?php
 
-                     $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+                     $form_one_data = DB::table('fd_one_forms')
+                     ->where('id',$allStatusData->fd_one_form_id)->first();
 
                      $decesionNameId = DB::table('ngo_f_d_nine_daks')
         ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
@@ -183,6 +913,186 @@
                         <td style="text-align:right;">
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">পাঠান</button>
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->id) }}';">দেখুন</button>
+
+
+
+                             <!--new code-->
+                             <button type="button" class="btn btn-primary btn-xs"
+                             data-bs-toggle="modal"
+                             data-original-title="" data-bs-target="#myModalfd9one{{ $f }}">
+                             ডাক গতিবিধি
+                     </button>
+
+
+                     <!-- Modal -->
+                     <div class="modal right fade bd-example-modal-lg"
+                     id="myModalfd9one{{ $f }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    ডাক গতিবিধি</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
+                                    @if(!$dakDetail)
+
+                                    @else
+
+                                    <?php
+
+$mainDetail = DB::table('ngo_f_d_nine_one_daks')
+->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+
+                                    ?>
+
+@foreach($mainDetail as  $key=>$allMainDetail)
+
+
+<?php
+
+
+
+$senderName = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$senderImage = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchId = DB::table('admins')
+->where('id',$allMainDetail->sender_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiName = DB::table('designation_lists')
+       ->where('id',$desiId)->value('designation_name');
+
+
+       $branchName = DB::table('branches')
+       ->where('id',$branchId)->value('branch_name');
+
+
+       //receiver
+
+       $receiverName = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_name_ban');
+
+
+$receiverImage = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('admin_image');
+
+
+$desiIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('designation_list_id');
+
+
+$branchIds = DB::table('admins')
+->where('id',$allMainDetail->receiver_admin_id)
+->orderBy('id','desc')->value('branch_id');
+
+
+$desiNames = DB::table('designation_lists')
+       ->where('id',$desiIds)->value('designation_name');
+
+
+       $branchNames = DB::table('branches')
+       ->where('id',$branchIds)->value('branch_name');
+
+
+
+?>
+
+                                <div class="d-flex mb-2">
+                                    <div class="flex-shrink-0 tracking_img">
+
+                                        @if($key == 0)
+
+                                        @if(empty($senderImage))
+
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $senderImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+                                        @else
+
+                                        @if(empty($receiverImage))
+                                        <img src="{{ asset('/') }}public/admin/user.png" class="rounded-circle" alt="Sample Image">
+
+                                        @else
+
+                                        <img src="{{ asset('/') }}{{ $receiverImage }}" class="rounded-circle" alt="Sample Image">
+@endif
+
+                                        @endif
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="card" style="border:2px solid #979797">
+                                            <div class="card-body">
+                                                <div class="tracking_box">
+                                                    <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ </h5>
+                                                    @if(!$dakDetail->main_file)
+
+                                                    @else
+
+
+                                                    <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+                                                     @endif
+
+
+
+
+
+                                                    <hr>
+                                                    <ul>
+                                                        <li>প্রেরক : {{ $senderName }}</li>
+                                                        <li>প্রাপক : {{ $receiverName }}</li>
+                                                    </ul>
+                                                    <hr>
+                                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @endforeach
+
+                                @endif
+
+
+
+                            </div><!-- modal-content -->
+                        </div><!-- modal-dialog -->
+                    </div><!-- modal -->
+                             <!--end new code -->
                         </td>
                     </tr>
                     @endforeach

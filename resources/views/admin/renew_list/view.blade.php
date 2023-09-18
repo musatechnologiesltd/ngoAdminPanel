@@ -518,6 +518,43 @@
 
                                                 </tbody>
                                             </table>
+
+
+                                            <table style=" margin-top: 15px;width:100%">
+
+                                                <tr>
+                                                    <td style="padding-left:1130px;" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $renewInfoData->digital_signature}}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left:1130px;" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $renewInfoData->digital_seal}}"/></td>
+                                                </tr>
+                                            </table>
+
+
+                                            <table style=" margin-top: 10px;width:100%">
+                                                <tr>
+                                                    <td style="padding-left:1130px;" colspan="3">প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 65%"></td>
+                                                    <td style="text-align: left; width:5%;">নাম </td>
+                                                    <td style="width:30%; text-align: left;">: {{ $renewInfoData->chief_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 65%"></td>
+                                                    <td style="text-align: left; width: 5%;">পদবি </td>
+                                                    <td style="width:30%; text-align: left;">: {{ $renewInfoData->chief_desi }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 65%"></td>
+                                                    <td style="text-align: left; width: 5%;">তারিখ </td>
+
+                                                    <td style="width:30%; text-align: left;">: {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($renewInfoData->created_at)->toDateString()))) }}</td>
+
+                                                </tr>
+                                            </table>
+
                                         </div>
 
                                     </div>
@@ -532,10 +569,10 @@
                                                     <th>নথির নাম</th>
                                                     <th>নথি দেখুন</th>
                                                 </tr>
-                                                <tr>
+                                                {{-- <tr>
                                                     <td>প্রধান নির্বাহীর স্বাক্ষরকৃত এফডি - ৮ ফরম </td>
                                                     <td><a target="_blank"  href="{{ route('verifiedFdEightDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a></td>
-                                                </tr>
+                                                </tr> --}}
 
 
                                                 <?php

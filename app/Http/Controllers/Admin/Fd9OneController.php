@@ -22,9 +22,14 @@ class Fd9OneController extends Controller
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
-       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId')
+
+       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal')
+
        ->orderBy('fd9_one_forms.id','desc')
        ->get();
+
+
+
 
        //dd($dataFromNVisaFd9Fd1);
            return view('admin.fd9Oneform.index',compact('dataFromNVisaFd9Fd1'));
@@ -52,10 +57,13 @@ class Fd9OneController extends Controller
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
         ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
-        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId')
+        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal','fd9_one_forms.created_at as chiefDate')
         ->orderBy('fd9_one_forms.id','desc')
         ->where('fd9_one_forms.id',$id)
         ->first();
+
+
+        //dd($dataFromNVisaFd9Fd1);
 
 
         $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$dataFromNVisaFd9Fd1->mainId)

@@ -97,6 +97,9 @@ class RegisterController extends Controller
             ->where('user_id',$form_one_data->user_id)->first();
 
 
+            $signDataNew = DB::table('form_eights')->where('fd_one_form_id',$id)->first();
+
+
             $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$id)->get();
             $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$id)->get();
 
@@ -139,9 +142,9 @@ class RegisterController extends Controller
 
 
         if($ngoTypeData->ngo_type == 'দেশিও'){
- return view('admin.registration_list.registration_view',compact('ngoTypeData','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+ return view('admin.registration_list.registration_view',compact('signDataNew','ngoTypeData','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
     }else{
-        return view('admin.registration_list.foreign.registration_view',compact('ngoTypeData','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+        return view('admin.registration_list.foreign.registration_view',compact('signDataNew','ngoTypeData','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
     }
     }
 

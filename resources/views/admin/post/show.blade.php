@@ -38,6 +38,8 @@
                 </div>
                 <form class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
+
+                    <input type="hidden" name="access_id" value="{{ $id }}" />
                     <div class="card-body">
                         <h5>সিধান্তঃ বিধি মোতাবেক বাবস্থা নিন।</h5>
                         <div class="nothi_header_box">
@@ -108,9 +110,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row-reverse bd-highlight">
-                                    <button  type="submit" class="btn btn-primary"><i class="fa fa-send"></i>
+                                    {{-- <button  type="submit" class="btn btn-primary"><i class="fa fa-send"></i>
                                         প্রেরন
-                                    </button>
+                                    </button> --}}
 
 
                                     <a class="btn btn-outline-success me-2" href = "{{ route('createSeal',['status'=>$mainstatus,'id'=>$id]) }}"><i class="fa fa-plus"></i> নতুন
@@ -244,8 +246,64 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+<div class="nothi_header_box">
+    <span>মন্তব্য এবং ফাইল আপলোড করুন </span>
+</div>
+
+
+<div class="card">
+                                        <div class="card-body">
+
+
+                                            <div class="mt-2 mb-2">
+
+
+                                                <div class="row mt-3">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="">মন্তব্য</label>
+                                                            <input name="comment" class="form-control" id=""
+                                                                   type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="">ফাইল
+                                                                আপলোড</label>
+                                                            <input name="main_file" accept="application/pdf" class="form-control" id=""
+                                                                   type="file">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row-reverse">
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fa fa-send"></i>
+                                                    প্রেরন
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
                     </div>
-                </form>
+
+
+
+
             </div>
         </div>
         <!-- Individual column searching (text inputs) Ends-->

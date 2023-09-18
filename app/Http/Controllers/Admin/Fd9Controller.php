@@ -320,25 +320,101 @@ if(empty($editCheck)){
 
     public function fdNinePdfDownload($id){
         $data = DB::table('system_information')->first();
-        $get_file_data = DB::table('fd9_forms')->where('id',$id)
-        ->value('verified_fd_nine_form');
 
-        $file_path = $data->system_url.'public/'.$get_file_data;
-                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
-        $file=$data->system_url.'public/'.$get_file_data;
 
-        //dd($file);
+        $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_forms.*')
+    ->where('fd9_forms.id',$id)
+     ->first();
 
-        $headers = array(
-                  'Content-Type: application/pdf',
-                );
 
-        // return Response::download($file,$filename.'.pdf', $headers);
+     //dd( $dataFromNVisaFd9Fd1);
 
-        return Response::make(file_get_contents($file), 200, [
-            'content-type'=>'application/pdf',
-        ]);
+
+     $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
+     ->orderBy('id','desc')->value('id');
+
+     $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+     ->get();
+     $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_one');
+
+
+     $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_two');
+
+
+     $checkNgoTypeForForeginNgo = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+
+     $ngoStatus = DB::table('ngo_statuses')
+     ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //dd($dataFromNVisaFd9Fd1->id);
+
+     $statusData = SecruityCheck::where('n_visa_id',$dataFromNVisaFd9Fd1->id)->value('created_at');
+
+$nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->get();
+
+$nVisaEmploye = DB::table('n_visa_employment_information')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+ $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+
+
+
+
+
+
+
+         $file_Name_Custome = 'fd9form';
+         $pdf=PDF::loadView('admin.fd9form.pdf',['ngoStatus'=>$ngoStatus,'checkNgoTypeForForeginNgo'=>$checkNgoTypeForForeginNgo,'dataFromNVisaFd9Fd1'=>$dataFromNVisaFd9Fd1]);
+ return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+
+
+
+
+
+        // $get_file_data = DB::table('fd9_forms')->where('id',$id)
+        // ->value('verified_fd_nine_form');
+
+        // $file_path = $data->system_url.'public/'.$get_file_data;
+        //         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+        // $file=$data->system_url.'public/'.$get_file_data;
+
+        // //dd($file);
+
+        // $headers = array(
+        //           'Content-Type: application/pdf',
+        //         );
+
+        // // return Response::download($file,$filename.'.pdf', $headers);
+
+        // return Response::make(file_get_contents($file), 200, [
+        //     'content-type'=>'application/pdf',
+        // ]);
     }
 
     public function nVisaDocumentDownload($cat,$id){

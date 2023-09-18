@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(PostController::class)->group(function () {
 
+
+        Route::get('/main_doc_download/{id}', 'main_doc_download')->name('main_doc_download');
+
         Route::get('/deleteMemberList/{id}', 'deleteMemberList')->name('deleteMemberList');
 
 
