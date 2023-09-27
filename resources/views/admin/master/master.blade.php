@@ -59,6 +59,25 @@
             margin-left:10px;
         }
 
+
+
+
+        .select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 22px !important;
+  width: 22px !important;
+  margin: 0 !important;
+  text-align: center !important;
+  color: #e74c3c !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+}
+
+
+
+
         </style>
         @yield('css')
 

@@ -82,14 +82,14 @@
 
                                     @if(empty($user->admin_image))
                                     @else
-<img src="{{ asset('/') }}{{ $user->admin_image }}" style="height:15px" />
+<img src="{{ asset('/') }}{{ $user->admin_image }}" style="height:60px" />
 @endif
                                 </td>
 
                                 <td>
                                     @if(empty($user->admin_sign))
                                     @else
-                                    <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:15px" />
+                                    <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:40px" />
                                     @endif
 
                                                                     </td>
@@ -146,9 +146,9 @@
 
                                     <td>
 
-                                          <a type="button" href="{{ route('user.edit',$user->id) }}"
-                                          class="btn btn-primary waves-light waves-effect  btn-sm" >
-                                          <i class="fa fa-pencil"></i></a>
+                                          <button type="button"  onclick="location.href = '{{ route('user.edit',$user->id) }}';"
+                                          class="btn btn-primary waves-light waves-effect  btn-sm mt-2" >
+                                          <i class="fa fa-pencil"></i></button>
 
 
 
@@ -159,7 +159,7 @@
 
 
 
-<button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm" onclick="deleteTag({{ $user->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
+<button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm mt-2" onclick="deleteTag({{ $user->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
                     <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}" method="POST" style="display: none;">
                       @method('DELETE')
                                                     @csrf

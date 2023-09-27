@@ -188,7 +188,7 @@
                                <div class="form-group col-md-6 col-sm-12">
                                   <label for="password_confirmation">প্রোফাইল ছবি</label>
                                   <input type="file" class="form-control form-control-sm" id="" name="image" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" >
-                                  <img src="{{ asset('/') }}{{ $user->admin_image }}" style="height:30px;"/>
+                                  <img src="{{ asset('/') }}{{ $user->admin_image }}" style="height:30px;margin-top:10px;"/>
                                   @if ($errors->has('image'))
                                   <span class="text-danger">{{ $errors->first('image') }}</span>
                               @endif
@@ -199,7 +199,7 @@
                               <div class="form-group col-md-12 col-sm-12">
                                 <label for="password_confirmation">স্বাক্ষর</label>
                                 <input type="file" class="form-control form-control-sm" id="" name="sign" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" >
-                                <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:30px;"/>
+                                <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:30px;margin-top:10px;"/>
                                 @if ($errors->has('sign'))
                                 <span class="text-danger">{{ $errors->first('sign') }}</span>
                             @endif

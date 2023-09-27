@@ -72,14 +72,14 @@
                                                          <!--new code-->
                              <button type="button" class="btn btn-primary btn-xs"
                              data-bs-toggle="modal"
-                             data-original-title="" data-bs-target="#myModalrenew{{ $i }}">
+                             data-original-title="" data-bs-target="#myModalreg{{ $i }}">
                              ডাক গতিবিধি
                      </button>
 
 
                      <!-- Modal -->
                      <div class="modal right fade bd-example-modal-lg"
-                     id="myModalrenew{{ $i }}" tabindex="-1" role="dialog"
+                     id="myModalreg{{ $i }}" tabindex="-1" role="dialog"
                      aria-labelledby="myModalLabel2">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -109,8 +109,7 @@ $dakDetail = DB::table('dak_details')
 
                                     <?php
 
-$mainDetail = DB::table('ngo_registration_daks')
-->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+$mainDetail = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->orderBy('id','asc')->get();
 
                                     ?>
 
@@ -326,7 +325,7 @@ $dakDetail = DB::table('dak_details')
                                     <?php
 
 $mainDetail = DB::table('ngo_renew_daks')
-->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+->where('renew_status_id',$allStatusData->id)->orderBy('id','asc')->get();
 
                                     ?>
 
@@ -536,7 +535,7 @@ $dakDetail = DB::table('dak_details')
                                     <?php
 
 $mainDetail = DB::table('ngo_name_change_daks')
-->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+->where('name_change_status_id',$allStatusData->id)->orderBy('id','asc')->get();
 
                                     ?>
 
@@ -746,7 +745,7 @@ $dakDetail = DB::table('dak_details')
                                     <?php
 
 $mainDetail = DB::table('ngo_f_d_nine_daks')
-->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+->where('f_d_nine_status_id',$allStatusData->id)->orderBy('id','asc')->get();
 
                                     ?>
 
@@ -894,8 +893,8 @@ $desiNames = DB::table('designation_lists')
                      $form_one_data = DB::table('fd_one_forms')
                      ->where('id',$allStatusData->fd_one_form_id)->first();
 
-                     $decesionNameId = DB::table('ngo_f_d_nine_daks')
-        ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
+                     $decesionNameId = DB::table('ngo_f_d_nine_one_daks')
+        ->where('f_d_nine_one_status_id',$allStatusData->fd9_one_form_id)->value('dak_detail_id');
 
                      $decesionName = DB::table('dak_details')
         ->where('id',$decesionNameId)
@@ -911,8 +910,8 @@ $desiNames = DB::table('designation_lists')
                             {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                         </td>
                         <td style="text-align:right;">
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->id) }}';">দেখুন</button>
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->fd9_one_form_id]) }}';">পাঠান</button>
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->fd9_one_form_id) }}';">দেখুন</button>
 
 
 
@@ -940,7 +939,7 @@ $desiNames = DB::table('designation_lists')
                                 <?php
 
 $dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+->where('access_id',$allStatusData->fd9_one_form_id)->orderBy('id','desc')->first();
 
 
 
@@ -957,7 +956,10 @@ $dakDetail = DB::table('dak_details')
                                     <?php
 
 $mainDetail = DB::table('ngo_f_d_nine_one_daks')
-->where('dak_detail_id',$dakDetail->id)->orderBy('id','asc')->get();
+->where('f_d_nine_one_status_id',$allStatusData->fd9_one_form_id)->orderBy('id','asc')->get();
+
+
+//dd($allStatusData->id);
 
                                     ?>
 
