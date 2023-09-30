@@ -53,7 +53,7 @@ class Fd9OneController extends Controller
        }
 
        public function show($id){
-
+        $mainIdFdNineOne = $id;
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
         ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
@@ -123,6 +123,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         //dd($dataFromNVisaFd9Fd1);
             return view('admin.fd9Oneform.show',
             compact(
+                'mainIdFdNineOne',
 'nVisabasicInfo',
                 'dataFromNVisaFd9Fd1',
                 'ngoTypeData',

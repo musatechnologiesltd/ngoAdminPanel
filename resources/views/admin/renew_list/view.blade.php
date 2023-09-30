@@ -151,6 +151,25 @@
                                 <h5>এনজিও নিবন্ধন নবায়ন সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
+
+
+                                <div class="row mb-4">
+                                    <div class="col-lg-12">
+
+                                        <div class="text-end">
+
+                                           @if($mainIdR->status == 'Ongoing')
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$mainIdR->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+
+                                            @else
+
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                         data-bs-toggle="pill" href="#pills-darkhome"

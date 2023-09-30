@@ -156,6 +156,25 @@
                                 <h5>এনজিও নাম পরিবর্তন  সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
+
+
+                                <div class="row mb-4">
+                                    <div class="col-lg-12">
+
+                                        <div class="text-end">
+
+                                           @if($getformOneId->status == 'Ongoing')
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$getformOneId->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+
+                                            @else
+
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
 
 

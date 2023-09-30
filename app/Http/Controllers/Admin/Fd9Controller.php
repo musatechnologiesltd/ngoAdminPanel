@@ -174,7 +174,7 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 
     public function show($id){
 
-
+$mainIdFdNine = $id;
 
 
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
@@ -234,7 +234,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-         return view('admin.fd9form.show_new',compact('ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show_new',compact('mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 

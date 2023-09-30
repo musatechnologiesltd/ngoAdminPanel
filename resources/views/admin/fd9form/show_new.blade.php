@@ -44,6 +44,25 @@
     <div class="user-profile">
         <div class="card height-equal">
             <div class="card-body">
+
+
+                <div class="row mb-4">
+                    <div class="col-lg-12">
+
+                        <div class="text-end">
+
+                           @if($dataFromNVisaFd9Fd1->status == 'Ongoing')
+                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$mainIdFdNine]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+
+                            @else
+
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                     <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                             data-bs-toggle="pill" href="#pills-darkhome"

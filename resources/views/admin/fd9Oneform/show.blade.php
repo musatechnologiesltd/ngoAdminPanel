@@ -46,6 +46,27 @@
         @include('flash_message')
         <div class="card">
         <div class="card-body">
+
+
+            <div class="row mb-4">
+                <div class="col-lg-12">
+
+                    <div class="text-end">
+
+
+
+                       @if(empty($dataFromNVisaFd9Fd1->status))
+                        <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$mainIdFdNineOne]) }}';" type="button" class="btn btn-primary add-btn">ডাক দেখুন</button>
+
+                        @else
+
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+
+
             <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                 <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                         data-bs-toggle="pill" href="#pills-darkhome"
