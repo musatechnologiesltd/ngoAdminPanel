@@ -43,6 +43,7 @@ class SettingController extends Controller
         $time_dy = time().date("Ymd");
         $admin =  Admin::find($request->id);
         $admin->admin_name = $request->admin_name;
+        $admin->admin_name_ban = $request->admin_name_ban;
         $admin->email = $request->email;
         $admin->admin_mobile = $request->admin_mobile;
          if ($request->hasfile('admin_image')) {

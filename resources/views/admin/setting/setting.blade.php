@@ -25,115 +25,119 @@
       </div>
     </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div>
-                    <div class="d-flex profile-wrapper">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-pills animation-nav profile-nav gap-2 gap-lg-3 flex-grow-1" role="tablist">
 
 
-                        </ul>
-                        <div class="flex-shrink-0">
-                            {{-- <a href="{{ route('profile.index') }}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i>Profile</a> --}}
-                        </div>
-                    </div>
-                    <!-- Tab panes -->
-                    <div class="tab-content pt-4 text-muted">
-                        <div class="tab-pane active" id="overview-tab" role="tabpanel">
-                            <div class="row">
-                                <div class="col-xxl-12">
 
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title mb-3">তথ্য</h5>
-                                            @include('flash_message')
+
+
+        <div class="edit-profile">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="card">
+                  <div class="card-header pb-0">
+                    <h4 class="card-title mb-0">আমার প্রোফাইল</h4>
+                    <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+                  </div>
+                  <div class="card-body">
+                    @include('flash_message')
                                             <form action="{{ route('setting.store') }}" method="post" enctype="multipart/form-data">
                                                 @csrf
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">পুরো নাম:</th>
-                                                            <td class="text-muted">
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}" name="পুরো নাম"/>
-                                                                <input type="hidden" class="form-control" value="{{ Auth::guard('admin')->user()->id }}" name="id"/>
+                      <div class="row mb-2">
+                        <div class="profile-title">
+                          <div class="media">
+                            <?php
+                            $designationName = DB::table('designation_lists')
+                            ->where('id',Auth::guard('admin')->user()->designation_list_id)
+                            ->value('designation_name');
 
-                                                            </td>
-                                                        </tr>
+                            $branchName = DB::table('branches')
+                            ->where('id',Auth::guard('admin')->user()->branch_id)
+                            ->value('branch_name');
 
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">মোবাইল নম্বর:</th>
-                                                            <td class="text-muted">
+                       ?>
 
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_mobile }}" name="মোবাইল নম্বর"/>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">ই-মেইল:</th>
-                                                            <td class="text-muted">
-
-                                                                <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->email }}" name="ই-মেইল"/>
-                                                            </td>
-
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">ছবি:</th>
-                                                            <td class="text-muted">
-
-                                                                <input type="file" class="form-control"  name="image"/>
-                                                                <div class="avatar-lg">
-                                                                @if(empty(Auth::guard('admin')->user()->admin_image))
-                        <img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="" style="height:50px;"/>
-                        @else
-                        <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="user-img" class="" style="height:50px;" />
-                        @endif
-                                                                </div>
-                                                            </td>
-
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">স্বাক্ষর:</th>
-                                                            <td class="text-muted">
-
-                                                                <input type="file" class="form-control"  name="image"/>
-                                                                <div class="avatar-lg">
-                                                                @if(empty(Auth::guard('admin')->user()->admin_sign))
-                        <img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="" style="height:50px;"/>
-                        @else
-                        <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_sign }}" alt="user-img" class="" style="height:50px;" />
-                        @endif
-                                                                </div>
-                                                            </td>
-
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light btn-sm">Update</button>
-                                            </form>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
+@if(empty(Auth::guard('admin')->user()->admin_image))
+<img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="img-70 rounded-circle" style="height: 100px;"/>
+@else
+<img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="img-70 rounded-circle" class="img-fluid" />
+@endif
 
 
-                                </div>
-                                <!--end col-->
 
+                            <div class="media-body">
+                              <h3 class="mb-1 f-20 txt-primary">{{ Auth::guard('admin')->user()->admin_name }}</h3>
+                              <p class="f-12">{{ $designationName }}</p>
                             </div>
-                            <!--end row-->
+                          </div>
                         </div>
+                      </div>
 
-                    </div>
-                    <!--end tab-content-->
+                      <div class="mb-3">
+                        <label class="form-label">ইংরেজি নাম:</label>
+                        <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}" name="admin_name"/>
+                        <input type="hidden" class="form-control" value="{{ Auth::guard('admin')->user()->id }}" name="id"/>
+                      </div>
+
+
+                      <div class="mb-3">
+                        <label class="form-label">বাংলা নাম:</label>
+                        <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_name_ban }}" name="admin_name_ban"/>
+
+                      </div>
+
+
+                      <div class="mb-3">
+                        <label class="form-label">মোবাইল নম্বর:</label>
+                        <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->admin_mobile }}" name="admin_mobile"/>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">ই-মেইল:</label>
+                        <input type="text" class="form-control" value="{{ Auth::guard('admin')->user()->email }}" name="email"/>
+                      </div>
+
+
+                      <div class="mb-3">
+                        <label class="form-label">ছবি:</label>
+                        <input type="file" class="form-control"  name="admin_image"/>
+                        <div class="avatar-lg">
+                        @if(empty(Auth::guard('admin')->user()->admin_image))
+<img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="" style="height:50px;"/>
+@else
+<img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="user-img" class="" style="height:50px;" />
+@endif
+                        </div>
+                      </div>
+
+
+                      <div class="mb-3">
+                        <label class="form-label">স্বাক্ষর:</label>
+                        <input type="file" class="form-control"  name="admin_sign"/>
+                        <div class="avatar-lg">
+                        @if(empty(Auth::guard('admin')->user()->admin_sign))
+<img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="" style="height:50px;"/>
+@else
+<img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_sign }}" alt="user-img" class="" style="height:50px;" />
+@endif
+                        </div>
+                      </div>
+
+
+                      <div class="form-footer">
+                        <button class="btn btn-primary btn-block">Save</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
+              </div>
+
             </div>
-            <!--end col-->
-        </div>
-        <!--end row-->
+          </div>
+
+
+
+
+
 
     </div><!-- container-fluid -->
 </div><!-- End Page-content -->
