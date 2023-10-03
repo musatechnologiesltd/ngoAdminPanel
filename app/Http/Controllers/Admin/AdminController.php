@@ -229,6 +229,9 @@ class AdminController extends Controller
             return redirect()->route('mainLogin');
                }
 
+$adminEmail = Admin::where('id',$id)->value('email');
+
+
         // Create New User
         $admins = Admin::find($id);
         $admins->admin_name = $request->name;
@@ -258,12 +261,28 @@ class AdminController extends Controller
 
         }
 
+
+        if($adminEmail == $request->email){
+
+
+
+        }else{
+            Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('NGOAB Password Set');
+            });
+
+        }
+
         $admins->save();
 
         $admins->roles()->detach();
         if ($request->roles) {
             $admins->assignRole($request->roles);
         }
+
+
+
 
 
         return redirect()->route('user.index')->with('success','Updated successfully!');;
