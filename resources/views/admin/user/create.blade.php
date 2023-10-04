@@ -181,7 +181,7 @@
                               </div>
                                <div class="form-group col-md-6 col-sm-12">
                                   <label for="password_confirmation">প্রোফাইল ছবি</label>
-                                  <input type="file" class="form-control form-control-sm" id="" name="image" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" required>
+                                  <input type="file" class="form-control form-control-sm" id="" name="image" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" >
 
                                   @if ($errors->has('image'))
                                   <span class="text-danger">{{ $errors->first('image') }}</span>
@@ -192,7 +192,7 @@
 
                               <div class="form-group col-md-12 col-sm-12">
                                 <label for="password_confirmation">স্বাক্ষর</label>
-                                <input type="file" class="form-control form-control-sm" id="" name="sign" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" required>
+                                <input type="file" class="form-control form-control-sm" id="" name="sign" accept="image/png, image/jpg, image/jpeg" placeholder="Enter Image" >
 
                                 @if ($errors->has('sign'))
                                 <span class="text-danger">{{ $errors->first('sign') }}</span>
@@ -217,7 +217,7 @@
                                               <div class="form-group mb-4">
                                                   <div>
                                                       <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                                        জমা দিন 
+                                                        জমা দিন
                                                       </button>
                                                   </div>
                                               </div>
