@@ -959,50 +959,23 @@ E.COMPENSATION AND BENIFITS
 //dd($forwardingLetterData);
 
                             ?>
-                            @if (is_null($forwardingLetterData))
+                            @if (empty($nVisabasicInfo->forwarding_letter))
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form class="custom-validation" action="{{ route('forwardingLetterPost') }}" method="post" enctype="multipart/form-data">
+                                            <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                           for="exampleFormControlInput1">স্মারক নম্বর</label>
-                                                    <input class="form-control" name="sarok_number" required id="" type="text"
-                                                           placeholder="13456798">
-
-                                                           <input class="form-control" value="{{ $dataFromNVisaFd9Fd1->id }}" name="fd9_id" required id="" type="hidden"
-                                                           placeholder="13456798">
-
-
+                                                   <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <label for="email">ফরওয়ার্ডিং লেটার</label>
+                                                    <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                           for="exampleFormControlInput1">দায়িত্বপ্রাপ্ত কর্মকর্তা</label>
-                                                        <input class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}"  id="" type="text"
-                                                        placeholder="দায়িত্বপ্রাপ্ত কর্মকর্তা" readonly>
-                                                        <input class="form-control" value="{{ Auth::guard('admin')->user()->id }}"  name="admin_id" type="hidden"
-                                                        placeholder="দায়িত্বপ্রাপ্ত কর্মকর্তা" readonly>
-                                                </div>
-                                                <div class="mb-3">
 
-                                                        <div class="col-md-12">
 
-                                                            <table class="table table-bordered" id="dynamicAddRemove">
-                                                                <tr>
-                                                                    <th>অনুলিপি</th>
-                                                                    <th>কার্যকলাপ</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><input required type="text" name="name[]" placeholder="Enter Ename" id="name0" class="form-control" />
-                                                                    </td>
-                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">নতুন যুক্ত করুন</button></td>
-                                                                </tr>
-                                                            </table>
 
-                                                        </div>
-                                                </div>
+
+
 
 
                                         </div>
@@ -1019,191 +992,54 @@ E.COMPENSATION AND BENIFITS
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
 
+
+                                    <div class="text-end">
+
+
+
                                     <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
 
-                                                    <p>ফরওয়ার্ডিং লেটার পিডিএফ এডিট করুন</p>
+                                        <div class="card-header">
+                                            <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                ফরওয়ার্ডিং লেটার আপডেট  করুন
+                                            </button>
 
-
-                                                    <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                                        এডিট করুন
-                                                    </button>
-
-                                                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                          <div class="modal-content">
-                                                            <div class="modal-header">
-                                                              <h1 class="modal-title fs-5" id="exampleModalLabel">ফরওয়ার্ডিং লেটার </h1>
-                                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                <form class="custom-validation" action="{{ route('postForwardingLetterForEdit') }}" id="form" method="post" enctype="multipart/form-data">
-                                                                    @csrf
-
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label"
-                                                                               for="exampleFormControlInput1">পিডিএফ বডি পার্ট এক </label>
-
-                                                                               @if(empty($editCheck))
-                                                                        <textarea class="form-control summernote" name="pdf_body_one" required id="" type="text"
-                                                                               >
-                                                                               উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে বর্ণিত সংস্থার নিয়োগের নিমিত্তে
-                                                                               নিম্নবর্ণিত বিদেশী নাগরিকের নিয়োগ/নিরাপত্তা ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর
-                                                                               কার্যালয়ের ২৫ নভেম্বর, ২০২১ তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
-                                                                               বিভাগের মতামত এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে অনুরোধ করা
-                                                                               হলো।
-
-                                                                            </textarea>
-                                                                            @else
-
-                                                                            <textarea class="form-control summernote" name="pdf_body_one" required id="" type="text"
-                                                                            >
-                                                                            {!! $editCheck !!}
-
-                                                                         </textarea>
-                                                                            @endif
-
-                                                                               <input class="form-control" value="{{ $dataFromNVisaFd9Fd1->id }}" name="fd9_id" required id="" type="hidden"
-                                                                               placeholder="13456798">
-
-
-                                                                    </div>
-
-
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label"
-                                                                               for="exampleFormControlInput1">পিডিএফ বডি পার্ট দুই  </label>
-
-                                                                               @if(empty($editCheck1))
-                                                                               <textarea class="form-control summernote" name="pdf_body_two" required id="" type="text"
-                                                                              >
-
-                                                                              সচিব <br>
-                                                                              সুরক্ষা সেবা বিভাগ <br>
-                                                                              স্বরাষ্ট্র মন্ত্রণালয় <br>
-                                                                              বাংলাদেশ সচিবালয়, ঢাকা
-                                                                            </textarea>
-
-                                                                            @else
-
-
-                                                                            <textarea class="form-control summernote" name="pdf_body_two" required id="" type="text"
-                                                                            >
-
-                                                                           {!! $editCheck1 !!}
-                                                                          </textarea>
-
-                                                                            @endif
-
-
-
-
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-
-                                                                        <div class="col-md-12">
-
-                                                                            <table class="table table-bordered" id="dynamicAddRemove">
-                                                                                <tr>
-                                                                                    <th>অনুলিপি</th>
-                                                                                    <th>কার্যকলাপ</th>
-                                                                                </tr>
-                                                                                @foreach($forwardingLetterOnulipi as $key=>$allForwardingLetterOnulipi)
-                                                                             @if($key == 0)
-                                                                                <tr>
-                                                                                    <td><input required type="text" value="{{ $allForwardingLetterOnulipi->onulipi_name }}" name="name[]" placeholder="অনুলিপি" id="name{{ $key+4000 }}" class="form-control" />
-                                                                                    </td>
-                                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">নতুন যুক্ত করুন </button></td>
-                                                                                </tr>
-                                                                                @else
-                                                                                <tr>
-                                                                                    <td><input required type="text" value="{{ $allForwardingLetterOnulipi->onulipi_name }}" name="name[]" placeholder="অনুলিপি" id="name{{ $key+4000 }}" class="form-control" />
-                                                                                    </td>
-                                                                                    <td><button type="button" class="btn btn-sm btn-outline-danger remove-input-field">মুছে ফেলুন</button></td>
-                                                                                </tr>
-                                                                                @endif
-                                                                                @endforeach
-                                                                            </table>
-
-                                                                        </div>
-                                                                </div>
-
-                                                                    <div class="card-footer text-end">
-                                                                        <button class="btn btn-primary" type="submit">জমা দিন </button>
-                                                                    </div>
-                                                                </form>
-
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                          </div>
-                                                        </div>
-                                                      </div>
-
-
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    {{-- <div class="text-center">
-                                                        <p>PDF Download (পিডিএফ ডাউনলোড )</p>
-                                                        <a class="btn btn-sm btn-success" target="_blank"
-                                                               href = '{{ route('downloadForwardingLetter',$dataFromNVisaFd9Fd1->id) }}'>
-                                                            Download Forwarding Letter
-                                                    </a>
-                                                    </div> --}}
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="text-center">
-                                                        <p>পিডিএফ আপলোড</p>
-                                                        <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            ফরওয়ার্ডিং লেটার আপলোড করুন
-                                                        </button>
-
-                                                        <!--model-->
-                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                              <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">পিডিএফ আপলোড</h1>
-                                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
-                                                                        @csrf
-                                                                           <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
-                                                                        <div class="form-group col-md-12 col-sm-12">
-                                                                            <label for="email">ফরওয়ার্ডিং লেটার</label>
-                                                                            <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
-                                                                        </div>
-
-
-
-                                                                        <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                                                            জমা দিন
-                                                                         </button>
-                                                                    </form>
-
-                                                                </div>
-
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                        <!--model -->
+                                            <!--model-->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">পিডিএফ আপলোড</h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
+                                                    <div class="modal-body">
+                                                        <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                               <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
+                                                            <div class="form-group col-md-12 col-sm-12">
+                                                                <label for="email">ফরওয়ার্ডিং লেটার</label>
+                                                                <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
+                                                            </div>
+
+
+
+                                                            <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
+                                                                জমা দিন
+                                                             </button>
+                                                        </form>
+
+                                                    </div>
+
+                                                  </div>
                                                 </div>
-                                            </div>
+                                              </div>
+                                            <!--model -->
                                         </div>
-                                    </div>
-
-
-                                    <div class="card">
+                                        </div>
                                         <div class="card-body">
+
+
+
                                             <iframe src=
                                             "{{ url('public/'.$nVisabasicInfo->forwarding_letter) }}"
                                                             width="100%"
