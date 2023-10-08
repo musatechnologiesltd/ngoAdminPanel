@@ -186,6 +186,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+        'LogActivity' => App\Helpers\LogActivity::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

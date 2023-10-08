@@ -94,7 +94,22 @@
 
                                                                     </td> --}}
 
-                                    <td>{{ $user->admin_name }}</td>
+                                    <td>
+
+
+                                        <?php
+
+$mac = exec('getmac');
+
+
+?>
+
+
+
+                                        <br>{{ $user->admin_name }}
+
+
+                                    </td>
 
                                     <td>
 @if($user->designation_list_id == 1)
