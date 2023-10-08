@@ -51,7 +51,7 @@
 
                                     <th>ক্র: নং:</th>
                                     <th>ছবি</th>
-                                    <th>স্বাক্ষর</th>
+                                    {{-- <th>স্বাক্ষর</th> --}}
                                     <th>নাম</th>
                                     <th>পদবী</th>
                                     <th>শাখা</th>
@@ -86,13 +86,13 @@
 @endif
                                 </td>
 
-                                <td>
+                                {{-- <td>
                                     @if(empty($user->admin_sign))
                                     @else
                                     <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:40px" />
                                     @endif
 
-                                                                    </td>
+                                                                    </td> --}}
 
                                     <td>{{ $user->admin_name }}</td>
 
