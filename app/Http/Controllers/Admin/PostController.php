@@ -28,6 +28,8 @@ class PostController extends Controller
 {
     public function index(){
 
+        \LogActivity::addToLog('view dak list.');
+
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
             $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
@@ -89,6 +91,8 @@ class PostController extends Controller
 
 
     public function dakListSecondStep(Request $request){
+
+        \LogActivity::addToLog('add dak detail.');
 
         //dd($request->karjo_onulipi2);
 
@@ -696,7 +700,7 @@ class PostController extends Controller
     public function dakListFirstStep(Request $request){
 
         //dd($request->all());
-
+        \LogActivity::addToLog('add dak detail.');
 
          $number=count($request->admin_id);
 
@@ -812,6 +816,8 @@ class PostController extends Controller
     }
 
     public function showDataAll($status,$id){
+
+        \LogActivity::addToLog('show dak detail.');
         $mainstatus = $status;
         $id = $id;
 
@@ -860,6 +866,8 @@ class PostController extends Controller
 
     public function createSeal($status , $id){
 
+        \LogActivity::addToLog('create seal.');
+
         $id = $id;
         $mainstatus = $status;
 
@@ -889,6 +897,8 @@ class PostController extends Controller
 
 
     public function showDataDesignationWise(Request $request){
+
+        \LogActivity::addToLog('show Data Designation Wise.');
 
         $mainstatus = $request->mainstatus;
         $totalBranch = $request->totalBranch;
@@ -936,6 +946,8 @@ $mainStatusNew = $request->mainStatusNew;
 
     public function deleteMemberList($id){
 
+        \LogActivity::addToLog('delete memeber list.');
+
         NgoRegistrationDak::where('id',$id)->delete();
 
         return redirect()->back();
@@ -945,6 +957,8 @@ $mainStatusNew = $request->mainStatusNew;
 
 
     public function main_doc_download($id){
+
+        \LogActivity::addToLog('dak pdf download.');
 
         $data = DB::table('system_information')->first();
 

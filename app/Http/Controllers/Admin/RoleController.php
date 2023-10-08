@@ -33,6 +33,8 @@ class RoleController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('Role List.');
+
         $permissions = Permission::all();
         $roles = Role::all();
         $permission_groups = Admin::getpermissionGroups();
@@ -48,6 +50,8 @@ class RoleController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('Create Role.');
+
         $all_permissions  = Permission::all();
         $permission_groups = Admin::getpermissionGroups();
         return view('admin.roles.create', compact('all_permissions', 'permission_groups'));
@@ -61,6 +65,8 @@ class RoleController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
+
+               \LogActivity::addToLog('Store Role.');
 
         // Validation Data
         $request->validate([
@@ -89,7 +95,7 @@ class RoleController extends Controller
             return redirect()->route('mainLogin');
                }
 
-
+               \LogActivity::addToLog('View Role Edit Page.');
         $role = Role::findById($id,'admin');
         $all_permissions = Permission::all();
         $permission_groups = Admin::getpermissionGroups();
@@ -104,6 +110,8 @@ class RoleController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
+
+               \LogActivity::addToLog('Update Role.');
 
         $role = Role::find($id);
         $permissions = $request->input('permissions');
@@ -124,6 +132,8 @@ class RoleController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
+
+               \LogActivity::addToLog('Delete Role.');
 
         $role = Role::findById($id,'admin');
         if (!is_null($role)) {

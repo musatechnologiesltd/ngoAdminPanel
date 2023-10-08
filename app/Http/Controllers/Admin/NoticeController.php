@@ -37,6 +37,9 @@ class NoticeController extends Controller
             return redirect()->route('mainLogin');
                }
 
+
+               \LogActivity::addToLog('notice list ');
+
           $noticeLists = Notice::latest()->get();
 
                return view('admin.noticeLists.index',compact('noticeLists'));
@@ -50,6 +53,11 @@ class NoticeController extends Controller
                 //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                 return redirect()->route('mainLogin');
             }
+
+
+            \LogActivity::addToLog(' create notice ');
+
+
             $noticeLists = new Notice();
             $noticeLists->headline = $request->headline;
 
@@ -73,6 +81,10 @@ class NoticeController extends Controller
                 //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                 return redirect()->route('mainLogin');
             }
+
+            \LogActivity::addToLog(' update notice ');
+
+
             $noticeLists =Notice::find($request->id);
             $noticeLists->headline = $request->headline;
 
@@ -97,6 +109,10 @@ class NoticeController extends Controller
                    //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                    return redirect()->route('mainLogin');
                }
+
+               \LogActivity::addToLog(' delete notice ');
+
+
                $admins = Notice::where('id',$id)->delete();
 
 

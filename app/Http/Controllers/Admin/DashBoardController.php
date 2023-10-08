@@ -32,7 +32,7 @@ class DashBoardController extends Controller
 
 
 
-
+               \LogActivity::addToLog('view dashboard');
 
 
 

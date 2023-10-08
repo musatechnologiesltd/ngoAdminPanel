@@ -28,7 +28,7 @@ class PermissionController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to View !');
            return redirect()->route('mainLogin');
                }
-
+               \LogActivity::addToLog('permission list');
 
         $pers = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
         return view('admin.permission.index',compact('pers'));
@@ -44,10 +44,15 @@ class PermissionController extends Controller
                }
 
 
+
+
         $request->validate([
             'name.*' => 'required|string',
             'group_name' => 'required|string',
         ]);
+
+
+        \LogActivity::addToLog(' create permission ');
 
 
                 $number=count($request->name);
@@ -78,6 +83,8 @@ class PermissionController extends Controller
                 return redirect()->route('mainLogin');
                    }
 
+                   \LogActivity::addToLog(' update permission ');
+
             Permission::where('group_name', $request->group_name)->delete();
 
             $number=count($request->name);
@@ -107,8 +114,11 @@ class PermissionController extends Controller
                 //abort(403, 'Sorry !! You are Unauthorized to View !');
 
                 return redirect()->route('mainLogin');
-                
+
                    }
+
+
+                   \LogActivity::addToLog(' delete permission ');
 
 
             $getGroupName = DB::table('permissions')

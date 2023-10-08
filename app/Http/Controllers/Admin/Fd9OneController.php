@@ -20,6 +20,9 @@ class Fd9OneController extends Controller
 {
     public function index(){
 
+
+        \LogActivity::addToLog('view fdNineOne List ');
+
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
 
@@ -40,6 +43,9 @@ class Fd9OneController extends Controller
        public function statusUpdateForFd9One(Request $request){
 
 
+        \LogActivity::addToLog('update fdNineOne status update ');
+
+
         DB::table('fd9_one_forms')->where('id',$request->id)
         ->update([
             'status' => $request->status
@@ -53,6 +59,10 @@ class Fd9OneController extends Controller
        }
 
        public function show($id){
+
+        \LogActivity::addToLog('view fdNineOne detail ');
+
+
         $mainIdFdNineOne = $id;
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
@@ -145,6 +155,11 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
        }
 
        public function fd9OneDownload($cat,$id){
+
+
+        \LogActivity::addToLog('download fdNineOne pdf ');
+
+
         $data = DB::table('system_information')->first();
 
 

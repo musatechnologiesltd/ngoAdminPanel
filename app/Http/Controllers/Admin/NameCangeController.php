@@ -31,6 +31,8 @@ class NameCangeController extends Controller
            return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('new name change list ');
+
 
         $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
 
@@ -45,6 +47,8 @@ class NameCangeController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
+
+        \LogActivity::addToLog('revision name change list ');
 
 
         $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Rejected')->latest()->get();
@@ -61,6 +65,8 @@ class NameCangeController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('already name changed list ');
+
 
         $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Accepted')->latest()->get();
 
@@ -72,7 +78,7 @@ class NameCangeController extends Controller
     public function nameChangeView($id){
 
 
-
+        \LogActivity::addToLog('view name change detail ');
 
 
              try {
@@ -140,6 +146,8 @@ class NameCangeController extends Controller
 
     public function updateStatusNameChangeForm(Request $request){
 
+        \LogActivity::addToLog('update name change status');
+
         $data_save = DB::table('ngo_name_changes')->where('id',$request->id)
         ->update([
             'status' => $request->status,
@@ -174,7 +182,7 @@ class NameCangeController extends Controller
 
     public function nameChangeDoc($id){
 
-
+        \LogActivity::addToLog('download name change pdf ');
 
             $form_one_data = DB::table('name_change_docs')->where('id',$id)->value('pdf_file_list');
 

@@ -45,6 +45,10 @@ class DesignationController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
+
+
+               \LogActivity::addToLog('designation  list ');
+
                $branchLists = Branch::where('id','!=',1)->get();
           $designationLists = DesignationList::where('id','!=',1)->
           orderBy(
@@ -70,6 +74,8 @@ class DesignationController extends Controller
 
 
            public function checkDesignation(Request $request){
+
+            \LogActivity::addToLog('designation check ');
 
             $branchId = $request->branchId;
             $designationName = $request->designationName;
@@ -100,7 +106,7 @@ class DesignationController extends Controller
                 'branch_id' => 'required',
                 'designation_name' => 'required',
               ]);
-
+              \LogActivity::addToLog('designation store ');
 
               //dd($request->all());
 
@@ -134,7 +140,7 @@ class DesignationController extends Controller
                return redirect()->route('mainLogin');
             }
 
-
+            \LogActivity::addToLog('designation update ');
            // dd($request->all());
 
             $medicine = DesignationList::findOrFail($id);
@@ -158,7 +164,7 @@ class DesignationController extends Controller
             return redirect()->route('mainLogin');
         }
 
-
+        \LogActivity::addToLog('designation delete ');
         DesignationList::destroy($id);
         return redirect()->route('designationList.index')->with('error','Deleted successfully!');
     }

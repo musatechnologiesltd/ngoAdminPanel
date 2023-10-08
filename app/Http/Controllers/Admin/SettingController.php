@@ -40,6 +40,9 @@ class SettingController extends Controller
             return redirect()->route('mainLogin');
                }
 
+
+               \LogActivity::addToLog('Profile Update.');
+
         $time_dy = time().date("Ymd");
         $admin =  Admin::find($request->id);
         $admin->admin_name = $request->admin_name;

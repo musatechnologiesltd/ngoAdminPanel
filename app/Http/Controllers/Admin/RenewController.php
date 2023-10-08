@@ -40,6 +40,9 @@ class RenewController extends Controller
         }
 
 
+        \LogActivity::addToLog('View New Renew List.');
+
+
         $all_data_for_new_list = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
 
 
@@ -53,6 +56,9 @@ class RenewController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
+
+
+        \LogActivity::addToLog('View Revision Renew List.');
 
 
         $all_data_for_new_list = DB::table('ngo_renews')->where('status','Rejected')->latest()->get();
@@ -69,6 +75,7 @@ class RenewController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('View Already Renew List.');
 
         $all_data_for_new_list = DB::table('ngo_renews')->where('status','Accepted')->latest()->get();
 
@@ -79,7 +86,7 @@ class RenewController extends Controller
 
     public function renewView($id){
 
-
+        \LogActivity::addToLog('View Renew Info .');
 
 
 
@@ -153,6 +160,8 @@ class RenewController extends Controller
 
     public function updateStatusRenewForm(Request $request){
 
+        \LogActivity::addToLog('Update Renew Status.');
+
         // $data_save = Renew::find($request->id);
         // $data_save->status = $request->status;
         // $data_save->save();
@@ -203,6 +212,8 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
 
     public function foreginPdfDownload($id){
 
+        \LogActivity::addToLog('renew pdf download.');
+
         $data = DB::table('system_information')->first();
 
         $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('foregin_pdf');
@@ -225,6 +236,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
     public function foreginPdfDownloadOld($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         //dd(base64_decode($id));
 
@@ -254,6 +267,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function yearlyBudgetPdfDownload($id){
 
+        \LogActivity::addToLog('download renew pdf.');
+
         $data = DB::table('system_information')->first();
 
         $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('yearly_budget');
@@ -278,6 +293,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function yearlyBudgetPdfDownloadOld($id){
 
+        \LogActivity::addToLog('download renew pdf.');
+
         $data = DB::table('system_information')->first();
 
         $get_file_data = DB::table('fd_one_forms')->where('id',base64_decode($id))->value('annual_budget_file');
@@ -301,6 +318,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
     public function copyOfChalanPdfDownload($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
 
@@ -327,6 +346,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function copyOfChalanPdfDownloadOld($id){
 
+        \LogActivity::addToLog('download renew pdf.');
+
         $data = DB::table('system_information')->first();
 
 
@@ -350,6 +371,8 @@ $file=$data->system_url.'public/'.$get_file_data;
     }
 
     public function dueVatPdfDownload($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
 
@@ -375,6 +398,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function dueVatPdfDownloadOld($id){
 
+
+        \LogActivity::addToLog('download renew pdf.');
         $data = DB::table('system_information')->first();
 
 
@@ -399,6 +424,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
         public function changeAcNumberDownload($id){
 
+            \LogActivity::addToLog('download renew pdf.');
+
             $data = DB::table('system_information')->first();
 
             $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('change_ac_number');
@@ -422,6 +449,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
         public function changeAcNumberDownloadOld($id){
+
+            \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
 
@@ -448,6 +477,8 @@ $file=$data->system_url.'public/'.$get_file_data;
         public function verifiedFdEightDownload($id){
 
             //dd(11);
+
+            \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
 
@@ -482,6 +513,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             //dd(11);
 
+            \LogActivity::addToLog('download renew pdf.');
+
             $data = DB::table('system_information')->first();
 
 
@@ -512,6 +545,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
         public function renewalFileDownload($title, $id){
+            \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
             if($title == 'trustees'){

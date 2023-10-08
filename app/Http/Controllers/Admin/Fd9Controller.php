@@ -30,6 +30,9 @@ class Fd9Controller extends Controller
     public function statusUpdateForFd9(Request $request){
 
 
+        \LogActivity::addToLog('update fdNine Status ');
+
+
         DB::table('fd9_forms')->where('id',$request->id)
         ->update([
             'status' => $request->status
@@ -46,6 +49,8 @@ class Fd9Controller extends Controller
 
     public function index(){
 
+        \LogActivity::addToLog('view fdNine List ');
+
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
      ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
      ->select('fd_one_forms.*','fd9_forms.*')
@@ -58,6 +63,8 @@ class Fd9Controller extends Controller
     }
 
     public function downloadForwardingLetter($id){
+
+        \LogActivity::addToLog('download forwarding Letter');
 
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
@@ -174,6 +181,8 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 
     public function show($id){
 
+        \LogActivity::addToLog('view fdNine detail ');
+
 $mainIdFdNine = $id;
 
 
@@ -240,6 +249,8 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
     public function postForwardingLetterForEdit(Request $request){
 
+        \LogActivity::addToLog('store forwarding Letter ');
+
 //dd($request->all());
 
 $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$request->fd9_id)
@@ -292,6 +303,8 @@ if(empty($editCheck)){
 
     public function postForwardingLetter(Request $request){
 
+        \LogActivity::addToLog('store forwarding letter');
+
         //dd($request->all());
 
         if ($request->hasfile('forwardingLetter')) {
@@ -319,6 +332,10 @@ if(empty($editCheck)){
 
 
     public function fdNinePdfDownload($id){
+
+        \LogActivity::addToLog('download fdNine pdf ');
+
+
         $data = DB::table('system_information')->first();
 
 
@@ -418,6 +435,10 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
     }
 
     public function nVisaDocumentDownload($cat,$id){
+
+        \LogActivity::addToLog('nVisa Document Download');
+
+
         $data = DB::table('system_information')->first();
 
         if($cat == 'nomination'){
@@ -565,6 +586,8 @@ $file=url('public/'.$get_file_data);
 
 public function forwardingLetterPost(Request $request){
 
+    \LogActivity::addToLog('forwardingLetterPost');
+
 //dd(234);
     $request->validate([
         'sarok_number' => 'required|string|max:150'
@@ -606,6 +629,8 @@ public function forwardingLetterPost(Request $request){
 
 
 public function submitForCheck(Request $request){
+
+    \LogActivity::addToLog('nvisaCheck');
 
 
      $fd9FormId = $request->id;
@@ -688,6 +713,8 @@ return redirect()->route('fd9OneForm.show',$fd9FormId)->with('success','Send Suc
 
 
 public function statusCheck(Request $request){
+
+    \LogActivity::addToLog('nvisa status check');
 
     $mainNVisaId = $request->mainId;
 

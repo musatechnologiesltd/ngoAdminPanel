@@ -37,6 +37,8 @@ class RegisterController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('view new ngo registration list.');
+
 
         $all_data_for_new_list = DB::table('ngo_statuses')
         ->where('status','Ongoing')->orWhere('status','Old Ngo Renew')->latest()->get();
@@ -53,6 +55,8 @@ class RegisterController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('view revision ngo registration list.');
+
 
         $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Rejected')->latest()->get();
 
@@ -68,6 +72,8 @@ class RegisterController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('view already ngo registration list.');
+
 
         $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Accepted')->latest()->get();
 
@@ -80,7 +86,7 @@ class RegisterController extends Controller
 
 
 
-
+        \LogActivity::addToLog('view  ngo registration detail.');
 
         try {
 
@@ -215,6 +221,9 @@ class RegisterController extends Controller
 
     public function printCertificateView(Request $request){
 
+
+        \LogActivity::addToLog('print ngo certificate.');
+
         //dd(11);
 
            $user_id = $request->user_id;
@@ -250,7 +259,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
     public function printCertificateViewDemo(Request $request){
 //dd(11);
 
-
+\LogActivity::addToLog('view certificate demo.');
 
 
         $user_id = $request->user_id;
@@ -285,6 +294,8 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
     public function updateStatusRegForm(Request $request){
 
+
+        \LogActivity::addToLog('update registration status.');
       //dd($request->all());
 
         DB::table('ngo_statuses')->where('id',$request->id)
@@ -365,6 +376,9 @@ if($request->ngotype == 'old'){
     public function formOnePdf($main_id,$id){
 
 
+        \LogActivity::addToLog('registration pdf download.');
+
+
         if($id == 'plan'){
 
             $form_one_data = DB::table('fd_one_forms')->where('id',$main_id)->value('plan_of_operation');
@@ -393,6 +407,8 @@ if($request->ngotype == 'old'){
 
     public function formEightPdf($main_id){
 
+        \LogActivity::addToLog('registration pdf download.');
+
         $form_one_data = DB::table('form_eights')->where('fd_one_form_id',$main_id)->value('verified_form_eight');
 
         return view('admin.registration_list.form_eight_pdf',compact('form_one_data'));
@@ -400,11 +416,15 @@ if($request->ngotype == 'old'){
 
     public function sourceOfFund($id){
 
+        \LogActivity::addToLog('registration pdf download.');
+
         $form_one_data = DB::table('fd_one_source_of_funds')->where('id',$id)->value('letter_file');
          return view('admin.registration_list.source_of_fund',compact('form_one_data'));
     }
 
     public function otherPdfView($id){
+
+        \LogActivity::addToLog('registration pdf download.');
 
         $form_one_data = DB::table('fd_one_other_pdf_lists')->where('id',$id)->value('information_pdf');
          return view('admin.registration_list.other_pdf_view',compact('form_one_data'));
@@ -412,6 +432,8 @@ if($request->ngotype == 'old'){
 
 
     public function ngoMemberDocPdfView($id){
+
+        \LogActivity::addToLog('registration pdf download.');
 
         $form_one_data = DB::table('ngo_member_nid_photos')->where('id',$id)->value('member_nid_copy');
 
@@ -421,12 +443,16 @@ if($request->ngotype == 'old'){
 
     public function ngoDocPdfView($id){
 
+        \LogActivity::addToLog('registration pdf download.');
+
         $form_one_data = DB::table('ngo_other_docs')->where('id',$id)->value('pdf_file_list');
          return view('admin.registration_list.ngo_doc__pdf_view',compact('form_one_data'));
     }
 
 
     public function renewPdfList($main_id,$id){
+
+        \LogActivity::addToLog('registration pdf download.');
 
         if($id = 'f'){
 

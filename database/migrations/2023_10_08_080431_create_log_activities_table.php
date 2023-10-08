@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ip_or_mac');
             $table->string('agent')->nullable();
             $table->string('admin_id')->nullable();
+            $table->string('activity_time');
             $table->timestamps();
         });
     }

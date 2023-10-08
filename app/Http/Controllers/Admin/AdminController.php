@@ -36,6 +36,8 @@ class AdminController extends Controller
 
     public function forgetPassword(){
 
+        \LogActivity::addToLog('forgetPassword');
+
         return view('admin.user.forgetPassword');
     }
 
@@ -77,7 +79,7 @@ class AdminController extends Controller
            return redirect()->route('mainLogin');
                }
 
-
+               \LogActivity::addToLog('create employee ');
 
               // dd($path);
 
@@ -95,6 +97,8 @@ class AdminController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to Add !');
            return redirect()->route('mainLogin');
                }
+
+               \LogActivity::addToLog('edit employee list');
 
                $designationLists = DesignationList::latest()->get();
 
@@ -120,7 +124,7 @@ class AdminController extends Controller
                }
 
 
-
+               \LogActivity::addToLog('view employee list');
               // dd($path);
 
               // dd(public_path().'\images');
@@ -139,7 +143,7 @@ class AdminController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to View !');
            return redirect()->route('mainLogin');
                }
-
+               \LogActivity::addToLog(' employee store');
                //dd($request->all());
 
         // Validation Data
@@ -229,6 +233,8 @@ class AdminController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('update employee list');
+
 $adminEmail = Admin::where('id',$id)->value('email');
 
 
@@ -297,6 +303,9 @@ $adminEmail = Admin::where('id',$id)->value('email');
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('delete employee from list');
+
+
         $admins = Admin::find($id);
         if (!is_null($admins)) {
             $admins->delete();
@@ -309,6 +318,10 @@ $adminEmail = Admin::where('id',$id)->value('email');
 
 
     public function accountPasswordChange($id){
+
+        \LogActivity::addToLog('accountPasswordChange');
+
+
        $email = $id;
        return view('admin.user.accountPasswordChange',compact('email'));
 
@@ -328,6 +341,8 @@ $adminEmail = Admin::where('id',$id)->value('email');
 
 
   public function employeeEndDatePost(request $request){
+
+    \LogActivity::addToLog('employeeEndDatePost');
 
 //dd($request->all());
 

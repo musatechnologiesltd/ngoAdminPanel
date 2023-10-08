@@ -38,6 +38,8 @@ class DesignationStepController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('designation step list ');
+
                $branchLists = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
 
 
@@ -66,7 +68,7 @@ class DesignationStepController extends Controller
                 //abort(403, 'Sorry !! You are Unauthorized to Add !');
                 return redirect()->route('mainLogin');
             }
-
+            \LogActivity::addToLog('designation step store ');
 //dd($request->all());
 //
             $request->validate([
@@ -125,6 +127,7 @@ class DesignationStepController extends Controller
                 return redirect()->route('mainLogin');
             }
 
+            \LogActivity::addToLog('designation step update ');
             $medicine = DesignationStep::findOrFail($id);
 
             $input = $request->all();
@@ -146,7 +149,7 @@ class DesignationStepController extends Controller
             return redirect()->route('mainLogin');
         }
 
-
+        \LogActivity::addToLog('designation step delete ');
         DesignationStep::destroy($id);
         return redirect()->route('designationStepList.index')->with('error','Deleted successfully!');
     }
