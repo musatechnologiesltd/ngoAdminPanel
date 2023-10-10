@@ -52,7 +52,7 @@
 
                                                   <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
-                                  <label for="name">নাম (ইংরেজি)</label>
+                                  <label for="name">নাম (ইংরেজি) <span class="text-danger">*</span></label>
                                   <input type="text" class="form-control" id="name" name="name" data-parsley-maxlength="150" value="{{ $user->admin_name }}" placeholder="নাম (ইংরেজি)" required>
 
                                   @if ($errors->has('name'))
@@ -64,7 +64,7 @@
 
 
                               <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">নাম</label>
+                                <label for="name">নাম <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="name_ban" name="name_ban" data-parsley-maxlength="150" value="{{ $user->admin_name_ban }}" placeholder="নাম" required>
 
                                 @if ($errors->has('name_ban'))
@@ -74,7 +74,7 @@
 
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">ইমেইল</label>
+                                <label for="email">ইমেইল <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control form-control-sm" data-parsley-maxlength="100" id="email" value="{{ $user->email }}" name="email" placeholder="ইমেইল" required>
 
                                 @if ($errors->has('email'))
@@ -82,7 +82,7 @@
                           @endif
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="text">মোবাইল নম্বর</label>
+                                <label for="text">মোবাইল নম্বর <span class="text-danger">*</span></label>
                                 <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                 type = "number"
                                 maxlength = "11" class="form-control form-control-sm" class="form-control form-control-sm" id="text" data-parsley-length="[11, 11]" name="phone" value="{{ $user->admin_mobile }}" placeholder="মোবাইল নম্বর" required>
@@ -178,7 +178,7 @@
 
                           <div class="row">
                               <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password">রোল বরাদ্দ করুন</label>
+                                  <label for="password">রোল বরাদ্দ করুন <span class="text-danger">*</span></label>
                                   <select name="roles[]" id="roles" multiple="multiple"  class="form-control form-control-sm js-example-basic-multiple" required>
                                       @foreach ($roles as $role)
                   <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
