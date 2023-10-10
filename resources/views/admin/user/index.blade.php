@@ -106,7 +106,7 @@ $mac = exec('getmac');
 
 
 
-                                        <br>{{ $user->admin_name }}
+                                        <br>{{ $user->admin_name_ban }}
 
 
                                     </td>
