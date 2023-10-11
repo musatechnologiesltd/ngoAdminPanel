@@ -81,7 +81,7 @@
                         data-bs-toggle="pill" href="#pills-darkdoc1"
                         role="tab" aria-controls="pills-darkdoc1"
                         aria-selected="false" style=""><i
-                class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস পরীক্ষা করুন</a>
+                class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস</a>
 </li>
                 </ul>
                 <div class="tab-content" id="pills-darktabContent">
@@ -694,13 +694,26 @@ ff
                                         <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                             <option value="Ongoing" {{ $dataFromNVisaFd9Fd1->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+
                                             <option value="Accepted" {{ $dataFromNVisaFd9Fd1->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                            <option value="Correct" {{ $dataFromNVisaFd9Fd1->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                             <option value="Rejected" {{ $dataFromNVisaFd9Fd1->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                         </select>
 
 
+                                        @if($dataFromNVisaFd9Fd1->status == 'Correct' || $dataFromNVisaFd9Fd1->status == 'Rejected')
 
+                                        <div id="rValueStatus" >
+                                            <label>বিস্তারিত লিখুন:</label>
+                                            <textarea class="form-control form-control-sm" name="comment">{{ $dataFromNVisaFd9Fd1->comment }}</textarea>
+                                        </div>
+                                        @else
+                                        <div id="rValueStatus" style="display:none;">
+                                            <label>বিস্তারিত লিখুন:</label>
+                                            <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                        </div>
+                                        @endif
                                         <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
 
                                       </form>
@@ -726,6 +739,27 @@ ff
 @endsection
 
 @section('script')
+
+
+<script>
+    $(document).ready(function(){
+      $("#regStatus").change(function(){
+        var valmain = $(this).val();
+
+        if(valmain == 'Accepted'){
+           $('#rValue').show();
+           $('#rValueStatus').hide();
+
+        }
+        else{
+            $('#rValue').hide();
+            $('#rValueStatus').show();
+        }
+      });
+    });
+    </script>
+
+
 <script type="text/javascript">
     $(".statusCheck").click(function () {
 

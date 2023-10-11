@@ -35,8 +35,22 @@ class Fd9Controller extends Controller
 
         DB::table('fd9_forms')->where('id',$request->id)
         ->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'comment' => $request->comment,
         ]);
+
+
+
+        if($request->status == 'Rejected' || $request->status == 'Correct'){
+
+            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('NGOAB Registration Service || Ngo Renew Status');
+            });
+
+        }
+
+
 
 
         return redirect()->back()->with('success','Updated successfully!');

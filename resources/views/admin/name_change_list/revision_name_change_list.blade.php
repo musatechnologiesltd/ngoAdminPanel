@@ -85,6 +85,11 @@
                                         চলমান
 
                                     </button>
+                                    @elseif($all_data_for_new_list_all->status == 'Correct')
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        সংশোধন করুন
+
+                                    </button>
                                     @else
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         প্রত্যাখ্যান

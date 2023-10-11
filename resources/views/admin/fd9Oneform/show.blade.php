@@ -100,11 +100,22 @@
                 </li>
 
 
+
+                <li class="nav-item"><a class="nav-link" id="pills-darkdoc2-tab"
+                    data-bs-toggle="pill" href="#pills-darkdoc2"
+                    role="tab" aria-controls="pills-darkdoc2"
+                    aria-selected="false" style=""><i
+            class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস</a>
+             </li>
+
+
+
+
                 <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                     data-bs-toggle="pill" href="#pills-darkdoc1"
                     role="tab" aria-controls="pills-darkdoc1"
                     aria-selected="false" style=""><i
-            class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস পরীক্ষা করুন</a>
+            class="icofont icofont-animal-lemur"></i>সুরক্ষা বিভাগে আবেদন পাঠান</a>
              </li>
 
 
@@ -150,8 +161,8 @@
                             <p class="mt-3 mb-2">
                                 উপর্যুক্ত বিষয় ও সূত্রের বরাতে "{{ $dataFromNVisaFd9Fd1->institute_name }}" সংস্থার "{{ $dataFromNVisaFd9Fd1->prokolpo_name }}" প্রকল্পের আওতায় "{{ $dataFromNVisaFd9Fd1->designation_name }}" হিসেবে বিদেশী বিশেষজ্ঞ/
                                 উপদেষ্টা/কর্মকর্তা/স্বেচ্ছাসেবী {{ $dataFromNVisaFd9Fd1->foreigner_name_for_body }} কে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_from_date))) }} খ্রি: হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_to_date))) }} পর্যন্ত সময়ের জন্য নিয়োগ করা হয়েছে। সংস্থার অনুকূলে
-                                উক্ত ব্যাক্তির অনুমোদিত সময়ের জন্য ওয়ার্ক পারমিট ইস্যু করার জন্য ওয়ার্ক পারমিট ইস্যু করার
-                                জন্য একসাথে নিম্ন বর্ণিত কাগজপত্র সংযুক্ত করা হল:
+                                উক্ত ব্যাক্তির অনুমোদিত সময়ের জন্য ওয়ার্ক পারমিট ইস্যু করার
+                                জন্য একসাথে নিম্ন বর্ণিত কাগজপত্র সংযুক্ত করা হলো:
                             </p>
 
                             <table class="table table-borderless">
@@ -198,7 +209,7 @@
 
                             </table>
 
-                            <p class="mb-3">এমতবস্থায়, অত্র সংস্থার উল্লেখিত পদে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} মেয়াদে উক্ত বিদেশি কর্মকর্তাকে ওয়ার্ক পারমিট ইস্যু করার জন্য বিনীত অনুরধ করেছি।</p>
+                            <p class="mb-3">এমতবস্থায়, অত্র সংস্থার উল্লেখিত পদে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} মেয়াদে উক্ত বিদেশি কর্মকর্তাকে ওয়ার্ক পারমিট ইস্যু করার জন্য বিনীত অনুরোধ করেছি।</p>
 
                     <div class="row">
                         <div class="col-lg-6 col-sm-12"></div>
@@ -219,9 +230,7 @@
                                 </tr>
 
 
-                                <tr>
-                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
-                                </tr>
+
                                 <tr>
                                     <td>নামঃ {{  $dataFromNVisaFd9Fd1->chiefName }}</td>
                                 </tr>
@@ -1054,6 +1063,67 @@ E.COMPENSATION AND BENIFITS
 
                 </div>
 
+               <!--new code start-->
+
+                <div class="tab-pane fade" id="pills-darkdoc2" role="tabpanel"
+                aria-labelledby="pills-darkdoc2-tab">
+               <div class="mb-0 m-t-30">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <form action="{{ route('statusUpdateForFd9') }}" method="post">
+                                    @csrf
+
+
+                                    <input type="hidden" value="{{ $dataFromNVisaFd9Fd1->id }}" name="id" />
+
+
+
+                                    <label>স্টেটাস:</label>
+                                    <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
+
+                                        <option value="Ongoing" {{ $dataFromNVisaFd9Fd1->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+
+                                        <option value="Accepted" {{ $dataFromNVisaFd9Fd1->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                        <option value="Correct" {{ $dataFromNVisaFd9Fd1->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
+                                        <option value="Rejected" {{ $dataFromNVisaFd9Fd1->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
+
+                                    </select>
+
+
+                                    @if($dataFromNVisaFd9Fd1->status == 'Correct' || $dataFromNVisaFd9Fd1->status == 'Rejected')
+
+                                    <div id="rValueStatus" >
+                                        <label>বিস্তারিত লিখুন:</label>
+                                        <textarea class="form-control form-control-sm" name="comment">{{ $dataFromNVisaFd9Fd1->comment }}</textarea>
+                                    </div>
+                                    @else
+                                    <div id="rValueStatus" style="display:none;">
+                                        <label>বিস্তারিত লিখুন:</label>
+                                        <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                    </div>
+                                    @endif
+                                    <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
+
+                                  </form>
+                            </div>
+                            <div class="col-md-12" id="finalResult">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+               </div>
+                </div>
+
+
+
+                <!--new code -->
+
 
 
                 <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
@@ -1063,6 +1133,15 @@ E.COMPENSATION AND BENIFITS
 
                 <div class="card">
                     <div class="card-body">
+                        @if (empty($nVisabasicInfo->forwarding_letter))
+
+                        <div class="row">
+
+<h5>ফরওয়ার্ডিং লেটার আপলোড করুন</h5>
+                        </div>
+
+
+                        @else
                         <div class="row">
                             <?php
 
@@ -1115,6 +1194,7 @@ E.COMPENSATION AND BENIFITS
                             </div>
 
                         </div>
+                        @endif
                     </div>
                 </div>
 
@@ -1133,6 +1213,26 @@ E.COMPENSATION AND BENIFITS
 @endsection
 
 @section('script')
+
+<script>
+    $(document).ready(function(){
+      $("#regStatus").change(function(){
+        var valmain = $(this).val();
+
+        if(valmain == 'Accepted'){
+           $('#rValue').show();
+           $('#rValueStatus').hide();
+
+        }
+        else{
+            $('#rValue').hide();
+            $('#rValueStatus').show();
+        }
+      });
+    });
+    </script>
+
+
 <script type="text/javascript">
     $(".statusCheck").click(function () {
 

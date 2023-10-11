@@ -1699,13 +1699,19 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
                                                 @csrf
                                                 <input type="hidden" value="{{ $mainIdR->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
-                                                <select class="form-control form-control-sm" name="status" >
+                                                <select class="form-control form-control-sm" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $mainIdR->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $mainIdR->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $mainIdR->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
+
+                                                <div id="rValueStatus" style="display:none;">
+                                                    <label>বিস্তারিত লিখুন:</label>
+                                                    <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                                </div>
 
                                                 <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
 
@@ -1740,9 +1746,12 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
         if(valmain == 'Accepted'){
            $('#rValue').show();
+           $('#rValueStatus').hide();
+
         }
         else{
             $('#rValue').hide();
+            $('#rValueStatus').show();
         }
       });
     });

@@ -77,11 +77,35 @@ $ngoTypeData = DB::table('ngo_type_and_languages')
                                 <td><h6> {{ $form_one_data->organization_name_ban }} </h6><span>ঠিকানা: {{ $form_one_data->organization_address }}</span></td>
                                 <td>{{ $allDataFromNVisaFd9Fd1->fd9_foreigner_name }} </td>
                                 <td class="font-success">
-@if(empty($allDataFromNVisaFd9Fd1->status))
+@if($allDataFromNVisaFd9Fd1->status == 'Ongoing')
+<button class="btn btn-secondary btn-xs" type="button">
 চলমান
+</button>
+                                   @elseif($allDataFromNVisaFd9Fd1->status == 'Accepted')
+
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        গৃহীত
+
+                                    </button>
+
+                                    @elseif($allDataFromNVisaFd9Fd1->status == 'Correct')
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        সংশোধন করুন
+
+                                    </button>
                                     @else
-                                    {{$allDataFromNVisaFd9Fd1->status}}
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        প্রত্যাখ্যান
+
+                                    </button>
                                     @endif
+
+
+
+
+
+
+
 
                                 </td>
                                 <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allDataFromNVisaFd9Fd1->created_at) }}</td>

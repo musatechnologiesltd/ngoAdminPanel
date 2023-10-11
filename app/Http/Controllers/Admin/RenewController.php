@@ -61,7 +61,7 @@ class RenewController extends Controller
         \LogActivity::addToLog('View Revision Renew List.');
 
 
-        $all_data_for_new_list = DB::table('ngo_renews')->where('status','Rejected')->latest()->get();
+        $all_data_for_new_list = DB::table('ngo_renews')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
       return view('admin.renew_list.revision_renew_list',compact('all_data_for_new_list'));
@@ -168,7 +168,8 @@ class RenewController extends Controller
 
         DB::table('ngo_renews')->where('id',$request->id)
         ->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'comment' => $request->comment
         ]);
 
 $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_form_id');

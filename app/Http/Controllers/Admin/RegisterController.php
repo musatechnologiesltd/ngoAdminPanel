@@ -58,7 +58,7 @@ class RegisterController extends Controller
         \LogActivity::addToLog('view revision ngo registration list.');
 
 
-        $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Rejected')->latest()->get();
+        $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
       return view('admin.registration_list.revision_registration_list',compact('all_data_for_new_list'));
@@ -294,13 +294,24 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
     public function updateStatusRegForm(Request $request){
 
+//dd($request->all());
 
+
+if(empty($request->comment)){
+
+    $comment ='0';
+
+}else{
+    $comment =  $request->comment;
+
+}
         \LogActivity::addToLog('update registration status.');
       //dd($request->all());
 
         DB::table('ngo_statuses')->where('id',$request->id)
 ->update([
-    'status' => $request->status
+    'status' => $request->status,
+    'comment' => $comment ,
 ]);
 
 $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_one_form_id');
@@ -314,7 +325,7 @@ $get_user_id = DB::table('ngo_statuses')->where('id',$request->id)->value('fd_on
 
 if($request->ngotype == 'old'){
 
-    Mail::send('emails.oldRenew', ['id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+    Mail::send('emails.oldRenew', ['comment' =>$comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
         $message->to($request->email);
         $message->subject('NGOAB Registration Service || Old Ngo Approved Status');
     });
@@ -358,7 +369,7 @@ if($request->ngotype == 'old'){
 
 
 
-        Mail::send('emails.passwordResetEmail', ['id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+        Mail::send('emails.passwordResetEmail', ['comment' => $comment ,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
             $message->to($request->email);
             $message->subject('NGOAB Registration Service || Ngo Approved Status');
         });

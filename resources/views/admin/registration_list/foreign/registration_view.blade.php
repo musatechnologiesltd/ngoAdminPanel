@@ -527,10 +527,11 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                                                 <input type="hidden" value="old" name="ngotype" />
 
                                                 <label>স্টেটাস:</label>
-                                                <select class="form-control form-control-sm mt-4" name="status" >
+                                                <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
@@ -543,10 +544,16 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
                                                     <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
                                                 @endif
+
+                                                <div id="rValueStatus" style="display:none;">
+                                                    <label>বিস্তারিত লিখুন:</label>
+                                                    <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                                </div>
 
 <div id="rValue" style="display:none;">
                                                 <label>রেজিস্ট্রেশন নম্বর :</label>
@@ -590,9 +597,12 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
         if(valmain == 'Accepted'){
            $('#rValue').show();
+           $('#rValueStatus').hide();
+
         }
         else{
             $('#rValue').hide();
+            $('#rValueStatus').show();
         }
       });
     });

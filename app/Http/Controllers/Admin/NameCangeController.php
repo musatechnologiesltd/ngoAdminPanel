@@ -51,7 +51,7 @@ class NameCangeController extends Controller
         \LogActivity::addToLog('revision name change list ');
 
 
-        $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Rejected')->latest()->get();
+        $all_data_for_new_list = DB::table('ngo_name_changes')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
       return view('admin.name_change_list.revision_name_change_list',compact('all_data_for_new_list'));
@@ -151,6 +151,7 @@ class NameCangeController extends Controller
         $data_save = DB::table('ngo_name_changes')->where('id',$request->id)
         ->update([
             'status' => $request->status,
+            'comment' => $request->comment,
          ]);
 
 
@@ -171,7 +172,7 @@ class NameCangeController extends Controller
                 'organization_name_ban' => $present_name_ban,
              ]);
         }
-        Mail::send('emails.passwordResetEmailName', ['id' => $request->status,'ngoId'=>$form_one_data->id], function($message) use($request){
+        Mail::send('emails.passwordResetEmailName', ['comment'=>$request->comment,'id' => $request->status,'ngoId'=>$form_one_data->id], function($message) use($request){
             $message->to($request->email);
             $message->subject('NGOAB Registration Service || Ngo Name Chnage Status');
         });

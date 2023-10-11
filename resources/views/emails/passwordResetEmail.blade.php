@@ -37,14 +37,26 @@ your NGO registration has been {{ $id }}. We'll assess the situation, and consid
     <b>NGO Affairs Bureau</b> <br>
     Prime Minister's Office <br>
     Plot-E-13/B, Agargaon. Sher-e-Bangla Nagar, Dhaka-1207</p>
-@elseif($id == 'Rejected')
+@elseif($id == 'Rejected' || $id == 'Correct')
 {{-- <p>Your Request Has Been {{ $id }}</p>
 
 <h2>------------------</h2> --}}
 
 Dear <b>{{$get_user_id}}</b>,
 
-Unfortunately, your NGO registration has been {{ $id }}. We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
+
+Unfortunately, your NGO registration has been
+
+<b>
+@if($id = 'Correct')
+Correction
+@else
+{{ $id }}
+
+@endif
+</b>
+
+.Becaouse Of <b>{{ $comment }}</b> , We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
 
 
 
