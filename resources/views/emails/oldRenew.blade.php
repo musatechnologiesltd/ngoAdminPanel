@@ -11,7 +11,16 @@ your NGO registration has been {{ $id }}. officially registered!.
 
 @elseif($id == 'Rejected' || $id == 'Correct')
 
-your NGO registration has been {{ $id }}.Because Of {{ $comment }}
+Unfortunately,
+
+<b>
+@if($id = 'Correct')
+your NGO registration need some Correction
+@else
+your NGO registration has been {{ $id }}
+
+@endif
+</b>
 
 @endif
 

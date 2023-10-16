@@ -44,17 +44,18 @@ your Renew has been {{ $id }}. We'll assess the situation, and consider the next
 
 Dear <b>{{$get_user_id}}</b>,
 
-Unfortunately, your Request has been:
+Unfortunately,
 
-<b>@if($id = 'Correct')
-Correction
-@else
-{{ $id }}
+<b>
+    @if($id = 'Correct')
+    your NGO Renew request need some Correction.
+    @else
+    your NGO Renew request has been {{ $id }}.
 
-@endif
-</b>
-
-. Becaouse Of <b>{{ $comment }} </b> , We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
+    @endif
+    </b>
+    <br>
+    <b>"{{ $comment }}"</b> , <br> We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
 
 
 

@@ -44,17 +44,18 @@ your Name Chnage has been {{ $id }}. We'll assess the situation, and consider th
 
 Dear <b>{{$get_user_id}}</b>,
 
-Unfortunately, your Name Change has been
+Unfortunately,
+
 <b>
 @if($id = 'Correct')
-Correction
+your NGO name Change request need some Correction.
 @else
-{{ $id }}
+your NGO name Change request has been {{ $id }}.
 
 @endif
 </b>
-
-. Becaouse Of <b>{{ $comment }}</b> , We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
+<br>
+<b>"{{ $comment }}"</b> , <br>We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
 
 
 

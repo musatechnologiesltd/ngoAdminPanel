@@ -45,18 +45,18 @@ your NGO registration has been {{ $id }}. We'll assess the situation, and consid
 Dear <b>{{$get_user_id}}</b>,
 
 
-Unfortunately, your NGO registration has been
+Unfortunately,
 
 <b>
 @if($id = 'Correct')
-Correction
+your NGO registration need some Correction
 @else
-{{ $id }}
+your NGO registration has been {{ $id }}
 
 @endif
 </b>
 
-.Becaouse Of <b>{{ $comment }}</b> , We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
+.<br>Becaouse Of <b>"{{ $comment }}"</b> , <br>We'll assess the situation, and consider the next steps. Your dedication remains valuable, and we'll overcome this setback together.
 
 
 
