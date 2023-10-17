@@ -34,7 +34,25 @@ class FD6Controller extends Controller
     ->get();
 
     //dd($dataFromNVisaFd9Fd1);
-        return view('admin.fd6form.ongoing',compact('dataFromFd6Form'));
+        return view('admin.fd6form.index',compact('dataFromFd6Form'));
 
     }
+
+
+
+    public function show($id){
+
+        \LogActivity::addToLog('view fdSix List Detail');
+
+          $dataFromFd6Form = DB::table('fd6_forms')
+          ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
+          ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
+          ->where('fd6_forms.id',$id)
+         ->orderBy('fd6_forms.id','desc')
+         ->first();
+
+         //dd($dataFromNVisaFd9Fd1);
+             return view('admin.fd6form.show',compact('dataFromFd6Form'));
+
+         }
 }
