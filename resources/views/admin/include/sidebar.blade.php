@@ -153,6 +153,19 @@
     </a>
 </li>
 @endif
+
+
+@if ($usr->can('fd6_formsAdd') || $usr->can('fd6_formsView') || $usr->can('fd6_formsDelete') || $usr->can('fd6_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd6Form.index') || Route::is('fd6Form.show') ? 'active' : '' }}" href="{{ route('fd6Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৬ ফরম </span>
+    </a>
+</li>
+@endif
+
+
+
 @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
 <li class="sidebar-main-title">
     <div>

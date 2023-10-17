@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\DesignationStepController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\FD6Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'admin'], function () {
 
+    Route::resource('fd6Form', FD6Controller::class);
+
+    Route::controller(FD6Controller::class)->group(function () {
+        
+        Route::get('/fd6FormForRevision', 'fd6FormForRevision')->name('fd6FormForRevision');
+        Route::get('/acceptedFd6Form', 'acceptedFd6Form')->name('acceptedFd6Form');
+
+    });
 
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.dashboard');
 
