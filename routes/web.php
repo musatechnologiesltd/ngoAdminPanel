@@ -59,9 +59,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fd6Form', FD6Controller::class);
 
     Route::controller(FD6Controller::class)->group(function () {
-        
+
+        Route::post('/statusUpdateForFd6', 'statusUpdateForFd6')->name('statusUpdateForFd6');
+
         Route::get('/fd6FormForRevision', 'fd6FormForRevision')->name('fd6FormForRevision');
         Route::get('/acceptedFd6Form', 'acceptedFd6Form')->name('acceptedFd6Form');
+
+        Route::get('/fd6PdfDownload/{id}', 'fd6PdfDownload')->name('fd6PdfDownload');
+        Route::get('/fd2PdfDownload/{id}', 'fd2PdfDownload')->name('fd2PdfDownload');
+        Route::get('/fd2OtherPdfDownload/{id}', 'fd2OtherPdfDownload')->name('fd2OtherPdfDownload');
+
 
     });
 

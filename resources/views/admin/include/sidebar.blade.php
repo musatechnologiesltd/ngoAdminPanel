@@ -159,7 +159,7 @@
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('fd6Form.index') || Route::is('fd6Form.show') ? 'active' : '' }}" href="{{ route('fd6Form.index') }}">
         <i data-feather="airplay"></i>
-        <span>এফডি - ৬ ফরম </span>
+        <span>এফডি - ৬ (প্রকল্প প্রস্তাব) </span>
     </a>
 </li>
 @endif
