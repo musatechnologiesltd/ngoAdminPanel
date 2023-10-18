@@ -80,7 +80,7 @@ class Fd9OneController extends Controller
         ->where('fd9_one_forms.id',$id)
         ->first();
 
-
+        $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
         //dd($dataFromNVisaFd9Fd1);
 
 
@@ -141,6 +141,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         //dd($dataFromNVisaFd9Fd1);
             return view('admin.fd9Oneform.show',
             compact(
+                'get_email_from_user',
                 'mainIdFdNineOne',
 'nVisabasicInfo',
                 'dataFromNVisaFd9Fd1',
