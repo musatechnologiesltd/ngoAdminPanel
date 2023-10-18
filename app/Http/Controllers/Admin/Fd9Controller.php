@@ -206,8 +206,6 @@ $mainIdFdNine = $id;
     ->where('fd9_forms.id',$id)
      ->first();
 
-     $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
-
 
      $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
      ->orderBy('id','desc')->value('id');
@@ -259,7 +257,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-         return view('admin.fd9form.show_new',compact('get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show_new',compact('mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 
@@ -668,7 +666,9 @@ public function submitForCheck(Request $request){
     //dd($jayParsedAry['data']['status_id']);
     //dd($jayParsedAry['data']['status_name']);
 
-    $response12 = Http::post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
+    $response12 = Http::withoutVerifying()
+    ->withOptions(["verify"=>false])
+    ->post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
         'client_id' => 5,
         'client_secret' => 'MS1LDLK3DPj0NGFBju55GG6KMPCtTuGOamDoZtKw',
         'grant_type'=>'client_credentials'
@@ -690,7 +690,7 @@ $mainToken = $jsonData['access_token'];
     $url = "https://mohaapi-uat.oss.net.bd/v1/api/application-submission";
     $response = $client->post($url,[
         'headers' => ['Content-type' => 'application/json', 'Authorization' => 'Bearer ' . $mainToken],
-
+        'verify'=>false,
         'body' => json_encode($data),
     ]);
 
@@ -734,8 +734,14 @@ public function statusCheck(Request $request){
 
     $mainNVisaId = $request->mainId;
 
-    $form9Id = DB::table('fd9_forms')
-            ->where('n_visa_id',$mainNVisaId)->value('id');
+    // $form9Id = DB::table('fd9_forms')
+    //         ->where('n_visa_id',$mainNVisaId)->value('id');
+
+
+
+
+            $fdNineOneId = DB::table('n_visas')->where('id',$mainNVisaId)
+            ->value('fd9_one_form_id');
 
     $secruityList = DB::table('secruity_checks')
     ->where('n_visa_id',$mainNVisaId)->first();
@@ -753,7 +759,9 @@ public function statusCheck(Request $request){
 
 
 
-    $response12 = Http::post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
+    $response12 = Http::withoutVerifying()
+    ->withOptions(["verify"=>false])
+    ->post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
         'client_id' => 5,
         'client_secret' => 'MS1LDLK3DPj0NGFBju55GG6KMPCtTuGOamDoZtKw',
         'grant_type'=>'client_credentials'
@@ -771,7 +779,7 @@ $client = new Client();
 $url = "https://mohaapi-uat.oss.net.bd/v1/api/check-application-status";
 $response = $client->post($url,[
     'headers' => ['Content-type' => 'application/json', 'Authorization' => 'Bearer ' . $mainToken],
-
+'verify'=>false,
     'body' => json_encode($data),
 ]);
 
@@ -786,7 +794,7 @@ $covertArray = json_decode($response,true);
     $statusName = $covertArray['data']['status_name'];
 
 
-    DB::table('fd9_forms')->where('id', $form9Id)
+    DB::table('fd9_one_forms')->where('id', $fdNineOneId)
     ->update([
         'status' => $statusName
      ]);
