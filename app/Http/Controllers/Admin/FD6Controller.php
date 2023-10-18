@@ -50,7 +50,7 @@ class FD6Controller extends Controller
           ->where('fd6_forms.id',$id)
          ->orderBy('fd6_forms.id','desc')
          ->first();
-
+         $get_email_from_user = DB::table('users')->where('id',$dataFromFd6Form->user_id)->value('email');
 
          $fd2FormList = DB::table('fd2_forms')->where('fd_one_form_id',$dataFromFd6Form->fd_one_form_id)
          ->where('fd_six_form_id',base64_encode($dataFromFd6Form->mainId))->latest()->first();
@@ -61,7 +61,7 @@ class FD6Controller extends Controller
          $prokolpoAreaList = DB::table('fd6_form_prokolpo_areas')->where('fd6_form_id',$dataFromFd6Form->mainId)->latest()->get();
 
          //dd($dataFromNVisaFd9Fd1);
-             return view('admin.fd6form.show',compact('dataFromFd6Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
+             return view('admin.fd6form.show',compact('get_email_from_user','dataFromFd6Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
 
          }
 
@@ -102,6 +102,32 @@ class FD6Controller extends Controller
 
          public function statusUpdateForFd6(Request $request){
 
-            dd($request->all());
+            //dd($request->all());
+
+
+            \LogActivity::addToLog('update fdSix Status ');
+
+
+            DB::table('fd6_forms')->where('id',$request->id)
+            ->update([
+                'status' => $request->status,
+                'comment' => $request->comment,
+            ]);
+
+
+            $get_user_id = DB::table('fd6_forms')->where('id',$request->id)->value('fd_one_form_id');
+
+
+                Mail::send('emails.projectProposal', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+                    $message->to($request->email);
+                    $message->subject('Project proposal Service');
+                });
+
+
+
+
+
+
+            return redirect()->back()->with('success','Updated successfully!');
          }
 }
