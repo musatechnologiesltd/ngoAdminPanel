@@ -164,6 +164,15 @@
 </li>
 @endif
 
+@if ($usr->can('fd7_formsAdd') || $usr->can('fd7_formsView') || $usr->can('fd7_formsDelete') || $usr->can('fd7_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd7Form.index') || Route::is('fd7Form.show') ? 'active' : '' }}" href="{{ route('fd7Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৭ (প্রকল্প প্রস্তাব)</span>
+    </a>
+</li>
+@endif
+
 
 
 @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))

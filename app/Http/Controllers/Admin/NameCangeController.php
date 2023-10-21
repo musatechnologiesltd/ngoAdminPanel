@@ -8,7 +8,13 @@ use Auth;
 Use DB;
 use Mail;
 use Carbon\Carbon;
-
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 class NameCangeController extends Controller
 {
     public $user;
@@ -34,7 +40,28 @@ class NameCangeController extends Controller
         \LogActivity::addToLog('new name change list ');
 
 
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
         $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
+
+        }else{
+
+
+            $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
+
+            $all_data_for_new_list = DB::table('ngo_name_changes')
+            ->whereIn('id',$separated_data_title)
+            ->where('status','Ongoing')->latest()->get();
+
+        }
+
+
+
 
 
       return view('admin.name_change_list.new_name_change_list',compact('all_data_for_new_list'));
@@ -51,7 +78,30 @@ class NameCangeController extends Controller
         \LogActivity::addToLog('revision name change list ');
 
 
-        $all_data_for_new_list = DB::table('ngo_name_changes')->whereIn('status',['Rejected','Correct'])->latest()->get();
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_name_changes')->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+            }else{
+
+
+                $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
+                ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+                $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+                $all_data_for_new_list = DB::table('ngo_name_changes')
+                ->whereIn('id',$separated_data_title)
+                ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+            }
+
+
+
+
+        //$all_data_for_new_list = DB::table('ngo_name_changes')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
       return view('admin.name_change_list.revision_name_change_list',compact('all_data_for_new_list'));
@@ -68,7 +118,28 @@ class NameCangeController extends Controller
         \LogActivity::addToLog('already name changed list ');
 
 
-        $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Accepted')->latest()->get();
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Accepted')->latest()->get();
+
+            }else{
+
+
+                $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
+                ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+                $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+                $all_data_for_new_list = DB::table('ngo_name_changes')
+                ->whereIn('id',$separated_data_title)
+                ->where('status','Accepted')->latest()->get();
+
+            }
+
+
+        //$all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Accepted')->latest()->get();
 
 
       return view('admin.name_change_list.already_name_change_list',compact('all_data_for_new_list'));

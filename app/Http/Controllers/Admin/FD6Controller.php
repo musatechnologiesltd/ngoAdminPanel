@@ -12,6 +12,13 @@ use DB;
 use Session;
 use PDF;
 use File;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 use Carbon\Carbon;
 use Response;
 use App\Models\Fd9ForwardingLetterEdit;
@@ -27,12 +34,33 @@ class FD6Controller extends Controller
 
    \LogActivity::addToLog('view fdSix List ');
 
+   if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
      $dataFromFd6Form = DB::table('fd6_forms')
      ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
      ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
     ->orderBy('fd6_forms.id','desc')
     ->get();
 
+
+   }else{
+
+    $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)
+    ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get();
+
+    $convert_name_title = $ngoStatusFdSixDak->implode("fd_six_status_id", " ");
+     $separated_data_title = explode(" ", $convert_name_title);
+
+    $dataFromFd6Form = DB::table('fd6_forms')
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
+    ->whereIn('fd6_forms.id',$separated_data_title)
+   ->orderBy('fd6_forms.id','desc')
+   ->get();
+
+
+   }
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd6form.index',compact('dataFromFd6Form'));
 

@@ -11,6 +11,13 @@ use Mail;
 use DB;
 use PDF;
 use Carbon\Carbon;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 class RegisterController extends Controller
 {
     public $user;
@@ -40,8 +47,28 @@ class RegisterController extends Controller
         \LogActivity::addToLog('view new ngo registration list.');
 
 
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
         $all_data_for_new_list = DB::table('ngo_statuses')
         ->where('status','Ongoing')->orWhere('status','Old Ngo Renew')->latest()->get();
+
+        }else{
+
+            $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+            $convert_name_title = $ngoStatusReg->implode("registration_status_id", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+            $all_data_for_new_list = DB::table('ngo_statuses')
+            ->whereIn('id',$separated_data_title)
+        ->where('status','Ongoing')->orWhere('status','Old Ngo Renew')->latest()->get();
+
+
+        }
 
 
       return view('admin.registration_list.new_registration_list',compact('all_data_for_new_list'));
@@ -58,7 +85,35 @@ class RegisterController extends Controller
         \LogActivity::addToLog('view revision ngo registration list.');
 
 
-        $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Rejected','Correct'])->latest()->get();
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_statuses')
+            ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+            }else{
+
+                $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+                $convert_name_title = $ngoStatusReg->implode("registration_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+                $all_data_for_new_list = DB::table('ngo_statuses')
+                ->whereIn('id',$separated_data_title)
+            ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+
+            }
+
+
+
+
+
+        // $all_data_for_new_list = DB::table('ngo_statuses')
+        // ->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
       return view('admin.registration_list.revision_registration_list',compact('all_data_for_new_list'));
@@ -73,6 +128,33 @@ class RegisterController extends Controller
         }
 
         \LogActivity::addToLog('view already ngo registration list.');
+
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_statuses')
+            ->where('status','Accepted')->latest()->get();
+
+            }else{
+
+                $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+                $convert_name_title = $ngoStatusReg->implode("registration_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+                $all_data_for_new_list = DB::table('ngo_statuses')
+                ->whereIn('id',$separated_data_title)
+                ->where('status','Accepted')->latest()->get();
+
+
+            }
+
+
+
 
 
         $all_data_for_new_list = DB::table('ngo_statuses')->where('status','Accepted')->latest()->get();

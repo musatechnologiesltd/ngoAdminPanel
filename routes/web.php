@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\DesignationStepController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\FD6Controller;
+use App\Http\Controllers\Admin\FD7Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,33 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::group(['prefix' => 'admin'], function () {
+
+
+
+    Route::resource('fd7Form', FD7Controller::class);
+
+    Route::controller(FD7Controller::class)->group(function () {
+
+        Route::get('reliefAssistanceProjectProposalPdf/{id}', 'reliefAssistanceProjectProposalPdf')->name('reliefAssistanceProjectProposalPdf');
+
+        Route::get('authorizationLetter/{id}', 'authorizationLetter')->name('authorizationLetter');
+
+        Route::get('letterFromDonorAgency/{id}', 'letterFromDonorAgency')->name('letterFromDonorAgency');
+
+        
+
+        Route::post('/statusUpdateForFd7', 'statusUpdateForFd7')->name('statusUpdateForFd7');
+
+        Route::get('/fd7FormForRevision', 'fd7FormForRevision')->name('fd7FormForRevision');
+        Route::get('/acceptedFd7Form', 'acceptedFd7Form')->name('acceptedFd7Form');
+
+        Route::get('/fd7PdfDownload/{id}', 'fd7PdfDownload')->name('fd7PdfDownload');
+        Route::get('/fd7fd2PdfDownload/{id}', 'fd7fd2PdfDownload')->name('fd7fd2PdfDownload');
+        Route::get('/fd7fd2OtherPdfDownload/{id}', 'fd7fd2OtherPdfDownload')->name('fd7fd2OtherPdfDownload');
+
+
+    });
+
 
     Route::resource('fd6Form', FD6Controller::class);
 
