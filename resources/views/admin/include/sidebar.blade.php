@@ -173,6 +173,25 @@
 </li>
 @endif
 
+@if ($usr->can('fc1_formsAdd') || $usr->can('fc1_formsView') || $usr->can('fc1_formsDelete') || $usr->can('fc1_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fc1PdfDownload') || Route::is('fc1Form.index') || Route::is('fc1Form.show') ? 'active' : '' }}" href="{{ route('fc1Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফসি - ১</span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('fc2_formsAdd') || $usr->can('fc2_formsView') || $usr->can('fc2_formsDelete') || $usr->can('fc2_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fc2Form.index') || Route::is('fc2Form.show') ? 'active' : '' }}" href="{{ route('fc2Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফসি-২</span>
+    </a>
+</li>
+@endif
+
 
 
 @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))

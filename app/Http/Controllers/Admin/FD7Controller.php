@@ -148,7 +148,7 @@ class FD7Controller extends Controller
              }
 
 
-             public function statusUpdateForFd6(Request $request){
+             public function statusUpdateForFd7(Request $request){
 
                 //dd($request->all());
 
