@@ -193,6 +193,16 @@
 @endif
 
 
+@if ($usr->can('fd3_formsAdd') || $usr->can('fd3_formsView') || $usr->can('fd3_formsDelete') || $usr->can('fd3_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd3Form.index') || Route::is('fd3Form.show') ? 'active' : '' }}" href="{{ route('fd3Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৩ </span>
+    </a>
+</li>
+@endif
+
+
 
 @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
 <li class="sidebar-main-title">

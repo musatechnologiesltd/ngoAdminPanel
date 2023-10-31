@@ -28,6 +28,7 @@ use App\Models\NgoRegistrationDak;
 use App\Models\DesignationList;
 use App\Models\DesignationStep;
 use App\Models\AdminDesignationHistory;
+use App\Models\FdThreeDak;
 class PostController extends Controller
 {
     public function index(){
@@ -86,11 +87,18 @@ class PostController extends Controller
            ->get();
 
 
+           $dataFromFd3Form = DB::table('fd3_forms')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd3_forms.fd_one_form_id')
+           ->select('fd_one_forms.*','fd3_forms.*','fd3_forms.id as mainId')
+           ->orderBy('fd3_forms.id','desc')
+           ->get();
+
+
 
 
           // dd($dataFromFd6Form);
 
-            return view('admin.post.index',compact('dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
+            return view('admin.post.index',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
         }else{
 
             $ngoStatusRenew = NgoRenewDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
@@ -112,6 +120,7 @@ class PostController extends Controller
 
             $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
+            $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
             $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
@@ -126,7 +135,7 @@ class PostController extends Controller
 
         $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-        return view('admin.post.otherMemberIndex',compact('ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+        return view('admin.post.otherMemberIndex',compact('ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
 
         }
@@ -1191,6 +1200,119 @@ class PostController extends Controller
 
             ///new code
 
+        }elseif($request->mainstatus == 'fdThree'){
+
+            ////new code
+
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = FdThreeDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = FdThreeDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+
+
+            ///new code
+
         }
 
         //end seven code end
@@ -1200,7 +1322,7 @@ class PostController extends Controller
 
     public function dakListFirstStep(Request $request){
 
-        //dd($request->all());
+       // dd($request->all());
         \LogActivity::addToLog('add dak detail.');
 
          $number=count($request->admin_id);
@@ -1390,6 +1512,27 @@ class PostController extends Controller
 
             }
 
+         }elseif($request->mainStatusNew == 'fdThree'){
+
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
+
+
+
+
+                 $regDakData = new FdThreeDak();
+                 $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+                 $regDakData->receiver_admin_id = $request->admin_id[$i];
+                 $regDakData->fd_three_status_id =$request->main_id;
+                 $regDakData->status = 0;
+                 $regDakData->save();
+
+                }
+
+
+            }
+
          }
 
 
@@ -1468,6 +1611,13 @@ class PostController extends Controller
             $allRegistrationDak = FcTwoDak::where('status',0)
             ->where('sender_admin_id',Auth::guard('admin')->user()->id)
             ->where('fc_two_status_id',$id)->get();
+
+
+        }elseif($mainstatus == 'fdThree'){
+
+            $allRegistrationDak = FdThreeDak::where('status',0)
+            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+            ->where('fd_three_status_id',$id)->get();
 
 
         }
