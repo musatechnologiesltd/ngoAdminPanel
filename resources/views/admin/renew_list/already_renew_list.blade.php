@@ -37,7 +37,9 @@
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
+
                                                  <tr>
+
                                 <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>পেমেন্ট</th>

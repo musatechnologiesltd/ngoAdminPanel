@@ -13,6 +13,13 @@ use App\Models\Renew;
 use App\Models\Duration;
 use Carbon\Carbon;
 use Response;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 class RenewController extends Controller
 {
     public $user;
@@ -42,8 +49,27 @@ class RenewController extends Controller
 
         \LogActivity::addToLog('View New Renew List.');
 
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-        $all_data_for_new_list = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
+
+        $all_data_for_new_list = DB::table('ngo_renews')
+        ->where('status','Ongoing')->latest()->get();
+
+        }else{
+
+            $ngoStatusRenew = NgoRenewDak::where('status',1)
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $convert_name_title = $ngoStatusRenew->implode("renew_status_id", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
+
+
+            $all_data_for_new_list = DB::table('ngo_renews')
+            ->whereIn('id',$separated_data_title)
+            ->where('status','Ongoing')->latest()->get();
+
+
+        }
 
 
       return view('admin.renew_list.new_renew_list',compact('all_data_for_new_list'));
@@ -59,6 +85,30 @@ class RenewController extends Controller
 
 
         \LogActivity::addToLog('View Revision Renew List.');
+
+
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_renews')
+           ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+            }else{
+
+                $ngoStatusRenew = NgoRenewDak::where('status',1)
+                ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+                $convert_name_title = $ngoStatusRenew->implode("renew_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+                $all_data_for_new_list = DB::table('ngo_renews')
+                ->whereIn('id',$separated_data_title)
+                ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+
+            }
 
 
         $all_data_for_new_list = DB::table('ngo_renews')->whereIn('status',['Rejected','Correct'])->latest()->get();
@@ -77,7 +127,32 @@ class RenewController extends Controller
 
         \LogActivity::addToLog('View Already Renew List.');
 
-        $all_data_for_new_list = DB::table('ngo_renews')->where('status','Accepted')->latest()->get();
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_renews')
+            ->where('status','Accepted')->latest()->get();
+
+            }else{
+
+                $ngoStatusRenew = NgoRenewDak::where('status',1)
+                ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+                $convert_name_title = $ngoStatusRenew->implode("renew_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+                $all_data_for_new_list = DB::table('ngo_renews')
+                ->whereIn('id',$separated_data_title)
+                ->where('status','Accepted')->latest()->get();
+
+
+            }
+
+
+
+        //$all_data_for_new_list = DB::table('ngo_renews')->where('status','Accepted')->latest()->get();
 
 
       return view('admin.renew_list.already_renew_list',compact('all_data_for_new_list'));

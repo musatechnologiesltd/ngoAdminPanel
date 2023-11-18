@@ -21,6 +21,11 @@ use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\DesignationStepController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\FD6Controller;
+use App\Http\Controllers\Admin\FD7Controller;
+use App\Http\Controllers\Admin\Fc1Controller;
+use App\Http\Controllers\Admin\Fc2Controller;
+use App\Http\Controllers\Admin\FD3Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +60,127 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'admin'], function () {
 
+
+    Route::resource('fd3Form', FD3Controller::class);
+
+    Route::controller(FD3Controller::class)->group(function () {
+
+        Route::get('reliefAssistanceProjectProposalPdf/{id}', 'reliefAssistanceProjectProposalPdf')->name('reliefAssistanceProjectProposalPdf');
+
+        Route::get('authorizationLetter/{id}', 'authorizationLetter')->name('authorizationLetter');
+
+        Route::get('letterFromDonorAgency/{id}', 'letterFromDonorAgency')->name('letterFromDonorAgency');
+
+
+
+        Route::post('/statusUpdateForFd3', 'statusUpdateForFd3')->name('statusUpdateForFd3');
+
+        Route::get('/fd3FormForRevision', 'fd3FormForRevision')->name('fd3FormForRevision');
+        Route::get('/acceptedFd3Form', 'acceptedFd3Form')->name('acceptedFd3Form');
+
+        Route::get('/fd3PdfDownload/{id}', 'fd3PdfDownload')->name('fd3PdfDownload');
+        Route::get('/fd3fd2PdfDownload/{id}', 'fd3fd2PdfDownload')->name('fd3fd2PdfDownload');
+        Route::get('/fd3fd2OtherPdfDownload/{id}', 'fd3fd2OtherPdfDownload')->name('fd3fd2OtherPdfDownload');
+
+
+    });
+
+
+
+
+
+    Route::resource('fc2Form', Fc2Controller::class);
+
+    Route::controller(Fc2Controller::class)->group(function () {
+
+        Route::get('reliefAssistanceProjectProposalPdf/{id}', 'reliefAssistanceProjectProposalPdf')->name('reliefAssistanceProjectProposalPdf');
+
+        Route::get('authorizationLetter/{id}', 'authorizationLetter')->name('authorizationLetter');
+
+        Route::get('letterFromDonorAgency/{id}', 'letterFromDonorAgency')->name('letterFromDonorAgency');
+
+
+
+        Route::post('/statusUpdateForFc2', 'statusUpdateForFc2')->name('statusUpdateForFc2');
+
+        Route::get('/fc2FormForRevision', 'fc2FormForRevision')->name('fc2FormForRevision');
+        Route::get('/acceptedFc2Form', 'acceptedFc2Form')->name('acceptedFc2Form');
+
+        Route::get('/fc2PdfDownload/{id}', 'fc2PdfDownload')->name('fc2PdfDownload');
+        Route::get('/fc2fd2PdfDownload/{id}', 'fc2fd2PdfDownload')->name('fc2fd2PdfDownload');
+        Route::get('/fc2fd2OtherPdfDownload/{id}', 'fc2fd2OtherPdfDownload')->name('fc2fd2OtherPdfDownload');
+
+
+    });
+
+
+
+    Route::resource('fc1Form', Fc1Controller::class);
+
+    Route::controller(Fc1Controller::class)->group(function () {
+
+        Route::get('reliefAssistanceProjectProposalPdf/{id}', 'reliefAssistanceProjectProposalPdf')->name('reliefAssistanceProjectProposalPdf');
+
+        Route::get('authorizationLetter/{id}', 'authorizationLetter')->name('authorizationLetter');
+
+        Route::get('letterFromDonorAgency/{id}', 'letterFromDonorAgency')->name('letterFromDonorAgency');
+
+
+
+        Route::post('/statusUpdateForFc1', 'statusUpdateForFc1')->name('statusUpdateForFc1');
+
+        Route::get('/fc1FormForRevision', 'fc1FormForRevision')->name('fc1FormForRevision');
+        Route::get('/acceptedFc1Form', 'acceptedFc1Form')->name('acceptedFc1Form');
+
+        Route::get('/fc1PdfDownload/{id}', 'fc1PdfDownload')->name('fc1PdfDownload');
+        Route::get('/fc1fd2PdfDownload/{id}', 'fc1fd2PdfDownload')->name('fc1fd2PdfDownload');
+        Route::get('/fc1fd2OtherPdfDownload/{id}', 'fc1fd2OtherPdfDownload')->name('fc1fd2OtherPdfDownload');
+
+
+    });
+
+
+
+    Route::resource('fd7Form', FD7Controller::class);
+
+    Route::controller(FD7Controller::class)->group(function () {
+
+        Route::get('reliefAssistanceProjectProposalPdf/{id}', 'reliefAssistanceProjectProposalPdf')->name('reliefAssistanceProjectProposalPdf');
+
+        Route::get('authorizationLetter/{id}', 'authorizationLetter')->name('authorizationLetter');
+
+        Route::get('letterFromDonorAgency/{id}', 'letterFromDonorAgency')->name('letterFromDonorAgency');
+
+
+
+        Route::post('/statusUpdateForFd7', 'statusUpdateForFd7')->name('statusUpdateForFd7');
+
+        Route::get('/fd7FormForRevision', 'fd7FormForRevision')->name('fd7FormForRevision');
+        Route::get('/acceptedFd7Form', 'acceptedFd7Form')->name('acceptedFd7Form');
+
+        Route::get('/fd7PdfDownload/{id}', 'fd7PdfDownload')->name('fd7PdfDownload');
+        Route::get('/fd7fd2PdfDownload/{id}', 'fd7fd2PdfDownload')->name('fd7fd2PdfDownload');
+        Route::get('/fd7fd2OtherPdfDownload/{id}', 'fd7fd2OtherPdfDownload')->name('fd7fd2OtherPdfDownload');
+
+
+    });
+
+
+    Route::resource('fd6Form', FD6Controller::class);
+
+    Route::controller(FD6Controller::class)->group(function () {
+
+        Route::post('/statusUpdateForFd6', 'statusUpdateForFd6')->name('statusUpdateForFd6');
+
+        Route::get('/fd6FormForRevision', 'fd6FormForRevision')->name('fd6FormForRevision');
+        Route::get('/acceptedFd6Form', 'acceptedFd6Form')->name('acceptedFd6Form');
+
+        Route::get('/fd6PdfDownload/{id}', 'fd6PdfDownload')->name('fd6PdfDownload');
+        Route::get('/fd2PdfDownload/{id}', 'fd2PdfDownload')->name('fd2PdfDownload');
+        Route::get('/fd2OtherPdfDownload/{id}', 'fd2OtherPdfDownload')->name('fd2OtherPdfDownload');
+
+
+    });
 
     Route::get('/', [DashBoardController::class, 'index'])->name('admin.dashboard');
 
@@ -252,6 +378,13 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::resource('setting', SettingController::class);
+
+    Route::controller(SettingController::class)->group(function () {
+
+        Route::get('/testOne', 'testOne')->name('testOne');
+
+        Route::get('/testTwo', 'testTwo')->name('testTwo');
+    });
 
     Route::resource('systemInformation', SystemInformationController::class);
 

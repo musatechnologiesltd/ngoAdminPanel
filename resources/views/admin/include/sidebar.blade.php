@@ -153,6 +153,57 @@
     </a>
 </li>
 @endif
+
+
+@if ($usr->can('fd6_formsAdd') || $usr->can('fd6_formsView') || $usr->can('fd6_formsDelete') || $usr->can('fd6_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd6Form.index') || Route::is('fd6Form.show') ? 'active' : '' }}" href="{{ route('fd6Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৬ (প্রকল্প প্রস্তাব) </span>
+    </a>
+</li>
+@endif
+
+@if ($usr->can('fd7_formsAdd') || $usr->can('fd7_formsView') || $usr->can('fd7_formsDelete') || $usr->can('fd7_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd7Form.index') || Route::is('fd7Form.show') ? 'active' : '' }}" href="{{ route('fd7Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৭ (প্রকল্প প্রস্তাব)</span>
+    </a>
+</li>
+@endif
+
+@if ($usr->can('fc1_formsAdd') || $usr->can('fc1_formsView') || $usr->can('fc1_formsDelete') || $usr->can('fc1_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fc1PdfDownload') || Route::is('fc1Form.index') || Route::is('fc1Form.show') ? 'active' : '' }}" href="{{ route('fc1Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফসি - ১</span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('fc2_formsAdd') || $usr->can('fc2_formsView') || $usr->can('fc2_formsDelete') || $usr->can('fc2_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fc2Form.index') || Route::is('fc2Form.show') ? 'active' : '' }}" href="{{ route('fc2Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফসি-২</span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('fd3_formsAdd') || $usr->can('fd3_formsView') || $usr->can('fd3_formsDelete') || $usr->can('fd3_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd3Form.index') || Route::is('fd3Form.show') ? 'active' : '' }}" href="{{ route('fd3Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৩ </span>
+    </a>
+</li>
+@endif
+
+
+
 @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
 <li class="sidebar-main-title">
     <div>
@@ -166,6 +217,16 @@
         <span>ডাক তালিকা</span>
     </a>
 </li>
+
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('testOne')  ? 'active' : '' }}" href="{{ route('testOne') }}">
+        <i data-feather="mail"></i>
+        <span>testCase</span>
+    </a>
+</li>
+
+
+
 
 @endif
 @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit') || $usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit') || $usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate')|| $usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate') || $usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))

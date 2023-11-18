@@ -37,7 +37,9 @@
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
+
                              <tr>
+
                                 <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>এনজিও'র ধরন</th>
@@ -84,6 +86,7 @@
                                 ?>
                             <tr>
                                 <td>
+
                                     @if($ngoOldNew == 'Old')
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
                                     @else
@@ -96,12 +99,19 @@
                                      {{ $reg_name  }}<br>
 
                                 </h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                
+                                
+                                
                                     <td> @if($ngoOldNew == 'Old')
                                         পুরাতন
                                         @else
 
                                         নতুন
                                         @endif</td>
+                                        
+                                        
+
+                    
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 
@@ -119,7 +129,7 @@
                                     </button>
                                     @elseif($all_data_for_new_list_all->status == 'Correct')
                                     <button class="btn btn-secondary btn-xs" type="button">
-                                        সংশোধন করুন 
+                                        সংশোধন করুন
 
                                     </button>
                                     @else

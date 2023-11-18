@@ -37,8 +37,10 @@
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
+
                             
       <tr>
+
                                 <th>নিবন্ধন নম্বর</th>
                                 <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
                                 <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
@@ -90,6 +92,7 @@ $ngoOldNew = DB::table('ngo_type_and_languages')
 @endif
 
                                 </td>
+
                                 <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
                                 <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->present_name_eng }}</td>
                                 <td>হ্যাঁ</td>

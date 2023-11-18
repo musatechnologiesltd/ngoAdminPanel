@@ -79,11 +79,11 @@
                                 <td><h6> {{ $allDataFromNVisaFd9Fd1->organization_name_ban }} </h6><span>Address: {{ $allDataFromNVisaFd9Fd1->organization_address }}</span></td>
                                 <td>{{ $allDataFromNVisaFd9Fd1->foreigner_name_for_subject }} </td>
                                 <td class="font-success">
-                                    @if(empty($allDataFromNVisaFd9Fd1->status))
+                                    @if(empty($allDataFromNVisaFd9Fd1->status) || $allDataFromNVisaFd9Fd1->status == 'Ongoing')
                                     <button class="btn btn-secondary btn-xs" type="button">
                                     চলমান
                                     </button>
-                                                                       @elseif($allDataFromNVisaFd9Fd1->status == 'Accepted')
+                                                                       @elseif($allDataFromNVisaFd9Fd1->status == 'Accepted' || $allDataFromNVisaFd9Fd1->status == 'Submitted' )
 
                                                                         <button class="btn btn-secondary btn-xs" type="button">
                                                                             গৃহীত
@@ -95,9 +95,11 @@
                                                                             সংশোধন করুন
 
                                                                         </button>
+
                                                                          @elseif($allDataFromNVisaFd9Fd1->status == 'Submitted')
                                                                           <button class="btn btn-secondary btn-xs" type="button">
                                                                          জমা দেওয়া হয়েছে 
+
 
                                                                         </button>
                                                                         @else

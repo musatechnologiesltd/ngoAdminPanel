@@ -15,6 +15,13 @@ use Response;
 use App\Models\ForwardingLetter;
 use App\Models\ForwardingLetterOnulipi;
 use App\Models\Fd9ForwardingLetterEdit;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 use App\Models\SecruityCheck;
 class Fd9OneController extends Controller
 {
@@ -23,6 +30,8 @@ class Fd9OneController extends Controller
 
         \LogActivity::addToLog('view fdNineOne List ');
 
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
 
@@ -30,6 +39,34 @@ class Fd9OneController extends Controller
 
        ->orderBy('fd9_one_forms.id','desc')
        ->get();
+
+
+
+
+        }else{
+
+
+            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->latest()->get();
+
+     $convert_name_title = $ngoStatusFDNineOneDak->implode("f_d_nine_one_status_id", " ");
+     $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+
+
+            $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
+       ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
+
+       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal')
+       ->whereIn('fd9_one_forms.id',$separated_data_title)
+       ->orderBy('fd9_one_forms.id','desc')
+       ->get();
+
+
+        }
 
 
 

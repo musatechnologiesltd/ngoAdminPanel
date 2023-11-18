@@ -9,5 +9,5 @@ class NgoRegistrationDak extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['attraction_attention','informational_purposes','copy_of_work','sender_admin_id','receiver_admin_id','registration_status_id','original_recipient','status'];
+    protected $fillable = ['dak_detail_id','attraction_attention','informational_purposes','copy_of_work','sender_admin_id','receiver_admin_id','registration_status_id','original_recipient','status'];
 }
