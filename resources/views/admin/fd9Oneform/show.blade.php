@@ -1086,7 +1086,7 @@ E.COMPENSATION AND BENIFITS
                                     <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                         <option value="Ongoing" {{ $dataFromNVisaFd9Fd1->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
-
+<option value="Submitted" {{ $dataFromNVisaFd9Fd1->status == 'Submitted' ? 'selected':''  }}>জমা দেওয়া হয়েছে </option>
                                         <option value="Accepted" {{ $dataFromNVisaFd9Fd1->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
                                         <option value="Correct" {{ $dataFromNVisaFd9Fd1->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                         <option value="Rejected" {{ $dataFromNVisaFd9Fd1->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>

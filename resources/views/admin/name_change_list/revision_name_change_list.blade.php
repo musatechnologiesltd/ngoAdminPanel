@@ -37,8 +37,8 @@
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
-                            <tr>
-                                <th>ডাইরি নম্বর </th>
+                        <tr>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
                                 <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
                                 <th>পেমেন্ট</th>
@@ -51,10 +51,21 @@
                                 @foreach($all_data_for_new_list as $all_data_for_new_list_all)
 
                                 <?php
-
+ $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
                                 $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
                          $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type');
                              // dd($getngoForLanguage);
+
+                             $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
+
+
+// dd($getngoForLanguage);
+
+$ngoOldNew = DB::table('ngo_type_and_languages')
+->where('user_id',$fdOneFormId)
+->value('ngo_type_new_old');
+
+
                                   if($getngoForLanguage =='দেশিও'){
 
                                     $reg_name = $reg_number->organization_name_ban;
@@ -66,8 +77,18 @@
 
                                 ?>
                             <tr>
+                              
 
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number) }}</td>
+
+                                <td>
+                                    @if($ngoOldNew == 'Old')
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
+                                    @else
+
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number) }}
+@endif
+
+                                </td>
                                 <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
                                 <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->present_name_eng }}</td>
                                 <td>হ্যাঁ</td>

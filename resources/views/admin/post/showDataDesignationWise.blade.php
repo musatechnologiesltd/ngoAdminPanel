@@ -60,7 +60,7 @@
     </table>
 
 
-    <button type="submit" class="btn btn-success mt-5">জমা দিন</button>
+    <button type="submit" class="btn btn-success mt-5">দাখিল করুন </button>
 
     </form>
 
