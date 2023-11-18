@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ডাক প্রেরণ তালিকা | {{ $ins_name }}
+ডাক প্রেরণ | {{ $ins_name }}
 @endsection
 
 
@@ -14,7 +14,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>ডাক প্রেরণ তালিকা</h3>
+                <h3>ডাক প্রেরণ </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">ডাক </li>
@@ -41,9 +41,9 @@
 
                     <input type="hidden" name="access_id" value="{{ $id }}" />
                     <div class="card-body">
-                        <h5>সিধান্তঃ বিধি মোতাবেক বাবস্থা নিন।</h5>
+                        <h5>সিদ্ধান্ত: বিধি মোতাবেক বাবস্থা নিন।</h5>
                         <div class="nothi_header_box">
-                            <span>সিধান্ত নিন</span>
+                            <span>সিদ্ধান্ত নিন <span style="color:red;">*</span></span>
                         </div>
                         <div class="form-group mt-3 m-checkbox-inline mb-0 custom-radio-ml">
                             <div class="radio radio-primary">
@@ -60,11 +60,11 @@
                             </div>
                             <div class="radio radio-primary">
                                 <input id="own_decision" type="radio" class="decision_list" name="decision_list" value="সিধান্ত নিজে নিন" required>
-                                <label class="mb-0" for="own_decision">সিধান্ত নিজে নিন</label>
+                                <label class="mb-0" for="own_decision">সিদ্ধান্ত নিজে লিখুন </label>
                             </div>
                         </div>
 
-                        <input type="text" placeholder="সিধান্ত নিজে নিন" class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>
+                        <input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>
                         {{-- <select class="form-select digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail" >
                             <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
                             <option value="দেখলাম কাজ শুরু হচ্ছে">দেখলাম কাজ শুরু হচ্ছে</option>
@@ -74,13 +74,13 @@
                             <option value="নথিজাত করুন">নথিজাত করুন</option>
                         </select> --}}
                         <div class="nothi_header_box">
-                            <span id="result_one">বিধি মোতাবেক ব্যবস্থা নিন</span>
+                            <span id="result_one">বিধি মোতাবেক ব্যবস্থা নিন</span><span style="color:red;">*</span>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-sm-12">
                                 <div class="mb-3">
                                     <label class="form-label"
-                                           for="exampleInputPassword21">অগ্রাধিকার</label>
+                                           for="exampleInputPassword21">অগ্রাধিকার <span style="color:red;">*</span></label>
                                     <select class="form-select digits" name="priority_list" id="exampleFormControlSelect9" required>
                                         <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
                                         <option value="সর্বচ্চ অগ্রাধিকার">সর্বচ্চ অগ্রাধিকার</option>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-lg-6 col-sm-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="exampleInputPassword21">গোপনীয়তা</label>
+                                    <label class="form-label" for="exampleInputPassword21">গোপনীয়তা <span style="color:red;">*</span></label>
                                     <select class="form-select digits" name="secret_list" id="exampleFormControlSelect9" required>
 
                                         <option value="">গোপনীয়তা বাছাই করুন</option>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class=" nothi_header_box">
-                            <span id="result_two">বিধি মোতাবেক ব্যবস্থা নিন</span>
+                            <span >প্রাপক  <span style="color:red;">*</span></span>
                         </div>
                         <div class="card">
                             <div class="card-body">

@@ -95,9 +95,11 @@
                                                                             সংশোধন করুন
 
                                                                         </button>
-                                                                        @elseif($allDataFromNVisaFd9Fd1->status == 'Submitted')
-                                                                        <button class="btn btn-secondary btn-xs" type="button">
-                                                                            জমা দেওয়া হয়েছে 
+
+                                                                         @elseif($allDataFromNVisaFd9Fd1->status == 'Submitted')
+                                                                          <button class="btn btn-secondary btn-xs" type="button">
+                                                                         জমা দেওয়া হয়েছে 
+
 
                                                                         </button>
                                                                         @else

@@ -179,6 +179,8 @@ class CommonController extends Controller
 
    $nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
+					  
+
 
     $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
@@ -638,7 +640,7 @@ $dataNew = DB::table('n_visa_necessary_document_for_work_permits')
       "document_list" => $mainDoc
    ];
 
-
+//dd($data);
    return $data;
 
 

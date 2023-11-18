@@ -37,7 +37,9 @@
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
-                            <tr>
+
+                             <tr>
+
                                 <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
                                 <th>এনজিও'র ধরন</th>
@@ -54,6 +56,10 @@
 
                                 $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
                                   $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
+
+                                  $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
+
+
                              // dd($getngoForLanguage);
 
                              $ngoOldNew = DB::table('ngo_type_and_languages')
@@ -79,19 +85,33 @@
 
                                 ?>
                             <tr>
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
                                 <td>
-                                    <h6>
-                                  {{ $reg_name  }}<br>
 
-                                    </h6>
-                                    <span>ঠিকানা: {{ $reg_address }}</td>
-                                        <td>  @if($ngoOldNew == 'Old')
-                                            এনজিও'র ধরন : পুরাতন
-                                            @else
+                                    @if($ngoOldNew == 'Old')
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
+                                    @else
 
-                                            এনজিও'র ধরন : নতুন
-                                            @endif</td>
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}
+@endif
+
+                                </td>
+                                <td><h6>
+                                     {{ $reg_name  }}<br>
+
+                                </h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                
+                                
+                                
+                                    <td> @if($ngoOldNew == 'Old')
+                                        পুরাতন
+                                        @else
+
+                                        নতুন
+                                        @endif</td>
+                                        
+                                        
+
+                    
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 

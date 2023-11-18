@@ -65,7 +65,7 @@
                                             {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                         </td>
                                         <td style="text-align:right;">
-                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
 
 
@@ -278,7 +278,7 @@ $desiNames = DB::table('designation_lists')
                                         {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                     </td>
                                     <td style="text-align:right;">
-                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
                                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->id) }}';">দেখুন</button>
 
 
@@ -489,7 +489,7 @@ $desiNames = DB::table('designation_lists')
                                     {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                                 </td>
                                 <td style="text-align:right;">
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->id) }}';">দেখুন</button>
 
 
@@ -700,7 +700,7 @@ $desiNames = DB::table('designation_lists')
                                 {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                             </td>
                             <td style="text-align:right;">
-                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">পাঠান</button>
+                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->id) }}';">দেখুন</button>
 
 
@@ -910,7 +910,7 @@ $desiNames = DB::table('designation_lists')
                             {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
                         </td>
                         <td style="text-align:right;">
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->fd9_one_form_id]) }}';">পাঠান</button>
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->fd9_one_form_id]) }}';">প্রেরণ</button>
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->fd9_one_form_id) }}';">দেখুন</button>
 
 
