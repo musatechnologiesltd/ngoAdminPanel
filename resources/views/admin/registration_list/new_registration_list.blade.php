@@ -38,8 +38,9 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
+                                <th>এনজিও'র ধরন</th>
                                 <th>পেমেন্ট</th>
                                 <th>স্ট্যাটাস</th>
                                 <th>জমাদানের তারিখ</th>
@@ -84,17 +85,17 @@
                             <tr>
                                 <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
                                 <td><h6>
+{{ $reg_name  }} <br>
 
-                                    এনজিও'র নাম: {{ $reg_name  }} <br>
-                                    @if($ngoOldNew == 'Old')
-                                    এনজিও'র ধরন : পুরাতন
-                                    @else
-
-                                    এনজিও'র ধরন : নতুন
-                                    @endif
 
 
                                 </h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                    <td>  @if($ngoOldNew == 'Old')
+                                        এনজিও'র ধরন : পুরাতন
+                                        @else
+
+                                        এনজিও'র ধরন : নতুন
+                                        @endif</td>
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 

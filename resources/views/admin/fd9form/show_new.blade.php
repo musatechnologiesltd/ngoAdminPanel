@@ -75,7 +75,7 @@
                                             data-bs-toggle="pill" href="#pills-darkdoc"
                                             role="tab" aria-controls="pills-darkdoc"
                                             aria-selected="false" style=""><i
-                                    class="icofont icofont-animal-lemur"></i>নথি সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</a>
+                                    class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                         data-bs-toggle="pill" href="#pills-darkdoc1"
@@ -399,8 +399,8 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                         <div class="mb-0 m-t-30">
                             <div class="card">
                                 <div class="card-header pb-0">
-                                    <h5>নথিপত্র সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</h5>
-                                    <span>সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠানোর আগে অনুগ্রহ করে সমস্ত নথি দেখুন করুন</span>
+                                    <h5>নথিপত্র</h5>
+                                    <span>নথি দেখুন করুন</span>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered">

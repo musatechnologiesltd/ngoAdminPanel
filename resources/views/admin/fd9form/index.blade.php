@@ -40,7 +40,7 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>এনজিও ডাইরি নম্বর </th>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম & ঠিকানা</th>
                                 <th>বিদেশীর নাম</th>
                                 <th>স্টেটাস</th>

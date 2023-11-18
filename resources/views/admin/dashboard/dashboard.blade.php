@@ -163,6 +163,7 @@
                             <tr>
                                 <th>ট্র্যাকিং নম্বর</th>
                                 <th>এনজিওর নাম ও ঠিকানা</th>
+                                <th>এনজিও'র ধরন</th>
                                 <th>পেমেন্ট</th>
                                 <th>স্ট্যাটাস</th>
                                 <th>জমাদানের তারিখ</th>
@@ -204,18 +205,21 @@
                                 <td>
                                     <h6>
 
-                                        এনজিওর নাম: {{ $reg_name  }} <br>
-                                        @if($ngoOldNew == 'Old')
-                                        এনজিও'র ধরন : পুরাতন
-                                        @else
-
-                                        এনজিও'র ধরন : নতুন
-                                        @endif
+                                    {{ $reg_name  }} <br>
 
 
                                     </h6>
 
                                     <span>ঠিকানা: {{ $reg_address }}</td>
+                                        <td>
+                                            @if($ngoOldNew == 'Old')
+                                            এনজিও'র ধরন : পুরাতন
+                                            @else
+
+                                            এনজিও'র ধরন : নতুন
+                                            @endif
+
+                                        </td>
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 

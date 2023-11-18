@@ -22,6 +22,17 @@ class SettingController extends Controller
     }
 
 
+    public function testOne(){
+
+        return view('admin.setting.testOne');
+    }
+
+    public function testTwo(Request $request){
+
+        return $data = view('admin.setting.testTwo')->render();
+    }
+
+
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {

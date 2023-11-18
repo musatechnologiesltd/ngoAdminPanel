@@ -379,6 +379,13 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('setting', SettingController::class);
 
+    Route::controller(SettingController::class)->group(function () {
+
+        Route::get('/testOne', 'testOne')->name('testOne');
+
+        Route::get('/testTwo', 'testTwo')->name('testTwo');
+    });
+
     Route::resource('systemInformation', SystemInformationController::class);
 
 
