@@ -44,6 +44,29 @@ class SettingController extends Controller
     }
 
 
+
+    public function basicInformationEdit(){
+        if (is_null($this->user) || !$this->user->can('profile.edit')) {
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
+               }
+
+        return view('admin.setting.setting');
+
+    }
+
+
+    public function digitalSignatureEdit(){
+
+        if (is_null($this->user) || !$this->user->can('profile.edit')) {
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
+               }
+
+        return view('admin.setting.digitalSignatureEdit');
+
+    }
+
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
@@ -92,6 +115,48 @@ class SettingController extends Controller
         $admin->save();
 
         return redirect()->back()->with('success','Updated Succesfully');
+    }
+
+
+
+    public function digitalSignatureUpdate(Request $request){
+
+
+        //dd($request->all());
+
+        $time_dy = time().date("Ymd");
+
+        if (is_null($this->user) || !$this->user->can('profile.edit')) {
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
+               }
+
+
+               \LogActivity::addToLog('Profile Update.');
+
+
+        $admin =  Admin::find($request->id);
+
+
+
+            $productImage = $request->file('admin_sign');
+            $imageName = $time_dy.$productImage->getClientOriginalName();
+            $directory = 'public/uploads/';
+            $imageUrl = $directory.$imageName;
+
+            $img=Image::make($productImage)->resize(300,80);
+            $img->save($imageUrl);
+
+             $admin->admin_sign =  'public/uploads/'.$imageName;
+
+
+        $admin->save();
+
+        return redirect()->back()->with('success','Updated Succesfully');
+
+
+
+
     }
 
 

@@ -58,17 +58,17 @@
                        ?>
 
 @if(empty(Auth::guard('admin')->user()->admin_image))
-<img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="img-70 rounded-circle" style="height: 100px;"/>
+{{-- <img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="img-70 rounded-circle" style="height: 100px;"/> --}}
 @else
-<img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="img-70 rounded-circle" class="img-fluid" />
+{{-- <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="img-70 rounded-circle" class="img-fluid" /> --}}
 @endif
 
 
 
-                            <div class="media-body">
+                            {{-- <div class="media-body">
                               <h3 class="mb-1 f-20 txt-primary">{{ Auth::guard('admin')->user()->admin_name }}</h3>
                               <p class="f-12">{{ $designationName }}</p>
-                            </div>
+                            </div> --}}
                           </div>
                         </div>
                       </div>
@@ -97,7 +97,7 @@
                       </div>
 
 
-                      <div class="mb-3">
+                      {{-- <div class="mb-3">
                         <label class="form-label">ছবি:</label>
                         <input type="file" class="form-control"  name="admin_image"/>
                         <div class="avatar-lg">
@@ -107,10 +107,10 @@
 <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="user-img" class="" style="height:50px;" />
 @endif
                         </div>
-                      </div>
+                      </div> --}}
 
 
-                      <div class="mb-3">
+                      {{-- <div class="mb-3">
                         <label class="form-label">স্বাক্ষর:</label>
                         <input type="file" class="form-control"  name="admin_sign"/>
                         <div class="avatar-lg">
@@ -120,11 +120,11 @@
 <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_sign }}" alt="user-img" class="" style="height:50px;" />
 @endif
                         </div>
-                      </div>
+                      </div> --}}
 
 
                       <div class="form-footer">
-                        <button class="btn btn-primary btn-block">Save</button>
+                        <button class="btn btn-primary btn-block">আপডেট করুন</button>
                       </div>
                     </form>
                   </div>

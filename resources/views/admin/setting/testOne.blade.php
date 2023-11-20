@@ -3,7 +3,9 @@
 @section('title')
 সেটিং
 @endsection
+@section('css')
 
+@endsection
 
 @section('body')
 <div class="container-fluid">
@@ -56,6 +58,17 @@
 
 
                     </form>
+
+
+                    <div id="dialog">
+                        <p>IT WORKS!!!</p>
+                         <input type="text" />
+                      </div>
+
+                      <button id="opener">Open Dialog</button>
+
+
+
                   </div>
                 </div>
               </div>
@@ -73,6 +86,27 @@
 @endsection
 
 @section('script')
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script>
+    $(function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      width: 600,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+
+    $( "#opener" ).click(function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  });
+</script>
 <script>
 
   //new code test

@@ -50,6 +50,65 @@
         <p class="mb-0 font-roboto">{{ $designationName  }}</p>
         <p class="mb-0 font-roboto">{{ $branchName  }}</p>
     </div>
+
+
+
+
+    @if(Route::is('profilePictureEdit') || Route::is('passwordEdit') || Route::is('digitalSignatureEdit') || Route::is('basicInformationEdit') || Route::is('profile.index'))
+    <nav>
+        <div class="main-navbar">
+            <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+            <div id="mainnav">
+                <ul class="nav-menu custom-scrollbar">
+                    <li class="back-btn">
+                        <div class="mobile-back text-end"><span>পেছনে</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <p>ই -মেইল : {{ Auth::guard('admin')->user()->email }}<br>
+                                ফোন : {{ App\Http\Controllers\Admin\CommonController::englishToBangla(Auth::guard('admin')->user()->admin_mobile) }}</p>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                            <i data-feather="home"></i>
+                            <span>ড্যাশবোর্ড</span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('basicInformationEdit') ? 'active' : '' }}" href="{{ route('basicInformationEdit') }}">
+                            <i data-feather="list"></i>
+                            <span>তথ্যাবলী</span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('digitalSignatureEdit') ? 'active' : '' }}" href="{{ route('digitalSignatureEdit') }}">
+                            <i data-feather="crop"></i>
+                            <span>ডিজিটাল স্বাক্ষর </span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('passwordEdit') ? 'active' : '' }}" href="{{ route('passwordEdit') }}">
+                            <i class="icon-key"></i>
+                            <span>পাসওয়ার্ড </span>
+                        </a>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('profilePictureEdit') ? 'active' : '' }}" href="{{ route('profilePictureEdit') }}">
+                            <i class="icon-image"></i>
+                            <span>প্রোফাইল ছবি </span>
+                        </a>
+                    </li>
+                </ul>
+                </div>
+                </div>
+                </nav>
+    @else
     <nav>
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -218,12 +277,12 @@
     </a>
 </li>
 
-<li class="dropdown">
+{{-- <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('testOne')  ? 'active' : '' }}" href="{{ route('testOne') }}">
         <i data-feather="mail"></i>
         <span>testCase</span>
     </a>
-</li>
+</li> --}}
 
 
 
@@ -429,6 +488,7 @@
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </div>
     </nav>
+    @endif
 </header>
 
 

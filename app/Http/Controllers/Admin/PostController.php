@@ -1535,9 +1535,102 @@ class PostController extends Controller
 
          }
 
+          $mainDataStatus = $request->mainStatusNew;
+          $mainIdNewStatus = $request->main_id;
 
 
-         return redirect('admin/showDataAll/'.$request->mainStatusNew.'/'.$request->main_id);
+
+
+//new code for ajax call
+
+if($mainDataStatus == 'registration'){
+
+
+    $allRegistrationDak = NgoRegistrationDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('registration_status_id',$mainIdNewStatus)->get();
+//dd($allRegistrationDak);
+}elseif($mainDataStatus == 'renew'){
+
+    $allRegistrationDak = NgoRenewDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('renew_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'nameChange'){
+
+    $allRegistrationDak = NgoNameChangeDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('name_change_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fdNine'){
+
+    $allRegistrationDak = NgoFDNineDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('f_d_nine_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fdNineOne'){
+
+    $allRegistrationDak = NgoFDNineOneDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('f_d_nine_one_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fdSix'){
+
+    $allRegistrationDak = NgoFdSixDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('fd_six_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fdSeven'){
+
+    $allRegistrationDak = NgoFdSevenDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('fd_seven_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fcOne'){
+
+    $allRegistrationDak = FcOneDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('fc_one_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fcTwo'){
+
+    $allRegistrationDak = FcTwoDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('fc_two_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'fdThree'){
+
+    $allRegistrationDak = FdThreeDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('fd_three_status_id',$mainIdNewStatus)->get();
+
+
+}
+
+
+//end new code for ajax call
+
+
+
+
+
+
+
+
+
+
+         $data = view('admin.post.newDataForFirstStepAjax',compact('allRegistrationDak','mainDataStatus'))->render();
+        return response()->json($data);
+
+        //  return redirect('admin/showDataAll/'.$request->mainStatusNew.'/'.$request->main_id);
 
 
 
@@ -1623,7 +1716,34 @@ class PostController extends Controller
         }
 
 
-        return view('admin.post.show',compact('mainstatus','id','allRegistrationDak'));
+        //new code for seal
+
+
+        $totalBranch = Branch::where('id','!=',1)->count();
+        $totalDesignation = DesignationList::where('id','!=',1)->count();
+        $totaluser = Admin::where('id','!=',1)->count();
+
+
+         $totalDesignationWorking = AdminDesignationHistory::count();
+
+        $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
+
+
+        $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+      $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
+
+        //dd($totalEmptyDesignation);
+
+        $totalBranchList = Branch::where('id','!=',1)->get();
+
+
+        //end new code for seal
+
+
+        return view('admin.post.show',compact('totalBranchList','totalEmptyDesignation','totalDesignationId','totalDesignationWorking','totaluser','totalDesignation','totalBranch','mainstatus','id','allRegistrationDak'));
 
     }
 
@@ -1707,11 +1827,138 @@ $mainStatusNew = $request->mainStatusNew;
     }
 
 
-    public function deleteMemberList($id){
+    public function deleteMemberListAjax(Request $request){
+
+
+        $status = $request->status;
+        $id = $request->id;
+
 
         \LogActivity::addToLog('delete memeber list.');
 
-        NgoRegistrationDak::where('id',$id)->delete();
+        // NgoRegistrationDak::where('id',$id)->delete();
+
+
+
+         if($status == 'registration'){
+
+
+             $allRegistrationDak = NgoRegistrationDak::where('id',$id)->delete();
+ //dd($allRegistrationDak);
+         }elseif($status == 'renew'){
+
+             $allRegistrationDak = NgoRenewDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'nameChange'){
+
+             $allRegistrationDak = NgoNameChangeDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'fdNine'){
+
+             $allRegistrationDak = NgoFDNineDak::where('id',$id)->delete();
+
+
+         }elseif($mainstatus == 'fdNineOne'){
+
+             $allRegistrationDak = NgoFDNineOneDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'fdSix'){
+
+             $allRegistrationDak = NgoFdSixDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'fdSeven'){
+
+             $allRegistrationDak = NgoFdSevenDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'fcOne'){
+
+             $allRegistrationDak = FcOneDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'fcTwo'){
+
+             $allRegistrationDak = FcTwoDak::where('id',$id)->delete();
+
+
+         }elseif($status == 'fdThree'){
+
+             $allRegistrationDak = FdThreeDak::where('id',$id)->delete();
+
+
+         }
+
+
+         return response()->json(1);
+    }
+
+
+    public function deleteMemberList($status, $id){
+
+        \LogActivity::addToLog('delete memeber list.');
+
+       // NgoRegistrationDak::where('id',$id)->delete();
+
+
+
+        if($status == 'registration'){
+
+
+            $allRegistrationDak = NgoRegistrationDak::where('id',$id)->delete();
+//dd($allRegistrationDak);
+        }elseif($status == 'renew'){
+
+            $allRegistrationDak = NgoRenewDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'nameChange'){
+
+            $allRegistrationDak = NgoNameChangeDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'fdNine'){
+
+            $allRegistrationDak = NgoFDNineDak::where('id',$id)->delete();
+
+
+        }elseif($mainstatus == 'fdNineOne'){
+
+            $allRegistrationDak = NgoFDNineOneDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'fdSix'){
+
+            $allRegistrationDak = NgoFdSixDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'fdSeven'){
+
+            $allRegistrationDak = NgoFdSevenDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'fcOne'){
+
+            $allRegistrationDak = FcOneDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'fcTwo'){
+
+            $allRegistrationDak = FcTwoDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'fdThree'){
+
+            $allRegistrationDak = FdThreeDak::where('id',$id)->delete();
+
+
+        }
+
+
+
 
         return redirect()->back();
     }

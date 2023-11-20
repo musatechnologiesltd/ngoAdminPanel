@@ -1,0 +1,235 @@
+@extends('admin.master.master')
+
+@section('title')
+ডিজিটাল স্বাক্ষর
+@endsection
+
+
+@section('body')
+<style>
+.image-preview-container {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    border-radius: 20px;
+}
+
+.image-preview-container img {
+    width: 100%;
+    display: none;
+    margin-bottom: 30px;
+}
+
+
+.image-preview-container input {
+    display: none;
+}
+
+.image-preview-container label {
+    display: block;
+    width: 45%;
+    height: 45px;
+    margin-left: 25%;
+    text-align: center;
+    background: #24695c;
+    color: #fff;
+    font-size: 15px;
+    text-transform: Uppercase;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+<style>
+.image-preview-container1 {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    border-radius: 20px;
+}
+
+.image-preview-container1 img {
+    /* width: 100%; */
+
+    margin-bottom: 30px;
+}
+
+
+.image-preview-container1 input {
+    display: none;
+}
+
+.image-preview-container1 label {
+    display: block;
+    width: 45%;
+    height: 45px;
+    margin-left: 25%;
+    text-align: center;
+    background: #24695c;
+    color: #fff;
+    font-size: 15px;
+    text-transform: Uppercase;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+</style>
+<div class="container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-6">
+          <h3>ডিজিটাল স্বাক্ষর  </h3>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
+            <li class="breadcrumb-item">ডিজিটাল স্বাক্ষর </li>
+
+          </ol>
+        </div>
+        <div class="col-sm-6">
+
+        </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+
+
+
+
+
+
+        <div class="edit-profile">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="card">
+                  <div class="card-header pb-0">
+                    <h4 class="card-title mb-0">ডিজিটাল স্বাক্ষর পরিবর্তন করুন </h4>
+                    <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+                  </div>
+                  <div class="card-body">
+                    @include('flash_message')
+                                            <form action="{{ route('digitalSignatureUpdate') }}" method="post" enctype="multipart/form-data">
+                                                @csrf
+
+
+                                                <input type="hidden" value="{{ Auth::guard('admin')->user()->id }}" name="id" />
+
+
+
+                                                @if(empty(Auth::guard('admin')->user()->admin_sign))
+
+                                                @else
+
+                                                <div class="image-preview-container1">
+
+                                               <center><img   src="{{ asset('/') }}{{ Auth::guard('admin')->user()->admin_sign }}"  /> </center>
+                                           
+
+
+
+                                            </div>
+
+                                                @endif
+
+
+
+
+
+                                                <div class="image-preview-container">
+
+
+
+                                                    <div class="preview">
+                                                        <img id="preview-selected-image" />
+                                                    </div>
+
+
+
+                                                    <label for="file-upload">ছবি আপলোড করুন </label>
+                                                    <input type="file" name="admin_sign" id="file-upload" accept="image/*" onchange="previewImage(event);" />
+                                                </div>
+
+
+                                                <div class="alert alert-warning d-flex align-items-center mt-3" role="alert">
+                                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                                    <div style="color:black !important">
+                                                        প্রোফাইল স্বাক্ষর অবশ্যই ৩০০ X ৮০ পিক্সেল (প্রস্থ X উচ্চতা ) এবং ফাইল এর আকার অবশ্যই ৫০ কিলো বাইটের কম এবং JPG বা JPEG ফরমেটে হতে হবে
+                                                    </div>
+                                                  </div>
+
+
+                                                <div class="form-footer">
+                                                    <button type="submit" class="btn btn-primary btn-block">আপডেট করুন</button>
+                                                  </div>
+
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+
+
+    </div><!-- container-fluid -->
+</div><!-- End Page-content -->
+@endsection
+
+@section('script')
+<script>
+    /**
+ * Create an arrow function that will be called when an image is selected.
+ */
+const previewImage = (event) => {
+    /**
+     * Get the selected files.
+     */
+    const imageFiles = event.target.files;
+    /**
+     * Count the number of files selected.
+     */
+    const imageFilesLength = imageFiles.length;
+    /**
+     * If at least one image is selected, then proceed to display the preview.
+     */
+    if (imageFilesLength > 0) {
+        /**
+         * Get the image path.
+         */
+        const imageSrc = URL.createObjectURL(imageFiles[0]);
+        /**
+         * Select the image preview element.
+         */
+        const imagePreviewElement = document.querySelector("#preview-selected-image");
+        /**
+         * Assign the path to the image preview element.
+         */
+        imagePreviewElement.src = imageSrc;
+        /**
+         * Show the element by changing the display value to "block".
+         */
+        imagePreviewElement.style.display = "block";
+    }
+};
+</script>
+@endsection
+

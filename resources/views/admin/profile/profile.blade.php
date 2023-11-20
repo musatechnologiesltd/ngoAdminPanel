@@ -25,50 +25,21 @@
         </div>
       </div>
     </div>
+    <?php
+    $designationName = DB::table('designation_lists')
+    ->where('id',Auth::guard('admin')->user()->designation_list_id)
+    ->value('designation_name');
 
+    $branchName = DB::table('branches')
+    ->where('id',Auth::guard('admin')->user()->branch_id)
+    ->value('branch_name');
+
+?>
 
     <div class="user-profile">
         <div class="row">
           <!-- user profile header start-->
-          <div class="col-sm-12">
-            <div class="card profile-header bg-size" style="background-image: url('{{ asset('/') }}public/admin/assets/images/back2.jpg'); background-size: cover; background-position: center center; display: block;"><img class="img-fluid bg-img-cover" src="{{ asset('/') }}public/admin/assets/images/back2.jpg" alt="" style="display: none;">
-              <div class="profile-img-wrrap bg-size" style="background-image: url('{{ asset('/') }}public/admin/assets/images/back2.jpg'); background-size: cover; background-position: center center; display: block;"><img class="img-fluid bg-img-cover" src="{{ asset('/') }}public/admin/assets/images/back2.jpg" alt="" style="display: none;"></div>
-              <div class="userpro-box">
-                <div class="img-wrraper">
-                  <div class="avatar">
-                    <?php
-                    $designationName = DB::table('designation_lists')
-                    ->where('id',Auth::guard('admin')->user()->designation_list_id)
-                    ->value('designation_name');
-
-                    $branchName = DB::table('branches')
-                    ->where('id',Auth::guard('admin')->user()->branch_id)
-                    ->value('branch_name');
-
-               ?>
-
-                    @if(empty(Auth::guard('admin')->user()->admin_image))
-                    <img src="{{asset('/')}}public/admin/user.png" alt="user-img" class="img-fluid" style="height: 100px;"/>
-                    @else
-                    <img src="{{asset('/')}}{{ Auth::guard('admin')->user()->admin_image }}" alt="user-img" class="img-fluid" />
-                    @endif
-
-                    {{-- <img class="img-fluid" alt="" src="../assets/images/user/7.jpg"> --}}
-
-                </div>
-                    <a class="icon-wrapper" href="{{ route('setting.index') }}"><i class="icofont icofont-pencil-alt-5"></i>
-                    </a>
-                </div>
-                <div class="user-designation">
-                  <div class="title"><a target="_blank" href="">
-                      <h4>{{ Auth::guard('admin')->user()->admin_name }}</h4>
-                      <h6>{{ $designationName }}</h6></a></div>
-
-
-                </div>
-              </div>
-            </div>
-          </div>
+       
           <!-- user profile header end-->
           <div class="col-xl-12 col-lg-12 col-md-12 xl-35">
             <div class="default-according style-1 faq-accordion job-accordion">

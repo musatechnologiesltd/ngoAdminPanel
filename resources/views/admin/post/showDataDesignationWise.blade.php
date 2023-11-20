@@ -1,10 +1,9 @@
-<form class="custom-validation" action="{{ route('dakListFirstStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-    @csrf
 
-  
-    <input type="hidden" value="{{ $mainStatusNew }}" name="mainStatusNew"/>
 
-    <table class="table table-bordered">
+    <p id="sm"></p>
+    <input type="hidden" value="{{ $mainStatusNew }}" name="mainStatusNew" id="mainStatusNew"/>
+    <input type="hidden" value="{{ $id }}" name="main_id"  id="mainIdNew"/>
+    <table class="table table-bordered"  id="cleanData">
         <tr>
             <th>#</th>
             <th>কর্মকর্তা</th>
@@ -39,8 +38,8 @@
                         <a data-id="{{ $allTotalBranchList->id }}"  class="btn btn-outline-success remove-input-field"><i class="fa fa-trash"></i></a>
                     </td>
                     <td>
-                        <input type="hidden" value="{{ $id }}" name="main_id"/>
-                        <input type="hidden" value="{{ $adminId }}" name="admin_id[]"/>
+
+                        <input type="hidden" value="{{ $adminId }}" name="admin_id[]" id="adminIdNew"/>
                         {{ $adminName }},{{ $allGetAllDesignationName->designation_name }} <span style="font-size:12px; color: #aeaeae;">{{ $allTotalBranchList->branch_name }}</span>
                     </td>
 
@@ -60,9 +59,57 @@
     </table>
 
 
-    <button type="submit" class="btn btn-success mt-5">দাখিল করুন </button>
+    <button id="finalMain" class="btn btn-success mt-5">দাখিল করুন </button>
 
-    </form>
+
+
+    <script>
+  //$(document).on('click', '#finalMain', function () {
+
+    $("#finalMain").click(function(){
+
+
+
+
+    var mainStatusNew = $('#mainStatusNew').val();
+    var main_id = $('#mainIdNew').val();
+    var admin_id = $('input[name="admin_id[]"]').map(function (idx, ele) {
+       return $(ele).val();
+    }).get();
+
+//alert(admin_id);
+    //alert(secret_listNew +' '+mainStatusNew + main_id + admin_id);
+
+
+    $.ajax({
+            url: "{{ route('dakListFirstStep') }}",
+            method: 'GET',
+            data: {mainStatusNew:mainStatusNew,main_id:main_id,admin_id:admin_id},
+            success: function(data) {
+
+
+                //cleanData
+
+
+
+
+
+
+
+                // $("#serial_part_one"+id_for_pass).val(data);
+                 $("#sm").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+                 $("#icon-home1").html('');
+                 $("#icon-home1").html(data);
+                 $("#cleanData").html('');
+
+
+                 $("#finalMain").remove();
+
+
+            }
+            });
+});
+        </script>
 
     <script>
     $(document).on('click', '.remove-input-field', function () {

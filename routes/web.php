@@ -198,7 +198,9 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/main_doc_download/{id}', 'main_doc_download')->name('main_doc_download');
 
-        Route::get('/deleteMemberList/{id}', 'deleteMemberList')->name('deleteMemberList');
+        Route::get('/deleteMemberList/{status}/{id}', 'deleteMemberList')->name('deleteMemberList');
+
+        Route::get('/deleteMemberListAjax', 'deleteMemberListAjax')->name('deleteMemberListAjax');
 
 
         Route::get('/createSeal/{status}/{id}', 'createSeal')->name('createSeal');
@@ -206,7 +208,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
-        Route::post('/dakListFirstStep', 'dakListFirstStep')->name('dakListFirstStep');
+        Route::get('/dakListFirstStep', 'dakListFirstStep')->name('dakListFirstStep');
         Route::post('/dakListSecondStep', 'dakListSecondStep')->name('dakListSecondStep');
 
         Route::get('/showDataAll/{status}/{id}', 'showDataAll')->name('showDataAll');
@@ -380,6 +382,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('setting', SettingController::class);
 
     Route::controller(SettingController::class)->group(function () {
+
+
+        Route::get('/basicInformationEdit', 'basicInformationEdit')->name('basicInformationEdit');
+        Route::get('/digitalSignatureEdit', 'digitalSignatureEdit')->name('digitalSignatureEdit');
+        Route::post('/digitalSignatureUpdate', 'digitalSignatureUpdate')->name('digitalSignatureUpdate');
+
+
+        Route::get('/passwordEdit', 'passwordEdit')->name('passwordEdit');
+        Route::get('/profilePictureEdit', 'profilePictureEdit')->name('profilePictureEdit');
+
+
+
 
         Route::get('/testOne', 'testOne')->name('testOne');
 
