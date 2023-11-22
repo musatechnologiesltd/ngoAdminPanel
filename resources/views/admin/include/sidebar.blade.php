@@ -122,12 +122,47 @@
                             <h6>সাধারণ</h6>
                         </div>
                     </li>
+
+
+
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i data-feather="home"></i>
                             <span>ড্যাশবোর্ড</span>
                         </a>
                     </li>
+
+
+                    @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
+<li class="sidebar-main-title">
+    <div>
+      <h6>ডাক ও নথি</h6>
+    </div>
+  </li>
+
+  <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('presentDocument') || Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
+        <i data-feather="mail"></i>
+        <span>আগত ডাক</span>
+    </a>
+</li>
+
+{{-- <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('testOne')  ? 'active' : '' }}" href="{{ route('testOne') }}">
+        <i data-feather="mail"></i>
+        <span>testCase</span>
+    </a>
+</li> --}}
+
+
+
+
+@endif
+<li class="sidebar-main-title">
+    <div>
+      <h6>এনজিও</h6>
+    </div>
+  </li>
 
                     @if ($usr->can('register_list_add') || $usr->can('register_list_view') || $usr->can('register_list_delete') || $usr->can('register_list_update'))
                     @if (Route::is('newRegistrationList') ||  Route::is('revisionRegistrationList') || Route::is('alreadyRegistrationList') || Route::is('registrationView'))
@@ -263,31 +298,7 @@
 
 
 
-@if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
-<li class="sidebar-main-title">
-    <div>
-      <h6>ডাক বিভাগ</h6>
-    </div>
-  </li>
 
-  <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
-        <i data-feather="mail"></i>
-        <span>ডাক তালিকা</span>
-    </a>
-</li>
-
-{{-- <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('testOne')  ? 'active' : '' }}" href="{{ route('testOne') }}">
-        <i data-feather="mail"></i>
-        <span>testCase</span>
-    </a>
-</li> --}}
-
-
-
-
-@endif
 @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit') || $usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit') || $usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate')|| $usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate') || $usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
 <li class="sidebar-main-title">
     <div>

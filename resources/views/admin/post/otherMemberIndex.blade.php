@@ -75,6 +75,7 @@ $formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registrat
                                         <td style="text-align:right;">
 
                                             @if($allStatusData->original_recipient == 1)
+                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'registration','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->registration_status_id]) }}';">প্রেরণ</button>
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$formOneDataId) }}';">দেখুন</button>
 
@@ -299,6 +300,7 @@ $formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_statu
                                     <td style="text-align:right;">
 
                                         @if($allStatusData->original_recipient == 1)
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'renew','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
                                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->renew_status_id]) }}';">প্রেরণ</button>
                                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$formOneDataId) }}';">দেখুন</button>
                                         @else
@@ -525,6 +527,7 @@ $formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_
                                 <td style="text-align:right;">
 
                                     @if($allStatusData->original_recipient == 1)
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->name_change_status_id]) }}';">প্রেরণ</button>
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->name_change_status_id) }}';">দেখুন</button>
                                     @else
@@ -755,6 +758,7 @@ $formOneDataId = DB::table('fd9_forms')
                             <td style="text-align:right;">
 
                                 @if($allStatusData->original_recipient == 1)
+                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->f_d_nine_status_id]) }}';">প্রেরণ</button>
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->f_d_nine_status_id) }}';">দেখুন</button>
                                 @else
@@ -990,6 +994,7 @@ $formOneDataId = DB::table('fd9_one_forms')
                         <td style="text-align:right;">
 
                             @if($allStatusData->original_recipient == 1)
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->f_d_nine_one_status_id]) }}';">প্রেরণ</button>
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->f_d_nine_one_status_id) }}';">দেখুন</button>
                             @else
@@ -1219,7 +1224,8 @@ $formOneDataId = DB::table('fd6_forms')->where('id',$allStatusData->fd_six_statu
                     <td style="text-align:right;">
 
                         @if($allStatusData->original_recipient == 1)
-                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdSix','id'=>$allStatusData->fd_six_status_id]) }}';">পাঠান</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdSix','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdSix','id'=>$allStatusData->fd_six_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd6Form.show',$allStatusData->fd_six_status_id) }}';">দেখুন</button>
                         @else
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd6Form.show',$allStatusData->fd_six_status_id) }}';">দেখুন</button>
@@ -1445,7 +1451,8 @@ $formOneDataId = DB::table('fd7_forms')->where('id',$allStatusData->fd_seven_sta
                     <td style="text-align:right;">
 
                         @if($allStatusData->original_recipient == 1)
-                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdSeven','id'=>$allStatusData->fd_seven_status_id]) }}';">পাঠান</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdSeven','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdSeven','id'=>$allStatusData->fd_seven_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd7Form.show',$allStatusData->fd_seven_status_id) }}';">দেখুন</button>
                         @else
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd7Form.show',$allStatusData->fd_seven_status_id) }}';">দেখুন</button>
@@ -1670,7 +1677,8 @@ $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_statu
                     <td style="text-align:right;">
 
                         @if($allStatusData->original_recipient == 1)
-                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$allStatusData->fc_one_status_id]) }}';">পাঠান</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcOne','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$allStatusData->fc_one_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
                         @else
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
@@ -1897,7 +1905,8 @@ $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_statu
                     <td style="text-align:right;">
 
                         @if($allStatusData->original_recipient == 1)
-                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcTwo','id'=>$allStatusData->fc_two_status_id]) }}';">পাঠান</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcTwo','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcTwo','id'=>$allStatusData->fc_two_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$allStatusData->fc_two_status_id) }}';">দেখুন</button>
                         @else
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$allStatusData->fc_two_status_id) }}';">দেখুন</button>
@@ -2123,7 +2132,8 @@ $branchNames = DB::table('branches')
                      <td style="text-align:right;">
 
                          @if($allStatusData->original_recipient == 1)
-                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcTwo','id'=>$allStatusData->fd_three_status_id]) }}';">পাঠান</button>
+                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdThree','id'=>$allStatusData->id]) }}';">নথি উপস্থাপন করুন</button>
+                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdThree','id'=>$allStatusData->fd_three_status_id]) }}';">প্রেরণ</button>
                          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd3Form.show',$allStatusData->fd_three_status_id) }}';">দেখুন</button>
                          @else
                          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd3Form.show',$allStatusData->fd_three_status_id) }}';">দেখুন</button>

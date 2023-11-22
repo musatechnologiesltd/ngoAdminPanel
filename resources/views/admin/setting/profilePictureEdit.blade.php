@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ডিজিটাল স্বাক্ষর
+প্রোফাইল ফটো
 @endsection
 
 
@@ -91,10 +91,10 @@
     <div class="page-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3>ডিজিটাল স্বাক্ষর  </h3>
+          <h3>প্রোফাইল ফটো </h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-            <li class="breadcrumb-item">ডিজিটাল স্বাক্ষর </li>
+            <li class="breadcrumb-item">প্রোফাইল ফটো </li>
 
           </ol>
         </div>
@@ -117,12 +117,12 @@
               <div class="col-xl-12">
                 <div class="card">
                   <div class="card-header pb-0">
-                    <h4 class="card-title mb-0">ডিজিটাল স্বাক্ষর পরিবর্তন করুন </h4>
+                    <h4 class="card-title mb-0">প্রোফাইল ফটো পরিবর্তন করুন </h4>
                     <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                   </div>
                   <div class="card-body">
                     @include('flash_message')
-                                            <form action="{{ route('digitalSignatureUpdate') }}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('profilePictureUpdate') }}" method="post" enctype="multipart/form-data">
                                                 @csrf
 
 
@@ -130,14 +130,14 @@
 
 
     <div class="nvisa-avatar">
-        @if(empty(Auth::guard('admin')->user()->admin_sign))
-                      <center>  <img src="{{ asset('/') }}public/sign/demo.jpg" alt="" id="output"> </center>
+        @if(empty(Auth::guard('admin')->user()->admin_image))
+                      <center>  <img src="{{ asset('/') }}public/sign/userImage.jpg" alt="" id="output"> </center>
                       @else
-                      <center>  <img src="{{ asset('/') }}{{ Auth::guard('admin')->user()->admin_sign }}" alt="" id="output"> </center>
+                      <center>  <img src="{{ asset('/') }}{{ Auth::guard('admin')->user()->admin_image }}" alt="" id="output"> </center>
                       @endif
                     </div>
                     <input type="file" accept="image/*"
-                    onchange="loadFile(event)" name="admin_sign" required id="upload" hidden/>
+                    onchange="loadFile(event)" name="admin_image" required id="upload" hidden/>
              <label class="login_upload_button btn btn-registration"  for="upload">ছবি নির্বাচন করুন</label>
 
 
@@ -145,7 +145,7 @@
                                                 <div class="alert alert-warning d-flex align-items-center mt-3" role="alert">
                                                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                                     <div style="color:black !important">
-                                                        প্রোফাইল স্বাক্ষর অবশ্যই ৩০০ X ৮০ পিক্সেল (প্রস্থ X উচ্চতা ) এবং ফাইল এর আকার অবশ্যই ৫০ কিলো বাইটের কম এবং JPG বা JPEG ফরমেটে হতে হবে
+                                                        প্রোফাইল স্বাক্ষর অবশ্যই ৩০০ X ৩০০ পিক্সেল (প্রস্থ X উচ্চতা ) এবং ফাইল এর আকার অবশ্যই ৫০ কিলো বাইটের কম এবং JPG বা JPEG ফরমেটে হতে হবে
                                                     </div>
                                                   </div>
 

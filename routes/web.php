@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\FD7Controller;
 use App\Http\Controllers\Admin\Fc1Controller;
 use App\Http\Controllers\Admin\Fc2Controller;
 use App\Http\Controllers\Admin\FD3Controller;
+use App\Http\Controllers\Admin\DocumentPresentController;
+use App\Http\Controllers\Admin\DocumentTypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +63,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin'], function () {
 
 
+    Route::resource('documentPresent', DocumentPresentController::class);
+    Route::resource('documentType', DocumentTypeController::class);
+
+
+    Route::controller(DocumentPresentController::class)->group(function () {
+
+        Route::get('/docTypeCode', 'docTypeCode')->name('docTypeCode');
+        Route::get('/presentDocument/{status}/{id}', 'presentDocument')->name('presentDocument');
+
+    });
     Route::resource('fd3Form', FD3Controller::class);
 
     Route::controller(FD3Controller::class)->group(function () {
@@ -390,7 +402,10 @@ Route::group(['prefix' => 'admin'], function () {
 
 
         Route::get('/passwordEdit', 'passwordEdit')->name('passwordEdit');
+        Route::post('/passwordUpdate', 'passwordUpdate')->name('passwordUpdate');
+
         Route::get('/profilePictureEdit', 'profilePictureEdit')->name('profilePictureEdit');
+        Route::post('/profilePictureUpdate', 'profilePictureUpdate')->name('profilePictureUpdate');
 
 
 

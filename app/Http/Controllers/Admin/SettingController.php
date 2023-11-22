@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Image;
 use Auth;
+use Hash;
 class SettingController extends Controller
 {
 
@@ -67,6 +68,29 @@ class SettingController extends Controller
 
     }
 
+
+    public function passwordEdit(){
+
+        if (is_null($this->user) || !$this->user->can('profile.edit')) {
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
+               }
+
+        return view('admin.setting.passwordEdit');
+    }
+
+
+    public function profilePictureEdit(){
+
+        if (is_null($this->user) || !$this->user->can('profile.edit')) {
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
+               }
+
+        return view('admin.setting.profilePictureEdit');
+
+    }
+
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
@@ -115,6 +139,77 @@ class SettingController extends Controller
         $admin->save();
 
         return redirect()->back()->with('success','Updated Succesfully');
+    }
+
+
+    public function profilePictureUpdate(Request $request){
+
+        $time_dy = time().date("Ymd");
+
+        if (is_null($this->user) || !$this->user->can('profile.edit')) {
+            //abort(403, 'Sorry !! You are Unauthorized to View !');
+            return redirect()->route('mainLogin');
+               }
+
+
+               \LogActivity::addToLog('Profile Update.');
+
+
+        $admin =  Admin::find($request->id);
+
+
+
+            $productImage = $request->file('admin_image');
+            $imageName = $time_dy.$productImage->getClientOriginalName();
+            $directory = 'public/uploads/';
+            $imageUrl = $directory.$imageName;
+
+            $img=Image::make($productImage)->resize(300,300);
+            $img->save($imageUrl);
+
+             $admin->admin_image =  'public/uploads/'.$imageName;
+
+
+        $admin->save();
+
+        return redirect()->back()->with('success','Updated Succesfully');
+    }
+
+
+
+
+    public function passwordUpdate(Request $request){
+
+        $this->validate($request,[
+            'old_password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+        $hashedPassword = Auth::guard('admin')->user()->password;
+        if (Hash::check($request->old_password,$hashedPassword))
+        {
+            if (!Hash::check($request->password,$hashedPassword))
+            {
+                $user = Admin::find($request->id);
+                $user->password = Hash::make($request->password);
+                $user->save();
+                // Toastr::success('Password Successfully Changed','Success');
+
+                \LogActivity::addToLog('Logged Out.');
+                Auth::guard('admin')->logout();
+                return redirect()->route('login.index')->with('success','Updated Succesfully');
+            } else {
+
+                return redirect()->back()->with('error','New password cannot be the same as old password');
+            }
+        } else {
+
+            return redirect()->back()->with('error','Current password not match');
+        }
+
+
+
+
+
     }
 
 
