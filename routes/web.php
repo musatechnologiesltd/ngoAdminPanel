@@ -28,6 +28,8 @@ use App\Http\Controllers\Admin\Fc2Controller;
 use App\Http\Controllers\Admin\FD3Controller;
 use App\Http\Controllers\Admin\DocumentPresentController;
 use App\Http\Controllers\Admin\DocumentTypeController;
+use App\Http\Controllers\Admin\ChildNoteController;
+use App\Http\Controllers\Admin\ParentNoteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,10 +69,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('documentType', DocumentTypeController::class);
 
 
+    Route::resource('childNote', ChildNoteController::class);
+    Route::resource('parentNote', ParentNoteController::class);
+
+ 
+
+
     Route::controller(DocumentPresentController::class)->group(function () {
 
         Route::get('/docTypeCode', 'docTypeCode')->name('docTypeCode');
         Route::get('/presentDocument/{status}/{id}', 'presentDocument')->name('presentDocument');
+        Route::get('/sheetAndNotes/{status}/{id}', 'sheetAndNotes')->name('sheetAndNotes');
 
     });
     Route::resource('fd3Form', FD3Controller::class);

@@ -32,6 +32,12 @@ class DocumentPresentController extends Controller
     }
 
 
+    public function sheetAndNotes($status, $id){
+
+        return view('admin.presentDocument.sheetAndNotes',compact('status','id'));
+    }
+
+
     public function docTypeCode(Request $request){
 
         $documentTypeList = DocumentType::where('id',$request->docId)->value('code_type');
@@ -62,8 +68,8 @@ class DocumentPresentController extends Controller
     {
 
 
-         dd($request->all());
-
+         //dd($request->all());
+         return redirect()->route('sheetAndNotes', ['status' => $request->status, 'id' =>$request->id]);
 
         $this->validate($request,[
             'document_branch' => 'required',
@@ -238,7 +244,7 @@ class DocumentPresentController extends Controller
 
         }
 
-        return 0;
+        return redirect->route('sheetAndNotes', ['status' => $request->status, 'id' =>$request->id]);
     }
 
     /**
