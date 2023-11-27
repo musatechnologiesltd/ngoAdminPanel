@@ -19,6 +19,33 @@ use App\Models\FdSevenDocPresent;
 use App\Models\FdThreeDocPresent;
 use App\Models\FcOneDocPresent;
 use App\Models\FcTwoDocPresent;
+
+
+use App\Models\ChildNoteForFcOne;
+use App\Models\ChildNoteForFcTwo;
+use App\Models\ChildNoteForFdNine;
+use App\Models\ChildNoteForFdNineOne;
+use App\Models\ChildNoteForFdSeven;
+use App\Models\ChildNoteForFdSix;
+use App\Models\ChildNoteForFdThree;
+use App\Models\ChildNoteForNameChange;
+use App\Models\ChildNoteForRegistration;
+use App\Models\ChildNoteForRenew;
+
+use App\Models\ParentNoteForFcOne;
+use App\Models\ParentNoteForFcTwo;
+use App\Models\ParentNoteForFdNine;
+use App\Models\ParentNoteForFdNineOne;
+use App\Models\ParentNoteForFdSeven;
+use App\Models\ParentNoteForFdsix;
+use App\Models\ParentNoteForFdThree;
+use App\Models\ParentNoteForNameChange;
+use App\Models\ParentNoteForRegistration;
+use App\Models\ParentNoteForRenew;
+
+
+
+
 class DocumentPresentController extends Controller
 {
 
@@ -32,9 +59,121 @@ class DocumentPresentController extends Controller
     }
 
 
-    public function sheetAndNotes($status, $id){
+    public function sheetAndNotes($status,$nothiId,$id){
 
-        return view('admin.presentDocument.sheetAndNotes',compact('status','id'));
+
+        if($status == 'registration'){
+
+
+            $checkParent = ParentNoteForRegistration::where('registration_doc_id',$id)
+                           ->get();
+
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+            $checkParent = ParentNoteForRenew::where('renew_doc_present_id',$id)
+            ->get();
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForNameChange::where('name_chane_doc_present_id',$id)
+            ->get();
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForFdNine::where('fd_nine_doc_present_id',$id)
+            ->get();
+
+//dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+            $checkParent = ParentNoteForFdNineOne::where('fd_nine_one_doc_present_id',$id)
+            ->get();
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+            $checkParent = ParentNoteForFdsix::where('fd_six_doc_present_id',$id)
+            ->get();
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+            $checkParent = ParentNoteForFdSeven::where('fd_seven_doc_present_id',$id)
+            ->get();
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+            $checkParent = ParentNoteForFcOne::where('fc_one_doc_present_id',$id)
+            ->get();
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+            $checkParent = ParentNoteForFcTwo::where('fc_two_doc_present_id',$id)
+            ->get();
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForFdThree::where('fd_three_doc_present_id',$id)
+            ->get();
+
+
+        }
+
+        return view('admin.presentDocument.sheetAndNotes',compact('checkParent','nothiId','status','id'));
     }
 
 
@@ -68,8 +207,7 @@ class DocumentPresentController extends Controller
     {
 
 
-         //dd($request->all());
-         return redirect()->route('sheetAndNotes', ['status' => $request->status, 'id' =>$request->id]);
+
 
         $this->validate($request,[
             'document_branch' => 'required',
@@ -99,6 +237,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -113,6 +253,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -128,6 +270,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -144,6 +288,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -159,6 +305,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -173,6 +321,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -187,6 +337,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -202,6 +354,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -217,6 +371,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -232,6 +388,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->sender =0;
+                $documentType->receiver =0;
                 $documentType->save();
 
 
@@ -244,7 +402,7 @@ class DocumentPresentController extends Controller
 
         }
 
-        return redirect->route('sheetAndNotes', ['status' => $request->status, 'id' =>$request->id]);
+        return redirect()->route('sheetAndNotes', ['status' => $request->status,'nothiId'=>$request->id, 'id' =>$documentType->id]);
     }
 
     /**

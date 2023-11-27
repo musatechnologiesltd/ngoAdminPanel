@@ -72,14 +72,24 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('childNote', ChildNoteController::class);
     Route::resource('parentNote', ParentNoteController::class);
 
- 
+
+
+    Route::controller(ChildNoteController::class)->group(function () {
+
+
+        Route::get('/addChildNote/{status}/{parentId}/{id}/{activeCode}', 'addChildNote')->name('addChildNote');
+
+
+    });
+
+
 
 
     Route::controller(DocumentPresentController::class)->group(function () {
 
         Route::get('/docTypeCode', 'docTypeCode')->name('docTypeCode');
         Route::get('/presentDocument/{status}/{id}', 'presentDocument')->name('presentDocument');
-        Route::get('/sheetAndNotes/{status}/{id}', 'sheetAndNotes')->name('sheetAndNotes');
+        Route::get('/sheetAndNotes/{status}/{nothiId}/{id}', 'sheetAndNotes')->name('sheetAndNotes');
 
     });
     Route::resource('fd3Form', FD3Controller::class);

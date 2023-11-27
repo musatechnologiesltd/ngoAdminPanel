@@ -7,6 +7,11 @@
 
 @section('body')
   <style>
+
+    .bactive{
+        background: #24695c !important;
+    color: white;
+    }
         #container {
             width: 100%;
         }
@@ -45,16 +50,42 @@
                         <div class="card">
                                     <div class="card-body">
                                         <div class="row">
+
+@include('flash_message')
                                             <div class="col-lg-2 col-sm-12">
                                                 <div style="border-right: 1px solid gray; height:100%">
-                                                    <button class="btn btn-outline-success"><i class="fa fa-calendar"></i> নতুন নোট</button>
 
-                                                    <p class="mt-2">আগত নোট <span>(2)</span></p>
-                                                    <hr>
-                                                    <button class="btn btn-transparent"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">01</span> Note Name</button>
-                                                    <hr>
-                                                    <button class="btn btn-transparent"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">01</span> Note Name</button>
+                                                    <!-- add note button -->
+                                                    <button class="btn btn-outline-success" data-bs-toggle="modal" data-original-title="" data-bs-target="#myModal3" data-bs-original-title="" title=""><i class="fa fa-calendar"></i> নতুন নোট</button>
+   <!-- end add note button -->
 
+
+
+
+
+
+                                                    @if(count($checkParent) == 0)
+
+                                                    @else
+                                                    <p class="mt-2">মোট নোট <span>({{ App\Http\Controllers\Admin\CommonController::englishToBangla(count($checkParent)) }})</span></p>
+                                                    <hr>
+
+                                                    @foreach($checkParent as $key=>$checkParents)
+
+                                                    @if(($key+1) == 1)
+                                                    <button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$id,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+@else
+<button class="btn btn-transparent mt-2 "  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$id,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+
+@endif
+                                                    @if(count($checkParent) == ($key+1))
+
+                                                    @else
+                                                    <hr>
+                                                    @endif
+                                                    @endforeach
+
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-10 col-sm-12">
@@ -72,10 +103,300 @@
                                         <div class="tab-content mt-4" id="icon-tabContent">
                                             <div class="tab-pane fade show active" id="icon-home" role="tabpanel"
                                                  aria-labelledby="icon-home-tab">
-                                                <div id="container">
-                                                    <div id="editor">
-                                                        <p>লিখুন</p>
+
+                                                 @if(count($checkParent) == 0)
+                                                 <h3>কোন নোট পাওয়া যায়নি</h3>
+                                                 @else
+
+
+                                                 <!--first note start-->
+
+                                                <?php
+
+
+
+if($status == 'registration'){
+
+
+$checkParentFirst = DB::table('parent_note_for_registrations')->where('registration_doc_id',$id)
+               ->first();
+
+
+               $childNoteNewList = DB::table('child_note_for_registrations')
+                       ->where('parent_note_regid',$checkParentFirst->id)->get();
+
+
+}elseif($status == 'renew'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_renews')->where('renew_doc_present_id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_renews')
+                       ->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
+
+
+
+}elseif($status == 'nameChange'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_name_changes')->where('name_chane_doc_present_id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_name_changes')
+                       ->where('parentnote_name_change_id',$checkParentFirst->id)->get();
+
+
+
+}elseif($status == 'fdNine'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('fd_nine_doc_present_id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_nines')
+                       ->where('p_note_for_fd_nine_id',$checkParentFirst->id)->get();
+
+//dd($checkParent);
+
+
+}elseif($status == 'fdNineOne'){
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('fd_nine_one_doc_present_id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+                       ->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
+
+
+
+
+}elseif($status == 'fdSix'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('fd_six_doc_present_id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_sixes')
+                       ->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
+
+
+
+}elseif($status == 'fdSeven'){
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('fd_seven_doc_present_id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_sevens')
+                       ->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
+
+
+
+}elseif($status == 'fcOne'){
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('fc_one_doc_present_id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fc_ones')
+                       ->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
+
+
+
+
+}elseif($status == 'fcTwo'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('fc_two_doc_present_id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fc_twos')
+                       ->where('parent_note_for_fc_two_id',$checkParentFirst->id)->get();
+
+
+
+
+
+}elseif($status == 'fdThree'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('fd_three_doc_present_id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_threes')
+                       ->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
+
+
+}
+
+
+
+
+
+                                                ?>
+
+                                                 <!--end first note-->
+
+                                             @if(count($childNoteNewList) > 0)
+
+                                             {{-- <h3>কোন নোট পাওয়া যায়নি</h3> --}}
+
+
+                                             <div class="card-body">
+                                                <div class="default-according" id="accordion1">
+
+@foreach($childNoteNewList as $key=>$childNoteNewLists)
+
+                                                  <div class="card">
+                                                    <div class="card-header bg-primary" id="heading{{ $key+1 }}">
+                                                      <h5 class="mb-0">
+                                                        <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapse{{ $key+1 }}" aria-expanded="true" aria-controls="collapseFour">অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span> <span style="padding-right:40px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($childNoteNewLists->created_at) }}</span></button>
+                                                      </h5>
                                                     </div>
+                                                    <div class="collapse" id="collapse{{ $key+1 }}" aria-labelledby="heading{{ $key+1 }}" data-bs-parent="#accordion1">
+                                                      <div class="card-body">
+                                                        <form class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" value="{{ $status }}" name="status"/>
+                                                             <div id="container">
+                                                        <textarea class="maineditor" name="mainPartNote" id="editor{{ $key+1 }}">
+
+                                                            {!! $childNoteNewLists->description !!}
+                                                        </textarea>
+                                                    </div>
+
+
+                                                    <div class="d-flex flex-row-reverse mt-3">
+
+                                                        <button class="btn btn-danger ms-3" type="button">
+                                                            <i class="fa fa-send"></i>
+                                                            বাতিল করুন
+                                                        </button>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary " type="submit"
+
+                                                                    aria-expanded="false">
+                                                                    সংশোধন করুন
+                                                            </button>
+                                                            {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
+                                                                        অনুচ্ছেদ</a></li>
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
+                                                                </li>
+                                                            </ul> --}}
+                                                        </div>
+                                                    </div>
+
+
+                                                        </form>
+
+
+                                                    </div>
+                                                    </div>
+                                                  </div>
+                                                  @endforeach
+
+                                                  <div class="card">
+                                                    <div class="card-header bg-primary" id="headingSix">
+                                                      <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">নতুন অনুচ্ছেদ</button>
+                                                      </h5>
+                                                    </div>
+                                                    <div class="collapse show" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
+                                                      <div class="card-body">
+
+
+                                                        <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
+                                                            <input type="hidden" value="{{ $status }}" name="status"/>
+                                                        <div id="container">
+                                                            <textarea class="maineditor" id="mainpeditor"  name="mainPartNote">
+                                                                <p>লিখুন</p>
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="d-flex flex-row-reverse mt-3">
+
+                                                            <button class="btn btn-danger ms-3" type="button">
+                                                                <i class="fa fa-send"></i>
+                                                                বাতিল করুন
+                                                            </button>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-primary " type="submit"
+
+                                                                        aria-expanded="false">
+                                                                    সংরক্ষন করুন
+                                                                </button>
+                                                                {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
+                                                                            অনুচ্ছেদ</a></li>
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
+                                                                    </li>
+                                                                </ul> --}}
+                                                            </div>
+                                                        </div>
+                                                         </form>
+
+
+
+                                                    </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+
+
+
+
+                                             @else
+                                                 <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
+                                                    <input type="hidden" value="{{ $status }}" name="status"/>
+                                                <div id="container">
+                                                    <textarea id="peditor"  name="mainPartNote">
+                                                        <p>লিখুন</p>
+                                                    </textarea>
                                                 </div>
                                                 <div class="d-flex flex-row-reverse mt-3">
 
@@ -84,12 +405,12 @@
                                                         বাতিল করুন
                                                     </button>
                                                     <div class="dropdown">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                        <button class="btn btn-primary " type="submit"
+
                                                                 aria-expanded="false">
                                                             সংরক্ষন করুন
                                                         </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                             <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
                                                             <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
                                                             </li>
@@ -97,9 +418,14 @@
                                                                     অনুচ্ছেদ</a></li>
                                                             <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
                                                             </li>
-                                                        </ul>
+                                                        </ul> --}}
                                                     </div>
                                                 </div>
+                                                 </form>
+                                                @endif
+                                                @endif
+
+
                                             </div>
                                             <div class="tab-pane fade" id="profile-icon" role="tabpanel"
                                                  aria-labelledby="profile-icon-tab">
@@ -186,7 +512,7 @@
                                                                                             <form action="">
                                                                                                 <lable class="form-label">সম্পাদন শেষ করুন</lable>
                                                                                                 <div id="container">
-                                                                                                    <div id="editor2">
+                                                                                                    <div id="peditor">
                                                                                                         <p>লিখুন</p>
                                                                                                     </div>
                                                                                                 </div>
@@ -274,6 +600,43 @@
                 </div>
             </div>
             <!-- Container-fluid Ends-->
+
+
+            <!-- note add modal start -->
+
+
+            <div class="modal fade bd-example-modal-lg" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">নতুন নোট তৈরী করুন</h4>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="custom-validation" action="{{ route('parentNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                @csrf
+
+                                <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
+                                <input type="hidden" value="{{ $id }}" placeholder="নোট এর বিষয়" class="form-control" name="doc_id" id=""/>
+
+                                <div class="mb-3">
+                                <label class="form-label" for="">নোট এর বিষয় </label>
+                                <input type="text" placeholder="নোট এর বিষয়" class="form-control" name="subject" id=""/>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="btn btn-primary w-md mt-3">সংরক্ষণ করুন</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- end note add modal start -->
             <!-- Modal -->
 <div class="modal right fade bd-example-modal-lg"
      id="myModal2" tabindex="-1" role="dialog"
@@ -314,154 +677,175 @@
 @section('script')
 <!-- Plugin used-->
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
+
+<!--script for  nottangoso start-->
+<script>
+
+    $('.maineditor').each(function () {
+
+        var ii = $(this).prop('id');
+
+        //alert(ii);
+                // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+                // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+                CKEDITOR.ClassicEditor.create(document.querySelector("#"+ii), {
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                    toolbar: {
+                        items: [
+                            'exportPDF','exportWord', '|',
+                            'findAndReplace', 'selectAll', '|',
+                            'heading', '|',
+                            'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                            'bulletedList', 'numberedList', 'todoList', '|',
+                            'outdent', 'indent', '|',
+                            'undo', 'redo',
+                            '-',
+                            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                            'alignment', '|',
+                            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                            'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                            'textPartLanguage', '|',
+                            'sourceEditing'
+                        ],
+                        shouldNotGroupWhenFull: true
+                    },
+                    // Changing the language of the interface requires loading the language file using the <script> tag.
+                    // language: 'es',
+                    list: {
+                        properties: {
+                            styles: true,
+                            startIndex: true,
+                            reversed: true
+                        }
+                    },
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                            { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                            { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                        ]
+                    },
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                    placeholder: 'Welcome to CKEditor&nbsp;5!',
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                    fontFamily: {
+                        options: [
+                            'default',
+                            'Arial, Helvetica, sans-serif',
+                            'Courier New, Courier, monospace',
+                            'Georgia, serif',
+                            'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                            'Tahoma, Geneva, sans-serif',
+                            'Times New Roman, Times, serif',
+                            'Trebuchet MS, Helvetica, sans-serif',
+                            'Verdana, Geneva, sans-serif'
+                        ],
+                        supportAllValues: true
+                    },
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                    fontSize: {
+                        options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+                        supportAllValues: true
+                    },
+                    // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                    htmlSupport: {
+                        allow: [
+                            {
+                                name: /.*/,
+                                attributes: true,
+                                classes: true,
+                                styles: true
+                            }
+                        ]
+                    },
+                    // Be careful with enabling previews
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                    htmlEmbed: {
+                        showPreviews: true
+                    },
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                    link: {
+                        decorators: {
+                            addTargetToExternalLinks: true,
+                            defaultProtocol: 'https://',
+                            toggleDownloadable: {
+                                mode: 'manual',
+                                label: 'Downloadable',
+                                attributes: {
+                                    download: 'file'
+                                }
+                            }
+                        }
+                    },
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                    mention: {
+                        feeds: [
+                            {
+                                marker: '@',
+                                feed: [
+                                    '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                    '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                    '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                    '@sugar', '@sweet', '@topping', '@wafer'
+                                ],
+                                minimumCharacters: 1
+                            }
+                        ]
+                    },
+                    // The "super-build" contains more premium features that require additional configuration, disable them below.
+                    // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                    removePlugins: [
+                        // These two are commercial, but you can try them out without registering to a trial.
+                        // 'ExportPdf',
+                        // 'ExportWord',
+                        'AIAssistant',
+                        'CKBox',
+                        'CKFinder',
+                        'EasyImage',
+                        // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                        // Storing images as Base64 is usually a very bad idea.
+                        // Replace it on production website with other solutions:
+                        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                        // 'Base64UploadAdapter',
+                        'RealTimeCollaborativeComments',
+                        'RealTimeCollaborativeTrackChanges',
+                        'RealTimeCollaborativeRevisionHistory',
+                        'PresenceList',
+                        'Comments',
+                        'TrackChanges',
+                        'TrackChangesData',
+                        'RevisionHistory',
+                        'Pagination',
+                        'WProofreader',
+                        // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                        // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+                        'MathType',
+                        // The following features are part of the Productivity Pack and require additional license.
+                        'SlashCommand',
+                        'Template',
+                        'DocumentOutline',
+                        'FormatPainter',
+                        'TableOfContents',
+                        'PasteFromOfficeEnhanced'
+                    ]
+                });
+
+            });
+            </script>
+
+<!--script for  nottangoso end-->
+
 <script>
     // This sample still does not showcase all CKEditor 5 features (!)
     // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-    CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
-        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
-        toolbar: {
-            items: [
-                'exportPDF', 'exportWord', '|',
-                'findAndReplace', 'selectAll', '|',
-                'heading', '|',
-                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-                'bulletedList', 'numberedList', 'todoList', '|',
-                'outdent', 'indent', '|',
-                'undo', 'redo',
-                '-',
-                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-                'alignment', '|',
-                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-                'textPartLanguage', '|',
-                'sourceEditing'
-            ],
-            shouldNotGroupWhenFull: true
-        },
-        // Changing the language of the interface requires loading the language file using the <script> tag.
-        // language: 'es',
-        list: {
-            properties: {
-                styles: true,
-                startIndex: true,
-                reversed: true
-            }
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
-        heading: {
-            options: [
-                {model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
-                {model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1'},
-                {model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2'},
-                {model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3'},
-                {model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4'},
-                {model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5'},
-                {model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6'}
-            ]
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-        placeholder: 'Welcome to CKEditor 5!',
-        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
-        fontFamily: {
-            options: [
-                'default',
-                'Arial, Helvetica, sans-serif',
-                'Courier New, Courier, monospace',
-                'Georgia, serif',
-                'Lucida Sans Unicode, Lucida Grande, sans-serif',
-                'Tahoma, Geneva, sans-serif',
-                'Times New Roman, Times, serif',
-                'Trebuchet MS, Helvetica, sans-serif',
-                'Verdana, Geneva, sans-serif'
-            ],
-            supportAllValues: true
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
-        fontSize: {
-            options: [10, 12, 14, 'default', 18, 20, 22],
-            supportAllValues: true
-        },
-        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
-        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
-        htmlSupport: {
-            allow: [
-                {
-                    name: /.*/,
-                    attributes: true,
-                    classes: true,
-                    styles: true
-                }
-            ]
-        },
-        // Be careful with enabling previews
-        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
-        htmlEmbed: {
-            showPreviews: true
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
-        link: {
-            decorators: {
-                addTargetToExternalLinks: true,
-                defaultProtocol: 'https://',
-                toggleDownloadable: {
-                    mode: 'manual',
-                    label: 'Downloadable',
-                    attributes: {
-                        download: 'file'
-                    }
-                }
-            }
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
-        mention: {
-            feeds: [
-                {
-                    marker: '@',
-                    feed: [
-                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-                        '@sugar', '@sweet', '@topping', '@wafer'
-                    ],
-                    minimumCharacters: 1
-                }
-            ]
-        },
-        // The "super-build" contains more premium features that require additional configuration, disable them below.
-        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
-        removePlugins: [
-            // These two are commercial, but you can try them out without registering to a trial.
-            // 'ExportPdf',
-            // 'ExportWord',
-            'CKBox',
-            'CKFinder',
-            'EasyImage',
-            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
-            // Storing images as Base64 is usually a very bad idea.
-            // Replace it on production website with other solutions:
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
-            // 'Base64UploadAdapter',
-            'RealTimeCollaborativeComments',
-            'RealTimeCollaborativeTrackChanges',
-            'RealTimeCollaborativeRevisionHistory',
-            'PresenceList',
-            'Comments',
-            'TrackChanges',
-            'TrackChangesData',
-            'RevisionHistory',
-            'Pagination',
-            'WProofreader',
-            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
-            // from a local file system (file://) - load this site via HTTP server if you enable MathType
-            'MathType'
-        ]
-    });
-</script>
-<script>
-    // This sample still does not showcase all CKEditor 5 features (!)
-    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-    CKEDITOR.ClassicEditor.create(document.getElementById("editor2"), {
+    CKEDITOR.ClassicEditor.create(document.getElementById("peditor"), {
         // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
         toolbar: {
             items: [
