@@ -18,7 +18,7 @@
 
         .ck-editor__editable[role="textbox"] {
             /* editing area */
-            min-height: 40vh;
+            min-height: 10vh;
         }
 
         .ck-content .image {
@@ -125,6 +125,8 @@ $checkParentFirst = DB::table('parent_note_for_registrations')->where('registrat
                $childNoteNewList = DB::table('child_note_for_registrations')
                        ->where('parent_note_regid',$checkParentFirst->id)->get();
 
+                       $officeDetail = DB::table('registration_office_saroks')->where('parent_note_regid',$checkParentFirst->id)->get();
+
 
 }elseif($status == 'renew'){
 
@@ -137,6 +139,9 @@ $checkParentFirst = DB::table('parent_note_for_renews')->where('renew_doc_presen
 
 $childNoteNewList = DB::table('child_note_for_renews')
                        ->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
+
+
+                       $officeDetail = DB::table('renew_office_saroks')->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
 
 
 
@@ -153,7 +158,7 @@ $checkParentFirst = DB::table('parent_note_for_name_changes')->where('name_chane
 
 $childNoteNewList = DB::table('child_note_for_name_changes')
                        ->where('parentnote_name_change_id',$checkParentFirst->id)->get();
-
+                       $officeDetail = DB::table('name_change_office_saroks')->where('parentnote_name_change_id',$checkParentFirst->id)->get();
 
 
 }elseif($status == 'fdNine'){
@@ -171,7 +176,7 @@ $childNoteNewList = DB::table('child_note_for_fd_nines')
                        ->where('p_note_for_fd_nine_id',$checkParentFirst->id)->get();
 
 //dd($checkParent);
-
+$officeDetail = DB::table('fd_nine_office_saroks')->where('p_note_for_fd_nine_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdNineOne'){
 
@@ -186,7 +191,7 @@ $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
                        ->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
 
 
-
+                       $officeDetail = DB::table('fd_nine_one_office_saroks')->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdSix'){
 
@@ -199,7 +204,7 @@ $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('fd_six_doc_pres
 $childNoteNewList = DB::table('child_note_for_fd_sixes')
                        ->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
 
-
+                       $officeDetail = DB::table('fd_six_office_saroks')->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdSeven'){
 
@@ -213,7 +218,7 @@ $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('fd_seven_doc_
 $childNoteNewList = DB::table('child_note_for_fd_sevens')
                        ->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
 
-
+                       $officeDetail = DB::table('fd_seven_office_saroks')->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fcOne'){
 
@@ -226,7 +231,7 @@ $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('fc_one_doc_pres
 $childNoteNewList = DB::table('child_note_for_fc_ones')
                        ->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
 
-
+                       $officeDetail = DB::table('fc_one_office_saroks')->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
 
 
 }elseif($status == 'fcTwo'){
@@ -242,7 +247,7 @@ $childNoteNewList = DB::table('child_note_for_fc_twos')
 
 
 
-
+                       $officeDetail = DB::table('fc_two_office_saroks')->where('parent_note_for_fc_two_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdThree'){
 
@@ -257,7 +262,7 @@ $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('fd_three_doc_
 
 $childNoteNewList = DB::table('child_note_for_fd_threes')
                        ->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
-
+                       $officeDetail = DB::table('fd_three_office_saroks')->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
 
 }
 
@@ -429,6 +434,11 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                             </div>
                                             <div class="tab-pane fade" id="profile-icon" role="tabpanel"
                                                  aria-labelledby="profile-icon-tab">
+
+                                                 @if(count($checkParent) == 0)
+                                                 <h3>কোন নোট পাওয়া যায়নি</h3>
+                                                 @else
+
                                                 <div class="row">
                                                     <div class="col-xl-9">
                                                         <div class="card-body">
@@ -484,55 +494,125 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                     <p>স্মারক নং- 123456789</p>
 
 
-                                                                                    <form>
+                                                                                    @if(count($officeDetail) > 0 )
+
+                                                                                    @foreach($officeDetail as $officeDetails)
+
+                                                                                    <input type="hidden" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
+                                                                                    <div class="row">
+                                                                                      <div class="col-xl-1">বিষয় :
+                                                                                      </div>
+                                                                                      <div class="col-xl-11">
+
+                                                                                      <div id="editor121" name="der">
+                                                                                  {!! $officeDetails->office_subject !!}
+                                                                                          </div>
+
+
+                                                                                      {{-- <span id="idOfElement"
+                                                                                            class="block">
+                                                                                      <textarea class=" form-control edit"   id="">..............................................................................................</textarea>
+                                                                                      <span class="preview"></span> --}}
+                                                                                  </span>
+                                                                                      </div>
+                                                                                  </div>
+                                                                                  <div class="row">
+                                                                                      <div class="col-xl-3">সুত্রঃ
+                                                                                          (যদি থাকে):
+                                                                                      </div>
+                                                                                      <div class="col-xl-9">
+
+                                                                                          <div id="editor122" name="dere">
+                                                                                              {!! $officeDetails->office_sutro !!}
+                                                                                                      </div>
+
+                                                                                      {{-- <span id="idOfElement1"
+                                                                                            class="block">
+                                                                                      <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
+                                                                                      <span class="preview"></span> --}}
+                                                                                  </span>
+                                                                                      </div>
+                                                                                  </div>
+                                                                                  <div class="row">
+                                                                                      <div class="col-xl-12">
+
+                                                                                              <label class="form-label">সম্পাদন শেষ করুন</label>
+
+
+
+                                                                                                  <div id="editor1222" name="derrr">
+                                                                                                      {!! $officeDetails->description !!}
+                                                                                                  </div>
+
+
+                                                                                      </div>
+                                                                                  </div>
+
+                                                                                    @endforeach
+
+                                                                                    <button class="btn btn-primary  mt-2" id="sorkariSarokUpdate"
+
+                                                                                    aria-expanded="false">
+                                                                                    সংশোধন করুন
+                                                                            </button>
+                                                                                    @else
                                                                                     <div class="row">
                                                                                         <div class="col-xl-1">বিষয় :
                                                                                         </div>
                                                                                         <div class="col-xl-11">
-                                                                                        <span id="idOfElement"
+
+                                                                                        <div id="editor121" name="der">
+                                                                                    ..................................................
+                                                                                            </div>
+
+
+                                                                                        {{-- <span id="idOfElement"
                                                                                               class="block">
-                                                                                        <textarea
-                                                                                                class="form-control edit">..............................................................................................</textarea>
-                                                                                        <span class="preview"></span>
+                                                                                        <textarea class=" form-control edit"   id="">..............................................................................................</textarea>
+                                                                                        <span class="preview"></span> --}}
                                                                                     </span>
                                                                                         </div>
                                                                                     </div>
-
-
-
                                                                                     <div class="row">
                                                                                         <div class="col-xl-3">সুত্রঃ
                                                                                             (যদি থাকে):
                                                                                         </div>
                                                                                         <div class="col-xl-9">
-                                                                                        <span id="idOfElement1"
+
+                                                                                            <div id="editor122" name="dere">
+                                                                                                ..................................................
+                                                                                                        </div>
+
+                                                                                        {{-- <span id="idOfElement1"
                                                                                               class="block">
-                                                                                        <textarea
-                                                                                                class="form-control edit">.............................................................................................</textarea>
-                                                                                        <span class="preview"></span>
+                                                                                        <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
+                                                                                        <span class="preview"></span> --}}
                                                                                     </span>
                                                                                         </div>
                                                                                     </div>
-
-
                                                                                     <div class="row">
                                                                                         <div class="col-xl-12">
-                                                                                            <form action="">
-                                                                                                <lable class="form-label">সম্পাদন শেষ করুন</lable>
-                                                                                                <div id="container">
-                                                                                                    <div id="peditor">
-                                                                                                        <p>লিখুন</p>
+
+                                                                                                <label class="form-label">সম্পাদন শেষ করুন</label>
+
+
+
+                                                                                                    <div id="editor1222" name="derrr">
+                                                                                                      ................................
                                                                                                     </div>
-                                                                                                </div>
-                                                                                            </form>
+
+
                                                                                         </div>
                                                                                     </div>
-                                                                                    <button class="btn btn-primary " type="submit"
+
+                                                                                    <button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
 
                                                                                     aria-expanded="false">
                                                                                 সংরক্ষন করুন
                                                                             </button>
-                                                                                    </form>
+
+                                                                            @endif
+
 
                                                                                 </div>
                                                                             </div>
@@ -604,6 +684,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                         </div>
                                                     </div>
                                                 </div>
+                                            
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -687,9 +769,106 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
         </div><!-- modal-dialog -->
     </div><!-- modal -->
 </div>
+
+
+<!--code for ajax -->
+<input type="hidden" id="updateOrSubmit" value="1"/>
+<input type="hidden" id="parentIdForPotrangso" value="{{ $id }}"/>
+<input type="hidden" id="statusForPotrangso" value="{{ $status }}"/>
+<!--end code for ajax-->
+
+
 @endsection
 
 @section('script')
+
+<script>
+    $.ajaxSetup({
+
+    headers: {
+
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+    }
+
+    });
+    $("#sorkariSarokSubmit").click(function(){
+
+
+
+        var subject =$('#editor121').html();
+        var sutro =$('#editor122').html();
+        var maindes =$('#editor1222').html();
+
+        var parentIdForPotrangso =$('#parentIdForPotrangso').val();
+        var statusForPotrangso =$('#statusForPotrangso').val();
+
+
+      //alert(maindes);
+
+
+      $.ajax({
+            url: "{{ route('officeSarok.store') }}",
+            method: 'Post',
+            data: {subject:subject,sutro:sutro,maindes:maindes,parentIdForPotrangso:parentIdForPotrangso,statusForPotrangso:statusForPotrangso},
+            success: function(data) {
+
+                location.reload();
+
+                // $("#serial_part_one"+id_for_pass).val(data);
+                // $("#hidden_value"+id_for_pass).val(data);
+
+
+
+
+            }
+            });
+
+
+
+    });
+
+
+    $("#sorkariSarokUpdate").click(function(){
+
+
+
+    var subject =$('#editor121').html();
+    var sutro =$('#editor122').html();
+    var maindes =$('#editor1222').html();
+
+    var parentIdForPotrangso =$('#parentIdForPotrangso').val();
+    var statusForPotrangso =$('#statusForPotrangso').val();
+    var updateOrSubmit =$('#updateOrSubmit').val();
+    var sorkariUpdateId =$('#sorkariUpdateId').val();
+
+    //alert(maindes);
+
+
+    $.ajax({
+        url: "{{ route('officeSarok.store') }}",
+        method: 'Post',
+        data: {sorkariUpdateId:sorkariUpdateId,updateOrSubmit:updateOrSubmit,subject:subject,sutro:sutro,maindes:maindes,parentIdForPotrangso:parentIdForPotrangso,statusForPotrangso:statusForPotrangso},
+        success: function(data) {
+
+            location.reload();
+
+            // $("#serial_part_one"+id_for_pass).val(data);
+            // $("#hidden_value"+id_for_pass).val(data);
+
+
+
+
+        }
+        });
+
+
+
+    });
+
+    </script>
+
+
 <!-- Plugin used-->
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
 
@@ -1002,35 +1181,448 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
     });
 </script>
 
-<script src="https://cdn.jsdelivr.net/gh/JackChilds/Preview-In-Place@main/dist/previewinplace.min.js"></script>
+
+<!-- script for potrangso start -->
+
+
+
 <script>
-    // get element:
-    var el = document.querySelector('#idOfElement')
-
-    // function to process the user's data, e.g. you could convert markdown to HTML here:
-    function processData(data) {
-        return data.toUpperCase() // do something with the data here
-    }
-
-    // initialise the class:
-    var example = new PreviewInPlace(el, {
-        // options
-        previewGenerator: processData // reference to the function that processes the data
-    })
+    // This sample still does not showcase all CKEditor 5 features (!)
+    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+    CKEDITOR.InlineEditor.create(document.getElementById("editor121"), {
+        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+        toolbar: {
+            items: [
+                'exportPDF', 'exportWord', '|',
+                'findAndReplace', 'selectAll', '|',
+                'heading', '|',
+                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',
+                'outdent', 'indent', '|',
+                'undo', 'redo',
+                '-',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                'alignment', '|',
+                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                'textPartLanguage', '|',
+                'sourceEditing'
+            ],
+            shouldNotGroupWhenFull: true
+        },
+        // Changing the language of the interface requires loading the language file using the <script> tag.
+        // language: 'es',
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+        heading: {
+            options: [
+                {model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
+                {model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1'},
+                {model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2'},
+                {model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3'},
+                {model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4'},
+                {model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5'},
+                {model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6'}
+            ]
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+        placeholder: 'লিখুন ',
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+        fontFamily: {
+            options: [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+            ],
+            supportAllValues: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+        htmlSupport: {
+            allow: [
+                {
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true
+                }
+            ]
+        },
+        // Be careful with enabling previews
+        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+        htmlEmbed: {
+            showPreviews: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+        link: {
+            decorators: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+                toggleDownloadable: {
+                    mode: 'manual',
+                    label: 'Downloadable',
+                    attributes: {
+                        download: 'file'
+                    }
+                }
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+        mention: {
+            feeds: [
+                {
+                    marker: '@',
+                    feed: [
+                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                        '@sugar', '@sweet', '@topping', '@wafer'
+                    ],
+                    minimumCharacters: 1
+                }
+            ]
+        },
+        // The "super-build" contains more premium features that require additional configuration, disable them below.
+        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+        removePlugins: [
+            // These two are commercial, but you can try them out without registering to a trial.
+            // 'ExportPdf',
+            // 'ExportWord',
+            'CKBox',
+            'CKFinder',
+            'EasyImage',
+            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+            // Storing images as Base64 is usually a very bad idea.
+            // Replace it on production website with other solutions:
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+            // 'Base64UploadAdapter',
+            'RealTimeCollaborativeComments',
+            'RealTimeCollaborativeTrackChanges',
+            'RealTimeCollaborativeRevisionHistory',
+            'PresenceList',
+            'Comments',
+            'TrackChanges',
+            'TrackChangesData',
+            'RevisionHistory',
+            'Pagination',
+            'WProofreader',
+            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+            // from a local file system (file://) - load this site via HTTP server if you enable MathType
+            'MathType'
+        ]
+    });
 </script>
+
+
+
 <script>
-    // get element:
-    var el = document.querySelector('#idOfElement1')
-
-    // function to process the user's data, e.g. you could convert markdown to HTML here:
-    function processData(data) {
-        return data.toUpperCase() // do something with the data here
-    }
-
-    // initialise the class:
-    var example = new PreviewInPlace(el, {
-        // options
-        previewGenerator: processData // reference to the function that processes the data
-    })
+    // This sample still does not showcase all CKEditor 5 features (!)
+    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+    CKEDITOR.InlineEditor.create(document.getElementById("editor122"), {
+        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+        toolbar: {
+            items: [
+                'exportPDF', 'exportWord', '|',
+                'findAndReplace', 'selectAll', '|',
+                'heading', '|',
+                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',
+                'outdent', 'indent', '|',
+                'undo', 'redo',
+                '-',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                'alignment', '|',
+                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                'textPartLanguage', '|',
+                'sourceEditing'
+            ],
+            shouldNotGroupWhenFull: true
+        },
+        // Changing the language of the interface requires loading the language file using the <script> tag.
+        // language: 'es',
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+        heading: {
+            options: [
+                {model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
+                {model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1'},
+                {model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2'},
+                {model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3'},
+                {model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4'},
+                {model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5'},
+                {model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6'}
+            ]
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+        placeholder: 'লিখুন ',
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+        fontFamily: {
+            options: [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+            ],
+            supportAllValues: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+        htmlSupport: {
+            allow: [
+                {
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true
+                }
+            ]
+        },
+        // Be careful with enabling previews
+        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+        htmlEmbed: {
+            showPreviews: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+        link: {
+            decorators: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+                toggleDownloadable: {
+                    mode: 'manual',
+                    label: 'Downloadable',
+                    attributes: {
+                        download: 'file'
+                    }
+                }
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+        mention: {
+            feeds: [
+                {
+                    marker: '@',
+                    feed: [
+                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                        '@sugar', '@sweet', '@topping', '@wafer'
+                    ],
+                    minimumCharacters: 1
+                }
+            ]
+        },
+        // The "super-build" contains more premium features that require additional configuration, disable them below.
+        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+        removePlugins: [
+            // These two are commercial, but you can try them out without registering to a trial.
+            // 'ExportPdf',
+            // 'ExportWord',
+            'CKBox',
+            'CKFinder',
+            'EasyImage',
+            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+            // Storing images as Base64 is usually a very bad idea.
+            // Replace it on production website with other solutions:
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+            // 'Base64UploadAdapter',
+            'RealTimeCollaborativeComments',
+            'RealTimeCollaborativeTrackChanges',
+            'RealTimeCollaborativeRevisionHistory',
+            'PresenceList',
+            'Comments',
+            'TrackChanges',
+            'TrackChangesData',
+            'RevisionHistory',
+            'Pagination',
+            'WProofreader',
+            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+            // from a local file system (file://) - load this site via HTTP server if you enable MathType
+            'MathType'
+        ]
+    });
 </script>
+
+<script>
+    // This sample still does not showcase all CKEditor 5 features (!)
+    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+    CKEDITOR.InlineEditor.create(document.getElementById("editor1222"), {
+        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+        toolbar: {
+            items: [
+                'exportPDF', 'exportWord', '|',
+                'findAndReplace', 'selectAll', '|',
+                'heading', '|',
+                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',
+                'outdent', 'indent', '|',
+                'undo', 'redo',
+                '-',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                'alignment', '|',
+                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                'textPartLanguage', '|',
+                'sourceEditing'
+            ],
+            shouldNotGroupWhenFull: true
+        },
+        // Changing the language of the interface requires loading the language file using the <script> tag.
+        // language: 'es',
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+        heading: {
+            options: [
+                {model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
+                {model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1'},
+                {model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2'},
+                {model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3'},
+                {model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4'},
+                {model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5'},
+                {model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6'}
+            ]
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+        placeholder: 'লিখুন ',
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+        fontFamily: {
+            options: [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+            ],
+            supportAllValues: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+        htmlSupport: {
+            allow: [
+                {
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true
+                }
+            ]
+        },
+        // Be careful with enabling previews
+        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+        htmlEmbed: {
+            showPreviews: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+        link: {
+            decorators: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+                toggleDownloadable: {
+                    mode: 'manual',
+                    label: 'Downloadable',
+                    attributes: {
+                        download: 'file'
+                    }
+                }
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+        mention: {
+            feeds: [
+                {
+                    marker: '@',
+                    feed: [
+                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                        '@sugar', '@sweet', '@topping', '@wafer'
+                    ],
+                    minimumCharacters: 1
+                }
+            ]
+        },
+        // The "super-build" contains more premium features that require additional configuration, disable them below.
+        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+        removePlugins: [
+            // These two are commercial, but you can try them out without registering to a trial.
+            // 'ExportPdf',
+            // 'ExportWord',
+            'CKBox',
+            'CKFinder',
+            'EasyImage',
+            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+            // Storing images as Base64 is usually a very bad idea.
+            // Replace it on production website with other solutions:
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+            // 'Base64UploadAdapter',
+            'RealTimeCollaborativeComments',
+            'RealTimeCollaborativeTrackChanges',
+            'RealTimeCollaborativeRevisionHistory',
+            'PresenceList',
+            'Comments',
+            'TrackChanges',
+            'TrackChangesData',
+            'RevisionHistory',
+            'Pagination',
+            'WProofreader',
+            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+            // from a local file system (file://) - load this site via HTTP server if you enable MathType
+            'MathType'
+        ]
+    });
+</script>
+<!-- script for potrangso end -->
+
+
 @endsection
