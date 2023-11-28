@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\DocumentPresentController;
 use App\Http\Controllers\Admin\DocumentTypeController;
 use App\Http\Controllers\Admin\ChildNoteController;
 use App\Http\Controllers\Admin\ParentNoteController;
+use App\Http\Controllers\Admin\OfficeSarokController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('documentPresent', DocumentPresentController::class);
     Route::resource('documentType', DocumentTypeController::class);
+    Route::resource('officeSarok', OfficeSarokController::class);
 
 
     Route::resource('childNote', ChildNoteController::class);

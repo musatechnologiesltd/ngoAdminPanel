@@ -482,6 +482,9 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                         </h5>
                                                                                     </div>
                                                                                     <p>স্মারক নং- 123456789</p>
+
+
+                                                                                    <form>
                                                                                     <div class="row">
                                                                                         <div class="col-xl-1">বিষয় :
                                                                                         </div>
@@ -494,6 +497,9 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                     </span>
                                                                                         </div>
                                                                                     </div>
+
+
+
                                                                                     <div class="row">
                                                                                         <div class="col-xl-3">সুত্রঃ
                                                                                             (যদি থাকে):
@@ -507,6 +513,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                     </span>
                                                                                         </div>
                                                                                     </div>
+
+
                                                                                     <div class="row">
                                                                                         <div class="col-xl-12">
                                                                                             <form action="">
@@ -519,6 +527,13 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                             </form>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <button class="btn btn-primary " type="submit"
+
+                                                                                    aria-expanded="false">
+                                                                                সংরক্ষন করুন
+                                                                            </button>
+                                                                                    </form>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
