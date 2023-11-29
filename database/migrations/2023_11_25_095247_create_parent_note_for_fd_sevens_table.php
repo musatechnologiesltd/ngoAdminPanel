@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('parent_note_for_fd_sevens', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('fd_seven_doc_present_id')->unsigned();
-            $table->foreign('fd_seven_doc_present_id')->references('id')->on('fd_seven_doc_presents')->onDelete('cascade');
+            $table->bigInteger('nothi_detail_id')->unsigned();
+
             $table->string('serial_number');
             $table->string('subject');
             $table->string('name');

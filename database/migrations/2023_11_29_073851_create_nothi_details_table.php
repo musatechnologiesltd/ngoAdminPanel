@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parent_note_for_fd_threes', function (Blueprint $table) {
+        Schema::create('nothi_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nothi_detail_id')->unsigned();
-
-            $table->string('serial_number');
-            $table->string('subject');
-            $table->string('name');
+            $table->string('nothId');
+            $table->string('dakId');
+            $table->string('dakType');
+            $table->string('sender');
+            $table->string('receiver');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('parent_note_for_fd_threes');
+        Schema::dropIfExists('nothi_details');
     }
 };

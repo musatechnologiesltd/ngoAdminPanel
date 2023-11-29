@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('parent_note_for_fc_twos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('fc_two_doc_present_id')->unsigned();
-            $table->foreign('fc_two_doc_present_id')->references('id')->on('fc_two_doc_presents')->onDelete('cascade');
+            $table->bigInteger('nothi_detail_id')->unsigned();
+
             $table->string('serial_number');
             $table->string('subject');
             $table->string('name');

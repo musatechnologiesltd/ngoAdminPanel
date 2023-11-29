@@ -120,58 +120,37 @@ if($status == 'registration'){
 
 $checkParentFirst = DB::table('parent_note_for_registrations')->where('registration_doc_id',$id)
                ->first();
-
-
-               $childNoteNewList = DB::table('child_note_for_registrations')
+$childNoteNewList = DB::table('child_note_for_registrations')
                        ->where('parent_note_regid',$checkParentFirst->id)->get();
-
-                       $officeDetail = DB::table('registration_office_saroks')->where('parent_note_regid',$checkParentFirst->id)->get();
+$officeDetail = DB::table('registration_office_saroks')->where('parent_note_regid',$checkParentFirst->id)->get();
 
 
 }elseif($status == 'renew'){
 
-
-
-
 $checkParentFirst = DB::table('parent_note_for_renews')->where('renew_doc_present_id',$id)
 ->first();
 
-
 $childNoteNewList = DB::table('child_note_for_renews')
                        ->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
-
-
-                       $officeDetail = DB::table('renew_office_saroks')->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('renew_office_saroks')->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
 
 
 
 }elseif($status == 'nameChange'){
 
-
-
-
-
-
 $checkParentFirst = DB::table('parent_note_for_name_changes')->where('name_chane_doc_present_id',$id)
 ->first();
 
-
 $childNoteNewList = DB::table('child_note_for_name_changes')
                        ->where('parentnote_name_change_id',$checkParentFirst->id)->get();
-                       $officeDetail = DB::table('name_change_office_saroks')->where('parentnote_name_change_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('name_change_office_saroks')
+->where('parentnote_name_change_id',$checkParentFirst->id)->get();
 
 
 }elseif($status == 'fdNine'){
 
-
-
-
-
-
 $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('fd_nine_doc_present_id',$id)
 ->first();
-
-
 $childNoteNewList = DB::table('child_note_for_fd_nines')
                        ->where('p_note_for_fd_nine_id',$checkParentFirst->id)->get();
 
@@ -180,23 +159,15 @@ $officeDetail = DB::table('fd_nine_office_saroks')->where('p_note_for_fd_nine_id
 
 }elseif($status == 'fdNineOne'){
 
-
-
-
-
 $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('fd_nine_one_doc_present_id',$id)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
                        ->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
 
-
-                       $officeDetail = DB::table('fd_nine_one_office_saroks')->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('fd_nine_one_office_saroks')->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdSix'){
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('fd_six_doc_present_id',$id)
 ->first();
@@ -204,13 +175,9 @@ $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('fd_six_doc_pres
 $childNoteNewList = DB::table('child_note_for_fd_sixes')
                        ->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
 
-                       $officeDetail = DB::table('fd_six_office_saroks')->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('fd_six_office_saroks')->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdSeven'){
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('fd_seven_doc_present_id',$id)
 ->first();
@@ -218,26 +185,19 @@ $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('fd_seven_doc_
 $childNoteNewList = DB::table('child_note_for_fd_sevens')
                        ->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
 
-                       $officeDetail = DB::table('fd_seven_office_saroks')->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('fd_seven_office_saroks')->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fcOne'){
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('fc_one_doc_present_id',$id)
 ->first();
 
-
 $childNoteNewList = DB::table('child_note_for_fc_ones')
                        ->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
-
-                       $officeDetail = DB::table('fc_one_office_saroks')->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('fc_one_office_saroks')->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
 
 
 }elseif($status == 'fcTwo'){
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('fc_two_doc_present_id',$id)
 ->first();
@@ -245,16 +205,9 @@ $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('fc_two_doc_pres
 $childNoteNewList = DB::table('child_note_for_fc_twos')
                        ->where('parent_note_for_fc_two_id',$checkParentFirst->id)->get();
 
-
-
-                       $officeDetail = DB::table('fc_two_office_saroks')->where('parent_note_for_fc_two_id',$checkParentFirst->id)->get();
+$officeDetail = DB::table('fc_two_office_saroks')->where('parent_note_for_fc_two_id',$checkParentFirst->id)->get();
 
 }elseif($status == 'fdThree'){
-
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('fd_three_doc_present_id',$id)
 ->first();
@@ -266,11 +219,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 }
 
-
-
-
-
-                                                ?>
+ ?>
 
                                                  <!--end first note-->
 
@@ -684,7 +633,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                         </div>
                                                     </div>
                                                 </div>
-                                            
+
                                                 @endif
                                             </div>
                                         </div>

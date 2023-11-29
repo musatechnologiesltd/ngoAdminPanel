@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('parent_note_for_renews', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('renew_doc_present_id')->unsigned();
-            $table->foreign('renew_doc_present_id')->references('id')->on('renew_doc_presents')->onDelete('cascade');
+            $table->bigInteger('nothi_detail_id')->unsigned();
+
             $table->string('serial_number');
             $table->string('subject');
             $table->string('name');

@@ -154,6 +154,31 @@
     </a>
 </li>
 
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav" href="{{ route('dakBranchList.index') }}">
+        <i data-feather="file-minus"></i>
+        <span>প্রেরিত নথি</span>
+    </a>
+</li>
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('documentPresent.index')  ? 'active' : '' }}" href="{{ route('documentPresent.index') }}">
+        <i data-feather="file-text"></i>
+        <span>নথি তালিকা</span>
+    </a>
+</li>
+
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('documentPresent.create')  ? 'active' : '' }}" href="{{ route('documentPresent.create') }}">
+        <i data-feather="file-text"></i>
+        <span>নতুন নথি তৈরী করুন </span>
+    </a>
+</li>
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav" href="{{ route('dakBranchList.index') }}">
+        <i data-feather="file-plus"></i>
+        <span>নথি সিদ্ধান্ত সমূহ</span>
+    </a>
+</li>
 {{-- <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('testOne')  ? 'active' : '' }}" href="{{ route('testOne') }}">
         <i data-feather="mail"></i>

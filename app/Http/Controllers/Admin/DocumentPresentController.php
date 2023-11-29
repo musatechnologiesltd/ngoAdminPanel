@@ -9,16 +9,7 @@ use Image;
 use Auth;
 use Hash;
 use App\Models\DocumentType;
-use App\Models\RegistrationDocPresent;
-use App\Models\RenewDocPresent;
-use App\Models\FdNineDocPresent;
-use App\Models\NameChaneDocPresent;
-use App\Models\FdNineOneDocPresent;
-use App\Models\FdSixDocPresent;
-use App\Models\FdSevenDocPresent;
-use App\Models\FdThreeDocPresent;
-use App\Models\FcOneDocPresent;
-use App\Models\FcTwoDocPresent;
+use App\Models\NothiList;
 
 
 use App\Models\ChildNoteForFcOne;
@@ -48,6 +39,14 @@ use App\Models\ParentNoteForRenew;
 
 class DocumentPresentController extends Controller
 {
+
+
+    public function create(){
+
+        $documentTypeList = DocumentType::latest()->get();
+         return view('admin.presentDocument.create',compact('documentTypeList'));
+
+     }
 
 
 
@@ -189,16 +188,14 @@ class DocumentPresentController extends Controller
      */
     public function index()
     {
-        //
+        $nothiList = NothiList::latest()->get();
+        return view('admin.presentDocument.index',compact('nothiList'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -226,174 +223,20 @@ class DocumentPresentController extends Controller
         }else{
 
 
-            if($request->status == 'registration'){
 
 
-                $documentType = new RegistrationDocPresent();
-                $documentType->ngo_registration_dak_id =$request->id;
+
+                $documentType = new NothiList();
                 $documentType->document_branch =$request->document_branch;
                 $documentType->document_type_id =$request->document_type_id;
                 $documentType->document_number =$request->document_number;
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
                 $documentType->save();
 
 
-            }elseif($request->status == 'renew'){
 
-
-                $documentType = new RenewDocPresent();
-                $documentType->ngo_renew_dak_id =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'nameChange'){
-
-
-
-                $documentType = new NameChaneDocPresent();
-                $documentType->ngo_name_change_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fdNine'){
-
-
-
-
-                $documentType = new FdNineDocPresent();
-                $documentType->ngo_f_d_nine_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fdNineOne'){
-
-
-
-                $documentType = new FdNineOneDocPresent();
-                $documentType->ngo_f_d_nine_one_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fdSix'){
-
-
-                $documentType = new FdSixDocPresent();
-                $documentType->ngo_fd_six_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fdSeven'){
-
-
-                $documentType = new FdSevenDocPresent();
-                $documentType->ngo_fd_seven_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fcOne'){
-
-
-
-                $documentType = new FcOneDocPresent();
-                $documentType->fc_one_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fcTwo'){
-
-
-
-                $documentType = new FcTwoDocPresent();
-                $documentType->fc_two_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }elseif($request->status == 'fdThree'){
-
-
-
-                $documentType = new FdThreeDocPresent();
-                $documentType->fd_three_dak_id  =$request->id;
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->sender =0;
-                $documentType->receiver =0;
-                $documentType->save();
-
-
-            }
 
 
 
@@ -402,7 +245,7 @@ class DocumentPresentController extends Controller
 
         }
 
-        return redirect()->route('sheetAndNotes', ['status' => $request->status,'nothiId'=>$request->id, 'id' =>$documentType->id]);
+        return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
 
     /**
@@ -418,7 +261,9 @@ class DocumentPresentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $documentTypeList = DocumentType::latest()->get();
+        $nothiList = NothiList::find($id);
+        return view('admin.presentDocument.edit',compact('nothiList','documentTypeList'));
     }
 
     /**
@@ -426,7 +271,17 @@ class DocumentPresentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+                $documentType = NothiList::find($id);
+                $documentType->document_branch =$request->document_branch;
+                $documentType->document_type_id =$request->document_type_id;
+                $documentType->document_number =$request->document_number;
+                $documentType->document_year =$request->document_year;
+                $documentType->document_class =$request->document_class;
+                $documentType->document_subject =$request->document_subject;
+                $documentType->save();
+
+
+                return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংশোধন করা হয়েছে');
     }
 
     /**
@@ -434,6 +289,10 @@ class DocumentPresentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $admins = NothiList::where('id',$id)->delete();
+
+
+
+        return back()->with('error','সফলভাবে মুছে ফেলা হয়েছে!');
     }
 }
