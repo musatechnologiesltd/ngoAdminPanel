@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2023 at 09:54 AM
+-- Generation Time: Nov 30, 2023 at 09:56 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -114,6 +114,175 @@ INSERT INTO `branches` (`id`, `branch_name`, `branch_code`, `branch_step`, `crea
 (10, 'পরিচালক (প্রকল্প-৩) শাখা (১)', 'শাখা (১)', 9, '2023-08-22 02:26:56', '2023-08-22 02:26:56'),
 (11, 'পরিচালক (প্রকল্প-৪) শাখা (১)', 'শাখা (১)', 10, '2023-08-22 02:27:10', '2023-08-22 02:27:10'),
 (12, 'পরিচালক (প্রকল্প-৫) শাখা (১)', 'শাখা (১)', 11, '2023-08-22 02:28:49', '2023-08-22 02:28:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fc_ones`
+--
+
+CREATE TABLE `child_note_for_fc_ones` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_for_fc_one_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fc_twos`
+--
+
+CREATE TABLE `child_note_for_fc_twos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_for_fc_two_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fd_nines`
+--
+
+CREATE TABLE `child_note_for_fd_nines` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `p_note_for_fd_nine_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `child_note_for_fd_nines`
+--
+
+INSERT INTO `child_note_for_fd_nines` (`id`, `p_note_for_fd_nine_id`, `serial_number`, `description`, `created_at`, `updated_at`) VALUES
+(1, 3, '0', '<p>প্রথম নোট অনুচ্ছেদ ১</p>', '2023-11-27 01:28:12', '2023-11-27 01:28:12'),
+(2, 3, '0', '<p>প্রথম নোট অনুচ্ছেদ ২</p>', '2023-11-27 01:28:31', '2023-11-27 01:28:31'),
+(3, 4, '0', '<p>দ্বিতীয় &nbsp;নোট অনুচ্ছেদ ১</p>', '2023-11-27 01:49:59', '2023-11-27 01:49:59'),
+(4, 4, '0', '<p>দ্বিতীয় &nbsp;নোট অনুচ্ছেদ ২<br>&nbsp;</p>', '2023-11-27 01:50:25', '2023-11-27 01:50:25'),
+(5, 4, '0', '<p>দ্বিতীয় &nbsp;নোট অনুচ্ছেদ ৩</p>', '2023-11-27 01:51:04', '2023-11-27 01:51:04'),
+(6, 3, '0', '<p>fdgdf</p>', '2023-11-26 20:37:34', '2023-11-27 02:37:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fd_nine_ones`
+--
+
+CREATE TABLE `child_note_for_fd_nine_ones` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `p_note_for_fd_nine_one_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fd_sevens`
+--
+
+CREATE TABLE `child_note_for_fd_sevens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_for_fd_seven_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fd_sixes`
+--
+
+CREATE TABLE `child_note_for_fd_sixes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_for_fdsix_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `child_note_for_fd_sixes`
+--
+
+INSERT INTO `child_note_for_fd_sixes` (`id`, `parent_note_for_fdsix_id`, `serial_number`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, '0', '<p>weweqwe</p>', '2023-11-28 05:19:54', '2023-11-27 23:19:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_fd_threes`
+--
+
+CREATE TABLE `child_note_for_fd_threes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_for_fd_three_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_name_changes`
+--
+
+CREATE TABLE `child_note_for_name_changes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parentnote_name_change_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_registrations`
+--
+
+CREATE TABLE `child_note_for_registrations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_regid` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_note_for_renews`
+--
+
+CREATE TABLE `child_note_for_renews` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_note_for_renew_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2380,7 +2549,9 @@ CREATE TABLE `document_types` (
 
 INSERT INTO `document_types` (`id`, `document_type`, `code_type`, `total_document`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'অডিট আপত্তি/অর্থ আত্মসাৎ/আর্থিক ক্ষতি', '১১', '০', '0', '2023-11-22 02:13:57', '2023-11-22 02:13:57'),
-(2, 'অর্থ/অগ্রিম', '১২', '০', '0', '2023-11-22 02:16:20', '2023-11-22 02:16:20');
+(2, 'অর্থ/অগ্রিম', '১২', '০', '0', '2023-11-22 02:16:20', '2023-11-22 02:16:20'),
+(3, 'অনিষ্পন্ন বিষয়ের তালিকা প্রণয়ন', '১৩', '০', '0', '2023-11-25 00:27:08', '2023-11-25 00:27:08'),
+(4, 'আইনগত/ মামলা পরিচালনা কার্যক্রম গ্রহণ', '১৪', '০', '0', '2023-11-29 03:00:24', '2023-11-29 03:00:24');
 
 -- --------------------------------------------------------
 
@@ -2563,27 +2734,6 @@ INSERT INTO `fc_one_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fc_one
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fc_one_doc_presents`
---
-
-CREATE TABLE `fc_one_doc_presents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `fc_one_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `fc_two_daks`
 --
 
@@ -2605,20 +2755,15 @@ CREATE TABLE `fc_two_daks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fc_two_doc_presents`
+-- Table structure for table `fc_two_office_saroks`
 --
 
-CREATE TABLE `fc_two_doc_presents` (
+CREATE TABLE `fc_two_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `fc_two_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `parent_note_for_fc_two_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3283,20 +3428,15 @@ INSERT INTO `fd9_one_forms` (`id`, `fd_one_form_id`, `foreigner_name_for_subject
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fd_nine_doc_presents`
+-- Table structure for table `fd_nine_office_saroks`
 --
 
-CREATE TABLE `fd_nine_doc_presents` (
+CREATE TABLE `fd_nine_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_f_d_nine_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `p_note_for_fd_nine_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3304,20 +3444,15 @@ CREATE TABLE `fd_nine_doc_presents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fd_nine_one_doc_presents`
+-- Table structure for table `fd_nine_one_office_saroks`
 --
 
-CREATE TABLE `fd_nine_one_doc_presents` (
+CREATE TABLE `fd_nine_one_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_f_d_nine_one_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `p_note_for_fd_nine_one_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3513,44 +3648,25 @@ INSERT INTO `fd_one_source_of_funds` (`id`, `fd_one_form_id`, `name`, `address`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fd_seven_doc_presents`
+-- Table structure for table `fd_seven_office_saroks`
 --
 
-CREATE TABLE `fd_seven_doc_presents` (
+CREATE TABLE `fd_seven_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_fd_seven_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `parent_note_for_fd_seven_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `fd_six_doc_presents`
+-- Dumping data for table `fd_seven_office_saroks`
 --
 
-CREATE TABLE `fd_six_doc_presents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_fd_six_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `fd_seven_office_saroks` (`id`, `parent_note_for_fd_seven_id`, `office_subject`, `office_sutro`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, '<p data-placeholder=\"লিখুন \">11</p>', '<p data-placeholder=\"লিখুন \">22</p>', '<p data-placeholder=\"লিখুন \">33</p><p>44</p>', '2023-11-27 21:18:10', '2023-11-28 03:18:10');
 
 -- --------------------------------------------------------
 
@@ -3583,20 +3699,15 @@ INSERT INTO `fd_three_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fd_t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fd_three_doc_presents`
+-- Table structure for table `fd_three_office_saroks`
 --
 
-CREATE TABLE `fd_three_doc_presents` (
+CREATE TABLE `fd_three_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `fd_three_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `parent_note_for_fd_three_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4375,7 +4486,40 @@ INSERT INTO `log_activities` (`id`, `subject`, `url`, `method`, `ip_or_mac`, `ag
 (613, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '04:48:42 pm', '2023-11-22 04:48:42', '2023-11-22 04:48:42'),
 (614, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '10:40:05 am', '2023-11-22 22:40:06', '2023-11-22 22:40:06'),
 (615, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '10:40:19 am', '2023-11-22 22:40:19', '2023-11-22 22:40:19'),
-(616, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '01:55:59 pm', '2023-11-23 01:55:59', '2023-11-23 01:55:59');
+(616, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '01:55:59 pm', '2023-11-23 01:55:59', '2023-11-23 01:55:59'),
+(617, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '11:31:43 am', '2023-11-24 23:31:47', '2023-11-24 23:31:47'),
+(618, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '12:21:27 pm', '2023-11-25 00:21:28', '2023-11-25 00:21:28'),
+(619, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '12:23:33 pm', '2023-11-25 00:23:33', '2023-11-25 00:23:33'),
+(620, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '02:21:24 pm', '2023-11-25 02:21:24', '2023-11-25 02:21:24'),
+(621, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '02:47:19 pm', '2023-11-25 02:47:20', '2023-11-25 02:47:20'),
+(622, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '01:05:33 pm', '2023-11-26 01:05:33', '2023-11-26 01:05:33'),
+(623, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '01:05:43 pm', '2023-11-26 01:05:44', '2023-11-26 01:05:44'),
+(624, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '02:15:44 pm', '2023-11-26 02:15:44', '2023-11-26 02:15:44'),
+(625, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '02:15:56 pm', '2023-11-26 02:15:57', '2023-11-26 02:15:57'),
+(626, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '11:18:01 am', '2023-11-26 23:18:02', '2023-11-26 23:18:02'),
+(627, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '11:18:13 am', '2023-11-26 23:18:14', '2023-11-26 23:18:14'),
+(628, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '01:19:41 pm', '2023-11-27 01:19:42', '2023-11-27 01:19:42'),
+(629, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '01:23:37 pm', '2023-11-27 01:23:38', '2023-11-27 01:23:38'),
+(630, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '11:10:23 am', '2023-11-27 23:10:26', '2023-11-27 23:10:26'),
+(631, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '11:16:45 am', '2023-11-27 23:16:46', '2023-11-27 23:16:46'),
+(632, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '02:32:51 pm', '2023-11-28 02:32:52', '2023-11-28 02:32:52'),
+(633, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '03:22:37 pm', '2023-11-28 03:22:38', '2023-11-28 03:22:38'),
+(634, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '04:23:42 pm', '2023-11-28 04:23:43', '2023-11-28 04:23:43'),
+(635, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '04:37:14 pm', '2023-11-28 04:37:15', '2023-11-28 04:37:15'),
+(636, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '11:03:45 am', '2023-11-28 23:03:46', '2023-11-28 23:03:46'),
+(637, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.188 Safari/537.36 CrKey/1.54.250320', '5', '12:12:19 pm', '2023-11-29 00:12:21', '2023-11-29 00:12:21'),
+(638, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '12:18:37 pm', '2023-11-29 00:18:38', '2023-11-29 00:18:38'),
+(639, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '12:20:54 pm', '2023-11-29 00:20:54', '2023-11-29 00:20:54'),
+(640, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '12:22:17 pm', '2023-11-29 00:22:17', '2023-11-29 00:22:17'),
+(641, 'Logged Out.', 'http://localhost/databaseUpdate/admin/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '5', '12:22:32 pm', '2023-11-29 00:22:32', '2023-11-29 00:22:32'),
+(642, 'Logged In.', 'http://localhost/databaseUpdate/admin/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '12:23:49 pm', '2023-11-29 00:23:49', '2023-11-29 00:23:49'),
+(643, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '12:23:50 pm', '2023-11-29 00:23:50', '2023-11-29 00:23:50'),
+(644, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '01:54:21 pm', '2023-11-29 01:54:22', '2023-11-29 01:54:22'),
+(645, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '01:58:16 pm', '2023-11-29 01:58:17', '2023-11-29 01:58:17'),
+(646, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '02:23:43 pm', '2023-11-29 02:23:43', '2023-11-29 02:23:43'),
+(647, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '02:44:57 pm', '2023-11-29 02:44:58', '2023-11-29 02:44:58'),
+(648, 'view dak list.', 'http://localhost/databaseUpdate/admin/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '02:55:55 pm', '2023-11-29 02:55:55', '2023-11-29 02:55:55'),
+(649, 'view dashboard', 'http://localhost/databaseUpdate/admin/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '1', '02:56:00 pm', '2023-11-29 02:56:00', '2023-11-29 02:56:00');
 
 -- --------------------------------------------------------
 
@@ -4490,16 +4634,38 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (101, '2023_10_30_085609_create_fd2_fd3_other_infos_table', 19),
 (102, '2023_10_31_080951_create_fd_three_daks_table', 20),
 (103, '2023_11_22_055621_create_document_types_table', 21),
-(104, '2023_11_22_060120_create_registration_doc_presents_table', 21),
-(105, '2023_11_22_060152_create_renew_doc_presents_table', 21),
-(106, '2023_11_22_060228_create_name_chane_doc_presents_table', 21),
-(107, '2023_11_22_060304_create_fd_nine_doc_presents_table', 21),
-(108, '2023_11_22_060333_create_fd_nine_one_doc_presents_table', 21),
-(109, '2023_11_22_060417_create_fd_six_doc_presents_table', 21),
-(110, '2023_11_22_060508_create_fd_seven_doc_presents_table', 21),
-(111, '2023_11_22_060547_create_fc_one_doc_presents_table', 21),
-(112, '2023_11_22_060616_create_fc_two_doc_presents_table', 21),
-(113, '2023_11_22_060641_create_fd_three_doc_presents_table', 21);
+(124, '2023_11_26_045322_create_child_note_for_registrations_table', 23),
+(125, '2023_11_26_045353_create_child_note_for_renews_table', 23),
+(126, '2023_11_26_045430_create_child_note_for_name_changes_table', 24),
+(127, '2023_11_26_045525_create_child_note_for_fd_nines_table', 24),
+(128, '2023_11_26_045557_create_child_note_for_fd_nine_ones_table', 24),
+(129, '2023_11_26_045657_create_child_note_for_fd_sixes_table', 24),
+(130, '2023_11_26_045734_create_child_note_for_fd_sevens_table', 24),
+(131, '2023_11_26_045815_create_child_note_for_fc_ones_table', 24),
+(132, '2023_11_26_045906_create_child_note_for_fc_twos_table', 24),
+(133, '2023_11_26_045951_create_child_note_for_fd_threes_table', 24),
+(134, '2023_11_28_052657_create_registration_office_saroks_table', 25),
+(135, '2023_11_28_052722_create_renew_office_saroks_table', 25),
+(136, '2023_11_28_052749_create_name_change_office_saroks_table', 25),
+(137, '2023_11_28_052811_create_fd_nine_office_saroks_table', 25),
+(138, '2023_11_28_052835_create_fd_nine_one_office_saroks_table', 25),
+(139, '2023_11_28_052904_create_fd_six_office_saroks_table', 25),
+(140, '2023_11_28_052939_create_fd_seven_office_saroks_table', 25),
+(141, '2023_11_28_053008_create_fc_one_office_saroks_table', 25),
+(142, '2023_11_28_053033_create_fc_two_office_saroks_table', 25),
+(143, '2023_11_28_053113_create_fd_three_office_saroks_table', 25),
+(144, '2023_11_25_094434_create_parent_note_for_registrations_table', 26),
+(145, '2023_11_25_094542_create_parent_note_for_renews_table', 26),
+(146, '2023_11_25_094630_create_parent_note_for_name_changes_table', 26),
+(147, '2023_11_25_094756_create_parent_note_for_fd_nines_table', 26),
+(148, '2023_11_25_094838_create_parent_note_for_fd_nine_ones_table', 26),
+(149, '2023_11_25_095140_create_parent_note_for_fdsixes_table', 26),
+(150, '2023_11_25_095247_create_parent_note_for_fd_sevens_table', 26),
+(151, '2023_11_25_095516_create_parent_note_for_fc_ones_table', 26),
+(152, '2023_11_25_100003_create_parent_note_for_fc_twos_table', 26),
+(153, '2023_11_25_100432_create_parent_note_for_fd_threes_table', 26),
+(154, '2023_11_29_071852_create_nothi_lists_table', 26),
+(155, '2023_11_29_073851_create_nothi_details_table', 26);
 
 -- --------------------------------------------------------
 
@@ -4539,27 +4705,6 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `name_chane_doc_presents`
---
-
-CREATE TABLE `name_chane_doc_presents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_name_change_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `name_change_docs`
 --
 
@@ -4591,6 +4736,22 @@ INSERT INTO `name_change_docs` (`id`, `ngo_name_change_id`, `pdf_file_list`, `ti
 (91, 11, 'uploads/NameChangeDoc/2023-27-0916958049314200830055.pdf', '14:55:30 pm', '0.05', '2023-09-27 02:55:31', '2023-09-27 02:55:31'),
 (92, 11, 'uploads/NameChangeDoc/2023-27-0916958049316317968568.pdf', '14:55:30 pm', '0.05', '2023-09-27 02:55:31', '2023-09-27 02:55:31'),
 (93, 11, 'uploads/NameChangeDoc/2023-27-0916958049316914110199.pdf', '14:55:30 pm', '0.05', '2023-09-27 02:55:31', '2023-09-27 02:55:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `name_change_office_saroks`
+--
+
+CREATE TABLE `name_change_office_saroks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `parentnote_name_change_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -5056,6 +5217,41 @@ INSERT INTO `ngo_type_and_languages` (`id`, `user_id`, `ngo_type`, `ngo_type_new
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nothi_details`
+--
+
+CREATE TABLE `nothi_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothId` varchar(255) NOT NULL,
+  `dakId` varchar(255) NOT NULL,
+  `dakType` varchar(255) NOT NULL,
+  `sender` varchar(255) NOT NULL,
+  `receiver` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nothi_lists`
+--
+
+CREATE TABLE `nothi_lists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `document_branch` varchar(255) NOT NULL,
+  `document_type_id` varchar(255) NOT NULL,
+  `document_number` varchar(255) NOT NULL,
+  `document_year` varchar(255) NOT NULL,
+  `document_class` varchar(255) NOT NULL,
+  `document_subject` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `notices`
 --
 
@@ -5379,6 +5575,166 @@ CREATE TABLE `oauth_refresh_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `parent_note_for_fc_ones`
+--
+
+CREATE TABLE `parent_note_for_fc_ones` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_fc_twos`
+--
+
+CREATE TABLE `parent_note_for_fc_twos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_fdsixes`
+--
+
+CREATE TABLE `parent_note_for_fdsixes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_fd_nines`
+--
+
+CREATE TABLE `parent_note_for_fd_nines` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_fd_nine_ones`
+--
+
+CREATE TABLE `parent_note_for_fd_nine_ones` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_fd_sevens`
+--
+
+CREATE TABLE `parent_note_for_fd_sevens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_fd_threes`
+--
+
+CREATE TABLE `parent_note_for_fd_threes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_name_changes`
+--
+
+CREATE TABLE `parent_note_for_name_changes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_registrations`
+--
+
+CREATE TABLE `parent_note_for_registrations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_note_for_renews`
+--
+
+CREATE TABLE `parent_note_for_renews` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nothi_detail_id` bigint(20) UNSIGNED NOT NULL,
+  `serial_number` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -5530,20 +5886,15 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registration_doc_presents`
+-- Table structure for table `registration_office_saroks`
 --
 
-CREATE TABLE `registration_doc_presents` (
+CREATE TABLE `registration_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_registration_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `parent_note_regid` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5592,20 +5943,15 @@ INSERT INTO `renewal_files` (`id`, `fd_one_form_id`, `constitution_of_the_organi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `renew_doc_presents`
+-- Table structure for table `renew_office_saroks`
 --
 
-CREATE TABLE `renew_doc_presents` (
+CREATE TABLE `renew_office_saroks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `ngo_renew_dak_id` bigint(20) UNSIGNED NOT NULL,
-  `document_branch` varchar(255) NOT NULL,
-  `document_type_id` varchar(255) NOT NULL,
-  `document_number` varchar(255) NOT NULL,
-  `document_year` varchar(255) NOT NULL,
-  `document_class` varchar(255) NOT NULL,
-  `document_subject` varchar(255) NOT NULL,
-  `sender` varchar(255) NOT NULL,
-  `receiver` varchar(255) NOT NULL,
+  `parent_note_for_renew_id` bigint(20) UNSIGNED NOT NULL,
+  `office_subject` varchar(255) NOT NULL,
+  `office_sutro` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5980,6 +6326,76 @@ ALTER TABLE `branches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `child_note_for_fc_ones`
+--
+ALTER TABLE `child_note_for_fc_ones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fc_ones_parent_note_for_fc_one_id_foreign` (`parent_note_for_fc_one_id`);
+
+--
+-- Indexes for table `child_note_for_fc_twos`
+--
+ALTER TABLE `child_note_for_fc_twos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fc_twos_parent_note_for_fc_two_id_foreign` (`parent_note_for_fc_two_id`);
+
+--
+-- Indexes for table `child_note_for_fd_nines`
+--
+ALTER TABLE `child_note_for_fd_nines`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fd_nines_p_note_for_fd_nine_id_foreign` (`p_note_for_fd_nine_id`);
+
+--
+-- Indexes for table `child_note_for_fd_nine_ones`
+--
+ALTER TABLE `child_note_for_fd_nine_ones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fd_nine_ones_p_note_for_fd_nine_one_id_foreign` (`p_note_for_fd_nine_one_id`);
+
+--
+-- Indexes for table `child_note_for_fd_sevens`
+--
+ALTER TABLE `child_note_for_fd_sevens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fd_sevens_parent_note_for_fd_seven_id_foreign` (`parent_note_for_fd_seven_id`);
+
+--
+-- Indexes for table `child_note_for_fd_sixes`
+--
+ALTER TABLE `child_note_for_fd_sixes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fd_sixes_parent_note_for_fdsix_id_foreign` (`parent_note_for_fdsix_id`);
+
+--
+-- Indexes for table `child_note_for_fd_threes`
+--
+ALTER TABLE `child_note_for_fd_threes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_fd_threes_parent_note_for_fd_three_id_foreign` (`parent_note_for_fd_three_id`);
+
+--
+-- Indexes for table `child_note_for_name_changes`
+--
+ALTER TABLE `child_note_for_name_changes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_name_changes_parentnote_name_change_id_foreign` (`parentnote_name_change_id`);
+
+--
+-- Indexes for table `child_note_for_registrations`
+--
+ALTER TABLE `child_note_for_registrations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_registrations_parent_note_regid_foreign` (`parent_note_regid`);
+
+--
+-- Indexes for table `child_note_for_renews`
+--
+ALTER TABLE `child_note_for_renews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `child_note_for_renews_parent_note_for_renew_id_foreign` (`parent_note_for_renew_id`);
+
+--
 -- Indexes for table `civilinfos`
 --
 ALTER TABLE `civilinfos`
@@ -6045,24 +6461,17 @@ ALTER TABLE `fc_one_daks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fc_one_doc_presents`
---
-ALTER TABLE `fc_one_doc_presents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fc_one_doc_presents_fc_one_dak_id_foreign` (`fc_one_dak_id`);
-
---
 -- Indexes for table `fc_two_daks`
 --
 ALTER TABLE `fc_two_daks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fc_two_doc_presents`
+-- Indexes for table `fc_two_office_saroks`
 --
-ALTER TABLE `fc_two_doc_presents`
+ALTER TABLE `fc_two_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fc_two_doc_presents_fc_two_dak_id_foreign` (`fc_two_dak_id`);
+  ADD KEY `fc_two_office_saroks_parent_note_for_fc_two_id_foreign` (`parent_note_for_fc_two_id`);
 
 --
 -- Indexes for table `fd2_fc1_other_infos`
@@ -6200,18 +6609,18 @@ ALTER TABLE `fd9_one_forms`
   ADD KEY `fd9_one_forms_fd_one_form_id_foreign` (`fd_one_form_id`);
 
 --
--- Indexes for table `fd_nine_doc_presents`
+-- Indexes for table `fd_nine_office_saroks`
 --
-ALTER TABLE `fd_nine_doc_presents`
+ALTER TABLE `fd_nine_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fd_nine_doc_presents_ngo_f_d_nine_dak_id_foreign` (`ngo_f_d_nine_dak_id`);
+  ADD KEY `fd_nine_office_saroks_p_note_for_fd_nine_id_foreign` (`p_note_for_fd_nine_id`);
 
 --
--- Indexes for table `fd_nine_one_doc_presents`
+-- Indexes for table `fd_nine_one_office_saroks`
 --
-ALTER TABLE `fd_nine_one_doc_presents`
+ALTER TABLE `fd_nine_one_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fd_nine_one_doc_presents_ngo_f_d_nine_one_dak_id_foreign` (`ngo_f_d_nine_one_dak_id`);
+  ADD KEY `fd_nine_one_office_saroks_p_note_for_fd_nine_one_id_foreign` (`p_note_for_fd_nine_one_id`);
 
 --
 -- Indexes for table `fd_one_adviser_lists`
@@ -6256,18 +6665,11 @@ ALTER TABLE `fd_one_source_of_funds`
   ADD KEY `fd_one_source_of_funds_fd_one_form_id_foreign` (`fd_one_form_id`);
 
 --
--- Indexes for table `fd_seven_doc_presents`
+-- Indexes for table `fd_seven_office_saroks`
 --
-ALTER TABLE `fd_seven_doc_presents`
+ALTER TABLE `fd_seven_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fd_seven_doc_presents_ngo_fd_seven_dak_id_foreign` (`ngo_fd_seven_dak_id`);
-
---
--- Indexes for table `fd_six_doc_presents`
---
-ALTER TABLE `fd_six_doc_presents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fd_six_doc_presents_ngo_fd_six_dak_id_foreign` (`ngo_fd_six_dak_id`);
+  ADD KEY `fd_seven_office_saroks_parent_note_for_fd_seven_id_foreign` (`parent_note_for_fd_seven_id`);
 
 --
 -- Indexes for table `fd_three_daks`
@@ -6276,11 +6678,11 @@ ALTER TABLE `fd_three_daks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fd_three_doc_presents`
+-- Indexes for table `fd_three_office_saroks`
 --
-ALTER TABLE `fd_three_doc_presents`
+ALTER TABLE `fd_three_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fd_three_doc_presents_fd_three_dak_id_foreign` (`fd_three_dak_id`);
+  ADD KEY `fd_three_office_saroks_parent_note_for_fd_three_id_foreign` (`parent_note_for_fd_three_id`);
 
 --
 -- Indexes for table `form_complete_statuses`
@@ -6345,18 +6747,18 @@ ALTER TABLE `model_has_roles`
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `name_chane_doc_presents`
---
-ALTER TABLE `name_chane_doc_presents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `name_chane_doc_presents_ngo_name_change_dak_id_foreign` (`ngo_name_change_dak_id`);
-
---
 -- Indexes for table `name_change_docs`
 --
 ALTER TABLE `name_change_docs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `name_change_docs_ngo_name_change_id_foreign` (`ngo_name_change_id`);
+
+--
+-- Indexes for table `name_change_office_saroks`
+--
+ALTER TABLE `name_change_office_saroks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `name_change_office_saroks_parentnote_name_change_id_foreign` (`parentnote_name_change_id`);
 
 --
 -- Indexes for table `ngo_durations`
@@ -6465,6 +6867,18 @@ ALTER TABLE `ngo_type_and_languages`
   ADD KEY `ngo_type_and_languages_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `nothi_details`
+--
+ALTER TABLE `nothi_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nothi_lists`
+--
+ALTER TABLE `nothi_lists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `notices`
 --
 ALTER TABLE `notices`
@@ -6569,6 +6983,66 @@ ALTER TABLE `oauth_refresh_tokens`
   ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
 
 --
+-- Indexes for table `parent_note_for_fc_ones`
+--
+ALTER TABLE `parent_note_for_fc_ones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_fc_twos`
+--
+ALTER TABLE `parent_note_for_fc_twos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_fdsixes`
+--
+ALTER TABLE `parent_note_for_fdsixes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_fd_nines`
+--
+ALTER TABLE `parent_note_for_fd_nines`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_fd_nine_ones`
+--
+ALTER TABLE `parent_note_for_fd_nine_ones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_fd_sevens`
+--
+ALTER TABLE `parent_note_for_fd_sevens`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_fd_threes`
+--
+ALTER TABLE `parent_note_for_fd_threes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_name_changes`
+--
+ALTER TABLE `parent_note_for_name_changes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_registrations`
+--
+ALTER TABLE `parent_note_for_registrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent_note_for_renews`
+--
+ALTER TABLE `parent_note_for_renews`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -6596,11 +7070,11 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `registration_doc_presents`
+-- Indexes for table `registration_office_saroks`
 --
-ALTER TABLE `registration_doc_presents`
+ALTER TABLE `registration_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `registration_doc_presents_ngo_registration_dak_id_foreign` (`ngo_registration_dak_id`);
+  ADD KEY `registration_office_saroks_parent_note_regid_foreign` (`parent_note_regid`);
 
 --
 -- Indexes for table `renewal_files`
@@ -6610,11 +7084,11 @@ ALTER TABLE `renewal_files`
   ADD KEY `renewal_files_fd_one_form_id_foreign` (`fd_one_form_id`);
 
 --
--- Indexes for table `renew_doc_presents`
+-- Indexes for table `renew_office_saroks`
 --
-ALTER TABLE `renew_doc_presents`
+ALTER TABLE `renew_office_saroks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `renew_doc_presents_ngo_renew_dak_id_foreign` (`ngo_renew_dak_id`);
+  ADD KEY `renew_office_saroks_parent_note_for_renew_id_foreign` (`parent_note_for_renew_id`);
 
 --
 -- Indexes for table `roles`
@@ -6672,6 +7146,66 @@ ALTER TABLE `branches`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `child_note_for_fc_ones`
+--
+ALTER TABLE `child_note_for_fc_ones`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_fc_twos`
+--
+ALTER TABLE `child_note_for_fc_twos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_fd_nines`
+--
+ALTER TABLE `child_note_for_fd_nines`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_fd_nine_ones`
+--
+ALTER TABLE `child_note_for_fd_nine_ones`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_fd_sevens`
+--
+ALTER TABLE `child_note_for_fd_sevens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_fd_sixes`
+--
+ALTER TABLE `child_note_for_fd_sixes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_fd_threes`
+--
+ALTER TABLE `child_note_for_fd_threes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_name_changes`
+--
+ALTER TABLE `child_note_for_name_changes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_registrations`
+--
+ALTER TABLE `child_note_for_registrations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `child_note_for_renews`
+--
+ALTER TABLE `child_note_for_renews`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `civilinfos`
 --
 ALTER TABLE `civilinfos`
@@ -6705,7 +7239,7 @@ ALTER TABLE `designation_steps`
 -- AUTO_INCREMENT for table `document_types`
 --
 ALTER TABLE `document_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -6732,21 +7266,15 @@ ALTER TABLE `fc_one_daks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `fc_one_doc_presents`
---
-ALTER TABLE `fc_one_doc_presents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `fc_two_daks`
 --
 ALTER TABLE `fc_two_daks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `fc_two_doc_presents`
+-- AUTO_INCREMENT for table `fc_two_office_saroks`
 --
-ALTER TABLE `fc_two_doc_presents`
+ALTER TABLE `fc_two_office_saroks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -6864,15 +7392,15 @@ ALTER TABLE `fd9_one_forms`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `fd_nine_doc_presents`
+-- AUTO_INCREMENT for table `fd_nine_office_saroks`
 --
-ALTER TABLE `fd_nine_doc_presents`
+ALTER TABLE `fd_nine_office_saroks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `fd_nine_one_doc_presents`
+-- AUTO_INCREMENT for table `fd_nine_one_office_saroks`
 --
-ALTER TABLE `fd_nine_one_doc_presents`
+ALTER TABLE `fd_nine_one_office_saroks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -6912,16 +7440,10 @@ ALTER TABLE `fd_one_source_of_funds`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `fd_seven_doc_presents`
+-- AUTO_INCREMENT for table `fd_seven_office_saroks`
 --
-ALTER TABLE `fd_seven_doc_presents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `fd_six_doc_presents`
---
-ALTER TABLE `fd_six_doc_presents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `fd_seven_office_saroks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `fd_three_daks`
@@ -6930,9 +7452,9 @@ ALTER TABLE `fd_three_daks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `fd_three_doc_presents`
+-- AUTO_INCREMENT for table `fd_three_office_saroks`
 --
-ALTER TABLE `fd_three_doc_presents`
+ALTER TABLE `fd_three_office_saroks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -6969,25 +7491,25 @@ ALTER TABLE `job_histories`
 -- AUTO_INCREMENT for table `log_activities`
 --
 ALTER TABLE `log_activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=617;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=650;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
-
---
--- AUTO_INCREMENT for table `name_chane_doc_presents`
---
-ALTER TABLE `name_chane_doc_presents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `name_change_docs`
 --
 ALTER TABLE `name_change_docs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `name_change_office_saroks`
+--
+ALTER TABLE `name_change_office_saroks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ngo_durations`
@@ -7086,6 +7608,18 @@ ALTER TABLE `ngo_type_and_languages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
+-- AUTO_INCREMENT for table `nothi_details`
+--
+ALTER TABLE `nothi_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `nothi_lists`
+--
+ALTER TABLE `nothi_lists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `notices`
 --
 ALTER TABLE `notices`
@@ -7158,6 +7692,66 @@ ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `parent_note_for_fc_ones`
+--
+ALTER TABLE `parent_note_for_fc_ones`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_fc_twos`
+--
+ALTER TABLE `parent_note_for_fc_twos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_fdsixes`
+--
+ALTER TABLE `parent_note_for_fdsixes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_fd_nines`
+--
+ALTER TABLE `parent_note_for_fd_nines`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_fd_nine_ones`
+--
+ALTER TABLE `parent_note_for_fd_nine_ones`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_fd_sevens`
+--
+ALTER TABLE `parent_note_for_fd_sevens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_fd_threes`
+--
+ALTER TABLE `parent_note_for_fd_threes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_name_changes`
+--
+ALTER TABLE `parent_note_for_name_changes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_registrations`
+--
+ALTER TABLE `parent_note_for_registrations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent_note_for_renews`
+--
+ALTER TABLE `parent_note_for_renews`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -7170,9 +7764,9 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `registration_doc_presents`
+-- AUTO_INCREMENT for table `registration_office_saroks`
 --
-ALTER TABLE `registration_doc_presents`
+ALTER TABLE `registration_office_saroks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -7182,9 +7776,9 @@ ALTER TABLE `renewal_files`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `renew_doc_presents`
+-- AUTO_INCREMENT for table `renew_office_saroks`
 --
-ALTER TABLE `renew_doc_presents`
+ALTER TABLE `renew_office_saroks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -7216,6 +7810,66 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `child_note_for_fc_ones`
+--
+ALTER TABLE `child_note_for_fc_ones`
+  ADD CONSTRAINT `child_note_for_fc_ones_parent_note_for_fc_one_id_foreign` FOREIGN KEY (`parent_note_for_fc_one_id`) REFERENCES `parent_note_for_fc_ones` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_fc_twos`
+--
+ALTER TABLE `child_note_for_fc_twos`
+  ADD CONSTRAINT `child_note_for_fc_twos_parent_note_for_fc_two_id_foreign` FOREIGN KEY (`parent_note_for_fc_two_id`) REFERENCES `parent_note_for_fc_twos` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_fd_nines`
+--
+ALTER TABLE `child_note_for_fd_nines`
+  ADD CONSTRAINT `child_note_for_fd_nines_p_note_for_fd_nine_id_foreign` FOREIGN KEY (`p_note_for_fd_nine_id`) REFERENCES `parent_note_for_fd_nines` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_fd_nine_ones`
+--
+ALTER TABLE `child_note_for_fd_nine_ones`
+  ADD CONSTRAINT `child_note_for_fd_nine_ones_p_note_for_fd_nine_one_id_foreign` FOREIGN KEY (`p_note_for_fd_nine_one_id`) REFERENCES `parent_note_for_fd_nine_ones` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_fd_sevens`
+--
+ALTER TABLE `child_note_for_fd_sevens`
+  ADD CONSTRAINT `child_note_for_fd_sevens_parent_note_for_fd_seven_id_foreign` FOREIGN KEY (`parent_note_for_fd_seven_id`) REFERENCES `parent_note_for_fd_sevens` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_fd_sixes`
+--
+ALTER TABLE `child_note_for_fd_sixes`
+  ADD CONSTRAINT `child_note_for_fd_sixes_parent_note_for_fdsix_id_foreign` FOREIGN KEY (`parent_note_for_fdsix_id`) REFERENCES `parent_note_for_fdsixes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_fd_threes`
+--
+ALTER TABLE `child_note_for_fd_threes`
+  ADD CONSTRAINT `child_note_for_fd_threes_parent_note_for_fd_three_id_foreign` FOREIGN KEY (`parent_note_for_fd_three_id`) REFERENCES `parent_note_for_fd_threes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_name_changes`
+--
+ALTER TABLE `child_note_for_name_changes`
+  ADD CONSTRAINT `child_note_for_name_changes_parentnote_name_change_id_foreign` FOREIGN KEY (`parentnote_name_change_id`) REFERENCES `parent_note_for_name_changes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_registrations`
+--
+ALTER TABLE `child_note_for_registrations`
+  ADD CONSTRAINT `child_note_for_registrations_parent_note_regid_foreign` FOREIGN KEY (`parent_note_regid`) REFERENCES `parent_note_for_registrations` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `child_note_for_renews`
+--
+ALTER TABLE `child_note_for_renews`
+  ADD CONSTRAINT `child_note_for_renews_parent_note_for_renew_id_foreign` FOREIGN KEY (`parent_note_for_renew_id`) REFERENCES `parent_note_for_renews` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `designation_lists`
 --
 ALTER TABLE `designation_lists`
@@ -7240,16 +7894,10 @@ ALTER TABLE `fc2_forms`
   ADD CONSTRAINT `fc2_forms_fd_one_form_id_foreign` FOREIGN KEY (`fd_one_form_id`) REFERENCES `fd_one_forms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `fc_one_doc_presents`
+-- Constraints for table `fc_two_office_saroks`
 --
-ALTER TABLE `fc_one_doc_presents`
-  ADD CONSTRAINT `fc_one_doc_presents_fc_one_dak_id_foreign` FOREIGN KEY (`fc_one_dak_id`) REFERENCES `fc_one_daks` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `fc_two_doc_presents`
---
-ALTER TABLE `fc_two_doc_presents`
-  ADD CONSTRAINT `fc_two_doc_presents_fc_two_dak_id_foreign` FOREIGN KEY (`fc_two_dak_id`) REFERENCES `fc_two_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `fc_two_office_saroks`
+  ADD CONSTRAINT `fc_two_office_saroks_parent_note_for_fc_two_id_foreign` FOREIGN KEY (`parent_note_for_fc_two_id`) REFERENCES `parent_note_for_fc_twos` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `fd2_fc1_other_infos`
@@ -7358,16 +8006,16 @@ ALTER TABLE `fd9_one_forms`
   ADD CONSTRAINT `fd9_one_forms_fd_one_form_id_foreign` FOREIGN KEY (`fd_one_form_id`) REFERENCES `fd_one_forms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `fd_nine_doc_presents`
+-- Constraints for table `fd_nine_office_saroks`
 --
-ALTER TABLE `fd_nine_doc_presents`
-  ADD CONSTRAINT `fd_nine_doc_presents_ngo_f_d_nine_dak_id_foreign` FOREIGN KEY (`ngo_f_d_nine_dak_id`) REFERENCES `ngo_f_d_nine_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `fd_nine_office_saroks`
+  ADD CONSTRAINT `fd_nine_office_saroks_p_note_for_fd_nine_id_foreign` FOREIGN KEY (`p_note_for_fd_nine_id`) REFERENCES `parent_note_for_fd_nines` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `fd_nine_one_doc_presents`
+-- Constraints for table `fd_nine_one_office_saroks`
 --
-ALTER TABLE `fd_nine_one_doc_presents`
-  ADD CONSTRAINT `fd_nine_one_doc_presents_ngo_f_d_nine_one_dak_id_foreign` FOREIGN KEY (`ngo_f_d_nine_one_dak_id`) REFERENCES `ngo_f_d_nine_one_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `fd_nine_one_office_saroks`
+  ADD CONSTRAINT `fd_nine_one_office_saroks_p_note_for_fd_nine_one_id_foreign` FOREIGN KEY (`p_note_for_fd_nine_one_id`) REFERENCES `parent_note_for_fd_nine_ones` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `fd_one_adviser_lists`
@@ -7406,22 +8054,16 @@ ALTER TABLE `fd_one_source_of_funds`
   ADD CONSTRAINT `fd_one_source_of_funds_fd_one_form_id_foreign` FOREIGN KEY (`fd_one_form_id`) REFERENCES `fd_one_forms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `fd_seven_doc_presents`
+-- Constraints for table `fd_seven_office_saroks`
 --
-ALTER TABLE `fd_seven_doc_presents`
-  ADD CONSTRAINT `fd_seven_doc_presents_ngo_fd_seven_dak_id_foreign` FOREIGN KEY (`ngo_fd_seven_dak_id`) REFERENCES `ngo_fd_seven_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `fd_seven_office_saroks`
+  ADD CONSTRAINT `fd_seven_office_saroks_parent_note_for_fd_seven_id_foreign` FOREIGN KEY (`parent_note_for_fd_seven_id`) REFERENCES `parent_note_for_fd_sevens` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `fd_six_doc_presents`
+-- Constraints for table `fd_three_office_saroks`
 --
-ALTER TABLE `fd_six_doc_presents`
-  ADD CONSTRAINT `fd_six_doc_presents_ngo_fd_six_dak_id_foreign` FOREIGN KEY (`ngo_fd_six_dak_id`) REFERENCES `ngo_fd_six_daks` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `fd_three_doc_presents`
---
-ALTER TABLE `fd_three_doc_presents`
-  ADD CONSTRAINT `fd_three_doc_presents_fd_three_dak_id_foreign` FOREIGN KEY (`fd_three_dak_id`) REFERENCES `fd_three_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `fd_three_office_saroks`
+  ADD CONSTRAINT `fd_three_office_saroks_parent_note_for_fd_three_id_foreign` FOREIGN KEY (`parent_note_for_fd_three_id`) REFERENCES `parent_note_for_fd_threes` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `form_complete_statuses`
@@ -7467,16 +8109,16 @@ ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `name_chane_doc_presents`
---
-ALTER TABLE `name_chane_doc_presents`
-  ADD CONSTRAINT `name_chane_doc_presents_ngo_name_change_dak_id_foreign` FOREIGN KEY (`ngo_name_change_dak_id`) REFERENCES `ngo_name_change_daks` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `name_change_docs`
 --
 ALTER TABLE `name_change_docs`
   ADD CONSTRAINT `name_change_docs_ngo_name_change_id_foreign` FOREIGN KEY (`ngo_name_change_id`) REFERENCES `ngo_name_changes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `name_change_office_saroks`
+--
+ALTER TABLE `name_change_office_saroks`
+  ADD CONSTRAINT `name_change_office_saroks_parentnote_name_change_id_foreign` FOREIGN KEY (`parentnote_name_change_id`) REFERENCES `parent_note_for_name_changes` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ngo_durations`
@@ -7589,10 +8231,10 @@ ALTER TABLE `n_visa_work_place_addresses`
   ADD CONSTRAINT `n_visa_work_place_addresses_n_visa_id_foreign` FOREIGN KEY (`n_visa_id`) REFERENCES `n_visas` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `registration_doc_presents`
+-- Constraints for table `registration_office_saroks`
 --
-ALTER TABLE `registration_doc_presents`
-  ADD CONSTRAINT `registration_doc_presents_ngo_registration_dak_id_foreign` FOREIGN KEY (`ngo_registration_dak_id`) REFERENCES `ngo_registration_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `registration_office_saroks`
+  ADD CONSTRAINT `registration_office_saroks_parent_note_regid_foreign` FOREIGN KEY (`parent_note_regid`) REFERENCES `parent_note_for_registrations` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `renewal_files`
@@ -7601,10 +8243,10 @@ ALTER TABLE `renewal_files`
   ADD CONSTRAINT `renewal_files_fd_one_form_id_foreign` FOREIGN KEY (`fd_one_form_id`) REFERENCES `fd_one_forms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `renew_doc_presents`
+-- Constraints for table `renew_office_saroks`
 --
-ALTER TABLE `renew_doc_presents`
-  ADD CONSTRAINT `renew_doc_presents_ngo_renew_dak_id_foreign` FOREIGN KEY (`ngo_renew_dak_id`) REFERENCES `ngo_renew_daks` (`id`) ON DELETE CASCADE;
+ALTER TABLE `renew_office_saroks`
+  ADD CONSTRAINT `renew_office_saroks_parent_note_for_renew_id_foreign` FOREIGN KEY (`parent_note_for_renew_id`) REFERENCES `parent_note_for_renews` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `role_has_permissions`
