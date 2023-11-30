@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class NothiDetail extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nothId','dakId','dakType','sender','receiver'];
+
 }
