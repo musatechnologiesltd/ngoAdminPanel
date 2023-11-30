@@ -74,7 +74,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('childNote', ChildNoteController::class);
     Route::resource('parentNote', ParentNoteController::class);
 
+    Route::controller(DocumentPresentController::class)->group(function () {
 
+        Route::get('/savePermissionNothi', 'savePermissionNothi')->name('savePermissionNothi');
+        Route::get('/givePermissionToNothi/{id}', 'givePermissionToNothi')->name('givePermissionToNothi');
+
+
+
+    });
 
     Route::controller(ChildNoteController::class)->group(function () {
 
@@ -245,6 +252,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/dakListSecondStep', 'dakListSecondStep')->name('dakListSecondStep');
 
         Route::get('/showDataAll/{status}/{id}', 'showDataAll')->name('showDataAll');
+
+        Route::get('/showDataDesignationWiseOne', 'showDataDesignationWiseOne')->name('showDataDesignationWiseOne');
 
         Route::get('/showDataDesignationWise', 'showDataDesignationWise')->name('showDataDesignationWise');
         Route::get('/showDataBranchWise', 'showDataBranchWise')->name('showDataBranchWise');

@@ -163,7 +163,7 @@
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('documentPresent.index')  ? 'active' : '' }}" href="{{ route('documentPresent.index') }}">
         <i data-feather="file-text"></i>
-        <span>নথি তালিকা</span>
+        <span>সকল নথি</span>
     </a>
 </li>
 

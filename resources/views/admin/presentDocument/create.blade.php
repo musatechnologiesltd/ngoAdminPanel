@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-নথি উপস্থাপন করুন
+নথি তৈরি করুন
 @endsection
 
 
@@ -10,10 +10,10 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3>নথি উপস্থাপন করুন </h3>
+                            <h3>নথি তৈরি করুন</h3>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                                <li class="breadcrumb-item">নথি উপস্থাপন করুন </li>
+                                <li class="breadcrumb-item">নথি তৈরি করুন </li>
                             </ol>
                         </div>
                     </div>
@@ -108,14 +108,17 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-row-reverse">
-                                        <button class="btn btn-primary ms-3" name="buttonValue" value="সংরক্ষণ করুন" type="submit">
+                                        <button class="btn btn-danger ms-3" name="buttonValue" value="সংরক্ষণ করুন" type="submit">
                                             <i class="fa fa-send"></i>
-                                            সংরক্ষণ করুন
+                                            সংরক্ষণ করুন এবং তালিকা দেখুন
                                         </button>
-                                        <button class="btn btn-danger" name="buttonValue" value="নথি অনুমতি" type="submit">
+                                        <button class="btn btn-primary" name="buttonValue" value="নথি অনুমতি" type="submit">
                                             <i class="fa fa-angle-right"></i>
-                                            নথি অনুমতি
+                                            সংরক্ষণ করুন এবং অনুমতি দিন
                                         </button>
+
+
+
                                     </div>
                                 </div>
                             </form>

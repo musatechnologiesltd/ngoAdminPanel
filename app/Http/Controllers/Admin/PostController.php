@@ -1779,6 +1779,57 @@ if($mainDataStatus == 'registration'){
     }
 
 
+
+    public function showDataDesignationWiseOne(Request $request){
+
+        \LogActivity::addToLog('show Data Designation Wise.');
+
+        $mainstatus = $request->mainstatus;
+        $totalBranch = $request->totalBranch;
+        $totalDesi= $request->totalDesi;
+$mainStatusNew = $request->mainStatusNew;
+      $id = $request->mainId;
+        //dd($totalDesi);
+
+    //     if(!empty($totalBranch) && !empty($totalDesi)){
+
+    //      dd($totalBranch);
+
+    //     }elseif(!empty($totalBranch)){
+
+    // dd(2);
+
+    //     }elseif(!empty($totalDesi)){
+
+    //     dd(3);
+
+    //     }
+
+    if(empty($totalDesi)){
+
+        $data = view('admin.post.showDataDesignationWiseEmpty')->render();
+        return response()->json($data);
+    }else{
+
+
+    $totalBranchId = DesignationList::whereIn('id',$totalDesi)->select('branch_id')->get();
+
+    $convert_name_title = $totalBranchId->implode("branch_id", " ");
+    $separated_data_title = explode(" ", $convert_name_title);
+
+
+    $totalBranchList = Branch::whereIn('id',$separated_data_title)->get();
+
+    $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
+
+        $data = view('admin.post.showDataDesignationWiseOne',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
+        return response()->json($data);
+    }
+    }
+
+
+
+
     public function showDataDesignationWise(Request $request){
 
         \LogActivity::addToLog('show Data Designation Wise.');
@@ -1821,7 +1872,7 @@ $mainStatusNew = $request->mainStatusNew;
 
     $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
 
-        $data = view('admin.post.showDataDesignationWise',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
+        $data = view('admin.post.showDataDesignationWiseOne',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
         return response()->json($data);
     }
     }

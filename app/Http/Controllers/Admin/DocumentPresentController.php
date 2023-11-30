@@ -8,6 +8,29 @@ use App\Models\Admin;
 use Image;
 use Auth;
 use Hash;
+use Illuminate\Support\Str;
+use Mail;
+use DB;
+use PDF;
+use Carbon\Carbon;
+use Response;
+use App\Models\Branch;
+use App\Models\ForwardingLetterOnulipi;
+use App\Models\NothiPermission;
+use App\Models\DakDetail;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\FcOneDak;
+use App\Models\FcTwoDak;
+use App\Models\NgoRegistrationDak;
+use App\Models\DesignationList;
+use App\Models\DesignationStep;
+use App\Models\AdminDesignationHistory;
+use App\Models\FdThreeDak;
 use App\Models\DocumentType;
 use App\Models\NothiList;
 
@@ -216,16 +239,6 @@ class DocumentPresentController extends Controller
         ]);
 
 
-        if($request->buttonValue == 'নথি অনুমতি'){
-
-
-
-        }else{
-
-
-
-
-
                 $documentType = new NothiList();
                 $documentType->document_branch =$request->document_branch;
                 $documentType->document_type_id =$request->document_type_id;
@@ -236,17 +249,82 @@ class DocumentPresentController extends Controller
                 $documentType->save();
 
 
+                $mainId = $documentType->id;
 
 
+        if($request->buttonValue == 'নথি অনুমতি'){
 
 
+            return redirect()->route('givePermissionToNothi',$mainId)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 
-
-
-        }
+        }else{
 
         return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
+}
+
+
+
+public function givePermissionToNothi($id){
+
+    \LogActivity::addToLog('nothi permission.');
+
+    $id = $id;
+
+     $totalBranch = Branch::where('id','!=',1)->count();
+     $totalDesignation = DesignationList::where('id','!=',1)->count();
+     $totaluser = Admin::where('id','!=',1)->count();
+
+
+      $totalDesignationWorking = AdminDesignationHistory::count();
+
+     $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
+
+
+     $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
+     $separated_data_title = explode(" ", $convert_name_title);
+
+
+   $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
+
+     //dd($totalEmptyDesignation);
+
+     $totalBranchList = Branch::where('id','!=',1)->get();
+
+     return view('admin.presentDocument.givePermissionToNothi',compact('id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
+
+}
+
+
+
+public function savePermissionNothi(Request $request){
+
+
+    \LogActivity::addToLog('add dak detail.');
+
+         $number=count($request->admin_id);
+
+
+
+            if($number >0){
+                for($i=0;$i<$number;$i++){
+
+
+
+
+                 $regDakData = new NothiPermission();
+                 $regDakData->adminId = $request->admin_id[$i];
+                 $regDakData->nothId =$request->main_id;
+
+                 $regDakData->save();
+
+                }
+
+
+            }
+            return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+
+}
 
     /**
      * Display the specified resource.
