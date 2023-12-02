@@ -60,7 +60,7 @@
                             <span style="text-align:left;">
                                 <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiLists->document_number) }}
                                 <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শ্রেণী: </span> {{ $nothiLists->document_class }}</span>
+                                {{-- <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শ্রেণী: </span> {{ $nothiLists->document_class }}</span> --}}
                     </p>
                 </td>
                 <td>
@@ -72,10 +72,12 @@
                         <button class="btn btn-dark ms-3" type="button"
                                 data-bs-toggle="modal"
                                 data-original-title=""
-                                data-bs-target="#myModal2">
+                                data-bs-target="#myModal{{ $nothiLists->id }}">
                             <i class="fa fa-sitemap"></i>
                             অনুমতি সংশোধন
                         </button>
+
+                        @include('admin.presentDocument.nothiEdit')
                         <button class="btn btn-primary ms-3" onclick="location.href = '{{ route('documentPresent.edit',$nothiLists->id) }}';" type="button">
                             <i class="fa fa-send"></i>
                             নথি সম্পাদনা
@@ -123,115 +125,7 @@
 </div>
 </div>
 
-<!--modal section for permission person list-->
-<div class="modal right fade bd-example-modal-lg"
-id="myModal2" tabindex="-1" role="dialog"
-aria-labelledby="myModalLabel2">
-<div class="modal-dialog modal-lg-custom" role="document">
-<div class="modal-content">
-<div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel2">
-        অনুমতিপ্রাপ্ত ব্যাক্তি বাছাই করুন </h4>
-</div>
 
-<div class="modal-body">
-    <div class="container-fluid list-products">
-        <div class="row">
-            <!-- Individual column searching (text inputs) Starts-->
-            <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>পদবি নির্বাচন করুন</h5>
-                            </div>
-                            <div class="card-body">
-                                <div id="page-wrap">
-                                    <h5>এনজিও বিষয়ক ব্যুরো শাখা ১১ টি, পদ ৪৩ টি, শূন্যপদ ৩৫টি, কর্মরত ৮
-                                        জন</h5>
-                                    <ul class="treeview">
-                                        <li>
-                                            <input type="checkbox" name="tall" id="tall">
-                                            <label for="tall" class="custom-unchecked">মহাপরিচালক মহোদয়ের
-                                                শাখা</label>
-
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" name="tall-1" id="tall-1">
-                                                    <label for="tall-1" class="custom-unchecked">শেখ মোঃ
-                                                        মনিরুজ্জামান</label>
-                                                </li>
-                                                <li class="last">
-                                                    <input type="checkbox" name="tall-3" id="tall-3">
-                                                    <label for="tall-3" class="custom-unchecked">শূন্য
-                                                        পদ</label>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>নির্বাচিত পদসমূহ</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul class="nav nav-dark" id="pills-darktab" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active"
-                                                            id="pills-darkhome-tab"
-                                                            data-bs-toggle="pill" href="#pills-darkhome"
-                                                            role="tab" aria-controls="pills-darkhome"
-                                                            aria-selected="true"><i
-                                                    class="icofont icofont-ui-home"></i>
-                                            স্বাক্ষরকারী ব্যাক্তি সমূহ</a></li>
-                                </ul>
-                                <div class="tab-content" id="pills-darktabContent">
-                                    <div class="tab-pane fade show active" id="pills-darkhome"
-                                         role="tabpanel" aria-labelledby="pills-darkhome-tab">
-                                        <div class="podobi_tab mt-4">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>কর্মকর্তা</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <button class="btn btn-outline-success"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                    </td>
-                                                    <td>
-                                                        <b>শাখাঃ মহাপরিচালক মহোদয়ের শাখা (২)</b>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <button class="btn btn-outline-success"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                    </td>
-                                                    <td>
-                                                        শেখ মনিরুজামান,মহাপরিচালক <span
-                                                                style="font-size:12px; color: #aeaeae;">মহাপরিচালক মহোদয়ের শাখা, এনজিও বিষয়ক ব্যুরো</span>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Individual column searching (text inputs) Ends-->
-        </div>
-    </div>
-</div><!-- modal-content -->
-</div><!-- modal-dialog -->
-</div><!-- modal -->
-</div>
 
 
 
@@ -239,6 +133,138 @@ aria-labelledby="myModalLabel2">
 
 @endsection
 @section('script')
+<script>
+
+    $(function() {
+
+    $('input[type="checkbox"]').change(checkboxChanged);
+
+    function checkboxChanged() {
+      var $this = $(this),
+          checked = $this.prop("checked"),
+          container = $this.parent(),
+          siblings = container.siblings();
+
+      container.find('input[type="checkbox"]')
+      .prop({
+          indeterminate: false,
+          checked: checked
+      })
+      .siblings('label')
+      .removeClass('custom-checked custom-unchecked custom-indeterminate')
+      .addClass(checked ? 'custom-checked' : 'custom-unchecked');
+
+      checkSiblings(container, checked);
+    }
+
+    function checkSiblings($el, checked) {
+      var parent = $el.parent().parent(),
+          all = true,
+          indeterminate = false;
+
+      $el.siblings().each(function() {
+        return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
+      });
+
+      if (all && checked) {
+        parent.children('input[type="checkbox"]')
+        .prop({
+            indeterminate: false,
+            checked: checked
+        })
+        .siblings('label')
+        .removeClass('custom-checked custom-unchecked custom-indeterminate')
+        .addClass(checked ? 'custom-checked' : 'custom-unchecked');
+
+        checkSiblings(parent, checked);
+      }
+      else if (all && !checked) {
+        indeterminate = parent.find('input[type="checkbox"]:checked').length > 0;
+
+        parent.children('input[type="checkbox"]')
+        .prop("checked", checked)
+        .prop("indeterminate", indeterminate)
+        .siblings('label')
+        .removeClass('custom-checked custom-unchecked custom-indeterminate')
+        .addClass(indeterminate ? 'custom-indeterminate' : (checked ? 'custom-checked' : 'custom-unchecked'));
+
+        checkSiblings(parent, checked);
+      }
+      else {
+        $el.parents("li").children('input[type="checkbox"]')
+        .prop({
+            indeterminate: true,
+            checked: false
+        })
+        .siblings('label')
+        .removeClass('custom-checked custom-unchecked custom-indeterminate')
+        .addClass('custom-indeterminate');
+      }
+    }
+    });
+
+
+    //new code
+    $(document).on('click', '.passBranch1', function(){
+
+       // alert(21);
+
+
+        var mainId = $('#main_id').val();
+        var mainstatus = $(this).data('status');
+
+
+        var mainStatusNew = $('#mainstatus').val();
+
+
+
+
+        var totalBranch = $('input[name="branch_name[]"]:checked').map(function (idx, ele) {
+       return $(ele).val();
+    }).get();
+
+
+    var totalDesi = $('input[name="designation[]"]:checked').map(function (idx, ele) {
+    return $(ele).val();
+    }).get();
+
+
+
+
+    console.log(mainstatus);
+    console.log(totalBranch);
+    console.log(totalDesi);
+
+
+
+
+    $.ajax({
+            url: "{{ route('showDataDesignationWiseOne') }}",
+            method: 'GET',
+            data: {mainStatusNew:mainStatusNew,mainId:mainId,mainstatus:mainstatus,totalBranch:totalBranch,totalDesi:totalDesi},
+            success: function(data) {
+
+
+
+                // $("#serial_part_one"+id_for_pass).val(data);
+                 $("#final_result").html(data);
+
+
+
+
+            }
+            });
+
+    });
+
+    //new branch all
+
+
+
+
+
+
+    </script>
 <script>
 
 
@@ -259,6 +285,67 @@ $("#document_type_id").change(function(){
 
 
 });
+
+
+//brnach delete from previous list
+
+
+$("[id^=branchDelete]").click(function(){
+
+    var branchId = $(this).attr('data-branchId');
+    var nothiId = $(this).attr('data-nothiId');
+
+
+    //alert(branchId + ' ' +nothiId );
+
+
+    $.ajax({
+            url: "{{ route('deleteBrachFromEdit') }}",
+            method: 'GET',
+            data: {branchId:branchId,nothiId:nothiId},
+            success: function(data) {
+
+                 $("#newCodeFromEditList").html(data);
+            }
+            });
+
+});
+
+
+//end
+
+
+
+//admin delete from previous list
+$("[id^=memberDelete]").click(function(){
+
+
+    var madminId = $(this).attr('data-madminId');
+    var nothiId = $(this).attr('data-nothiId');
+
+
+    //alert(madminId + ' ' +nothiId );
+
+    $.ajax({
+            url: "{{ route('deleteAdminFromEdit') }}",
+            method: 'GET',
+            data: {madminId:madminId,nothiId:nothiId},
+            success: function(data) {
+
+                 $("#newCodeFromEditList").html(data);
+            }
+            });
+
+});
+
+
+//
+
+
+
+
+
+
 </script>
 
 @endsection

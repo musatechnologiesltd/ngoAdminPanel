@@ -212,7 +212,35 @@ class DocumentPresentController extends Controller
     public function index()
     {
         $nothiList = NothiList::latest()->get();
-        return view('admin.presentDocument.index',compact('nothiList'));
+
+
+        //for designation
+
+        $totalBranch = Branch::where('id','!=',1)->count();
+        $totalDesignation = DesignationList::where('id','!=',1)->count();
+        $totaluser = Admin::where('id','!=',1)->count();
+
+
+         $totalDesignationWorking = AdminDesignationHistory::count();
+
+        $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
+
+
+        $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+      $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
+
+        //dd($totalEmptyDesignation);
+
+        $totalBranchList = Branch::where('id','!=',1)->get();
+
+        //for designation
+
+
+
+        return view('admin.presentDocument.index',compact('nothiList','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
     }
 
     /**
@@ -299,6 +327,7 @@ public function givePermissionToNothi($id){
 
 public function savePermissionNothi(Request $request){
 
+    //dd($request->all());
 
     \LogActivity::addToLog('add dak detail.');
 
@@ -309,20 +338,30 @@ public function savePermissionNothi(Request $request){
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
-
+                     $branchId = DB::table('admins')
+                     ->where('id',$request->admin_id[$i])
+                     ->value('branch_id');
 
 
                  $regDakData = new NothiPermission();
                  $regDakData->adminId = $request->admin_id[$i];
                  $regDakData->nothId =$request->main_id;
-
+                 $regDakData->branchId =$branchId;
                  $regDakData->save();
 
                 }
 
 
             }
-            return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+
+
+            $data =route('documentPresent.index');
+
+
+            return response()->json($data);
+
+
+            //return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 
 }
 
@@ -332,6 +371,44 @@ public function savePermissionNothi(Request $request){
     public function show(string $id)
     {
         //
+    }
+
+
+
+    public function deleteBrachFromEdit(Request $request){
+
+
+         $branchId = $request->branchId;
+         $nothiId = $request->nothiId;
+
+
+
+         $delete = NothiPermission::where('branchId',$branchId)->delete();
+
+         $data = view('admin.presentDocument.deleteBrachFromEdit',compact('nothiId'))->render();
+
+
+         return response()->json($data);
+
+    }
+
+
+
+    public function deleteAdminFromEdit(Request $request){
+        $madminId = $request->madminId;
+        $nothiId = $request->nothiId;
+
+
+        $delete = NothiPermission::where('nothId',$nothiId)
+         ->where('adminId',$madminId)->delete();
+
+
+         $data = view('admin.presentDocument.deleteBrachFromEdit',compact('nothiId'))->render();
+
+
+         return response()->json($data);
+
+
     }
 
     /**

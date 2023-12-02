@@ -44135,3 +44135,8 @@ span.twitter-typeahead .tt-suggestion.active, span.twitter-typeahead .tt-suggest
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.modal-lg-custom
+{
+    max-width: 80% !important;
+}

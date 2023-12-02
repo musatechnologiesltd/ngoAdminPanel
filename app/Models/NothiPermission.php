@@ -9,5 +9,5 @@ class NothiPermission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nothId','adminId'];
+    protected $fillable = ['nothId','branchId','adminId'];
 }

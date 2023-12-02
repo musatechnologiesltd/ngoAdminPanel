@@ -76,6 +76,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(DocumentPresentController::class)->group(function () {
 
+
+        Route::get('/deleteAdminFromEdit', 'deleteAdminFromEdit')->name('deleteAdminFromEdit');
+        Route::get('/deleteBrachFromEdit', 'deleteBrachFromEdit')->name('deleteBrachFromEdit');
+
         Route::get('/savePermissionNothi', 'savePermissionNothi')->name('savePermissionNothi');
         Route::get('/givePermissionToNothi/{id}', 'givePermissionToNothi')->name('givePermissionToNothi');
 

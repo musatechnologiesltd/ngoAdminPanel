@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nothi_permissions', function (Blueprint $table) {
             $table->id();
             $table->string('nothId');
+            $table->string('branchId');
             $table->string('adminId');
             $table->timestamps();
         });

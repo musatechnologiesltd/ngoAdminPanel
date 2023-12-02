@@ -161,7 +161,7 @@
     </a>
 </li>
 <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('documentPresent.index')  ? 'active' : '' }}" href="{{ route('documentPresent.index') }}">
+    <a class="nav-link menu-title link-nav {{  Route::is('givePermissionToNothi') || Route::is('documentPresent.index')  ? 'active' : '' }}" href="{{ route('documentPresent.index') }}">
         <i data-feather="file-text"></i>
         <span>সকল নথি</span>
     </a>
