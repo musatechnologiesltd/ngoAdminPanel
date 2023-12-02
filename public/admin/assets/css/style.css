@@ -16506,7 +16506,7 @@ table.dataTable.display tbody tr {
 }
 
 .product-table tbody tr td:first-child {
-    text-align: center;
+    text-align: left;
 }
 
 .product-table .dataTables_wrapper button {
