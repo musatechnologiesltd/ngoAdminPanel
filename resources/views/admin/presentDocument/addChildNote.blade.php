@@ -77,9 +77,9 @@
 
 @if($activeCode == ($key+1))
 
-<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$parentId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
 @else
-<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$parentId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
 @endif
 
                                         @if(count($checkParent) == ($key+1))
@@ -122,7 +122,8 @@
 if($status == 'registration'){
 
 
-$checkParentFirst = DB::table('parent_note_for_registrations')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
    ->first();
 
 
@@ -135,7 +136,8 @@ $checkParentFirst = DB::table('parent_note_for_registrations')->where('id',$id)
 
 
 
-$checkParentFirst = DB::table('parent_note_for_renews')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 
@@ -151,7 +153,8 @@ $childNoteNewList = DB::table('child_note_for_renews')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_name_changes')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 
@@ -167,7 +170,8 @@ $childNoteNewList = DB::table('child_note_for_name_changes')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 
@@ -183,7 +187,8 @@ $childNoteNewList = DB::table('child_note_for_fd_nines')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
@@ -197,7 +202,8 @@ $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_sixes')
@@ -211,7 +217,8 @@ $childNoteNewList = DB::table('child_note_for_fd_sixes')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_sevens')
@@ -223,7 +230,8 @@ $childNoteNewList = DB::table('child_note_for_fd_sevens')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 
@@ -238,7 +246,8 @@ $childNoteNewList = DB::table('child_note_for_fc_ones')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fc_twos')
@@ -255,7 +264,8 @@ $childNoteNewList = DB::table('child_note_for_fc_twos')
 
 
 
-$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
 ->first();
 
 
@@ -498,7 +508,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                         </div>
                                                                         <div class="col-xl-11">
 
-                                                                        <div id="editor121" name="der">
+                                                                        <div id="editor1" name="der">
                                                                     {!! $officeDetails->office_subject !!}
                                                                             </div>
 
@@ -516,7 +526,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                         </div>
                                                                         <div class="col-xl-9">
 
-                                                                            <div id="editor122" name="dere">
+                                                                            <div id="editor2" name="dere">
                                                                                 {!! $officeDetails->office_sutro !!}
                                                                                         </div>
 
@@ -555,9 +565,9 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                             </div>
                                                                             <div class="col-xl-11">
 
-                                                                            <div id="editor121" name="der">
-                                                                        ..................................................
-                                                                                </div>
+                                                                                <div id="editor1" placeholder="........">
+                                                                                    ...................................................
+                                                                                      </div>
 
 
                                                                             {{-- <span id="idOfElement"
@@ -573,15 +583,17 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                             </div>
                                                                             <div class="col-xl-9">
 
-                                                                                <div id="editor122" name="dere">
-                                                                                    ..................................................
-                                                                                            </div>
+
+
+
+                                                                                            <input type="text" id="editor2" placeholder="........"/>
+
 
                                                                             {{-- <span id="idOfElement1"
                                                                                   class="block">
                                                                             <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
                                                                             <span class="preview"></span> --}}
-                                                                        </span>
+
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
@@ -591,9 +603,9 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
 
-                                                                                        <div id="editor1222" name="derrr">
-                                                                                          ................................
-                                                                                        </div>
+                                                                                        <textarea id="editor1222" name="derrr" placeholder="................................">
+
+                                                                                        </textarea>
 
 
                                                                             </div>
@@ -710,8 +722,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                     @csrf
 
                     <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
-                    <input type="hidden" value="{{ $parentId }}" placeholder="নোট এর বিষয়" class="form-control" name="doc_id" id=""/>
-
+                    <input type="hidden" value="{{ $parentId }}" placeholder="নোট এর বিষয়" class="form-control" name="dakId" id=""/>
+                    <input type="hidden" value="{{ $nothiId }}" placeholder="নোট এর বিষয়" class="form-control" name="nothiId" id=""/>
                     <div class="mb-3">
                     <label class="form-label" for="">নোট এর বিষয় </label>
                     <input type="text" placeholder="নোট এর বিষয়" class="form-control" name="subject" id=""/>
@@ -865,6 +877,9 @@ $.ajax({
 </script>
 <!-- Plugin used-->
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/inline/ckeditor.js"></script>
+
+
 
 <!--script for  nottangoso start-->
 <script>
@@ -1032,7 +1047,7 @@ $.ajax({
 <script>
     // This sample still does not showcase all CKEditor 5 features (!)
     // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-    CKEDITOR.InlineEditor.create(document.getElementById("editor1222"), {
+    CKEDITOR.ClassicEditor.create(document.getElementById("editor1222"), {
         // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
         toolbar: {
             items: [
@@ -1616,6 +1631,31 @@ $.ajax({
 
 
 <!-- script for potrangso end -->
+
+
+
+<script>
+    InlineEditor.create(document.querySelector("#editor1"), {
+        plugins: ["Essentials", "Bold", "Italic", "Link", "List"]
+    })
+        .then((editor) => {
+            window.editor = editor;
+        })
+        .catch((err) => {
+            console.error(err.stack);
+        });
+</script>
+<script>
+    InlineEditor.create(document.querySelector("#editor2"), {
+        plugins: ["Essentials", "Bold", "Italic", "Link", "List"]
+    })
+        .then((editor) => {
+            window.editor = editor;
+        })
+        .catch((err) => {
+            console.error(err.stack);
+        });
+</script>
 
 
 @endsection

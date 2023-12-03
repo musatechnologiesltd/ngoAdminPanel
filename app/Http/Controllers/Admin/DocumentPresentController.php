@@ -64,6 +64,34 @@ class DocumentPresentController extends Controller
 {
 
 
+    public function searchResultForDak(Request $request){
+
+
+        $dakId = $request->result;
+        $status = $request->status;
+
+//dd($request->main_value);
+
+        $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_year', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
+
+
+        //dd($searchResult);
+
+        $data = view('admin.presentDocument.searchResultForDak',compact('searchResult','dakId','status'))->render();
+
+
+        return response()->json($data);
+
+
+
+    }
+
+
     public function create(){
 
         $documentTypeList = DocumentType::latest()->get();

@@ -25,14 +25,14 @@
                     </div>
                     <div class="col-lg-12 mt-3">
                         <div class="input-group">
-                            <input class="form-control" type="text" placeholder="নথি খুজুন"><span
-                                    class="input-group-text" id="nothiSearch"><i class="fa fa-search"> </i></span>
+                            <input class="form-control"  id="nothiSearchName{{ $allStatusData->id }}" type="text" placeholder="নথি খুজুন"><span
+                                    class="input-group-text" ><i class="fa fa-search"> </i></span>
                         </div>
                     </div>
                     <div class="col-lg-12 mt-3">
                         <div class="table-responsive">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="nothiSearchResultName{{ $allStatusData->id }}">
                                     <tbody>
 
                                         @foreach ($nothiList as $key=>$nothiLists)
@@ -57,7 +57,7 @@
                                                      class="accordion-collapse collapse">
                                                     <div class="accordion-body">
                                                         <div class="d-flex mt-3">
-                                                            <button class="btn btn-transparent ms-3" type="button">
+                                                            <button onclick="location.href = '{{ route('addParentNote',['status'=>'nameChange','dakId'=>$allStatusData->id,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                                                 <i class="fa fa-plus"></i>
                                                                 নতুন নোট
                                                             </button>
@@ -67,7 +67,28 @@
                                                             </button>
                                                         </div>
                                                         <div class="card-body">
+
+<?php
+
+
+  $allNoteListNew = DB::table('parent_note_for_name_changes')
+  ->where('serial_number',$nothiLists->id)
+  ->where('nothi_detail_id',$allStatusData->id)->get();
+
+
+
+    ?>
+    @if(count($allNoteListNew) > 0)
+    <ul>
+    @foreach($allNoteListNew as $key=>$allNoteListNews)
+                                                      <li>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla(($key+1)) }} .   <a href="{{ route('addChildNote', ['status' =>'nameChange','parentId'=>$allStatusData->id,'nothiId'=>$nothiLists->id,'id' =>$allNoteListNews->id,'activeCode' => ($key+1)]) }}">{{ $allNoteListNews->subject }}</a> </li>
+                                                            @endforeach
+                                                        </ul>
+                                                            @else
+
+
                                                             <p>কোন নোট পাওয়া যায়নি</p>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

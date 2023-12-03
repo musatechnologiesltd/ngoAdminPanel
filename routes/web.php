@@ -74,7 +74,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('childNote', ChildNoteController::class);
     Route::resource('parentNote', ParentNoteController::class);
 
+
+    Route::controller(ParentNoteController::class)->group(function () {
+
+        Route::get('/addParentNote/{status}/{dakId}/{nothiId}', 'addParentNote')->name('addParentNote');
+
+    });
+
     Route::controller(DocumentPresentController::class)->group(function () {
+
+        Route::get('/searchResultForDak', 'searchResultForDak')->name('searchResultForDak');
 
 
         Route::get('/deleteAdminFromEdit', 'deleteAdminFromEdit')->name('deleteAdminFromEdit');
@@ -90,7 +99,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::controller(ChildNoteController::class)->group(function () {
 
 
-        Route::get('/addChildNote/{status}/{parentId}/{id}/{activeCode}', 'addChildNote')->name('addChildNote');
+        Route::get('/addChildNote/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'addChildNote')->name('addChildNote');
 
 
     });

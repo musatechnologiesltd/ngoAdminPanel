@@ -73,9 +73,9 @@
                                                     @foreach($checkParent as $key=>$checkParents)
 
                                                     @if(($key+1) == 1)
-                                                    <button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$id,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+                                                    <button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$dakId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
 @else
-<button class="btn btn-transparent mt-2 "  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$id,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2 "  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$dakId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
 
 @endif
                                                     @if(count($checkParent) == ($key+1))
@@ -118,7 +118,8 @@
 if($status == 'registration'){
 
 
-$checkParentFirst = DB::table('parent_note_for_registrations')->where('registration_doc_id',$id)
+$checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
                ->first();
 $childNoteNewList = DB::table('child_note_for_registrations')
                        ->where('parent_note_regid',$checkParentFirst->id)->get();
@@ -127,7 +128,8 @@ $officeDetail = DB::table('registration_office_saroks')->where('parent_note_regi
 
 }elseif($status == 'renew'){
 
-$checkParentFirst = DB::table('parent_note_for_renews')->where('renew_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_renews')
@@ -138,7 +140,8 @@ $officeDetail = DB::table('renew_office_saroks')->where('parent_note_for_renew_i
 
 }elseif($status == 'nameChange'){
 
-$checkParentFirst = DB::table('parent_note_for_name_changes')->where('name_chane_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_name_changes')
@@ -149,7 +152,8 @@ $officeDetail = DB::table('name_change_office_saroks')
 
 }elseif($status == 'fdNine'){
 
-$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('fd_nine_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 $childNoteNewList = DB::table('child_note_for_fd_nines')
                        ->where('p_note_for_fd_nine_id',$checkParentFirst->id)->get();
@@ -159,7 +163,8 @@ $officeDetail = DB::table('fd_nine_office_saroks')->where('p_note_for_fd_nine_id
 
 }elseif($status == 'fdNineOne'){
 
-$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('fd_nine_one_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
@@ -169,7 +174,8 @@ $officeDetail = DB::table('fd_nine_one_office_saroks')->where('p_note_for_fd_nin
 
 }elseif($status == 'fdSix'){
 
-$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('fd_six_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_sixes')
@@ -179,7 +185,8 @@ $officeDetail = DB::table('fd_six_office_saroks')->where('parent_note_for_fdsix_
 
 }elseif($status == 'fdSeven'){
 
-$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('fd_seven_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_sevens')
@@ -189,7 +196,8 @@ $officeDetail = DB::table('fd_seven_office_saroks')->where('parent_note_for_fd_s
 
 }elseif($status == 'fcOne'){
 
-$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('fc_one_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fc_ones')
@@ -199,7 +207,8 @@ $officeDetail = DB::table('fc_one_office_saroks')->where('parent_note_for_fc_one
 
 }elseif($status == 'fcTwo'){
 
-$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('fc_two_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fc_twos')
@@ -209,7 +218,8 @@ $officeDetail = DB::table('fc_two_office_saroks')->where('parent_note_for_fc_two
 
 }elseif($status == 'fdThree'){
 
-$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('fd_three_doc_present_id',$id)
+$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
 ->first();
 
 
@@ -663,7 +673,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                 @csrf
 
                                 <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
-                                <input type="hidden" value="{{ $id }}" placeholder="নোট এর বিষয়" class="form-control" name="doc_id" id=""/>
+                                <input type="hidden" value="{{ $dakId }}" placeholder="নোট এর বিষয়" class="form-control" name="dakId" id=""/>
+                                <input type="hidden" value="{{ $nothiId }}" placeholder="নোট এর বিষয়" class="form-control" name="nothiId" id=""/>
 
                                 <div class="mb-3">
                                 <label class="form-label" for="">নোট এর বিষয় </label>
@@ -683,6 +694,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
             <!-- end note add modal start -->
+
+
             <!-- Modal -->
 <div class="modal right fade bd-example-modal-lg"
      id="myModal2" tabindex="-1" role="dialog"
@@ -720,9 +733,38 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 </div>
 
 
+<div id="myModals" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">নতুন নোট তৈরী করুন</h5>
+                <button type="button" class="close newcl" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-validation" action="{{ route('parentNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                    @csrf
+
+                    <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
+                    <input type="hidden" value="{{ $dakId }}" placeholder="নোট এর বিষয়" class="form-control" name="dakId" id=""/>
+                    <input type="hidden" value="{{ $nothiId }}" placeholder="নোট এর বিষয়" class="form-control" name="nothiId" id=""/>
+                    <div class="mb-3">
+                    <label class="form-label" for="">নোট এর বিষয় </label>
+                    <input type="text" placeholder="নোট এর বিষয়" class="form-control" name="subject" id=""/>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary w-md mt-3">সংরক্ষণ করুন</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--code for ajax -->
 <input type="hidden" id="updateOrSubmit" value="1"/>
-<input type="hidden" id="parentIdForPotrangso" value="{{ $id }}"/>
+<input type="hidden" id="parentIdForPotrangso" value="{{ $nothiId }}"/>
 <input type="hidden" id="statusForPotrangso" value="{{ $status }}"/>
 <!--end code for ajax-->
 
@@ -730,6 +772,21 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 @endsection
 
 @section('script')
+
+
+<!-- new my modal -->
+<script>
+    $(document).ready(function(){
+        $("#myModals").modal('show');
+    });
+
+    $(".newcl").click(function(){
+        $("#myModals").modal('hide');
+    });
+</script>
+<!-- end new modal -->
+
+
 
 <script>
     $.ajaxSetup({

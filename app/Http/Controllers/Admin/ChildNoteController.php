@@ -47,7 +47,7 @@ use App\Models\FdThreeOfficeSarok;
 
 class ChildNoteController extends Controller
 {
-    public function addChildNote($status,$parentId,$id,$activeCode){
+    public function addChildNote($status,$parentId,$nothiId,$id,$activeCode){
 
 //dd($status. $parentId. $id);
 
@@ -56,7 +56,8 @@ class ChildNoteController extends Controller
 
 
             $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
-            $checkParent = ParentNoteForRegistration::where('registration_doc_id',$parentId)
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
                            ->get();
 
 
@@ -66,7 +67,8 @@ class ChildNoteController extends Controller
 
 
             $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
-            $checkParent = ParentNoteForRenew::where('renew_doc_present_id',$parentId)
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -78,7 +80,8 @@ class ChildNoteController extends Controller
             $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
 
 
-            $checkParent = ParentNoteForNameChange::where('name_chane_doc_present_id',$parentId)
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -90,7 +93,8 @@ class ChildNoteController extends Controller
 
             $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
 
-            $checkParent = ParentNoteForFdNine::where('fd_nine_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 //dd($checkParent);
@@ -102,7 +106,8 @@ class ChildNoteController extends Controller
             $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
 
 
-            $checkParent = ParentNoteForFdNineOne::where('fd_nine_one_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -110,10 +115,11 @@ class ChildNoteController extends Controller
 
         }elseif($status == 'fdSix'){
 
-          
+
             $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
 
-            $checkParent = ParentNoteForFdsix::where('fd_six_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -124,7 +130,8 @@ class ChildNoteController extends Controller
 
             $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
 
-            $checkParent = ParentNoteForFdSeven::where('fd_seven_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -133,7 +140,7 @@ class ChildNoteController extends Controller
 
 
             $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
-            $checkParent = ParentNoteForFcOne::where('fc_one_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
             ->get();
 
 
@@ -144,7 +151,8 @@ class ChildNoteController extends Controller
 
             $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
 
-            $checkParent = ParentNoteForFcTwo::where('fc_two_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -158,7 +166,8 @@ class ChildNoteController extends Controller
 
 
 
-            $checkParent = FdThreeOfficeSarok::where('fd_three_doc_present_id',$parentId)
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
             ->get();
 
 
@@ -166,7 +175,7 @@ class ChildNoteController extends Controller
 
 
 
-        return view('admin.presentDocument.addChildNote',compact('officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.presentDocument.addChildNote',compact('nothiId','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 

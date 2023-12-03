@@ -2462,6 +2462,10 @@ $branchNames = DB::table('branches')
 
 
 @section('script')
+
+@include('admin.post.script')
+
+
 <script>
     .modal:nth-of-type(even) {
         z-index: 1062 !important;

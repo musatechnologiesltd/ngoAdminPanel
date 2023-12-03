@@ -141,7 +141,7 @@
   </li>
 
   <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
+    <a class="nav-link menu-title link-nav {{ Route::is('addParentNote')  ||  Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
         <i data-feather="mail"></i>
         <span>আগত ডাক</span>
     </a>
