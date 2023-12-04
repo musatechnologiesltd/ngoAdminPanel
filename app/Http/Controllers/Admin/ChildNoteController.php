@@ -28,6 +28,7 @@ use App\Models\ChildNoteForFdThree;
 use App\Models\ChildNoteForNameChange;
 use App\Models\ChildNoteForRegistration;
 use App\Models\ChildNoteForRenew;
+use App\Models\NothiList;
 
 use DateTime;
 use DateTimezone;
@@ -174,8 +175,11 @@ class ChildNoteController extends Controller
         }
 
 
+        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
 
-        return view('admin.presentDocument.addChildNote',compact('nothiId','officeDetail','checkParent','status','id','parentId','activeCode'));
+        $user = Admin::where('id','!=',1)->get();
+
+        return view('admin.presentDocument.addChildNote',compact('user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 

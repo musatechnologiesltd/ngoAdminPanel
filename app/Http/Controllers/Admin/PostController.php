@@ -1875,7 +1875,7 @@ $mainStatusNew = $request->mainStatusNew;
 
     $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
 
-        $data = view('admin.post.showDataDesignationWiseOne',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
+        $data = view('admin.post.showDataDesignationWise',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
         return response()->json($data);
     }
     }

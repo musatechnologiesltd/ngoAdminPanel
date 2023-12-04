@@ -28,6 +28,11 @@ class OfficeSarokController extends Controller
     public function store(Request $request){
 
 
+
+
+        //dd($request->all());
+
+
         if($request->updateOrSubmit == 1){
 
 
@@ -274,6 +279,10 @@ class OfficeSarokController extends Controller
      }
     }
 
-     return 1;
+    if($request->updateOrSubmit == 1){
+        return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
+    }else{
+    return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+    }
     }
 }

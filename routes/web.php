@@ -31,6 +31,9 @@ use App\Http\Controllers\Admin\DocumentTypeController;
 use App\Http\Controllers\Admin\ChildNoteController;
 use App\Http\Controllers\Admin\ParentNoteController;
 use App\Http\Controllers\Admin\OfficeSarokController;
+use App\Http\Controllers\Admin\NothiPrapokController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,6 +73,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('documentType', DocumentTypeController::class);
     Route::resource('officeSarok', OfficeSarokController::class);
 
+
+    Route::resource('nothiPrapok', NothiPrapokController::class);
+
+    Route::controller(NothiPrapokController::class)->group(function () {
+
+        Route::get('/selfOfficerAdd', 'selfOfficerAdd')->name('selfOfficerAdd');
+        Route::get('/otherOfficerAdd', 'otherOfficerAdd')->name('otherOfficerAdd');
+
+    });
 
     Route::resource('childNote', ChildNoteController::class);
     Route::resource('parentNote', ParentNoteController::class);
