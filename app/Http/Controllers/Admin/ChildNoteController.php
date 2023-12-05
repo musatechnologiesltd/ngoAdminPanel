@@ -29,6 +29,8 @@ use App\Models\ChildNoteForNameChange;
 use App\Models\ChildNoteForRegistration;
 use App\Models\ChildNoteForRenew;
 use App\Models\NothiList;
+use App\Models\NothiPrapok;
+use App\Models\NothiCopy;
 
 use DateTime;
 use DateTimezone;
@@ -43,7 +45,7 @@ use App\Models\FdSevenOfficeSarok;
 use App\Models\FcOneOfficeSarok;
 use App\Models\FcTwoOfficeSarok;
 use App\Models\FdThreeOfficeSarok;
-
+use App\Models\NothiAttarct;
 
 
 class ChildNoteController extends Controller
@@ -179,7 +181,11 @@ class ChildNoteController extends Controller
 
         $user = Admin::where('id','!=',1)->get();
 
-        return view('admin.presentDocument.addChildNote',compact('user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+
+        $nothiPropokListUpdate = NothiPrapok::where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('status',1)->get();
+        return view('admin.presentDocument.addChildNote',compact('nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 

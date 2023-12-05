@@ -36,18 +36,14 @@ class NothiPrapokController extends Controller
                  ->value('branch_name');
 
 
-                 $table->string('nothiId');
-                 $table->string('nijOfficeId')->nullable();
-                 $table->string('otherOfficerName')->nullable();
-                 $table->string('otherOfficerDesignation')->nullable();
-                 $table->string('otherOfficerBranch')->nullable();
-                 $table->string('otherOfficerEmail')->nullable();
-                 $table->string('otherOfficerPhone')->nullable();
 
+                 //snoteId
 
                 $nothiPrapok = new NothiPrapok();
+                $nothiPrapok->adminId = $selfOfficerList;
                 $nothiPrapok->nothiId = $snothiId;
                 $nothiPrapok->nijOfficeId =  $sstatus;
+                $nothiPrapok->noteId =  $request->snoteId;
                 $nothiPrapok->otherOfficerName = $adminIdList->admin_name_ban;
                 $nothiPrapok->otherOfficerDesignation = $designationName;
                 $nothiPrapok->otherOfficerBranch =  $branchName;
@@ -57,7 +53,10 @@ class NothiPrapokController extends Controller
 
 
 
-                $nothiPrapokList = NothiPrapok::all();
+                $nothiPrapokList = NothiPrapok::where('nothiId',$request->snothiId)
+                ->where('nijOfficeId',$request->sstatus)
+                ->where('noteId',$request->snoteId)
+                ->get();
 
 
                 $data = view('admin.presentDocument.selfOfficerAdd',compact('nothiPrapokList'))->render();
@@ -65,6 +64,61 @@ class NothiPrapokController extends Controller
 
 
          }
+
+    }
+
+
+    public function selfOfficerAjaxDelete($id)
+    {
+        NothiPrapok::find($id)->delete();
+
+        return response()->json(['success'=>'User Deleted Successfully!']);
+    }
+
+
+    public function otherOfficerAdd(Request $request){
+
+        //dd($request->all());
+
+
+        $nothiPrapok = new NothiPrapok();
+        $nothiPrapok->nothiId = $request->snothiId;
+        $nothiPrapok->nijOfficeId =  $request->sstatus;
+        $nothiPrapok->noteId =  $request->snoteId;
+        $nothiPrapok->otherOfficerName = $request->otherOfficerName;
+        $nothiPrapok->otherOfficerDesignation = $request->otherOfficerDesignation;
+        $nothiPrapok->otherOfficerBranch =  $request->otherOfficerBranch;
+        $nothiPrapok->otherOfficerEmail = $request->otherOfficerEmail;
+        $nothiPrapok->otherOfficerPhone = $request->otherOfficerPhone;
+        $nothiPrapok->otherOfficerAddress = $request->otherOfficerAddress;
+        $nothiPrapok->save();
+
+
+
+        $nothiPrapokList = NothiPrapok::where('nothiId',$request->snothiId)
+        ->where('nijOfficeId',$request->sstatus)
+        ->where('noteId',$request->snoteId)
+        ->get();
+
+
+        $data = view('admin.presentDocument.selfOfficerAdd',compact('nothiPrapokList'))->render();
+        return response()->json($data);
+    }
+
+
+    public function prapokStatusUpdate(Request $request){
+
+
+
+
+        NothiPrapok::where('nothiId', $request->fnothiId)
+        ->where('noteId', $request->fnoteId)
+        ->where('nijOfficeId', $request->fstatus)
+       ->update([
+           'status' => 1
+        ]);
+
+        return redirect()->back()->with('success','সফলভাবে  বাছাই সম্পন্ন হয়েছে');
 
     }
 }

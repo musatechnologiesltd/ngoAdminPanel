@@ -32,7 +32,10 @@ use App\Http\Controllers\Admin\ChildNoteController;
 use App\Http\Controllers\Admin\ParentNoteController;
 use App\Http\Controllers\Admin\OfficeSarokController;
 use App\Http\Controllers\Admin\NothiPrapokController;
-
+use App\Http\Controllers\Admin\NothiAttractController;
+use App\Http\Controllers\Admin\NothiCopyController;
+use App\Http\Controllers\Admin\NothiApproverController;
+use App\Http\Controllers\Admin\NothiSenderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,8 +78,46 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::resource('nothiPrapok', NothiPrapokController::class);
+    Route::resource('nothiAttract', NothiAttractController::class);
+    Route::resource('nothiCopy', NothiCopyController::class);
+    Route::resource('nothiApprover', NothiApproverController::class);
+    Route::resource('nothiSender', NothiSenderController::class);
+
+
+
+
+    Route::controller(NothiCopyController::class)->group(function () {
+
+        Route::post('/copyStatusUpdate', 'copyStatusUpdate')->name('copyStatusUpdate');
+
+        Route::get('/copySelfOfficerAjaxDelete/{id}', 'copySelfOfficerAjaxDelete')->name('copySelfOfficerAjaxDelete');
+
+        Route::get('/copySelfOfficerAdd', 'copySelfOfficerAdd')->name('copySelfOfficerAdd');
+        Route::get('/copyOtherOfficerAdd', 'copyOtherOfficerAdd')->name('copyOtherOfficerAdd');
+
+    });
+
+
+
+    Route::controller(NothiAttractController::class)->group(function () {
+
+        Route::post('/attractStatusUpdate', 'attractStatusUpdate')->name('attractStatusUpdate');
+
+        Route::get('/attractSelfOfficerAjaxDelete/{id}', 'attractSelfOfficerAjaxDelete')->name('attractSelfOfficerAjaxDelete');
+
+        Route::get('/attractSelfOfficerAdd', 'attractSelfOfficerAdd')->name('attractSelfOfficerAdd');
+        Route::get('/attractOtherOfficerAdd', 'attractOtherOfficerAdd')->name('attractOtherOfficerAdd');
+
+    });
+
+
+
 
     Route::controller(NothiPrapokController::class)->group(function () {
+
+        Route::post('/prapokStatusUpdate', 'prapokStatusUpdate')->name('prapokStatusUpdate');
+
+        Route::get('/selfOfficerAjaxDelete/{id}', 'selfOfficerAjaxDelete')->name('selfOfficerAjaxDelete');
 
         Route::get('/selfOfficerAdd', 'selfOfficerAdd')->name('selfOfficerAdd');
         Route::get('/otherOfficerAdd', 'otherOfficerAdd')->name('otherOfficerAdd');
