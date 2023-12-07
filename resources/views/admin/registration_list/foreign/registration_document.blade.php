@@ -93,18 +93,30 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
     </a></td>
 </tr>
 @else
-<tr>
-    @if($key+1 == 1)
-    <td>Certificate Of Incorporation in the Country Of Origin</td>
+
+
+
+
+<tr>  @if($key+1 == 1)
+
+    <td> FD - 1 Form</td>
+
     @elseif($key+1 == 2)
-    <td>Constitution</td>
-    @elseif($key+1 == 3)
-    <td>Activities Report</td>
+
+    <td> Form No - 8</td>
+@elseif($key+1 == 3)
+    <td>Certificate Of Incorporation in the Country Of Origin</td>
     @elseif($key+1 == 4)
-    <td>Decision Of the Committee/Board To Open Office In Bangladesh</td>
+    <td>Attested copy of Constitution</td>
     @elseif($key+1 == 5)
- <td>Deed Of Agreement Stamp Of TK.300/-with the landlord in Support Of Opening the Office In Bangladesh</td>
+    <td>Activities Report</td>
     @elseif($key+1 == 6)
+    <td>Decision Of the Committee/Board To Open Office In Bangladesh</td>
+    @elseif($key+1 == 7)
+    <td>Letter Of Appoinment Of The Country Representative</td>
+    @elseif($key+1 == 8)
+ <td>Deed Of Agreement Stamp Of TK.300/-with the landlord in Support Of Opening the Office In Bangladesh</td>
+    @elseif($key+1 == 9)
     <td>Letter Of Intent</td>
 
     @endif

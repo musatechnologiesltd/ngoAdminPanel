@@ -15,6 +15,8 @@ class DesignationListSeeder extends Seeder
     {
         $user1 = Branch::where('id',1)->first();
 
+       
+
             $user = new DesignationList();
             $user->branch_id =  $user1->id;
             $user->designation_name	 = "super admin";

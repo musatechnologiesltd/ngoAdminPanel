@@ -628,6 +628,8 @@ $file=$data->system_url.'public/'.$get_file_data;
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('list_of_board_of_directors_or_board_of_trustees');
             }elseif($title == 'laws_or_constitution'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('organization_by_laws_or_constitution');
+            }elseif($title == 'final_fd_eight_form'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('final_fd_eight_form');
             }elseif($title == 'work_procedure'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('work_procedure_of_organization');
             }elseif($title == 'last_ten_years'){

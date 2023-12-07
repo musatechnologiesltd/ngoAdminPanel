@@ -83,25 +83,31 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 @if($ngoTypeInfo == 'দেশিও')
 <tr>
     <td>
-    @if($key+1 == 1)
+
+        @if($key+1 == 1)
+        এফডি -১ ফরম
+        @elseif($key+1 == 2)
+        ফরম নং - ৮
+
+    @elseif($key+1 == 3)
 
 
  নির্বাহী কমিটির সদস্যদের পাসপোর্ট সাইজের ছবিসহ জাতীয় পরিচয়পত্রে সত্যায়িত অনুলিপি
 
 
-@elseif($key+1 == 2)
+@elseif($key+1 == 4)
 
 
 প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি
 
 
-@elseif($key+1 == 3)
+@elseif($key+1 == 5)
 
 
 গঠনতন্ত্রের (প্রাথমিক নিবন্ধন কতৃপক্ষ কতৃক অনুমোদিত ) সত্যায়িত অনুলিপি
 
 
-@elseif($key+1 == 4)
+@elseif($key+1 == 6)
 
 
 
@@ -110,22 +116,22 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 
 
-@elseif($key+1 == 5)
+@elseif($key+1 == 7)
 
 
 দাতা সংস্থার প্রতিশ্রুতিপত্র (সংস্থার প্রধান কতৃক সত্যায়িত )
 
-@elseif($key+1 == 6)
+@elseif($key+1 == 8)
 
 
 কোড নং -১-০৩২৩-০০০০-১৮৩৬-এ তফসিল-১ নির্ধারিত ফি জমা প্রদান করে ট্রেজারি চালানের মূল কপিসহ
 
-@elseif($key+1 == 7)
+@elseif($key+1 == 9)
 
 
 সংস্থার নির্বাহী কমিটি গঠন সংক্রান্ত সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি (উপস্থিত সাধারণ সদস্যদের উপস্থিতির স্বাক্ষরিত তালিকাসহ )
 
-@elseif($key+1 == 8)
+@elseif($key+1 == 10)
 
 
 সংস্থার সাধারণ সদস্যদের নামের তালিকা (প্রত্যেক সদস্যদের স্বাক্ষরসহ নাম, পিতা /মাতা, স্বামী/স্ত্রী'র নাম ও ঠিকানা ,জাতীয় পরিচয়পত্র নম্বর )
@@ -139,16 +145,21 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 @else
 <tr>
     @if($key+1 == 1)
-    <td>Certificate Of Incorporation in the Country Of Origin</td>
+    FD - 1 Form
     @elseif($key+1 == 2)
-    <td>Constitution</td>
-    @elseif($key+1 == 3)
-    <td>Activities Report</td>
+    Form No - 8
+
+@elseif($key+1 == 3)
+    <td>Certificate Of Incorporation in the Country Of Origin</td>
     @elseif($key+1 == 4)
-    <td>Decision Of the Committee/Board To Open Office In Bangladesh</td>
+    <td>Constitution</td>
     @elseif($key+1 == 5)
- <td>Deed Of Agreement Stamp Of TK.300/-with the landlord in Support Of Opening the Office In Bangladesh</td>
+    <td>Activities Report</td>
     @elseif($key+1 == 6)
+    <td>Decision Of the Committee/Board To Open Office In Bangladesh</td>
+    @elseif($key+1 == 7)
+ <td>Deed Of Agreement Stamp Of TK.300/-with the landlord in Support Of Opening the Office In Bangladesh</td>
+    @elseif($key+1 == 8)
     <td>Letter Of Intent</td>
 
     @endif

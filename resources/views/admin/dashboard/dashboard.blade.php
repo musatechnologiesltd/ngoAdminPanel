@@ -206,7 +206,7 @@
 
                                 ?>
                             <tr>
-
+<td>
                                     @if($ngoOldNew == 'Old')
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
                                     @else
@@ -214,7 +214,7 @@
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}
 @endif
 
-                                   
+
 
 
                                 </td>
