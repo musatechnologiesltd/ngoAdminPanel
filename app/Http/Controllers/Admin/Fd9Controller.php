@@ -33,6 +33,21 @@ class Fd9Controller extends Controller
 
 
 
+    public function verified_fd_nine_download($id){
+
+        \LogActivity::addToLog('verified_fd_nine_download');
+
+        $form_one_data = DB::table('fd9_forms')->where('id',$id)->value('verified_fd_nine_form');
+
+        //dd($form_one_data);
+
+         return view('admin.fd9form.verified_fd_nine_download',compact('form_one_data'));
+
+
+    }
+
+
+
 
     public function statusUpdateForFd9(Request $request){
 
@@ -142,8 +157,25 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 //dd($editCheck);
 
 
-        $ngoStatus = DB::table('ngo_statuses')
-        ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+//new code for old  and new
+
+      $checkOldorNew = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+    $ngoStatus = DB::table('ngo_renews')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}else{
+
+    $ngoStatus = DB::table('ngo_statuses')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+
+
 
         //dd($dataFromNVisaFd9Fd1->nVisaId);
 
@@ -256,8 +288,25 @@ $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user
      $ngoTypeData = DB::table('ngo_type_and_languages')
      ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
 
-     $ngoStatus = DB::table('ngo_statuses')
-     ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //new code for old  and new
+
+     $checkOldorNew = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+    $ngoStatus = DB::table('ngo_renews')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}else{
+
+    $ngoStatus = DB::table('ngo_statuses')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+
 
      //dd($dataFromNVisaFd9Fd1->id);
 
@@ -413,8 +462,28 @@ if(empty($editCheck)){
      $checkNgoTypeForForeginNgo = DB::table('ngo_type_and_languages')
      ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
 
-     $ngoStatus = DB::table('ngo_statuses')
-     ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //new code for old  and new
+
+     $checkOldorNew = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+    $ngoStatus = DB::table('ngo_renews')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}else{
+
+    $ngoStatus = DB::table('ngo_statuses')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+
+
+    //  $ngoStatus = DB::table('ngo_statuses')
+    //  ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
 
      //dd($dataFromNVisaFd9Fd1->id);
 

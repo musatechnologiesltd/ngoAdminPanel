@@ -184,6 +184,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/fd3FormForRevision', 'fd3FormForRevision')->name('fd3FormForRevision');
         Route::get('/acceptedFd3Form', 'acceptedFd3Form')->name('acceptedFd3Form');
 
+        Route::get('/verified_fd_three_form/{id}', 'verified_fd_three_form')->name('verified_fd_three_form');
+
         Route::get('/fd3PdfDownload/{id}', 'fd3PdfDownload')->name('fd3PdfDownload');
         Route::get('/fd3fd2PdfDownload/{id}', 'fd3fd2PdfDownload')->name('fd3fd2PdfDownload');
         Route::get('/fd3fd2OtherPdfDownload/{id}', 'fd3fd2OtherPdfDownload')->name('fd3fd2OtherPdfDownload');
@@ -213,6 +215,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/acceptedFc2Form', 'acceptedFc2Form')->name('acceptedFc2Form');
 
         Route::get('/fc2PdfDownload/{id}', 'fc2PdfDownload')->name('fc2PdfDownload');
+
+        Route::get('/verified_fc_two_form/{id}', 'verified_fc_two_form')->name('verified_fc_two_form');
+
+
         Route::get('/fc2fd2PdfDownload/{id}', 'fc2fd2PdfDownload')->name('fc2fd2PdfDownload');
         Route::get('/fc2fd2OtherPdfDownload/{id}', 'fc2fd2OtherPdfDownload')->name('fc2fd2OtherPdfDownload');
 
@@ -239,6 +245,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/acceptedFc1Form', 'acceptedFc1Form')->name('acceptedFc1Form');
 
         Route::get('/fc1PdfDownload/{id}', 'fc1PdfDownload')->name('fc1PdfDownload');
+
+
+        Route::get('/verified_fc_one_form/{id}', 'verified_fc_one_form')->name('verified_fc_one_form');
+
+
         Route::get('/fc1fd2PdfDownload/{id}', 'fc1fd2PdfDownload')->name('fc1fd2PdfDownload');
         Route::get('/fc1fd2OtherPdfDownload/{id}', 'fc1fd2OtherPdfDownload')->name('fc1fd2OtherPdfDownload');
 
@@ -351,6 +362,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::controller(Fd9Controller::class)->group(function () {
 
 
+        Route::get('/verified_fd_nine_download/{id}','verified_fd_nine_download')->name('verified_fd_nine_download');
+
+
         Route::post('/statusUpdateForFd9', 'statusUpdateForFd9')->name('statusUpdateForFd9');
 
 
@@ -379,6 +393,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fd9OneForm', Fd9OneController::class);
 
     Route::controller(Fd9OneController::class)->group(function () {
+
+        Route::get('/verified_fd_nine_one_download/{id}','verified_fd_nine_one_download')->name('verified_fd_nine_one_download');
+
+
         Route::post('/statusUpdateForFd9One', 'statusUpdateForFd9One')->name('statusUpdateForFd9One');
         Route::get('/fd9OneDownload/{cat}/{id}', 'fd9OneDownload')->name('fd9OneDownload');
     });

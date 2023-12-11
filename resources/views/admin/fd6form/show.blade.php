@@ -298,7 +298,7 @@
                                     </table>
                                     <table class="table table-bordered mb-4">
                                         <tr>
-                                            <td>প্রকল্প প্রস্তাব ফরম পিডিফ</td>
+                                            <td>প্রকল্প প্রস্তাব ফরম / এফডি - ৬  পিডিএফ </td>
                                             <td>: <a href="{{ route('fd6PdfDownload',$dataFromFd6Form->mainId) }}" target="_blank" class="btn btn-success">View</a></td>
                                         </tr>
                                     </table>

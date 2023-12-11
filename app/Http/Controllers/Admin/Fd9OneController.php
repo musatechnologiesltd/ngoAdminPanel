@@ -25,6 +25,20 @@ use App\Models\NgoRegistrationDak;
 use App\Models\SecruityCheck;
 class Fd9OneController extends Controller
 {
+
+
+
+    public function verified_fd_nine_one_download($id){
+
+        \LogActivity::addToLog('verified_fd_nine_one_download');
+
+        $form_one_data = DB::table('fd9_one_forms')->where('id',$id)->value('verified_fd_nine_one_form');
+
+        //dd($form_one_data);
+
+         return view('admin.fd9Oneform.verified_fd_nine_one_download',compact('form_one_data'));
+
+    }
     public function index(){
 
 

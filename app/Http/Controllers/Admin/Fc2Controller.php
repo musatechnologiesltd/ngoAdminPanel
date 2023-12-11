@@ -103,6 +103,18 @@ class Fc2Controller extends Controller
 
              }
 
+
+             public function verified_fc_two_form($id){
+
+                \LogActivity::addToLog('verified_fc_two_form pdf');
+
+                $form_one_data = DB::table('fc2_forms')->where('id',$id)->value('verified_fc_two_form');
+
+                //dd($form_one_data);
+
+                 return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
+             }
+
              public function fc2fd2PdfDownload($id){
 
                 \LogActivity::addToLog('fd2 pdf download.');

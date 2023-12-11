@@ -246,7 +246,7 @@
 
                                     <table class="table table-bordered mb-4">
                                         <tr>
-                                            <td>দুর্যোগকালীন ও দুর্যোগ পরবর্তী জরুরি ত্রাণ সহায়তা কার্যক্রম/ প্রকল্প প্রস্তাব ফরম পিডিফ</td>
+                                            <td>দুর্যোগকালীন ও দুর্যোগ পরবর্তী জরুরি ত্রাণ সহায়তা কার্যক্রম/ প্রকল্প প্রস্তাব ফরম পিডিএফ  / এফডি -৭ ফরম</td>
                                             <td>: <a href="{{ route('reliefAssistanceProjectProposalPdf',$dataFromFd7Form->id) }}" target="_blank" class="btn btn-success">View</a></td>
                                         </tr>
                                     </table>

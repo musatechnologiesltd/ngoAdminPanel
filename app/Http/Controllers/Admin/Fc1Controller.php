@@ -103,6 +103,19 @@ class Fc1Controller extends Controller
 
              }
 
+
+
+             public function verified_fc_one_form($id){
+
+                \LogActivity::addToLog('verified_fc_one_form pdf');
+
+                $form_one_data = DB::table('fc1_forms')->where('id',$id)->value('verified_fc_one_form');
+
+                //dd($form_one_data);
+
+                 return view('admin.fc1form.fc1PdfDownload',compact('form_one_data'));
+             }
+
              public function fc1fd2PdfDownload($id){
 
                 \LogActivity::addToLog('fd2 pdf download.');

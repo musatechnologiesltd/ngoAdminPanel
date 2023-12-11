@@ -377,6 +377,14 @@
 
                                     </table>
 
+
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>ব্যক্তি কর্তৃক বৈদেশিক অনুদানে গৃহীত প্রকল্প প্রস্তাব ফরম / এফসি-২ ফরম</td>
+                                            <td>:<a href="{{ route('verified_fc_two_form',$dataFromFc2Form->id) }}" target="_blank" class="btn btn-success">View</a></td>
+                                        </tr>
+                                    </table>
+
                                 </div>
                             </div>
                         </div>

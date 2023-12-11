@@ -344,6 +344,13 @@
 
                                     </table>
 
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>এককালীন অনুদান গ্রহণের আবেদন ফরম / এফসি-১ ফরম</td>
+                                            <td>:<a href="{{ route('verified_fc_one_form',$dataFromFc1Form->id) }}" target="_blank" class="btn btn-success">View</a></td>
+                                        </tr>
+                                    </table>
+
                                 </div>
                             </div>
                         </div>

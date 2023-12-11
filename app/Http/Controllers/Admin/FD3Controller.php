@@ -99,6 +99,19 @@ class FD3Controller extends Controller
              }
 
 
+
+             public function verified_fd_three_form($id){
+
+                \LogActivity::addToLog('verified_fd_three_form pdf');
+
+                $form_one_data = DB::table('fd3_forms')->where('id',$id)->value('verified_fd_three_form');
+
+                //dd($form_one_data);
+
+                 return view('admin.fd3form.verified_fd_three_form',compact('form_one_data'));
+             }
+
+
              public function fd3fd2PdfDownload($id){
 
                 \LogActivity::addToLog('fd2 pdf download.');

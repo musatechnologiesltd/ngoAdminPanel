@@ -126,7 +126,25 @@
                      role="tabpanel" aria-labelledby="pills-darkhome-tab">
                     <div class="mb-0 m-t-30">
 
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
 
+                                        <p>এফডি-৯(১) পিডিএফ ডাউনলোড করুন</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="text-center">
+                                            <p>পিডিএফ ডাউনলোড</p>
+                                            <a class="btn btn-sm btn-success" target="_blank"
+                                                   href = '{{ route('verified_fd_nine_one_download',$dataFromNVisaFd9Fd1->id) }}'>
+                                                   ডাউনলোড করুন
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="text-center">
                                 <h4>এফডি-৯(১) ফরম</h4>
@@ -214,33 +232,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-12"></div>
                         <div class="col-lg-6 col-sm-12">
-                            <table class="table table-borderless">
 
-                                <tr>
-                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->chiefSign}}"/></td>
-                                </tr>
-
-
-                                <tr>
-                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->chiefSeal}}"/></td>
-                                </tr>
-
-                                <tr>
-                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
-                                </tr>
-
-
-
-                                <tr>
-                                    <td>নামঃ {{  $dataFromNVisaFd9Fd1->chiefName }}</td>
-                                </tr>
-                                <tr>
-                                    <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chiefDesi }}</td>
-                                </tr>
-                                <tr>
-                                    <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->chiefDate)->toDateString() )))}}</td>
-                                </tr>
-                            </table>
                         </div>
                     </div>
 

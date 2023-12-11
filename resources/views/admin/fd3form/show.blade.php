@@ -86,8 +86,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <h4>এফডি - ৭ ফরম</h4>
-                                        <h5>দুর্যোগকালীন ও দুর্যোগ পরবর্তী জরুরি ত্রাণ সহায়তা কার্যক্রম/ প্রকল্প প্রস্তাব ফরম</h5>
+                                        <h4>এফডি - ৩ ফরম</h4>
+                                        <h5>পূর্বপর্তি বছরের অর্থগ্রহনের বিবরণী ফরম</h5>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -345,6 +345,14 @@
                                             <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromFd3Form->bank_account_number) }}</td>
                                         </tr>
 
+                                    </table>
+
+
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>পূর্বপর্তি বছরের অর্থগ্রহনের বিবরণী ফরম / এফডি - ৩ ফরম</td>
+                                            <td>:<a href="{{ route('verified_fd_three_form',$dataFromFd3Form->id) }}" target="_blank" class="btn btn-success">View</a></td>
+                                        </tr>
                                     </table>
 
 

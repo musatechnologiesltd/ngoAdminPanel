@@ -167,7 +167,27 @@ class NameCangeController extends Controller
                 $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
 
 
-                $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+                //new code for old  and new
+
+      $checkOldorNew = DB::table('ngo_type_and_languages')
+      ->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+
+ //end new code for old and new
+
+ if($checkOldorNew == 'Old'){
+
+     $all_data_for_new_list_all = DB::table('ngo_renews')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }else{
+
+     $all_data_for_new_list_all = DB::table('ngo_statuses')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }
+
+
+
+
+                //$all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
 
                 $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
                 $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
