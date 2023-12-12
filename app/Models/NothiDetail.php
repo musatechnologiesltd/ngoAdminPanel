@@ -9,6 +9,6 @@ class NothiDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nothId','dakId','dakType','sender','receiver'];
+    protected $fillable = ['noteId','nothId','dakId','dakType','sender','receiver'];
 
 }

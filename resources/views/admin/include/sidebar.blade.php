@@ -146,20 +146,22 @@
         <span>আগত ডাক</span>
     </a>
 </li>
-
+@if ($usr->can('receiveNothiAdd') || $usr->can('receiveNothiView') || $usr->can('receiveNothiDelete') || $usr->can('receiveNothiUpdate'))
 <li class="dropdown">
-    <a class="nav-link menu-title link-nav" href="{{ route('dakBranchList.index') }}">
+    <a class="nav-link menu-title link-nav {{  Route::is('receiveNothi.index')  ? 'active' : '' }}" href="{{ route('receiveNothi.index') }}">
         <i data-feather="mail"></i>
         <span>আগত নথি</span>
     </a>
 </li>
-
+@endif
+@if ($usr->can('sendNothiAdd') || $usr->can('sendNothiView') || $usr->can('sendNothiDelete') || $usr->can('sendNothiUpdate'))
 <li class="dropdown">
-    <a class="nav-link menu-title link-nav" href="{{ route('dakBranchList.index') }}">
+    <a class="nav-link menu-title link-nav {{  Route::is('sendNothi.index')  ? 'active' : '' }}" href="{{ route('sendNothi.index') }}">
         <i data-feather="file-minus"></i>
         <span>প্রেরিত নথি</span>
     </a>
 </li>
+@endif
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{  Route::is('givePermissionToNothi') || Route::is('documentPresent.index')  ? 'active' : '' }}" href="{{ route('documentPresent.index') }}">
         <i data-feather="file-text"></i>

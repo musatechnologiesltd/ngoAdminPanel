@@ -124,11 +124,12 @@ if($status == 'registration'){
 
 $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
    ->first();
 
 
    $childNoteNewList = DB::table('child_note_for_registrations')
-           ->where('parent_note_regid',$checkParentFirst->id)->get();
+           ->where('parent_note_regid',$id)->get();
 
 
 }elseif($status == 'renew'){
@@ -138,11 +139,12 @@ $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_det
 
 $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 
 $childNoteNewList = DB::table('child_note_for_renews')
-           ->where('parent_note_for_renew_id',$checkParentFirst->id)->get();
+           ->where('parent_note_for_renew_id',$id)->get();
 
 
 
@@ -155,11 +157,12 @@ $childNoteNewList = DB::table('child_note_for_renews')
 
 $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 
 $childNoteNewList = DB::table('child_note_for_name_changes')
-           ->where('parentnote_name_change_id',$checkParentFirst->id)->get();
+           ->where('parentnote_name_change_id',$id)->get();
 
 
 
@@ -172,11 +175,12 @@ $childNoteNewList = DB::table('child_note_for_name_changes')
 
 $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 
 $childNoteNewList = DB::table('child_note_for_fd_nines')
-           ->where('p_note_for_fd_nine_id',$checkParentFirst->id)->get();
+           ->where('p_note_for_fd_nine_id',$id)->get();
 
 //dd($checkParent);
 
@@ -189,10 +193,11 @@ $childNoteNewList = DB::table('child_note_for_fd_nines')
 
 $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-           ->where('p_note_for_fd_nine_one_id',$checkParentFirst->id)->get();
+           ->where('p_note_for_fd_nine_one_id',$id)->get();
 
 
 
@@ -204,10 +209,11 @@ $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
 
 $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_sixes')
-           ->where('parent_note_for_fdsix_id',$checkParentFirst->id)->get();
+           ->where('parent_note_for_fdsix_id',$id)->get();
 
 
 
@@ -219,10 +225,11 @@ $childNoteNewList = DB::table('child_note_for_fd_sixes')
 
 $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fd_sevens')
-           ->where('parent_note_for_fd_seven_id',$checkParentFirst->id)->get();
+           ->where('parent_note_for_fd_seven_id',$id)->get();
 
 
 
@@ -232,11 +239,12 @@ $childNoteNewList = DB::table('child_note_for_fd_sevens')
 
 $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 
 $childNoteNewList = DB::table('child_note_for_fc_ones')
-           ->where('parent_note_for_fc_one_id',$checkParentFirst->id)->get();
+           ->where('parent_note_for_fc_one_id',$id)->get();
 
 
 
@@ -248,10 +256,11 @@ $childNoteNewList = DB::table('child_note_for_fc_ones')
 
 $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 $childNoteNewList = DB::table('child_note_for_fc_twos')
-           ->where('parent_note_for_fc_two_id',$checkParentFirst->id)->get();
+           ->where('parent_note_for_fc_two_id',$id)->get();
 
 
 
@@ -266,11 +275,12 @@ $childNoteNewList = DB::table('child_note_for_fc_twos')
 
 $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
+->where('id',$id)
 ->first();
 
 
 $childNoteNewList = DB::table('child_note_for_fd_threes')
-           ->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
+           ->where('parent_note_for_fd_three_id',$id)->get();
 
 
 }
@@ -315,10 +325,10 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                         <div class="d-flex flex-row-reverse mt-3">
 
-                                            <button class="btn btn-danger ms-3" type="button">
+                                            {{-- <button class="btn btn-danger ms-3" type="button">
                                                 <i class="fa fa-send"></i>
                                                 বাতিল করুন
-                                            </button>
+                                            </button> --}}
                                             <div class="dropdown">
                                                 <button class="btn btn-primary " type="submit"
 
@@ -358,7 +368,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                             <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                 @csrf
-                                                <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
+                                                <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
                                                 <input type="hidden" value="{{ $status }}" name="status"/>
                                             <div id="container">
                                                 <textarea class="maineditor" id="mainpeditor"  name="mainPartNote">
@@ -366,11 +376,17 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                 </textarea>
                                             </div>
                                             <div class="d-flex flex-row-reverse mt-3">
+                                                @if(count($checkParent) == 0)
 
-                                                <button class="btn btn-danger ms-3" type="button">
+                                                @else
+                                                <button data-bs-toggle="modal"
+                                                data-original-title="" data-bs-target="#myModal22stu" class="btn btn-secondary ms-3" type="button">
                                                     <i class="fa fa-send"></i>
-                                                    বাতিল করুন
+                                                    প্রেরণ করুন
                                                 </button>
+                                                @endif
+
+
                                                 <div class="dropdown">
                                                     <button class="btn btn-primary " type="submit"
 
@@ -405,7 +421,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                  @else
                                      <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                         @csrf
-                                        <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
+                                        <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
                                         <input type="hidden" value="{{ $status }}" name="status"/>
                                     <div id="container">
                                         <textarea id="peditor"  name="mainPartNote">
@@ -414,10 +430,10 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                     </div>
                                     <div class="d-flex flex-row-reverse mt-3">
 
-                                        <button class="btn btn-danger ms-3" type="button">
+                                        {{-- <button class="btn btn-danger ms-3" type="button">
                                             <i class="fa fa-send"></i>
                                             বাতিল করুন
-                                        </button>
+                                        </button> --}}
                                         <div class="dropdown">
                                             <button class="btn btn-primary " type="submit"
 
@@ -731,7 +747,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     <!--end copy list -->
 <!--prapok-->
 <div class="mt-4" style="text-align: right;">
-    
+
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
     </div>
@@ -886,6 +902,11 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 <!-- end copy nothi -->
 
 
+<!-- nothi sender list -->
+@include('admin.presentDocument.nothiSendToUserModal')
+<!-- end nothi sender list -->
+
+
 <!--code for ajax -->
 
 
@@ -894,6 +915,15 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
 @section('script')
+
+<script>
+
+$(".chb").change(function()
+                                  {
+                                      $(".chb").prop('checked',false);
+                                      $(this).prop('checked',true);
+                                  });
+</script>
 
 
 <!-- slef oficer add code -->

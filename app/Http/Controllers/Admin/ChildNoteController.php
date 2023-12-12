@@ -46,7 +46,9 @@ use App\Models\FcOneOfficeSarok;
 use App\Models\FcTwoOfficeSarok;
 use App\Models\FdThreeOfficeSarok;
 use App\Models\NothiAttarct;
-
+use App\Models\NothiPermission;
+use App\Models\Branch;
+use App\Models\NothiDetail;
 
 class ChildNoteController extends Controller
 {
@@ -182,10 +184,48 @@ class ChildNoteController extends Controller
         $user = Admin::where('id','!=',1)->get();
 
 
-        $nothiPropokListUpdate = NothiPrapok::where('status',1)->get();
-        $nothiAttractListUpdate = NothiAttarct::where('status',1)->get();
-        $nothiCopyListUpdate = NothiCopy::where('status',1)->get();
-        return view('admin.presentDocument.addChildNote',compact('nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("branchId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = Branch::whereIn('id',$separated_data_title)
+        ->orderBy('branch_step','asc')->get();
+
+
+
+
+        return view('admin.presentDocument.addChildNote',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+    }
+
+
+    public function saveNothiPermission(Request $request){
+
+        //dd($request->all());
+
+        $mainSaveData = new NothiDetail();
+        $mainSaveData ->noteId = $request->noteId;
+        $mainSaveData ->nothId = $request->nothiId;
+        $mainSaveData ->dakId = $request->dakId;
+        $mainSaveData ->dakType = $request->status;
+        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+        $mainSaveData ->receiver = $request->nothiPermissionId;
+        $mainSaveData->save();
+
+        return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
 
 
