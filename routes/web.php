@@ -137,7 +137,15 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ParentNoteController::class)->group(function () {
 
+
+        Route::post('/storeDataFromSenderView', 'storeDataFromSenderView')->name('storeDataFromSenderView');
+
+
+
         Route::get('/addParentNote/{status}/{dakId}/{nothiId}', 'addParentNote')->name('addParentNote');
+
+        Route::get('/addParentNoteFromView/{status}/{dakId}/{nothiId}', 'addParentNoteFromView')->name('addParentNoteFromView');
+
 
     });
 
@@ -158,12 +166,14 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
-
+        Route::post('/saveNothiPermissionReturn', 'saveNothiPermissionReturn')->name('saveNothiPermissionReturn');
         Route::post('/saveNothiPermission', 'saveNothiPermission')->name('saveNothiPermission');
 
 
         Route::get('/addChildNote/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'addChildNote')->name('addChildNote');
 
+
+        Route::get('/viewChildNote/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'viewChildNote')->name('viewChildNote');
 
     });
 

@@ -13,7 +13,7 @@ class SendNothiController extends Controller
 
 
         $senderNothiList = NothiDetail::where('sender',Auth::guard('admin')->user()->id)
-                                      ->get();
+                                     ->latest()->get();
 
 
             return view('admin.sendNothi.index',compact('senderNothiList'));

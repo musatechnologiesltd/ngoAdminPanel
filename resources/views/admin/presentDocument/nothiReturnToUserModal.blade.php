@@ -1,13 +1,5 @@
 
-<?php
-$receiverId = DB::table('nothi_details')
-                            ->where('noteId',$id)
-                            ->where('nothId',$nothiId)
-                            ->where('dakId',$parentId)
-                            ->where('dakType',$status)
-                            ->where('sender',Auth::guard('admin')->user()->id)
-                            ->value('receiver');
-?>
+
 
 <div class="modal right fade bd-example-modal-lg"
      id="myModal22stu"  role="dialog"
@@ -16,7 +8,7 @@ $receiverId = DB::table('nothi_details')
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    পরবর্তী কার্যক্রমের জন্যে প্রেরণ করুন
+                    ফেরত পাঠান
                     <br>
                     <small> <span style="background: gray; border-radius: 5px; padding: 2px 5px;">
 
@@ -37,17 +29,25 @@ $receiverId = DB::table('nothi_details')
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('saveNothiPermission') }}" method="post">
+
+                        <?php
+
+                         $senderId = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            ->value('sender');
+
+                            //dd($senderId );
+
+                            ?>
+                        <form action="{{ route('saveNothiPermissionReturn') }}" method="post">
 
                             @csrf
 
-
-
-
                             <input type="hidden" value="{{ $childNoteNewListValue }}" placeholder="নোট এর বিষয়" class="form-control" name="child_note_id" id=""/>
-
-
-
 
 
                             <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
@@ -109,7 +109,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <div class="custom_checkbox">
-                                                                <input id="ccheck{{ $finalAdminLists->id }}" value="{{ $finalAdminLists->id }}" {{ $receiverId == $finalAdminLists->id ? 'checked':'' }} name="nothiPermissionId" class="custom_check chb" type="checkbox">
+                                                                <input id="ccheck{{ $finalAdminLists->id }}" value="{{ $finalAdminLists->id }}"  {{ $senderId == $finalAdminLists->id ? 'checked':'' }} name="nothiPermissionId" class="custom_check chb" type="checkbox">
                                                                 <label for="ccheck{{ $finalAdminLists->id }}" style="--d: 30px">
                                                                     <svg viewBox="0,0,50,50">
                                                                         <path d="M5 30 L 20 45 L 45 5"></path>
@@ -131,7 +131,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                                 @endforeach
 
 
-
+                                           
                                                 </tbody>
                                             </table>
                                         </div>
@@ -140,19 +140,12 @@ $getAlldesignationName = DB::table('designation_lists')
                             </div>
                             <div class="mt-3">
                                 <div style="text-align:right;">
-                                    <a class="btn btn-primary" type="button" href="{{ route('documentPresent.index') }}">
+                                    {{-- <a class="btn btn-primary" type="button" href="{{ route('documentPresent.index') }}">
                                         অনুমতি সংশোধন
-                                    </a>
-
-                                    @if(empty($receiverId))
-                                    <button  class="btn btn-primary" name="button_value" value="send" type="submit">
+                                    </a> --}}
+                                    <button  class="btn btn-primary" type="submit">
                                         প্রেরণ
                                     </button>
-                                    @else
-                                    <button  class="btn btn-danger" name="button_value" value="return" type="submit">
-                                        ফেরত আনুন
-                                    </button>
-                                    @endif
                                 </div>
                             </div>
                         </form>

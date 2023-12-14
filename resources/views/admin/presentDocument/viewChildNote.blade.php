@@ -77,9 +77,9 @@
 
 @if($activeCode == ($key+1))
 
-<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
 @else
-<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('addChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
 @endif
 
                                         @if(count($checkParent) == ($key+1))
@@ -131,10 +131,8 @@ $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_det
    $childNoteNewList = DB::table('child_note_for_registrations')
            ->where('parent_note_regid',$id)->get();
 
-
            $childNoteNewListValue = DB::table('child_note_for_registrations')
            ->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
-
 
 }elseif($status == 'renew'){
 
@@ -150,11 +148,8 @@ $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id'
 $childNoteNewList = DB::table('child_note_for_renews')
            ->where('parent_note_for_renew_id',$id)->get();
 
-
            $childNoteNewListValue = DB::table('child_note_for_renews')
            ->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
-
-
 
 }elseif($status == 'nameChange'){
 
@@ -172,10 +167,8 @@ $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_deta
 $childNoteNewList = DB::table('child_note_for_name_changes')
            ->where('parentnote_name_change_id',$id)->get();
 
-
            $childNoteNewListValue = DB::table('child_note_for_name_changes')
            ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
 
 
 }elseif($status == 'fdNine'){
@@ -194,11 +187,9 @@ $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_i
 $childNoteNewList = DB::table('child_note_for_fd_nines')
            ->where('p_note_for_fd_nine_id',$id)->get();
 
-           $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-           ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
 //dd($checkParent);
-
+$childNoteNewListValue = DB::table('child_note_for_fd_nines')
+           ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fdNineOne'){
 
@@ -214,11 +205,8 @@ $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_deta
 $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
            ->where('p_note_for_fd_nine_one_id',$id)->get();
 
-
            $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
            ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
 
 
 }elseif($status == 'fdSix'){
@@ -234,11 +222,8 @@ $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id
 $childNoteNewList = DB::table('child_note_for_fd_sixes')
            ->where('parent_note_for_fdsix_id',$id)->get();
 
-
            $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
            ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-
 
 }elseif($status == 'fdSeven'){
 
@@ -254,11 +239,8 @@ $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_
 $childNoteNewList = DB::table('child_note_for_fd_sevens')
            ->where('parent_note_for_fd_seven_id',$id)->get();
 
-
            $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
            ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
 
 }elseif($status == 'fcOne'){
 
@@ -275,8 +257,6 @@ $childNoteNewList = DB::table('child_note_for_fc_ones')
 
            $childNoteNewListValue = DB::table('child_note_for_fc_ones')
            ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
 
 
 }elseif($status == 'fcTwo'){
@@ -297,9 +277,6 @@ $childNoteNewList = DB::table('child_note_for_fc_twos')
            ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
 
 
-
-
-
 }elseif($status == 'fdThree'){
 
 
@@ -315,6 +292,7 @@ $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_
 
 $childNoteNewList = DB::table('child_note_for_fd_threes')
            ->where('parent_note_for_fd_three_id',$id)->get();
+
 
            $childNoteNewListValue = DB::table('child_note_for_fd_threes')
            ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
@@ -353,62 +331,36 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                 @method('PUT')
                                                 <input type="hidden" value="{{ $status }}" name="status"/>
                                                  <div id="container">
-                                            <textarea class="maineditor" name="mainPartNote" id="editor{{ $key+1 }}">
+
 
                                                 {!! $childNoteNewLists->description !!}
-                                            </textarea>
+
                                         </div>
 
+                                      <?php
 
-                                        <div class="d-flex flex-row-reverse mt-3">
+                            $senderIdNew = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            //->whereNull('back_status')
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            ->orWhere('sender',Auth::guard('admin')->user()->id)
+                            ->get();
 
-                                            {{-- <button class="btn btn-danger ms-3" type="button">
-                                                <i class="fa fa-send"></i>
-                                                বাতিল করুন
-                                            </button> --}}
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary " type="submit"
-
-                                                        aria-expanded="false">
-                                                        সংশোধন করুন
-                                                </button>
-
-
+                                        ?>
 
 
 
-                                                {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
-                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
-                                                            অনুচ্ছেদ</a></li>
-                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
-                                                    </li>
-                                                </ul> --}}
-                                            </div>
-                                        </div>
 
+                                        <div class="row">
 
-                                            </form>
-
-
-                                            <?php
-
-                                            $senderIdNew = DB::table('nothi_details')
-                                            ->where('noteId',$id)
-                                            ->where('nothId',$nothiId)
-                                            ->where('dakId',$parentId)
-                                            ->where('dakType',$status)
-                                            ->whereNull('back_status')
-                                            //->where('sender',Auth::guard('admin')->user()->id)
-                                            ->first();
-
-                                                        ?>
-
-@if(!$senderIdNew)
+@if(count($senderIdNew) == 0)
 
 @else
+
+@foreach($senderIdNew as $senderIdNew)
 
 <?php
 
@@ -418,16 +370,15 @@ $mainSenderIdNew =DB::table('article_signs')
 
 //dd($mainSenderIdNew);
 ?>
-
 @if(count($mainSenderIdNew) == 0)
 
 @else
 
-<div class="row">
-    @foreach($mainSenderIdNew as $key=>$mainSenderIdNews)
+@foreach($mainSenderIdNew as $key=>$mainSenderIdNews)
 
-    <?php
+<?php
 $adminId = DB::table('admins')->where('id',$mainSenderIdNews->sender)->first();
+$adminId2 = DB::table('admins')->where('id',$mainSenderIdNews->permissionId)->first();
 
 ?>
 
@@ -442,30 +393,96 @@ $desiName = DB::table('designation_lists')
 $branchName = DB::table('branches')->where('id',$adminId->branch_id)->value('branch_name');
 
 ?>
-<div class="col-lg-3 col-md-3 col-sm-6 mt-3">
+@if($senderIdNew->back_status == 1)
+
+@else
+
+<div class="col-lg-3 col-md-3 col-sm-6 mb-2">
     <div class="text-center">
-        <img src="{{ asset('/') }}{{ $adminId->admin_sign }}" alt="" height="40" width="150">
+        <img src="{{ asset('/') }}{{ $adminId->admin_sign }}" alt="" height="50" width="180">
+        <div style="height:1px; width:100%; background-color: #BC1133"></div>
+        <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
+            {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($mainSenderIdNews->created_at))) }}<br>
+            {{ $adminId->admin_name_ban }} <br>
+            {{ $desiName }} <br>
+            {{ $branchName }}</p>
     </div>
-    <div style="line-height:.8" class="text-center">
-        <p>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($mainSenderIdNews->created_at))) }}</p>
-        <h4>{{ $adminId->admin_name_ban }}</h4>
-        <h5>{{ $desiName }}</h5>
-        <p>{{ $branchName }}</p>
-    </div>
-
 </div>
 @endif
 
-    @endforeach
-</div>
 
-@endif
+                                            @endif
+                                            @endforeach
 
-@endif
+                                            @if(!$adminId2)
 
-                  <!-- nothi sender list -->
-                  @include('admin.presentDocument.nothiSendToUserModal')
-                  <!-- end nothi sender list -->
+@else
+
+<?php
+
+
+$desiName1 = DB::table('designation_lists')
+                                        ->where('id',$adminId2->designation_list_id)
+                                        ->value('designation_name');
+$branchName1 = DB::table('branches')->where('id',$adminId2->branch_id)->value('branch_name');
+
+
+
+?>
+                          @if($senderIdNew->back_status == 1)
+
+                          @else
+
+                                            <div class="col-lg-3 col-md-3 col-sm-6 mb-2" style="margin-top: 50px;">
+                                                <div class="text-center">
+
+                                                    <div style="height:1px; width:100%; background-color: #BC1133"></div>
+                                                    <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
+                                                        {{-- {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime(Auth::guard('admin')->user()->created_at))) }}<br> --}}
+                                                        {{ $adminId2->admin_name_ban }} <br>
+                                                        {{ $desiName1 }} <br>
+                                                        {{ $branchName1 }}</p>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @endif
+
+
+                                            @endif
+                                            @endforeach
+
+                                            @endif
+
+                                        </div>
+
+                                        <div class="d-flex flex-row-reverse mt-3">
+
+                                            {{-- <button class="btn btn-danger ms-3" type="button">
+                                                <i class="fa fa-send"></i>
+                                                বাতিল করুন
+                                            </button> --}}
+                                            <div class="dropdown">
+                                                {{-- <button class="btn btn-primary " type="submit"
+
+                                                        aria-expanded="false">
+                                                        সংশোধন করুন
+                                                </button> --}}
+                                                {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
+                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
+                                                            অনুচ্ছেদ</a></li>
+                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
+                                                    </li>
+                                                </ul> --}}
+                                            </div>
+
+                                        </div>
+
+
+                                            </form>
+
 
                                         </div>
                                         </div>
@@ -492,37 +509,7 @@ $branchName = DB::table('branches')->where('id',$adminId->branch_id)->value('bra
                                                 </textarea>
                                             </div>
                                             <div class="d-flex flex-row-reverse mt-3">
-                                                @if(count($checkParent) == 0)
 
-                                                @else
-
-                                                <?php
-
-$receiverId = DB::table('nothi_details')
-                            ->where('noteId',$id)
-                            ->where('nothId',$nothiId)
-                            ->where('dakId',$parentId)
-                            ->where('dakType',$status)
-                            ->where('sender',Auth::guard('admin')->user()->id)
-                            ->value('receiver');
-
-?>
- @if(empty($receiverId))
-                                                <button data-bs-toggle="modal"
-                                                data-original-title="" data-bs-target="#myModal22stu" class="btn btn-secondary ms-3" type="button">
-                                                    <i class="fa fa-send"></i>
-                                                    প্রেরণ করুন
-                                                </button>
-
-                                                @else
-
-                                                <button data-bs-toggle="modal"
-                                                data-original-title="" data-bs-target="#myModal22stu" class="btn btn-danger ms-3" type="button">
-                                                    <i class="fa fa-arrow-circle-left"></i>
-                                                    ফেরত আনুন
-                                                </button>
-                                                @endif
-                                                @endif
 
 
                                                 <div class="dropdown">
@@ -540,6 +527,12 @@ $receiverId = DB::table('nothi_details')
                                                         <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
                                                         </li>
                                                     </ul> --}}
+
+                                                    <button data-bs-toggle="modal"
+                                                    data-original-title="" data-bs-target="#myModal22stu" class="btn btn-danger ms-3" type="button">
+                                                        <i class="fa fa-send"></i>
+                                                        প্রেরণ করুন
+                                                    </button>
                                                 </div>
                                             </div>
                                              </form>
@@ -988,7 +981,7 @@ $receiverId = DB::table('nothi_details')
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('parentNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
 
                     <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
@@ -1039,10 +1032,18 @@ $receiverId = DB::table('nothi_details')
 @include('admin.presentDocument.nothiCopyModal')
 <!-- end copy nothi -->
 
+@if(!$senderIdNew)
+
+@else
+
 
 <!-- nothi sender list -->
-@include('admin.presentDocument.nothiSendToUserModal')
+@include('admin.presentDocument.nothiReturnToUserModal')
 <!-- end nothi sender list -->
+
+
+
+@endif
 
 
 <!--code for ajax -->

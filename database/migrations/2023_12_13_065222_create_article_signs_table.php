@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nothi_details', function (Blueprint $table) {
+        Schema::create('article_signs', function (Blueprint $table) {
             $table->id();
-            $table->string('nothId');
-            $table->string('dakId');
-            $table->string('dakType');
-            $table->string('sender');
-            $table->string('receiver');
-            $table->string('back_status')->nullable();
+            $table->string('dakDetailId')->nullable();
+            $table->string('childId')->nullable();
+            $table->string('sender')->nullable();
+            $table->string('permissionId')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nothi_details');
+        Schema::dropIfExists('article_signs');
     }
 };

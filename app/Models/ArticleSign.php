@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NothiDetail extends Model
+class ArticleSign extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['noteId','nothId','dakId','dakType','sender','receiver','back_status'];
-
+    protected $fillable = ['dakDetailId','childId','sender','permissionId'];
 }

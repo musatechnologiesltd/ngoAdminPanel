@@ -154,6 +154,314 @@ class ParentNoteController extends Controller
 
 
     }
+
+
+
+
+    public function addParentNoteFromView($status,$dakId,$nothiId){
+
+
+        if($status == 'registration'){
+
+
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+                           ->get();
+
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+//dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }
+
+        return view('admin.presentDocument.addParentNoteFromView',compact('checkParent','nothiId','status','dakId'));
+
+
+    }
+
+
+    public function storeDataFromSenderView(Request $request){
+
+
+        $dt = new DateTime();
+       $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+       $created_at = $dt->format('Y-m-d h:i:s');
+
+
+       if($request->status == 'registration'){
+
+
+           $saveNewData = new ParentNoteForRegistration();
+           $saveNewData->nothi_detail_id = $request->dakId;
+           $saveNewData->serial_number = $request->nothiId;
+           $saveNewData->subject = $request->subject;
+           $saveNewData->name ='নোট';
+           $saveNewData->created_at =$created_at;
+           $saveNewData->save();
+
+
+           $totalCount = ParentNoteForRegistration::count();
+            $pId = $saveNewData->id;
+
+    }elseif($request->status == 'renew'){
+
+
+        $saveNewData = new ParentNoteForRenew();
+        $saveNewData->nothi_detail_id  = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+        $totalCount = ParentNoteForRenew::count();
+            $pId = $saveNewData->id;
+
+
+
+    }elseif($request->status == 'nameChange'){
+
+        $saveNewData = new ParentNoteForNameChange();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+        $totalCount = ParentNoteForNameChange::count();
+            $pId = $saveNewData->id;
+
+
+
+    }elseif($request->status == 'fdNine'){
+
+        $saveNewData = new ParentNoteForFdNine();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFdNine::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'fdNineOne'){
+
+        $saveNewData = new ParentNoteForFdNineOne();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFdNineOne::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+    }elseif($request->status == 'fdSix'){
+
+        $saveNewData = new ParentNoteForFdsix();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFdsix::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+    }elseif($request->status == 'fdSeven'){
+
+           $saveNewData = new ParentNoteForFdSeven();
+           $saveNewData->nothi_detail_id = $request->dakId;
+           $saveNewData->serial_number = $request->nothiId;
+           $saveNewData->subject = $request->subject;
+           $saveNewData->name ='নোট';
+           $saveNewData->created_at =$created_at;
+           $saveNewData->save();
+
+
+           $totalCount = ParentNoteForFdSeven::where('nothi_detail_id',$request->dakId)
+           ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'fcOne'){
+
+        $saveNewData = new ParentNoteForFcOne();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFcOne::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+    }elseif($request->status == 'fcTwo'){
+
+
+        $saveNewData = new ParentNoteForFcTwo();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+        $totalCount = ParentNoteForFcTwo::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'fdThree'){
+
+        $saveNewData = new ParentNoteForFdThree();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFdThree::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }
+
+
+
+    //addChildNote/{status}/{parentId}/{id}/{activeCode}
+
+
+    return redirect('admin/addParentNoteFromView/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$pId.'/'.$totalCount)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+
+
+    }
+
+
     public function store(Request $request){
 
        //dd($request->all());

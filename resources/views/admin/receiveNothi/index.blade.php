@@ -62,7 +62,7 @@
                                          class="accordion-collapse collapse">
                                         <div class="accordion-body">
                                             <div class="d-flex mt-3">
-                                                <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                                <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                                     <i class="fa fa-plus"></i>
                                                     নতুন নোট
                                                 </button>
@@ -84,7 +84,7 @@ if($nothiLists1->dakType == 'registration'){
 
 $allNoteListNew = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -98,7 +98,7 @@ $allNoteListNew = DB::table('parent_note_for_registrations')->where('nothi_detai
 
 $allNoteListNew = DB::table('parent_note_for_renews')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -115,7 +115,7 @@ $allNoteListNew = DB::table('parent_note_for_renews')->where('nothi_detail_id',$
 
 $allNoteListNew = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -132,7 +132,7 @@ $allNoteListNew = DB::table('parent_note_for_name_changes')->where('nothi_detail
 
 $allNoteListNew = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -147,7 +147,7 @@ $allNoteListNew = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id'
 
 $allNoteListNew = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -162,7 +162,7 @@ $allNoteListNew = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail
 
 $allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -177,7 +177,7 @@ $allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',
 
 $allNoteListNew = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -190,7 +190,7 @@ $allNoteListNew = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id
 
 $allNoteListNew = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -206,7 +206,7 @@ $allNoteListNew = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',
 
 $allNoteListNew = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -224,7 +224,7 @@ $allNoteListNew = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',
 
 $allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)
-->where('id',$nothiLists1->noteId)
+// ->where('id',$nothiLists1->noteId)
 ->get();
 
 
@@ -239,7 +239,7 @@ $allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id
 @if(count($allNoteListNew) > 0)
 <ul>
 @foreach($allNoteListNew as $key=>$allNoteListNews)
-                                              <li>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla(($key+1)) }} .   <a href="{{ route('addChildNote', ['status' =>$nothiLists1->dakType,'parentId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists1->nothId,'id' =>$allNoteListNews->id,'activeCode' => ($key+1)]) }}">{{ $allNoteListNews->subject }}</a> </li>
+                                              <li>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla(($key+1)) }} .   <a href="{{ route('viewChildNote', ['status' =>$nothiLists1->dakType,'parentId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists1->nothId,'id' =>$allNoteListNews->id,'activeCode' => ($key+1)]) }}">{{ $allNoteListNews->subject }}</a> </li>
                                                     @endforeach
                                                 </ul>
 

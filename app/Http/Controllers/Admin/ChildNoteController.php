@@ -31,7 +31,7 @@ use App\Models\ChildNoteForRenew;
 use App\Models\NothiList;
 use App\Models\NothiPrapok;
 use App\Models\NothiCopy;
-
+use DB;
 use DateTime;
 use DateTimezone;
 
@@ -49,6 +49,7 @@ use App\Models\NothiAttarct;
 use App\Models\NothiPermission;
 use App\Models\Branch;
 use App\Models\NothiDetail;
+use App\Models\ArticleSign;
 
 class ChildNoteController extends Controller
 {
@@ -212,10 +213,170 @@ class ChildNoteController extends Controller
     }
 
 
+    public function viewChildNote($status,$parentId,$nothiId,$id,$activeCode){
+
+        //dd($status. $parentId. $id);
+
+                if($status == 'registration'){
+
+
+
+                    $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+                    $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                                   ->get();
+
+
+
+                }elseif($status == 'renew'){
+
+
+
+                    $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+                    $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+
+                }elseif($status == 'nameChange'){
+
+
+
+                    $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+
+
+                    $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+
+                }elseif($status == 'fdNine'){
+
+
+
+
+                    $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+
+                    $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+        //dd($checkParent);
+
+
+                }elseif($status == 'fdNineOne'){
+
+
+                    $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+                    $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+
+
+                }elseif($status == 'fdSix'){
+
+
+                    $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+
+                    $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+
+                }elseif($status == 'fdSeven'){
+
+
+
+                    $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+
+                    $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+
+                }elseif($status == 'fcOne'){
+
+
+                    $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+                    $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
+                    ->get();
+
+
+
+
+                }elseif($status == 'fcTwo'){
+
+
+                    $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+
+                    $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+
+
+
+                }elseif($status == 'fdThree'){
+
+                    $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+
+
+
+
+                    $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+                }
+
+
+                $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+
+                $user = Admin::where('id','!=',1)->get();
+
+
+                $nothiPropokListUpdate = NothiPrapok::
+                where('nothiId',$nothiId)
+                ->where('noteId',$id)->where('status',1)->get();
+                $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+                ->where('noteId',$id)->where('status',1)->get();
+                $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+                ->where('noteId',$id)->where('status',1)->get();
+
+
+
+                $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+                $convert_name_title = $permissionNothiList->implode("branchId", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+                $branchListForSerial = Branch::whereIn('id',$separated_data_title)
+                ->orderBy('branch_step','asc')->get();
+
+
+
+
+                return view('admin.presentDocument.viewChildNote',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+            }
+
+
     public function saveNothiPermission(Request $request){
 
         //dd($request->all());
-
+        //ArticleSign
         $mainSaveData = new NothiDetail();
         $mainSaveData ->noteId = $request->noteId;
         $mainSaveData ->nothId = $request->nothiId;
@@ -225,7 +386,65 @@ class ChildNoteController extends Controller
         $mainSaveData ->receiver = $request->nothiPermissionId;
         $mainSaveData->save();
 
+        $mainId = $mainSaveData->id;
+
+        $mainSaveData = new ArticleSign();
+        $mainSaveData ->dakDetailId = $mainId;
+        $mainSaveData ->childId = $request->child_note_id;
+        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+        $mainSaveData ->permissionId = $request->nothiPermissionId;
+        $mainSaveData->save();
+
         return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+    }
+
+
+    public function saveNothiPermissionReturn(Request $request){
+
+        //dd($request->all());
+
+
+        $senderId = DB::table('nothi_details')
+                            ->where('noteId',$request->noteId)
+                            ->where('nothId',$request->nothiId)
+                            ->where('dakId',$request->dakId)
+                            ->where('dakType',$request->status)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            ->value('sender');
+
+                            //dd($senderId);
+                            // DB::table('nothi_details')
+                            // ->where('noteId',$request->noteId)
+                            // ->where('nothId',$request->nothiId)
+                            // ->where('dakId',$request->dakId)
+                            // ->where('dakType',$request->status)
+                            // ->update([
+                            //     'sender' => Auth::guard('admin')->user()->id,
+                            //     'receiver' =>$senderId,
+                            //     'back_status' =>1
+                            //  ]);
+
+
+        $mainSaveData = new NothiDetail();
+        $mainSaveData ->noteId = $request->noteId;
+        $mainSaveData ->nothId = $request->nothiId;
+        $mainSaveData ->dakId = $request->dakId;
+        $mainSaveData ->dakType = $request->status;
+        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+        $mainSaveData ->receiver = $senderId;
+        $mainSaveData ->back_status =1;
+        $mainSaveData->save();
+
+        $mainId = $mainSaveData->id;
+
+        $mainSaveData = new ArticleSign();
+        $mainSaveData ->dakDetailId = $mainId;
+        $mainSaveData ->childId = $request->child_note_id;
+        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+        $mainSaveData ->permissionId = $senderId;
+        $mainSaveData->save();
+
+    return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
 
 
