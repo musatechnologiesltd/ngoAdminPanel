@@ -509,7 +509,7 @@ $receiverId = DB::table('nothi_details')
 ?>
  @if(empty($receiverId))
                                                 <button data-bs-toggle="modal"
-                                                data-original-title="" data-bs-target="#myModal22stu" class="btn btn-secondary ms-3" type="button">
+                                                data-original-title="" data-bs-target="#modalforsender1" class="btn btn-secondary ms-3" type="button">
                                                     <i class="fa fa-send"></i>
                                                     প্রেরণ করুন
                                                 </button>
@@ -517,7 +517,7 @@ $receiverId = DB::table('nothi_details')
                                                 @else
 
                                                 <button data-bs-toggle="modal"
-                                                data-original-title="" data-bs-target="#myModal22stu" class="btn btn-danger ms-3" type="button">
+                                                data-original-title="" data-bs-target="#modalforsenderreturn1" class="btn btn-danger ms-3" type="button">
                                                     <i class="fa fa-arrow-circle-left"></i>
                                                     ফেরত আনুন
                                                 </button>
@@ -1041,7 +1041,12 @@ $receiverId = DB::table('nothi_details')
 
 
 <!-- nothi sender list -->
-@include('admin.presentDocument.nothiSendToUserModal')
+@include('admin.presentDocument.mt2')
+<!-- end nothi sender list -->
+
+
+<!-- nothi sender list -->
+@include('admin.presentDocument.mt3')
 <!-- end nothi sender list -->
 
 

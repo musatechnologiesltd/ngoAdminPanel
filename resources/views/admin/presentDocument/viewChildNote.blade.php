@@ -349,6 +349,9 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                             ->orWhere('sender',Auth::guard('admin')->user()->id)
                             ->get();
 
+
+                           // dd($senderIdNew);
+
                                         ?>
 
 
@@ -393,7 +396,7 @@ $desiName = DB::table('designation_lists')
 $branchName = DB::table('branches')->where('id',$adminId->branch_id)->value('branch_name');
 
 ?>
-@if($senderIdNew->back_status == 1)
+@if($mainSenderIdNews->back_status == 1)
 
 @else
 
@@ -429,7 +432,7 @@ $branchName1 = DB::table('branches')->where('id',$adminId2->branch_id)->value('b
 
 
 ?>
-                          @if($senderIdNew->back_status == 1)
+                          @if($mainSenderIdNews->back_status == 1)
 
                           @else
 

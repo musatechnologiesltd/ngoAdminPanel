@@ -375,7 +375,36 @@ class ChildNoteController extends Controller
 
     public function saveNothiPermission(Request $request){
 
+
+
+
         //dd($request->all());
+
+
+        if($request->button_value == 'return'){
+
+
+            $mainId = DB::table('nothi_details')
+            ->where('noteId',$request->noteId)
+            ->where('nothId',$request->nothiId)
+            ->where('dakId',$request->dakId)
+            ->where('dakType',$request->status)
+            ->where('sender',Auth::guard('admin')->user()->id)
+            ->value('id');
+
+
+            $deleteData = NothiDetail::where('id',$mainId)->delete();
+
+
+            $deleteDataOne = ArticleSign::where('dakDetailId',$mainId)
+            ->where('childId',$request->child_note_id)->delete();
+
+            return redirect()->back()->with('error','সফলভাবে ফেরত আনা হয়েছে');
+
+        }else{
+
+
+
         //ArticleSign
         $mainSaveData = new NothiDetail();
         $mainSaveData ->noteId = $request->noteId;
@@ -395,16 +424,34 @@ class ChildNoteController extends Controller
         $mainSaveData ->permissionId = $request->nothiPermissionId;
         $mainSaveData->save();
 
-        return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+        return redirect()->back()->with('success','সফলভাবে পাঠানো হয়েছে');
+
+    }
+
+        return redirect()->back()->with('success','সফলভাবে পাঠানো হয়েছে');
     }
 
 
     public function saveNothiPermissionReturn(Request $request){
 
-        //dd($request->all());
 
 
-        $senderId = DB::table('nothi_details')
+//dd(Auth::guard('admin')->user()->id);
+
+
+                     $secondLastValue = ArticleSign::orderBy('id','desc')
+                    ->value('back_status');
+
+                    // dd($secondLastValue);
+
+
+                     if(empty($secondLastValue)){
+
+                        $secondLastValueLast = 1;
+
+
+
+                        $senderId = DB::table('nothi_details')
                             ->where('noteId',$request->noteId)
                             ->where('nothId',$request->nothiId)
                             ->where('dakId',$request->dakId)
@@ -412,39 +459,90 @@ class ChildNoteController extends Controller
                             ->where('receiver',Auth::guard('admin')->user()->id)
                             ->value('sender');
 
+
                             //dd($senderId);
-                            // DB::table('nothi_details')
-                            // ->where('noteId',$request->noteId)
-                            // ->where('nothId',$request->nothiId)
-                            // ->where('dakId',$request->dakId)
-                            // ->where('dakType',$request->status)
-                            // ->update([
-                            //     'sender' => Auth::guard('admin')->user()->id,
-                            //     'receiver' =>$senderId,
-                            //     'back_status' =>1
-                            //  ]);
 
 
-        $mainSaveData = new NothiDetail();
-        $mainSaveData ->noteId = $request->noteId;
-        $mainSaveData ->nothId = $request->nothiId;
-        $mainSaveData ->dakId = $request->dakId;
-        $mainSaveData ->dakType = $request->status;
-        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
-        $mainSaveData ->receiver = $senderId;
-        $mainSaveData ->back_status =1;
-        $mainSaveData->save();
+                            $mainId = DB::table('nothi_details')
+                            ->where('noteId',$request->noteId)
+                            ->where('nothId',$request->nothiId)
+                            ->where('dakId',$request->dakId)
+                            ->where('dakType',$request->status)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            ->value('id');
 
-        $mainId = $mainSaveData->id;
+
+                            //dd($senderId.' '.Auth::guard('admin')->user()->id);
+
+
+                     }else{
+
+                        $secondLastValueLast = "";
+
+
+                        $senderId = DB::table('nothi_details')
+                        ->where('noteId',$request->noteId)
+                        ->where('nothId',$request->nothiId)
+                        ->where('dakId',$request->dakId)
+                        ->where('dakType',$request->status)
+                        ->where('receiver',Auth::guard('admin')->user()->id)
+                        ->value('sender');
+
+
+                        //dd($senderId);
+
+
+                        $mainId = DB::table('nothi_details')
+                        ->where('noteId',$request->noteId)
+                        ->where('nothId',$request->nothiId)
+                        ->where('dakId',$request->dakId)
+                        ->where('dakType',$request->status)
+                        ->where('receiver',Auth::guard('admin')->user()->id)
+                        ->value('id');
+
+
+                        //dd($senderId.' '.Auth::guard('admin')->user()->id);
+                     }
+
+
+                     //dd($secondLastValueLast);
+
+                            //dd($senderId);
+                            DB::table('nothi_details')
+                            ->where('noteId',$request->noteId)
+                            ->where('nothId',$request->nothiId)
+                            ->where('dakId',$request->dakId)
+                            ->where('dakType',$request->status)
+                            ->update([
+                                'sender' => Auth::guard('admin')->user()->id,
+                                'receiver' =>$senderId,
+                                'back_status' =>$secondLastValueLast
+                             ]);
+
+
+        // $mainSaveData = new NothiDetail();
+        // $mainSaveData ->noteId = $request->noteId;
+        // $mainSaveData ->nothId = $request->nothiId;
+        // $mainSaveData ->dakId = $request->dakId;
+        // $mainSaveData ->dakType = $request->status;
+        // $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+        // $mainSaveData ->receiver = $senderId;
+        // $mainSaveData ->back_status =1;
+        // $mainSaveData->save();
+
+        // $mainId = $mainSaveData->id;
+
+
 
         $mainSaveData = new ArticleSign();
         $mainSaveData ->dakDetailId = $mainId;
         $mainSaveData ->childId = $request->child_note_id;
         $mainSaveData ->sender = Auth::guard('admin')->user()->id;
         $mainSaveData ->permissionId = $senderId;
+        $mainSaveData ->back_status = $secondLastValueLast;
         $mainSaveData->save();
 
-    return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+    return redirect()->back()->with('success','সফলভাবে পাঠানো হয়েছে');
     }
 
 

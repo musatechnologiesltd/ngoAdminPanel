@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('childId')->nullable();
             $table->string('sender')->nullable();
             $table->string('permissionId')->nullable();
+            $table->string('back_status')->nullable();
             $table->timestamps();
         });
     }

@@ -9,5 +9,5 @@ class ArticleSign extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['dakDetailId','childId','sender','permissionId'];
+    protected $fillable = ['dakDetailId','childId','sender','permissionId','back_status'];
 }
