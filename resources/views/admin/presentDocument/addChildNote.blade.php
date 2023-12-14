@@ -367,11 +367,33 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                 বাতিল করুন
                                             </button> --}}
                                             <div class="dropdown">
-                                                <button class="btn btn-primary " type="submit"
+                                                <?php
+
+                                                $senderIdNew1 = DB::table('nothi_details')
+                                                ->where('noteId',$id)
+                                                ->where('nothId',$nothiId)
+                                                ->where('dakId',$parentId)
+                                                ->where('dakType',$status)
+                                                ->whereNull('back_status')
+                                                //->where('sender',Auth::guard('admin')->user()->id)
+                                                ->value('permission_status');
+
+                                                            ?>
+
+
+                                                @if($senderIdNew1 == 1)
+                                                <button class="btn btn-primary" disabled>
+                                                    সংশোধন করুন
+                                                 </button>
+                                                @else
+                                                <button class="btn btn-primary" type="submit"
 
                                                         aria-expanded="false">
                                                         সংশোধন করুন
                                                 </button>
+
+                                                @endif
+
 
 
 
@@ -392,19 +414,19 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                             </form>
 
+<?php
 
-                                            <?php
+$senderIdNew = DB::table('nothi_details')
+                                                ->where('noteId',$id)
+                                                ->where('nothId',$nothiId)
+                                                ->where('dakId',$parentId)
+                                                ->where('dakType',$status)
+                                                ->whereNull('back_status')
+                                                //->where('sender',Auth::guard('admin')->user()->id)
+                                                ->first();
 
-                                            $senderIdNew = DB::table('nothi_details')
-                                            ->where('noteId',$id)
-                                            ->where('nothId',$nothiId)
-                                            ->where('dakId',$parentId)
-                                            ->where('dakType',$status)
-                                            ->whereNull('back_status')
-                                            //->where('sender',Auth::guard('admin')->user()->id)
-                                            ->first();
+?>
 
-                                                        ?>
 
 @if(!$senderIdNew)
 
@@ -428,7 +450,7 @@ $mainSenderIdNew =DB::table('article_signs')
 
     <?php
 $adminId = DB::table('admins')->where('id',$mainSenderIdNews->sender)->first();
-
+$adminId2 = DB::table('admins')->where('id',$mainSenderIdNews->permissionId)->first();
 ?>
 
 @if(!$adminId)
@@ -442,18 +464,58 @@ $desiName = DB::table('designation_lists')
 $branchName = DB::table('branches')->where('id',$adminId->branch_id)->value('branch_name');
 
 ?>
-<div class="col-lg-3 col-md-3 col-sm-6 mt-3">
+<div class="col-lg-3 col-md-3 col-sm-6 mb-2" >
     <div class="text-center">
-        <img src="{{ asset('/') }}{{ $adminId->admin_sign }}" alt="" height="40" width="150">
-    </div>
-    <div style="line-height:.8" class="text-center">
-        <p>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($mainSenderIdNews->created_at))) }}</p>
-        <h4>{{ $adminId->admin_name_ban }}</h4>
-        <h5>{{ $desiName }}</h5>
-        <p>{{ $branchName }}</p>
+        <img src="{{ asset('/') }}{{ $adminId->admin_sign }}" alt="" height="50" width="180">
+
+    <div style="height:1px; width:100%; background-color: #BC1133"></div>
+
+    <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
+        {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($mainSenderIdNews->created_at))) }}<br>
+        {{ $adminId->admin_name_ban }}<br>
+        {{ $desiName }}<br>
+        {{ $branchName }}
+    </p>
+
+</div>
+
+</div>
+@endif
+
+@if($senderIdNew->permission_status == 1)
+
+<?php
+$desiName1 = DB::table('designation_lists')
+                                        ->where('id',$adminId2->designation_list_id)
+                                        ->value('designation_name');
+$branchName1 = DB::table('branches')->where('id',$adminId2->branch_id)->value('branch_name');
+
+?>
+<div class="col-lg-3 col-md-3 col-sm-6 mb-2" >
+
+    <div class="text-center">
+        @if($senderIdNew->permission_status == 1)
+        <img src="{{ asset('/') }}{{ $adminId2->admin_sign }}" alt="" height="50" width="180">
+        @else
+
+        @endif
+        <div style="height:1px; width:100%; background-color: #BC1133"></div>
+        <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
+
+
+            @if($senderIdNew->permission_status == 1)
+        {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($senderIdNew->created_at))) }}<br>
+            @else
+
+            @endif
+            {{ $adminId2->admin_name_ban }} <br>
+            {{ $desiName1 }} <br>
+            {{ $branchName1 }}</p>
     </div>
 
 </div>
+@else
+
 @endif
 
     @endforeach
@@ -492,6 +554,26 @@ $branchName = DB::table('branches')->where('id',$adminId->branch_id)->value('bra
                                                 </textarea>
                                             </div>
                                             <div class="d-flex flex-row-reverse mt-3">
+
+                                                <?php
+
+ $senderIdNew12 = DB::table('nothi_details')
+ ->where('noteId',$id)
+ ->where('nothId',$nothiId)
+ ->where('dakId',$parentId)
+ ->where('dakType',$status)
+ ->whereNull('back_status')
+ //->where('sender',Auth::guard('admin')->user()->id)
+ ->value('permission_status');
+
+             ?>
+
+            @if($senderIdNew12 == 1)
+
+
+            @else
+
+
                                                 @if(count($checkParent) == 0)
 
                                                 @else
@@ -507,7 +589,13 @@ $receiverId = DB::table('nothi_details')
                             ->value('receiver');
 
 ?>
+
+
  @if(empty($receiverId))
+
+
+
+
                                                 <button data-bs-toggle="modal"
                                                 data-original-title="" data-bs-target="#modalforsender1" class="btn btn-secondary ms-3" type="button">
                                                     <i class="fa fa-send"></i>
@@ -522,6 +610,9 @@ $receiverId = DB::table('nothi_details')
                                                     ফেরত আনুন
                                                 </button>
                                                 @endif
+
+
+
                                                 @endif
 
 
@@ -541,6 +632,7 @@ $receiverId = DB::table('nothi_details')
                                                         </li>
                                                     </ul> --}}
                                                 </div>
+                                                @endif
                                             </div>
                                              </form>
 
@@ -686,9 +778,43 @@ $receiverId = DB::table('nothi_details')
                                                                             }
 
 
-                                                                                                                                                ?>
 
-                                                                        <div class="text-center mb-3">
+ ?>
+ @if(count($officeDetail) > 0 )
+
+ @foreach($officeDetail as $officeDetails)
+
+
+ <!-- new button code start -->
+
+ <div class="d-flex flex-wrap mb-4">
+    <div class="dropdown me-2">
+        <button class="btn btn-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+            পত্র অনুমোদন করুন
+        </button>
+        <div class="dropdown-menu"
+             aria-labelledby="dropdownMenuButton1">
+            <div>
+                <h3 class="popover-header">পত্র অনুমোদন </h3>
+                <div class="popover-body">আপনি কি পত্র অনুমোদন করতে চান</div>
+                <div class="d-flex justify-content-center p-2">
+                    <button  onclick="location.href = '{{ route('givePermissionToNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'childnote'=>$childNoteNewListValue]) }}';" class="btn btn-primary me-2">হ্যাঁ</button>
+                    <button class="btn btn-danger">না</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <button class="btn btn-primary me-2"><i class="fa fa-pencil"></i> সংশোধন করুন</button> --}}
+    <button class="btn btn-primary me-2" onclick="location.href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}';"><i class="fa fa-print"></i> প্রিন্ট করুন</button>
+</div>
+
+ <!-- new button code end -->
+
+                                                                        <div class="text-center mb-3 mt-2">
                                                                             <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
                                                                                 সরকার</h3>
                                                                             <h5>এনজিও বিষয়ক ব্যুরো <br>
@@ -707,9 +833,9 @@ $receiverId = DB::table('nothi_details')
                                                                         </div>
 
 
-                                                                      @if(count($officeDetail) > 0 )
+
                                                                       <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-                                                                      @foreach($officeDetail as $officeDetails)
+
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
                                                                       <div class="row mt-3">
@@ -755,7 +881,7 @@ $receiverId = DB::table('nothi_details')
                                                                         </div>
                                                                     </div>
 
-                                                                      @endforeach
+
 
                                                                       <button class="btn btn-primary  mt-2" id="sorkariSarokUpdate"
 
@@ -763,64 +889,11 @@ $receiverId = DB::table('nothi_details')
                                                                       সংশোধন করুন
                                                               </button>
                                                             </form>
-                                                                      @else
-                                                                      <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-                                                                        @csrf
-                                                                        <div class="row mt-3">
-                                                                            <div class="col-xl-3">বিষয় :
-                                                                            </div>
-                                                                            <div class="col-xl-9">
-                                                                                <textarea id="ineditor1" name="subject" contenteditable="true">
-                                                                                    ...............................................
-                                                                                     </textarea>
-
-                                                                                     <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                                                                                     <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-                                                                        </span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-xl-3">সুত্রঃ
-                                                                                (যদি থাকে):
-                                                                            </div>
-                                                                            <div class="col-xl-9">
-
-                                                                 <textarea id="ineditor2" name="sutro" contenteditable="true">
-                                                                                              ...............................................
-                                                                                               </textarea>
-
-
-                                                                            {{-- <span id="idOfElement1"
-                                                                                  class="block">
-                                                                            <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
-                                                                            <span class="preview"></span> --}}
-
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-xl-12">
-
-                                                                                    <label class="form-label">সম্পাদন শেষ করুন</label>
 
 
 
-                                                                                        <textarea id="editor1222" class="mainEdit"  name="maindes" >
-
-                                                                                        </textarea>
 
 
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
-
-                                                                        aria-expanded="false">
-                                                                    সংরক্ষন করুন
-                                                                </button>
-                                                            </form>
-
-
-                                                                        @endif
 
                                                                         <!-- approver start --->
 
@@ -889,6 +962,152 @@ $receiverId = DB::table('nothi_details')
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
     </div>
+@endforeach
+    @else
+
+    <!-- no data available  -->
+    <div class="text-center mb-3 mt-2">
+        <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
+            সরকার</h3>
+        <h5>এনজিও বিষয়ক ব্যুরো <br>
+            প্রধানমন্ত্রীর কার্যালয় <br>
+            প্লট-ই, ১৩/বি, আগারগাঁও <br>
+            শেরেবাংলা নগর, ঢাকা-১২০৭
+        </h5>
+    </div>
+    <div class="row" class="mt-4">
+        <div class="col-md-6">
+            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            তারিখ : {{ $dateApp }}
+        </div>
+    </div>
+    <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+        @csrf
+        <div class="row mt-3">
+            <div class="col-xl-3">বিষয় :
+            </div>
+            <div class="col-xl-9">
+                <textarea id="ineditor1" name="subject" contenteditable="true">
+                    ...............................................
+                     </textarea>
+
+                     <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+                     <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
+        </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3">সুত্রঃ
+                (যদি থাকে):
+            </div>
+            <div class="col-xl-9">
+
+ <textarea id="ineditor2" name="sutro" contenteditable="true">
+                              ...............................................
+                               </textarea>
+
+
+            {{-- <span id="idOfElement1"
+                  class="block">
+            <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
+            <span class="preview"></span> --}}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+
+                    <label class="form-label">সম্পাদন শেষ করুন</label>
+
+
+
+                        <textarea id="editor1222" class="mainEdit"  name="maindes" >
+
+                        </textarea>
+
+
+            </div>
+        </div>
+
+        <button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
+
+        aria-expanded="false">
+    সংরক্ষন করুন
+</button>
+</form>
+            <!-- approver start --->
+
+
+
+            <div class="mt-4" style="text-align: right;">
+                <span>{{ $appName }}</span><br>
+                <span>{{ $desiName }}</span>
+                </div>
+
+                <!-- approver end -->
+
+           <!--prapok-->
+            <div class="mt-4">
+                @foreach($nothiPropokListUpdate as $nothiPropokLists)
+                <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                @endforeach
+            </div>
+            <!--end prapok  --->
+
+            <!-- attraction -->
+
+            @if(count($nothiAttractListUpdate) == 0)
+
+            @else
+            <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
+            @foreach($nothiAttractListUpdate as $nothiPropokLists)
+            <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+            @endforeach
+            @endif
+
+            <!-- attracttion -->
+
+            <!-- sarok number --->
+
+            <div class="row" class="mt-4">
+                <div class="col-md-6">
+                    <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                </div>
+                <div class="col-md-6" style="text-align: right;">
+                    তারিখ : {{ $dateApp }}
+                </div>
+            </div>
+
+
+
+
+
+            <!-- end sarok number -->
+
+            <!--copy-->
+
+            @if(count($nothiCopyListUpdate) == 0)
+
+            @else
+            <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
+            @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+            @endforeach
+            @endif
+
+            <!--end copy list -->
+<!--prapok-->
+<div class="mt-4" style="text-align: right;">
+
+<span>{{ $appName }}</span><br>
+<span>{{ $desiName }}</span>
+</div>
+    <!-- end no data available -->
+
+
+    @endif
 
                                                                     </div>
                                                                 </div>

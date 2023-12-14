@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sender');
             $table->string('receiver');
             $table->string('back_status')->nullable();
+            $table->string('permission_status')->nullable();
             $table->timestamps();
         });
     }

@@ -166,11 +166,23 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
+
+
+        Route::get('/givePermissionToNote/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionToNote')->name('givePermissionToNote');
+
+
+
+
         Route::post('/saveNothiPermissionReturn', 'saveNothiPermissionReturn')->name('saveNothiPermissionReturn');
         Route::post('/saveNothiPermission', 'saveNothiPermission')->name('saveNothiPermission');
 
 
         Route::get('/addChildNote/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'addChildNote')->name('addChildNote');
+
+
+
+        Route::get('/printPotrangso/{status}/{parentId}/{nothiId}/{id}/{sarokCode}', 'printPotrangso')->name('printPotrangso');
+
 
 
         Route::get('/viewChildNote/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'viewChildNote')->name('viewChildNote');
