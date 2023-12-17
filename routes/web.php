@@ -343,6 +343,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::controller(PostController::class)->group(function () {
+        
+        Route::get('/sent_dak', 'sent_dak')->name('receiver_dak');
 
 
         Route::get('/main_doc_download/{id}', 'main_doc_download')->name('main_doc_download');

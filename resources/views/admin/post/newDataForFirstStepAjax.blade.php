@@ -131,6 +131,16 @@
             method: 'GET',
             data: {id:id,status:status},
             success: function(data) {
+                
+          //alert(data);
+                if(data  >= 1){
+                    
+                                     $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
+                    
+                }else{
+                    
+                                     $("#lastButton").html('<a class="btn btn-danger"><i class="fa fa-send"></i>প্রেরণ এর পূর্বে, দয়া করে সিল তৈরী  করুন</a>');
+                }
 
 
 

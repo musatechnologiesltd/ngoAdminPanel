@@ -350,7 +350,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
         $data = DB::table('system_information')->first();
 
-        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('yearly_budget');
+        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('yearly_budget_file');
 
         $file_path = $data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);

@@ -114,14 +114,14 @@ ul {
 
                     <input type="hidden" name="access_id" value="{{ $id }}" />
                     <div class="card-body">
-                        <h5>সিদ্ধান্ত: বিধি মোতাবেক বাবস্থা নিন।</h5>
+                        <h5>সিদ্ধান্ত: বিধি মোতাবেক ব্যবস্থা নিন।</h5>
                         <div class="nothi_header_box">
                             <span>সিদ্ধান্ত নিন <span style="color:red;">*</span></span>
                         </div>
                         <div class="form-group mt-3 m-checkbox-inline mb-0 custom-radio-ml">
                             <div class="radio radio-primary">
-                                <input id="radioinline1" type="radio" class="decision_list" name="decision_list" value="বিধি মোতাবেক বাবস্থা নিন" required>
-                                <label class="mb-0" for="radioinline1">বিধি মোতাবেক বাবস্থা নিন</label>
+                                <input id="radioinline1" type="radio" class="decision_list" name="decision_list" value="বিধি মোতাবেক ব্যবস্থা নিন" required>
+                                <label class="mb-0" for="radioinline1">বিধি মোতাবেক ব্যবস্থা নিন</label>
                             </div>
                             <div class="radio radio-primary">
                                 <input id="radioinline2" type="radio" class="decision_list" name="decision_list" value="নথিতে উপস্থাপন করুন" required>
@@ -132,12 +132,16 @@ ul {
                                 <label class="mb-0" for="radioinline3">নথিজাত করুন</label>
                             </div>
                             <div class="radio radio-primary">
-                                <input id="own_decision" type="radio" class="decision_list" name="decision_list" value="সিধান্ত নিজে নিন" required>
+                                <input id="own_decision" type="radio" class="decision_list" name="decision_list" value="সিদ্ধান্ত নিজে লিখুন" required>
                                 <label class="mb-0" for="own_decision">সিদ্ধান্ত নিজে লিখুন </label>
                             </div>
                         </div>
+                        
+                        <div id="decision_list_detail">
+                            
+                        </div>
 
-                        <input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>
+                        <!--<input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>-->
                         {{-- <select class="form-select digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail" >
                             <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
                             <option value="দেখলাম কাজ শুরু হচ্ছে">দেখলাম কাজ শুরু হচ্ছে</option>
@@ -146,7 +150,7 @@ ul {
                             <option value="দেখলাম পেশ করুন">দেখলাম পেশ করুন</option>
                             <option value="নথিজাত করুন">নথিজাত করুন</option>
                         </select> --}}
-                        <div class="nothi_header_box">
+                        <div class="nothi_header_box" id="mm2">
                             <span id="result_one">বিধি মোতাবেক ব্যবস্থা নিন</span><span style="color:red;">*</span>
                         </div>
                         <div class="row">
@@ -156,9 +160,9 @@ ul {
                                            for="exampleInputPassword21">অগ্রাধিকার <span style="color:red;">*</span></label>
                                     <select class="form-select digits" name="priority_list" id="exampleFormControlSelect9" required>
                                         <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
-                                        <option value="সর্বচ্চ অগ্রাধিকার">সর্বচ্চ অগ্রাধিকার</option>
+                                        <option value="সর্বোচ্চ  অগ্রাধিকার">সর্বোচ্চ অগ্রাধিকার</option>
                                         <option value="অবিলম্বে">অবিলম্বে</option>
-                                        <option value="জরুরী">জরুরী</option>
+                                        <option value="জরুরি">জরুরি</option>
                                     </select>
                                 </div>
                             </div>
@@ -168,10 +172,10 @@ ul {
                                     <select class="form-select digits" name="secret_list" id="secret_listNew" required>
 
                                         <option value="">গোপনীয়তা বাছাই করুন</option>
-                                        <option value="অতি গোপনীয়তা">অতি গোপনীয়তা</option>
+                                        <option value="অতি গোপনীয়">অতি গোপনীয়</option>
                                         <option value="বিশেষ গোপনীয়">বিশেষ গোপনীয়</option>
                                         <option value="গোপনীয়">গোপনীয়</option>
-                                        <option value="সিমিত">সিমিত</option>
+                                        <option value="সীমিত">সীমিত</option>
                                     </select>
                                 </div>
                                 <input value="{{ $mainstatus}}" type="hidden" name="mainstatus"/>
@@ -356,11 +360,21 @@ ul {
                                                 </div>
                                             </div>
 
-                                            <div class="d-flex flex-row-reverse">
-                                                <button class="btn btn-primary" type="submit">
+                                            <div class="d-flex flex-row-reverse" id="lastButton">
+                                                
+                                                
+                                                @if(count($allRegistrationDak) == 0 )
+                                                <a class="btn btn-danger"  >
+                                                    <i class="fa fa-send"></i>
+                                              প্রেরণ এর পূর্বে, দয়া করে সিল তৈরী  করুন
+                                                </a>
+                                                
+                                                @else
+                                                <button class="btn btn-primary" type="submit" >
                                                     <i class="fa fa-send"></i>
                                                     প্রেরন
                                                 </button>
+                                                @endif
                                             </div>
 
                                         </div>
@@ -539,7 +553,7 @@ ul {
         </div>
         <div class="modal-footer">
             {{-- <button type="button" id="finalMainPage" class="btn btn-success">দাখিল করুন </button> --}}
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">বন্ধ করুন</button>
+          <!--<button type="button" class="btn btn-primary" data-bs-dismiss="modal">বন্ধ করুন</button>-->
 
         </div>
       </div>
@@ -567,8 +581,17 @@ ul {
             method: 'GET',
             data: {id:id,status:status},
             success: function(data) {
+                
+               // alert(data);
 
-
+  if(data  >= 1){
+                    
+                                     $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
+                    
+                }else{
+                    
+                                     $("#lastButton").html('<a class="btn btn-danger"><i class="fa fa-send"></i>প্রেরণ এর পূর্বে, দয়া করে সিল তৈরী  করুন</a>');
+                }
 
                 // $("#serial_part_one"+id_for_pass).val(data);
                  $("#deleteStatuss").html('<div class="alert" style=" padding: 20px;background-color: #f44336 !important;color: white;"><strong>ডেটা সফলভাবে মুছে ফেলা হয়েছে</strong></div>');
@@ -850,17 +873,20 @@ $(document).on('click', '.decision_list', function(){
 
     var decisionVal = $(this).val();
 
-    $('#result_one').html(decisionVal);
-    $('#result_two').html(decisionVal);
+   
 
-    if(decisionVal == 'সিধান্ত নিজে নিন'){
+    if(decisionVal == 'সিদ্ধান্ত নিজে লিখুন'){
 
-        $('#decision_list_detail').show();
+        $('#decision_list_detail').html('<input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" required name="decision_list_detail" />');
 
+    $('#mm2').hide();
+    
 
     }else{
-        $('#decision_list_detail').hide();
-
+        $('#mm2').show();
+        $('#decision_list_detail').html('');
+ $('#result_one').html(decisionVal);
+    $('#result_two').html(decisionVal);
     }
 
 

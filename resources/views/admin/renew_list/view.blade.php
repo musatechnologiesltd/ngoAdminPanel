@@ -64,7 +64,7 @@
                             </div>    @if($getNgoType == 'Foreign')
                             <h6>বিদেশী এনজিও </h6>
                             @else
-                            <h6>দেশি এনজিও </h6>
+                            <h6>দেশীয় এনজিও </h6>
 
                             @endif
                             @if($ngoTypeData->ngo_type_new_old == 'Old')
@@ -148,7 +148,7 @@
                     <div class="col-sm-12">
                         <div class="card height-equal">
                             <div class="card-header pb-0">
-                                <h5>এনজিও নিবন্ধন নবায়ন সমস্ত তথ্য</h5>
+                                <h5>এনজিও নিবন্ধন নবায়ন</h5>
                             </div>
                             <div class="card-body">
 
@@ -159,7 +159,7 @@
                                         <div class="text-end">
 
                                            @if($mainIdR->status == 'Ongoing')
-                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$mainIdR->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$mainIdR->id]) }}';" type="button" class="btn btn-primary float-right">ডাক প্রেরণ</button>
 
                                             @else
 

@@ -104,6 +104,8 @@
 
 
                  $("#finalMain").remove();
+                 
+                 $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
 
 
             }

@@ -136,7 +136,7 @@
                     @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
 <li class="sidebar-main-title">
     <div>
-      <h6>ডাক ও নথি</h6>
+      <h6>ডাক </h6>
     </div>
   </li>
 
@@ -146,6 +146,28 @@
         <span>আগত ডাক</span>
     </a>
 </li>
+
+ <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('addParentNote')  ||  Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('receiver_dak') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('receiver_dak') }}">
+        <i data-feather="mail"></i>
+        <span>প্রেরিত ডাক</span>
+    </a>
+</li>
+
+
+
+@endif
+
+
+
+                    @if ($usr->can('receiveNothiAdd') || $usr->can('receiveNothiView') || $usr->can('receiveNothiDelete') || $usr->can('receiveNothiUpdate'))
+<li class="sidebar-main-title">
+    <div>
+      <h6>নথি</h6>
+    </div>
+  </li>
+
+  
 @if ($usr->can('receiveNothiAdd') || $usr->can('receiveNothiView') || $usr->can('receiveNothiDelete') || $usr->can('receiveNothiUpdate'))
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{  Route::is('receiveNothi.index')  ? 'active' : '' }}" href="{{ route('receiveNothi.index') }}">
@@ -181,17 +203,17 @@
         <span>নথি সিদ্ধান্ত সমূহ</span>
     </a>
 </li>
-{{-- <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('testOne')  ? 'active' : '' }}" href="{{ route('testOne') }}">
-        <i data-feather="mail"></i>
-        <span>testCase</span>
-    </a>
-</li> --}}
+
 
 
 
 
 @endif
+
+
+
+
+
 <li class="sidebar-main-title">
     <div>
       <h6>এনজিও</h6>

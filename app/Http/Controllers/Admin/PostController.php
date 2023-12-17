@@ -147,6 +147,52 @@ class PostController extends Controller
 
 
     }
+    
+    
+    public function sent_dak(){
+        
+        
+           $nothiList = NothiList::latest()->get();
+
+            $ngoStatusRenew = NgoRenewDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+            $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+            $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+
+
+            $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+            $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+        $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+
+
+
+
+        $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
+
+        return view('admin.post.sentDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+        
+        
+        
+    }
 
 
     public function dakListSecondStep(Request $request){
@@ -1331,12 +1377,31 @@ class PostController extends Controller
          $number=count($request->admin_id);
 
          if($request->mainStatusNew == 'registration'){
+             
+               $deleteData = NgoRegistrationDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+                
+                       ->where('registration_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
+                       
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
-
-
-
+                    
+                    
+                    
+                           
+                           
+                         
+                           
+                           
+    
+                    
+                    
+                     
+                       
+                       
+                       
 
                  $regDakData = new NgoRegistrationDak();
                  $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
@@ -1351,9 +1416,24 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'renew'){
+             
+                 $deleteData = NgoRenewDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+        
+                       ->where('renew_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
+                    
+                    
+                       
+                           
+                           
+                       
+                           
+                           
+    
 
 
 
@@ -1371,10 +1451,23 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'nameChange'){
+                 $deleteData = NgoNameChangeDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+             
+                       ->where('name_change_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
-
+                    
+                    
+                         
+                           
+                           
+                       
+                           
+                           
+ 
 
 
 
@@ -1391,9 +1484,23 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fdNine'){
+             
+             
+                
+                           $deleteData = NgoFDNineDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+          
+                       ->where('f_d_nine_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
+                    
+                    
+                    
+                           
+                        
+   
 
 
 
@@ -1411,10 +1518,25 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fdNineOne'){
+             
+                 $deleteData = NgoFDNineOneDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+               
+                       ->where('f_d_nine_one_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
+                    
+                    
+                       
+           
+                           
+                       
+                           
+                           
+
 
 
 
@@ -1432,10 +1554,26 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fdSix'){
+             
+                 
+                           $deleteData = NgoFdSixDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+                  
+                       ->where('fd_six_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
+                    
+                    
+                    
+                         
+                           
+                       
+                           
+                           
+
 
 
 
@@ -1453,10 +1591,25 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fdSeven'){
+             
+                $deleteData = NgoFdSevenDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+                    
+                       ->where('fd_seven_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
+                    
+                    
+                        
+                           
+                           
+                        
+                           
+                           
+ 
 
 
 
@@ -1474,11 +1627,25 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fcOne'){
+             
+               $deleteData = FcOneDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+                   
+                       ->where('fc_one_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
-
+                    
+                    
+                      
+                           
+                           
+                         
+                           
+                           
+ 
 
 
 
@@ -1495,13 +1662,25 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fcTwo'){
+             
+                $deleteData = FcTwoDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+               
+                       ->where('fc_two_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
+                           
 
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
 
-
+     
+                           
+                           
+                        
+                           
+      
 
                  $regDakData = new FcTwoDak();
                  $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
@@ -1516,13 +1695,24 @@ class PostController extends Controller
             }
 
          }elseif($request->mainStatusNew == 'fdThree'){
+             
+                  $deleteData = FdThreeDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+                 
+                       ->where('fd_three_status_id',$request->main_id)
+                       ->where('status',0)
+                       ->delete();
 
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
-
-
+  
+                           
+                           
+                      
+                           
+                           
+     
 
                  $regDakData = new FdThreeDak();
                  $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
@@ -1886,7 +2076,7 @@ $mainStatusNew = $request->mainStatusNew;
 
         $status = $request->status;
         $id = $request->id;
-
+//dd($id);
 
         \LogActivity::addToLog('delete memeber list.');
 
@@ -1898,56 +2088,75 @@ $mainStatusNew = $request->mainStatusNew;
 
 
              $allRegistrationDak = NgoRegistrationDak::where('id',$id)->delete();
+             
+             $data = NgoRegistrationDak::count();
  //dd($allRegistrationDak);
          }elseif($status == 'renew'){
 
              $allRegistrationDak = NgoRenewDak::where('id',$id)->delete();
+             
+             $data = NgoRenewDak::count();
 
 
          }elseif($status == 'nameChange'){
 
              $allRegistrationDak = NgoNameChangeDak::where('id',$id)->delete();
+             
+             
+             $data = NgoNameChangeDak::count();
 
 
          }elseif($status == 'fdNine'){
 
              $allRegistrationDak = NgoFDNineDak::where('id',$id)->delete();
+             
+             $data = NgoFDNineDak::count();
 
 
          }elseif($mainstatus == 'fdNineOne'){
 
              $allRegistrationDak = NgoFDNineOneDak::where('id',$id)->delete();
+             
+              $data = NgoFDNineOneDak::count();
 
 
          }elseif($status == 'fdSix'){
 
              $allRegistrationDak = NgoFdSixDak::where('id',$id)->delete();
+             
+             $data = NgoFdSixDak::count();
 
 
          }elseif($status == 'fdSeven'){
 
              $allRegistrationDak = NgoFdSevenDak::where('id',$id)->delete();
+             
+             $data = NgoFdSevenDak::count();
 
 
          }elseif($status == 'fcOne'){
 
              $allRegistrationDak = FcOneDak::where('id',$id)->delete();
+             
+             $data = FcOneDak::count();
 
 
          }elseif($status == 'fcTwo'){
 
              $allRegistrationDak = FcTwoDak::where('id',$id)->delete();
+             
+             $data = FcTwoDak::count();
 
 
          }elseif($status == 'fdThree'){
 
              $allRegistrationDak = FdThreeDak::where('id',$id)->delete();
 
-
+$data = FdThreeDak::count();
          }
 
 
-         return response()->json(1);
+         return response()->json($data);
     }
 
 
