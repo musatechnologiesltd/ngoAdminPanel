@@ -155,6 +155,14 @@
 </li>
 
 
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('all_dak_list') ? 'active' : '' }}" href="{{ route('all_dak_list') }}">
+        <i data-feather="mail"></i>
+        <span>সকল ডাক</span>
+    </a>
+</li>
+
+
 
 @endif
 
@@ -167,7 +175,7 @@
     </div>
   </li>
 
-  
+
 @if ($usr->can('receiveNothiAdd') || $usr->can('receiveNothiView') || $usr->can('receiveNothiDelete') || $usr->can('receiveNothiUpdate'))
 <li class="dropdown">
     <a class="nav-link menu-title link-nav {{  Route::is('receiveNothi.index')  ? 'active' : '' }}" href="{{ route('receiveNothi.index') }}">

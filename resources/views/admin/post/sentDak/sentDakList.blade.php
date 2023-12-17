@@ -18,7 +18,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">ডাক </li>
-                    <li class="breadcrumb-item">ডাক তালিকা</li>
+                    <li class="breadcrumb-item">প্রেরিত ডাক তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -42,36 +42,25 @@
                             <div class="table-responsive product-table mb-0 m-t-30">
                                 <table class="display" id="basic-1">
                                     <tbody>
-                                        
 
-                                      @include('admin.post.registrationDakFirstStep')
+                                 @include('admin.post.sentDak.sentRegistrationDakList')
 
-                                      @include('admin.post.renewDakFirstStep')
+                                 @include('admin.post.sentDak.sentRenewDakList')
 
+                                 @include('admin.post.sentDak.sentNameChangeDakList')
 
-                                      @include('admin.post.nameChangeDakFirstStep')
-
-
-                                      @include('admin.post.fdNineDakFirstStep')
+                                 @include('admin.post.sentDak.sentFdNineDakList')
+                                 @include('admin.post.sentDak.sentFdNineOneDakList')
 
 
-                                      @include('admin.post.fdNineOneDakFirstStep')
+                                 @include('admin.post.sentDak.sentFdSixDakList')
+                                 @include('admin.post.sentDak.sentFdSevenDakList')
 
+                                 @include('admin.post.sentDak.sentFcOneDakList')
 
-                                      @include('admin.post.fdSixDakFirstStep')
+                                 @include('admin.post.sentDak.sentFcTwoDakList')
 
-
-                                      @include('admin.post.fdSevenDakFirstStep')
-
-                                      @include('admin.post.fcOneDakFirstStep')
-
-
-                                      @include('admin.post.fcTwoDakFirstStep')
-
-
-                                      @include('admin.post.fdThreeDakFirstStep')
-
-
+                                 @include('admin.post.sentDak.sentFdThreeDakList')
 
                                     </tbody>
                                 </table>
@@ -90,4 +79,15 @@
 
 @section('script')
 
+@include('admin.post.script')
+
+
+<script>
+    .modal:nth-of-type(even) {
+        z-index: 1062 !important;
+    }
+    .modal-backdrop.show:nth-of-type(even) {
+        z-index: 1061 !important;
+    }
+</script>
 @endsection
