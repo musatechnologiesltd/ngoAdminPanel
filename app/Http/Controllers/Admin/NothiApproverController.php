@@ -17,6 +17,7 @@ class NothiApproverController extends Controller
         $dataInsert->nothiId = $request->fnothiId;
         $dataInsert->noteId = $request->fnoteId;
         $dataInsert->adminId = $request->fadmin;
+        $dataInsert->bangla_date =bangla_date(time());
         $dataInsert->status = $request->fstatus;
         $dataInsert->save();
 

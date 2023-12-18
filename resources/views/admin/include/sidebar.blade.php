@@ -148,7 +148,7 @@
 </li>
 
  <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('addParentNote')  ||  Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('receiver_dak') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('receiver_dak') }}">
+    <a class="nav-link menu-title link-nav {{  Route::is('receiver_dak')  ? 'active' : '' }}" href="{{ route('receiver_dak') }}">
         <i data-feather="mail"></i>
         <span>প্রেরিত ডাক</span>
     </a>

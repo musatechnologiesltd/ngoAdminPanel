@@ -455,8 +455,8 @@ class ParentNoteController extends Controller
 
     //addChildNote/{status}/{parentId}/{id}/{activeCode}
 
-
-    return redirect('admin/addParentNoteFromView/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$pId.'/'.$totalCount)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+    return redirect('admin/viewChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$pId.'/'.$totalCount)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+    // return redirect('admin/addParentNoteFromView/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 
 
     }

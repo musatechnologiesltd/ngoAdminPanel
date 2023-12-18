@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\NothiApproverController;
 use App\Http\Controllers\Admin\NothiSenderController;
 use App\Http\Controllers\Admin\SendNothiController;
 use App\Http\Controllers\Admin\ReceiveNothiController;
+use App\Http\Controllers\NGO\PotroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::group(['prefix' => 'admin'], function () {
+
+
+    Route::resource('potroList', PotroController::class);
+
+    Route::controller(PotroController::class)->group(function () {
+
+        Route::get('/createPotro/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'createPotro')->name('createPotro');
+        Route::get('/createPotroForReceiver/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'createPotroForReceiver')->name('createPotroForReceiver');
+
+});
 
 
     Route::resource('documentPresent', DocumentPresentController::class);
@@ -147,6 +158,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/addParentNoteFromView/{status}/{dakId}/{nothiId}', 'addParentNoteFromView')->name('addParentNoteFromView');
 
 
+
     });
 
     Route::controller(DocumentPresentController::class)->group(function () {
@@ -166,7 +178,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
-
+        Route::get('/givePermissionForPotroZari/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionForPotroZari')->name('givePermissionForPotroZari');
 
         Route::get('/givePermissionToNote/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionToNote')->name('givePermissionToNote');
 
@@ -179,7 +191,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/addChildNote/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'addChildNote')->name('addChildNote');
 
-
+        Route::get('/addChildNoteFromView/{status}/{parentId}/{nothiId}/{id}/{activeCode}', 'addChildNoteFromView')->name('addChildNoteFromView');
 
         Route::get('/printPotrangso/{status}/{parentId}/{nothiId}/{id}/{sarokCode}', 'printPotrangso')->name('printPotrangso');
 

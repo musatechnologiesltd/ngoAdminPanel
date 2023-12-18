@@ -220,9 +220,169 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
     }
+
+
+    public function addChildNoteFromView($status,$parentId,$nothiId,$id,$activeCode){
+
+        if($status == 'registration'){
+
+
+
+            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+                           ->get();
+
+
+
+        }elseif($status == 'renew'){
+
+
+
+            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+            $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+
+
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+            $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+//dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+            $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+            $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+            $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+            $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+            $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }
+
+
+        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+
+        $user = Admin::where('id','!=',1)->get();
+
+
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("branchId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = Branch::whereIn('id',$separated_data_title)
+        ->orderBy('branch_step','asc')->get();
+
+
+
+
+        return view('admin.presentDocument.addParentNoteFromView',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+
+    }
+
     public function addChildNote($status,$parentId,$nothiId,$id,$activeCode){
 
-//dd($status. $parentId. $id);
+//dd(bangla_date(time(),"bn","d-m-y"));
 
         if($status == 'registration'){
 
@@ -852,7 +1012,16 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
      }
 
 
-     return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+     if($request->final_button == 'সংরক্ষন ও খসড়া'){
+
+        return redirect('admin/createPotro/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+
+     }else{
+        return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+     }
+
+
+
     }
 
 

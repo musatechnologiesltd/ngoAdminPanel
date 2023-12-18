@@ -162,6 +162,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        S1K3\Bangla\Date\BanglaDateServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -65,6 +65,7 @@ if(!$nothiApproverList){
         $appName = '';
         $desiName = '';
         $dateApp = '';
+        $dateAppBan='';
 
 }else{
 
@@ -94,8 +95,8 @@ if(!$nothiApproverList){
        }
 
 
-       $dateApp =  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/Y', strtotime($nothiApproverList->created_at)));
-
+       $dateApp =  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d F Y', strtotime($nothiApproverList->created_at)));
+       $dateAppBan =  $nothiApproverList->bangla_date;
     }
 
 
@@ -104,16 +105,27 @@ if(!$nothiApproverList){
 <table class="pdf_table">
     <tr>
         <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</td>
-        <td style="text-align: right">তারিখ: {{ $dateApp }}</td>
+        <td style="text-align: right">
+            <table class="pdf_table">
+                <tr>
+                    <td style="width: 58%;">তারিখ:</td>
+                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
 @foreach($officeDetail as $officeDetails)
 <table class="pdf_table">
-    <tr>
-        <td style="font-weight:bold;">বিষয়:  {!! $officeDetails->office_subject !!} </td>
+    <tr style="font-weight:bold;">
+        <td style="width: 7%"> বিষয়: </td>
+        <td>{!! $officeDetails->office_subject !!} </td>
     </tr>
+</table>
+<table class="pdf_table">
     <tr>
-        <td>সূত্র: (যদি থাকে)    {!! $officeDetails->office_sutro !!}</td>
+        <td style="width: 15%"> সূত্র: (যদি থাকে)</td>
+        <td> {!! $officeDetails->office_sutro !!}</td>
     </tr>
 </table>
 <table class="pdf_table">
@@ -152,7 +164,14 @@ if(!$nothiApproverList){
 <table class="pdf_table">
     <tr>
         <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</td>
-        <td style="text-align: right">তারিখ: {{ $dateApp }}</td>
+        <td style="text-align: right">
+            <table class="pdf_table">
+                <tr>
+                    <td style="width: 58%;">তারিখ:</td>
+                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
 <table class="pdf_table">
