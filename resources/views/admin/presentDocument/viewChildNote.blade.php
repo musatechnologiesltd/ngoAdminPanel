@@ -654,7 +654,7 @@ $senderIdNew122 = DB::table('nothi_details')
 
 
                                                                         if(!$nothiApproverList){
-
+                                                                            $appSignature ='';
                                                                                 $appName = '';
                                                                                 $desiName = '';
                                                                                 $dateApp = '';
@@ -671,7 +671,7 @@ $senderIdNew122 = DB::table('nothi_details')
 
                                                                                if(!$nothiApproverLista){
 
-
+                                                                                $appSignature ='';
                                                                                 $appName = '';
                                                                                 $desiName = '';
 
@@ -681,7 +681,7 @@ $senderIdNew122 = DB::table('nothi_details')
                                                                                         ->where('id',$nothiApproverLista->designation_list_id)
                                                                                         ->value('designation_name');
 
-
+                                                                                $appSignature =$nothiApproverLista->admin_sign;
                                                                                 $appName = $nothiApproverLista->admin_name_ban;
                                                                                 $desiName = $designationName;
 
@@ -697,9 +697,55 @@ $senderIdNew122 = DB::table('nothi_details')
 
 @foreach($officeDetail as $officeDetails)
 
+ <!-- new code potrangso -->
+ <?php
+$potroZariListValueZari =  DB::table('nothi_details')
+                    ->where('noteId',$id)
+                    ->where('nothId',$nothiId)
+                    ->where('dakId',$parentId)
+                    ->where('dakType',$status)
+                    ->value('zari_permission_status');
+
+                    $potroZariListValueZariPdf =  DB::table('nothi_details')
+                    ->where('noteId',$id)
+                    ->where('nothId',$nothiId)
+                    ->where('dakId',$parentId)
+                    ->where('dakType',$status)
+                    ->value('potroPdf');
+ ?>
+ <!-- end new code potrangso -->
+
 
 <!-- new button code start -->
+@if($potroZariListValueZari == 1)
+<button class="btn btn-primary me-2" onclick="location.href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}';"><i class="fa fa-print"></i> প্রিন্ট করুন</button>
 
+ <div class="row mt-3">
+    <div class="col-xl-2 ">পত্রের বিষয়:</div>
+    <div class="col-xl-10">{!! $officeDetails->office_subject !!}</div>
+</div>
+
+ <div class="row mt-3">
+
+    <object
+    data='{{ asset('/') }}{{ 'public/'.$potroZariListValueZariPdf }}'
+    type="application/pdf"
+    width="500"
+    height="900"
+  >
+
+    <iframe
+      src='{{ asset('/')}}{{ 'public/'.$potroZariListValueZariPdf }}'
+      width="500"
+      height="900"
+    >
+    <p>This browser does not support PDF!</p>
+    </iframe>
+  </object>
+
+</div>
+
+@else
 <div class="d-flex flex-wrap mb-4">
     <div class="dropdown me-2">
         <button class="btn btn-primary dropdown-toggle"
@@ -833,6 +879,19 @@ $potroZariListValue =  DB::table('nothi_details')
 
 
                                                                         <div class="mt-4" style="text-align: right;">
+
+                                                                            @if($potroZariListValue == 1)
+
+                                                                            @if(!$nothiApproverLista)
+
+                                                                            @else
+                                                                            <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/><br>
+                                                                            @endif
+
+                                                                            @else
+                                                                            @endif
+
+
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
                                                                         </div>
@@ -900,7 +959,9 @@ $potroZariListValue =  DB::table('nothi_details')
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
     </div>
+    @endif
 @endforeach
+
 
 
                                                                     </div>

@@ -61,7 +61,7 @@ $nothiApproverList = DB::table('nothi_approvers')->where('nothiId',$nothiId)
 
 
 if(!$nothiApproverList){
-    $appSignature =$nothiApproverLista->admin_sign;
+    $appSignature ='';
         $appName = '';
         $desiName = '';
         $dateApp = '';
@@ -134,6 +134,7 @@ if(!$nothiApproverList){
     </tr>
 </table>
 @endforeach
+
 <?php
     $potroZariListValue =  DB::table('nothi_details')
                     ->where('noteId',$id)

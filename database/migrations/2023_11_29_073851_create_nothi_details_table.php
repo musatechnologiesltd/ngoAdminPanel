@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('receiver');
             $table->string('back_status')->nullable();
             $table->string('permission_status')->nullable();
+            $table->string('zari_permission_status')->nullable();
+            $table->string('potroPdf')->nullable();
+            $table->string('onumodon_id')->nullable();
             $table->timestamps();
         });
     }
