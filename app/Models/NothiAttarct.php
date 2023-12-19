@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NothiAttarct extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nothiId','noteId','adminId','nijOfficeId','otherOfficerName','otherOfficerAddress','otherOfficerDesignation','otherOfficerBranch','otherOfficerEmail','otherOfficerPhone','status'];
 }
