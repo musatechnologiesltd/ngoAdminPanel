@@ -171,6 +171,7 @@
 
 
                                                                         <div class="text-center mb-3 mt-2">
+                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
                                                                             <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
                                                                                 সরকার</h3>
                                                                             <h5>এনজিও বিষয়ক ব্যুরো <br>
@@ -222,27 +223,30 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
+
                                                                         <div class="col-xl-3">সুত্রঃ
                                                                             (যদি থাকে):
                                                                         </div>
+
                                                                         <div class="col-xl-9">
-
-
-                                                                                        <textarea id="ineditor2" name="sutro" contenteditable="true">
-                                                                                            {!! $officeDetails->office_sutro !!}
-                                                                                             </textarea>
-
-                                                                                             <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                                                                                             <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-                                                                    </span>
+                                                                            <textarea id="ineditor2" name="sutro" contenteditable="true">
+                                                                                {!! $officeDetails->office_sutro !!}
+                                                                                </textarea>
                                                                         </div>
+
+                                                                        <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+                                                                                             <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-12">
 
                                                                                 <label class="form-label">সম্পাদন শেষ করুন</label>
 
+                                                                                <button class="btn btn-primary  mt-2" id="sorkariSarokUpdate"
 
+                                                                                aria-expanded="false">
+                                                                                সংশোধন করুন
+                                                                        </button>
 
                                                                                 <textarea id="editor1222" class="mainEdit"  name="maindes" >
                                                                                         {!! $officeDetails->description !!}
@@ -254,11 +258,7 @@
 
 
 
-                                                                      <button class="btn btn-primary  mt-2" id="sorkariSarokUpdate"
 
-                                                                      aria-expanded="false">
-                                                                      সংশোধন করুন
-                                                              </button>
                                                             </form>
 
 
@@ -268,9 +268,31 @@
 
                                                                         <!-- approver start --->
 
+                                                                        <?php
+                                                                        $potroZariListValue =  DB::table('nothi_details')
+                                                                                        ->where('noteId',$id)
+                                                                                        ->where('nothId',$nothiId)
+                                                                                        ->where('dakId',$parentId)
+                                                                                        ->where('dakType',$status)
+                                                                                        ->value('permission_status');
 
+
+
+                                                                            ?>
 
                                                                         <div class="mt-4" style="text-align: right;">
+
+                                                                            @if($potroZariListValue == 1)
+
+                                                                            @if(!$nothiApproverLista)
+
+                                                                            @else
+                                                                            <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
+                                                                            @endif
+
+                                                                            @else
+                                                                            @endif
+
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
                                                                         </div>

@@ -11,6 +11,18 @@
 
    <?php
 
+                                        //new code
+$orginalReceverId= DB::table('ngo_name_change_daks')
+                ->where('name_change_status_id',$allStatusData->name_change_status_id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
 $formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_change_status_id)
        ->value('fd_one_form_id');
 
@@ -32,9 +44,10 @@ $decesionName = DB::table('dak_details')
    <td style="text-align:left;">
        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
        প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-       প্রাপকঃ {{ $adminNamePrapok}}</span>  <br>
-       বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-       সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
+       মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
+       বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ </b><br>
+       সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
+       তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
    </td>
    <td style="text-align:right;">
 

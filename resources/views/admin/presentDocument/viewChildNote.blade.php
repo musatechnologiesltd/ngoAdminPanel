@@ -794,6 +794,7 @@ $potroZariListValue =  DB::table('nothi_details')
 
  <!-- new button code end -->
                                                                         <div class="text-center mb-3">
+                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
                                                                             <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
                                                                                 সরকার</h3>
                                                                             <h5>এনজিও বিষয়ক ব্যুরো <br>
@@ -835,23 +836,20 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
+                                                                        @if($officeDetails->office_sutro == '<p>...............................................</p>')
+
+                                                                        @else
                                                                         <div class="col-xl-3">সুত্রঃ
                                                                             (যদি থাকে):
                                                                         </div>
-                                                                        <div class="col-xl-9">
 
-
-
-                                                                                            {!! $officeDetails->office_sutro !!}
-
-
-                                                                                             <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+                                                                        <div class="col-xl-9">{!! $officeDetails->office_sutro !!}</div>
+                                                                        @endif
+                                                                        <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
                                                                                              <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-                                                                    </span>
-                                                                        </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-xl-12">
+                                                                        <div class="col-xl-12 mt-2">
 
                                                                                 <label class="form-label">সম্পাদন শেষ করুন</label>
 

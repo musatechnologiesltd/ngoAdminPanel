@@ -4,6 +4,18 @@
 
  <?php
 
+                                                        //new code
+                                                        $orginalReceverId= DB::table('fc_one_daks')
+                ->where('fc_one_status_id',$allStatusData->fc_one_status_id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
 $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_status_id)->value('fd_one_form_id');
 
 $form_one_data = DB::table('fd_one_forms')
@@ -24,29 +36,18 @@ $decesionName = DB::table('dak_details')
  <td style="text-align:left;">
      উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
      প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-     মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
-     বিষয়ঃ <b> এফসি-১ নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-     সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
+     মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
+     বিষয়ঃ <b> এফসি-১ নোটিশ </b> <br>
+     সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
+     তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
  </td>
  <td style="text-align:right;">
 
-    @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
-@else
-
-     <button type="button" class="btn-xs btn btn-primary"
-                     data-toggle="tooltip" data-placement="top"
-                     title="নথিতে উপস্থাপন করুন"
-                     data-bs-toggle="modal"
-                     data-original-title="" data-bs-target="#fconemyModal{{ $allStatusData->id }}">
-                 <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
-             </button>
-
-             @endif
 
              @include('admin.post.fconenothiModal')
      {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcOne','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$allStatusData->fc_one_status_id]) }}';">প্রেরণ</button>
+     {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$allStatusData->fc_one_status_id]) }}';">প্রেরণ</button> --}}
      <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
 
 

@@ -61,7 +61,7 @@ $nothiApproverList = DB::table('nothi_approvers')->where('nothiId',$nothiId)
 
 
 if(!$nothiApproverList){
-    $appSignature =$nothiApproverLista->admin_sign;
+    $appSignature ='';
         $appName = '';
         $desiName = '';
         $dateApp = '';
@@ -122,12 +122,17 @@ if(!$nothiApproverList){
         <td>{!! $officeDetails->office_subject !!} </td>
     </tr>
 </table>
+
+@if($officeDetails->office_sutro == '<p>...............................................</p>')
+
+@else
 <table class="pdf_table">
     <tr>
         <td style="width: 15%"> সূত্র: (যদি থাকে)</td>
         <td> {!! $officeDetails->office_sutro !!}</td>
     </tr>
 </table>
+@endif
 <table class="pdf_table">
     <tr>
         <td>{!! $officeDetails->description !!}</td>
@@ -151,7 +156,7 @@ if(!$nothiApproverList){
         <td style="text-align:center; line-height:.8">
             @if($potroZariListValue == 1)
 
-            @if(!$nothiApproverLista)
+            @if(!$nothiApproverList)
 
             @else
             <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/>

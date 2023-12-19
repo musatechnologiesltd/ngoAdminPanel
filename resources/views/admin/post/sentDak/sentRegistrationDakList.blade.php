@@ -2,6 +2,18 @@
 
 <?php
 
+//new code
+$orginalReceverId= DB::table('ngo_registration_daks')
+                ->where('registration_status_id',$allStatusData->registration_status_id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
 $formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)
     ->value('fd_one_form_id');
 
@@ -23,30 +35,19 @@ $decesionName = DB::table('dak_details')
 <td style="text-align:left;">
     উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
     প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-    মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
-    বিষয়ঃ <b> এনজিও নিবন্ধনের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-    সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
+    মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
+    বিষয়ঃ <b> এনজিও নিবন্ধনের নোটিশ </b> <br>
+    সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
+    তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
 </td>
 <td style="text-align:right;">
 
 
 
-@if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
-@else
-    <button  type="button" class="btn-xs btn btn-primary"
-    data-toggle="tooltip" data-placement="top"
-    title="নথিতে উপস্থাপন করুন"
-    data-bs-toggle="modal"
-    data-original-title="" data-bs-target="#myModal{{ $allStatusData->id }}">
-<i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
-</button>
-@endif
-
-@include('admin.post.nothiModal')
 
     {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'registration','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->registration_status_id]) }}';">প্রেরণ</button>
+    {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->registration_status_id]) }}';">প্রেরণ</button> --}}
     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$formOneDataId) }}';">দেখুন</button>
 
 

@@ -11,6 +11,19 @@
 
  <?php
 
+
+                                                                                           //new code
+$orginalReceverId= DB::table('ngo_f_d_nine_one_daks')
+                ->where('f_d_nine_one_status_id',$allStatusData->f_d_nine_one_status_id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
 $formOneDataId = DB::table('fd9_one_forms')
 ->where('id',$allStatusData->f_d_nine_one_status_id)
      ->value('fd_one_form_id');
@@ -44,9 +57,14 @@ $decesionName = DB::table('dak_details')
  <td style="text-align:left;">
      উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
      প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-     প্রাপকঃ {{ $adminNamePrapok}}</span>  <br>
-     বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-     সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
+     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
+     বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ</b><br>
+     @if(empty($decesionName))
+
+     @else
+     সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
+     @endif
+     তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
  </td>
  <td style="text-align:right;">
 

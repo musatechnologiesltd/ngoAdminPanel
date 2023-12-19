@@ -9,6 +9,21 @@
 
                         <?php
 
+
+
+                                                                                           //new code
+                                                                                           $orginalReceverId= DB::table('ngo_f_d_nine_one_daks')
+                ->where('f_d_nine_one_status_id',$allStatusData->f_d_nine_one_status_id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
+
 $formOneDataId = DB::table('fd9_one_forms')
 ->where('id',$allStatusData->f_d_nine_one_status_id)
                             ->value('fd_one_form_id');
@@ -42,30 +57,19 @@ $formOneDataId = DB::table('fd9_one_forms')
                         <td style="text-align:left;">
                             উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                             প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                            মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
-                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                            সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
+                            মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
+                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ </b> <br>
+                            সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
+                            তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                         </td>
                         <td style="text-align:right;">
 
-                            @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
- @else
-
-                            <button type="button" class="btn-xs btn btn-primary"
-                                        data-toggle="tooltip" data-placement="top"
-                                        title="নথিতে উপস্থাপন করুন"
-                                        data-bs-toggle="modal"
-                                        data-original-title="" data-bs-target="#fdnineonemyModal{{ $allStatusData->id }}">
-                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
-                                </button>
-@endif
-                                @include('admin.post.fdnineonenothiModal')
 
 
 
                             {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->f_d_nine_one_status_id]) }}';">প্রেরণ</button>
+                            {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->f_d_nine_one_status_id]) }}';">প্রেরণ</button> --}}
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->f_d_nine_one_status_id) }}';">দেখুন</button>
 
 

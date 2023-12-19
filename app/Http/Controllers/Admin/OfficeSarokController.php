@@ -33,6 +33,13 @@ class OfficeSarokController extends Controller
         //dd($request->all());
 
 
+        $request->validate([
+            'subject' => 'required',
+            'maindes' => 'required',
+
+        ]);
+
+
         if($request->updateOrSubmit == 1){
 
 
