@@ -60,7 +60,10 @@ class NothiPrapokController extends Controller
 
 
                 $data = view('admin.presentDocument.selfOfficerAdd',compact('nothiPrapokList'))->render();
-                return response()->json($data);
+
+                return response()->json(['totalPrapok'=>count($nothiPrapokList),'data'=>$data]);
+
+                //return response()->json($data);
 
 
          }

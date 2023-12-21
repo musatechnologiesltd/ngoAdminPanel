@@ -13,6 +13,17 @@ class NothiApproverController extends Controller
     public function store(Request $request){
 
 
+        $nothiApproverList = NothiApprover::orderBy('id','desc')->value('id');
+
+
+
+        if(empty($nothiApproverList)){
+
+
+        }else{
+        $deleteData = NothiApprover::where('id','<=',$nothiApproverList)->delete();
+        }
+
         $dataInsert = new NothiApprover();
         $dataInsert->nothiId = $request->fnothiId;
         $dataInsert->noteId = $request->fnoteId;

@@ -1193,10 +1193,12 @@ $.ajax({
     method: 'get',
     data: {snoteId:snoteId,snothiId:snothiId,sstatus:sstatus,selfOfficerList:selfOfficerList},
     success: function(data) {
+        //totalPrapok
+        alertify.set('notifier','position','top-center');
+        alertify.success('সফলভাবেই সংরক্ষণ করা হয়েছে');
 
-
-        $("#sms2").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
-        $('#tableListN').html(data);
+        $("#totalPrapok").html('('+data.totalPrapok+')');
+        $('#tableListN').html(data.data);
     }
     });
 

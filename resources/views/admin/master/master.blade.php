@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
           rel="stylesheet">
 
-          
+
     <!-- Font Awesome-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/fontawesome.css">
     <!-- ico-font-->
@@ -51,7 +51,8 @@
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/responsive.css">
 
-
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 <!-- Plugins css start-->
 <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/tree.css">
     <style>
@@ -231,6 +232,9 @@
 <!-- Bootstrap js-->
 <script src="{{ asset('/') }}public/admin/assets/js/bootstrap/popper.min.js"></script>
 <script src="{{ asset('/') }}public/admin/assets/js/bootstrap/bootstrap.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <!-- Plugins JS start-->
 <script src="{{ asset('/') }}public/admin/assets/js/chart/chartist/chartist.js"></script>
 <script src="{{ asset('/') }}public/admin/assets/js/chart/chartist/chartist-plugin-tooltip.js"></script>

@@ -11,7 +11,19 @@ class NothiSenderController extends Controller
 {
     public function store(Request $request){
 
+//dd(3);
 
+
+$nothiApproverList = NothiSender::orderBy('id','desc')->value('id');
+
+
+
+if(empty($nothiApproverList)){
+
+
+}else{
+$deleteData = NothiSender::where('id','<=',$nothiApproverList)->delete();
+}
         $dataInsert = new NothiSender();
         $dataInsert->nothiId = $request->fnothiId;
         $dataInsert->noteId = $request->fnoteId;
