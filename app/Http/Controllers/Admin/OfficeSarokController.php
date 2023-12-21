@@ -293,9 +293,9 @@ class OfficeSarokController extends Controller
 
         if($request->receiveEnd == 1){
 
-            return redirect('admin/viewChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংশোধন করা হয়েছে');
+            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }else{
-            return redirect('admin/addChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংশোধন করা হয়েছে');
+            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }
 
 
@@ -308,11 +308,20 @@ class OfficeSarokController extends Controller
     }else{
 
 
+
         if($request->receiveEnd == 1){
-            return redirect('admin/viewChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+
+            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }else{
-        return redirect('admin/addChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }
+
+        
+        // if($request->receiveEnd == 1){
+        //     return redirect('admin/viewChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+        // }else{
+        // return redirect('admin/addChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
+        // }
    // return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
     }

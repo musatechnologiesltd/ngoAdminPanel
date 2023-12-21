@@ -28,11 +28,11 @@
         <div class="badge-bottom"></div>
         @if ($usr->can('profile.view'))
         <a href="{{ route('profile.index') }}">
-            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name_ban }}</h6>
         </a>
         @else
         <a href="#">
-            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name_ban }}</h6>
         </a>
         @endif
 

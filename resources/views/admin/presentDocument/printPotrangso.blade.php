@@ -13,7 +13,9 @@
             width: 8.3in;
             height: 11.7in;
         }
-        body,h5,h4,h3 {
+        
+        body
+        {
             font-family: 'bangla', sans-serif;
         /* font-size: 14px; */
 
@@ -38,9 +40,26 @@
             width: 100%;
             margin: 25px 0;
         }
+        
+        .bt{
+  font-family: 'banglabold', sans-serif;
+  font-weight: bold;
+}
     </style>
 </head>
 <body>
+    
+    <?php
+$potroZariListValue =  DB::table('nothi_details')
+                ->where('noteId',$id)
+                ->where('nothId',$nothiId)
+                ->where('dakId',$parentId)
+                ->where('dakType',$status)
+                ->value('permission_status');
+
+
+
+    ?>
 
 <div class="upper_section">
     <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
@@ -104,12 +123,20 @@ if(!$nothiApproverList){
 ?>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</td>
+        <td style="font-weight:bold;"> 
+        <span style="font-weight: bold ;   font-family: 'banglabold', sans-serif !important;">স্মারক নম্বর:</span>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+        </td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
-                    <td style="width: 58%;">তারিখ:</td>
-                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                    <td style="width: 58%;"><span class="bt">তারিখ:</span></td>
+                    <td style="text-align: left; padding-left: 10px;">
+                        @if($potroZariListValue == 1)
+                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                        @else
+
+                        @endif
+                    </td>
                 </tr>
             </table>
         </td>
@@ -153,7 +180,7 @@ if(!$nothiApproverList){
 <table class="pdf_table">
     <tr>
         <td style="width:80%"></td>
-        <td style="text-align:center; line-height:.8">
+        <td style="text-align:center; line-height:1">
             @if($potroZariListValue == 1)
 
             @if(!$nothiApproverList)
@@ -172,7 +199,7 @@ if(!$nothiApproverList){
     </tr>
     @foreach($nothiPropokListUpdate as $nothiPropokLists)
     <tr>
-        <td colspan="2">{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}। </td>
+        <td colspan="2">{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}। </td>
     </tr>
     @endforeach
 </table>
@@ -182,18 +209,24 @@ if(!$nothiApproverList){
     </tr>
     @foreach($nothiAttractListUpdate as $nothiPropokLists)
     <tr>
-        <td style="padding-left:20px; padding-top: 10px;">{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}। </td>
+        <td style="padding-left:20px; padding-top: 10px;">{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}। </td>
     </tr>
     @endforeach
 </table>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</td>
+        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
                     <td style="width: 58%;">তারিখ:</td>
-                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                    <td style="text-align: left; padding-left: 10px;">
+                        @if($potroZariListValue == 1)
+                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                        @else
+
+                        @endif
+                    </td>
                 </tr>
             </table>
         </td>
@@ -205,7 +238,12 @@ if(!$nothiApproverList){
     </tr>
     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
     <tr>
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}।</td>
+        @if(count($nothiCopyListUpdate) == ($key+1))
+        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }},এনজিও বিষয়ক ব্যুরো।</td>
+        @else
+        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }},এনজিও বিষয়ক ব্যুরো;</td>
+        @endif
+        
     </tr>
     @endforeach
 
@@ -214,7 +252,7 @@ if(!$nothiApproverList){
 <table class="pdf_table">
     <tr>
         <td style="width:80%"></td>
-        <td style="text-align:center; line-height:.8">
+        <td style="text-align:center; line-height:1">
 
             <p>{{ $appName }}</p>
            <p>{{ $desiName }}</p>

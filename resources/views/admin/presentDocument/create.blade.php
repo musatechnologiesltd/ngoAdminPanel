@@ -80,10 +80,10 @@
                                                     <input class="form-control" name="document_number" id="document_number" type="text" placeholder="" required>
                                                     <select class="form-control" name="document_year" id="" required>
                                                         <option value="">বছর বাছাই করুন</option>
-                                                        <option value="২০২৩">২০২৩</option>
-                                                        <option value="২০২৪">২০২৪</option>
-                                                        <option value="২০২৫">২০২৫</option>
-                                                        <option value="২০২৬">২০২৬</option>
+                                                        <option value="২৩">২৩</option>
+                                                        <option value="২৪">২৪</option>
+                                                        <option value="২৫">২৫</option>
+                                                        <option value="২৬">২৬</option>
                                                     </select>
                                                 </div>
                                             </div>

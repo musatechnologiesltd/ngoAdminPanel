@@ -186,6 +186,8 @@ class ChildNoteController extends Controller
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+        
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         $user = Admin::where('id','!=',1)->get();
 
@@ -214,7 +216,7 @@ class ChildNoteController extends Controller
 
 
         $file_Name_Custome = 'printPotrangso';
-        $pdf=PDF::loadView('admin.presentDocument.printPotrangso',['sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate]);
+        $pdf=PDF::loadView('admin.presentDocument.printPotrangso',['nothiYear'=>$nothiYear,'sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
@@ -349,6 +351,8 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+        
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         $user = Admin::where('id','!=',1)->get();
 
@@ -377,7 +381,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 
-        return view('admin.presentDocument.addParentNoteFromView',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.presentDocument.addParentNoteFromView',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
 
     }
 
@@ -509,6 +513,8 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+        
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         $user = Admin::where('id','!=',1)->get();
 
@@ -537,7 +543,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 
-        return view('admin.presentDocument.addChildNote',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.presentDocument.addChildNote',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 
@@ -669,6 +675,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
                 $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+                $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
                 $user = Admin::where('id','!=',1)->get();
 
@@ -697,7 +704,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 
-                return view('admin.presentDocument.viewChildNote',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+                return view('admin.presentDocument.viewChildNote',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
             }
 
 
@@ -859,6 +866,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
                 $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+                $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
                 $user = Admin::where('id','!=',1)->get();
 
@@ -897,6 +905,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
                 $pdf=PDF::loadView('admin.presentDocument.issuedPaper',[
+                    'nothiYear'=>$nothiYear,
                     'childnote'=>$childnote,
                     'parentId'=>$parentId,
                     'id'=>$id,

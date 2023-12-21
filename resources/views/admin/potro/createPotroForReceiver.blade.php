@@ -43,7 +43,218 @@
         </div>
     </div>
 </div>
+<?php
 
+
+
+if($status == 'registration'){
+
+
+$checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+   ->first();
+
+
+   $childNoteNewList = DB::table('child_note_for_registrations')
+           ->where('parent_note_regid',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_registrations')
+           ->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'renew'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_renews')
+           ->where('parent_note_for_renew_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_renews')
+           ->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+}elseif($status == 'nameChange'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_name_changes')
+           ->where('parentnote_name_change_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_name_changes')
+           ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+}elseif($status == 'fdNine'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_nines')
+           ->where('p_note_for_fd_nine_id',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+           ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+//dd($checkParent);
+
+
+}elseif($status == 'fdNineOne'){
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+           ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+           ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+}elseif($status == 'fdSix'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_sixes')
+           ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+           ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+}elseif($status == 'fdSeven'){
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_sevens')
+           ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+           ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+}elseif($status == 'fcOne'){
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fc_ones')
+           ->where('parent_note_for_fc_one_id',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+           ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+}elseif($status == 'fcTwo'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fc_twos')
+           ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+           ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+}elseif($status == 'fdThree'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_threes')
+           ->where('parent_note_for_fd_three_id',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+           ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+}
+
+
+
+
+
+                                    ?>
 
    <!-- Container-fluid starts-->
    <div class="container-fluid list-products">
@@ -69,7 +280,30 @@
 
                                 <div class="tab-pane show active fade" id="profile-icon" role="tabpanel"
                                      aria-labelledby="profile-icon-tab">
+<!-- header start-->
 
+<?php
+$branchName = DB::table('branches')
+                ->where('id',Auth::guard('admin')->user()->branch_id)
+                ->value('branch_name');
+
+ ?>
+
+ <div class="row">
+
+   <div class="col-sm-8 col-xs-8">
+
+       <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
+
+   </div>
+   <div class="col-sm-4 col-xs-4">
+       <div class="d-flex flex-row-reverse">
+           <a class="btn btn-warning"aria-expanded="false">সংরক্ষন করুন</a>
+       </div>
+   </div>
+</div>
+<hr>
+<!-- header end -->
 
                                     <div class="row">
                                         <div class="col-xl-9">
@@ -180,17 +414,32 @@
                                                                                 শেরেবাংলা নগর, ঢাকা-১২০৭
                                                                             </h5>
                                                                         </div>
+
+                                                                        <?php
+                                                                        $potroZariListValue =  DB::table('nothi_details')
+                                                                                        ->where('noteId',$id)
+                                                                                        ->where('nothId',$nothiId)
+                                                                                        ->where('dakId',$parentId)
+                                                                                        ->where('dakType',$status)
+                                                                                        ->value('permission_status');
+
+
+
+                                                                            ?>
+
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
-                                                                                <table class="table table-borderless">
-                                                                                    <tr>
-                                                                                        <td style="width: 60%;">তারিখ:</td>
-                                                                                        <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
-                                                                                    </tr>
-                                                                                </table>
+                                                                                <div class="d-flex justify-content-end">
+                                                                                    <p>তারিখ: </p>
+                                                                                    <p>@if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
+
+                                                                                            @endif</p>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
@@ -210,47 +459,41 @@
 
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-                                                                      <div class="row mt-3">
-                                                                        <div class="col-xl-3 ">বিষয় :
-                                                                        </div>
-                                                                        <div class="col-xl-9">
-
-
-                                                                            <textarea id="ineditor1" name="subject" contenteditable="true">
+                                                                      <div class="d-flex justify-content-end mt-3">
+                                                                          <p>বিষয় :</p>
+                                                                          <p>
+                                                                              <textarea id="ineditor1" name="subject" contenteditable="true">
                                                                                 {!! $officeDetails->office_subject !!}
-                                                                                 </textarea>
-                                                                    </span>
-                                                                        </div>
+                                                                                </textarea></p>
                                                                     </div>
-                                                                    <div class="row">
-
-                                                                        <div class="col-xl-3">সুত্রঃ
-                                                                            (যদি থাকে):
-                                                                        </div>
-
-                                                                        <div class="col-xl-9">
-                                                                            <textarea id="ineditor2" name="sutro" contenteditable="true">
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <p>সুত্রঃ(যদি থাকে):</p>
+                                                                        <p><textarea id="ineditor2" name="sutro" contenteditable="true">
                                                                                 {!! $officeDetails->office_sutro !!}
                                                                                 </textarea>
-                                                                        </div>
-
+                                                                                </p>
                                                                         <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                                                                                             <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
+                                                                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-xl-12">
 
-                                                                                <label class="form-label">সম্পাদন শেষ করুন</label>
+                                                                            <label class="btn btn-primary" id="sompadonButton">সম্পাদন করুন</label>
 
-                                                                                <button class="btn btn-primary  mt-2" id="sorkariSarokUpdate"
 
-                                                                                aria-expanded="false">
-                                                                                সংশোধন করুন
-                                                                        </button>
+                                                                            <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
+<br>
+                                                                            {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
 
-                                                                                <textarea id="editor1222" class="mainEdit"  name="maindes" >
-                                                                                        {!! $officeDetails->description !!}
-                                                                                    </textarea>
+                                                                            <div id="firstBisoyBostu"> {!! $officeDetails->description !!}</div>
+
+                                                                            {{-- <textarea id="editor1222"   class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
+                                                                                    {!! $officeDetails->description !!}
+                                                                                </textarea> --}}
+
+                                                                                <textarea   style="display: none;" class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
+                                                                                    {!! $officeDetails->description !!}
+                                                                                </textarea>
 
 
                                                                         </div>
@@ -302,7 +545,7 @@
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
                                                                         @endforeach
                                                                     </div>
                                                                     <!--end prapok  --->
@@ -314,7 +557,7 @@
                                                                     @else
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
-                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
                                                                     @endforeach
                                                                     @endif
 
@@ -324,15 +567,17 @@
 
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
-                                                                            <table class="table table-borderless">
-                                                                                <tr>
-                                                                                    <td style="width: 60%;">তারিখ:</td>
-                                                                                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
-                                                                                </tr>
-                                                                            </table>
+<div class="d-flex justify-content-end">
+                                                                                    <p>তারিখ: </p>
+                                                                                    <p>@if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
+
+                                                                                            @endif</p>
+                                                                                </div>
                                                                         </div>
                                                                     </div>
 
@@ -349,7 +594,7 @@
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
                                                                     @endforeach
                                                                     @endif
 
@@ -373,17 +618,31 @@
             শেরেবাংলা নগর, ঢাকা-১২০৭
         </h5>
     </div>
+
+    <?php
+    $potroZariListValue =  DB::table('nothi_details')
+                    ->where('noteId',$id)
+                    ->where('nothId',$nothiId)
+                    ->where('dakId',$parentId)
+                    ->where('dakType',$status)
+                    ->value('permission_status');
+
+
+
+        ?>
     <div class="row" class="mt-4">
         <div class="col-md-6">
-            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+            <span style="font-weight:900;">স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
         </div>
         <div class="col-md-6" style="text-align: right;">
-            <table class="table table-borderless">
-                <tr>
-                    <td style="width: 60%;">তারিখ:</td>
-                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
-                </tr>
-            </table>
+<div class="d-flex justify-content-end">
+                                                                                    <p>তারিখ: </p>
+                                                                                    <p>@if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
+
+                                                                                            @endif</p>
+                                                                                </div>
         </div>
     </div>
     <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
@@ -397,57 +656,69 @@
                                         <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
                                         <input type="hidden" value="{{ $status }}" name="status"/>
 
-        <div class="row mt-3">
-            <div class="col-xl-3">বিষয় :
-            </div>
-            <div class="col-xl-9">
-                <textarea id="ineditor1" name="subject" contenteditable="true">
+        <div class="d-flex justify-content-end mt-3">
+            <p>বিষয় :</p>
+            <p>                
+            <textarea id="ineditor1" name="subject" contenteditable="true">
                     ...............................................
-                     </textarea>
-
-                     <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                     <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-        </span>
-            </div>
+            </textarea>
+            
+            <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+            <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
+            </p>
         </div>
-        <div class="row">
-            <div class="col-xl-3">সুত্রঃ
-                (যদি থাকে):
-            </div>
-            <div class="col-xl-9">
-
- <textarea id="ineditor2" name="sutro" contenteditable="true">
-                              ...............................................
+        <div class="d-flex justify-content-end">
+            <p>সুত্রঃ </p>
+            <p>
+                 <textarea id="ineditor2" name="sutro" contenteditable="true">
+    (যদি থাকে):...............................................
                                </textarea>
-
-
+            </p>
+            
+            
             {{-- <span id="idOfElement1"
                   class="block">
             <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
             <span class="preview"></span> --}}
-
-            </div>
         </div>
         <div class="row">
             <div class="col-xl-12">
 
-                    <label class="form-label">সম্পাদন শেষ করুন</label>
+                    {{-- <label class="form-label">সম্পাদন শেষ করুন</label>
 
+                    <br><br>
 
+<button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
 
+aria-expanded="false">
+সংরক্ষন করুন
+</button>
+<br><br>
                         <textarea id="editor1222" class="mainEdit"  name="maindes" >
 
-                        </textarea>
+                        </textarea> --}}
+
+
+                        <label class="btn btn-primary" id="sompadonButton">সম্পাদন করুন</label>
+
+
+                        <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
+<br>
+                        {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
+
+                        <div id="firstBisoyBostu">পত্রের বিষয়বস্তু.........................</div>
+
+
+
+                            <textarea   style="display: none;" class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
+
+                            </textarea>
 
 
             </div>
         </div>
 
-        <button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
 
-        aria-expanded="false">
-    সংরক্ষন করুন
-</button>
 </form>
             <!-- approver start --->
 
@@ -463,7 +734,7 @@
            <!--prapok-->
             <div class="mt-4">
                 @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
                 @endforeach
             </div>
             <!--end prapok  --->
@@ -475,7 +746,7 @@
             @else
             <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
             @foreach($nothiAttractListUpdate as $nothiPropokLists)
-            <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+            <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
             @endforeach
             @endif
 
@@ -485,15 +756,17 @@
 
             <div class="row" class="mt-4">
                 <div class="col-md-6">
-                    <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
-                    <table class="table table-borderless">
-                        <tr>
-                            <td style="width: 60%;">তারিখ:</td>
-                            <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
-                        </tr>
-                    </table>
+<div class="d-flex justify-content-end">
+                                                                                    <p>তারিখ: </p>
+                                                                                    <p>@if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
+
+                                                                                            @endif</p>
+                                                                                </div>
                 </div>
             </div>
 
@@ -510,7 +783,7 @@
             @else
             <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
             @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
             @endforeach
             @endif
 
@@ -736,7 +1009,31 @@
 
 
 @section('script')
+<script>
 
+    $("#sompadonButton").click(function(){
+
+       // alert(11);
+        //<div>sompadonButton
+            sompadonButtonOne
+
+            $("#sompadonButtonOne").show();
+
+            $("#sompadonButton").hide();
+
+            // $("#sompadonButton").html('সম্পাদনা শেষ করুন');
+
+            // $("#sompadonButton").attr('type','submit');
+        //id="editor1222"   class="mainEdit mt-2 secondBisoyBostu"
+
+        $("#firstBisoyBostu").hide();
+        $(".secondBisoyBostu").show();
+        $(".secondBisoyBostu").attr('id','editor1222');
+        //$("#sompadonButton").removeAttr("id");
+        onSelectedChanged();
+
+    });
+        </script>
 <script>
 
 $(".chb").change(function()
@@ -980,6 +1277,11 @@ $.ajax({
 <!-- Plugin used-->
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
 <script>
+
+function onSelectedChanged(){
+    CKEDITOR.replace('editor1222');
+}
+
     $('.maineditor').each(function () {
 
     var ii = $(this).prop('id');

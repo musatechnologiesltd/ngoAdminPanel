@@ -182,7 +182,7 @@ class PotroController extends Controller
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
-
+$nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         $user = Admin::where('id','!=',1)->get();
 
 
@@ -210,7 +210,7 @@ class PotroController extends Controller
 
 
 
-        return view('admin.potro.createPotro',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.potro.createPotro',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
 
     }
 
@@ -343,7 +343,7 @@ class PotroController extends Controller
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
-
+$nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         $user = Admin::where('id','!=',1)->get();
 
 
@@ -371,7 +371,7 @@ class PotroController extends Controller
 
 
 
-        return view('admin.potro.createPotroForReceiver',compact('branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.potro.createPotroForReceiver',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
 
 
     }

@@ -80,10 +80,10 @@
                                                     <input class="form-control" name="document_number" value="{{ $nothiList->document_number }}" id="document_number" type="text" placeholder="" required>
                                                     <select class="form-control" name="document_year" id="" required>
                                                         <option value="">বছর বাছাই করুন</option>
-                                                        <option value="২০২৩" {{ $nothiList->document_year == '২০২৩' ? 'selected':'' }}>২০২৩</option>
-                                                        <option value="২০২৪" {{ $nothiList->document_year == '২০২৪' ? 'selected':'' }}>২০২৪</option>
-                                                        <option value="২০২৫" {{ $nothiList->document_year == '২০২৫' ? 'selected':'' }}>২০২৫</option>
-                                                        <option value="২০২৬" {{ $nothiList->document_year == '২০২৬' ? 'selected':'' }}>২০২৬</option>
+                                                        <option value="২৩" {{ $nothiList->document_year == '২৩ '? 'selected':'' }}>২৩</option>
+                                                        <option value="২৪" {{ $nothiList->document_year == '২৪' ? 'selected':'' }}>২৪</option>
+                                                        <option value="২৫" {{ $nothiList->document_year == '২৫' ? 'selected':'' }}>২৫</option>
+                                                        <option value="২৬" {{ $nothiList->document_year == '২৬' ? 'selected':'' }}>২৬</option>
                                                     </select>
                                                 </div>
                                             </div>

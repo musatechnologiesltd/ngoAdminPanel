@@ -768,7 +768,7 @@ $potroZariListValueZari =  DB::table('nothi_details')
         </div>
     </div>
     <button class="btn btn-primary me-2" onclick="location.href = '{{ route('createPotroForReceiver', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'activeCode' =>$activeCode]) }}';"><i class="fa fa-pencil"></i> সংশোধন করুন</button>
-    <button class="btn btn-primary me-2" onclick="location.href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}';"><i class="fa fa-print"></i> প্রিন্ট করুন</button>
+    <a target="_blank"    class="btn btn-primary me-2" href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}'><i class="fa fa-print"></i> প্রিন্ট করুন</a>
 
 
     <?php
@@ -805,13 +805,24 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
                                                                                     <tr>
                                                                                         <td style="width: 60%;">তারিখ:</td>
-                                                                                        <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                                                                                        <td style="text-align: left; padding-left: 10px;">
+
+                                                                                            @if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
+
+                                                                                            @endif
+
+                                                                                            {{-- {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ --}}
+
+
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </div>
@@ -836,7 +847,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        @if($officeDetails->office_sutro == '<p>...............................................</p>')
+                                                                        @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
                                                                         @else
                                                                         <div class="col-xl-3">সুত্রঃ
@@ -921,13 +932,21 @@ $potroZariListValue =  DB::table('nothi_details')
 
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
                                                                             <table class="table table-borderless">
                                                                                 <tr>
                                                                                     <td style="width: 60%;">তারিখ:</td>
-                                                                                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                                                                                    <td style="text-align: left; padding-left: 10px;">
+
+                                                                                        @if($potroZariListValue == 1)
+                                                                                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                        @else
+
+                                                                                        @endif
+
+                                                                                    </td>
                                                                                 </tr>
                                                                             </table>
                                                                         </div>

@@ -56,13 +56,17 @@ aria-labelledby="myModalLabel22">
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
                                                                                     <tr>
                                                                                         <td style="width: 60%;">তারিখ:</td>
-                                                                                        <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                                                                                        <td style="text-align: left; padding-left: 10px;">                                                                     @if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
+
+                                                                                            @endif</td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </div>
@@ -156,13 +160,17 @@ aria-labelledby="myModalLabel22">
 
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}</p>
+                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
                                                                             <table class="table table-borderless">
                                                                                 <tr>
                                                                                     <td style="width: 60%;">তারিখ:</td>
-                                                                                    <td style="text-align: left; padding-left: 10px;">{{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ</td>
+                                                                                    <td style="text-align: left; padding-left: 10px;">                                                                     @if($potroZariListValue == 1)
+                                                                                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                        @else
+
+                                                                                        @endif</td>
                                                                                 </tr>
                                                                             </table>
                                                                         </div>
