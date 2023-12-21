@@ -178,6 +178,11 @@ aria-labelledby="myModalLabel22">
 
                                                                     <!-- sarok number --->
 
+
+                                                                    @if(count($nothiCopyListUpdate) == 0)
+
+                                                                    @else
+
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
                                                                             <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
@@ -208,7 +213,7 @@ aria-labelledby="myModalLabel22">
                                                                         </div>
                                                                     </div>
 
-
+@endif
 
 
 
@@ -221,7 +226,12 @@ aria-labelledby="myModalLabel22">
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+
+                                                                    @endif
                                                                     @endforeach
                                                                     @endif
 

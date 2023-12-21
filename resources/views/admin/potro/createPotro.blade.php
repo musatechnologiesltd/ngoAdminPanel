@@ -436,7 +436,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -461,13 +461,13 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
                                                                       <div class="d-flex justify-content-start mt-3">
-                                                                          <p>বিষয় : </p>
+                                                                          <p style="font-weight:bold">বিষয় : </p>
                                                                             <textarea id="ineditor1" name="subject" contenteditable="true">
                                                                                 {!! $officeDetails->office_subject !!}
                                                                             </textarea>
                                                                         </div>
                                                                     <div class="d-flex justify-content-start">
-                                                                        <p>সুত্রঃ </p>
+                                                                        <p style="font-weight:bold">সুত্রঃ </p>
                                                                         <textarea id="ineditor2" name="sutro" contenteditable="true">
                                                                                  {!! $officeDetails->office_sutro !!}
                                                                         </textarea>
@@ -564,13 +564,17 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                                                     <!-- sarok number --->
 
+                                                                    @if(count($nothiCopyListUpdate) == 0)
+
+                                                                    @else
+
                                                                     <div class="row" style="margin-top: 20px;">
                                                                         <div class="col-md-6">
                                                                             <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -579,7 +583,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                 </div>
                                                                         </div>
                                                                     </div>
-
+@endif
 
 
 
@@ -593,7 +597,12 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     @else
                                                                     <p class="mt-4" style="font-weight:bold">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</p>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+
+                                                                    @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -634,7 +643,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -655,7 +664,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
         <div class="d-flex justify-content-start mt-3">
-            <p>বিষয় : </p>
+            <p style="font-weight:bold">বিষয় : </p>
             <textarea id="ineditor1" name="subject" contenteditable="true">
             ...............................................
             </textarea>
@@ -663,7 +672,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                 <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
         </div>
         <div class="d-flex justify-content-start">
-            <p>সুত্রঃ </p>
+            <p style="font-weight:bold">সুত্রঃ </p>
             <textarea id="ineditor2" name="sutro" contenteditable="true">
              (যদি থাকে):...............................................
             </textarea>
@@ -671,21 +680,6 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
         <div class="row">
             <div class="col-xl-12">
-
-                    {{-- <label class="form-label">সম্পাদন শেষ করুন</label>
-
-                    <br>
-
-                    <button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
-
-                    aria-expanded="false">
-                সংরক্ষন করুন
-            </button>
-<br><br>
-
-                        <textarea id="editor1222" class="mainEdit"  name="maindes" >
-
-                        </textarea> --}}
 
                         <label class="btn btn-primary" id="sompadonButton">সম্পাদন করুন</label>
 
@@ -741,14 +735,16 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
             <!-- attracttion -->
 
             <!-- sarok number --->
+            @if(count($nothiCopyListUpdate) == 0)
 
+            @else
             <div class="row" style="margin-top:20px;">
                 <div class="col-md-6">
                     <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -760,7 +756,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
 
-
+@endif
 
             <!-- end sarok number -->
 
@@ -771,8 +767,14 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
             @else
             <p class="mt-4" style="font-weight:bold">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</p>
             @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+            @if(count($nothiCopyListUpdate) == ($key+1))
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+            @else
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+
+            @endif
             @endforeach
+
             @endif
 
             <!--end copy list -->

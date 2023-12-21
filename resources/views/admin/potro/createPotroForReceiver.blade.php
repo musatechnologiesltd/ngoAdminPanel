@@ -433,7 +433,7 @@ $branchName = DB::table('branches')
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold;">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -460,14 +460,14 @@ $branchName = DB::table('branches')
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
                                                                       <div class="d-flex justify-content-end mt-3">
-                                                                          <p>বিষয় :</p>
+                                                                          <p style="font-weight:bold;">বিষয় :</p>
                                                                           <p>
                                                                               <textarea id="ineditor1" name="subject" contenteditable="true">
                                                                                 {!! $officeDetails->office_subject !!}
                                                                                 </textarea></p>
                                                                     </div>
                                                                     <div class="d-flex justify-content-end">
-                                                                        <p>সুত্রঃ(যদি থাকে):</p>
+                                                                        <p style="font-weight:bold;">সুত্রঃ(যদি থাকে):</p>
                                                                         <p><textarea id="ineditor2" name="sutro" contenteditable="true">
                                                                                 {!! $officeDetails->office_sutro !!}
                                                                                 </textarea>
@@ -564,14 +564,16 @@ $branchName = DB::table('branches')
                                                                     <!-- attracttion -->
 
                                                                     <!-- sarok number --->
+                                                                    @if(count($nothiCopyListUpdate) == 0)
 
+                                                                    @else
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
                                                                             <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold;">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -581,7 +583,7 @@ $branchName = DB::table('branches')
                                                                         </div>
                                                                     </div>
 
-
+@endif
 
 
 
@@ -594,7 +596,12 @@ $branchName = DB::table('branches')
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+            @else
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+
+            @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -636,7 +643,7 @@ $branchName = DB::table('branches')
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p>তারিখ: </p>
+                                                                                    <p style="font-weight:bold;">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -657,7 +664,7 @@ $branchName = DB::table('branches')
                                         <input type="hidden" value="{{ $status }}" name="status"/>
 
         <div class="d-flex justify-content-end mt-3">
-            <p>বিষয় :</p>
+            <p style="font-weight:bold;">বিষয় :</p>
             <p>
             <textarea id="ineditor1" name="subject" contenteditable="true">
                     ...............................................
@@ -668,7 +675,7 @@ $branchName = DB::table('branches')
             </p>
         </div>
         <div class="d-flex justify-content-end">
-            <p>সুত্রঃ </p>
+            <p style="font-weight:bold;">সুত্রঃ </p>
             <p>
                  <textarea id="ineditor2" name="sutro" contenteditable="true">
     (যদি থাকে):...............................................
@@ -753,7 +760,9 @@ aria-expanded="false">
             <!-- attracttion -->
 
             <!-- sarok number --->
+            @if(count($nothiCopyListUpdate) == 0)
 
+            @else
             <div class="row" class="mt-4">
                 <div class="col-md-6">
                     <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
@@ -770,7 +779,7 @@ aria-expanded="false">
                 </div>
             </div>
 
-
+@endif
 
 
 
@@ -783,7 +792,12 @@ aria-expanded="false">
             @else
             <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
             @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+            @if(count($nothiCopyListUpdate) == ($key+1))
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+            @else
+            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+
+            @endif
             @endforeach
             @endif
 

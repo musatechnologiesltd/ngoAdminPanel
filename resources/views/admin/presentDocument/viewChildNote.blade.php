@@ -834,27 +834,16 @@ $potroZariListValue =  DB::table('nothi_details')
 
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-                                                                      <div class="row mt-3">
-                                                                        <div class="col-xl-3 ">বিষয় :
-                                                                        </div>
-                                                                        <div class="col-xl-9">
+                                                                      <div class="d-flex justify-content-start mt-3">
+                                                                        <p>বিষয় :</p>{!! $officeDetails->office_subject !!}
 
 
-
-                                                                                {!! $officeDetails->office_subject !!}
-
-                                                                    </span>
-                                                                        </div>
                                                                     </div>
-                                                                    <div class="row">
+                                                                    <div class="d-flex justify-content-start">
                                                                         @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
                                                                         @else
-                                                                        <div class="col-xl-3">সুত্রঃ
-                                                                            (যদি থাকে):
-                                                                        </div>
-
-                                                                        <div class="col-xl-9">{!! $officeDetails->office_sutro !!}</div>
+                                                                        <p>সুত্রঃ</p>{!! $officeDetails->office_sutro !!}
                                                                         @endif
                                                                         <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
                                                                                              <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
@@ -929,8 +918,10 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <!-- attracttion -->
 
                                                                     <!-- sarok number --->
+                                                                    @if(count($nothiCopyListUpdate) == 0)
 
-                                                                    <div class="row" class="mt-4">
+                                                                    @else
+                                                                    <div class="row" class="mt-4" style="margin-top:20px;">
                                                                         <div class="col-md-6">
                                                                             <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                         </div>
@@ -952,7 +943,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
                                                                     </div>
 
-
+                                                                 @endif
 
 
 
@@ -965,7 +956,12 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+
+                                                                    @endif
                                                                     @endforeach
                                                                     @endif
 

@@ -733,7 +733,7 @@ $receiverId = DB::table('nothi_details')
                                                                                 $dateAppBan='';
                                                                                 $appSignature ='';
 
-                                                                                
+
                                                                         }else{
 
 
@@ -891,7 +891,7 @@ $potroZariListValueZari =  DB::table('nothi_details')
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
                                                                                     <tr>
-                                                                                        <td style="width: 60%;">তারিখ:</td>
+                                                                                        <td style="width: 60%;font-weight:bold;">তারিখ:</td>
                                                                                         <td style="text-align: left; padding-left: 10px;">
                                                                                             @if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
@@ -910,27 +910,19 @@ $potroZariListValueZari =  DB::table('nothi_details')
 
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-                                                                      <div class="row mt-3">
-                                                                        <div class="col-xl-2 ">বিষয় :
-                                                                        </div>
-                                                                        <div class="col-xl-10">
+                                                                      <div class="d-flex justify-content-start mt-3">
+                                                                        <p style="font-weight:bold;">বিষয় : </p>
 
+                                                                              {!! $officeDetails->office_subject !!}
 
-
-                                                                                {!! $officeDetails->office_subject !!}
-
-                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
+                                                                      </div>
+                                                                      <div class="d-flex justify-content-start">
                                                                         @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
                                                                         @else
-                                                                        <div class="col-xl-2">সুত্রঃ
-                                                                            (যদি থাকে):
-                                                                        </div>
+                                                                        <p style="font-weight:bold;">সুত্রঃ</p>
 
-                                                                        <div class="col-xl-10">{!! $officeDetails->office_sutro !!}</div>
+                                                                     {!! $officeDetails->office_sutro !!}
                                                                         @endif
                                                                         <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
                                                                                              <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
@@ -1000,14 +992,18 @@ $potroZariListValueZari =  DB::table('nothi_details')
 
                                                                     <!-- sarok number --->
 
-                                                                    <div class="row" class="mt-4">
+                                                                    @if(count($nothiCopyListUpdate) == 0)
+
+                                                                    @else
+
+                                                                    <div class="row" class="mt-5" style="margin-top:20px;">
                                                                         <div class="col-md-6">
                                                                             <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
                                                                             <table class="table table-borderless">
                                                                                 <tr>
-                                                                                    <td style="width: 60%;">তারিখ:</td>
+                                                                                    <td style="width: 60%;font-weight:bold;">তারিখ:</td>
                                                                                     <td style="text-align: left; padding-left: 10px;">
 
                                                                                         @if($potroZariListValue == 1)
@@ -1022,7 +1018,7 @@ $potroZariListValueZari =  DB::table('nothi_details')
                                                                         </div>
                                                                     </div>
 
-
+@endif
 
 
 

@@ -118,7 +118,7 @@ if(!$nothiApproverList){
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
-                    <td style="width: 58%;">তারিখ:</td>
+                    <td style="width: 58%;font-weight:bold;">তারিখ:</td>
                     <td style="text-align: left; padding-left: 10px;">                                                                     @if($potroZariListValue == 1)
                         {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                         @else
@@ -132,7 +132,7 @@ if(!$nothiApproverList){
 @foreach($officeDetail as $officeDetails)
 <table class="pdf_table">
     <tr style="font-weight:bold;">
-        <td style="width: 7%"> বিষয়: </td>
+        <td style="width: 7%;font-weight:bold;"> বিষয়: </td>
         <td>{!! $officeDetails->office_subject !!} </td>
     </tr>
 </table>
@@ -142,7 +142,7 @@ if(!$nothiApproverList){
 @else
 <table class="pdf_table">
     <tr>
-        <td style="width: 15%"> সূত্র:</td>
+        <td style="width: 15%;font-weight:bold;"> সূত্র:</td>
         <td> {!! $officeDetails->office_sutro !!}</td>
     </tr>
 </table>
@@ -201,13 +201,16 @@ if(!$nothiApproverList){
     </tr>
     @endforeach
 </table>
+@if(count($nothiCopyListUpdate) == 0)
+
+@else
 <table class="pdf_table">
     <tr>
         <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
-                    <td style="width: 58%;">তারিখ:</td>
+                    <td style="width: 58%;font-weight:bold;">তারিখ:</td>
                     <td style="text-align: left; padding-left: 10px;">                                                                     @if($potroZariListValue == 1)
                         {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                         @else
@@ -218,6 +221,7 @@ if(!$nothiApproverList){
         </td>
     </tr>
 </table>
+@endif
 <table class="pdf_table">
     <tr>
         <td style="font-weight:bold;">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয়):</td>
