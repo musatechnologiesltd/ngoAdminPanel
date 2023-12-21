@@ -293,7 +293,7 @@ $branchName = DB::table('branches')
 
    <div class="col-sm-8 col-xs-8">
 
-       <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
+       <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
 
    </div>
    <div class="col-sm-4 col-xs-4">
@@ -429,7 +429,7 @@ $branchName = DB::table('branches')
 
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <div class="d-flex justify-content-end">
@@ -567,7 +567,7 @@ $branchName = DB::table('branches')
 
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
-                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -632,7 +632,7 @@ $branchName = DB::table('branches')
         ?>
     <div class="row" class="mt-4">
         <div class="col-md-6">
-            <span style="font-weight:900;">স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+            <span style="font-weight:900;">স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -658,11 +658,11 @@ $branchName = DB::table('branches')
 
         <div class="d-flex justify-content-end mt-3">
             <p>বিষয় :</p>
-            <p>                
+            <p>
             <textarea id="ineditor1" name="subject" contenteditable="true">
                     ...............................................
             </textarea>
-            
+
             <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
             <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
             </p>
@@ -674,8 +674,8 @@ $branchName = DB::table('branches')
     (যদি থাকে):...............................................
                                </textarea>
             </p>
-            
-            
+
+
             {{-- <span id="idOfElement1"
                   class="block">
             <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
@@ -756,7 +756,7 @@ aria-expanded="false">
 
             <div class="row" class="mt-4">
                 <div class="col-md-6">
-                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">

@@ -107,7 +107,7 @@ $getAllbranchName = DB::table('branches')
                                                         $adminName = DB::table('admins')->where('id',$checkDesiId->admin_id)->value('admin_name_ban');
 ?>
 @if(Auth::guard('admin')->user()->id == $checkDesiId->admin_id)
-                                                        <input type="checkbox" disabled class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
+                                                        <input type="checkbox"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
                                                         @else
 
                                                         <?php

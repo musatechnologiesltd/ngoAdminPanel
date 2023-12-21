@@ -293,7 +293,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
     <div class="col-sm-8 col-xs-8">
 
-        <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
+        <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
 
     </div>
     <div class="col-sm-4 col-xs-4">
@@ -432,7 +432,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                             ?>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <div class="d-flex justify-content-end">
@@ -442,7 +442,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                             @else
 
                                                                                             @endif</p>
-                                                                                </div> 
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
@@ -566,7 +566,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                                                     <div class="row" style="margin-top: 20px;">
                                                                         <div class="col-md-6">
-                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -630,7 +630,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
         ?>
     <div class="row" class="mt-4">
         <div class="col-md-6">
-            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}
+            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -652,8 +652,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                         <input type="hidden" value="{{ $parentId }}" name="dakId"/>
                                         <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
                                         <input type="hidden" value="{{ $status }}" name="status"/>
-                                        
-                                        
+
+
         <div class="d-flex justify-content-start mt-3">
             <p>বিষয় : </p>
             <textarea id="ineditor1" name="subject" contenteditable="true">
@@ -699,7 +699,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
                             <textarea   style="display: none;" class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
-                                
+
                             </textarea>
 
 
@@ -744,7 +744,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
             <div class="row" style="margin-top:20px;">
                 <div class="col-md-6">
-                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber) }}
+                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">

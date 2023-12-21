@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('document_number');
             $table->string('document_year');
             $table->string('document_class');
+            $table->string('main_sarok_number')->nullable();
+            $table->string('document_serial_number')->nullable();
             $table->string('document_subject');
             $table->timestamps();
         });

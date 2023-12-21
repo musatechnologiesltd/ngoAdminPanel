@@ -30,6 +30,7 @@ use App\Models\DesignationStep;
 use App\Models\AdminDesignationHistory;
 use App\Models\FdThreeDak;
 use App\Models\NothiList;
+use Mpdf\Mpdf;
 class PostController extends Controller
 {
 
@@ -179,6 +180,18 @@ class PostController extends Controller
 
     }
     public function index(){
+
+
+
+
+       
+
+// $invID = 1211;
+//         $invID = str_pad($invID, 3, '0', STR_PAD_LEFT);
+
+//         dd($invID);
+
+
 
         \LogActivity::addToLog('view dak list.');
 

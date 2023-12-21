@@ -58,7 +58,7 @@ use App\Models\ParentNoteForRegistration;
 use App\Models\ParentNoteForRenew;
 
 
-
+use App\Http\Controllers\Admin\CommonController;
 
 class DocumentPresentController extends Controller
 {
@@ -283,7 +283,7 @@ class DocumentPresentController extends Controller
     {
 
 
-
+//dd($request->all());
 
         $this->validate($request,[
             'document_branch' => 'required',
@@ -295,6 +295,25 @@ class DocumentPresentController extends Controller
         ]);
 
 
+
+
+        $branchCode = DB::table('branches')
+        ->where('id',Auth::guard('admin')->user()->branch_id)
+        ->value('branch_code');
+
+
+$lastNothiSerialNumber = DB::table('nothi_lists')
+                ->orderBy('id','desc')->value('document_serial_number');
+$convertNumber = intval($lastNothiSerialNumber)+1;
+$finalSerialNumber = CommonController::englishToBangla(str_pad($convertNumber, 3, '0', STR_PAD_LEFT));
+
+$main_sarok_number = '০৩.০৭.২৬৬৬.'.$branchCode.'.'.$request->document_number.$finalSerialNumber.'.'.$request->document_year;
+
+
+$finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
+
+//dd($finalSarokNumber);
+
                 $documentType = new NothiList();
                 $documentType->document_branch =$request->document_branch;
                 $documentType->document_type_id =$request->document_type_id;
@@ -302,6 +321,8 @@ class DocumentPresentController extends Controller
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->document_serial_number =$convertNumber;
+                $documentType->main_sarok_number =$finalSarokNumber;
                 $documentType->save();
 
 
@@ -454,6 +475,29 @@ public function savePermissionNothi(Request $request){
      */
     public function update(Request $request, string $id)
     {
+
+
+
+
+$branchCode = DB::table('branches')
+        ->where('id',Auth::guard('admin')->user()->branch_id)
+        ->value('branch_code');
+
+
+$lastNothiSerialNumber = DB::table('nothi_lists')
+                ->orderBy('id','desc')->value('document_serial_number');
+
+
+$main_sarok_number = '০৩.০৭.২৬৬৬.'.$branchCode.'.'.$request->document_number.$request->document_serial_number.'.'.$request->document_year;
+
+
+$finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
+
+
+//dd($finalSarokNumber);
+
+
+
                 $documentType = NothiList::find($id);
                 $documentType->document_branch =$request->document_branch;
                 $documentType->document_type_id =$request->document_type_id;
@@ -461,6 +505,7 @@ public function savePermissionNothi(Request $request){
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
+                $documentType->main_sarok_number =$finalSarokNumber;
                 $documentType->save();
 
 

@@ -13,10 +13,10 @@
             width: 8.3in;
             height: 11.7in;
         }
-        
+
         body
         {
-            font-family: 'bangla', sans-serif;
+           /* // font-family: 'banglaNikos', sans-serif; */
         /* font-size: 14px; */
 
         }
@@ -40,15 +40,15 @@
             width: 100%;
             margin: 25px 0;
         }
-        
+
         .bt{
-  font-family: 'banglabold', sans-serif;
+  /* font-family: 'banglabold', sans-serif; */
   font-weight: bold;
 }
     </style>
 </head>
 <body>
-    
+
     <?php
 $potroZariListValue =  DB::table('nothi_details')
                 ->where('noteId',$id)
@@ -123,8 +123,8 @@ if(!$nothiApproverList){
 ?>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;"> 
-        <span style="font-weight: bold ;   font-family: 'banglabold', sans-serif !important;">স্মারক নম্বর:</span>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}
+        <td style="font-weight:bold;">
+        <span style="">স্মারক নম্বর:</span>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
         </td>
         <td style="text-align: right">
             <table class="pdf_table">
@@ -150,7 +150,7 @@ if(!$nothiApproverList){
     </tr>
 </table>
 
-@if($officeDetails->office_sutro == '<p>...............................................</p>')
+@if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
 @else
 <table class="pdf_table">
@@ -215,7 +215,7 @@ if(!$nothiApproverList){
 </table>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</td>
+        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
@@ -243,7 +243,7 @@ if(!$nothiApproverList){
         @else
         <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }},এনজিও বিষয়ক ব্যুরো;</td>
         @endif
-        
+
     </tr>
     @endforeach
 

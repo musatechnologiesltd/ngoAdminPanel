@@ -181,7 +181,7 @@ class PotroController extends Controller
         }
 
 
-        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
 $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         $user = Admin::where('id','!=',1)->get();
 
@@ -342,7 +342,7 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         }
 
 
-        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
 $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         $user = Admin::where('id','!=',1)->get();
 
@@ -374,5 +374,13 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         return view('admin.potro.createPotroForReceiver',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
 
 
+    }
+
+
+
+    public function dd(){
+         //title check two and one
+
+         
     }
 }

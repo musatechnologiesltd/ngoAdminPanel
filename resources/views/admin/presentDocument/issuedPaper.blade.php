@@ -14,7 +14,7 @@
             height: 11.7in;
         }
         body,h5,h4,h3 {
-            font-family: 'bangla', sans-serif;
+            /* //font-family: 'bangla', sans-serif; */
         /* font-size: 14px; */
 
         }
@@ -114,7 +114,7 @@ if(!$nothiApproverList){
 ?>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</td>
+        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
@@ -137,7 +137,7 @@ if(!$nothiApproverList){
     </tr>
 </table>
 
-@if($officeDetails->office_sutro == '<p>...............................................</p>')
+@if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
 @else
 <table class="pdf_table">
@@ -203,7 +203,7 @@ if(!$nothiApproverList){
 </table>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</td>
+        <td style="font-weight:bold;">স্মারক নম্বর: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>

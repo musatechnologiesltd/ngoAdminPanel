@@ -72,12 +72,34 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                        <?php
+
+$branchCode = DB::table('branches')
+                 ->where('id',Auth::guard('admin')->user()->branch_id)
+                 ->value('branch_code');
+
+
+$lastNothiSerialNumber = DB::table('nothi_lists')
+                         ->orderBy('id','desc')->value('document_serial_number');
+$convertNumber = intval($lastNothiSerialNumber)+1;
+$finalSerialNumber = App\Http\Controllers\Admin\CommonController::englishToBangla(str_pad($convertNumber, 3, '0', STR_PAD_LEFT));
+//dd($finalSerialNumber);
+
+
+                                        ?>
+
+
+
                                         <div class="col-xl-3 col-sm-12">
                                             <div class="mb-3">
                                                 <label class="form-label">নথি নম্বর</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">১১.২২.৩৩৩৩.৪৪৪.৫৫.</span>
-                                                    <input class="form-control" name="document_number" id="document_number" type="text" placeholder="" required>
+                                                    <span class="input-group-text">০৩.০৭.২৬৬৬.{{ $branchCode }}.</span>
+                                                    <input class="form-control" name="document_number" readonly id="document_number" type="text" placeholder="" required>
+
+                                                    <input class="form-control" name="document_serial_number" readonly id="document_serial_number" value="{{ $finalSerialNumber }}" type="text" placeholder="" required>
+
                                                     <select class="form-control" name="document_year" id="" required>
                                                         <option value="">বছর বাছাই করুন</option>
                                                         <option value="২৩">২৩</option>

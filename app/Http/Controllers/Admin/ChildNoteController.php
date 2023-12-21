@@ -52,11 +52,28 @@ use App\Models\NothiPermission;
 use App\Models\Branch;
 use App\Models\NothiDetail;
 use App\Models\ArticleSign;
-
+use Mpdf\Mpdf;
 class ChildNoteController extends Controller
 {
 
 
+    public function dd(){
+
+        $mpdf = new Mpdf([
+            'default_font_size' => 14,
+            'default_font' => 'nikosh'
+        ]);
+
+        $mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+        $mpdf->WriteHTML('এর ক্ষতিপূরণ নির্ধারণ সংক্রান্ত প্রতিবেদন।');
+
+
+
+        $mpdf->Output();
+        die();
+
+    }
 
 
     public function printPotrangso($status,$parentId,$nothiId,$id,$sarokCode){
@@ -185,8 +202,8 @@ class ChildNoteController extends Controller
         }
 
 
-        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
-        
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         $user = Admin::where('id','!=',1)->get();
@@ -215,9 +232,25 @@ class ChildNoteController extends Controller
 
 
 
-        $file_Name_Custome = 'printPotrangso';
-        $pdf=PDF::loadView('admin.presentDocument.printPotrangso',['nothiYear'=>$nothiYear,'sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate]);
-return $pdf->stream($file_Name_Custome.''.'.pdf');
+        //$file_Name_Custome = 'printPotrangso';
+        $data = view('admin.presentDocument.printPotrangso',['nothiYear'=>$nothiYear,'sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate])->render();
+//return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+//dd(11);
+
+$mpdf = new Mpdf([
+    //'default_font_size' => 14,
+    'default_font' => 'nikosh'
+]);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output();
+die();
 
 
 
@@ -350,8 +383,8 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
         }
 
 
-        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
-        
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         $user = Admin::where('id','!=',1)->get();
@@ -512,8 +545,8 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
         }
 
 
-        $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
-        
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         $user = Admin::where('id','!=',1)->get();
@@ -674,7 +707,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
                 }
 
 
-                $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+                $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
                 $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
                 $user = Admin::where('id','!=',1)->get();
@@ -716,7 +749,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
                 // ->where('nothId',$nothiId)
                 // ->where('dakId',$parentId)
                 // ->where('dakType',$status)->value('id'));
-
+//dd(12)
 
                 DB::table('nothi_details')
                 ->where('noteId',$id)
@@ -732,7 +765,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
             public function givePermissionForPotroZari($status,$parentId,$nothiId,$id,$childnote){
-//dd(12);
+
 
                 // dd(DB::table('nothi_details')
                 // ->where('noteId',$id)
@@ -865,7 +898,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
                 }
 
 
-                $nothiNumber = NothiList::where('id',$nothiId)->value('document_number');
+                $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
                 $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
                 $user = Admin::where('id','!=',1)->get();
@@ -896,7 +929,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
                 $file_Name_Custome ='IssuedPaper-'.date('d').date('F').date('Y').'-'.time().CommonController::generateRandomInteger();
 
-                $url = public_path('uploads/IssuedPaper');
+                $url = public_path('uploads\IssuedPaper');
                 //dd($url);
 
 
@@ -904,7 +937,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 
-                $pdf=PDF::loadView('admin.presentDocument.issuedPaper',[
+                $data =view('admin.presentDocument.issuedPaper',[
                     'nothiYear'=>$nothiYear,
                     'childnote'=>$childnote,
                     'parentId'=>$parentId,
@@ -919,11 +952,11 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
                     'nothiAttractListUpdate'=>$nothiAttractListUpdate,
                     'branchListForSerial'=>$branchListForSerial,
                     'permissionNothiList'=>$permissionNothiList,
-                    'nothiCopyListUpdate'=>$nothiCopyListUpdate],[],['format' => 'A4'])->save($url. '/' .$file_Name_Custome.'.pdf');
+                    'nothiCopyListUpdate'=>$nothiCopyListUpdate])->render();
                      //return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
-                DB::table('nothi_details')
+                     DB::table('nothi_details')
                 ->where('noteId',$id)
                 ->where('nothId',$nothiId)
                 ->where('dakId',$parentId)
@@ -932,6 +965,28 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
                     'potroPdf'=>'uploads/IssuedPaper/'.$file_Name_Custome.'.pdf',
                     'zari_permission_status' =>1
                  ]);
+
+
+
+                 $pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+                     $mpdf = new Mpdf([
+                        //'default_font_size' => 14,
+                        'default_font' => 'nikosh'
+                    ]);
+
+                    //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+                    $mpdf->WriteHTML($data);
+
+
+
+                    $mpdf->Output("./public/uploads/IssuedPaper/".$pdfFilePath, "F");
+                    //die();
+
+
+
                  return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
             }
 

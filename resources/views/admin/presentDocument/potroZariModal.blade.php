@@ -43,7 +43,17 @@ aria-labelledby="myModalLabel22">
 </div>
 
  <!-- new button code end -->
+ <?php
+ $potroZariListValue =  DB::table('nothi_details')
+                 ->where('noteId',$id)
+                 ->where('nothId',$nothiId)
+                 ->where('dakId',$parentId)
+                 ->where('dakType',$status)
+                 ->value('permission_status');
 
+
+
+     ?>
                                                                         <div class="text-center mb-3 mt-2">
                                                                             <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
                                                                             <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
@@ -56,7 +66,7 @@ aria-labelledby="myModalLabel22">
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
+                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
@@ -72,7 +82,17 @@ aria-labelledby="myModalLabel22">
                                                                             </div>
                                                                         </div>
 
+                                                                        <?php
+                                                                        $potroZariListValue =  DB::table('nothi_details')
+                                                                                        ->where('noteId',$id)
+                                                                                        ->where('nothId',$nothiId)
+                                                                                        ->where('dakId',$parentId)
+                                                                                        ->where('dakType',$status)
+                                                                                        ->value('permission_status');
 
+
+
+                                                                            ?>
 
 
 
@@ -91,7 +111,7 @@ aria-labelledby="myModalLabel22">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        @if($officeDetails->office_sutro == '<p>...............................................</p>')
+                                                                        @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
                                                                         @else
                                                                         <div class="col-xl-3">সুত্রঃ
@@ -160,8 +180,20 @@ aria-labelledby="myModalLabel22">
 
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
+                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                         </div>
+
+                                                                        <?php
+    $potroZariListValue =  DB::table('nothi_details')
+                    ->where('noteId',$id)
+                    ->where('nothId',$nothiId)
+                    ->where('dakId',$parentId)
+                    ->where('dakType',$status)
+                    ->value('permission_status');
+
+
+
+        ?>
                                                                         <div class="col-md-6" style="text-align: right;">
                                                                             <table class="table table-borderless">
                                                                                 <tr>

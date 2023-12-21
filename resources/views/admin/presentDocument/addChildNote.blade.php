@@ -732,6 +732,8 @@ $receiverId = DB::table('nothi_details')
                                                                                 $dateApp = '';
                                                                                 $dateAppBan='';
                                                                                 $appSignature ='';
+
+                                                                                
                                                                         }else{
 
 
@@ -884,7 +886,7 @@ $potroZariListValueZari =  DB::table('nothi_details')
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
+                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
@@ -1000,7 +1002,7 @@ $potroZariListValueZari =  DB::table('nothi_details')
 
                                                                     <div class="row" class="mt-4">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla('১১.২২.৩৩৩৩.৪৪৪.৫৫.'.$nothiNumber.$nothiYear) }}</p>
+                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
                                                                             <table class="table table-borderless">
