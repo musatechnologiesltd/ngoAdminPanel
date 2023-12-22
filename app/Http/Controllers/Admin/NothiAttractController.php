@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\NothiAttarct;
 use App\Models\Admin;
 use DB;
+use Validator;
 class NothiAttractController extends Controller
 {
     public function attractSelfOfficerAdd(Request $request){
@@ -60,7 +61,9 @@ class NothiAttractController extends Controller
 
 
                $data = view('admin.presentDocument.attractSelfOfficerAdd',compact('nothiAttractList'))->render();
-               return response()->json($data);
+              // return response()->json($data);
+
+              return response()->json(['totalAttract'=>count($nothiAttractList),'data'=>$data]);
 
 
         }
@@ -80,6 +83,13 @@ class NothiAttractController extends Controller
 
        //dd($request->all());
 
+       $validator = Validator::make($request->all(), [
+        'otherOfficerName' => 'required',
+        'otherOfficerDesignation' => 'required',
+        'otherOfficerBranch' => 'required',
+        'otherOfficerAddress' => 'required',
+    ]);
+    if ($validator->passes()) {
 
        $nothiPrapok = new NothiAttarct();
        $nothiPrapok->nothiId = $request->snothiId;
@@ -102,7 +112,10 @@ class NothiAttractController extends Controller
 
 
        $data = view('admin.presentDocument.attractSelfOfficerAdd',compact('nothiAttractList'))->render();
-       return response()->json($data);
+           return response()->json(['totalAttract'=>count($nothiAttractList),'data'=>$data]);
+    }
+
+    return response()->json(['error'=>$validator->errors()]);
    }
 
 

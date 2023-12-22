@@ -7,7 +7,13 @@ aria-labelledby="myModalLabel22">
     <h4 class="modal-title" id="myModalLabel2">
         দৃষ্টি আকর্ষণ  </h4>
 </div>
+<?php
 
+$nothiAttractList = DB::table('nothi_attarcts')->where('nothiId',$nothiId)
+       ->where('nijOfficeId',$status)
+       ->where('noteId',$id)->get();
+
+    ?>
 <div class="modal-body">
     <div class="card">
 
@@ -15,7 +21,7 @@ aria-labelledby="myModalLabel22">
           <ul class="nav nav-tabs" id="icon-tab" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="icon-home-tab" data-bs-toggle="tab" href="#icon-home12" role="tab" aria-controls="icon-home" aria-selected="true"><i class="icofont icofont-ui-home"></i>অফিসার খুজুন</a></li>
             <li class="nav-item"><a class="nav-link" id="profile-icon-tab" data-bs-toggle="tab" href="#profile-icon12" role="tab" aria-controls="profile-icon" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>অফিসার তথ্য নিজে লিখুন</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-icon-tab" data-bs-toggle="tab" href="#contact-icon12" role="tab" aria-controls="contact-icon" aria-selected="false"><i class="icofont icofont-contacts"></i>বাছাইকৃত অফিসারগণ </a></li>
+            <li class="nav-item"><a class="nav-link" id="contact-icon-tab" data-bs-toggle="tab" href="#contact-icon12" role="tab" aria-controls="contact-icon" aria-selected="false"><i class="icofont icofont-contacts"></i>বাছাইকৃত অফিসারগণ <span id="totalAttract">({{ count($nothiAttractList) }})</span></a></li>
           </ul>
           <div class="tab-content" id="icon-tabContent">
             <div class="tab-pane fade show active" id="icon-home12" role="tabpanel" aria-labelledby="icon-home-tab">

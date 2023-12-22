@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\NothiPrapok;
 use App\Models\Admin;
 use DB;
+
+use Validator;
 class NothiPrapokController extends Controller
 {
     public function selfOfficerAdd(Request $request){
@@ -83,6 +85,13 @@ class NothiPrapokController extends Controller
 
         //dd($request->all());
 
+        $validator = Validator::make($request->all(), [
+            'otherOfficerName' => 'required',
+            'otherOfficerDesignation' => 'required',
+            'otherOfficerBranch' => 'required',
+            'otherOfficerAddress' => 'required',
+        ]);
+        if ($validator->passes()) {
 
         $nothiPrapok = new NothiPrapok();
         $nothiPrapok->nothiId = $request->snothiId;
@@ -96,8 +105,6 @@ class NothiPrapokController extends Controller
         $nothiPrapok->otherOfficerAddress = $request->otherOfficerAddress;
         $nothiPrapok->save();
 
-
-
         $nothiPrapokList = NothiPrapok::where('nothiId',$request->snothiId)
         ->where('nijOfficeId',$request->sstatus)
         ->where('noteId',$request->snoteId)
@@ -105,7 +112,11 @@ class NothiPrapokController extends Controller
 
 
         $data = view('admin.presentDocument.selfOfficerAdd',compact('nothiPrapokList'))->render();
-        return response()->json($data);
+        return response()->json(['totalPrapok'=>count($nothiPrapokList),'data'=>$data]);
+    }
+
+    return response()->json(['error'=>$validator->errors()]);
+
     }
 
 

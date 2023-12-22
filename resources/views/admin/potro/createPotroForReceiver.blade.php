@@ -1029,7 +1029,7 @@ aria-expanded="false">
 
        // alert(11);
         //<div>sompadonButton
-            sompadonButtonOne
+            //sompadonButtonOne
 
             $("#sompadonButtonOne").show();
 
@@ -1067,7 +1067,8 @@ $(".chb").change(function()
 
 
 
-$("#otherOfficerAdd").click(function(){
+$("#otherOfficerAdd").click(function(e){
+    e.preventDefault();
 
    var otherOfficerName = $("#otherOfficerName").val();
    var otherOfficerDesignation = $("#otherOfficerDesignation").val();
@@ -1100,8 +1101,22 @@ var snoteId =$('#snoteId').val();
    $("#otherOfficerEmail").val('');
    $("#otherOfficerPhone").val('');
 
-        $("#sms22").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
-        $('#tableListN').html(data);
+        // $("#sms22").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+        // $('#tableListN').html(data);
+
+        alertify.set('notifier','position','top-center');
+
+console.log(data.error)
+                if($.isEmptyObject(data.error)){
+                    //alert(data.success);
+                    alertify.success('সফলভাবেই সংরক্ষণ করা হয়েছে');
+                    $('#tableListN').html(data.data);
+                    $("#totalPrapok").html('('+data.totalPrapok+')');
+                }else{
+                   // printErrorMsg(data.error);
+
+                   alertify.error('ফরম সঠিকভাবে পূরণ হয়নি');
+                }
     }
     });
 
@@ -1143,8 +1158,22 @@ $("#otherOfficerBranch2").val('');
 $("#otherOfficerEmail2").val('');
 $("#otherOfficerPhone2").val('');
 
-     $("#sms22a").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
-     $('#tableListN2').html(data);
+    //  $("#sms22a").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+    //  $('#tableListN2').html(data);
+
+    alertify.set('notifier','position','top-center');
+
+console.log(data.error)
+                if($.isEmptyObject(data.error)){
+                    //alert(data.success);
+                    alertify.success('সফলভাবেই সংরক্ষণ করা হয়েছে');
+                    $('#tableListN2').html(data.data);
+                    $("#totalAttract").html('('+data.totalAttract+')');
+                }else{
+                   // printErrorMsg(data.error);
+
+                   alertify.error('ফরম সঠিকভাবে পূরণ হয়নি');
+                }
  }
  });
 
@@ -1213,9 +1242,13 @@ $.ajax({
     data: {snoteId:snoteId,snothiId:snothiId,sstatus:sstatus,selfOfficerList:selfOfficerList},
     success: function(data) {
 
+        alertify.set('notifier','position','top-center');
+        alertify.success('সফলভাবেই সংরক্ষণ করা হয়েছে');
+        // $("#sms2").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+        // $('#tableListN').html(data);
 
-        $("#sms2").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
-        $('#tableListN').html(data);
+        $("#totalPrapok").html('('+data.totalPrapok+')');
+        $('#tableListN').html(data.data);
     }
     });
 
@@ -1242,8 +1275,18 @@ $.ajax({
     success: function(data) {
 
 
-        $("#sms2a").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
-        $('#tableListN2').html(data);
+        // $("#sms2a").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+        // $('#tableListN2').html(data);
+
+        alertify.set('notifier','position','top-center');
+        alertify.success('সফলভাবেই সংরক্ষণ করা হয়েছে');
+
+
+        // $("#sms2a").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+        // $('#tableListN2').html(data);
+
+        $("#totalAttract").html('('+data.totalAttract+')');
+        $('#tableListN2').html(data.data);
     }
     });
 
@@ -1270,8 +1313,14 @@ $.ajax({
     success: function(data) {
 
 
-        $("#sms2c").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
-        $('#tableListN3').html(data);
+        // $("#sms2c").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
+        // $('#tableListN3').html(data);
+
+        alertify.set('notifier','position','top-center');
+        alertify.success('সফলভাবেই সংরক্ষণ করা হয়েছে');
+
+        $("#totalCopy").html('('+data.totalCopy+')');
+        $('#tableListN3').html(data.data);
     }
     });
 
@@ -1351,7 +1400,11 @@ function onSelectedChanged(){
                     type: 'get',
                     dataType: 'json',
                     success: function(data) {
-                        alert(data.success);
+                      //  alert(data.success);
+
+                      alertify.set('notifier','position','top-center');
+        alertify.error('সফলভাবে মুছে ফেলা হয়েছে');
+
                         trObj.parents("tr").remove();
                     }
                 });
@@ -1384,7 +1437,11 @@ function onSelectedChanged(){
                     type: 'get',
                     dataType: 'json',
                     success: function(data) {
-                        alert(data.success);
+                       // alert(data.success);
+
+                       alertify.set('notifier','position','top-center');
+        alertify.error('সফলভাবে মুছে ফেলা হয়েছে');
+
                         trObj.parents("tr").remove();
                     }
                 });
@@ -1417,7 +1474,12 @@ function onSelectedChanged(){
                     type: 'get',
                     dataType: 'json',
                     success: function(data) {
-                        alert(data.success);
+                        //alert(data.success);
+
+
+                        alertify.set('notifier','position','top-center');
+        alertify.error('সফলভাবে মুছে ফেলা হয়েছে');
+
                         trObj.parents("tr").remove();
                     }
                 });

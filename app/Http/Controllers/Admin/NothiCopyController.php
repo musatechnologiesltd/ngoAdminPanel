@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\NothiCopy;
 use App\Models\Admin;
 use DB;
+use Validator;
 class NothiCopyController extends Controller
 {
     public function copySelfOfficerAdd(Request $request){
@@ -60,7 +61,8 @@ class NothiCopyController extends Controller
 
 
                $data = view('admin.presentDocument.copySelfOfficerAdd',compact('nothiCopyList'))->render();
-               return response()->json($data);
+               //return response()->json($data);
+               return response()->json(['totalCopy'=>count($nothiCopyList),'data'=>$data]);
 
 
         }
