@@ -53,6 +53,14 @@ aria-labelledby="myModalLabel2">
 
                 <input type="hidden" value="{{ $id }}" placeholder="নোট এর বিষয়" class="form-control" name="noteId" id=""/>
 
+
+
+               @if(Route::is('addChildNote') )
+
+               <input type="hidden" value="first_sender" placeholder="নোট এর বিষয়" class="form-control" name="first_sender" id=""/>
+                @else
+
+                @endif
                 {{-- <div class="mb-3">
                     <label class="form-label" for="">অগ্রাধিকার বাছাই করুন </label>
                     <select class="js-example-basic-single col-sm-12">

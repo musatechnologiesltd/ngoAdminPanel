@@ -35,7 +35,7 @@ $decesionName = DB::table('dak_details')
 ?>
 @if(!empty($checkDataAvailableOrNot))
 
-@include('admin.post.receivedRenewDak');
+@include('admin.post.receivedRenewDak')
 
 @else
 <tr>

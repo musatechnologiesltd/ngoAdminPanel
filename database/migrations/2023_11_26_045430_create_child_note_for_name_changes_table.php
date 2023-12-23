@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('parentnote_name_change_id')->references('id')->on('parent_note_for_name_changes')->onDelete('cascade');
             $table->string('serial_number');
             $table->text('description');
+            $table->string('admin_id');
             $table->timestamps();
         });
     }

@@ -33,6 +33,7 @@ use App\Models\ChildNoteForRenew;
 use App\Models\NothiList;
 use App\Models\NothiPrapok;
 use App\Models\NothiCopy;
+use App\Models\NothiFirstSenderList;
 use DB;
 use DateTime;
 use DateTimezone;
@@ -574,9 +575,226 @@ die();
         ->orderBy('branch_step','asc')->get();
 
 
+        //new code december 23
 
 
-        return view('admin.presentDocument.addChildNote',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+
+
+        if($status == 'registration'){
+
+
+        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+           ->first();
+
+
+           $childNoteNewList = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+        //dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+        }
+
+
+
+
+
+
+
+        //end new code december 23
+
+
+
+
+        return view('admin.presentDocument.addChildNote',compact('childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 
@@ -737,7 +955,202 @@ die();
 
 
 
-                return view('admin.presentDocument.viewChildNote',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+
+
+
+
+
+if($status == 'registration'){
+
+
+$checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_registrations')
+->where('parent_note_regid',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_registrations')
+->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
+
+}elseif($status == 'renew'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_renews')
+->where('parent_note_for_renew_id',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_renews')
+->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
+
+}elseif($status == 'nameChange'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_name_changes')
+->where('parentnote_name_change_id',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_name_changes')
+->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'fdNine'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_nines')
+->where('p_note_for_fd_nine_id',$id)->get();
+
+//dd($checkParent);
+$childNoteNewListValue = DB::table('child_note_for_fd_nines')
+->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+}elseif($status == 'fdNineOne'){
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+->where('p_note_for_fd_nine_one_id',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'fdSix'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_sixes')
+->where('parent_note_for_fdsix_id',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+}elseif($status == 'fdSeven'){
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fd_sevens')
+->where('parent_note_for_fd_seven_id',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+}elseif($status == 'fcOne'){
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fc_ones')
+->where('parent_note_for_fc_one_id',$id)->get();
+
+$childNoteNewListValue = DB::table('child_note_for_fc_ones')
+->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'fcTwo'){
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+$childNoteNewList = DB::table('child_note_for_fc_twos')
+->where('parent_note_for_fc_two_id',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_fc_twos')
+->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'fdThree'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_threes')
+->where('parent_note_for_fd_three_id',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_fd_threes')
+->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+}
+
+
+
+
+
+//dd(count($childNoteNewList));
+
+
+
+
+                return view('admin.presentDocument.viewChildNote',compact('childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
             }
 
 
@@ -999,6 +1412,23 @@ die();
         //dd($request->all());
 
 
+        //NothiFirstSenderList
+
+
+        if($request->first_sender == 'first_sender'){
+
+        $mainSaveData = new NothiFirstSenderList();
+        $mainSaveData ->noteId = $request->noteId;
+        $mainSaveData ->nothId = $request->nothiId;
+        $mainSaveData ->dakId = $request->dakId;
+        $mainSaveData ->dakType = $request->status;
+        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+        $mainSaveData->save();
+
+
+        }
+
+
         if($request->button_value == 'return'){
 
 
@@ -1183,6 +1613,7 @@ die();
             $saveNewData->serial_number = 0;
             $saveNewData->description = $request->mainPartNote;
             $saveNewData->created_at =$created_at;
+            $saveNewData->admin_id =Auth::guard('admin')->user()->id;
             $saveNewData->save();
 
 
@@ -1194,6 +1625,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
 
@@ -1205,6 +1637,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
 
@@ -1216,6 +1649,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
 
@@ -1226,6 +1660,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
      }elseif($request->status == 'fdSix'){
@@ -1235,6 +1670,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
      }elseif($request->status == 'fdSeven'){
@@ -1244,6 +1680,7 @@ die();
   $saveNewData->serial_number = 0;
   $saveNewData->description = $request->mainPartNote;
   $saveNewData->created_at =$created_at;
+  $saveNewData->admin_id =Auth::guard('admin')->user()->id;
   $saveNewData->save();
 
 
@@ -1254,6 +1691,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
      }elseif($request->status == 'fcTwo'){
@@ -1264,6 +1702,7 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
 
@@ -1274,6 +1713,9 @@ die();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+
+         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
+
          $saveNewData->save();
 
 

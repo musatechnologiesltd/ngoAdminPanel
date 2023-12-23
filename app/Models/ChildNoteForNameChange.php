@@ -11,7 +11,8 @@ class ChildNoteForNameChange extends Model
     protected $fillable = [
         'parentnote_name_change_id',
         'serial_number',
-        'description'
+        'description',
+        'admin_id'
     ];
 
     public function parentNoteForNameChange()

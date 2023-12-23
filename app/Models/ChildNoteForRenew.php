@@ -12,7 +12,8 @@ class ChildNoteForRenew extends Model
     protected $fillable = [
         'parent_note_for_renew_id',
         'serial_number',
-        'description'
+        'description',
+        'admin_id'
     ];
 
 

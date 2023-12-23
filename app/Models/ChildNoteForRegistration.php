@@ -12,7 +12,8 @@ class ChildNoteForRegistration extends Model
     protected $fillable = [
         'parent_note_regid',
         'serial_number',
-        'description'
+        'description',
+        'admin_id'
     ];
 
 

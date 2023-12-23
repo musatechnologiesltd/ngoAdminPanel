@@ -12,7 +12,8 @@ class ChildNoteForFcOne extends Model
     protected $fillable = [
         'parent_note_for_fc_one_id',
         'serial_number',
-        'description'
+        'description',
+        'admin_id'
     ];
 
     public function parentNoteForFcOne()

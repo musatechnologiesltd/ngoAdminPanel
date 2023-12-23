@@ -11,7 +11,8 @@ class ChildNoteForFdNineOne extends Model
     protected $fillable = [
         'p_note_for_fd_nine_one_id',
         'serial_number',
-        'description'
+        'description',
+        'admin_id'
     ];
 
     public function parentNoteForFdNineOne()

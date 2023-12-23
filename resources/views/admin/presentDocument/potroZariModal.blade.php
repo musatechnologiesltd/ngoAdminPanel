@@ -98,31 +98,26 @@ aria-labelledby="myModalLabel22">
 
                                                                       <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
                                                                       <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-                                                                      <div class="row mt-3">
-                                                                        <div class="col-xl-3 ">বিষয় :
-                                                                        </div>
-                                                                        <div class="col-xl-9">
+                                                                      <div class="d-flex justify-content-start mt-3">
+                                                                        <p style="font-weight:bold">বিষয় : </p>
 
+                                                                              {!! $officeDetails->office_subject !!}
 
-
-                                                                                {!! $officeDetails->office_subject !!}
-
-                                                                    </span>
-                                                                        </div>
-                                                                    </div>
+                                                                      </div>
                                                                     <div class="row">
                                                                         @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
                                                                         @else
-                                                                        <div class="col-xl-3">সুত্রঃ
-                                                                            (যদি থাকে):
-                                                                        </div>
+                                                                        <div class="d-flex justify-content-start">
+                                                                            <p style="font-weight:bold">সুত্রঃ </p>
 
-                                                                        <div class="col-xl-9">{!! $officeDetails->office_sutro !!}</div>
+                                                                                     {!! $officeDetails->office_sutro !!}
+
+
+                                                                           
+                                                                        </div>
                                                                         @endif
-                                                                        <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                                                                                             <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-                                                                    </div>
+
                                                                     <div class="row">
                                                                         <div class="col-xl-12 mt-3">
 

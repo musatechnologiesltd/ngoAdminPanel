@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('parent_note_for_renew_id')->references('id')->on('parent_note_for_renews')->onDelete('cascade');
             $table->string('serial_number');
             $table->text('description');
+            $table->string('admin_id');
             $table->timestamps();
         });
     }

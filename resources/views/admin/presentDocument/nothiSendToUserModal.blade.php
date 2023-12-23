@@ -29,7 +29,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                       
+
                     </div>
                 </div>
             </div><!-- modal-content -->

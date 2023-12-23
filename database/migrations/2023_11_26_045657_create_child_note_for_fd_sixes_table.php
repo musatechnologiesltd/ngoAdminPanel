@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('parent_note_for_fdsix_id')->references('id')->on('parent_note_for_fdsixes')->onDelete('cascade');
             $table->string('serial_number');
             $table->text('description');
+            $table->string('admin_id');
             $table->timestamps();
         });
     }

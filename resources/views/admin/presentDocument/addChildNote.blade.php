@@ -112,586 +112,10 @@
                                      <h3>কোন নোট পাওয়া যায়নি</h3>
                                      @else
 
-
-                                     <!--first note start-->
-
-                                    <?php
-
-
-
-if($status == 'registration'){
-
-
-$checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-   ->first();
-
-
-   $childNoteNewList = DB::table('child_note_for_registrations')
-           ->where('parent_note_regid',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_registrations')
-           ->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'renew'){
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_renews')
-           ->where('parent_note_for_renew_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_renews')
-           ->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-}elseif($status == 'nameChange'){
-
-
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_name_changes')
-           ->where('parentnote_name_change_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_name_changes')
-           ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-}elseif($status == 'fdNine'){
-
-
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_fd_nines')
-           ->where('p_note_for_fd_nine_id',$id)->get();
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-           ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-//dd($checkParent);
-
-
-}elseif($status == 'fdNineOne'){
-
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-           ->where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-           ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-}elseif($status == 'fdSix'){
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fd_sixes')
-           ->where('parent_note_for_fdsix_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-           ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-}elseif($status == 'fdSeven'){
-
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fd_sevens')
-           ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-           ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-}elseif($status == 'fcOne'){
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_fc_ones')
-           ->where('parent_note_for_fc_one_id',$id)->get();
-
-           $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-           ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-}elseif($status == 'fcTwo'){
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fc_twos')
-           ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-           ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-
-}elseif($status == 'fdThree'){
-
-
-
-
-
-
-$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_fd_threes')
-           ->where('parent_note_for_fd_three_id',$id)->get();
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-           ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
-
-}
-
-
-
-
-
-                                    ?>
-
-                                     <!--end first note-->
-
-                                 @if(count($childNoteNewList) > 0)
-
-                                 {{-- <h3>কোন নোট পাওয়া যায়নি</h3> --}}
-
-
-                                 <div class="card-body">
-                                    <div class="default-according" id="accordion1">
-
-@foreach($childNoteNewList as $key=>$childNoteNewLists)
-
-                                      <div class="card">
-                                        <div class="card-header bg-primary" id="heading{{ $key+1 }}">
-                                          <h5 class="mb-0">
-                                            <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapse{{ $key+1 }}" aria-expanded="true" aria-controls="collapseFour">অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span> <span style="padding-right:40px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($childNoteNewLists->created_at) }}</span>
-                                          </h5>
-                                        </div>
-                                        <div class="collapse" id="collapse{{ $key+1 }}" aria-labelledby="heading{{ $key+1 }}" data-bs-parent="#accordion1">
-                                          <div class="card-body">
-                                            <form class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-                                                @csrf
-                                                @method('PUT')
-
-                                                <input type="hidden" value="{{ $status }}" name="status"/>
-
-                                                <input type="hidden" value="{{ $id }}" name="noteId"/>
-                                                <input type="hidden" value="{{ $activeCode }}" name="activeCode"/>
-                                                <input type="hidden" value="{{ $nothiId }}" name="nothiId"/>
-                                                <input type="hidden" value="{{ $parentId }}" name="dakId"/>
-                                                {{-- <input type="hidden" value="{{ $status }}" name="status"/> --}}
-                                                 <div id="container">
-                                            <textarea class="maineditor" name="mainPartNote" id="editor{{ $key+1 }}">
-
-                                                {!! $childNoteNewLists->description !!}
-                                            </textarea>
-                                        </div>
-
-
-                                        <div class="d-flex flex-row-reverse mt-3">
-
-                                            {{-- <button class="btn btn-danger ms-3" type="button">
-                                                <i class="fa fa-send"></i>
-                                                বাতিল করুন
-                                            </button> --}}
-                                            <div class="dropdown">
-                                                <?php
-
-                                                $senderIdNew1 = DB::table('nothi_details')
-                                                ->where('noteId',$id)
-                                                ->where('nothId',$nothiId)
-                                                ->where('dakId',$parentId)
-                                                ->where('dakType',$status)
-                                                ->whereNull('back_status')
-                                                //->where('sender',Auth::guard('admin')->user()->id)
-                                                ->value('permission_status');
-
-                                                            ?>
-
-
-                                                @if($senderIdNew1 == 1)
-                                                <button class="btn btn-primary" disabled>
-                                                    সংশোধন করুন
-                                                 </button>
-                                                @else
-                                                <button class="btn btn-primary" value="সংশোধন" name="final_button" type="submit"
-
-                                                        aria-expanded="false">
-                                                        সংশোধন করুন
-                                                </button>
-
-                                                @endif
-
-                                                <button class="btn btn-secondary" value="সংশোধন ও খসড়া" name="final_button" type="submit"
-
-                                                aria-expanded="false">
-                                                সংশোধন ও খসড়া
-                                        </button>
-
-                                            </div>
-                                        </div>
-
-
-                                            </form>
-
-<?php
-
-$senderIdNew = DB::table('nothi_details')
-                                                ->where('noteId',$id)
-                                                ->where('nothId',$nothiId)
-                                                ->where('dakId',$parentId)
-                                                ->where('dakType',$status)
-                                                ->whereNull('back_status')
-                                                //->where('sender',Auth::guard('admin')->user()->id)
-                                                ->first();
-
-?>
-
-
-@if(!$senderIdNew)
-
-@else
-
-<?php
-
-$mainSenderIdNew =DB::table('article_signs')
-->where('dakDetailId',$senderIdNew->id)
-->where('childId',$childNoteNewLists->id)->get();
-
-//dd($mainSenderIdNew);
-?>
-
-@if(count($mainSenderIdNew) == 0)
-
-@else
-
-<div class="row">
-    @foreach($mainSenderIdNew as $key=>$mainSenderIdNews)
-
-    <?php
-$adminId = DB::table('admins')->where('id',$mainSenderIdNews->sender)->first();
-$adminId2 = DB::table('admins')->where('id',$mainSenderIdNews->permissionId)->first();
-?>
-
-@if(!$adminId)
-
-@else
-
-<?php
-$desiName = DB::table('designation_lists')
-                                        ->where('id',$adminId->designation_list_id)
-                                        ->value('designation_name');
-$branchName = DB::table('branches')->where('id',$adminId->branch_id)->value('branch_name');
-
-?>
-<div class="col-lg-3 col-md-3 col-sm-6 mb-2" >
-    <div class="text-center">
-        <img src="{{ asset('/') }}{{ $adminId->admin_sign }}" alt="" height="50" width="180">
-
-    <div style="height:1px; width:100%; background-color: #BC1133"></div>
-
-    <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
-        {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($mainSenderIdNews->created_at))) }}<br>
-        {{ $adminId->admin_name_ban }}<br>
-        {{ $desiName }}<br>
-        {{ $branchName }}
-    </p>
-
-</div>
-
-</div>
-@endif
-
-@if($senderIdNew->permission_status == 1)
-
-<?php
-$desiName1 = DB::table('designation_lists')
-                                        ->where('id',$adminId2->designation_list_id)
-                                        ->value('designation_name');
-$branchName1 = DB::table('branches')->where('id',$adminId2->branch_id)->value('branch_name');
-
-?>
-<div class="col-lg-3 col-md-3 col-sm-6 mb-2" >
-
-    <div class="text-center">
-        @if($senderIdNew->permission_status == 1)
-        <img src="{{ asset('/') }}{{ $adminId2->admin_sign }}" alt="" height="50" width="180">
-        @else
-
-        @endif
-        <div style="height:1px; width:100%; background-color: #BC1133"></div>
-        <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
-
-
-            @if($senderIdNew->permission_status == 1)
-        {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($senderIdNew->created_at))) }}<br>
-            @else
-
-            @endif
-            {{ $adminId2->admin_name_ban }} <br>
-            {{ $desiName1 }} <br>
-            {{ $branchName1 }}</p>
-    </div>
-
-</div>
-@else
-
-@endif
-
-    @endforeach
-</div>
-
-@endif
-
-@endif
-
-                  <!-- nothi sender list -->
-                  @include('admin.presentDocument.nothiSendToUserModal')
-                  <!-- end nothi sender list -->
-
-                                        </div>
-                                        </div>
-                                      </div>
-                                      @endforeach
-
-                                      <div class="card">
-                                        <div class="card-header bg-primary" id="headingSix">
-                                          <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">নতুন অনুচ্ছেদ</button>
-                                          </h5>
-                                        </div>
-                                        <div class="collapse show" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
-                                          <div class="card-body">
-
-
-                                            <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-                                                @csrf
-                                                <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
-                                                <input type="hidden" value="{{ $status }}" name="status"/>
-
-                                                <input type="hidden" value="{{ $id }}" name="noteId"/>
-                                                <input type="hidden" value="{{ $activeCode }}" name="activeCode"/>
-                                                <input type="hidden" value="{{ $nothiId }}" name="nothiId"/>
-                                                <input type="hidden" value="{{ $parentId }}" name="dakId"/>
-
-                                            <div id="container">
-                                                <textarea class="maineditor" id="mainpeditor"  name="mainPartNote">
-                                                    <p>লিখুন</p>
-                                                </textarea>
-                                            </div>
-                                            <div class="d-flex flex-row-reverse mt-3">
-
-                                                <?php
-
- $senderIdNew12 = DB::table('nothi_details')
- ->where('noteId',$id)
- ->where('nothId',$nothiId)
- ->where('dakId',$parentId)
- ->where('dakType',$status)
- ->whereNull('back_status')
- //->where('sender',Auth::guard('admin')->user()->id)
- ->value('permission_status');
-
-             ?>
-
-            @if($senderIdNew12 == 1)
-
-
-            @else
-
-
-                                                @if(count($checkParent) == 0)
-
-                                                @else
-
-                                                <?php
-
-$receiverId = DB::table('nothi_details')
-                            ->where('noteId',$id)
-                            ->where('nothId',$nothiId)
-                            ->where('dakId',$parentId)
-                            ->where('dakType',$status)
-                            ->where('sender',Auth::guard('admin')->user()->id)
-                            ->value('receiver');
-
-?>
-
-
- @if(empty($receiverId))
-
-
-
-
-                                                <button data-bs-toggle="modal"
-                                                data-original-title="" data-bs-target="#modalforsender1" class="btn btn-secondary ms-3" type="button">
-                                                    <i class="fa fa-send"></i>
-                                                    প্রেরণ করুন
-                                                </button>
-
-                                                @else
-
-                                                <button data-bs-toggle="modal"
-                                                data-original-title="" data-bs-target="#modalforsenderreturn1" class="btn btn-danger ms-3" type="button">
-                                                    <i class="fa fa-arrow-circle-left"></i>
-                                                    ফেরত আনুন
-                                                </button>
-                                                @endif
-
-
-
-                                                @endif
-
-
-                                                <div class="dropdown">
-
-                                                    <button class="btn btn-success" value="সংরক্ষন ও খসড়া" name="final_button" type="submit"
-
-                                                    aria-expanded="false">
-                                                    সংরক্ষন ও খসড়া
-                                            </button>
-
-
-                                                    <button class="btn btn-primary" value="সংরক্ষন করুন" type="submit" name="final_button"
-
-                                                            aria-expanded="false">
-                                                        সংরক্ষন করুন
-                                                    </button>
-
-                                                </div>
-                                                @endif
-                                            </div>
-                                             </form>
-
-
-
-                                        </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-
-
-
-
-                                 @else
-                                     <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-                                        @csrf
-
-
-                                        <input type="hidden" value="{{ $id }}" name="noteId"/>
-                                        <input type="hidden" value="{{ $activeCode }}" name="activeCode"/>
-                                        <input type="hidden" value="{{ $nothiId }}" name="nothiId"/>
-                                        <input type="hidden" value="{{ $parentId }}" name="dakId"/>
-                                        <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
-                                        <input type="hidden" value="{{ $status }}" name="status"/>
-                                    <div id="container">
-                                        <textarea id="peditor"  name="mainPartNote">
-                                            <p>লিখুন</p>
-                                        </textarea>
-                                    </div>
-                                    <div class="d-flex flex-row-reverse mt-3">
-
-                                        {{-- <button class="btn btn-danger ms-3" type="button">
-                                            <i class="fa fa-send"></i>
-                                            বাতিল করুন
-                                        </button> --}}
-                                        <div class="dropdown">
-                                            <button class="btn btn-success" value="সংরক্ষন ও খসড়া" name="final_button" type="submit"
-
-                                            aria-expanded="false">
-                                            সংরক্ষন ও খসড়া
-                                    </button>
-
-
-                                            <button class="btn btn-primary" value="সংরক্ষন করুন" type="submit" name="final_button"
-
-                                                    aria-expanded="false">
-                                                সংরক্ষন করুন
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                     </form>
+                                    @if(count($childNoteNewList) > 0)
+                                    @include('admin.presentDocument.childNoteAddSecondStep')
+                                    @else
+                                    @include('admin.presentDocument.childNoteAddFirstStep')
                                     @endif
                                     @endif
 
@@ -828,6 +252,34 @@ $potroZariListValueZari =  DB::table('nothi_details')
  @else
 
  <div class="d-flex flex-wrap mb-4">
+
+
+    <?php
+
+        $firstSenderId = DB::table('nothi_first_sender_lists')
+        ->where('noteId',$id)
+        ->where('nothId',$nothiId)
+        ->where('dakId',$parentId)
+        ->where('dakType',$status)
+        ->where('sender',Auth::guard('admin')->user()->id)
+        ->value('id');
+
+        ?>
+
+@if(empty($firstSenderId))
+
+<?php
+
+$potroZariListValue =  DB::table('nothi_details')
+                    ->where('noteId',$id)
+                    ->where('nothId',$nothiId)
+                    ->where('dakId',$parentId)
+                    ->where('dakType',$status)
+                    ->value('permission_status');
+
+?>
+
+@if($potroZariListValue == 1)
     <div class="dropdown me-2">
         <button class="btn btn-primary dropdown-toggle"
                 type="button"
@@ -848,6 +300,9 @@ $potroZariListValueZari =  DB::table('nothi_details')
             </div>
         </div>
     </div>
+    @else
+@endif
+    @endif
     <button class="btn btn-primary me-2" onclick="location.href = '{{ route('createPotro', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'activeCode' =>$activeCode]) }}';"><i class="fa fa-pencil"></i> সংশোধন করুন</button>
     <a target="_blank"    class="btn btn-primary me-2" href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}'><i class="fa fa-print"></i> প্রিন্ট করুন</a>
 
@@ -1158,6 +613,17 @@ $potroZariListValueZari =  DB::table('nothi_details')
 
 
 @section('script')
+
+<script>
+
+
+    $("#newPara").click(function(){
+
+        $(".mclose").removeClass("show");
+        $("#newParaDes").show();
+
+                                  });
+</script>
 
 <script>
 

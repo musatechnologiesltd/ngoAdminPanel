@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('parent_note_for_fc_one_id')->references('id')->on('parent_note_for_fc_ones')->onDelete('cascade');
             $table->string('serial_number');
             $table->text('description');
+            $table->string('admin_id');
             $table->timestamps();
         });
     }

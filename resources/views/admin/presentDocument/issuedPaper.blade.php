@@ -142,7 +142,7 @@ if(!$nothiApproverList){
 @else
 <table class="pdf_table">
     <tr>
-        <td style="width: 15%;font-weight:bold;"> সূত্র:</td>
+        <td style="width: 5%;font-weight:bold;"> সূত্র:</td>
         <td> {!! $officeDetails->office_sutro !!}</td>
     </tr>
 </table>
