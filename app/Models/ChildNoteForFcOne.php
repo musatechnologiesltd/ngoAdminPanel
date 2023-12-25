@@ -13,7 +13,9 @@ class ChildNoteForFcOne extends Model
         'parent_note_for_fc_one_id',
         'serial_number',
         'description',
-        'admin_id'
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 
     public function parentNoteForFcOne()

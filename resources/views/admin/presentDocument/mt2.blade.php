@@ -114,7 +114,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <div class="custom_checkbox">
-                                                    <input id="ccheck{{ $finalAdminLists->id }}" value="{{ $finalAdminLists->id }}" {{ $receiverId == $finalAdminLists->id ? 'checked':'' }} name="nothiPermissionId" class="custom_check chb" type="checkbox">
+                                                    <input id="ccheck{{ $finalAdminLists->id }}" value="{{ $finalAdminLists->id }}" {{ $receiverId == $finalAdminLists->id ? 'checked':'' }} name="nothiPermissionId" class="custom_check chb" type="checkbox" >
                                                     <label for="ccheck{{ $finalAdminLists->id }}" style="--d: 30px">
                                                         <svg viewBox="0,0,50,50">
                                                             <path d="M5 30 L 20 45 L 45 5"></path>

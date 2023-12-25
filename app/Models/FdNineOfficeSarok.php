@@ -13,6 +13,9 @@ class FdNineOfficeSarok extends Model
         'p_note_for_fd_nine_id',
         'office_subject',
         'office_sutro',
-        'description'
+        'description',
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 }

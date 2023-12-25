@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('name_change_office_saroks', function (Blueprint $table) {
+        Schema::create('potrangsho_drafts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('parentnote_name_change_id')->unsigned();
-            $table->foreign('parentnote_name_change_id')->references('id')->on('parent_note_for_name_changes')->onDelete('cascade');
+            $table->integer('adminId');
+            $table->integer('nothiId');
+            $table->integer('sarokId')->nullable();
+            $table->integer('noteId')->nullable();
+            $table->integer('receiverId')->nullable();
+            $table->integer('SentStatus')->nullable();
+            $table->string('status')->nullable();
             $table->text('office_subject');
             $table->text('office_sutro')->nullable();
             $table->longText('description');
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('name_change_office_saroks');
+        Schema::dropIfExists('potrangsho_drafts');
     }
 };

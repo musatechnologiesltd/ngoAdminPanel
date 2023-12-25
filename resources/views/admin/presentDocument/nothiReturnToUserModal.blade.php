@@ -131,7 +131,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                                 @endforeach
 
 
-                                           
+
                                                 </tbody>
                                             </table>
                                         </div>

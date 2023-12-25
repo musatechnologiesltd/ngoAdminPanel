@@ -1453,6 +1453,10 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
 
 
+
+
+
+
         //ArticleSign
         $mainSaveData = new NothiDetail();
         $mainSaveData ->noteId = $request->noteId;
@@ -1484,7 +1488,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
 
 
-//dd(Auth::guard('admin')->user()->id);
+//dd($request->all());
 
 
                      $secondLastValue = ArticleSign::orderBy('id','desc')
@@ -1589,6 +1593,90 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
         $mainSaveData ->permissionId = $senderId;
         $mainSaveData ->back_status = $secondLastValueLast;
         $mainSaveData->save();
+
+           //
+           if($request->status == 'registration'){
+
+
+            $saveNewData = ChildNoteForRegistration::find($request->child_note_id);
+            $saveNewData->sent_status = 1;
+            $saveNewData->receiver_id = $request->nothiPermissionId;
+            $saveNewData->save();
+
+
+     }elseif($request->status == 'renew'){
+
+
+         $saveNewData = ChildNoteForRenew::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+
+     }elseif($request->status == 'nameChange'){
+
+         $saveNewData = ChildNoteForNameChange::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+
+     }elseif($request->status == 'fdNine'){
+
+         $saveNewData = ChildNoteForFdNine::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+     }elseif($request->status == 'fdNineOne'){
+
+         $saveNewData = ChildNoteForFdNineOne::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+     }elseif($request->status == 'fdSix'){
+
+         $saveNewData = ChildNoteForFdSix::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+     }elseif($request->status == 'fdSeven'){
+
+  $saveNewData = ChildNoteForFdSeven::find($request->child_note_id);
+  $saveNewData->sent_status = 1;
+  $saveNewData->receiver_id = $request->nothiPermissionId;
+            $saveNewData->save();
+     }elseif($request->status == 'fcOne'){
+
+         $saveNewData = ChildNoteForFcOne::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+     }elseif($request->status == 'fcTwo'){
+
+
+         $saveNewData = ChildNoteForFcTwo::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+     }elseif($request->status == 'fdThree'){
+
+         $saveNewData = ChildNoteForFdThree::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+     }
+
+
+        //
 
     return redirect()->back()->with('success','সফলভাবে পাঠানো হয়েছে');
     }

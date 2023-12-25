@@ -12,7 +12,9 @@ class ChildNoteForNameChange extends Model
         'parentnote_name_change_id',
         'serial_number',
         'description',
-        'admin_id'
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 
     public function parentNoteForNameChange()

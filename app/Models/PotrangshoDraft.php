@@ -5,18 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NameChangeOfficeSarok extends Model
+class PotrangshoDraft extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'parentnote_name_change_id',
+        'adminId',
+        'nothiId',
+        'noteId',
+        'sarokId',
+        'receiverId',
+        'SentStatus',
+        'status',
         'office_subject',
         'office_sutro',
-        'description',
-        'admin_id',
-        'receiver_id',
-        'sent_status'
+        'description'
     ];
+
+
+
 }

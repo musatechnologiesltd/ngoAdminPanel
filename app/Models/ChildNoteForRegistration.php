@@ -13,7 +13,9 @@ class ChildNoteForRegistration extends Model
         'parent_note_regid',
         'serial_number',
         'description',
-        'admin_id'
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 
 

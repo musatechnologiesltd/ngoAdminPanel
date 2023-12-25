@@ -13,6 +13,9 @@ class FcTwoOfficeSarok extends Model
         'parent_note_for_fc_two_id',
         'office_subject',
         'office_sutro',
-        'description'
+        'description',
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 }

@@ -12,7 +12,9 @@ class ChildNoteForFdThree extends Model
         'parent_note_for_fd_three_id',
         'serial_number',
         'description',
-        'admin_id'
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 
     public function parentNoteForFdThree()

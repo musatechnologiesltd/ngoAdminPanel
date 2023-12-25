@@ -14,7 +14,10 @@ class RegistrationOfficeSarok extends Model
         'parent_note_regid',
         'office_subject',
         'office_sutro',
-        'description'
+        'description',
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 
 

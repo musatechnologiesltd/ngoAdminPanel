@@ -13,6 +13,9 @@ class FdSixOfficeSarok extends Model
         'parent_note_for_fdsix_id',
         'office_subject',
         'office_sutro',
-        'description'
+        'description',
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 }

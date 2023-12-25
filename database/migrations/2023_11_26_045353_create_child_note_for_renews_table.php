@@ -16,8 +16,10 @@ return new class extends Migration
             $table->bigInteger('parent_note_for_renew_id')->unsigned();
             $table->foreign('parent_note_for_renew_id')->references('id')->on('parent_note_for_renews')->onDelete('cascade');
             $table->string('serial_number');
-            $table->text('description');
-            $table->string('admin_id');
+            $table->longText('description');
+            $table->string('admin_id',11);
+            $table->string('receiver_id',11)->nullable();
+            $table->string('sent_status',11)->nullable();
             $table->timestamps();
         });
     }

@@ -12,7 +12,9 @@ class ChildNoteForFdNine extends Model
         'p_note_for_fd_nine_id',
         'serial_number',
         'description',
-        'admin_id'
+        'admin_id',
+        'receiver_id',
+        'sent_status'
     ];
 
     public function parentNoteForFdNine()

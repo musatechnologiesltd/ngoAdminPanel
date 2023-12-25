@@ -1,3 +1,17 @@
+<div class="row">
+
+    <div class="col-sm-8 col-xs-8">
+
+        <p style="font-size: 14px;"><b>{{$checkParentFirst->subject }}<span style="padding-left: 5px;color:#660080">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($checkParentFirst->created_at))) }}</span></b></p>
+
+    </div>
+    <div class="col-sm-4 col-xs-4">
+        <div class="d-flex flex-row-reverse">
+            {{-- <a  href ="" class="btn btn-outline-danger btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+        </div>
+    </div>
+</div>
+<hr>
 <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
     @csrf
     <input type="hidden" value="{{ $id }}" name="noteId"/>
