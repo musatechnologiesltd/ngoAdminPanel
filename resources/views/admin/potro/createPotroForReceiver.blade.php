@@ -298,7 +298,7 @@ $branchName = DB::table('branches')
    </div>
    <div class="col-sm-4 col-xs-4">
        <div class="d-flex flex-row-reverse">
-           <a class="btn btn-warning"aria-expanded="false">সংরক্ষন করুন</a>
+        <a  href ="{{  url('admin/viewChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-warning"aria-expanded="false">সংরক্ষন করুন</a>
        </div>
    </div>
 </div>
@@ -443,66 +443,31 @@ $branchName = DB::table('branches')
                                                                             </div>
                                                                         </div>
 
+                                                                                 <!-- show save and unsaved potro -->
+                                                                                 <?php
+                                                                                 $potrangshoDraft =  DB::table('potrangsho_drafts')
+                                                                                                   ->where('sarokId',$officeDetails->id)
+                                                                                                   ->where('status',$status)
+                                                                                                   ->orderBy('id','desc')
+                                                                                                   ->first();
 
+                                                                                   ?>
 
-                                                                      <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-@csrf
-                                                                        <input type="hidden" value="{{ $id }}" name="noteId"/>
-                                                                        <input type="hidden" value="{{ $activeCode }}" name="activeCode"/>
-                                                                        <input type="hidden" value="{{ $nothiId }}" name="nothiId"/>
-                                                                        <input type="hidden" value="{{ $parentId }}" name="dakId"/>
-                                                                        <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
-                                                                        <input type="hidden" value="{{ $status }}" name="status"/>
+                                                                                   @if(!$potrangshoDraft)
 
-                                                                        <input type="hidden" name="receiveEnd" value="1"/>
+                                                                                   @else
 
+                                                                                   @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+                                                                                   @include('admin.potro.formReceiver')
 
-                                                                      <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
-                                                                      <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-                                                                      <div class="d-flex justify-content-end mt-3">
-                                                                          <p style="font-weight:bold;">বিষয় :</p>
-                                                                          <p>
-                                                                              <textarea id="ineditor1" name="subject" contenteditable="true">
-                                                                                {!! $officeDetails->office_subject !!}
-                                                                                </textarea></p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-end">
-                                                                        <p style="font-weight:bold;">সুত্রঃ(যদি থাকে):</p>
-                                                                        <p><textarea id="ineditor2" name="sutro" contenteditable="true">
-                                                                                {!! $officeDetails->office_sutro !!}
-                                                                                </textarea>
-                                                                                </p>
-                                                                        <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                                                                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-xl-12">
-
-                                                                            <label class="btn btn-primary" id="sompadonButton">সম্পাদন করুন</label>
-
-
-                                                                            <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
-<br>
-                                                                            {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
-
-                                                                            <div id="firstBisoyBostu"> {!! $officeDetails->description !!}</div>
-
-                                                                            {{-- <textarea id="editor1222"   class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
-                                                                                    {!! $officeDetails->description !!}
-                                                                                </textarea> --}}
-
-                                                                                <textarea   style="display: none;" class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
-                                                                                    {!! $officeDetails->description !!}
-                                                                                </textarea>
-
-
-                                                                        </div>
-                                                                    </div>
+                                                                                   @else
+                                                                                   @include('admin.potro.formReceiverMain')
+                                                                                   @endif
+                                                                                   @endif
 
 
 
 
-                                                            </form>
 
 
 

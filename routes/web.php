@@ -149,6 +149,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::controller(ParentNoteController::class)->group(function () {
 
 
+        Route::get('/addParentAttachment', 'addParentAttachment')->name('addParentAttachment');
+
+
+
+
+
         Route::post('/storeDataFromSenderView', 'storeDataFromSenderView')->name('storeDataFromSenderView');
 
 

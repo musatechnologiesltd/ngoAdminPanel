@@ -54,6 +54,7 @@ use App\Models\Branch;
 use App\Models\NothiDetail;
 use App\Models\ArticleSign;
 use Mpdf\Mpdf;
+use App\Models\PotrangshoDraft;
 class ChildNoteController extends Controller
 {
 
@@ -99,6 +100,13 @@ class ChildNoteController extends Controller
             $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
+
+
+
+
+
+
+
 
 
 
@@ -442,6 +450,67 @@ die();
             $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
+
+              //new code  start
+
+              $renew_status_id = DB::table('ngo_renew_daks')
+              ->where('id',$parentId)
+              ->value('renew_status_id');
+
+
+              $mainIdR = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $fdOneFormId = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
+
+              $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
+
+
+          $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+
+          $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+          $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+
+          $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
+
+          //dd($renewInfoData);
+
+
+
+          $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+
+        $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+          $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
+
+          $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+          $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+          $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+          $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+          $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+          $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+          ->first();
+
+
+          $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+          ->get();
+
+          $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+  ->get();
+
+
+
+         //end new code
 
 
 
@@ -794,7 +863,7 @@ die();
 
 
 
-        return view('admin.presentDocument.addChildNote',compact('childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.presentDocument.addChildNote',compact('renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data','childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 
@@ -821,6 +890,69 @@ die();
                     $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
                     ->where('serial_number',$nothiId)
                     ->get();
+
+
+
+                    //new code  start
+
+              $renew_status_id = DB::table('ngo_renew_daks')
+              ->where('id',$parentId)
+              ->value('renew_status_id');
+
+
+              $mainIdR = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $fdOneFormId = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
+
+              $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
+
+
+          $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+
+          $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+          $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+
+          $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
+
+          //dd($renewInfoData);
+
+
+
+          $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+
+        $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+          $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
+
+          $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+          $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+          $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+          $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+          $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+          $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+          ->first();
+
+
+          $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+          ->get();
+
+          $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+  ->get();
+
+
+
+         //end new code
 
 
 
@@ -1150,7 +1282,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
 
 
-                return view('admin.presentDocument.viewChildNote',compact('childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+                return view('admin.presentDocument.viewChildNote',compact('renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data','childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
             }
 
 
@@ -1409,25 +1541,171 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
 
 
-        //dd($request->all());
+     $lastSarokValue = PotrangshoDraft::where('nothiId',$request->nothiId)
+                                        ->where('noteId',$request->noteId)
+                                        ->where('status',$request->status)
+                                        ->where('adminId',Auth::guard('admin')->user()->id)
+                                        ->where('SentStatus',0)
+                                        ->orderBy('id','desc')
+                                        ->first();
+
+                                         //dd($lastSarokValue);
 
 
+
+
+
+
+
+
+                if(!$lastSarokValue){
+
+
+                }else{
+
+
+                                          $newCode =PotrangshoDraft::find($lastSarokValue->id);
+                                          $newCode->SentStatus = 1;
+                                          $newCode->receiverId = $request->nothiPermissionId;
+                                          $newCode->save();
+
+
+                    if($request->status == 'registration'){
+
+
+                        $saveNewData = RegistrationOfficeSarok::find($lastSarokValue->sarokId);
+
+                        $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                        $saveNewData->save();
+
+
+                 }elseif($request->status == 'renew'){
+
+
+                     $saveNewData = RenewOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+
+
+                 }elseif($request->status == 'nameChange'){
+
+                     $saveNewData = NameChangeOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+
+
+                 }elseif($request->status == 'fdNine'){
+
+                     $saveNewData = FdNineOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+
+                 }elseif($request->status == 'fdNineOne'){
+
+                     $saveNewData = FdNineOneOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+                 }elseif($request->status == 'fdSix'){
+
+                    //dd($lastSarokValue->sarokId);
+
+                     $saveNewData = FdSixOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+                 }elseif($request->status == 'fdSeven'){
+
+                        $saveNewData = FdSevenOfficeSarok::find($lastSarokValue->sarokId);
+
+                        $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                        $saveNewData->save();
+
+
+                 }elseif($request->status == 'fcOne'){
+
+                     $saveNewData = FcOneOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                     $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                     $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+                 }elseif($request->status == 'fcTwo'){
+
+
+                     $saveNewData = FcTwoOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                     $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                     $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+
+                 }elseif($request->status == 'fdThree'){
+
+                     $saveNewData = FdThreeOfficeSarok::find($lastSarokValue->sarokId);
+
+                     $saveNewData->office_subject = $lastSarokValue->office_subject;
+                        $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                        $saveNewData->description =$lastSarokValue->description;
+
+                     $saveNewData->save();
+
+
+                 }
+
+
+
+                }
         //NothiFirstSenderList
 
+//dd($request->all());
 
-        if($request->first_sender == 'first_sender'){
+if($request->first_sender == 'first_sender'){
 
-        $mainSaveData = new NothiFirstSenderList();
-        $mainSaveData ->noteId = $request->noteId;
-        $mainSaveData ->nothId = $request->nothiId;
-        $mainSaveData ->dakId = $request->dakId;
-        $mainSaveData ->dakType = $request->status;
-        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
-        $mainSaveData->save();
+    $mainSaveData = new NothiFirstSenderList();
+    $mainSaveData ->noteId = $request->noteId;
+    $mainSaveData ->nothId = $request->nothiId;
+    $mainSaveData ->dakId = $request->dakId;
+    $mainSaveData ->dakType = $request->status;
+    $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+    $mainSaveData ->receiver = $request->nothiPermissionId;
+    $mainSaveData->save();
 
 
-        }
-
+    }
 
         if($request->button_value == 'return'){
 
@@ -1475,6 +1753,87 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
         $mainSaveData ->sender = Auth::guard('admin')->user()->id;
         $mainSaveData ->permissionId = $request->nothiPermissionId;
         $mainSaveData->save();
+
+
+        if($request->status == 'registration'){
+
+
+            $saveNewData = ChildNoteForRegistration::find($request->child_note_id);
+            $saveNewData->sent_status = 1;
+            $saveNewData->receiver_id = $request->nothiPermissionId;
+            $saveNewData->save();
+
+
+     }elseif($request->status == 'renew'){
+
+
+         $saveNewData = ChildNoteForRenew::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+
+     }elseif($request->status == 'nameChange'){
+
+         $saveNewData = ChildNoteForNameChange::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+
+     }elseif($request->status == 'fdNine'){
+
+         $saveNewData = ChildNoteForFdNine::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+     }elseif($request->status == 'fdNineOne'){
+
+         $saveNewData = ChildNoteForFdNineOne::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+     }elseif($request->status == 'fdSix'){
+
+         $saveNewData = ChildNoteForFdSix::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+     }elseif($request->status == 'fdSeven'){
+
+  $saveNewData = ChildNoteForFdSeven::find($request->child_note_id);
+  $saveNewData->sent_status = 1;
+  $saveNewData->receiver_id = $request->nothiPermissionId;
+            $saveNewData->save();
+     }elseif($request->status == 'fcOne'){
+
+         $saveNewData = ChildNoteForFcOne::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+     }elseif($request->status == 'fcTwo'){
+
+
+         $saveNewData = ChildNoteForFcTwo::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+     }elseif($request->status == 'fdThree'){
+
+         $saveNewData = ChildNoteForFdThree::find($request->child_note_id);
+         $saveNewData->sent_status = 1;
+         $saveNewData->receiver_id = $request->nothiPermissionId;
+         $saveNewData->save();
+
+
+     }
 
         return redirect()->back()->with('success','সফলভাবে পাঠানো হয়েছে');
 
@@ -1583,6 +1942,165 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
         // $mainSaveData->save();
 
         // $mainId = $mainSaveData->id;
+
+
+
+        // new code for ptrangso start
+
+
+
+        $lastSarokValue = PotrangshoDraft::where('nothiId',$request->nothiId)
+        ->where('noteId',$request->noteId)
+        ->where('status',$request->status)
+        ->where('adminId',Auth::guard('admin')->user()->id)
+        ->where('SentStatus',0)
+        ->orderBy('id','desc')
+        ->first();
+
+         //dd($lastSarokValue);
+
+
+
+
+
+
+
+
+if(!$lastSarokValue){
+
+
+}else{
+
+
+          $newCode =PotrangshoDraft::find($lastSarokValue->id);
+          $newCode->SentStatus = 1;
+          $newCode->receiverId = $request->nothiPermissionId;
+          $newCode->save();
+
+
+if($request->status == 'registration'){
+
+
+$saveNewData = RegistrationOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+}elseif($request->status == 'renew'){
+
+
+$saveNewData = RenewOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+
+}elseif($request->status == 'nameChange'){
+
+$saveNewData = NameChangeOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+
+}elseif($request->status == 'fdNine'){
+
+$saveNewData = FdNineOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+}elseif($request->status == 'fdNineOne'){
+
+$saveNewData = FdNineOneOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+}elseif($request->status == 'fdSix'){
+
+//dd($lastSarokValue->sarokId);
+
+$saveNewData = FdSixOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+}elseif($request->status == 'fdSeven'){
+
+$saveNewData = FdSevenOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+}elseif($request->status == 'fcOne'){
+
+$saveNewData = FcOneOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+}elseif($request->status == 'fcTwo'){
+
+
+$saveNewData = FcTwoOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+}elseif($request->status == 'fdThree'){
+
+$saveNewData = FdThreeOfficeSarok::find($lastSarokValue->sarokId);
+
+$saveNewData->office_subject = $lastSarokValue->office_subject;
+$saveNewData->office_sutro = $lastSarokValue->office_sutro;
+$saveNewData->description =$lastSarokValue->description;
+
+$saveNewData->save();
+
+
+}
+
+
+
+}
+
+
+
+        // end new code for potrangso
 
 
 
@@ -1809,6 +2327,17 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
      }
 
+$childDataId = $saveNewData->id;
+
+ $unsentAtt = DB::table('note_attachments')
+->where('noteId',$request->noteId)
+->where('nothiId',$request->nothiId)
+->where('status',$request->status)
+->where('admin_id',Auth::guard('admin')->user()->id)
+->whereNull('child_id')
+->update(array('child_id' => $childDataId));
+
+
 
      if($request->final_button == 'সংরক্ষন ও খসড়া'){
 
@@ -1909,6 +2438,15 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
      }
 
+     $childDataId = $saveNewData->id;
+
+     $unsentAtt = DB::table('note_attachments')
+    ->where('noteId',$request->noteId)
+    ->where('nothiId',$request->nothiId)
+    ->where('status',$request->status)
+    ->where('admin_id',Auth::guard('admin')->user()->id)
+    ->whereNull('child_id')
+    ->update(array('child_id' => $childDataId));
 
      if($request->final_button == 'সংশোধন ও খসড়া'){
 

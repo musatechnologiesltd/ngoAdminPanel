@@ -143,6 +143,47 @@ if(!$nothiApproverList){
     </tr>
 </table>
 @foreach($officeDetail as $officeDetails)
+
+<?php
+$potrangshoDraft =  DB::table('potrangsho_drafts')
+                  ->where('sarokId',$officeDetails->id)
+                  ->where('status',$status)
+                  ->orderBy('id','desc')
+                  ->first();
+
+  ?>
+
+
+@if(!$potrangshoDraft)
+
+@else
+
+@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+<table class="pdf_table">
+    <tr style="font-weight:bold;">
+        <td style="width: 7%;font-weight:bold;"> বিষয়: </td>
+        <td>{!! $potrangshoDraft->office_subject !!} </td>
+    </tr>
+</table>
+
+@if($potrangshoDraft->office_sutro == '<p>(যদি থাকে):...............................................</p>')
+
+@else
+<table class="pdf_table">
+    <tr>
+        <td style="width: 5%;font-weight:bold;"> সূত্র:</td>
+        <td> {!! $potrangshoDraft->office_sutro !!}</td>
+    </tr>
+</table>
+@endif
+<table class="pdf_table">
+    <tr>
+        <td>{!! $potrangshoDraft->description !!}</td>
+    </tr>
+</table>
+
+@else
 <table class="pdf_table">
     <tr style="font-weight:bold;">
         <td style="width: 7%;font-weight:bold;"> বিষয়: </td>
@@ -165,6 +206,12 @@ if(!$nothiApproverList){
         <td>{!! $officeDetails->description !!}</td>
     </tr>
 </table>
+
+@endif
+
+
+@endif
+
 @endforeach
 <?php
     $potroZariListValue =  DB::table('nothi_details')

@@ -102,7 +102,33 @@
                                                         data-bs-toggle="tab" href="#profile-icon" role="tab"
                                                         aria-controls="profile-icon"
                                                         aria-selected="false"><i
-                                                class="icofont icofont-man-in-glasses"></i>পত্রাংশ</a></li>
+                                                class="icofont icofont-files"></i>পত্রাংশ</a></li>
+
+
+                                                  <!-- new code start --->
+
+                                                  @if($status == 'renew')
+
+
+                                                  <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                                                      data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                                                      aria-controls="profile-icon"
+                                                      aria-selected="false"><i
+                                              class="icofont icofont-file-document"></i>এফডি -৮ ফরম</a></li>
+
+                                              <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                                  data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                                  aria-controls="profile-icon"
+                                                  aria-selected="false"><i
+                                          class="icofont icofont-list"></i>নথিপত্র</a></li>
+
+
+                                                  @elseif($status == 'registration')
+
+
+                                                  @endif
+
+                                                  <!-- end new code --->
                             </ul>
                             <div class="tab-content mt-4" id="icon-tabContent">
                                 <div class="tab-pane fade show active" id="icon-home" role="tabpanel"
@@ -114,6 +140,7 @@
 
 
                                  @if(count($childNoteNewList) > 0)
+
 @include('admin.presentDocument.viewChildNoteAddSecondStep')
                                  @else
 @include('admin.presentDocument.viewChildNoteAddFirstStep')
@@ -254,12 +281,13 @@ $potroZariListValueZari =  DB::table('nothi_details')
     ->where('nothId',$nothiId)
     ->where('dakId',$parentId)
     ->where('dakType',$status)
-    ->where('sender',Auth::guard('admin')->user()->id)
+    //->where('sender',Auth::guard('admin')->user()->id)
+    ->where('receiver',Auth::guard('admin')->user()->id)
     ->value('id');
-
+//dd($firstSenderId);
     ?>
 
-@if(empty($firstSenderId))
+@if(!empty($firstSenderId))
 
 <?php
 
@@ -272,7 +300,6 @@ $potroZariListValue =  DB::table('nothi_details')
 
 ?>
 
-@if($potroZariListValue == 1)
 <div class="dropdown me-2">
     <button class="btn btn-primary dropdown-toggle"
             type="button"
@@ -293,8 +320,7 @@ $potroZariListValue =  DB::table('nothi_details')
         </div>
     </div>
 </div>
-@else
-@endif
+
 @endif
 
     {{-- <div class="dropdown me-2">
@@ -382,39 +408,88 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
 
 
+                                                                        <?php
+                                                                        $potrangshoDraft =  DB::table('potrangsho_drafts')
+                                                                                          ->where('sarokId',$officeDetails->id)
+                                                                                          ->where('status',$status)
+                                                                                          ->orderBy('id','desc')
+                                                                                          ->first();
+
+                                                                          ?>
+
+@if(!$potrangshoDraft)
+
+@else
+
+@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+<input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
+<input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
+<div class="d-flex justify-content-start mt-3">
+  <p>বিষয় :</p>{!! $potrangshoDraft->office_subject !!}
+
+
+</div>
+<div class="d-flex justify-content-start">
+  @if($potrangshoDraft->office_sutro == '<p>(যদি থাকে):...............................................</p>')
+
+  @else
+  <p>সুত্রঃ</p>{!! $potrangshoDraft->office_sutro !!}
+  @endif
+  <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+                       <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
+</div>
+<div class="row">
+  <div class="col-xl-12 mt-2">
+
+          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
 
 
 
-                                                                      <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
-                                                                      <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-                                                                      <div class="d-flex justify-content-start mt-3">
-                                                                        <p>বিষয় :</p>{!! $officeDetails->office_subject !!}
 
-
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-start">
-                                                                        @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
-
-                                                                        @else
-                                                                        <p>সুত্রঃ</p>{!! $officeDetails->office_sutro !!}
-                                                                        @endif
-                                                                        <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                                                                                             <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-xl-12 mt-2">
-
-                                                                                <label class="form-label">সম্পাদন শেষ করুন</label>
+                  {!! $potrangshoDraft->description !!}
 
 
 
+  </div>
+</div>
 
-                                                                                        {!! $officeDetails->description !!}
+@else
+<input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
+<input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
+<div class="d-flex justify-content-start mt-3">
+  <p>বিষয় :</p>{!! $officeDetails->office_subject !!}
+
+
+</div>
+<div class="d-flex justify-content-start">
+  @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
+
+  @else
+  <p>সুত্রঃ</p>{!! $officeDetails->office_sutro !!}
+  @endif
+  <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+                       <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
+</div>
+<div class="row">
+  <div class="col-xl-12 mt-2">
+
+          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
 
 
 
-                                                                        </div>
-                                                                    </div>
+
+                  {!! $officeDetails->description !!}
+
+
+
+  </div>
+</div>
+
+@endif
+@endif
+
+
+
 
 
 
@@ -543,6 +618,26 @@ $potroZariListValue =  DB::table('nothi_details')
                                     </div>
                                     @endif
                                 </div>
+
+                                 <!--new code start -->
+
+       @if($status == 'renew')
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.renew_list.formEightPart')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.renew_list.filePart')
+
+       </div>
+       @elseIf($status == 'registration')
+
+       @endif
+
+       <!-- end new code-->
                             </div>
                         </div>
                         </div>
@@ -639,6 +734,63 @@ $potroZariListValue =  DB::table('nothi_details')
 
 
 @section('script')
+
+
+<script>
+    //jQuery('#copyLink1').on("click", function(event){
+
+        $(document).on('click', 'button#attLink1', function () {
+         var name =   $(this).data("name")
+    //event.preventDefault();
+    var value = $(this).attr('href');
+    var snothiId =$('#snothiId').val();
+var sstatus =$('#sstatus').val();
+
+var snoteId =$('#snoteId').val();
+    //navigator.clipboard.writeText(value);
+
+        //   alertify.set('notifier','position','top-center');
+        //   alertify.success('সফলভাবে কপি হয়েছে');
+
+
+        $.ajax({
+    url: "{{ route('addParentAttachment') }}",
+    method: 'get',
+    data: {name:name,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,value:value},
+    success: function(data) {
+
+        location.reload(true);
+        alertify.set('notifier','position','top-center');
+          alertify.success('সফলভাবে কপি হয়েছে');
+
+    }
+    });
+
+    });
+
+    </script>
+
+
+<script>
+    //jQuery('#copyLink1').on("click", function(event){
+
+        $(document).on('click', 'button#copyLink1', function () {
+
+    //event.preventDefault();
+    value = $(this).attr('href');
+    navigator.clipboard.writeText(value);
+
+          alertify.set('notifier','position','top-center');
+          alertify.success('সফলভাবে কপি হয়েছে');
+
+    });
+
+    </script>
+
+
+
+
+
 <script>
 
 

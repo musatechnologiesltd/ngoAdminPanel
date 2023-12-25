@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('parentnote_name_change_id')->unsigned();
             $table->foreign('parentnote_name_change_id')->references('id')->on('parent_note_for_name_changes')->onDelete('cascade');
-            $table->text('office_subject');
+            $table->text('office_subject')->nullable();
             $table->text('office_sutro')->nullable();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

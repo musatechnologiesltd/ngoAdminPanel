@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nothi_first_sender_lists', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('noteId');
-            $table->string('nothId');
-            $table->string('dakId');
-            $table->string('dakType');
-            $table->string('sender',11)->nullable();
-            $table->string('receiver',11)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nothi_first_sender_lists');
+        Schema::dropIfExists('attachments');
     }
 };

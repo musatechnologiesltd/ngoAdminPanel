@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('parent_note_for_fc_one_id')->unsigned();
             $table->foreign('parent_note_for_fc_one_id')->references('id')->on('parent_note_for_fc_ones')->onDelete('cascade');
-            $table->text('office_subject');
+            $table->text('office_subject')->nullable();
             $table->text('office_sutro')->nullable();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

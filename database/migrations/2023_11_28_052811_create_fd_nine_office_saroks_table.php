@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('p_note_for_fd_nine_id')->unsigned();
             $table->foreign('p_note_for_fd_nine_id')->references('id')->on('parent_note_for_fd_nines')->onDelete('cascade');
-            $table->text('office_subject');
+            $table->text('office_subject')->nullable();
             $table->text('office_sutro')->nullable();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

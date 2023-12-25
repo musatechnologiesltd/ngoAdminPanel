@@ -27,6 +27,29 @@
         <p>লিখুন</p>
     </textarea>
 </div>
+<hr>
+
+<?php
+
+$unsentAtt = DB::table('note_attachments')
+->where('noteId',$id)
+->where('nothiId',$nothiId)
+->where('status',$status)
+->where('admin_id',Auth::guard('admin')->user()->id)
+->whereNull('child_id')
+->get();
+
+?>
+
+
+
+ <p class="mt-4">সংযুক্তি({{ count($unsentAtt) }})</p>
+ <ul>
+    @foreach($unsentAtt as $unsentAtts )
+    <li><a target="_blank" href="{{ $unsentAtts->title }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
+    @endforeach
+ </ul>
+
 <div class="d-flex flex-row-reverse mt-3">
 
     <div class="dropdown">

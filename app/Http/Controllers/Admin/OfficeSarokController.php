@@ -20,7 +20,7 @@ use App\Models\FdSevenOfficeSarok;
 use App\Models\FcOneOfficeSarok;
 use App\Models\FcTwoOfficeSarok;
 use App\Models\FdThreeOfficeSarok;
-
+use App\Models\PotrangshoDraft;
 
 
 class OfficeSarokController extends Controller
@@ -30,7 +30,7 @@ class OfficeSarokController extends Controller
 
 
 
-        //dd($request->all());
+       // dd($request->all());
 
 
         $request->validate([
@@ -41,123 +41,26 @@ class OfficeSarokController extends Controller
 
 
         if($request->updateOrSubmit == 1){
+            $dt = new DateTime();
+            $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+            $created_at = $dt->format('Y-m-d h:i:s');
+
+            //new code during update
+            $getAllData = new PotrangshoDraft();
+            $getAllData->adminId = Auth::guard('admin')->user()->id;
+            $getAllData->nothiId = $request->nothiId;
+            $getAllData->sarokId = $request->sorkariUpdateId;
+            $getAllData->noteId = $request->noteId;
+            $getAllData->status = $request->status;
+            $getAllData->SentStatus = 0;
+            $getAllData->office_subject= $request->subject;
+            $getAllData->office_sutro = $request->sutro;
+            $getAllData->description =$request->maindes;
+            $getAllData->created_at =$created_at;
+            $getAllData->save();
+            //end new code during update
 
 
-            if($request->statusForPotrangso == 'registration'){
-
-
-                $saveNewData = RegistrationOfficeSarok::find($request->sorkariUpdateId);
-
-                $saveNewData->office_subject = $request->subject;
-                $saveNewData->office_sutro = $request->sutro;
-                $saveNewData->description =$request->maindes;
-
-                $saveNewData->save();
-
-
-         }elseif($request->statusForPotrangso == 'renew'){
-
-
-             $saveNewData = RenewOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-
-
-         }elseif($request->statusForPotrangso == 'nameChange'){
-
-             $saveNewData = NameChangeOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-
-
-         }elseif($request->statusForPotrangso == 'fdNine'){
-
-             $saveNewData = FdNineOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-
-         }elseif($request->statusForPotrangso == 'fdNineOne'){
-
-             $saveNewData = FdNineOneOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-         }elseif($request->statusForPotrangso == 'fdSix'){
-
-            //dd($request->sorkariUpdateId);
-
-             $saveNewData = FdSixOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-         }elseif($request->statusForPotrangso == 'fdSeven'){
-
-                $saveNewData = FdSevenOfficeSarok::find($request->sorkariUpdateId);
-
-                $saveNewData->office_subject = $request->subject;
-                $saveNewData->office_sutro = $request->sutro;
-                $saveNewData->description =$request->maindes;
-
-                $saveNewData->save();
-
-
-         }elseif($request->statusForPotrangso == 'fcOne'){
-
-             $saveNewData = FcOneOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-         }elseif($request->statusForPotrangso == 'fcTwo'){
-
-
-             $saveNewData = FcTwoOfficeSarok::find($request->sorkariUpdateId);
-
-                $saveNewData->office_subject = $request->subject;
-                $saveNewData->office_sutro = $request->sutro;
-                $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-
-         }elseif($request->statusForPotrangso == 'fdThree'){
-
-             $saveNewData = FdThreeOfficeSarok::find($request->sorkariUpdateId);
-
-             $saveNewData->office_subject = $request->subject;
-             $saveNewData->office_sutro = $request->sutro;
-             $saveNewData->description =$request->maindes;
-
-             $saveNewData->save();
-
-
-         }
 
 
         }else{
@@ -171,14 +74,18 @@ class OfficeSarokController extends Controller
         $created_at = $dt->format('Y-m-d h:i:s');
 
 
+
+
+
+
         if($request->statusForPotrangso == 'registration'){
 
 
             $saveNewData = new RegistrationOfficeSarok();
             $saveNewData->parent_note_regid = $request->parentIdForPotrangso;
-            $saveNewData->office_subject = $request->subject;
-            $saveNewData->office_sutro = $request->sutro;
-            $saveNewData->description =$request->maindes;
+            // $saveNewData->office_subject = $request->subject;
+            // $saveNewData->office_sutro = $request->sutro;
+            // $saveNewData->description =$request->maindes;
             $saveNewData->created_at =$created_at;
             $saveNewData->save();
 
@@ -188,9 +95,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new RenewOfficeSarok();
          $saveNewData->parent_note_for_renew_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -200,9 +107,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new NameChangeOfficeSarok();
          $saveNewData->parentnote_name_change_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -212,9 +119,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new FdNineOfficeSarok();
          $saveNewData->p_note_for_fd_nine_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -223,9 +130,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new FdNineOneOfficeSarok();
          $saveNewData->p_note_for_fd_nine_one_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -233,9 +140,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new FdSixOfficeSarok();
          $saveNewData->parent_note_for_fdsix_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -243,9 +150,9 @@ class OfficeSarokController extends Controller
 
             $saveNewData = new FdSevenOfficeSarok();
             $saveNewData->parent_note_for_fd_seven_id = $request->parentIdForPotrangso;
-            $saveNewData->office_subject = $request->subject;
-            $saveNewData->office_sutro = $request->sutro;
-            $saveNewData->description =$request->maindes;
+            // $saveNewData->office_subject = $request->subject;
+            // $saveNewData->office_sutro = $request->sutro;
+            // $saveNewData->description =$request->maindes;
             $saveNewData->created_at =$created_at;
             $saveNewData->save();
 
@@ -254,9 +161,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new FcOneOfficeSarok();
          $saveNewData->parent_note_for_fc_one_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -265,9 +172,9 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new FcTwoOfficeSarok();
          $saveNewData->parent_note_for_fc_two_id = $request->parentIdForPotrangso;
-            $saveNewData->office_subject = $request->subject;
-            $saveNewData->office_sutro = $request->sutro;
-            $saveNewData->description =$request->maindes;
+            // $saveNewData->office_subject = $request->subject;
+            // $saveNewData->office_sutro = $request->sutro;
+            // $saveNewData->description =$request->maindes;
             $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
@@ -276,14 +183,31 @@ class OfficeSarokController extends Controller
 
          $saveNewData = new FdThreeOfficeSarok();
          $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
-         $saveNewData->office_subject = $request->subject;
-         $saveNewData->office_sutro = $request->sutro;
-         $saveNewData->description =$request->maindes;
+        //  $saveNewData->office_subject = $request->subject;
+        //  $saveNewData->office_sutro = $request->sutro;
+        //  $saveNewData->description =$request->maindes;
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
 
      }
+
+     $sarokId = $saveNewData->id;
+
+     $getAllData = new PotrangshoDraft();
+     $getAllData->adminId = Auth::guard('admin')->user()->id;
+     $getAllData->nothiId = $request->nothiId;
+     $getAllData->sarokId = $sarokId;
+     $getAllData->noteId = $request->noteId;
+     $getAllData->status = $request->status;
+     $getAllData->SentStatus = 0;
+     $getAllData->office_subject= $request->subject;
+     $getAllData->office_sutro = $request->sutro;
+     $getAllData->description =$request->maindes;
+     $getAllData->created_at =$created_at;
+     $getAllData->save();
+
+
     }
 
     if($request->updateOrSubmit == 1){
@@ -316,7 +240,7 @@ class OfficeSarokController extends Controller
             return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }
 
-        
+
         // if($request->receiveEnd == 1){
         //     return redirect('admin/viewChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
         // }else{
