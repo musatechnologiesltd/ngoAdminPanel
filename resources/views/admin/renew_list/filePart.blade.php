@@ -64,7 +64,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
                 <button  href="{{ route('renewalFileDownload', ['title' =>'final_fd_eight_form', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="কর্মকর্তার স্বাক্ষর ও তারিখ সহ এফডি -৮ এর ফাইনাল কপি"><i class="fa fa-paperclip"></i></button>
-                <button  href="{{ route('renewalFileDownload', ['title' =>'final_fd_eight_form', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+                <button  href="{{ route('renewalFileDownload', ['title' =>'final_fd_eight_form', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
                 @else
 
                 @endif
@@ -105,7 +105,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'trustees', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টিজ তালিকা (সংশ্লিষ্ট দেশের পিস অব জাস্টিস কতৃক নোটারীকৃত /সত্যায়িত )"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'trustees', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'trustees', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -148,7 +148,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'laws_or_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার বাই লজ (By laws)/গঠনতন্ত্র  (সংশ্লিষ্ট দেশের পিস অব জাস্টিস কতৃক নোটারীকৃত /সত্যায়িত )"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'laws_or_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'laws_or_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -187,7 +187,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'work_procedure', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টিজ সভার কার্যবিবরণী"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'work_procedure', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'work_procedure', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -228,7 +228,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'last_ten_years', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার বিগত ১০(দশ ) বছরের অডিট রিপোর্ট  এবং বার্ষিক প্রতিবেদনের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'last_ten_years', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'last_ten_years', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -268,7 +268,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'registration_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার মূল কার্যালয়ের নিবন্ধনপত্রের (সংশ্লিষ্ট দেশের নোটারীকৃত /সত্যায়িত ) অনুলিপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'registration_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'registration_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -308,7 +308,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'registration_or_renewal_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সর্বশেষ নিবন্ধন /নবায়ন সনদপত্রের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'registration_or_renewal_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'registration_or_renewal_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -345,7 +345,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'right_to_information_act', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="Right To Information Act- ২০০৯ - এর আওতায় - Focal Point নিয়োগ করত:ব্যুরোকে অবহিতকরণ পত্রের অনুলিপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'right_to_information_act', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'right_to_information_act', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -388,7 +388,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'fee_if_changed', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার গঠনতন্ত্র পরিবর্তন হয়ে থাকলে নির্ধারিত ফি সহ তার সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'fee_if_changed', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'fee_if_changed', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -430,7 +430,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'primary_registering_authority', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিতো গঠনতন্ত্রের সত্যায়িত কপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'primary_registering_authority', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'primary_registering_authority', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -473,7 +473,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'clean_copy_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার চেয়ারম্যান ও সেক্রেটারি কর্তৃক যৌথ স্বাক্ষরিত গঠনতন্ত্র পরিচ্ছন্ন কপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'clean_copy_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'clean_copy_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -514,7 +514,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'payment_of_change_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ফি জমা প্রদানের চালানের মূলকপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'payment_of_change_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'payment_of_change_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -552,7 +552,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'section_sub_section_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ও সংযোজনের বিষয়ে সাধারণ সভার কার্যবিবরণীর সত্যায়িত কপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'section_sub_section_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'section_sub_section_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -591,7 +591,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'previous_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="পূর্ব গঠনতন্ত্র ও বর্তমান গঠনতন্ত্রের তুলনামূলক বিবরণী (প্রতি পাতায় সভাপতি ও সম্পাদকের যৌথ স্বাক্ষরসহ)"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'previous_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'previous_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -631,7 +631,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
            @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
            <button  href="{{ route('renewalFileDownload', ['title' =>'organization_if_unchanged', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার গঠনতন্ত্র পরিবর্তন না হয়ে থাকলে 'পরিবর্তন হয়নি' মর্মে  প্রত্যয়ন কপি"><i class="fa fa-paperclip"></i></button>
-           <button  href="{{ route('renewalFileDownload', ['title' =>'organization_if_unchanged', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+           <button  href="{{ route('renewalFileDownload', ['title' =>'organization_if_unchanged', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
            @else
 
            @endif
@@ -683,7 +683,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'registration_renewal_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="নিবন্ধন নবায়ন ফি জমাদানের চালানের মূলকপিসহ সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'registration_renewal_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'registration_renewal_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -722,7 +722,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'committee_members_list', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="নিবন্ধনকালীন দাখিলকৃত সাধারণ ও নির্বাহী কমিটির তালিকা এবং বর্তমান সাধারণ সদস্য ও নির্বাহী কমিটির তালিকা"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'committee_members_list', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'committee_members_list', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -762,7 +762,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'approval_of_executive_committee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="উপস্থিত সাধারণ সদস্যদের উপস্থিতির স্বাক্ষরিত তালিকাসহ নির্বাহী কমিটি অনুমোদন সংক্রান্ত সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'approval_of_executive_committee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'approval_of_executive_committee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -801,7 +801,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'nid_and_image_of_executive_committee_members', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="নির্বাহী কমিটির সদস্যদের পাসপোর্ট সাইজের ছবিসহ জাতীয় পরিচয়পত্রে সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'nid_and_image_of_executive_committee_members', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'nid_and_image_of_executive_committee_members', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -846,7 +846,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'trustees', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="বোর্ড অব ডিরেক্টরস /বোর্ড অব ট্রাস্টিজ তালিকা"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'trustees', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'trustees', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -885,7 +885,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'laws_or_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="অন্য কোনো আইনে নিবন্ধিত হলে সংশিষ্ট কতৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকার সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'laws_or_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'laws_or_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -926,7 +926,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'work_procedure', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিত গঠনতন্ত্রের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'work_procedure', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'work_procedure', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -965,7 +965,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'last_ten_years', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার বিগত ১০(দশ ) বছরের অডিট রিপোর্ট  এবং বার্ষিক প্রতিবেদনের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'last_ten_years', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'last_ten_years', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1004,7 +1004,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'registration_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name=" সংস্থার মূল কার্যালয়ের নিবন্ধনপত্রের (সংশ্লিষ্ট দেশের নোটারীকৃত /সত্যায়িত ) অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'registration_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'registration_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1042,7 +1042,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'registration_or_renewal_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সর্বশেষ নিবন্ধন /নবায়ন সনদপত্রের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'registration_or_renewal_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'registration_or_renewal_certificate', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1081,7 +1081,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'right_to_information_act', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="Right To Information Act- ২০০৯ - এর আওতায় - Focal Point নিয়োগ করত:ব্যুরোকে অবহিতকরণ পত্রের অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'right_to_information_act', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'right_to_information_act', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1124,7 +1124,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'fee_if_changed', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার গঠনতন্ত্র পরিবর্তন হয়ে থাকলে নির্ধারিত ফি সহ তার সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'fee_if_changed', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'fee_if_changed', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1165,7 +1165,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'primary_registering_authority', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিতো গঠনতন্ত্রের সত্যায়িত কপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'primary_registering_authority', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'primary_registering_authority', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1205,7 +1205,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'clean_copy_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার চেয়ারম্যান ও সেক্রেটারি কর্তৃক যৌথ স্বাক্ষরিত গঠনতন্ত্র পরিচ্ছন্ন কপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'clean_copy_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'clean_copy_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1246,7 +1246,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'payment_of_change_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ফি জমা প্রদানের চালানের মূলকপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'payment_of_change_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'payment_of_change_fee', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1285,7 +1285,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'section_sub_section_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ও সংযোজনের বিষয়ে সাধারণ সভার কার্যবিবরণীর সত্যায়িত কপি"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'section_sub_section_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'section_sub_section_of_the_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1322,7 +1322,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'previous_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="পূর্ব গঠনতন্ত্র ও বর্তমান গঠনতন্ত্রের তুলনামূলক বিবরণী (প্রতি পাতায় সভাপতি ও সম্পাদকের যৌথ স্বাক্ষরসহ)"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'previous_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'previous_constitution', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif
@@ -1364,7 +1364,7 @@ $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
 <button  href="{{ route('renewalFileDownload', ['title' =>'organization_if_unchanged', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার গঠনতন্ত্র পরিবর্তন না হয়ে থাকলে 'পরিবর্তন হয়নি' মর্মে  প্রত্যয়ন কপি (সংশ্লিষ্ট দেশের পিস অব জাস্টিস কতৃক নোটারীকৃত /সত্যায়িত )"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('renewalFileDownload', ['title' =>'organization_if_unchanged', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-warning" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('renewalFileDownload', ['title' =>'organization_if_unchanged', 'id' =>$ngoOtherDocListsFirst->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 @else
 
 @endif

@@ -5,21 +5,57 @@
     </tr>
     <tr>
         <td>পরিচালন পরিকল্পনা</td>
-        <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
+        <td>
+
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
             <i class="fa fa-eye"></i>
-        </a></td>
+        </a>
+
+
+        @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-secondary" id="attLink1"  data-name="পরিচালন পরিকল্পনা"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        @else
+
+        @endif
+
+
+    </td>
     </tr>
     <tr>
         <td>চালানের কপি</td>
-        <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}">
+        <td>
+
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}">
             <i class="fa fa-eye"></i>
-        </a></td>
+        </a>
+        @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-secondary" id="attLink1"  data-name="চালানের কপি"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        @else
+
+        @endif
+
+    </td>
     </tr>
     <tr>
         <td>ট্রেজারি চালানের মূলকপি</td>
-        <td> <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}">
+        <td>
+
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}">
             <i class="fa fa-eye"></i>
-        </a></td>
+        </a>
+        @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}" class="btn btn-secondary" id="attLink1"  data-name="ট্রেজারি চালানের মূলকপি"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        @else
+
+        @endif
+
+    </td>
     </tr>
 
     {{-- <tr>
@@ -35,9 +71,22 @@
         <td>
         সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি(দাতা সংস্থার নাম)
         </td>
-        <td> <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}">
+        <td>
+
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}">
             <i class="fa fa-eye"></i>
-        </a>({{ $all_get_all_source_of_fund_data->name }})</td>
+        </a>({{ $all_get_all_source_of_fund_data->name }})
+
+        @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        @else
+
+        @endif
+
+
+    </td>
     </tr>
 
     @endforeach
@@ -46,9 +95,21 @@
 
     <tr>
     <td>{{ $all_get_all_data_other->information_title }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
-    <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}">
+    <td>
+
+        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}">
         <i class="fa fa-eye"></i>
-    </a></td>
+    </a>
+    @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+    <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="{{ $all_get_all_data_other->information_title }}"><i class="fa fa-paperclip"></i></button>
+    <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+    @else
+
+    @endif
+
+
+</td>
 </tr>
 @endforeach
 
@@ -56,9 +117,20 @@
 
 <tr>
     <td>এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
-    <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
+    <td>
+
+        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
         <i class="fa fa-eye"></i>
-    </a></td>
+    </a>
+    @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+    <button  href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}"><i class="fa fa-paperclip"></i></button>
+    <button  href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+    @else
+
+    @endif
+
+</td>
 </tr>
 
 @endforeach
@@ -120,9 +192,81 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
     <td>Letter Of Intent</td>
 
     @endif
-    <td><a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
+    <td>
+
+    <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
         <i class="fa fa-eye"></i>
-    </a></td>
+    </a>
+
+
+
+    @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+
+    @if($key+1 == 1)
+
+    <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="FD - 1 Form"><i class="fa fa-paperclip"></i></button>
+    @elseif($key+1 == 2)
+
+    <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Form No - 8"><i class="fa fa-paperclip"></i></button>
+@elseif($key+1 == 3)
+
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Certificate Of Incorporation in the Country Of Origin"><i class="fa fa-paperclip"></i></button>
+@elseif($key+1 == 4)
+
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Attested copy of Constitution"><i class="fa fa-paperclip"></i></button>
+@elseif($key+1 == 5)
+
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Activities Report"><i class="fa fa-paperclip"></i></button>
+@elseif($key+1 == 6)
+
+
+
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Decision Of the Committee/Board To Open Office In Bangladesh"><i class="fa fa-paperclip"></i></button>
+
+@elseif($key+1 == 7)
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Letter Of Appoinment Of The Country Representative"><i class="fa fa-paperclip"></i></button>
+@elseif($key+1 == 8)
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Deed Of Agreement Stamp Of TK.300/-with the landlord in Support Of Opening the Office In Bangladesh"><i class="fa fa-paperclip"></i></button>
+@elseif($key+1 == 9)
+
+
+
+<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="Letter Of Intent"><i class="fa fa-paperclip"></i></button>
+
+@endif
+
+
+
+
+
+
+
+    <button  href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="copyLink1"><i class="fa fa-copy"></i></button>
+    @else
+
+    @endif
+
+
+</td>
 </tr>
 
 @endif

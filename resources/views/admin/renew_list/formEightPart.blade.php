@@ -139,7 +139,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
                 <button  href="{{ route('foreginPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-secondary" id="attLink1" data-name="বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-                <button href="{{ route('foreginPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-warning" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+                <button href="{{ route('foreginPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
                 @else
 
                 @endif
@@ -170,7 +170,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
                 <button  href="{{ route('yearlyBudgetPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-secondary" id="attLink1"><i class="fa fa-paperclip" data-name="সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট"></i> সংযুক্তি </button>
-                <button  href="{{ route('yearlyBudgetPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-warning" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+                <button  href="{{ route('yearlyBudgetPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
                 @else
 
                 @endif
@@ -276,7 +276,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
                 <button  href="{{ route('copyOfChalanPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-secondary" id="attLink1" data-name="নিবন্ধন ফি ও ভ্যাট পরিশোধ চালানের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-                <button  href="{{ route('copyOfChalanPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-warning" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+                <button  href="{{ route('copyOfChalanPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
                 @else
 
                 @endif
@@ -306,7 +306,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
                 <button  href="{{ route('dueVatPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-secondary" id="attLink1" data-name="তফসিল -১ এ বর্ণিত যেকোন ফি এর ভ্যাট বকেয়া থাকলে পরিশোধ চালানের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-                <button  href="{{ route('dueVatPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-warning" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+                <button  href="{{ route('dueVatPdfDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
                 @else
 
                 @endif
@@ -374,7 +374,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
                 <button  href="{{ route('changeAcNumberDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="ব্যাংক হিসাব নম্বর পরিবর্তন হয়ে থাকলে ব্যুরোর অনুমোদনপত্রের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-                <button  href="{{ route('changeAcNumberDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-warning" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+                <button  href="{{ route('changeAcNumberDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
                 @else
 
                 @endif

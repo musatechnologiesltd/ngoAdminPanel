@@ -117,7 +117,7 @@
                                                     data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
                                                     aria-controls="profile-icon"
                                                     aria-selected="false"><i
-                                            class="icofont icofont-file-document"></i>এফডি -৮ ফরম</a></li>
+                                            class="icofont icofont-file-document"></i>এফডি - ৮ ফরম</a></li>
 
                                             <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
                                                 data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
@@ -127,7 +127,17 @@
 
 
                                                 @elseif($status == 'registration')
+                                                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                                                    data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                                                    aria-controls="profile-icon"
+                                                    aria-selected="false"><i
+                                            class="icofont icofont-file-document"></i>এফডি - ১ ফরম</a></li>
 
+                                            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                                data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                                aria-controls="profile-icon"
+                                                aria-selected="false"><i
+                                        class="icofont icofont-list"></i>নথিপত্র</a></li>
 
                                                 @endif
 
@@ -612,6 +622,39 @@ $potroZariListValue =  DB::table('nothi_details')
 
        </div>
        @elseIf($status == 'registration')
+
+
+
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @if($ngoTypeData->ngo_type == 'Foreign')
+       @include('admin.registration_list.foreign.fd_one_form_nothi')
+       @else
+
+       @include('admin.registration_list.fd_one_form_nothi')
+
+       @endif
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+
+       @if($ngoTypeData->ngo_type == 'Foreign')
+       @include('admin.registration_list.foreign.registration_document')
+
+       @else
+       @include('admin.registration_list.registration_document')
+
+       @endif
+
+       </div>
+
+
+
+
 
        @endif
 
