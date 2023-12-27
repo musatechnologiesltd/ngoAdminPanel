@@ -157,29 +157,27 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
     <td>
 
         @if($key+1 == 1)
-        এফডি -১ ফরম
-        @elseif($key+1 == 2)
         ফরম নং - ৮
 
-    @elseif($key+1 == 3)
+    @elseif($key+1 == 2)
 
 
  নির্বাহী কমিটির সদস্যদের পাসপোর্ট সাইজের ছবিসহ জাতীয় পরিচয়পত্রে সত্যায়িত অনুলিপি
 
 
-@elseif($key+1 == 4)
+@elseif($key+1 == 3)
 
 
 প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি
 
 
-@elseif($key+1 == 5)
+@elseif($key+1 == 4)
 
 
 গঠনতন্ত্রের (প্রাথমিক নিবন্ধন কতৃপক্ষ কতৃক অনুমোদিত ) সত্যায়িত অনুলিপি
 
 
-@elseif($key+1 == 6)
+@elseif($key+1 == 5)
 
 
 
@@ -188,22 +186,22 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 
 
-@elseif($key+1 == 7)
+@elseif($key+1 == 6)
 
 
 দাতা সংস্থার প্রতিশ্রুতিপত্র (সংস্থার প্রধান কতৃক সত্যায়িত )
 
-@elseif($key+1 == 8)
+@elseif($key+1 == 7)
 
 
 কোড নং -১-০৩২৩-০০০০-১৮৩৬-এ তফসিল-১ নির্ধারিত ফি জমা প্রদান করে ট্রেজারি চালানের মূল কপিসহ
 
-@elseif($key+1 == 9)
+@elseif($key+1 == 8)
 
 
 সংস্থার নির্বাহী কমিটি গঠন সংক্রান্ত সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি (উপস্থিত সাধারণ সদস্যদের উপস্থিতির স্বাক্ষরিত তালিকাসহ )
 
-@elseif($key+1 == 10)
+@elseif($key+1 == 9)
 
 
 সংস্থার সাধারণ সদস্যদের নামের তালিকা (প্রত্যেক সদস্যদের স্বাক্ষরসহ নাম, পিতা /মাতা, স্বামী/স্ত্রী'র নাম ও ঠিকানা ,জাতীয় পরিচয়পত্র নম্বর )
@@ -222,29 +220,26 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
     @if($key+1 == 1)
 
-    <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="এফডি -১ ফরম"><i class="fa fa-paperclip"></i></button>
-    @elseif($key+1 == 2)
-
     <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="ফরম নং - ৮"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 3)
+@elseif($key+1 == 2)
 
 
 
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="নির্বাহী কমিটির সদস্যদের পাসপোর্ট সাইজের ছবিসহ জাতীয় পরিচয়পত্রে সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 4)
+@elseif($key+1 == 3)
 
 
 
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 5)
+@elseif($key+1 == 4)
 
 
 
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের (প্রাথমিক নিবন্ধন কতৃপক্ষ কতৃক অনুমোদিত ) সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 6)
+@elseif($key+1 == 5)
 
 
 
@@ -253,22 +248,22 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার কার্যক্রম প্রতিবেদন"><i class="fa fa-paperclip"></i></button>
 
-@elseif($key+1 == 7)
+@elseif($key+1 == 6)
 
 
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="দাতা সংস্থার প্রতিশ্রুতিপত্র (সংস্থার প্রধান কতৃক সত্যায়িত )"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 8)
+@elseif($key+1 == 7)
 
 
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="কোড নং -১-০৩২৩-০০০০-১৮৩৬-এ তফসিল-১ নির্ধারিত ফি জমা প্রদান করে ট্রেজারি চালানের মূল কপিসহ"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 9)
+@elseif($key+1 == 8)
 
 
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার নির্বাহী কমিটি গঠন সংক্রান্ত সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি (উপস্থিত সাধারণ সদস্যদের উপস্থিতির স্বাক্ষরিত তালিকাসহ )"><i class="fa fa-paperclip"></i></button>
-@elseif($key+1 == 10)
+@elseif($key+1 == 9)
 
 <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার সাধারণ সদস্যদের নামের তালিকা (প্রত্যেক সদস্যদের স্বাক্ষরসহ নাম, পিতা /মাতা, স্বামী/স্ত্রী'র নাম ও ঠিকানা ,জাতীয় পরিচয়পত্র নম্বর )"><i class="fa fa-paperclip"></i></button>
 @endif
