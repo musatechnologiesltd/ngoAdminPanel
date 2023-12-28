@@ -39,9 +39,9 @@ class PostController extends Controller
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-            $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
-            $all_data_for_renew_list = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
-            $all_data_for_name_changes_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
+            $all_data_for_new_list = DB::table('ngo_statuses')->latest()->get();
+            $all_data_for_renew_list = DB::table('ngo_renews')->latest()->get();
+            $all_data_for_name_changes_list = DB::table('ngo_name_changes')->latest()->get();
 
             // $dataFdNine = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
             // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
@@ -52,14 +52,14 @@ class PostController extends Controller
             ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
-            ->whereNull('fd9_one_forms.status')
+            // ->whereNull('fd9_one_forms.status')
             ->orderBY('fd9_one_forms.id','desc')
             ->get();
 
 
             //dd($dataFdNineOne);
 
-            $dataFdNine = DB::table('fd9_forms')->where('status','Ongoing')->latest()->get();
+            $dataFdNine = DB::table('fd9_forms')->latest()->get();
 
             $dataFromFd6Form = DB::table('fd6_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
@@ -184,7 +184,7 @@ class PostController extends Controller
 
 
 
-       
+
 
 // $invID = 1211;
 //         $invID = str_pad($invID, 3, '0', STR_PAD_LEFT);

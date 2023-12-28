@@ -229,12 +229,40 @@
 
                             <p class="mb-3">এমতবস্থায়, অত্র সংস্থার উল্লেখিত পদে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} মেয়াদে উক্ত বিদেশি কর্মকর্তাকে ওয়ার্ক পারমিট ইস্যু করার জন্য বিনীত অনুরোধ করেছি।</p>
 
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-12"></div>
-                        <div class="col-lg-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12"></div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <table class="table table-borderless">
 
-                        </div>
-                    </div>
+                                        <tr>
+                                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                        </tr>
+                                        <tr>
+                                            <td>নামঃ {{  $dataFromNVisaFd9Fd1->chief_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chief_desi }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->created_at)->toDateString() )))}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
 
 
 
@@ -318,6 +346,10 @@
                                 </tr>
                             </tbody>
                         </table>
+
+
+
+
                       </div>
                     </div>
                 </div>
