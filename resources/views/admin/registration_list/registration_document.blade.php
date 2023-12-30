@@ -1,11 +1,13 @@
 <table class="table table-bordered">
     <tr>
         <th>নথির নাম</th>
+        <th></th>
         <th>নথি দেখুন</th>
     </tr>
 
     <tr>
         <td>এফডি -১ ফরম</td>
+        <td></td>
         <td>
 
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdfMain',['id'=>$form_one_data->id]) }}" >
@@ -26,6 +28,7 @@
     </tr>
     <tr>
         <td>পরিচালন পরিকল্পনা</td>
+        <td></td>
         <td>
 
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
@@ -46,6 +49,7 @@
     </tr>
     <tr>
         <td>কোড নং -১-০৩২৩-০০০০-১৮৩৬-এ তফসিল-১ নির্ধারিত ফি জমা প্রদান করে ট্রেজারি চালানের মূল কপিসহ</td>
+        <td></td>
         <td>
 
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}">
@@ -63,6 +67,7 @@
     </tr>
     <tr>
         <td>প্রদেয় ফি এর উপর জাতীয় রাজস্ব বোর্ডের নির্ধারিত কোড নং- ১-১১৩৩- ০০৩৫-০৩১১ এ ১৫% ভ্যাট বাবদ অর্থ জমা প্রদান করে ট্রেজারি চালানের মূলকপিসহ</td>
+        <td></td>
         <td>
 
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}">
@@ -100,11 +105,12 @@
         <td>
         সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি(দাতা সংস্থার নাম)
         </td>
+        <td>{{ $all_get_all_source_of_fund_data->name }}</td>
         <td>
 
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}">
             <i class="fa fa-eye"></i>
-        </a>({{ $all_get_all_source_of_fund_data->name }})
+        </a>
 
         @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
@@ -124,6 +130,7 @@
 
     <tr>
     <td>{{ $all_get_all_data_other->information_title }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
+    <td></td>
     <td>
 
         <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}">
@@ -146,6 +153,7 @@
 
 <tr>
     <td>এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
+    <td></td>
     <td>
 
         <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
@@ -226,6 +234,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 @endif
     </td>
+    <td></td>
     <td>
 
         <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
@@ -320,6 +329,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
     <td>Letter Of Intent</td>
 
     @endif
+    <td></td>
     <td>
 
         <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
@@ -349,6 +359,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 @foreach($form_member_data_doc_renew as $all)
 <tr>
     <td>বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ (প্রকল্প ওয়ারী তথাদির সংক্ষিপ্তসার সংযুক্ত করতে হবে)</td>
+    <td></td>
     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'f']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
@@ -357,6 +368,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 <tr>
     <td>সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট (উৎসসহ)</td>
+    <td></td>
     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'y']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
@@ -365,6 +377,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 <tr>
     <td>নিবন্ধন ফি ও ভ্যাট পরিশোধ করা হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)</td>
+    <td></td>
     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'c']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
@@ -373,6 +386,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 <tr>
     <td>তফসিল-১ এ বর্ণিত যেকোন ফি এর ভ্যাট বকেয়া থাকলে পরিশোধ করা হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)</td>
+    <td></td>
     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'d']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
@@ -381,6 +395,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 <tr>
     <td>ব্যাংক হিসাব নম্বর পরিবর্তন হয়ে থাকলে ব্যুরোর অনুমদনপত্রের কপি সংযুক্ত করতে হবে</td>
+    <td></td>
     <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'ch']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
