@@ -2117,9 +2117,9 @@ if($mainDataStatus == 'registration'){
 
 
         //end new code for seal
-
-
-        return view('admin.post.show',compact('totalBranchList','totalEmptyDesignation','totalDesignationId','totalDesignationWorking','totaluser','totalDesignation','totalBranch','mainstatus','id','allRegistrationDak'));
+        $newMainDaKId = $id;
+//dd($id);
+        return view('admin.post.show',compact('newMainDaKId','totalBranchList','totalEmptyDesignation','totalDesignationId','totalDesignationWorking','totaluser','totalDesignation','totalBranch','mainstatus','id','allRegistrationDak'));
 
     }
 
@@ -2213,8 +2213,9 @@ $mainStatusNew = $request->mainStatusNew;
         $mainstatus = $request->mainstatus;
         $totalBranch = $request->totalBranch;
         $totalDesi= $request->totalDesi;
-$mainStatusNew = $request->mainStatusNew;
+      $mainStatusNew = $request->mainStatusNew;
       $id = $request->mainId;
+      $newMainDakIdOne = $request->mainId;
         //dd($totalDesi);
 
     //     if(!empty($totalBranch) && !empty($totalDesi)){
@@ -2248,7 +2249,7 @@ $mainStatusNew = $request->mainStatusNew;
 
     $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
 
-        $data = view('admin.post.showDataDesignationWise',compact('mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
+        $data = view('admin.post.showDataDesignationWise',compact('newMainDakIdOne','mainStatusNew','id','totalDesi','adminDesignationHistory','totalBranchList'))->render();
         return response()->json($data);
     }
     }

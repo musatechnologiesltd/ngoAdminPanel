@@ -2,7 +2,7 @@
 
     <p id="sm"></p>
     <input type="hidden" value="{{ $mainStatusNew }}" name="mainStatusNew" id="mainStatusNew"/>
-    <input type="hidden" value="{{ $id }}" name="main_id"  id="mainIdNew"/>
+    <input type="hidden" value="{{ $newMainDakIdOne }}" name="main_id"  id="mainIdNewone"/>
     <table class="table table-bordered"  id="cleanData">
         <tr>
             <th>#</th>
@@ -72,7 +72,7 @@
 
 
     var mainStatusNew = $('#mainStatusNew').val();
-    var main_id = $('#mainIdNew').val();
+    var main_id = $('#mainIdNewone').val();
     var admin_id = $('input[name="admin_id[]"]').map(function (idx, ele) {
        return $(ele).val();
     }).get();
@@ -104,7 +104,7 @@
 
 
                  $("#finalMain").remove();
-                 
+
                  $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
 
 

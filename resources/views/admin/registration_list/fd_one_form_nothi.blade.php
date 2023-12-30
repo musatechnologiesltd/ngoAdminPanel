@@ -48,7 +48,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
     <tr>
         <td></td>
         <td>(iv)</td>
-        <td>কোন দেশীয় সংস্থা</td>
+        <td>{{ trans('fd_one_step_one.Country_of_Origin')}}</td>
         <td>: {{ $form_one_data->country_of_origin }}</td>
     </tr>
     <tr>
@@ -78,8 +78,8 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
     <tr>
         <td></td>
         <td></td>
-        <td>গ) ঠিকানা,মোবাইল নম্বর, ইমেইল</td>
-        <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
+        <td>গ) {{ trans('fd_one_step_one.Address_Mobile_Number_Email')}}</td>
+        <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->tele_phone_number.', '.$form_one_data->phone) }}, {{ $form_one_data->email }}</td>
     </tr>
     <tr>
         <td></td>
@@ -114,11 +114,6 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 <i class="fa fa-file-pdf-o"></i> দেখুন
             </a>
 
-
-
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="পরিচালন পরিকল্পনা"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-                <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
-
             @endif
         </td>
     </tr>
@@ -139,7 +134,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <td></td>
         <td></td>
         <td>(i) দাতা/দাতা সংস্থাসমূহের নাম ও ঠিকানা</td>
-        <td>: {{ $all_get_all_source_of_fund_data->name }},{{ $all_get_all_source_of_fund_data->address }}</td>
+        <td>: {{ $all_get_all_source_of_fund_data->name }}, {{ $all_get_all_source_of_fund_data->address }}</td>
     </tr>
     <tr>
         <td></td>
@@ -156,10 +151,6 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" >
             <i class="fa fa-file-pdf-o"></i> দেখুন
         </a>
-
-
-        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="দাতা /দাতাসংস্থার অঙ্গীকারপত্রের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
 
             @endif</td>
     </tr>
@@ -245,10 +236,6 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" >
                 <i class="fa fa-file-pdf-o"></i> দেখুন
             </a>
-
-
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="নিবন্ধন ফি ও ভ্যাট পরিশোধ চালানের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
 
             @endif</td>
     </tr>
@@ -337,10 +324,6 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <a target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" >
                 <i class="fa fa-file-pdf-o"></i> দেখুন
             </a>
-
-
-            <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="অন্য কোন গুরুত্বপূর্ণ তথ্য"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-            <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
             @endif
 
 

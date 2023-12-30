@@ -454,6 +454,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/printCertificateViewDemo', [RegisterController::class, 'printCertificateViewDemo'])->name('printCertificateViewDemo');
 
 
+
+    Route::get('/formOnePdfMain/{id}', [RegisterController::class, 'formOnePdfMain'])->name('formOnePdfMain');
+    Route::get('/formOnePdfMainForeign/{id}', [RegisterController::class, 'formOnePdfMainForeign'])->name('formOnePdfMainForeign');
+
+
     Route::get('/formOnePdf/{main_id}/{id}', [RegisterController::class, 'formOnePdf'])->name('formOnePdf');
     Route::get('/formEightPdf/{main_id}', [RegisterController::class, 'formEightPdf'])->name('formEightPdf');
     Route::get('/sourceOfFund/{id}', [RegisterController::class, 'sourceOfFund'])->name('sourceOfFund');

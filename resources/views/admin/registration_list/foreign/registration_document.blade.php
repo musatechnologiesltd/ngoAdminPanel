@@ -4,6 +4,26 @@
         <th>নথি দেখুন</th>
     </tr>
     <tr>
+        <td>এফডি -১ ফরম</td>
+        <td>
+
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdfMainForeign',['id'=>$form_one_data->id]) }}" >
+            <i class="fa fa-eye"></i>
+        </a>
+
+
+        @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+        <button  href="{{ route('formOnePdfMainForeign',['id'=>$form_one_data->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="এফডি -১ ফরম"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdfMainForeign',['id'=>$form_one_data->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        @else
+
+        @endif
+
+
+    </td>
+    </tr>
+    <tr>
         <td>পরিচালন পরিকল্পনা</td>
         <td>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use Illuminate\Support\Str;
+use Mpdf\Mpdf;
 use Mail;
 use DB;
 use PDF;
@@ -463,6 +464,126 @@ if($request->ngotype == 'old'){
 
 
         return redirect()->back()->with('success','Updated Successfully');
+    }
+
+
+    public function formOnePdfMainForeign($id){
+
+
+        $allformOneData = DB::table('fd_one_forms')->where('id',$id)->first();
+        $getNgoTypeForPdf = DB::table('ngo_type_and_languages')->where('user_id',$allformOneData->user_id)->value('ngo_type');
+        $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$allformOneData->id)->first();
+
+        $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+
+//dd($get_all_data_other);
+
+        $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+        $formOneMemberList = DB::table('fd_one_member_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+        $get_all_source_of_fund_data = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$allformOneData->id)->get();
+
+
+        $file_Name_Custome = '(এফডি-১ ফরম)';
+
+
+
+
+
+
+
+
+    $data =view('admin.registration_list.foreign.fdFormOneInfoPdf',[
+        'getNgoTypeForPdf'=>$getNgoTypeForPdf,
+
+        'get_all_source_of_fund_data'=>$get_all_source_of_fund_data,
+        'formOneMemberList'=>$formOneMemberList,
+        'get_all_data_adviser'=>$get_all_data_adviser,
+        'get_all_data_other'=>$get_all_data_other,
+        'get_all_data_adviser_bank'=>$get_all_data_adviser_bank,
+        'allformOneData'=>$allformOneData
+
+    ])->render();
+
+
+    $pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+                     $mpdf = new Mpdf([
+                        //'default_font_size' => 14,
+                        'default_font' => 'nikosh'
+                    ]);
+
+                    //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+                    $mpdf->WriteHTML($data);
+
+
+
+                    $mpdf->Output($pdfFilePath, "I");
+                    die();
+
+    }
+
+
+    public function formOnePdfMain($id){
+
+        $allformOneData = DB::table('fd_one_forms')->where('id',$id)->first();
+        $getNgoTypeForPdf = DB::table('ngo_type_and_languages')->where('user_id',$allformOneData->user_id)->value('ngo_type');
+        $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$allformOneData->id)->first();
+
+        $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+
+//dd($get_all_data_other);
+
+        $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+        $formOneMemberList = DB::table('fd_one_member_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+        $get_all_source_of_fund_data = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$allformOneData->id)->get();
+
+
+        $file_Name_Custome = '(এফডি-১ ফরম)';
+
+
+
+
+
+
+
+
+    $data =view('admin.registration_list.fdFormOneInfoPdf',[
+        'getNgoTypeForPdf'=>$getNgoTypeForPdf,
+
+        'get_all_source_of_fund_data'=>$get_all_source_of_fund_data,
+        'formOneMemberList'=>$formOneMemberList,
+        'get_all_data_adviser'=>$get_all_data_adviser,
+        'get_all_data_other'=>$get_all_data_other,
+        'get_all_data_adviser_bank'=>$get_all_data_adviser_bank,
+        'allformOneData'=>$allformOneData
+
+    ])->render();
+
+
+    $pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+                     $mpdf = new Mpdf([
+                        //'default_font_size' => 14,
+                        'default_font' => 'nikosh'
+                    ]);
+
+                    //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+                    $mpdf->WriteHTML($data);
+
+
+
+                    $mpdf->Output($pdfFilePath, "I");
+                    die();
+
+
+
+
+
+
     }
 
 

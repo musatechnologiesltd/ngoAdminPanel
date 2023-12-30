@@ -112,7 +112,7 @@ ul {
                 <form class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
 
-                    <input type="hidden" name="access_id" value="{{ $id }}" />
+                    <input type="hidden" name="access_id" value="{{ $newMainDaKId }}" />
                     <div class="card-body">
                         <h5>সিদ্ধান্ত: বিধি মোতাবেক ব্যবস্থা নিন।</h5>
                         <div class="nothi_header_box">
@@ -136,9 +136,9 @@ ul {
                                 <label class="mb-0" for="own_decision">সিদ্ধান্ত নিজে লিখুন </label>
                             </div>
                         </div>
-                        
+
                         <div id="decision_list_detail">
-                            
+
                         </div>
 
                         <!--<input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>-->
@@ -361,14 +361,14 @@ ul {
                                             </div>
 
                                             <div class="d-flex flex-row-reverse" id="lastButton">
-                                                
-                                                
+
+
                                                 @if(count($allRegistrationDak) == 0 )
                                                 <a class="btn btn-danger"  >
                                                     <i class="fa fa-send"></i>
                                               প্রেরণ এর পূর্বে, দয়া করে সিল তৈরী  করুন
                                                 </a>
-                                                
+
                                                 @else
                                                 <button class="btn btn-primary" type="submit" >
                                                     <i class="fa fa-send"></i>
@@ -434,7 +434,7 @@ ul {
                                         <h6>এনজিও বিষয়ক ব্যুরো শাখা {{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalBranch) }} টি, পদ {{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalDesignation) }} টি, শূন্যপদ {{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalEmptyDesignation) }}টি,
                                             কর্মরত {{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalDesignationWorking) }} জন</h6>
                                         <ul class="treeview">
-                                            <input type="hidden" value="{{ $id }}" id="main_id" name="main_id"/>
+                                            <input type="hidden" value="{{ $newMainDaKId }}" id="newMainDaKId" name="main_id"/>
                                             <input type="hidden" value="{{ $mainstatus }}" id="mainstatus" name="mainstatus"/>
 
                                             @foreach($totalBranchList as $key=>$allTotalBranchList)
@@ -581,15 +581,15 @@ ul {
             method: 'GET',
             data: {id:id,status:status},
             success: function(data) {
-                
+
                // alert(data);
 
   if(data  >= 1){
-                    
+
                                      $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
-                    
+
                 }else{
-                    
+
                                      $("#lastButton").html('<a class="btn btn-danger"><i class="fa fa-send"></i>প্রেরণ এর পূর্বে, দয়া করে সিল তৈরী  করুন</a>');
                 }
 
@@ -688,7 +688,7 @@ ul {
     $(document).on('click', '.passBranch1', function(){
 
 
-        var mainId = $('#main_id').val();
+        var mainId = $('#newMainDaKId').val();
         var mainstatus = $(this).data('status');
 
 
@@ -873,14 +873,14 @@ $(document).on('click', '.decision_list', function(){
 
     var decisionVal = $(this).val();
 
-   
+
 
     if(decisionVal == 'সিদ্ধান্ত নিজে লিখুন'){
 
         $('#decision_list_detail').html('<input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" required name="decision_list_detail" />');
 
     $('#mm2').hide();
-    
+
 
     }else{
         $('#mm2').show();
