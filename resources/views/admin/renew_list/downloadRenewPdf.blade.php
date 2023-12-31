@@ -89,19 +89,14 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$all_partiw1->user_id)->v
       ?>
     <tr>
         <td></td>
-        <td>(i)</td>
-        <td>সংস্থার নাম</td>
-        <td>: {{ $reg_name }}</td>
+        <td>অ)</td>
+        <td>সংস্থার নাম ও সংস্থার ঠিকানা</td>
+        <td>: {{ $reg_name }}, {{ $all_partiw1->organization_address}}</td>
     </tr>
+
     <tr>
         <td></td>
-        <td>(ii)</td>
-        <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $all_partiw1->organization_address}}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>(iii)</td>
+        <td>আ)</td>
         <td>নিবন্ধন নম্বর</td>
         <td>:
             <?php
@@ -137,22 +132,17 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
 
       </td>
     </tr>
+
     <tr>
         <td></td>
-        <td>(iv)</td>
-        <td>কোন দেশীয় সংস্থা</td>
-        <td>: {{ $all_partiw1->country_of_origin }}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>(v)</td>
+        <td>ই)</td>
         <td>প্রধান কার্যালয়ের ঠিকানা</td>
         <td>: {{ $all_partiw1->address_of_head_office }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
-        <td>টেলিফোন নম্বর ,মোবাইল নম্বর ,ইমেইল  ও ওয়েব এড্রেস</td>
+        <td>(টেলিফোন নম্বর ,মোবাইল নম্বর ,ইমেইল  ও ওয়েব এড্রেস)</td>
         <td>:
             @if(!$get_all_data_new )
 
@@ -163,7 +153,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
     </tr>
     <tr>
         <td></td>
-        <td>(vi)</td>
+        <td>ঈ)</td>
         <td>বাংলাদেশস্থ সংস্থা প্রধানের তথ্যাদি</td>
         <td></td>
     </tr>
@@ -204,12 +194,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         </td>
         <td>: {{ $all_partiw1->citizenship }}</td>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td>চ) পেশা (বর্তমান পেশা উল্লেখ করতে হবে)</td>
-        <td>: {{ $all_partiw1->profession }}</td>
-    </tr>
+
 
     <tr>
         <td>২.</td>
@@ -250,9 +235,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
 
     <tr>
         <td>৪.</td>
-        <td colspan="3">কর্মকর্তাদের তথ্যাদি পৃথক কাগজে
-            [ঊর্ধ্বতন ৫(পাঁচ) জন কর্মকর্তার]
-            উপস্থাপন করতে হবে
+        <td colspan="3">৫(পাঁচ) জন ঊর্ধ্বতন কর্মকর্তার তথ্যাদি :
         </td>
     </tr>
     @foreach($all_partiw as $key=>$all_all_parti)
@@ -283,7 +266,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
     <tr>
         <td></td>
         <td>(ঘ)</td>
-        <td>নাগরিকত্ব (দ্বৈত নাগরিকত্ব থাকলে উল্লেখ করতে হবে)
+        <td>নাগরিকত্ব (পূর্বতন নাগরিকত্ব যদি থাকে উল্লেখ করতে হবে)
         </td>
         <td>: {{ $all_all_parti->citizenship }}</td>
     </tr>
@@ -324,7 +307,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
 
     <tr>
         <td>৫.</td>
-        <td colspan="2">নিবন্ধন ফি ও ভ্যাট পরিশোধ করা হয়েছে
+        <td colspan="2">নিবন্ধন নবায়ন ফি ও ভ্যাট পরিশোধ করা হয়েছে
             কিনা (চালানের কপি সংযুক্ত করতে
             হবে)
         </td>
