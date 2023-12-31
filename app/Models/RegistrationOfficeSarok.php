@@ -9,7 +9,7 @@ class RegistrationOfficeSarok extends Model
 {
     use HasFactory;
 
-
+    protected $table = "registration_office_saroks";
     protected $fillable = [
         'parent_note_regid',
         'office_subject',

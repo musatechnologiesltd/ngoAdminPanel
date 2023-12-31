@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NothiPermission extends Model
 {
     use HasFactory;
-
+    protected $table = "nothi_permissions";
     protected $fillable = ['nothId','branchId','adminId'];
 }

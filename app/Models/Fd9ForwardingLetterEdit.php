@@ -9,6 +9,8 @@ class Fd9ForwardingLetterEdit extends Model
 {
     use HasFactory;
 
+    protected $table = "fd9_forwarding_letter_edits";
+
     protected $fillable = ['forwarding_letter_id','pdf_part_one','pdf_part_two'];
 
     public function forwardingLetter()

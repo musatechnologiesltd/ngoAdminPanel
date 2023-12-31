@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RenewOfficeSarok extends Model
 {
     use HasFactory;
-
+    protected $table = "renew_office_saroks";
     protected $fillable = [
         'parent_note_for_renew_id ',
         'office_subject',

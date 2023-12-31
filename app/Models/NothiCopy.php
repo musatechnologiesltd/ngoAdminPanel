@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NothiCopy extends Model
 {
     use HasFactory;
+    protected $table = "nothi_copies";
     protected $fillable = ['nothiId','noteId','adminId','nijOfficeId','otherOfficerName','otherOfficerAddress','otherOfficerDesignation','otherOfficerBranch','otherOfficerEmail','otherOfficerPhone','status'];
 }

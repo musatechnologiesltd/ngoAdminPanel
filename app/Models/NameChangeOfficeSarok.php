@@ -9,6 +9,7 @@ class NameChangeOfficeSarok extends Model
 {
     use HasFactory;
 
+    protected $table = "name_change_office_saroks";
 
     protected $fillable = [
         'parentnote_name_change_id',

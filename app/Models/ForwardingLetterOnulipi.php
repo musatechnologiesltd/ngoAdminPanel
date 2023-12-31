@@ -9,6 +9,8 @@ class ForwardingLetterOnulipi extends Model
 {
     use HasFactory;
 
+    protected $table = "forwarding_letter_onulipis";
+
     protected $fillable = ['forwarding_letter_id','onulipi_name'];
 
     public function forwardingLetter()

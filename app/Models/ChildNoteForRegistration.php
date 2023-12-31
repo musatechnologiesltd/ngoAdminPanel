@@ -9,6 +9,8 @@ class ChildNoteForRegistration extends Model
 {
     use HasFactory;
 
+    protected $table = "child_note_for_registrations";
+
     protected $fillable = [
         'parent_note_regid',
         'serial_number',

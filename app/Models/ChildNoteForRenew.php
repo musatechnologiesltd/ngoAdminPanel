@@ -9,6 +9,8 @@ class ChildNoteForRenew extends Model
 {
     use HasFactory;
 
+    protected $table = "child_note_for_renews";
+
     protected $fillable = [
         'parent_note_for_renew_id',
         'serial_number',

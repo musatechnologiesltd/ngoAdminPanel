@@ -9,6 +9,8 @@ class FcTwoOfficeSarok extends Model
 {
     use HasFactory;
 
+    protected $table = "fc_two_office_saroks";
+
     protected $fillable = [
         'parent_note_for_fc_two_id',
         'office_subject',

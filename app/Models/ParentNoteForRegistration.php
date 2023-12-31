@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ParentNoteForRegistration extends Model
 {
     use HasFactory;
-
+    protected $table = "parent_note_for_registrations";
     protected $fillable = [
         'registration_doc_id',
         'serial_number',

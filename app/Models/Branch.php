@@ -12,10 +12,4 @@ class Branch extends Model
     protected $fillable = ['branch_name','branch_code','branch_step'];
 
 
-
-
-
-   
-
-
 }

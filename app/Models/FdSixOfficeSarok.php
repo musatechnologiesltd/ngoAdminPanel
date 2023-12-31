@@ -9,6 +9,8 @@ class FdSixOfficeSarok extends Model
 {
     use HasFactory;
 
+    protected $table = "fd_six_office_saroks";
+
     protected $fillable = [
         'parent_note_for_fdsix_id',
         'office_subject',

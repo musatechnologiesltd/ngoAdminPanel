@@ -9,6 +9,8 @@ class JobHistory extends Model
 {
     use HasFactory;
 
+    protected $table = "job_histories";
+
     protected $fillable = ['designation_list_id','admin_id','start_date','end_date'];
 
     public function admin()
