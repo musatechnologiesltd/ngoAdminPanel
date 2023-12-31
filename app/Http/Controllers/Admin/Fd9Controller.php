@@ -12,6 +12,13 @@ use DB;
 use Session;
 use PDF;
 use File;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 use Carbon\Carbon;
 use Response;
 use App\Models\Fd9ForwardingLetterEdit;
@@ -26,14 +33,46 @@ class Fd9Controller extends Controller
 
 
 
+    public function verified_fd_nine_download($id){
+
+        \LogActivity::addToLog('verified_fd_nine_download');
+
+        $form_one_data = DB::table('fd9_forms')->where('id',$id)->value('verified_fd_nine_form');
+
+        //dd($form_one_data);
+
+         return view('admin.fd9form.verified_fd_nine_download',compact('form_one_data'));
+
+
+    }
+
+
+
 
     public function statusUpdateForFd9(Request $request){
 
 
+        \LogActivity::addToLog('update fdNine Status ');
+
+
         DB::table('fd9_forms')->where('id',$request->id)
         ->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'comment' => $request->comment,
         ]);
+
+
+
+        if($request->status == 'Rejected' || $request->status == 'Correct'){
+
+            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('NGOAB Registration Service || Ngo Renew Status');
+            });
+
+        }
+
+
 
 
         return redirect()->back()->with('success','Updated successfully!');
@@ -46,11 +85,37 @@ class Fd9Controller extends Controller
 
     public function index(){
 
+        \LogActivity::addToLog('view fdNine List ');
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
      ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
      ->select('fd_one_forms.*','fd9_forms.*')
     ->orderBy('fd9_forms.id','desc')
     ->get();
+
+
+        }else{
+
+            $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $convert_name_title = $ngoStatusFDNineDak->implode("f_d_nine_status_id", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
+
+
+            $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+     ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+     ->select('fd_one_forms.*','fd9_forms.*')
+     ->whereIn('fd9_one_forms.id',$separated_data_title)
+    ->orderBy('fd9_forms.id','desc')
+    ->get();
+
+
+
+
+        }
 
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd9form.index',compact('dataFromNVisaFd9Fd1'));
@@ -58,6 +123,8 @@ class Fd9Controller extends Controller
     }
 
     public function downloadForwardingLetter($id){
+
+        \LogActivity::addToLog('download forwarding Letter');
 
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
@@ -90,8 +157,25 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 //dd($editCheck);
 
 
-        $ngoStatus = DB::table('ngo_statuses')
-        ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+//new code for old  and new
+
+      $checkOldorNew = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+    $ngoStatus = DB::table('ngo_renews')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}else{
+
+    $ngoStatus = DB::table('ngo_statuses')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+
+
 
         //dd($dataFromNVisaFd9Fd1->nVisaId);
 
@@ -174,7 +258,9 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
 
     public function show($id){
 
+        \LogActivity::addToLog('view fdNine detail ');
 
+$mainIdFdNine = $id;
 
 
      $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
@@ -182,6 +268,8 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
     ->select('fd_one_forms.*','fd9_forms.*')
     ->where('fd9_forms.id',$id)
      ->first();
+
+$get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
 
 
      $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
@@ -200,8 +288,25 @@ $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
      $ngoTypeData = DB::table('ngo_type_and_languages')
      ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
 
-     $ngoStatus = DB::table('ngo_statuses')
-     ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //new code for old  and new
+
+     $checkOldorNew = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+    $ngoStatus = DB::table('ngo_renews')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}else{
+
+    $ngoStatus = DB::table('ngo_statuses')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+
 
      //dd($dataFromNVisaFd9Fd1->id);
 
@@ -234,11 +339,13 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 
-         return view('admin.fd9form.show_new',compact('ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show_new',compact('get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 
     public function postForwardingLetterForEdit(Request $request){
+
+        \LogActivity::addToLog('store forwarding Letter ');
 
 //dd($request->all());
 
@@ -292,6 +399,8 @@ if(empty($editCheck)){
 
     public function postForwardingLetter(Request $request){
 
+        \LogActivity::addToLog('store forwarding letter');
+
         //dd($request->all());
 
         if ($request->hasfile('forwardingLetter')) {
@@ -319,29 +428,133 @@ if(empty($editCheck)){
 
 
     public function fdNinePdfDownload($id){
+
+        \LogActivity::addToLog('download fdNine pdf ');
+
+
         $data = DB::table('system_information')->first();
-        $get_file_data = DB::table('fd9_forms')->where('id',$id)
-        ->value('verified_fd_nine_form');
 
-        $file_path = $data->system_url.'public/'.$get_file_data;
-                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
 
-        $file=$data->system_url.'public/'.$get_file_data;
 
-        //dd($file);
+        $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_forms.*')
+    ->where('fd9_forms.id',$id)
+     ->first();
 
-        $headers = array(
-                  'Content-Type: application/pdf',
-                );
 
-        // return Response::download($file,$filename.'.pdf', $headers);
+     //dd( $dataFromNVisaFd9Fd1);
 
-        return Response::make(file_get_contents($file), 200, [
-            'content-type'=>'application/pdf',
-        ]);
+
+     $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)
+     ->orderBy('id','desc')->value('id');
+
+     $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)
+     ->get();
+     $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_one');
+
+
+     $editCheck1 = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_two');
+
+
+     $checkNgoTypeForForeginNgo = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+
+
+     //new code for old  and new
+
+     $checkOldorNew = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+    $ngoStatus = DB::table('ngo_renews')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}else{
+
+    $ngoStatus = DB::table('ngo_statuses')
+    ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+
+
+    //  $ngoStatus = DB::table('ngo_statuses')
+    //  ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //dd($dataFromNVisaFd9Fd1->id);
+
+     $statusData = SecruityCheck::where('n_visa_id',$dataFromNVisaFd9Fd1->id)->value('created_at');
+
+$nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->get();
+
+$nVisaEmploye = DB::table('n_visa_employment_information')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+ $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+$nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
+                   ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+
+
+
+
+
+
+
+
+         $file_Name_Custome = 'fd9form';
+         $pdf=PDF::loadView('admin.fd9form.pdf',['ngoStatus'=>$ngoStatus,'checkNgoTypeForForeginNgo'=>$checkNgoTypeForForeginNgo,'dataFromNVisaFd9Fd1'=>$dataFromNVisaFd9Fd1]);
+ return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+
+
+
+
+
+        // $get_file_data = DB::table('fd9_forms')->where('id',$id)
+        // ->value('verified_fd_nine_form');
+
+        // $file_path = $data->system_url.'public/'.$get_file_data;
+        //         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+        // $file=$data->system_url.'public/'.$get_file_data;
+
+        // //dd($file);
+
+        // $headers = array(
+        //           'Content-Type: application/pdf',
+        //         );
+
+        // // return Response::download($file,$filename.'.pdf', $headers);
+
+        // return Response::make(file_get_contents($file), 200, [
+        //     'content-type'=>'application/pdf',
+        // ]);
     }
 
     public function nVisaDocumentDownload($cat,$id){
+
+        \LogActivity::addToLog('nVisa Document Download');
+
+
         $data = DB::table('system_information')->first();
 
         if($cat == 'nomination'){
@@ -489,6 +702,8 @@ $file=url('public/'.$get_file_data);
 
 public function forwardingLetterPost(Request $request){
 
+    \LogActivity::addToLog('forwardingLetterPost');
+
 //dd(234);
     $request->validate([
         'sarok_number' => 'required|string|max:150'
@@ -531,6 +746,8 @@ public function forwardingLetterPost(Request $request){
 
 public function submitForCheck(Request $request){
 
+    \LogActivity::addToLog('nvisaCheck');
+
 
      $fd9FormId = $request->id;
 
@@ -544,14 +761,16 @@ public function submitForCheck(Request $request){
     ->where('fd9_one_forms.id',$fd9FormId)
     ->first();
 
-    //dd($data['wp_tracking_no']);
+    //dd($data);
 
     //dd($jayParsedAry['data']);
     //dd($jayParsedAry['data']['tracking-no']);
     //dd($jayParsedAry['data']['status_id']);
     //dd($jayParsedAry['data']['status_name']);
 
-    $response12 = Http::post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
+    $response12 = Http::withoutVerifying()
+    ->withOptions(["verify"=>false])
+    ->post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
         'client_id' => 5,
         'client_secret' => 'MS1LDLK3DPj0NGFBju55GG6KMPCtTuGOamDoZtKw',
         'grant_type'=>'client_credentials'
@@ -561,19 +780,19 @@ public function submitForCheck(Request $request){
 
 
 $jsonData = $response12->json();
-
+//dd($jsonData);
 $mainToken = $jsonData['access_token'];
 
 
 
-//dd($data);
+
 
 
     $client = new Client();
     $url = "https://mohaapi-uat.oss.net.bd/v1/api/application-submission";
     $response = $client->post($url,[
         'headers' => ['Content-type' => 'application/json', 'Authorization' => 'Bearer ' . $mainToken],
-
+        'verify'=>false,
         'body' => json_encode($data),
     ]);
 
@@ -613,10 +832,18 @@ return redirect()->route('fd9OneForm.show',$fd9FormId)->with('success','Send Suc
 
 public function statusCheck(Request $request){
 
+    \LogActivity::addToLog('nvisa status check');
+
     $mainNVisaId = $request->mainId;
 
-    $form9Id = DB::table('fd9_forms')
-            ->where('n_visa_id',$mainNVisaId)->value('id');
+    // $form9Id = DB::table('fd9_forms')
+    //         ->where('n_visa_id',$mainNVisaId)->value('id');
+
+
+
+
+            $fdNineOneId = DB::table('n_visas')->where('id',$mainNVisaId)
+            ->value('fd9_one_form_id');
 
     $secruityList = DB::table('secruity_checks')
     ->where('n_visa_id',$mainNVisaId)->first();
@@ -634,7 +861,9 @@ public function statusCheck(Request $request){
 
 
 
-    $response12 = Http::post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
+    $response12 = Http::withoutVerifying()
+    ->withOptions(["verify"=>false])
+    ->post('https://mohaapi-uat.oss.net.bd/v1/oauth/token', [
         'client_id' => 5,
         'client_secret' => 'MS1LDLK3DPj0NGFBju55GG6KMPCtTuGOamDoZtKw',
         'grant_type'=>'client_credentials'
@@ -652,7 +881,7 @@ $client = new Client();
 $url = "https://mohaapi-uat.oss.net.bd/v1/api/check-application-status";
 $response = $client->post($url,[
     'headers' => ['Content-type' => 'application/json', 'Authorization' => 'Bearer ' . $mainToken],
-
+'verify'=>false,
     'body' => json_encode($data),
 ]);
 
@@ -667,7 +896,7 @@ $covertArray = json_decode($response,true);
     $statusName = $covertArray['data']['status_name'];
 
 
-    DB::table('fd9_forms')->where('id', $form9Id)
+    DB::table('fd9_one_forms')->where('id', $fdNineOneId)
     ->update([
         'status' => $statusName
      ]);

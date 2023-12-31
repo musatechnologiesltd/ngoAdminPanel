@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-রোল তালিকা 
+রোল তালিকা
 @endsection
 
 
@@ -103,13 +103,15 @@
                                                 <td>
 
 
+                                                    <button type="button"  onclick="location.href = '{{ route('role.edit',$role->id) }}';"
+                                                        class="btn btn-primary waves-light waves-effect  btn-sm mt-2" >
+                                                        <i class="fa fa-pencil"></i></button>
 
 
-                                                        <a href="{{ route('role.edit',$role->id) }}" type="button" class="btn-sm btn btn-primary waves-light waves-effect"><i class="fa fa-edit"></i></a>
 
 
 
-                                                        <button type="button" class="btn-sm btn btn-danger waves-light waves-effect" onclick="deleteTag({{ $role->id }})"><i class="fa fa-trash-o"></i></button>
+                                                        <button type="button" class="btn-sm btn btn-danger waves-light waves-effect mt-2" onclick="deleteTag({{ $role->id }})"><i class="fa fa-trash-o"></i></button>
 
  <form id="delete-form-{{ $role->id }}" action="{{ route('role.destroy',$role->id) }}" method="POST" style="display: none;">
   @method('DELETE')

@@ -40,7 +40,7 @@
                 <form class="custom-validation" action="{{ route('branchList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                 <div class="mb-3">
-                    <label class="form-label" for="">শাখার নাম</label>
+                    <label class="form-label" for="">শাখার নাম <span style="color:red;">*</span></label>
                     <input class="form-control" id="" name="branch_name" type="text" placeholder="" required>
 
                     <input type="hidden" class="form-control form-control-sm" value="{{ $stepValue+1 }}" name="branch_step" placeholder=""  readonly>
@@ -48,13 +48,13 @@
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="">শাখা কোড</label>
+                    <label class="form-label" for="">শাখা কোড <span style="color:red;">*</span></label>
                     <input class="form-control" id="" name="branch_code" type="text" placeholder="" required>
 
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12">
-                    <label for="branch_step">শাখা ধাপ</label>
+                    <label for="branch_step">শাখা ধাপ <span style="color:red;">*</span></label>
                     <input type="text" class="form-control form-control-sm" value="{{ $stepValue+1 }}" name="branch_step1" placeholder=""  readonly>
                 </div>
                 <small class="text-danger" id="result0"></small>
@@ -113,19 +113,19 @@
                                                           @csrf
                                                           <div class="row">
                                                               <div class="form-group col-md-12 col-sm-12">
-                                                                  <label for="name">শাখার নাম</label>
+                                                                  <label for="name">শাখার নাম <span style="color:red;">*</span></label>
                                                   <input type="text" class="form-control form-control-sm" id="name" name="branch_name" placeholder="শাখার নাম" value="{{ $AllBranchLists->branch_name}}">
 
 
                                                               </div>
                                                               <div class="form-group col-md-12 col-sm-12">
-                                                                  <label for="email">শাখা কোড</label>
+                                                                  <label for="email">শাখা কোড <span style="color:red;">*</span></label>
                                                                   <input type="text" class="form-control form-control-sm" id="email" name="branch_code" placeholder="শাখা কোড" value="{{ $AllBranchLists->branch_code }}">
                                                               </div>
 
 
                                                               <div class="form-group col-md-12 col-sm-12">
-                                                                <label for="branch_step">শাখা ধাপ</label>
+                                                                <label for="branch_step">শাখা ধাপ <span style="color:red;">*</span></label>
                                                                 <input type="text" class="form-control form-control-sm" id="branch_step{{ $AllBranchLists->id }}" name="branch_step" placeholder="শাখা ধাপ" value="{{ $AllBranchLists->branch_step }}">
                                                             </div>
                                                             <small class="text-danger" id="result{{ $AllBranchLists->id  }}"></small>

@@ -5,7 +5,24 @@ $get_user_id1 = DB::table('fd_one_forms')->where('id',$ngoId)->value('registrati
 ?>
 Dear <b>{{$get_user_id}}</b>,
 
+@if($id == 'Accepted')
+
 your NGO registration has been {{ $id }}. officially registered!.
+
+@elseif($id == 'Rejected' || $id == 'Correct')
+
+Unfortunately,
+
+<b>
+@if($id = 'Correct')
+your NGO registration need some Correction
+@else
+your NGO registration has been {{ $id }}
+
+@endif
+</b>
+
+@endif
 
 
 

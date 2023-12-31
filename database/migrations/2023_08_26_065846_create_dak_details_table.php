@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('dak_details', function (Blueprint $table) {
             $table->id();
             $table->string('sender_id')->nullable();
+         
+
+            $table->string('comment')->nullable();
+            $table->string('main_file')->nullable();
+            $table->string('access_id')->nullable();
+
             $table->string('decision_list')->nullable();
             $table->string('decision_list_detail')->nullable();
             $table->string('priority_list')->nullable();

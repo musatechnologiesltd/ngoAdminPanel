@@ -42,150 +42,36 @@
                             <div class="table-responsive product-table mb-0 m-t-30">
                                 <table class="display" id="basic-1">
                                     <tbody>
+                                        
 
-                                        @foreach($all_data_for_new_list as $allStatusData)
+                                      @include('admin.post.registrationDakFirstStep')
 
-                                        <?php
-
-                                     $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-
-                                     $decesionNameId = DB::table('ngo_registration_daks')
-                        ->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
-
-                                     $decesionName = DB::table('dak_details')
-                        ->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
-
-                                        ?>
-                                    <tr>
-                                        <td style="text-align:left;">
-                                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                            প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
-                                            প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
-                                            বিষয়ঃ <b> এনজিও নিবন্ধনের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                                            {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
-                                        </td>
-                                        <td style="text-align:right;">
-                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-                                    @foreach($all_data_for_renew_list as $allStatusData)
-
-                                    <?php
-
-                                 $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-
-                                 $decesionNameId = DB::table('ngo_renew_daks')
-                    ->where('renew_status_id',$allStatusData->id)->value('dak_detail_id');
-
-                                 $decesionName = DB::table('dak_details')
-                    ->where('id',$decesionNameId)->where('status','renew')->value('decision_list');
-
-                                    ?>
-                                <tr>
-                                    <td style="text-align:left;">
-                                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
-                                        প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
-                                        বিষয়ঃ <b> এনজিও নিবন্ধন নবায়নের নোটিশ                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                                        {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
-                                    </td>
-                                    <td style="text-align:right;">
-                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                      @include('admin.post.renewDakFirstStep')
 
 
-                                @foreach($all_data_for_name_changes_list as $allStatusData)
-
-                                <?php
-
-                             $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-
-                             $decesionNameId = DB::table('ngo_name_change_daks')
-                ->where('name_change_status_id',$allStatusData->id)->value('dak_detail_id');
-
-                             $decesionName = DB::table('dak_details')
-                ->where('id',$decesionNameId)->where('status','nameChange')->value('decision_list');
-
-                                ?>
-                            <tr>
-                                <td style="text-align:left;">
-                                    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                    প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
-                                    প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
-                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                                    {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
-                                </td>
-                                <td style="text-align:right;">
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->fd_one_form_id) }}';">দেখুন</button>
-                                </td>
-                            </tr>
-                            @endforeach
+                                      @include('admin.post.nameChangeDakFirstStep')
 
 
-                            @foreach($dataFdNine as $allStatusData)
-
-                            <?php
-
-                         $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-
-                         $decesionNameId = DB::table('ngo_f_d_nine_daks')
-            ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
-
-                         $decesionName = DB::table('dak_details')
-            ->where('id',$decesionNameId)->where('status','fdNine')->value('decision_list');
-
-                            ?>
-                        <tr>
-                            <td style="text-align:left;">
-                                উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
-                                প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
-                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা) নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                                {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
-                            </td>
-                            <td style="text-align:right;">
-                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->id) }}';">দেখুন</button>
-                            </td>
-                        </tr>
-                        @endforeach
+                                      @include('admin.post.fdNineDakFirstStep')
 
 
-                        @foreach($dataFdNineOne as $allStatusData)
+                                      @include('admin.post.fdNineOneDakFirstStep')
 
-                        <?php
 
-                     $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+                                      @include('admin.post.fdSixDakFirstStep')
 
-                     $decesionNameId = DB::table('ngo_f_d_nine_daks')
-        ->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
 
-                     $decesionName = DB::table('dak_details')
-        ->where('id',$decesionNameId)
-        ->where('status','fdNineOne')->value('decision_list');
+                                      @include('admin.post.fdSevenDakFirstStep')
 
-                        ?>
-                    <tr>
-                        <td style="text-align:left;">
-                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                            প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
-                            প্রাপকঃ {{ Auth::guard('admin')->user()->admin_name_ban }}</span>  <br>
-                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ                                      {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-                            {{-- সিধান্তঃ <span style="color:blue;"> {{ $decesionName  }}। </span> --}}
-                        </td>
-                        <td style="text-align:right;">
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">পাঠান</button>
-                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->id) }}';">দেখুন</button>
-                        </td>
-                    </tr>
-                    @endforeach
+                                      @include('admin.post.fcOneDakFirstStep')
+
+
+                                      @include('admin.post.fcTwoDakFirstStep')
+
+
+                                      @include('admin.post.fdThreeDakFirstStep')
+
+
 
                                     </tbody>
                                 </table>

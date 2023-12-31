@@ -30,6 +30,9 @@ class SystemInformationController extends Controller
                }
 
 
+               \LogActivity::addToLog('View System Information.');
+
+
         $systemInformation = SystemInformation::all();
         return view('admin.systemInformation.index',compact('systemInformation'));
     }
@@ -42,6 +45,9 @@ class SystemInformationController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
+
+
+               \LogActivity::addToLog('System  Info Update.');
 
         $request->validate([
             'name' => 'required|string',
@@ -108,6 +114,9 @@ class SystemInformationController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
+
+
+               \LogActivity::addToLog('System  Info Update.');
 
         $time_dy = time().date("Ymd");
 

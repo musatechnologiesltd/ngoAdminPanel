@@ -48,7 +48,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
     <tr>
         <td></td>
         <td>(iv)</td>
-        <td>কোন দেশীয় সংস্থা</td>
+        <td>{{ trans('fd_one_step_one.Country_of_Origin')}}</td>
         <td>: {{ $form_one_data->country_of_origin }}</td>
     </tr>
     <tr>
@@ -78,8 +78,8 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
     <tr>
         <td></td>
         <td></td>
-        <td>গ) ঠিকানা,মোবাইল নম্বর, ইমেইল</td>
-        <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
+        <td>গ) {{ trans('fd_one_step_one.Address_Mobile_Number_Email')}}</td>
+        <td>:{{ $form_one_data->address }}, {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->tele_phone_number.', '.$form_one_data->phone) }}, {{ $form_one_data->email }}</td>
     </tr>
     <tr>
         <td></td>
@@ -134,7 +134,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <td></td>
         <td></td>
         <td>(i) দাতা/দাতা সংস্থাসমূহের নাম ও ঠিকানা</td>
-        <td>: {{ $all_get_all_source_of_fund_data->name }},{{ $all_get_all_source_of_fund_data->address }}</td>
+        <td>: {{ $all_get_all_source_of_fund_data->name }}, {{ $all_get_all_source_of_fund_data->address }}</td>
     </tr>
     <tr>
         <td></td>
@@ -331,7 +331,14 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
     </tr>
 
     </tbody>
+
+
+
+
+
+
 </table>
+
 </div>
 
 </div>
@@ -339,80 +346,8 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
 aria-labelledby="pills-darkprofile-tab">
 <div class="mb-0 m-t-30">
 <div class="table-responsive">
-<table class="table table-bordered overflow-scroll">
-    <tr>
-        <th rowspan="2">ক্রঃ নং</th>
-        <th rowspan="2">নাম ও পদবী</th>
-        <th rowspan="2">জন্ম তারিখ</th>
-        <th rowspan="2">এনএইডি এবং মোবাইল নং</th>
-        <th rowspan="2">বাবার নাম</th>
-        <th colspan="2">ঠিকানা</th>
-        <th rowspan="2">স্বামী/স্ত্রীর নাম</th>
-        <th rowspan="2">শিক্ষাগত যোগ্যতা</th>
-        <th colspan="3">পেশা</th>
-        <th rowspan="2">তিনি কি অন্য কোন এনজিওর সদস্য বা
-            পরিষেবাধারী ছিলেন (যদি তা হয় তবে অনুগ্রহ করে
-            চিহ্নিত করুন)
-        </th>
-        <th rowspan="2">মন্তব্য</th>
-        <th rowspan="2">স্বাক্ষর এবং তারিখ</th>
-    </tr>
-    <tr>
-        <th>বর্তমান ঠিকানা</th>
-        <th>স্থায়ী ঠিকানা</th>
-        <th>সরকারী/আধা সরকারী/সরকারি স্বায়ত্তশাসিত</th>
-        <th>ব্যক্তিগত সেবা</th>
-        <th>স্ব সেবা</th>
-    </tr>
-    @foreach($form_eight_data as $key=>$all_all_parti)
-<tr>
-<td>{{  $key+1 }}</td>
-<td>{{ $all_all_parti->name }} & {{ $all_all_parti->desi }}</td>
-<td>
-
-<?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
 
 
-{{  App\Http\Controllers\Admin\CommonController::englishToBangla($start_date_one) }}
 
 
-</td>
-<td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->nid_no) }} & {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->phone) }}</td>
-<td>{{ $all_all_parti->father_name }}</td>
-<td>{{ $all_all_parti->present_address }}</td>
-<td>{{ $all_all_parti->permanent_address }}</td>
-<td>{{ $all_all_parti->name_supouse }}</td>
-<td>{{ $all_all_parti->edu_quali }}</td>
-<td>
 
-@if($all_all_parti->profession  == 'Govt./Semi Govt./Govt Autonomous' || $all_all_parti->profession  == 'সরকারি/আধা/সরকারি স্বায়ত্তশাসিত')
-
-{{ $all_all_parti->job_des }}
-@else
--
-@endif
-
-
-</td>
-<td>@if($all_all_parti->profession  == 'Private Service' || $all_all_parti->profession  == 'ব্যক্তিগত সেবা')
-
-{{ $all_all_parti->job_des }}
-@else
--
-@endif</td>
-<td>@if($all_all_parti->profession  == 'Self Service' || $all_all_parti->profession  == 'স্ব সেবা')
-
-{{ $all_all_parti->job_des }}
-@else
--
-@endif</td>
-<td>{{ $all_all_parti->service_status }}</td>
-<td></td>
-<td>
-
-
-</td>
-
-</tr>
-@endforeach
-</table>

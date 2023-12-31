@@ -40,7 +40,7 @@
                         <table class="display" id="basic-1">
                             <thead>
                             <tr>
-                                <th>এনজিও ডাইরি নম্বর </th>
+                                <th>নিবন্ধন নম্বর</th>
                                 <th>এনজিওর নাম & ঠিকানা</th>
                                 <th>বিদেশীর নাম</th>
                                 <th>স্টেটাস</th>
@@ -79,11 +79,35 @@
                                 <td><h6> {{ $allDataFromNVisaFd9Fd1->organization_name_ban }} </h6><span>Address: {{ $allDataFromNVisaFd9Fd1->organization_address }}</span></td>
                                 <td>{{ $allDataFromNVisaFd9Fd1->foreigner_name_for_subject }} </td>
                                 <td class="font-success">
-@if(empty($allDataFromNVisaFd9Fd1->status))
-চলমান
-                                    @else
-Confirmed
-                                    @endif
+                                    @if(empty($allDataFromNVisaFd9Fd1->status) || $allDataFromNVisaFd9Fd1->status == 'Ongoing')
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                    চলমান
+                                    </button>
+                                                                       @elseif($allDataFromNVisaFd9Fd1->status == 'Accepted' || $allDataFromNVisaFd9Fd1->status == 'Submitted' )
+
+                                                                        <button class="btn btn-secondary btn-xs" type="button">
+                                                                            গৃহীত
+
+                                                                        </button>
+
+                                                                        @elseif($allDataFromNVisaFd9Fd1->status == 'Correct')
+                                                                        <button class="btn btn-secondary btn-xs" type="button">
+                                                                            সংশোধন করুন
+
+                                                                        </button>
+
+                                                                         @elseif($allDataFromNVisaFd9Fd1->status == 'Submitted')
+                                                                          <button class="btn btn-secondary btn-xs" type="button">
+                                                                         জমা দেওয়া হয়েছে 
+
+
+                                                                        </button>
+                                                                        @else
+                                                                        <button class="btn btn-secondary btn-xs" type="button">
+                                                                            প্রত্যাখ্যান
+
+                                                                        </button>
+                                                                        @endif
 
                                 </td>
                                 <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allDataFromNVisaFd9Fd1->created_at) }}</td>

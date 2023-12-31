@@ -12,7 +12,15 @@ use App\Models\Namechange;
 use App\Models\Renew;
 use App\Models\Duration;
 use Carbon\Carbon;
+use Mpdf\Mpdf;
 use Response;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 class RenewController extends Controller
 {
     public $user;
@@ -27,6 +35,60 @@ class RenewController extends Controller
     }
 
 
+    public function viewFormEightPdf($id){
+
+        //dd(33);
+        $get_all_data_new = DB::table('ngo_renew_infos')->where('id',$id)->first();
+
+        //$getUserIdFrom = NgoRenew::where('id',base64_decode($id))->first();
+        $all_partiw1 = DB::table('fd_one_forms')->where('id',$get_all_data_new->fd_one_form_id)->first();
+
+        //dd($all_partiw1);
+
+        $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$get_all_data_new->fd_one_form_id)->get();
+        $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$get_all_data_new->fd_one_form_id)->first();
+
+
+        $file_Name_Custome = 'fd_eight_form';
+
+
+
+
+
+
+
+
+
+    $data =view('admin.renew_list.downloadRenewPdf',[
+                'get_all_data_new'=>$get_all_data_new,
+
+                'all_partiw1'=>$all_partiw1,
+                'all_partiw'=>$all_partiw,
+                 'get_all_data_adviser_bank'=>$get_all_data_adviser_bank
+
+            ])->render();
+
+
+    $pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+                     $mpdf = new Mpdf([
+                        //'default_font_size' => 14,
+                        'default_font' => 'nikosh'
+                    ]);
+
+                    //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+                    $mpdf->WriteHTML($data);
+
+
+
+                    $mpdf->Output($pdfFilePath, "I");
+                    die();
+
+
+    }
+
 
 
 
@@ -40,7 +102,29 @@ class RenewController extends Controller
         }
 
 
-        $all_data_for_new_list = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
+        \LogActivity::addToLog('View New Renew List.');
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+        $all_data_for_new_list = DB::table('ngo_renews')
+        ->where('status','Ongoing')->latest()->get();
+
+        }else{
+
+            $ngoStatusRenew = NgoRenewDak::where('status',1)
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $convert_name_title = $ngoStatusRenew->implode("renew_status_id", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
+
+
+            $all_data_for_new_list = DB::table('ngo_renews')
+            ->whereIn('id',$separated_data_title)
+            ->where('status','Ongoing')->latest()->get();
+
+
+        }
 
 
       return view('admin.renew_list.new_renew_list',compact('all_data_for_new_list'));
@@ -55,7 +139,34 @@ class RenewController extends Controller
         }
 
 
-        $all_data_for_new_list = DB::table('ngo_renews')->where('status','Rejected')->latest()->get();
+        \LogActivity::addToLog('View Revision Renew List.');
+
+
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_renews')
+           ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+            }else{
+
+                $ngoStatusRenew = NgoRenewDak::where('status',1)
+                ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+                $convert_name_title = $ngoStatusRenew->implode("renew_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+                $all_data_for_new_list = DB::table('ngo_renews')
+                ->whereIn('id',$separated_data_title)
+                ->whereIn('status',['Rejected','Correct'])->latest()->get();
+
+
+            }
+
+
+        $all_data_for_new_list = DB::table('ngo_renews')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
       return view('admin.renew_list.revision_renew_list',compact('all_data_for_new_list'));
@@ -69,8 +180,34 @@ class RenewController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        \LogActivity::addToLog('View Already Renew List.');
 
-        $all_data_for_new_list = DB::table('ngo_renews')->where('status','Accepted')->latest()->get();
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
+
+
+            $all_data_for_new_list = DB::table('ngo_renews')
+            ->where('status','Accepted')->latest()->get();
+
+            }else{
+
+                $ngoStatusRenew = NgoRenewDak::where('status',1)
+                ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+                $convert_name_title = $ngoStatusRenew->implode("renew_status_id", " ");
+                $separated_data_title = explode(" ", $convert_name_title);
+
+
+                $all_data_for_new_list = DB::table('ngo_renews')
+                ->whereIn('id',$separated_data_title)
+                ->where('status','Accepted')->latest()->get();
+
+
+            }
+
+
+
+        //$all_data_for_new_list = DB::table('ngo_renews')->where('status','Accepted')->latest()->get();
 
 
       return view('admin.renew_list.already_renew_list',compact('all_data_for_new_list'));
@@ -79,7 +216,7 @@ class RenewController extends Controller
 
     public function renewView($id){
 
-
+        \LogActivity::addToLog('View Renew Info .');
 
 
 
@@ -91,32 +228,32 @@ class RenewController extends Controller
 
                 $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
 
-                $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
+                $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
             $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
             $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
 
 
-            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+            $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
 
             $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
             $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
 
 
 
-            $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->first();
+            $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
 
             //dd($renewInfoData);
 
 
 
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
+            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
 
 
- $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->value('ngo_duration_end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->value('ngo_duration_start_date');
+ $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
 
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$all_data_for_new_list_all->fd_one_form_id)->get();
+            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
 
             $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
 
@@ -153,13 +290,19 @@ class RenewController extends Controller
 
     public function updateStatusRenewForm(Request $request){
 
+
+        //dd(12);
+
+        \LogActivity::addToLog('Update Renew Status.');
+
         // $data_save = Renew::find($request->id);
         // $data_save->status = $request->status;
         // $data_save->save();
 
         DB::table('ngo_renews')->where('id',$request->id)
         ->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'comment' => $request->comment
         ]);
 
 $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_form_id');
@@ -203,6 +346,8 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
 
     public function foreginPdfDownload($id){
 
+        \LogActivity::addToLog('renew pdf download.');
+
         $data = DB::table('system_information')->first();
 
         $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('foregin_pdf');
@@ -225,6 +370,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
     public function foreginPdfDownloadOld($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         //dd(base64_decode($id));
 
@@ -254,9 +401,11 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function yearlyBudgetPdfDownload($id){
 
+        \LogActivity::addToLog('download renew pdf.');
+
         $data = DB::table('system_information')->first();
 
-        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('yearly_budget');
+        $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('yearly_budget_file');
 
         $file_path = $data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
@@ -277,6 +426,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
     public function yearlyBudgetPdfDownloadOld($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
 
@@ -301,6 +452,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
     public function copyOfChalanPdfDownload($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
 
@@ -327,6 +480,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function copyOfChalanPdfDownloadOld($id){
 
+        \LogActivity::addToLog('download renew pdf.');
+
         $data = DB::table('system_information')->first();
 
 
@@ -350,6 +505,8 @@ $file=$data->system_url.'public/'.$get_file_data;
     }
 
     public function dueVatPdfDownload($id){
+
+        \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
 
@@ -375,6 +532,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
     public function dueVatPdfDownloadOld($id){
 
+
+        \LogActivity::addToLog('download renew pdf.');
         $data = DB::table('system_information')->first();
 
 
@@ -399,6 +558,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
         public function changeAcNumberDownload($id){
 
+            \LogActivity::addToLog('download renew pdf.');
+
             $data = DB::table('system_information')->first();
 
             $get_file_data = DB::table('ngo_renew_infos')->where('id',base64_decode($id))->value('change_ac_number');
@@ -422,6 +583,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
         public function changeAcNumberDownloadOld($id){
+
+            \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
 
@@ -448,6 +611,8 @@ $file=$data->system_url.'public/'.$get_file_data;
         public function verifiedFdEightDownload($id){
 
             //dd(11);
+
+            \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
 
@@ -482,6 +647,8 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             //dd(11);
 
+            \LogActivity::addToLog('download renew pdf.');
+
             $data = DB::table('system_information')->first();
 
 
@@ -512,12 +679,15 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
         public function renewalFileDownload($title, $id){
+            \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
             if($title == 'trustees'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('list_of_board_of_directors_or_board_of_trustees');
             }elseif($title == 'laws_or_constitution'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('organization_by_laws_or_constitution');
+            }elseif($title == 'final_fd_eight_form'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('final_fd_eight_form');
             }elseif($title == 'work_procedure'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('work_procedure_of_organization');
             }elseif($title == 'last_ten_years'){

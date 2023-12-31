@@ -36,6 +36,8 @@ class AdminController extends Controller
 
     public function forgetPassword(){
 
+        \LogActivity::addToLog('forgetPassword');
+
         return view('admin.user.forgetPassword');
     }
 
@@ -77,7 +79,7 @@ class AdminController extends Controller
            return redirect()->route('mainLogin');
                }
 
-
+               \LogActivity::addToLog('create employee ');
 
               // dd($path);
 
@@ -95,6 +97,8 @@ class AdminController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to Add !');
            return redirect()->route('mainLogin');
                }
+
+               \LogActivity::addToLog('edit employee list');
 
                $designationLists = DesignationList::latest()->get();
 
@@ -120,7 +124,7 @@ class AdminController extends Controller
                }
 
 
-
+               \LogActivity::addToLog('view employee list');
               // dd($path);
 
               // dd(public_path().'\images');
@@ -139,7 +143,7 @@ class AdminController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to View !');
            return redirect()->route('mainLogin');
                }
-
+               \LogActivity::addToLog(' employee store');
                //dd($request->all());
 
         // Validation Data
@@ -150,8 +154,8 @@ class AdminController extends Controller
            // 'branch_id' => 'required|string|max:200',
            // 'admin_job_start_date' => 'required|date',
             // 'admin_job_end_date' => 'required|date',
-            'sign' => 'required|file|mimes:jpeg,png,jpg',
-            'image' => 'required|file|mimes:jpeg,png,jpg',
+            'sign' => 'nullable|file|mimes:jpeg,png,jpg',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg',
             'email' => 'required|max:100|email|unique:admins',
             // 'password' => 'required|min:8|confirmed',
         ],
@@ -229,12 +233,17 @@ class AdminController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('update employee list');
+
+$adminEmail = Admin::where('id',$id)->value('email');
+
+
         // Create New User
         $admins = Admin::find($id);
         $admins->admin_name = $request->name;
         $admins->admin_name_ban = $request->name_ban;
-        $admins->designation_list_id = 1;
-        $admins->branch_id = 1;
+        // $admins->designation_list_id = 1;
+        // $admins->branch_id = 1;
         //$admins->admin_job_start_date = $request->admin_job_start_date;
         // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
@@ -258,12 +267,28 @@ class AdminController extends Controller
 
         }
 
+
+        if($adminEmail == $request->email){
+
+
+
+        }else{
+            Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('NGOAB Password Set');
+            });
+
+        }
+
         $admins->save();
 
         $admins->roles()->detach();
         if ($request->roles) {
             $admins->assignRole($request->roles);
         }
+
+
+
 
 
         return redirect()->route('user.index')->with('success','Updated successfully!');;
@@ -278,6 +303,9 @@ class AdminController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('delete employee from list');
+
+
         $admins = Admin::find($id);
         if (!is_null($admins)) {
             $admins->delete();
@@ -290,6 +318,10 @@ class AdminController extends Controller
 
 
     public function accountPasswordChange($id){
+
+        \LogActivity::addToLog('accountPasswordChange');
+
+
        $email = $id;
        return view('admin.user.accountPasswordChange',compact('email'));
 
@@ -309,6 +341,8 @@ class AdminController extends Controller
 
 
   public function employeeEndDatePost(request $request){
+
+    \LogActivity::addToLog('employeeEndDatePost');
 
 //dd($request->all());
 

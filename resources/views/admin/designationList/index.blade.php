@@ -40,7 +40,7 @@
                 <form class="custom-validation" action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="">শাখার নাম</label>
+                        <label class="form-label" for="">শাখার নাম <span style="color:red;">*</span></label>
 
                         <select class="form-control" name="branch_id" id="branch_id0" type="text" placeholder="" required>
                             <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
@@ -51,7 +51,7 @@
                         <input class="form-control" name="serial_part_one"  id="hidden_value0" type="hidden" step="0.01"  placeholder="" required readonly>
                     </div>
                 <div class="mb-3">
-                    <label class="form-label" for="">পদবী নাম</label>
+                    <label class="form-label" for="">পদবী নাম <span style="color:red;">*</span></label>
                     <input class="form-control" name="designation_name" id="designation_name0" type="text" placeholder="" required>
                 </div>
 
@@ -59,7 +59,7 @@
 
 
                 <div class="mb-3">
-                    <label class="form-label" for="">পদবীর ক্রম</label>
+                    <label class="form-label" for="">পদবীর ক্রম <span style="color:red;">*</span></label>
 
                     <div class="row">
                         <div class="col-md-2">
@@ -140,7 +140,7 @@
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="mb-3">
-                                                            <label class="form-label" for="">শাখার নাম</label>
+                                                            <label class="form-label" for="">শাখার নাম <span style="color:red;">*</span></label>
 
                                                             <select class="form-control" name="branch_id" id="branch_id{{ $AllDesignationLists->id }}" type="text" placeholder="" required>
                                                                 <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
@@ -153,14 +153,14 @@
 
                                                         </div>
                                                           <div class="mb-3">
-                                                            <label class="form-label" for="">পদবী নাম</label>
+                                                            <label class="form-label" for="">পদবী নাম <span style="color:red;">*</span></label>
                                                             <input class="form-control" name="designation_name" value="{{ $AllDesignationLists->designation_name  }}" id="designation_name{{ $AllDesignationLists->id }}" type="text" placeholder="" required>
                                                         </div>
 
 
 
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="">পদবীর ক্রম</label>
+                                                            <label class="form-label" for="">পদবীর ক্রম <span style="color:red;">*</span></label>
                                                             <input class="form-control" name="designation_serial" value="{{ $AllDesignationLists->designation_serial }}" id="designation_serial{{ $AllDesignationLists->id  }}" type="number" step="0.01" placeholder="" required>
 
                                                         </div>

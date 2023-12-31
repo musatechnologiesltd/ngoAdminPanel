@@ -9,6 +9,8 @@ class ForwardingLetter extends Model
 {
     use HasFactory;
 
+    protected $table = "forwarding_letters";
+
     protected $fillable = ['admin_id','apply_date','apply_month_name','apply_year_name','sarok_number'];
 
     public function onuLipiList()

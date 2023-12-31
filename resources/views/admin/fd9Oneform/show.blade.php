@@ -46,6 +46,27 @@
         @include('flash_message')
         <div class="card">
         <div class="card-body">
+
+
+            <div class="row mb-4">
+                <div class="col-lg-12">
+
+                    <div class="text-end">
+
+
+
+                       @if(empty($dataFromNVisaFd9Fd1->status))
+                        <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$mainIdFdNineOne]) }}';" type="button" class="btn btn-primary add-btn">ডাক দেখুন</button>
+
+                        @else
+
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+
+
             <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                 <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                         data-bs-toggle="pill" href="#pills-darkhome"
@@ -79,11 +100,22 @@
                 </li>
 
 
+
+                <li class="nav-item"><a class="nav-link" id="pills-darkdoc2-tab"
+                    data-bs-toggle="pill" href="#pills-darkdoc2"
+                    role="tab" aria-controls="pills-darkdoc2"
+                    aria-selected="false" style=""><i
+            class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস</a>
+             </li>
+
+
+
+
                 <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                     data-bs-toggle="pill" href="#pills-darkdoc1"
                     role="tab" aria-controls="pills-darkdoc1"
                     aria-selected="false" style=""><i
-            class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস পরীক্ষা করুন</a>
+            class="icofont icofont-animal-lemur"></i>সুরক্ষা বিভাগে আবেদন পাঠান</a>
              </li>
 
 
@@ -93,26 +125,152 @@
                 <div class="tab-pane fade active show" id="pills-darkhome"
                      role="tabpanel" aria-labelledby="pills-darkhome-tab">
                     <div class="mb-0 m-t-30">
-                        @if(!$dataFromNVisaFd9Fd1->verified_fd_nine_one_form)
-                        এনজিও প্রধান নির্বাহীর স্বাক্ষরকৃত পিডিএফ জমা দেয়নি
-                        @else
-                        <object
-                        data='{{ $ins_url }}{{ 'public/'.$dataFromNVisaFd9Fd1->verified_fd_nine_one_form}}'
-                        type="application/pdf"
-                        width="100%"
-                        height="678"
-                      >
 
-                        <iframe
-                          src='{{ $ins_url }}{{ 'public/'.$dataFromNVisaFd9Fd1->verified_fd_nine_one_form}}'
-                          width="100%"
-                          height="900"
-                        >
-                        <p>This browser does not support PDF!</p>
-                        </iframe>
-                      </object>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
 
-                        @endif
+                                        <p>এফডি-৯(১) পিডিএফ ডাউনলোড করুন</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="text-center">
+                                            <p>পিডিএফ ডাউনলোড</p>
+                                            <a class="btn btn-sm btn-success" target="_blank"
+                                                   href = '{{ route('verified_fd_nine_one_download',$dataFromNVisaFd9Fd1->id) }}'>
+                                                   ডাউনলোড করুন
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4>এফডি-৯(১) ফরম</h4>
+                                <h5>বিদেশি বিশেষজ্ঞ, উপদেষ্টা, কর্মকর্তা বা স্বেচ্ছাসেবী এর ওয়ার্ক পারমিটের (কার্যানুমতি)
+                                    আবেদন ফরম</h5>
+
+                            </div>
+
+                            <div>
+                                <p>বরাবর <br>
+                                    মহাপরিচালক <br>
+                                    এনজিও বিষয় ব্যুরো, ঢাকা <br>
+                                    জনাব,</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card-body fd0901_text_style">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>বিষয়:</td>
+                                    <td>"{{ $dataFromNVisaFd9Fd1->institute_name }}" সংস্থার বিদেশি বিশেষজ্ঞউপদেষ্টা/কর্মকর্ত/সেচ্ছাসেবী "{{ $dataFromNVisaFd9Fd1->foreigner_name_for_subject }}" এর
+                                        ওয়ার্ক পারমিট প্রসঙ্গে।
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>সূত্র: এনজিও বিষয়ক ব্যুরোর স্মারক নম্বর {{ $dataFromNVisaFd9Fd1->sarok_number }} তারিখ {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->application_date))) }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <p class="mt-3 mb-2">
+                                উপর্যুক্ত বিষয় ও সূত্রের বরাতে "{{ $dataFromNVisaFd9Fd1->institute_name }}" সংস্থার "{{ $dataFromNVisaFd9Fd1->prokolpo_name }}" প্রকল্পের আওতায় "{{ $dataFromNVisaFd9Fd1->designation_name }}" হিসেবে বিদেশী বিশেষজ্ঞ/
+                                উপদেষ্টা/কর্মকর্তা/স্বেচ্ছাসেবী {{ $dataFromNVisaFd9Fd1->foreigner_name_for_body }} কে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_from_date))) }} খ্রি: হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->expire_to_date))) }} পর্যন্ত সময়ের জন্য নিয়োগ করা হয়েছে। সংস্থার অনুকূলে
+                                উক্ত ব্যাক্তির অনুমোদিত সময়ের জন্য ওয়ার্ক পারমিট ইস্যু করার
+                                জন্য একসাথে নিম্ন বর্ণিত কাগজপত্র সংযুক্ত করা হলো:
+                            </p>
+
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>০১</td>
+                                    <td>নিয়োগপত্র সত্যায়ন প্রমাণক</td>
+                                     <td> :@if(!$dataFromNVisaFd9Fd1->attestation_of_appointment_letter)
+
+                                        @else
+
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                         @endif</td>
+                                </tr>
+
+                                <tr>
+                                    <td>০২</td>
+                            <td>ফর্ম ৯ এর কপি</td>
+                                     <td>:@if(!$dataFromNVisaFd9Fd1->copy_of_form_nine)
+
+                                        @else
+
+                                    <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                         @endif</td>
+                                </tr>
+
+                                <tr>
+                                    <td>০৩</td>
+                            <td>ছবি</td>
+                                     <td>:<img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
+                                </tr>
+
+                                <tr>
+                                    <td>০৪</td>
+                                    <td>এন ভিসা নিয়ে আগমনের তারিখ (প্রমানসহ)</td>
+                                     <td> @if(!$dataFromNVisaFd9Fd1->copy_of_nvisa)
+
+                                        @else
+
+                                         <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>,
+                                         @endif
+
+                                         {{ str_replace($engDATE,$bangDATE,date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->arrival_date_in_nvisa))) }}</td>
+                                </tr>
+
+                            </table>
+
+                            <p class="mb-3">এমতবস্থায়, অত্র সংস্থার উল্লেখিত পদে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} হতে {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->proposed_from_date))) }} মেয়াদে উক্ত বিদেশি কর্মকর্তাকে ওয়ার্ক পারমিট ইস্যু করার জন্য বিনীত অনুরোধ করেছি।</p>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12"></div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <table class="table table-borderless">
+
+                                        <tr>
+                                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                        </tr>
+                                        <tr>
+                                            <td>নামঃ {{  $dataFromNVisaFd9Fd1->chief_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chief_desi }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->created_at)->toDateString() )))}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
                     </div>
 
                 </div>
@@ -188,6 +346,10 @@
                                 </tr>
                             </tbody>
                         </table>
+
+
+
+
                       </div>
                     </div>
                 </div>
@@ -290,7 +452,7 @@
                                             <td>Email: {{ $nVisaSponSor->org_email }}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">Type of the Organization: NGO</td>
+                                            <td colspan="2">Type of the Organization: Admin</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Nature of buisness: {{ $nVisaSponSor->nature_of_business }}</td>
@@ -304,7 +466,7 @@
                                         </tr>
                                         <tr>
                                             <td>Remittance received during last 12 months: {{ $nVisaSponSor->remittance_received }}</td>
-                                            <td>Type of Industry:NGO </td>
+                                            <td>Type of Industry:Admin </td>
                                         </tr>
                                         <tr>
                                             <td>Recommendation of Company Boards: {{ $nVisaSponSor->recommendation_of_company_board }}</td>
@@ -830,50 +992,23 @@ E.COMPENSATION AND BENIFITS
 //dd($forwardingLetterData);
 
                             ?>
-                            @if (is_null($forwardingLetterData))
+                            @if (empty($nVisabasicInfo->forwarding_letter))
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form class="custom-validation" action="{{ route('forwardingLetterPost') }}" method="post" enctype="multipart/form-data">
+                                            <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                           for="exampleFormControlInput1">স্মারক নম্বর</label>
-                                                    <input class="form-control" name="sarok_number" required id="" type="text"
-                                                           placeholder="13456798">
-
-                                                           <input class="form-control" value="{{ $dataFromNVisaFd9Fd1->id }}" name="fd9_id" required id="" type="hidden"
-                                                           placeholder="13456798">
-
-
+                                                   <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <label for="email">ফরওয়ার্ডিং লেটার</label>
+                                                    <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                           for="exampleFormControlInput1">দায়িত্বপ্রাপ্ত কর্মকর্তা</label>
-                                                        <input class="form-control" value="{{ Auth::guard('admin')->user()->admin_name }}"  id="" type="text"
-                                                        placeholder="দায়িত্বপ্রাপ্ত কর্মকর্তা" readonly>
-                                                        <input class="form-control" value="{{ Auth::guard('admin')->user()->id }}"  name="admin_id" type="hidden"
-                                                        placeholder="দায়িত্বপ্রাপ্ত কর্মকর্তা" readonly>
-                                                </div>
-                                                <div class="mb-3">
 
-                                                        <div class="col-md-12">
 
-                                                            <table class="table table-bordered" id="dynamicAddRemove">
-                                                                <tr>
-                                                                    <th>অনুলিপি</th>
-                                                                    <th>কার্যকলাপ</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><input required type="text" name="name[]" placeholder="Enter Ename" id="name0" class="form-control" />
-                                                                    </td>
-                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">নতুন যুক্ত করুন</button></td>
-                                                                </tr>
-                                                            </table>
 
-                                                        </div>
-                                                </div>
+
+
 
 
                                         </div>
@@ -890,191 +1025,54 @@ E.COMPENSATION AND BENIFITS
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
 
+
+                                    <div class="text-end">
+
+
+
                                     <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
 
-                                                    <p>ফরওয়ার্ডিং লেটার পিডিএফ এডিট করুন</p>
+                                        <div class="card-header">
+                                            <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                ফরওয়ার্ডিং লেটার আপডেট  করুন
+                                            </button>
 
-
-                                                    <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                                        এডিট করুন
-                                                    </button>
-
-                                                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                          <div class="modal-content">
-                                                            <div class="modal-header">
-                                                              <h1 class="modal-title fs-5" id="exampleModalLabel">ফরওয়ার্ডিং লেটার </h1>
-                                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                <form class="custom-validation" action="{{ route('postForwardingLetterForEdit') }}" id="form" method="post" enctype="multipart/form-data">
-                                                                    @csrf
-
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label"
-                                                                               for="exampleFormControlInput1">পিডিএফ বডি পার্ট এক </label>
-
-                                                                               @if(empty($editCheck))
-                                                                        <textarea class="form-control summernote" name="pdf_body_one" required id="" type="text"
-                                                                               >
-                                                                               উপযুক্ত বিষয় ও সূত্রস্থ পত্রের পরিপ্রেক্ষিতে বর্ণিত সংস্থার নিয়োগের নিমিত্তে
-                                                                               নিম্নবর্ণিত বিদেশী নাগরিকের নিয়োগ/নিরাপত্তা ছাড়পত্রের বিষয়ে প্রধানমন্ত্রীর
-                                                                               কার্যালয়ের ২৫ নভেম্বর, ২০২১ তারিখের পরিপত্রের নির্দেশ মোতাবেক সুরক্ষা সেবা
-                                                                               বিভাগের মতামত এনজিও বিষয়ক ব্যুরোতে প্রেরণের জন্য নির্দেশক্রমে অনুরোধ করা
-                                                                               হলো।
-
-                                                                            </textarea>
-                                                                            @else
-
-                                                                            <textarea class="form-control summernote" name="pdf_body_one" required id="" type="text"
-                                                                            >
-                                                                            {!! $editCheck !!}
-
-                                                                         </textarea>
-                                                                            @endif
-
-                                                                               <input class="form-control" value="{{ $dataFromNVisaFd9Fd1->id }}" name="fd9_id" required id="" type="hidden"
-                                                                               placeholder="13456798">
-
-
-                                                                    </div>
-
-
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label"
-                                                                               for="exampleFormControlInput1">পিডিএফ বডি পার্ট দুই  </label>
-
-                                                                               @if(empty($editCheck1))
-                                                                               <textarea class="form-control summernote" name="pdf_body_two" required id="" type="text"
-                                                                              >
-
-                                                                              সচিব <br>
-                                                                              সুরক্ষা সেবা বিভাগ <br>
-                                                                              স্বরাষ্ট্র মন্ত্রণালয় <br>
-                                                                              বাংলাদেশ সচিবালয়, ঢাকা
-                                                                            </textarea>
-
-                                                                            @else
-
-
-                                                                            <textarea class="form-control summernote" name="pdf_body_two" required id="" type="text"
-                                                                            >
-
-                                                                           {!! $editCheck1 !!}
-                                                                          </textarea>
-
-                                                                            @endif
-
-
-
-
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-
-                                                                        <div class="col-md-12">
-
-                                                                            <table class="table table-bordered" id="dynamicAddRemove">
-                                                                                <tr>
-                                                                                    <th>অনুলিপি</th>
-                                                                                    <th>কার্যকলাপ</th>
-                                                                                </tr>
-                                                                                @foreach($forwardingLetterOnulipi as $key=>$allForwardingLetterOnulipi)
-                                                                             @if($key == 0)
-                                                                                <tr>
-                                                                                    <td><input required type="text" value="{{ $allForwardingLetterOnulipi->onulipi_name }}" name="name[]" placeholder="অনুলিপি" id="name{{ $key+4000 }}" class="form-control" />
-                                                                                    </td>
-                                                                                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-sm btn-outline-primary">নতুন যুক্ত করুন </button></td>
-                                                                                </tr>
-                                                                                @else
-                                                                                <tr>
-                                                                                    <td><input required type="text" value="{{ $allForwardingLetterOnulipi->onulipi_name }}" name="name[]" placeholder="অনুলিপি" id="name{{ $key+4000 }}" class="form-control" />
-                                                                                    </td>
-                                                                                    <td><button type="button" class="btn btn-sm btn-outline-danger remove-input-field">মুছে ফেলুন</button></td>
-                                                                                </tr>
-                                                                                @endif
-                                                                                @endforeach
-                                                                            </table>
-
-                                                                        </div>
-                                                                </div>
-
-                                                                    <div class="card-footer text-end">
-                                                                        <button class="btn btn-primary" type="submit">জমা দিন </button>
-                                                                    </div>
-                                                                </form>
-
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                          </div>
-                                                        </div>
-                                                      </div>
-
-
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    {{-- <div class="text-center">
-                                                        <p>PDF Download (পিডিএফ ডাউনলোড )</p>
-                                                        <a class="btn btn-sm btn-success" target="_blank"
-                                                               href = '{{ route('downloadForwardingLetter',$dataFromNVisaFd9Fd1->id) }}'>
-                                                            Download Forwarding Letter
-                                                    </a>
-                                                    </div> --}}
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="text-center">
-                                                        <p>পিডিএফ আপলোড</p>
-                                                        <button class="btn btn-sm btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            ফরওয়ার্ডিং লেটার আপলোড করুন
-                                                        </button>
-
-                                                        <!--model-->
-                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                              <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">পিডিএফ আপলোড</h1>
-                                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
-                                                                        @csrf
-                                                                           <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
-                                                                        <div class="form-group col-md-12 col-sm-12">
-                                                                            <label for="email">ফরওয়ার্ডিং লেটার</label>
-                                                                            <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
-                                                                        </div>
-
-
-
-                                                                        <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
-                                                                            জমা দিন
-                                                                         </button>
-                                                                    </form>
-
-                                                                </div>
-
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                        <!--model -->
+                                            <!--model-->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">পিডিএফ আপলোড</h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
+                                                    <div class="modal-body">
+                                                        <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                               <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
+                                                            <div class="form-group col-md-12 col-sm-12">
+                                                                <label for="email">ফরওয়ার্ডিং লেটার</label>
+                                                                <input type="file" accept=".pdf" name="forwardingLetter" class="form-control form-control-sm" required>
+                                                            </div>
+
+
+
+                                                            <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
+                                                                জমা দিন
+                                                             </button>
+                                                        </form>
+
+                                                    </div>
+
+                                                  </div>
                                                 </div>
-                                            </div>
+                                              </div>
+                                            <!--model -->
                                         </div>
-                                    </div>
-
-
-                                    <div class="card">
+                                        </div>
                                         <div class="card-body">
+
+
+
                                             <iframe src=
                                             "{{ url('public/'.$nVisabasicInfo->forwarding_letter) }}"
                                                             width="100%"
@@ -1089,6 +1087,69 @@ E.COMPENSATION AND BENIFITS
 
                 </div>
 
+               <!--new code start-->
+
+                <div class="tab-pane fade" id="pills-darkdoc2" role="tabpanel"
+                aria-labelledby="pills-darkdoc2-tab">
+               <div class="mb-0 m-t-30">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <form action="{{ route('statusUpdateForFd9') }}" method="post">
+                                    @csrf
+
+
+                                    <input type="hidden" value="{{ $dataFromNVisaFd9Fd1->id }}" name="id" />
+
+                                    <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
+
+                                    <label>স্টেটাস:</label>
+                                    <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
+
+                                        <option value="Ongoing" {{ $dataFromNVisaFd9Fd1->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+
+<option value="Submitted" {{ $dataFromNVisaFd9Fd1->status == 'Submitted' ? 'selected':''  }}>জমা দেওয়া হয়েছে </option>
+
+                                        <option value="Accepted" {{ $dataFromNVisaFd9Fd1->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                        <option value="Correct" {{ $dataFromNVisaFd9Fd1->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
+                                        <option value="Rejected" {{ $dataFromNVisaFd9Fd1->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
+
+                                    </select>
+
+
+                                    @if($dataFromNVisaFd9Fd1->status == 'Correct' || $dataFromNVisaFd9Fd1->status == 'Rejected')
+
+                                    <div id="rValueStatus" >
+                                        <label>বিস্তারিত লিখুন:</label>
+                                        <textarea class="form-control form-control-sm" name="comment">{{ $dataFromNVisaFd9Fd1->comment }}</textarea>
+                                    </div>
+                                    @else
+                                    <div id="rValueStatus" style="display:none;">
+                                        <label>বিস্তারিত লিখুন:</label>
+                                        <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                    </div>
+                                    @endif
+                                    <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
+
+                                  </form>
+                            </div>
+                            <div class="col-md-12" id="finalResult">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+               </div>
+                </div>
+
+
+
+                <!--new code -->
+
 
 
                 <div class="tab-pane fade" id="pills-darkdoc1" role="tabpanel"
@@ -1098,6 +1159,15 @@ E.COMPENSATION AND BENIFITS
 
                 <div class="card">
                     <div class="card-body">
+                        @if (empty($nVisabasicInfo->forwarding_letter))
+
+                        <div class="row">
+
+<h5>ফরওয়ার্ডিং লেটার আপলোড করুন</h5>
+                        </div>
+
+
+                        @else
                         <div class="row">
                             <?php
 
@@ -1150,6 +1220,7 @@ E.COMPENSATION AND BENIFITS
                             </div>
 
                         </div>
+                        @endif
                     </div>
                 </div>
 
@@ -1168,6 +1239,26 @@ E.COMPENSATION AND BENIFITS
 @endsection
 
 @section('script')
+
+<script>
+    $(document).ready(function(){
+      $("#regStatus").change(function(){
+        var valmain = $(this).val();
+
+        if(valmain == 'Accepted'){
+           $('#rValue').show();
+           $('#rValueStatus').hide();
+
+        }
+        else{
+            $('#rValue').hide();
+            $('#rValueStatus').show();
+        }
+      });
+    });
+    </script>
+
+
 <script type="text/javascript">
     $(".statusCheck").click(function () {
 

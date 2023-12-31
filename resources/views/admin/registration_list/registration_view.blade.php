@@ -160,6 +160,21 @@
                                 <h5>এনজিও নিবন্ধন সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-lg-12">
+
+                                        <div class="text-end">
+
+                                           @if($r_status == 'Ongoing')
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$form_one_data->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+
+                                            @else
+
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </div>
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                                             data-bs-toggle="pill" href="#pills-darkhome"
@@ -173,12 +188,7 @@
 
                                                     @endif
                                                 </a></li>
-                                    <li class="nav-item"><a class="nav-link" id="pills-darkprofile-tab"
-                                                            data-bs-toggle="pill" href="#pills-darkprofile"
-                                                            role="tab" aria-controls="pills-darkprofile"
-                                                            aria-selected="false" style=""><i
-                                                    class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
-                                    </li>
+                                   
 
 
 
@@ -214,6 +224,9 @@
 
                 @endif
 
+
+
+
                                 </ul>
                                 <div class="tab-content" id="pills-darktabContent">
                                     <div class="tab-pane fade active show" id="pills-darkhome"
@@ -240,83 +253,10 @@
                                          aria-labelledby="pills-darkprofile-tab">
                                         <div class="mb-0 m-t-30">
                                           <div class="table-responsive">
-                                            <table class="table table-bordered overflow-scroll">
-                                                <tr>
-                                                    <th rowspan="2">ক্রঃ নং</th>
-                                                    <th rowspan="2">নাম ও পদবী</th>
-                                                    <th rowspan="2">জন্ম তারিখ</th>
-                                                    <th rowspan="2">এনএইডি এবং মোবাইল নং</th>
-                                                    <th rowspan="2">বাবার নাম</th>
-                                                    <th colspan="2">ঠিকানা</th>
-                                                    <th rowspan="2">স্বামী/স্ত্রীর নাম</th>
-                                                    <th rowspan="2">শিক্ষাগত যোগ্যতা</th>
-                                                    <th colspan="3">পেশা</th>
-                                                    <th rowspan="2">তিনি কি অন্য কোন এনজিওর সদস্য বা
-                                                        পরিষেবাধারী ছিলেন (যদি তা হয় তবে অনুগ্রহ করে
-                                                        চিহ্নিত করুন)
-                                                    </th>
-                                                    <th rowspan="2">মন্তব্য</th>
-                                                    <th rowspan="2">স্বাক্ষর এবং তারিখ</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>বর্তমান ঠিকানা</th>
-                                                    <th>স্থায়ী ঠিকানা</th>
-                                                    <th>সরকারী/আধা সরকারী/সরকারি স্বায়ত্তশাসিত</th>
-                                                    <th>ব্যক্তিগত সেবা</th>
-                                                    <th>স্ব সেবা</th>
-                                                </tr>
-                                                @foreach($form_eight_data as $key=>$all_all_parti)
-    <tr>
-        <td>{{  $key+1 }}</td>
-        <td>{{ $all_all_parti->name }} & {{ $all_all_parti->desi }}</td>
-        <td>
 
-         <?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
+gjgjhgh
 
 
-         {{  App\Http\Controllers\Admin\CommonController::englishToBangla($start_date_one) }}
-
-
-        </td>
-        <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->nid_no) }} & {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->phone) }}</td>
-        <td>{{ $all_all_parti->father_name }}</td>
-        <td>{{ $all_all_parti->present_address }}</td>
-        <td>{{ $all_all_parti->permanent_address }}</td>
-        <td>{{ $all_all_parti->name_supouse }}</td>
-        <td>{{ $all_all_parti->edu_quali }}</td>
-        <td>
-
-            @if($all_all_parti->profession  == 'Govt./Semi Govt./Govt Autonomous' || $all_all_parti->profession  == 'সরকারি/আধা/সরকারি স্বায়ত্তশাসিত')
-
-            {{ $all_all_parti->job_des }}
-            @else
--
-            @endif
-
-
-        </td>
-        <td>@if($all_all_parti->profession  == 'Private Service' || $all_all_parti->profession  == 'ব্যক্তিগত সেবা')
-
-            {{ $all_all_parti->job_des }}
-            @else
--
-            @endif</td>
-        <td>@if($all_all_parti->profession  == 'Self Service' || $all_all_parti->profession  == 'স্ব সেবা')
-
-            {{ $all_all_parti->job_des }}
-            @else
--
-            @endif</td>
-        <td>{{ $all_all_parti->service_status }}</td>
-        <td></td>
-        <td>
-
-
-        </td>
-
-    </tr>
-    @endforeach
-                                            </table>
                                           </div>
                                         </div>
 
@@ -577,10 +517,11 @@
                                                 <input type="hidden" value="old" name="ngotype" />
 
                                                 <label>স্টেটাস:</label>
-                                                <select class="form-control form-control-sm mt-4" name="status" >
+                                                <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
@@ -593,10 +534,16 @@
 
                                                     <option value="Ongoing" {{ $all_data_for_new_list_all->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $all_data_for_new_list_all->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $all_data_for_new_list_all->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
                                                 @endif
+
+                                                <div id="rValueStatus" style="display:none;">
+                                                    <label>বিস্তারিত লিখুন:</label>
+                                                    <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                                </div>
 
 <div id="rValue" style="display:none;">
                                                 <label>রেজিস্ট্রেশন নম্বর :</label>
@@ -640,9 +587,12 @@
 
         if(valmain == 'Accepted'){
            $('#rValue').show();
+           $('#rValueStatus').hide();
+
         }
         else{
             $('#rValue').hide();
+            $('#rValueStatus').show();
         }
       });
     });

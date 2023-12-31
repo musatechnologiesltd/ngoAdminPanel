@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "niklasravnsborg/laravel-pdf": "^4.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "laravel/framework": "^10.8",
@@ -14,6 +13,8 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "mpdf/mpdf": "v8.1.6",
+        "niklasravnsborg/laravel-pdf": "^4.1",
+        "s1k3/bangla-date": "^1.07",
         "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {
@@ -30,7 +31,12 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+
+            "app/Helpers/LogActivity.php"
+
+        ]
     },
     "autoload-dev": {
         "psr-4": {

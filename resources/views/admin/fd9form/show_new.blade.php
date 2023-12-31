@@ -44,6 +44,25 @@
     <div class="user-profile">
         <div class="card height-equal">
             <div class="card-body">
+
+
+                <div class="row mb-4">
+                    <div class="col-lg-12">
+
+                        <div class="text-end">
+
+                           @if($dataFromNVisaFd9Fd1->status == 'Ongoing')
+                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$mainIdFdNine]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+
+                            @else
+
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                     <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
                                             data-bs-toggle="pill" href="#pills-darkhome"
@@ -56,13 +75,13 @@
                                             data-bs-toggle="pill" href="#pills-darkdoc"
                                             role="tab" aria-controls="pills-darkdoc"
                                             aria-selected="false" style=""><i
-                                    class="icofont icofont-animal-lemur"></i>নথি সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</a>
+                                    class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                         data-bs-toggle="pill" href="#pills-darkdoc1"
                         role="tab" aria-controls="pills-darkdoc1"
                         aria-selected="false" style=""><i
-                class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস পরীক্ষা করুন</a>
+                class="icofont icofont-animal-lemur"></i>আবেদনের স্টেটাস</a>
 </li>
                 </ul>
                 <div class="tab-content" id="pills-darktabContent">
@@ -80,7 +99,7 @@
                                             <div class="text-center">
                                                 <p>পিডিএফ ডাউনলোড</p>
                                                 <a class="btn btn-sm btn-success" target="_blank"
-                                                       href = '{{ route('fdNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}'>
+                                                       href = '{{ route('verified_fd_nine_download',$dataFromNVisaFd9Fd1->id) }}'>
                                                        ডাউনলোড করুন
                                             </a>
                                             </div>
@@ -333,6 +352,41 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                         </tr>
                                         </tbody>
                                     </table>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-12"></div>
+                                        <div class="col-lg-6 col-sm-12">
+                                            <table class="table table-borderless">
+
+                                                <tr>
+                                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>নামঃ {{  $dataFromNVisaFd9Fd1->chief_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chief_desi }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->created_at)->toDateString() )))}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -345,8 +399,8 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                         <div class="mb-0 m-t-30">
                             <div class="card">
                                 <div class="card-header pb-0">
-                                    <h5>নথিপত্র সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠান</h5>
-                                    <span>সুরক্ষা বিভাগ ,স্বরাষ্ট্র মন্ত্রণালয়ে পাঠানোর আগে অনুগ্রহ করে সমস্ত নথি দেখুন করুন</span>
+                                    <h5>নথিপত্র</h5>
+                                    <span>নথি দেখুন করুন</span>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered">
@@ -614,6 +668,8 @@ ff
                                 </div>
 
                             </div>
+
+
                         </div>
                     </div>
 
@@ -634,19 +690,32 @@ ff
 
                                         <input type="hidden" value="{{ $dataFromNVisaFd9Fd1->id }}" name="id" />
 
-
+                                        <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
 
                                         <label>স্টেটাস:</label>
                                         <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                             <option value="Ongoing" {{ $dataFromNVisaFd9Fd1->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+
                                             <option value="Accepted" {{ $dataFromNVisaFd9Fd1->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                            <option value="Correct" {{ $dataFromNVisaFd9Fd1->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                             <option value="Rejected" {{ $dataFromNVisaFd9Fd1->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                         </select>
 
 
+                                        @if($dataFromNVisaFd9Fd1->status == 'Correct' || $dataFromNVisaFd9Fd1->status == 'Rejected')
 
+                                        <div id="rValueStatus" >
+                                            <label>বিস্তারিত লিখুন:</label>
+                                            <textarea class="form-control form-control-sm" name="comment">{{ $dataFromNVisaFd9Fd1->comment }}</textarea>
+                                        </div>
+                                        @else
+                                        <div id="rValueStatus" style="display:none;">
+                                            <label>বিস্তারিত লিখুন:</label>
+                                            <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                        </div>
+                                        @endif
                                         <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
 
                                       </form>
@@ -672,6 +741,27 @@ ff
 @endsection
 
 @section('script')
+
+
+<script>
+    $(document).ready(function(){
+      $("#regStatus").change(function(){
+        var valmain = $(this).val();
+
+        if(valmain == 'Accepted'){
+           $('#rValue').show();
+           $('#rValueStatus').hide();
+
+        }
+        else{
+            $('#rValue').hide();
+            $('#rValueStatus').show();
+        }
+      });
+    });
+    </script>
+
+
 <script type="text/javascript">
     $(".statusCheck").click(function () {
 

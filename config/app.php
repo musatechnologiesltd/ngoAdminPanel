@@ -162,6 +162,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        S1K3\Bangla\Date\BanglaDateServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -186,6 +187,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+        'LogActivity' => App\Helpers\LogActivity::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

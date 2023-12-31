@@ -58,6 +58,10 @@ return $designationCount;
             return redirect()->route('mainLogin');
                }
 
+
+               \LogActivity::addToLog('branch list ');
+
+
           $branchLists = Branch::where('id','!=',1)->get();
 
           $stepValue = Branch::orderBy('id','desc')->max('branch_step');
@@ -79,6 +83,9 @@ return $designationCount;
                 'branch_name' => 'required',
                 'branch_code' => 'required',
               ]);
+
+
+              \LogActivity::addToLog('branch store ');
 
 
 
@@ -107,6 +114,8 @@ return $designationCount;
                 return redirect()->route('mainLogin');
             }
 
+            \LogActivity::addToLog('branch update ');
+
             $medicine = Branch::findOrFail($id);
 
             $input = $request->all();
@@ -127,6 +136,8 @@ return $designationCount;
            // abort(403, 'Sorry !! You are Unauthorized to Delete !');
            return redirect()->route('mainLogin');
         }
+
+        \LogActivity::addToLog('branch delete ');
 
 
         Branch::destroy($id);

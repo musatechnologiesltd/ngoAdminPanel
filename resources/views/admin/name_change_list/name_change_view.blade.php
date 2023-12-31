@@ -156,10 +156,29 @@
                                 <h5>এনজিও নাম পরিবর্তন  সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
+
+
+                                <div class="row mb-4">
+                                    <div class="col-lg-12">
+
+                                        <div class="text-end">
+
+                                           @if($getformOneId->status == 'Ongoing')
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$getformOneId->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+
+                                            @else
+
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
 
 
-                                    @if($getNgoType == 'Foreign')
+                                    @if($getNgoType == 'Foreign' || $getNgoType == 'দেশিও')
 
                                     <li class="nav-item"><a class="nav-link active" id="pills-darkdoc-tab"
                                         data-bs-toggle="pill" href="#pills-darkdoc"
@@ -221,7 +240,7 @@
 
 
 
-                                    @if($getNgoType == 'Foreign')
+                                    @if($getNgoType == 'Foreign' || $getNgoType == 'দেশিও')
                                     <div class="tab-pane fade " id="pills-darkprofile" role="tabpanel"
                                     aria-labelledby="pills-darkprofile-tab">
                                     @else
@@ -259,64 +278,14 @@
                                                     <th>ব্যক্তিগত সেবা</th>
                                                     <th>স্ব সেবা</th>
                                                 </tr>
-                                                @foreach($form_eight_data as $key=>$all_all_parti)
-    <tr>
-        <td>{{  $key+1 }}</td>
-        <td>{{ $all_all_parti->name }} & {{ $all_all_parti->desi }}</td>
-        <td>
 
-         <?php   $start_date_one = date("d/m/Y", strtotime($all_all_parti->dob)); ?>
-
-
-         {{  App\Http\Controllers\Admin\CommonController::englishToBangla($start_date_one) }}
-
-
-        </td>
-        <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->nid_no) }} & {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->phone) }}</td>
-        <td>{{ $all_all_parti->father_name }}</td>
-        <td>{{ $all_all_parti->present_address }}</td>
-        <td>{{ $all_all_parti->permanent_address }}</td>
-        <td>{{ $all_all_parti->name_supouse }}</td>
-        <td>{{ $all_all_parti->edu_quali }}</td>
-        <td>
-
-            @if($all_all_parti->profession  == 'Govt./Semi Govt./Govt Autonomous' || $all_all_parti->profession  == 'সরকারি/আধা/সরকারি স্বায়ত্তশাসিত')
-
-            {{ $all_all_parti->job_des }}
-            @else
--
-            @endif
-
-
-        </td>
-        <td>@if($all_all_parti->profession  == 'Private Service' || $all_all_parti->profession  == 'ব্যক্তিগত সেবা')
-
-            {{ $all_all_parti->job_des }}
-            @else
--
-            @endif</td>
-        <td>@if($all_all_parti->profession  == 'Self Service' || $all_all_parti->profession  == 'স্ব সেবা')
-
-            {{ $all_all_parti->job_des }}
-            @else
--
-            @endif</td>
-        <td>{{ $all_all_parti->service_status }}</td>
-        <td></td>
-        <td>
-
-
-        </td>
-
-    </tr>
-    @endforeach
                                             </table>
                                           </div>
                                         </div>
                                     </div>
 
 
-                                    @if($getNgoType == 'Foreign')
+                                    @if($getNgoType == 'Foreign' || $getNgoType == 'দেশিও')
 
                                     <div class="tab-pane fade active show" id="pills-darkdoc" role="tabpanel"
                                     aria-labelledby="pills-darkdoc-tab">
@@ -1036,13 +1005,19 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                                                 @csrf
                                                 <input type="hidden" value="{{ $getformOneId->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
-                                                <select class="form-control form-control-sm" name="status" >
+                                                <select class="form-control form-control-sm" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $getformOneId->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $getformOneId->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $getformOneId->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
+
+                                                <div id="rValueStatus" style="display:none;">
+                                                    <label>বিস্তারিত লিখুন:</label>
+                                                    <textarea class="form-control form-control-sm" name="comment"></textarea>
+                                                </div>
 
                                                 <button type="submit" class="btn btn-primary mt-5">আপডেট করুন</button>
 
@@ -1077,9 +1052,12 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
         if(valmain == 'Accepted'){
            $('#rValue').show();
+           $('#rValueStatus').hide();
+
         }
         else{
             $('#rValue').hide();
+            $('#rValueStatus').show();
         }
       });
     });

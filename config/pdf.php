@@ -20,7 +20,16 @@ return[
             'BI' => 'SolaimanLipi_Bold_10-03-12.ttf', // optional: bold-italic font
             'useOTL' => 0xFF,
             'useKashida' => 75,
+         ],
+         'banglaNikos' => [
+            'R'  => 'Nikosh.ttf',    // regular font
+            'B'  => 'Nikosh.ttf',       // optional: bold font
+            'I'  => 'Nikosh.ttf',     // optional: italic font
+            'BI' => 'Nikosh.ttf', // optional: bold-italic font
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
         ]
         // ...add as many as you want.
     ]
 ];
+

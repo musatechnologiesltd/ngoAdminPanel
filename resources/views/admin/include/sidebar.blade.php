@@ -28,11 +28,11 @@
         <div class="badge-bottom"></div>
         @if ($usr->can('profile.view'))
         <a href="{{ route('profile.index') }}">
-            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name_ban }}</h6>
         </a>
         @else
         <a href="#">
-            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name }}</h6>
+            <h6 class="mt-3 f-14 f-w-600">{{ Auth::guard('admin')->user()->admin_name_ban }}</h6>
         </a>
         @endif
 
@@ -50,6 +50,65 @@
         <p class="mb-0 font-roboto">{{ $designationName  }}</p>
         <p class="mb-0 font-roboto">{{ $branchName  }}</p>
     </div>
+
+
+
+
+    @if(Route::is('profilePictureEdit') || Route::is('passwordEdit') || Route::is('digitalSignatureEdit') || Route::is('basicInformationEdit') || Route::is('profile.index'))
+    <nav>
+        <div class="main-navbar">
+            <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+            <div id="mainnav">
+                <ul class="nav-menu custom-scrollbar">
+                    <li class="back-btn">
+                        <div class="mobile-back text-end"><span>পেছনে</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <p>ই -মেইল : {{ Auth::guard('admin')->user()->email }}<br>
+                                ফোন : {{ App\Http\Controllers\Admin\CommonController::englishToBangla(Auth::guard('admin')->user()->admin_mobile) }}</p>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                            <i data-feather="home"></i>
+                            <span>ড্যাশবোর্ড</span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('basicInformationEdit') ? 'active' : '' }}" href="{{ route('basicInformationEdit') }}">
+                            <i data-feather="list"></i>
+                            <span>তথ্যাবলী</span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('digitalSignatureEdit') ? 'active' : '' }}" href="{{ route('digitalSignatureEdit') }}">
+                            <i data-feather="crop"></i>
+                            <span>ডিজিটাল স্বাক্ষর </span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('passwordEdit') ? 'active' : '' }}" href="{{ route('passwordEdit') }}">
+                            <i class="icon-key"></i>
+                            <span>পাসওয়ার্ড </span>
+                        </a>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{ Route::is('profilePictureEdit') ? 'active' : '' }}" href="{{ route('profilePictureEdit') }}">
+                            <i class="icon-image"></i>
+                            <span>প্রোফাইল ছবি </span>
+                        </a>
+                    </li>
+                </ul>
+                </div>
+                </div>
+                </nav>
+    @else
     <nav>
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -63,12 +122,111 @@
                             <h6>সাধারণ</h6>
                         </div>
                     </li>
+
+
+
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i data-feather="home"></i>
                             <span>ড্যাশবোর্ড</span>
                         </a>
                     </li>
+
+
+                    @if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
+<li class="sidebar-main-title">
+    <div>
+      <h6>ডাক </h6>
+    </div>
+  </li>
+
+  <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('addParentNote')  ||  Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
+        <i data-feather="mail"></i>
+        <span>আগত ডাক</span>
+    </a>
+</li>
+
+ <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{  Route::is('receiver_dak')  ? 'active' : '' }}" href="{{ route('receiver_dak') }}">
+        <i data-feather="mail"></i>
+        <span>প্রেরিত ডাক</span>
+    </a>
+</li>
+
+
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('all_dak_list') ? 'active' : '' }}" href="{{ route('all_dak_list') }}">
+        <i data-feather="mail"></i>
+        <span>সকল ডাক</span>
+    </a>
+</li>
+
+
+
+@endif
+
+
+
+                    @if ($usr->can('receiveNothiAdd') || $usr->can('receiveNothiView') || $usr->can('receiveNothiDelete') || $usr->can('receiveNothiUpdate'))
+<li class="sidebar-main-title">
+    <div>
+      <h6>নথি</h6>
+    </div>
+  </li>
+
+
+@if ($usr->can('receiveNothiAdd') || $usr->can('receiveNothiView') || $usr->can('receiveNothiDelete') || $usr->can('receiveNothiUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{  Route::is('receiveNothi.index')  ? 'active' : '' }}" href="{{ route('receiveNothi.index') }}">
+        <i data-feather="mail"></i>
+        <span>আগত নথি</span>
+    </a>
+</li>
+@endif
+@if ($usr->can('sendNothiAdd') || $usr->can('sendNothiView') || $usr->can('sendNothiDelete') || $usr->can('sendNothiUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{  Route::is('sendNothi.index')  ? 'active' : '' }}" href="{{ route('sendNothi.index') }}">
+        <i data-feather="file-minus"></i>
+        <span>প্রেরিত নথি</span>
+    </a>
+</li>
+@endif
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{  Route::is('givePermissionToNothi') || Route::is('documentPresent.index')  ? 'active' : '' }}" href="{{ route('documentPresent.index') }}">
+        <i data-feather="file-text"></i>
+        <span>সকল নথি</span>
+    </a>
+</li>
+
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('documentPresent.create')  ? 'active' : '' }}" href="{{ route('documentPresent.create') }}">
+        <i data-feather="file-text"></i>
+        <span>নতুন নথি তৈরী করুন </span>
+    </a>
+</li>
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav" href="{{ route('dakBranchList.index') }}">
+        <i data-feather="file-plus"></i>
+        <span>নথি সিদ্ধান্ত সমূহ</span>
+    </a>
+</li>
+
+
+
+
+
+@endif
+
+
+
+
+
+<li class="sidebar-main-title">
+    <div>
+      <h6>এনজিও</h6>
+    </div>
+  </li>
 
                     @if ($usr->can('register_list_add') || $usr->can('register_list_view') || $usr->can('register_list_delete') || $usr->can('register_list_update'))
                     @if (Route::is('newRegistrationList') ||  Route::is('revisionRegistrationList') || Route::is('alreadyRegistrationList') || Route::is('registrationView'))
@@ -153,21 +311,58 @@
     </a>
 </li>
 @endif
-@if ($usr->can('postAdd') || $usr->can('postView') || $usr->can('postDelete') || $usr->can('postUpdate'))
-<li class="sidebar-main-title">
-    <div>
-      <h6>ডাক বিভাগ</h6>
-    </div>
-  </li>
 
-  <li class="dropdown">
-    <a class="nav-link menu-title link-nav {{ Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
-        <i data-feather="mail"></i>
-        <span>ডাক তালিকা</span>
+
+@if ($usr->can('fd6_formsAdd') || $usr->can('fd6_formsView') || $usr->can('fd6_formsDelete') || $usr->can('fd6_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd6Form.index') || Route::is('fd6Form.show') ? 'active' : '' }}" href="{{ route('fd6Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৬ (প্রকল্প প্রস্তাব) </span>
     </a>
 </li>
-
 @endif
+
+@if ($usr->can('fd7_formsAdd') || $usr->can('fd7_formsView') || $usr->can('fd7_formsDelete') || $usr->can('fd7_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd7Form.index') || Route::is('fd7Form.show') ? 'active' : '' }}" href="{{ route('fd7Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৭ (প্রকল্প প্রস্তাব)</span>
+    </a>
+</li>
+@endif
+
+@if ($usr->can('fc1_formsAdd') || $usr->can('fc1_formsView') || $usr->can('fc1_formsDelete') || $usr->can('fc1_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fc1PdfDownload') || Route::is('fc1Form.index') || Route::is('fc1Form.show') ? 'active' : '' }}" href="{{ route('fc1Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফসি - ১</span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('fc2_formsAdd') || $usr->can('fc2_formsView') || $usr->can('fc2_formsDelete') || $usr->can('fc2_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fc2Form.index') || Route::is('fc2Form.show') ? 'active' : '' }}" href="{{ route('fc2Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফসি-২</span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('fd3_formsAdd') || $usr->can('fd3_formsView') || $usr->can('fd3_formsDelete') || $usr->can('fd3_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd3Form.index') || Route::is('fd3Form.show') ? 'active' : '' }}" href="{{ route('fd3Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৩ </span>
+    </a>
+</li>
+@endif
+
+
+
+
 @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit') || $usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit') || $usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate')|| $usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate') || $usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
 <li class="sidebar-main-title">
     <div>
@@ -368,6 +563,7 @@
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </div>
     </nav>
+    @endif
 </header>
 
 

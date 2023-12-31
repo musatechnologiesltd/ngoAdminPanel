@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এফডি৯ (এন-ভিসা) | {{ $ins_name }}
+এফডি - ৯ (এন-ভিসা) | {{ $ins_name }}
 @endsection
 
 
@@ -30,8 +30,8 @@
                 <h3>বিদেশী কর্মকর্তার নিয়োগ পত্রের সত্যায়ন পত্র </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">এফডি৯ (এন-ভিসা)</li>
-                    <li class="breadcrumb-item">এফডি৯ (এন-ভিসা) এর বিবরণ </li>
+                    <li class="breadcrumb-item">এফডি - ৯ (এন-ভিসা)</li>
+                    <li class="breadcrumb-item">এফডি - ৯ (এন-ভিসা) এর বিবরণ </li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -49,7 +49,7 @@
                                             data-bs-toggle="pill" href="#pills-darkhome"
                                             role="tab" aria-controls="pills-darkhome"
                                             aria-selected="true" style=""><i
-                                    class="icofont icofont-ui-home"></i>এফডি৯ </a></li>
+                                    class="icofont icofont-ui-home"></i>এফডি - ৯ </a></li>
 
                                     <li class="nav-item"><a class="nav-link" id="pills-darkprofile-tab"
                                             data-bs-toggle="pill" href="#pills-darkprofile"
@@ -64,7 +64,7 @@
                                     class="icofont icofont-contacts"></i>ফরওয়ার্ডিং লেটার</a>
                     </li>
 
-                    
+
                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc-tab"
                                             data-bs-toggle="pill" href="#pills-darkdoc"
                                             role="tab" aria-controls="pills-darkdoc"
@@ -87,7 +87,7 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
 
-                                            <p>এফডি-০৯ পিডিএফ ডাউনলোড করুন</p>
+                                            <p>এফডি - ৯ পিডিএফ ডাউনলোড করুন</p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="text-center">
@@ -342,6 +342,42 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                                         </tr>
                                         </tbody>
                                     </table>
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-12"></div>
+                                        <div class="col-lg-6 col-sm-12">
+                                            <table class="table table-borderless">
+
+                                                <tr>
+                                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>নামঃ {{  $dataFromNVisaFd9Fd1->chief_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>পদবীঃ {{  $dataFromNVisaFd9Fd1->chief_desi }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>তারিখঃ {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dataFromNVisaFd9Fd1->chiefDate)->toDateString() )))}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1522,6 +1558,9 @@ ff
                                                 </tr>
                                                 @endif
                                     </table>
+
+
+
                                 </div>
                                 <div class="card-footer text-end">
 

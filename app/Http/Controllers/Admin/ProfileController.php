@@ -27,6 +27,8 @@ class ProfileController extends Controller
           return redirect()->route('mainLogin');
                }
 
+               \LogActivity::addToLog('view profile.');
+
         return view('admin.profile.profile');
     }
 }

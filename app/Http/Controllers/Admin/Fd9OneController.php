@@ -15,16 +15,75 @@ use Response;
 use App\Models\ForwardingLetter;
 use App\Models\ForwardingLetterOnulipi;
 use App\Models\Fd9ForwardingLetterEdit;
+use App\Models\NgoFDNineDak;
+use App\Models\NgoFDNineOneDak;
+use App\Models\NgoNameChangeDak;
+use App\Models\NgoRenewDak;
+use App\Models\NgoFdSixDak;
+use App\Models\NgoFdSevenDak;
+use App\Models\NgoRegistrationDak;
 use App\Models\SecruityCheck;
 class Fd9OneController extends Controller
 {
+
+
+
+    public function verified_fd_nine_one_download($id){
+
+        \LogActivity::addToLog('verified_fd_nine_one_download');
+
+        $form_one_data = DB::table('fd9_one_forms')->where('id',$id)->value('verified_fd_nine_one_form');
+
+        //dd($form_one_data);
+
+         return view('admin.fd9Oneform.verified_fd_nine_one_download',compact('form_one_data'));
+
+    }
     public function index(){
+
+
+        \LogActivity::addToLog('view fdNineOne List ');
+
+        if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
-       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId')
+
+       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal')
+
        ->orderBy('fd9_one_forms.id','desc')
        ->get();
+
+
+
+
+        }else{
+
+
+            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->latest()->get();
+
+     $convert_name_title = $ngoStatusFDNineOneDak->implode("f_d_nine_one_status_id", " ");
+     $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+
+
+            $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
+       ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
+
+       ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal')
+       ->whereIn('fd9_one_forms.id',$separated_data_title)
+       ->orderBy('fd9_one_forms.id','desc')
+       ->get();
+
+
+        }
+
+
+
 
        //dd($dataFromNVisaFd9Fd1);
            return view('admin.fd9Oneform.index',compact('dataFromNVisaFd9Fd1'));
@@ -35,12 +94,23 @@ class Fd9OneController extends Controller
        public function statusUpdateForFd9One(Request $request){
 
 
+        \LogActivity::addToLog('update fdNineOne status update ');
+
+
         DB::table('fd9_one_forms')->where('id',$request->id)
         ->update([
-            'status' => $request->status
+            'status' => $request->status,
+            'comment' => $request->comment,
         ]);
 
+        if($request->status == 'Rejected' || $request->status == 'Correct'){
 
+            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('NGOAB Registration Service || Ngo Renew Status');
+            });
+
+        }
         return redirect()->back()->with('success','Updated successfully!');
 
 
@@ -49,13 +119,20 @@ class Fd9OneController extends Controller
 
        public function show($id){
 
+        \LogActivity::addToLog('view fdNineOne detail ');
+
+
+        $mainIdFdNineOne = $id;
 
         $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
         ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
-        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId')
+        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal','fd9_one_forms.created_at as chiefDate')
         ->orderBy('fd9_one_forms.id','desc')
         ->where('fd9_one_forms.id',$id)
         ->first();
+
+        $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
+        //dd($dataFromNVisaFd9Fd1);
 
 
         $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$dataFromNVisaFd9Fd1->mainId)
@@ -115,6 +192,8 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
         //dd($dataFromNVisaFd9Fd1);
             return view('admin.fd9Oneform.show',
             compact(
+                'get_email_from_user',
+                'mainIdFdNineOne',
 'nVisabasicInfo',
                 'dataFromNVisaFd9Fd1',
                 'ngoTypeData',
@@ -136,6 +215,11 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
        }
 
        public function fd9OneDownload($cat,$id){
+
+
+        \LogActivity::addToLog('download fdNineOne pdf ');
+
+
         $data = DB::table('system_information')->first();
 
 

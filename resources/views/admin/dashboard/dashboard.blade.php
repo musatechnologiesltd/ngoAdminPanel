@@ -154,309 +154,305 @@
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-    এনজিও নিবন্ধন আবেদনের তালিকা
+    <b>আগত ডাকের তালিকা</b>
               </div>
-                <div class="card-body">
-                  <div class="table-responsive product-table">
-                        <table class="display" id="basic-1">
-                            <thead>
-                            <tr>
-                                <th>ট্র্যাকিং নম্বর</th>
-                                <th>এনজিওর নাম ও ঠিকানা</th>
-                                <th>পেমেন্ট</th>
-                                <th>স্ট্যাটাস</th>
-                                <th>জমাদানের তারিখ</th>
-                                <th>কার্যকলাপ</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($all_data_for_new_list as $all_data_for_new_list_all)
-
-                                <?php
-
-                                $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
-                             // dd($getngoForLanguage);
-
-                             $ngoOldNew = DB::table('ngo_type_and_languages')
-                             ->where('user_id',$fdOneFormId)
-                             ->value('ngo_type_new_old');
-
-                                  if($getngoForLanguage =='দেশিও'){
-
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
-
-                                  }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
-                                  }
-
-                                  ?>
-
-                                <?php
-
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
-
-                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
-
-                                ?>
-                            <tr>
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
-                                <td>
-                                    <h6>
-
-                                        এনজিওর নাম: {{ $reg_name  }} <br>
-                                        @if($ngoOldNew == 'Old')
-                                        এনজিও'র ধরন : পুরাতন
-                                        @else
-
-                                        এনজিও'র ধরন : নতুন
-                                        @endif
+              <div class="card-body">
+                <ul class="nav nav-dark" id="pills-darktab" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-ui-home"></i>ডাক</a></li>
+                </ul>
+                <div class="tab-content" id="pills-darktabContent">
+                    <div class="tab-pane fade show active" id="pills-darkhome" role="tabpanel" aria-labelledby="pills-darkhome-tab">
+                        <div class="table-responsive product-table mb-0 m-t-30">
+                            <table class="display" id="basic-1">
+                                <tbody>
 
 
-                                    </h6>
+                                  @include('admin.post.registrationDakFirstStep')
 
-                                    <span>ঠিকানা: {{ $reg_address }}</td>
-                                <td>হ্যাঁ</td>
-                                <td class="font-success">
-
-                                    @if($all_data_for_new_list_all->status == 'Accepted')
-
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        গৃহীত
-
-                                    </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
-
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
-
-                                    </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Rejected')
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        প্রত্যাখ্যান
-
-                                    </button>
-
-                                    @else
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
-
-                                    </button>
-
-                                    @endif
-                                </td>
-                                <td>
+                                  @include('admin.post.renewDakFirstStep')
 
 
-                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
-
-                                </td>
-                                <td>
-
-                                    @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
-@endif
+                                  @include('admin.post.nameChangeDakFirstStep')
 
 
-                                </td>
-                            </tr>
-                            @endforeach
+                                  @include('admin.post.fdNineDakFirstStep')
 
-                            </tbody>
-                        </table>
+
+                                  @include('admin.post.fdNineOneDakFirstStep')
+
+
+                                  @include('admin.post.fdSixDakFirstStep')
+
+
+                                  @include('admin.post.fdSevenDakFirstStep')
+
+                                  @include('admin.post.fcOneDakFirstStep')
+
+
+                                  @include('admin.post.fcTwoDakFirstStep')
+
+
+                                  @include('admin.post.fdThreeDakFirstStep')
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-              </div>
+                </div>
+            </div>
          </div>
       </div>
    </div>
 </div>
 
- <div class="container-fluid dashboard-default-sec">
+<!-- Container-fluid Ends-->
+<div class="container-fluid dashboard-default-sec">
     <div class="row">
        <div class="col-sm-12">
             <div class="card">
 <div class="card-header">
-    এনজিও নাম পরিবর্তনের তালিকা
+    <b>আগত নথির  তালিকা</b>
               </div>
-                <div class="card-body">
-                    <div class="table-responsive product-table">
-                        <table class="display" id="basic-2">
-                            <thead>
-                            <tr>
-                                <th>ডাইরি নম্বর</th>
-                                <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
-                                <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
-                                <th>পেমেন্ট</th>
-                                <th>স্ট্যাটাস</th>
-                                <th>জমাদানের তারিখ</th>
-                                <th>কার্যকলাপ</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($all_data_for_new_list_name_change as $all_data_for_new_list_all)
+              <div class="card-body">
 
-                                <?php
- $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
-                         $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
-                             // dd($getngoForLanguage);
-                                  if($getngoForLanguage =='দেশিও'){
+                <table class="table table-striped" >
+                    <tbody>
 
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
+                        @foreach ($senderNothiList as $key=>$nothiLists1)
 
-                                  }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
-                                  }
-                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
+                        <?php
 
-                                ?>
-                            <tr>
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
-                                <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->previous_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->previous_name_eng }}</td>
-                                <td><h6> এনজিওর নাম (বাংলা): {{ $all_data_for_new_list_all->present_name_ban }}</h6><span>এনজিওর নাম (ইংরেজি): {{ $all_data_for_new_list_all->present_name_eng }}</td>
-                                <td>হ্যাঁ</td>
-                                <td class="font-success">
+$nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first();
+?>
 
-                                    @if($all_data_for_new_list_all->status == 'Accepted')
+@if(!$nothiLists)
 
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        গৃহীত
+@else
+                    <tr>
+                        <td>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <div class="accordion-button collapsed"
+                                         data-bs-toggle="collapse"
+                                         data-bs-target="#flush-collapse{{ $key+1 }}">
+                                                            <span>
+                                                                                                                                            <span style="line-height:3">
+                                                <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+                                                            <br>
+                                                            <span style="text-align:left;"> <span
+                                                                        style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+                                                            <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
+                                                            </span>
+                                    </div>
+                                </h2>
+                                <div id="flush-collapse{{ $key+1 }}"
+                                     class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        <div class="d-flex mt-3">
+                                            <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                                <i class="fa fa-plus"></i>
+                                                নতুন নোট
+                                            </button>
+                                            <button class="btn btn-transparent ms-3" type="button">
+                                                <i class="fa fa-envelope"></i>
+                                                সকল নোট
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
 
-                                    </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
-
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
-
-                                    </button>
-                                    @else
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        প্রত্যাখ্যান
-
-                                    </button>
-                                    @endif
-                                </td>
-                                <td>
+<?php
 
 
-                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
 
 
-                                </td>
-                                <td>
 
-                                    @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$all_data_for_new_list_all->id) }}';">বিস্তারিত দেখুন</button>
-@endif
+if($nothiLists1->dakType == 'registration'){
 
 
-                                </td>
-                            </tr>
-                            @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
-              </div>
-         </div>
-      </div>
-   </div>
-</div>
+$allNoteListNew = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
 
 
- <div class="container-fluid dashboard-default-sec">
-    <div class="row">
-       <div class="col-sm-12">
-            <div class="card">
-<div class="card-header">
-    এনজিও নিবন্ধন নবায়ন তালিকা
-              </div>
-                <div class="card-body">
-                   <div class="table-responsive product-table">
-                        <table class="display" id="basic-3">
-                            <thead>
-                            <tr>
-                                <th>ডাইরি নম্বর</th>
-                                <th>এনজিওর নাম ও ঠিকানা</th>
-                                <th>পেমেন্ট</th>
-                                <th>স্ট্যাটাস</th>
-                                <th>জমাদানের তারিখ</th>
-                                <th>কার্যকলাপ</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($all_data_for_new_list_renew as $all_data_for_new_list_all)
-
-                                <?php
- $fdOneFormId =  DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number');
-                                 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id', $fdOneFormId)->value('ngo_type');
-                             // dd($getngoForLanguage);
-                                  if($getngoForLanguage =='দেশিও'){
-
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
-
-                                  }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
-                                  }
-                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
-
-                                ?>
-                            <tr>
-                                <td>#{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}</td>
-                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
-                                <td>হ্যাঁ</td>
-                                <td class="font-success">
-
-                                    @if($all_data_for_new_list_all->status == 'Accepted')
-
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        গৃহীত
-
-                                    </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
-
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
-
-                                    </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Rejected')
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        প্রত্যাখ্যান
-
-                                    </button>
-
-                                    @else
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
-
-                                    </button>
-
-                                    @endif
-                                </td>
-                                <td>
-
-                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
-
-                                </td>
-                                <td>
-
-                                    @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$all_data_for_new_list_all->id) }}';">বিস্তারিত দেখুন</button>
-@endif
 
 
-                                </td>
-                            </tr>
-                            @endforeach
 
-                            </tbody>
-                        </table>
-                    </div>
-              </div>
-         </div>
-      </div>
-   </div>
+}elseif($nothiLists1->dakType == 'renew'){
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_renews')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'nameChange'){
+
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+
+}elseif($nothiLists1->dakType== 'fdNine'){
+
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'fdNineOne'){
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'fdSix'){
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'fdSeven'){
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'fcOne'){
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'fcTwo'){
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+
+
+}elseif($nothiLists1->dakType == 'fdThree'){
+
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+// ->where('id',$nothiLists1->noteId)
+->get();
+
+
+
+
+
+}
+
+
+
+?>
+@if(count($allNoteListNew) > 0)
+<ul>
+@foreach($allNoteListNew as $key=>$allNoteListNews)
+                                          <li>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla(($key+1)) }} .   <a href="{{ route('viewChildNote', ['status' =>$nothiLists1->dakType,'parentId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists1->nothId,'id' =>$allNoteListNews->id,'activeCode' => ($key+1)]) }}">{{ $allNoteListNews->subject }}</a> </li>
+                                                @endforeach
+                                            </ul>
+
+                                            @else
+
+
+                                            <p>কোন নোট পাওয়া যায়নি</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+
+            </div>
+       </div>
+    </div>
 </div>
 @endsection
 
