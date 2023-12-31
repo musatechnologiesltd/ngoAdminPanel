@@ -12,6 +12,7 @@ use App\Models\Namechange;
 use App\Models\Renew;
 use App\Models\Duration;
 use Carbon\Carbon;
+use Mpdf\Mpdf;
 use Response;
 use App\Models\NgoFDNineDak;
 use App\Models\NgoFDNineOneDak;
@@ -33,6 +34,60 @@ class RenewController extends Controller
         });
     }
 
+
+    public function viewFormEightPdf($id){
+
+        //dd(33);
+        $get_all_data_new = DB::table('ngo_renew_infos')->where('id',$id)->first();
+
+        //$getUserIdFrom = NgoRenew::where('id',base64_decode($id))->first();
+        $all_partiw1 = DB::table('fd_one_forms')->where('id',$get_all_data_new->fd_one_form_id)->first();
+
+        //dd($all_partiw1);
+
+        $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$get_all_data_new->fd_one_form_id)->get();
+        $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$get_all_data_new->fd_one_form_id)->first();
+
+
+        $file_Name_Custome = 'fd_eight_form';
+
+
+
+
+
+
+
+
+
+    $data =view('admin.renew_list.downloadRenewPdf',[
+                'get_all_data_new'=>$get_all_data_new,
+
+                'all_partiw1'=>$all_partiw1,
+                'all_partiw'=>$all_partiw,
+                 'get_all_data_adviser_bank'=>$get_all_data_adviser_bank
+
+            ])->render();
+
+
+    $pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+                     $mpdf = new Mpdf([
+                        //'default_font_size' => 14,
+                        'default_font' => 'nikosh'
+                    ]);
+
+                    //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+                    $mpdf->WriteHTML($data);
+
+
+
+                    $mpdf->Output($pdfFilePath, "I");
+                    die();
+
+
+    }
 
 
 

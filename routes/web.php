@@ -488,6 +488,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(RenewController::class)->group(function () {
 
+
+        Route::get('viewFormEightPdf/{id}', 'viewFormEightPdf')->name('viewFormEightPdf');
+
     Route::get('changeAcNumberDownload/{id}', 'changeAcNumberDownload')->name('changeAcNumberDownload');
     Route::get('dueVatPdfDownload/{id}', 'dueVatPdfDownload')->name('dueVatPdfDownload');
     Route::get('copyOfChalanPdfDownload/{id}', 'copyOfChalanPdfDownload')->name('copyOfChalanPdfDownload');
@@ -525,7 +528,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('user', AdminController::class);
 
   Route::controller(AdminController::class)->group(function () {
-    Route::get('/getAdminDetail', 'getAdminDetail')->name('getAdminDetail');
+        Route::get('/getAdminDetail', 'getAdminDetail')->name('getAdminDetail');
         Route::post('/employeeEndDatePost', 'employeeEndDatePost')->name('employeeEndDatePost');
         Route::get('/employeeEndDate', 'employeeEndDate')->name('employeeEndDate');
         Route::post('/postPasswordChange', 'postPasswordChange')->name('postPasswordChange');

@@ -7,6 +7,10 @@
 
 <div class="mb-0 m-t-30">
     <table class="table table-bordered">
+
+
+
+
         <tr>
             <th>নথির নাম</th>
             <th>নথি দেখুন</th>
@@ -16,7 +20,28 @@
             <td><a target="_blank"  href="{{ route('verifiedFdEightDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a></td>
         </tr> --}}
 
+ <tr>
+           <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ এফডি -৮ এর ফাইনাল কপি</td>
+           <td>
 
+
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('viewFormEightPdf', ['id' =>$renewInfoData->id]) }}" >
+               <i class="fa fa-eye"></i>
+           </a>
+
+
+           @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+                <button  href="{{ route('viewFormEightPdf', ['id' =>$renewInfoData->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="কর্মকর্তার স্বাক্ষর ও তারিখ সহ এফডি -৮ এর ফাইনাল কপি"><i class="fa fa-paperclip"></i></button>
+                <button  href="{{ route('viewFormEightPdf', ['id' =>$renewInfoData->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+                @else
+
+                @endif
+
+
+
+        </td>
+       </tr>
         <?php
 
 

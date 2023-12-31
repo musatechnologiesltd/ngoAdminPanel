@@ -136,9 +136,7 @@ $dakDetail = DB::table('dak_details')
                                     <?php
 
 $mainDetail = DB::table('ngo_registration_daks')
-->where('registration_status_id',$allStatusData->id)
-->where('sender_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('receiver_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->where('registration_status_id',$allStatusData->registration_status_id)->orderBy('id','asc')->get();
 
                                     ?>
 

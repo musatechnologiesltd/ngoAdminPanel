@@ -95,7 +95,8 @@ $dakDetail = DB::table('dak_details')
 
 <?php
 
-$mainDetail = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->orderBy('id','asc')->get();
+$mainDetail = DB::table('ngo_registration_daks')
+->where('id',$allStatusData->id)->orderBy('id','asc')->get();
 
 ?>
 
