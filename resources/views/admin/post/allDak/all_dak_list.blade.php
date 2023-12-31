@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ডাক তালিকা | {{ $ins_name }}
+সকল ডাক তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,7 +14,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>ডাক তালিকা</h3>
+                <h3>সকল ডাক তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">ডাক </li>
@@ -84,7 +84,7 @@ $formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registrat
                                             উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                             প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                                             মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                            বিষয়ঃ <b> এনজিও নিবন্ধনের নোটিশ </b><br>
+                                            বিষয়ঃ <b> এনজিও নিবন্ধন</b><br>
                                             সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                                             তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                                         </td>
@@ -237,7 +237,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও নিবন্ধনের নোটিশ </h5>
+                                                    <h5>বিষয়ঃ এনজিও নিবন্ধন</h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -315,7 +315,7 @@ $formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_statu
                                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                        বিষয়ঃ <b> এনজিও নিবন্ধন নবায়নের নোটিশ </b><br>
+                                        বিষয়ঃ <b> এনজিও নবায়ন</b><br>
                                         @if(empty($decesionName))
 
                                         @else
@@ -476,7 +476,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও নিবন্ধন নবায়নের নোটিশ  </h5>
+                                                    <h5>বিষয়ঃ এনজিও নবায়ন</h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else

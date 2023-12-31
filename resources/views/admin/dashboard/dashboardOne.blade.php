@@ -156,7 +156,7 @@
 <div class="card-header">
     <b>আগত ডাকের তালিকা</b>
               </div>
-               @include('admin.dashboard.otherdashboard')
+               @include('admin.dashboard.otherdashboardOne')
          </div>
       </div>
    </div>

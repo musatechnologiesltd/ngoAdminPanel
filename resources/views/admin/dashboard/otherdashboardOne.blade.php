@@ -1,10 +1,7 @@
 <div class="card-body">
-    <ul class="nav nav-dark" id="pills-darktab" role="tablist">
-        <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-ui-home"></i>ডাক</a></li>
-    </ul>
-    <div class="tab-content" id="pills-darktabContent">
-        <div class="tab-pane fade show active" id="pills-darkhome" role="tabpanel" aria-labelledby="pills-darkhome-tab">
-            <div class="table-responsive product-table mb-0 m-t-30">
+
+
+            <div class="table-responsive product-table mb-0 ">
                 <table class="display" id="basic-1">
                     <tbody>
 
@@ -2541,6 +2538,5 @@ $branchNames = DB::table('branches')
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
+       
 </div>
