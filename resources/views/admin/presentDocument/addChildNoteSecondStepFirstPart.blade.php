@@ -1,3 +1,15 @@
+<?php
+
+$receiverId = DB::table('nothi_details')
+->where('noteId',$id)
+->where('nothId',$nothiId)
+->where('dakId',$parentId)
+->where('dakType',$status)
+->where('sender',Auth::guard('admin')->user()->id)
+->value('receiver');
+
+?>
+
 <div class="card">
     <div class="card-header bg-primary" id="heading{{ $key+1 }}">
       <h5 class="mb-0">
@@ -5,7 +17,29 @@
            অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($activeCode.'.'.$key+1) }}</span> <span style="padding-right:40px;">{{ '('.$creatorNAme}} <span style="font-size: 10px;padding-right:60px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->created_at))).')'  }}</span>
 
         </button>
+        @if(empty($receiverId))
+
+        <!-- new delete code -->
+        <a class="btn-sm btn btn-outline-danger"  onclick="deleteTag({{ $childNoteNewLists->id}})">
+
+
+        <i class="fa fa-trash" aria-hidden="true"></i>
+
+    </a>
+
+
+    <form id="delete-form-{{ $childNoteNewLists->id }}" action="{{ route('deleteAllParagraph',['id'=>$childNoteNewLists->id,'status'=>$status]) }}" method="POST" style="display: none;">
+        @method('DELETE')
+                                      @csrf
+
+                                  </form>
+
+        <!-- end delete code -->
+
+        @endif
       </h5>
+
+
     </div>
 
     @if(count($childNoteNewList)  == ($key+1))
@@ -28,8 +62,13 @@
             <input type="hidden" value="{{ $nothiId }}" name="nothiId"/>
             <input type="hidden" value="{{ $parentId }}" name="dakId"/>
             {{-- <input type="hidden" value="{{ $status }}" name="status"/> --}}
-             <div id="container">
-        <textarea class="maineditor" name="mainPartNote" id="editor{{ $key+1 }}">
+             <div id="container mt-2">
+
+                <div id="descriptionFirst{{ $key+1 }}">
+                {!! $childNoteNewLists->description !!}
+                </div>
+
+        <textarea class="maineditor maineditorOne{{ $key+1 }}" style="display: none;" name="mainPartNote" >
 
             {!! $childNoteNewLists->description !!}
         </textarea>
@@ -165,7 +204,7 @@ $unsentAtt = DB::table('note_attachments')
  <p class="mt-4">সংযুক্তি({{ count($unsentAtt) }})</p>
  <ul>
     @foreach($unsentAtt as $unsentAtts )
-    <li><a target="_blank" href="{{ $unsentAtts->title }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
+    <li><a target="_blank" href="{{ $unsentAtts->link }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
     @endforeach
  </ul>
 
@@ -203,33 +242,30 @@ $unsentAtt = DB::table('note_attachments')
     </button>
 
 
-    <?php
 
-    $receiverId = DB::table('nothi_details')
-    ->where('noteId',$id)
-    ->where('nothId',$nothiId)
-    ->where('dakId',$parentId)
-    ->where('dakType',$status)
-    ->where('sender',Auth::guard('admin')->user()->id)
-    ->value('receiver');
-
-    ?>
 
 
     @if(empty($receiverId))
 
+    <a class="btn-sm btn btn-primary editButtonFirst"  data-eid="{{ $key+1 }}">
+    সংশোধন করুন
+</a>
 
-    <button class="btn-sm btn btn-primary" value="সংশোধন" name="final_button" type="submit"
+
+    <button class="btn-sm btn btn-primary editButtonSecond{{ $key+1 }}" style="display: none;"  value="সংশোধন" name="final_button" type="submit"
 
     aria-expanded="false">
-    সংশোধন করুন
+    সংরক্ষণ করুন
 </button>
+
 
                     <button data-bs-toggle="modal"
                     data-original-title="" data-bs-target="#modalforsender1" class="btn-sm btn btn-info ms-3" type="button">
                         <i class="fa fa-send"></i>
                         নথি প্রেরণ
                     </button>
+
+
 
                     @else
 

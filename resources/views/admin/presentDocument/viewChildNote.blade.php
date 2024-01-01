@@ -77,9 +77,9 @@
 
 @if($activeCode == ($key+1))
 
-<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->subject}}</button>
 @else
-<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->subject}}</button>
 @endif
 
                                         @if(count($checkParent) == ($key+1))
@@ -765,7 +765,7 @@ $potroZariListValue =  DB::table('nothi_details')
 
 <!--code for ajax -->
 
-
+<input type="hidden" name=""  id="lastChild" value="{{ $childNoteNewListValue }}"/>
 <!--end code for ajax-->
 @endsection
 
@@ -788,12 +788,12 @@ var snoteId =$('#snoteId').val();
 
         //   alertify.set('notifier','position','top-center');
         //   alertify.success('সফলভাবে কপি হয়েছে');
-
+        var lastChild = $('#lastChild').val();
 
         $.ajax({
     url: "{{ route('addParentAttachment') }}",
     method: 'get',
-    data: {name:name,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,value:value},
+    data: {lastChild:lastChild,name:name,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,value:value},
     success: function(data) {
 
         location.reload(true);
@@ -815,6 +815,7 @@ var snoteId =$('#snoteId').val();
 
     //event.preventDefault();
     value = $(this).attr('href');
+
     navigator.clipboard.writeText(value);
 
           alertify.set('notifier','position','top-center');

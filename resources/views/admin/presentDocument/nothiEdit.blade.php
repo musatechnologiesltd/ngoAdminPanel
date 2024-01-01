@@ -41,13 +41,15 @@ $getAllbranchName = DB::table('branches')
 
 
 ?>
-
+<!--new code  -->
 <div class="modal right fade bd-example-modal-lg" id="myModal{{ $nothiLists->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-lg-custom" role="document">
     <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel2">
             অনুমতিপ্রাপ্ত ব্যাক্তি বাছাই করুন </h4>
+
+            <input type="hidden" name="nothiMainId"  id="nothiMainId" value="{{ $nothiLists->id }}"/>
     </div>
 
     <div class="modal-body">
@@ -81,7 +83,7 @@ $getAllbranchName = DB::table('branches')
 
 
                                             <li>
-                                                <input disabled type="checkbox" class="passBranch1" value="{{ $allTotalBranchList->id }}" data-status="branch" name="branch_name[]" id="branch_name{{ $allTotalBranchList->id }}">
+                                                <input disabled type="checkbox" data-nid="{{ $nothiLists->id }}" class="passBranch1"  value="{{ $allTotalBranchList->id }}" data-status="branch" name="branch_name[]" id="branch_name{{ $allTotalBranchList->id }}">
                                                 <label for="branch_name{{ $allTotalBranchList->id }}" class="custom-unchecked">   {{ $allTotalBranchList->branch_name }}</label>
 
                                                 <ul>
@@ -107,7 +109,7 @@ $getAllbranchName = DB::table('branches')
                                                         $adminName = DB::table('admins')->where('id',$checkDesiId->admin_id)->value('admin_name_ban');
 ?>
 @if(Auth::guard('admin')->user()->id == $checkDesiId->admin_id)
-                                                        <input type="checkbox"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
+                                                        <input type="checkbox" data-nid="{{ $nothiLists->id }}" class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
                                                         @else
 
                                                         <?php
@@ -124,7 +126,7 @@ $getAllbranchName = DB::table('branches')
 
 @if(empty($adminIdListCheckNew))
 
-<input type="checkbox"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
+<input type="checkbox" data-nid="{{ $nothiLists->id }}"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
 
 
                                                         @else
@@ -302,7 +304,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                     <div class="tab-content" id="pills-darktabContent">
                                         <div class="tab-pane fade show active" id="pills-darkhome"
                                              role="tabpanel" aria-labelledby="pills-darkhome-tab">
-                                            <div class="podobi_tab mt-4" id="final_result">
+                                            <div class="podobi_tab mt-4" id="final_result{{ $nothiLists->id }}">
 
                                             </div>
                                         </div>

@@ -166,6 +166,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
+
+        Route::delete('/deleteAllParagraph/{id}/{status}', 'deleteAllParagraph')->name('deleteAllParagraph');
         Route::get('/givePermissionForPotroZari/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionForPotroZari')->name('givePermissionForPotroZari');
         Route::get('/givePermissionToNote/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionToNote')->name('givePermissionToNote');
         Route::post('/saveNothiPermissionReturn', 'saveNothiPermissionReturn')->name('saveNothiPermissionReturn');
@@ -430,7 +432,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('user', AdminController::class);
 
   Route::controller(AdminController::class)->group(function () {
-    
+
         Route::get('/getAdminDetail', 'getAdminDetail')->name('getAdminDetail');
         Route::post('/employeeEndDatePost', 'employeeEndDatePost')->name('employeeEndDatePost');
         Route::get('/employeeEndDate', 'employeeEndDate')->name('employeeEndDate');

@@ -1,3 +1,5 @@
+
+
 <div class="card">
     <div class="card-header bg-primary" id="heading{{ $key+1 }}">
       <h5 class="mb-0">
@@ -5,6 +7,37 @@
 
             অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($activeCode.'.'.$key+1) }}</span> <span style="padding-right:40px;">{{ '('.$creatorNAme}} <span style="font-size: 10px;padding-right:60px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->created_at))).')'  }}</span>
         </button>
+
+        @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
+
+        @if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id))
+
+
+    @else
+
+
+
+<!-- new delete code -->
+<a class="btn-sm btn btn-outline-danger"  onclick="deleteTag({{ $childNoteNewLists->id}})">
+
+
+    <i class="fa fa-trash" aria-hidden="true"></i>
+
+</a>
+
+
+<form id="delete-form-{{ $childNoteNewLists->id }}" action="{{ route('deleteAllParagraph',['id'=>$childNoteNewLists->id,'status'=>$status]) }}" method="POST" style="display: none;">
+    @method('DELETE')
+                                  @csrf
+
+                              </form>
+
+    <!-- end delete code -->
+@endif
+        @else
+
+
+        @endif
       </h5>
     </div>
     @if(count($childNoteNewList)  == ($key+1))
@@ -171,7 +204,7 @@ $unsentAtt = DB::table('note_attachments')
 ->where('nothiId',$nothiId)
 ->where('status',$status)
 ->where('admin_id',Auth::guard('admin')->user()->id)
-->where('child_id',$childNoteNewLists->id)
+ ->where('child_id',$childNoteNewLists->id)
 ->get();
 
 ?>
@@ -181,7 +214,7 @@ $unsentAtt = DB::table('note_attachments')
  <p class="mt-4">সংযুক্তি({{ count($unsentAtt) }})</p>
  <ul>
     @foreach($unsentAtt as $unsentAtts )
-    <li><a target="_blank" href="{{ $unsentAtts->title }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
+    <li><a target="_blank" href="{{ $unsentAtts->link }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
     @endforeach
  </ul>
     <div class="d-flex flex-row-reverse mt-3">

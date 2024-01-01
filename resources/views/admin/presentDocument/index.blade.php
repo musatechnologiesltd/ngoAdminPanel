@@ -210,7 +210,10 @@
        // alert(21);
 
 
-        var mainId = $('#main_id').val();
+        var mainId = $(this).data('nid');
+
+
+        //alert(mainId);
         var mainstatus = $(this).data('status');
 
 
@@ -247,7 +250,7 @@
 
 
                 // $("#serial_part_one"+id_for_pass).val(data);
-                 $("#final_result").html(data);
+                 $("#final_result"+mainId).html(data);
 
 
 

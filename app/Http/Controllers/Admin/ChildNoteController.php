@@ -59,6 +59,90 @@ class ChildNoteController extends Controller
 {
 
 
+    public function deleteAllParagraph($id,$status){
+
+
+
+        if($status == 'registration'){
+
+            $childNoteNewList = DB::table('child_note_for_registrations')
+            ->where('id',$id)->delete();
+
+
+            }elseif($status == 'renew'){
+
+            $childNoteNewList = DB::table('child_note_for_renews')
+            ->where('id',$id)->delete();
+
+
+            }elseif($status == 'nameChange'){
+
+            $childNoteNewList = DB::table('child_note_for_name_changes')
+            ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'fdNine'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_nines')
+            ->where('id',$id)->delete();
+
+
+            }elseif($status == 'fdNineOne'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+            ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'fdSix'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')
+            ->where('id',$id)->delete();
+
+
+            }elseif($status == 'fdSeven'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_sevens')
+            ->where('id',$id)->delete();
+
+
+            }elseif($status == 'fcOne'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fc_ones')
+            ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'fcTwo'){
+
+
+
+            $childNoteNewList = DB::table('child_note_for_fc_twos')
+            ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'fdThree'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_threes')
+            ->where('id',$id)->delete();
+
+
+
+            }
+
+
+            return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে');
+    }
+
+
     public function dd(){
 
         $mpdf = new Mpdf([

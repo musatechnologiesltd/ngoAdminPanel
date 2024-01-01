@@ -37,6 +37,7 @@ $insertData->status = $request->sstatus;
 $insertData->nothiId = $request->snothiId;
 $insertData->title = $request->name;
 $insertData->link = $request->value;
+$insertData->child_id = $request->lastChild;
 $insertData->admin_id =Auth::guard('admin')->user()->id;
 $insertData->save();
 
