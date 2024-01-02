@@ -19,6 +19,11 @@ $receiverId = DB::table('nothi_details')
         </button>
         @if(empty($receiverId))
 
+        @if($key+1 == 1)
+
+
+@else
+
         <!-- new delete code -->
         <a class="btn-sm btn btn-outline-danger"  onclick="deleteTag({{ $childNoteNewLists->id}})">
 
@@ -35,6 +40,7 @@ $receiverId = DB::table('nothi_details')
                                   </form>
 
         <!-- end delete code -->
+        @endif
 
         @endif
       </h5>

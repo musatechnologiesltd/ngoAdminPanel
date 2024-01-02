@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('office_subject')->nullable();
             $table->text('office_sutro')->nullable();
             $table->longText('description')->nullable();
+            $table->text('extra_text')->nullable();
+            $table->text('sarok_number')->nullable();
         });
     }
 

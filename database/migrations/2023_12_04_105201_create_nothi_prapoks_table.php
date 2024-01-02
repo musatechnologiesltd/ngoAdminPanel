@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('otherOfficerBranch')->nullable();
             $table->string('otherOfficerEmail')->nullable();
             $table->string('otherOfficerPhone')->nullable();
+            $table->text('organization_name')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

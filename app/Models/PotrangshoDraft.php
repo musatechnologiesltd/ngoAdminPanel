@@ -19,6 +19,8 @@ class PotrangshoDraft extends Model
         'status',
         'office_subject',
         'office_sutro',
+        'extra_text',
+        'sarok_number',
         'description'
     ];
 

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('office_subject');
             $table->text('office_sutro')->nullable();
             $table->longText('description');
+            $table->text('extra_text')->nullable();
+            $table->text('sarok_number')->nullable();
             $table->timestamps();
         });
     }

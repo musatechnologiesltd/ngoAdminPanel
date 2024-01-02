@@ -16,6 +16,8 @@ class NameChangeOfficeSarok extends Model
         'office_subject',
         'office_sutro',
         'description',
+        'extra_text',
+        'sarok_number',
         'admin_id',
         'receiver_id',
         'sent_status'

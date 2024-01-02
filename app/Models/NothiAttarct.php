@@ -9,5 +9,5 @@ class NothiAttarct extends Model
 {
     use HasFactory;
     protected $table = "nothi_attarcts";
-    protected $fillable = ['nothiId','noteId','adminId','nijOfficeId','otherOfficerName','otherOfficerAddress','otherOfficerDesignation','otherOfficerBranch','otherOfficerEmail','otherOfficerPhone','status'];
+    protected $fillable = ['organization_name','nothiId','noteId','adminId','nijOfficeId','otherOfficerName','otherOfficerAddress','otherOfficerDesignation','otherOfficerBranch','otherOfficerEmail','otherOfficerPhone','status'];
 }

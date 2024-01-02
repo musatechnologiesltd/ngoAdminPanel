@@ -16,7 +16,10 @@
     @else
 
 
+@if($key+1 == 1)
 
+
+@else
 <!-- new delete code -->
 <a class="btn-sm btn btn-outline-danger"  onclick="deleteTag({{ $childNoteNewLists->id}})">
 
@@ -33,6 +36,8 @@
                               </form>
 
     <!-- end delete code -->
+@endif
+
 @endif
         @else
 
