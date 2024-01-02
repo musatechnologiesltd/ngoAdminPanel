@@ -30,7 +30,7 @@ class OfficeSarokController extends Controller
 
 
 
-       // dd($request->all());
+        //dd($request->all());
 
 
         $request->validate([
@@ -52,6 +52,8 @@ class OfficeSarokController extends Controller
             $getAllData->sarokId = $request->sorkariUpdateId;
             $getAllData->noteId = $request->noteId;
             $getAllData->status = $request->status;
+            $getAllData->sarok_number = $request->sarok_number;
+            $getAllData->extra_text = $request->extra_text;
             $getAllData->SentStatus = 0;
             $getAllData->office_subject= $request->subject;
             $getAllData->office_sutro = $request->sutro;
@@ -200,6 +202,8 @@ class OfficeSarokController extends Controller
      $getAllData->sarokId = $sarokId;
      $getAllData->noteId = $request->noteId;
      $getAllData->status = $request->status;
+     $getAllData->sarok_number = $request->sarok_number;
+     $getAllData->extra_text = $request->extra_text;
      $getAllData->SentStatus = 0;
      $getAllData->office_subject= $request->subject;
      $getAllData->office_sutro = $request->sutro;

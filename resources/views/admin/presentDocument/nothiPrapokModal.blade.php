@@ -71,6 +71,12 @@ aria-labelledby="myModalLabel22">
 
 
                     <div class="mb-3">
+                        <label class="form-label" for="">সংস্থার নাম</label>
+                         <input type="text" name="organizationName" id="organizationName" class="form-control"/>
+                    </div>
+
+
+                    <div class="mb-3">
                         <label class="form-label" for="">কার্যালয়/ঠিকানা</label>
                          <input type="text" name="otherOfficerAddress" id="otherOfficerAddress" class="form-control"/>
                     </div>

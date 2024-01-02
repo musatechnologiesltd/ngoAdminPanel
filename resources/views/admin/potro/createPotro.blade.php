@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-পত্রাংশ তৈরী করুন
+ পত্রাংশ তৈরী করুন
 @endsection
 
 
@@ -292,9 +292,20 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
   <div class="row">
 
     <div class="col-sm-8 col-xs-8">
+        <div style="display: flex;">
+        <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>
 
-        <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
 
+            @if(!$potrangshoDraftNew)
+            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }};
+            @else
+
+            {!! $potrangshoDraftNew->sarok_number !!};
+
+            @endif
+
+            <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
+        </div>
     </div>
     <div class="col-sm-4 col-xs-4">
         <div class="d-flex flex-row-reverse">
@@ -366,6 +377,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                 $desiName = '';
                                                                                 $dateApp = '';
                                                                                 $dateAppBan = '';
+                                                                                $aphone = '';
+                                                                                $aemail = '';
                                                                         }else{
 
 
@@ -380,6 +393,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                                                                 $appName = '';
                                                                                 $desiName = '';
+                                                                                $aphone = '';
+                                                                                $aemail = '';
 
 
                                                                                }else{
@@ -391,6 +406,8 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                                                                 $appName = $nothiApproverLista->admin_name_ban;
                                                                                 $desiName = $designationName;
+                                                                                $aphone = $nothiApproverLista->admin_mobile;
+                                                                                $aemail = $nothiApproverLista->email;
 
                                                                                }
 
@@ -430,21 +447,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
                                                                             ?>
-                                                                        <div class="row" class="mt-4">
-                                                                            <div class="col-md-6">
-                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
-                                                                            </div>
-                                                                            <div class="col-md-6" style="text-align: right;">
-                                                                                <div class="d-flex justify-content-end">
-                                                                                    <p style="font-weight:bold">তারিখ: </p>
-                                                                                    <p>@if($potroZariListValue == 1)
-                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                            @else
 
-                                                                                            @endif</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
                                                                         <!-- show save and unsaved potro -->
                                                                         <?php
@@ -482,43 +485,18 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
 
-
-                                                                        <!-- approver start --->
-
-                                                                        <?php
-                                                                        $potroZariListValue =  DB::table('nothi_details')
-                                                                                        ->where('noteId',$id)
-                                                                                        ->where('nothId',$nothiId)
-                                                                                        ->where('dakId',$parentId)
-                                                                                        ->where('dakType',$status)
-                                                                                        ->value('permission_status');
-
-
-
-                                                                            ?>
-
-                                                                        <div class="mt-4" style="text-align: right;">
-
-                                                                            @if($potroZariListValue == 1)
-
-                                                                            @if(!$nothiApproverLista)
-
-                                                                            @else
-                                                                            <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
-                                                                            @endif
-
-                                                                            @else
-                                                                            @endif
-                                                                        <span>{{ $appName }}</span><br>
-                                                                        <span>{{ $desiName }}</span>
-                                                                        </div>
-
-                                                                        <!-- approver end -->
-
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                        <span>
+
+                                                                            @if(empty($nothiPropokLists->organization_name))
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                             @else
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                            @endif
+
+
                                                                         @endforeach
                                                                     </div>
                                                                     <!--end prapok  --->
@@ -530,7 +508,11 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     @else
                                                                     <p class="mt-4" style="font-weight:bold">দৃষ্টি আকর্ষণ</p>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
-                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                    <span>@if(empty($nothiPropokLists->organization_name))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                         @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -544,7 +526,28 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
                                                                     <div class="row" style="margin-top: 20px;">
                                                                         <div class="col-md-6">
+
+                                                                            @if(!$potrangshoDraft)
+
+
                                                                             <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+
+                                                                            @else
+
+
+                                                                            <div class="d-flex justify-content-start">
+
+                                                                            @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}
+
+                                                                            @else
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}
+                                                                            @endif
+
+                                                                            </div>
+
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -571,22 +574,48 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     @else
                                                                     <p class="mt-4" style="font-weight:bold">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</p>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
+
+                                                                    @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।
                                                                     @else
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;<br>
+
+                                                                    @endif
+                                                                    @else
+
+
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};<br>
+
+                                                                    @endif
+
+
 
                                                                     @endif
                                                                     @endforeach
-                                                                    @endif
 
+                                                                    <div class="mt-4" style="text-align: right;">
+
+                                                                        <span>{{ $appName }}</span><br>
+                                                                        <span>{{ $desiName }}</span><br>
+                                                                        @if(empty($potrangshoDraft->extra_text))
+
+                                                                        @else
+
+                                                                        <span>{!! $potrangshoDraft->extra_text !!}</span>
+
+                                                                        @endif
+                                                                        <span>ফোন :{{ $aphone }}</span><br>
+                                                                                        <span>ইমেইল : {{ $aemail }}</span>
+                                                                        </div>
+                                                                    @endif
+                                                                </form>
                                                                     <!--end copy list -->
 <!--prapok-->
-<div class="mt-4" style="text-align: right;">
 
-    <span>{{ $appName }}</span><br>
-    <span>{{ $desiName }}</span>
-    </div>
 @endforeach
     @else
 
@@ -611,9 +640,19 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
         ?>
+         <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+            @csrf
     <div class="row" class="mt-4">
         <div class="col-md-6">
-            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+            <div class="d-flex justify-content-start">
+            <span style="font-weight:900;">স্মারক নং: </span>
+
+
+
+            <textarea id="ineditor3" name="sarok_number" contenteditable="true">
+                {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+                </textarea>
+            </div>
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -626,8 +665,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                                 </div>
         </div>
     </div>
-    <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
-        @csrf
+
 
         <input type="hidden" value="{{ $id }}" name="noteId"/>
                                         <input type="hidden" value="{{ $activeCode }}" name="activeCode"/>
@@ -675,15 +713,21 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
         </div>
 
 
-</form>
+
             <!-- approver start --->
 
 
 
             <div class="mt-4" style="text-align: right;">
                 <span>{{ $appName }}</span><br>
-                <span>{{ $desiName }}</span>
-                </div>
+                <span>{{ $desiName }}</span><br>
+
+                    {{-- <textarea id="ineditor4" name="extra_text" contenteditable="true">
+                        .............
+                    </textarea> --}}
+
+                    <span>{{ $aphone }}</span><br>
+                    <span>{{ $aemail }}</span>
 
                 <!-- approver end -->
 
@@ -756,12 +800,15 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 <div class="mt-4" style="text-align: right;">
 
 <span>{{ $appName }}</span><br>
-<span>{{ $desiName }}</span>
+<span>{{ $desiName }}</span><br>
+<span>{{ $aphone }}</span><br>
+<span>{{ $aemail }}</span>
 </div>
     <!-- end no data available -->
 
 
     @endif
+</form>
 
                                                                     </div>
                                                                 </div>
@@ -1032,6 +1079,9 @@ $("#otherOfficerAdd").click(function(e){
    var otherOfficerEmail = $("#otherOfficerEmail").val();
    var otherOfficerPhone = $("#otherOfficerPhone").val();
 
+   var organizationName = $("#organizationName").val();
+
+
    var snothiId =$('#snothiId').val();
 var sstatus =$('#sstatus').val();
 
@@ -1047,8 +1097,10 @@ var snoteId =$('#snoteId').val();
    $.ajax({
     url: "{{ route('otherOfficerAdd') }}",
     method: 'get',
-    data: {snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,otherOfficerName:otherOfficerName,otherOfficerDesignation:otherOfficerDesignation,otherOfficerAddress:otherOfficerAddress,otherOfficerBranch:otherOfficerBranch,otherOfficerEmail:otherOfficerEmail,otherOfficerPhone:otherOfficerPhone},
+    data: {organizationName:organizationName,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,otherOfficerName:otherOfficerName,otherOfficerDesignation:otherOfficerDesignation,otherOfficerAddress:otherOfficerAddress,otherOfficerBranch:otherOfficerBranch,otherOfficerEmail:otherOfficerEmail,otherOfficerPhone:otherOfficerPhone},
     success: function(data) {
+
+        $("#organizationName").val('');
       $("#otherOfficerName").val('');
    $("#otherOfficerDesignation").val('');
    $("#otherOfficerAddress").val('');
@@ -1090,6 +1142,8 @@ var otherOfficerBranch = $("#otherOfficerBranch2").val();
 var otherOfficerEmail = $("#otherOfficerEmail2").val();
 var otherOfficerPhone = $("#otherOfficerPhone2").val();
 
+var organizationName = $("#organizationName2").val();
+
 var snothiId =$('#snothiId2').val();
 var sstatus =$('#sstatus2').val();
 
@@ -1105,8 +1159,9 @@ var snoteId =$('#snoteId2').val();
 $.ajax({
  url: "{{ route('attractOtherOfficerAdd') }}",
  method: 'get',
- data: {snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,otherOfficerName:otherOfficerName,otherOfficerDesignation:otherOfficerDesignation,otherOfficerAddress:otherOfficerAddress,otherOfficerBranch:otherOfficerBranch,otherOfficerEmail:otherOfficerEmail,otherOfficerPhone:otherOfficerPhone},
+ data: {organizationName:organizationName,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,otherOfficerName:otherOfficerName,otherOfficerDesignation:otherOfficerDesignation,otherOfficerAddress:otherOfficerAddress,otherOfficerBranch:otherOfficerBranch,otherOfficerEmail:otherOfficerEmail,otherOfficerPhone:otherOfficerPhone},
  success: function(data) {
+    $("#organizationName2").val('');
    $("#otherOfficerName2").val('');
 $("#otherOfficerDesignation2").val('');
 $("#otherOfficerAddress2").val('');
@@ -1147,6 +1202,8 @@ var otherOfficerBranch = $("#otherOfficerBranch3").val();
 var otherOfficerEmail = $("#otherOfficerEmail3").val();
 var otherOfficerPhone = $("#otherOfficerPhone3").val();
 
+var organizationName = $("#organizationName3").val();
+
 var snothiId =$('#snothiId3').val();
 var sstatus =$('#sstatus3').val();
 
@@ -1162,8 +1219,10 @@ var snoteId =$('#snoteId3').val();
 $.ajax({
  url: "{{ route('copyOtherOfficerAdd') }}",
  method: 'get',
- data: {snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,otherOfficerName:otherOfficerName,otherOfficerDesignation:otherOfficerDesignation,otherOfficerAddress:otherOfficerAddress,otherOfficerBranch:otherOfficerBranch,otherOfficerEmail:otherOfficerEmail,otherOfficerPhone:otherOfficerPhone},
+ data: {organizationName:organizationName,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,otherOfficerName:otherOfficerName,otherOfficerDesignation:otherOfficerDesignation,otherOfficerAddress:otherOfficerAddress,otherOfficerBranch:otherOfficerBranch,otherOfficerEmail:otherOfficerEmail,otherOfficerPhone:otherOfficerPhone},
  success: function(data) {
+
+    $("#organizationName3").val('');
    $("#otherOfficerName3").val('');
 $("#otherOfficerDesignation3").val('');
 $("#otherOfficerAddress3").val('');
@@ -1339,6 +1398,20 @@ function onSelectedChanged(){
     CKEDITOR.disableAutoInline = true;
     //CKEDITOR.inline('ineditor2' );
     CKEDITOR.inline('ineditor1' );
+</script>
+
+<script>
+    // Turn off automatic editor creation first.
+    CKEDITOR.disableAutoInline = true;
+    //CKEDITOR.inline('ineditor2' );
+    CKEDITOR.inline('ineditor3' );
+</script>
+
+<script>
+    // Turn off automatic editor creation first.
+    CKEDITOR.disableAutoInline = true;
+    //CKEDITOR.inline('ineditor2' );
+    CKEDITOR.inline('ineditor4' );
 </script>
 
 

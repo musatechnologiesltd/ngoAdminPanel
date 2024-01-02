@@ -1742,7 +1742,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
     public function saveNothiPermission(Request $request){
 
-
+//dd(12);
 
 
      $lastSarokValue = PotrangshoDraft::where('nothiId',$request->nothiId)
@@ -1783,6 +1783,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
 
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
+
                         $saveNewData->save();
 
 
@@ -1794,6 +1797,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                      $saveNewData->office_subject = $lastSarokValue->office_subject;
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
+
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
 
                      $saveNewData->save();
 
@@ -1807,6 +1813,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
 
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
+
                      $saveNewData->save();
 
 
@@ -1819,6 +1828,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
 
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
+
                      $saveNewData->save();
 
 
@@ -1829,6 +1841,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                      $saveNewData->office_subject = $lastSarokValue->office_subject;
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
+
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
 
                      $saveNewData->save();
 
@@ -1842,6 +1857,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
 
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
+
                      $saveNewData->save();
 
                  }elseif($request->status == 'fdSeven'){
@@ -1851,6 +1869,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                         $saveNewData->office_subject = $lastSarokValue->office_subject;
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
+
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
 
                         $saveNewData->save();
 
@@ -1863,6 +1884,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                      $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                      $saveNewData->description =$lastSarokValue->description;
 
+                     $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
+
                      $saveNewData->save();
 
                  }elseif($request->status == 'fcTwo'){
@@ -1874,6 +1898,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                      $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                      $saveNewData->description =$lastSarokValue->description;
 
+                     $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
+
                      $saveNewData->save();
 
 
@@ -1884,6 +1911,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                      $saveNewData->office_subject = $lastSarokValue->office_subject;
                         $saveNewData->office_sutro = $lastSarokValue->office_sutro;
                         $saveNewData->description =$lastSarokValue->description;
+
+                        $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                        $saveNewData->extra_text =$lastSarokValue->extra_text;
 
                      $saveNewData->save();
 

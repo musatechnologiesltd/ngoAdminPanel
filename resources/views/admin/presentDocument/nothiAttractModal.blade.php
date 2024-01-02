@@ -67,7 +67,10 @@ $nothiAttractList = DB::table('nothi_attarcts')->where('nothiId',$nothiId)
                          <input type="text" name="otherOfficerDesignation" id="otherOfficerDesignation2" class="form-control"/>
                     </div>
 
-
+                    <div class="mb-3">
+                        <label class="form-label" for="">সংস্থার নাম</label>
+                         <input type="text" name="organizationName" id="organizationName2" class="form-control"/>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label" for="">কার্যালয়/ঠিকানা</label>
                          <input type="text" name="otherOfficerAddress" id="otherOfficerAddress2" class="form-control"/>

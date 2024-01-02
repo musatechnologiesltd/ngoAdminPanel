@@ -121,6 +121,7 @@ if(!$nothiApproverList){
 
 
 ?>
+@foreach($officeDetail as $officeDetails)
 <table class="pdf_table">
     <tr>
         <td style="font-weight:bold;">
@@ -142,7 +143,7 @@ if(!$nothiApproverList){
         </td>
     </tr>
 </table>
-@foreach($officeDetail as $officeDetails)
+
 
 <?php
 $potrangshoDraft =  DB::table('potrangsho_drafts')
@@ -212,7 +213,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 @endif
 
-@endforeach
+
 <?php
     $potroZariListValue =  DB::table('nothi_details')
                     ->where('noteId',$id)
@@ -314,6 +315,6 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
     </tr>
 
 </table>
-
+@endforeach
 </body>
 </html>

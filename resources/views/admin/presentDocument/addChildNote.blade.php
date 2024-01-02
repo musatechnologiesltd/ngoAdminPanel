@@ -199,7 +199,8 @@
                                                                                 $dateApp = '';
                                                                                 $dateAppBan='';
                                                                                 $appSignature ='';
-
+                                                                                $aphone = '';
+                                                                                $aemail = '';
 
                                                                         }else{
 
@@ -216,6 +217,8 @@
                                                                                 $appName = '';
                                                                                 $desiName = '';
                                                                                 $appSignature ='';
+                                                                                $aphone = '';
+                                                                                $aemail = '';
 
                                                                                }else{
 
@@ -227,6 +230,11 @@
                                                                                 $appName = $nothiApproverLista->admin_name_ban;
                                                                                 $desiName = $designationName;
                                                                                 $appSignature =$nothiApproverLista->admin_sign;
+
+                                                                                $aphone = $nothiApproverLista->admin_mobile;
+                                                                                $aemail = $nothiApproverLista->email;
+
+
                                                                                }
 
 
@@ -384,7 +392,35 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+
+                                                                                <?php
+                                                                                $potrangshoDraft =  DB::table('potrangsho_drafts')
+                                                                                                  ->where('sarokId',$officeDetails->id)
+                                                                                                  ->where('status',$status)
+                                                                                                  ->orderBy('id','desc')
+                                                                                                  ->first();
+
+                                                                                  ?>
+
+@if(!$potrangshoDraft)
+<p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+@else
+<div style="display: flex;">
+@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+<p ><span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+@else
+<p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+@endif
+</div>
+
+@endif
+
+
+
+
+
+
+
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
@@ -403,14 +439,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
 
 
-                                                                        <?php
-                                                                        $potrangshoDraft =  DB::table('potrangsho_drafts')
-                                                                                          ->where('sarokId',$officeDetails->id)
-                                                                                          ->where('status',$status)
-                                                                                          ->orderBy('id','desc')
-                                                                                          ->first();
 
-                                                                          ?>
 
 @if(!$potrangshoDraft)
 
@@ -510,6 +539,31 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                             @endif
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
+
+                                                                        @if(!$potrangshoDraft)
+
+@else
+
+@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+@if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
+
+@else
+{!! $potrangshoDraft->extra_text !!}
+@endif
+@else
+@if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+
+@else
+{!! $officeDetails->extra_text !!}
+@endif
+@endif
+
+
+@endif
+
+                                                                        <span>ফোন :{{ $aphone }}</span><br>
+                                                                        <span>ইমেইল : {{ $aemail }}</span>
                                                                         </div>
 
                                                                         <!-- approver end -->
@@ -517,7 +571,11 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                        @if(empty($nothiPropokLists->organization_name))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                         @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @endif
                                                                         @endforeach
                                                                     </div>
                                                                     <!--end prapok  --->
@@ -529,7 +587,11 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     @else
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
-                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                    @if(empty($nothiPropokLists->organization_name))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                         @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -543,7 +605,18 @@ $potroZariListValue =  DB::table('nothi_details')
 
                                                                     <div class="row" class="mt-5" style="margin-top:20px;">
                                                                         <div class="col-md-6">
+                                                                            @if(!$potrangshoDraft)
                                                                             <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                            @else
+                                                                            <div style="display: flex;">
+                                                                            @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                            @else
+                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+                                                                            @endif
+                                                                            </div>
+
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
                                                                             <table class="table table-borderless">
@@ -576,7 +649,26 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span>;<br>
+                                                                    @if(empty($nothiPropokLists->organization_name))
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;<br>
+
+                                                                    @endif
+                                                                    @else
+
+
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};<br>
+
+                                                                    @endif
+
+
+
+                                                                    @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -586,6 +678,31 @@ $potroZariListValue =  DB::table('nothi_details')
 
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
+
+    @if(!$potrangshoDraft)
+
+    @else
+
+    @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+    @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
+
+    @else
+    {!! $potrangshoDraft->extra_text !!}
+    @endif
+    @else
+    @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+
+    @else
+    {!! $officeDetails->extra_text !!}
+    @endif
+    @endif
+
+
+    @endif
+
+                                                                            <span>ফোন :{{ $aphone }}</span><br>
+                                                                            <span>ইমেইল : {{ $aemail }}</span>
     </div>
     @endif
 @endforeach

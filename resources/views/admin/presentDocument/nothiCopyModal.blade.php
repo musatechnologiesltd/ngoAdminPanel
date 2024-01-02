@@ -67,7 +67,10 @@ $nothiCopyList = DB::table('nothi_copies')->where('nothiId',$nothiId)
                          <input type="text" name="otherOfficerDesignation" id="otherOfficerDesignation3" class="form-control"/>
                     </div>
 
-
+                    <div class="mb-3">
+                        <label class="form-label" for="">সংস্থার নাম</label>
+                         <input type="text" name="organizationName" id="organizationName3" class="form-control"/>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label" for="">কার্যালয়/ঠিকানা</label>
                          <input type="text" name="otherOfficerAddress" id="otherOfficerAddress3" class="form-control"/>

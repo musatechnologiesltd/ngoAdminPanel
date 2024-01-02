@@ -84,14 +84,14 @@ class NothiAttractController extends Controller
        //dd($request->all());
 
        $validator = Validator::make($request->all(), [
-        'otherOfficerName' => 'required',
+        'organizationName' => 'required',
         'otherOfficerDesignation' => 'required',
-        'otherOfficerBranch' => 'required',
         'otherOfficerAddress' => 'required',
     ]);
     if ($validator->passes()) {
 
        $nothiPrapok = new NothiAttarct();
+       $nothiPrapok->organization_name = $request->organizationName;
        $nothiPrapok->nothiId = $request->snothiId;
        $nothiPrapok->nijOfficeId =  $request->sstatus;
        $nothiPrapok->noteId =  $request->snoteId;
