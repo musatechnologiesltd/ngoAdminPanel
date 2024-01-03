@@ -10,6 +10,7 @@ use Auth;
 use Hash;
 use PDF;
 use File;
+use Mail;
 use App\Models\ParentNoteForFcOne;
 use App\Models\ParentNoteForFcTwo;
 use App\Models\ParentNoteForFdNine;
@@ -33,6 +34,7 @@ use App\Models\ChildNoteForRenew;
 use App\Models\NothiList;
 use App\Models\NothiPrapok;
 use App\Models\NothiCopy;
+use App\Models\NoteAttachment;
 use App\Models\NothiFirstSenderList;
 use DB;
 use DateTime;
@@ -57,6 +59,14 @@ use Mpdf\Mpdf;
 use App\Models\PotrangshoDraft;
 class ChildNoteController extends Controller
 {
+
+
+    public function deleteAttachment($id){
+
+  $dataDelete = NoteAttachment::where('id',$id)->delete();
+
+  return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে ');
+    }
 
 
     public function deleteAllParagraph($id,$status){
@@ -159,6 +169,189 @@ class ChildNoteController extends Controller
         $mpdf->Output();
         die();
 
+    }
+
+
+    public function printPotrangsoPdfForEmail($status,$parentId,$nothiId,$id){
+        if($status == 'registration'){
+
+
+
+            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+                           ->get();
+
+
+
+        }elseif($status == 'renew'){
+
+
+
+            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+
+
+
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+            $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+
+
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+            $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+//dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+            $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+            $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+            $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+            $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+            $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }
+
+
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+
+        $user = Admin::where('id','!=',1)->get();
+
+
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("branchId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = Branch::whereIn('id',$separated_data_title)
+        ->orderBy('branch_step','asc')->get();
+
+$sarokCode = 1;
+
+        //$file_Name_Custome = 'printPotrangso';
+        $data = view('admin.presentDocument.printPotrangso',['nothiYear'=>$nothiYear,'sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate])->render();
+//return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+//dd(11);
+
+$mpdf = new Mpdf([
+    //'default_font_size' => 14,
+    'default_font' => 'nikosh'
+]);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output();
+die();
     }
 
 
@@ -1515,12 +1708,104 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
             public function givePermissionForPotroZari($status,$parentId,$nothiId,$id,$childnote){
 
-
+// dd($getCopylIst = DB::table('nothi_copies')
+// ->where('nothiId',$nothiId)
+// ->where('noteId',$id)
+// ->where('nijOfficeId',$status)
+// ->whereNotNull('otherOfficerEmail')
+// ->get());
                 // dd(DB::table('nothi_details')
                 // ->where('noteId',$id)
                 // ->where('nothId',$nothiId)
                 // ->where('dakId',$parentId)
                 // ->where('dakType',$status)->value('id'));
+
+
+                $getPrapokLIst = DB::table('nothi_prapoks')
+                ->where('nothiId',$nothiId)
+                ->where('noteId',$id)
+                ->where('nijOfficeId',$status)
+                ->whereNotNull('otherOfficerEmail')
+                ->get();
+
+                $getAttlIst = DB::table('nothi_attarcts')
+                ->where('nothiId',$nothiId)
+                ->where('noteId',$id)
+                ->where('nijOfficeId',$status)
+                ->whereNotNull('otherOfficerEmail')
+                ->get();
+
+                $getCopylIst = DB::table('nothi_copies')
+                ->where('nothiId',$nothiId)
+                ->where('noteId',$id)
+                ->where('nijOfficeId',$status)
+                ->whereNotNull('otherOfficerEmail')
+                ->get();
+
+
+
+
+                if(count($getPrapokLIst) == 0){
+
+
+                }else{
+
+                   $mainUrl = url('printPotrangsoPdfForEmail/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id);
+
+                    foreach($getPrapokLIst as $getPrapokLIsts){
+
+
+                    Mail::send('emails.pdf', ['mainUrl' =>$mainUrl], function($message) use($getPrapokLIsts){
+                        $message->to($getPrapokLIsts->otherOfficerEmail);
+                        $message->subject('Issued Letter');
+                    });
+
+                }
+
+                }
+
+
+                if(count($getAttlIst) == 0){
+
+
+                }else{
+
+                    $mainUrl = url('printPotrangsoPdfForEmail/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id);
+
+                    foreach($getAttlIst as $getPrapokLIsts){
+
+
+                    Mail::send('emails.pdf', ['mainUrl' =>$mainUrl], function($message) use($getPrapokLIsts){
+                        $message->to($getPrapokLIsts->otherOfficerEmail);
+                        $message->subject('Issued Letter');
+                    });
+
+                }
+
+                }
+
+                if(count($getCopylIst) == 0){
+
+
+                }else{
+
+                    $mainUrl = url('printPotrangsoPdfForEmail/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id);
+
+                    foreach($getPrapokLIst as $getPrapokLIsts){
+
+
+                    Mail::send('emails.pdf', ['mainUrl' =>$mainUrl], function($message) use($getPrapokLIsts){
+                        $message->to($getCopylIst->otherOfficerEmail);
+                        $message->subject('Issued Letter');
+                    });
+
+                }
+
+                }
+
+
+
+
 
 
 

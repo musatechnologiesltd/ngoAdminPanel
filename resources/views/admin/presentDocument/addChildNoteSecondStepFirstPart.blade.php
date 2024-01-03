@@ -210,7 +210,7 @@ $unsentAtt = DB::table('note_attachments')
  <p class="mt-4">সংযুক্তি({{ count($unsentAtt) }})</p>
  <ul>
     @foreach($unsentAtt as $unsentAtts )
-    <li><a target="_blank" href="{{ $unsentAtts->link }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
+    <li>@if(empty($receiverId))<a  href="{{ route('deleteAttachment',$unsentAtts->id) }}"><i class="fa fa-trash"></i></a>@endif  <a target="_blank" href="{{ $unsentAtts->link }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
     @endforeach
  </ul>
 

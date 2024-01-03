@@ -598,7 +598,16 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     @endforeach
 
                                                                     <div class="mt-4" style="text-align: right;">
+                                                                        @if($potroZariListValue == 1)
 
+                                                                        @if(!$nothiApproverLista)
+
+                                                                        @else
+                                                                        <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
+                                                                        @endif
+
+                                                                        @else
+                                                                        @endif
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span><br>
                                                                         @if(empty($potrangshoDraft->extra_text))

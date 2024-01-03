@@ -1,7 +1,7 @@
 <div class="modal right fade bd-example-modal-lg"
 id="potroZariModal" role="dialog"
 aria-labelledby="myModalLabel22">
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-xl" role="document">
 <div class="modal-content">
 <div class="modal-header">
     <h4 class="modal-title" id="myModalLabel2">
@@ -66,7 +66,12 @@ aria-labelledby="myModalLabel22">
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+
+                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+
+                                                                                </div>
+
+
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
@@ -114,7 +119,7 @@ aria-labelledby="myModalLabel22">
                                                                                      {!! $officeDetails->office_sutro !!}
 
 
-                                                                           
+
                                                                         </div>
                                                                         @endif
 
@@ -144,8 +149,29 @@ aria-labelledby="myModalLabel22">
 
 
                                                                         <div class="mt-4" style="text-align: right;">
+                                                                            @if($potroZariListValue == 1)
+
+                                                                            @if(!$nothiApproverLista)
+
+                                                                            @else
+                                                                            <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/><br>
+                                                                            @endif
+
+                                                                            @else
+                                                                            @endif
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
+
+
+@if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+
+@else
+{!! $officeDetails->extra_text !!}
+@endif
+
+
+                                                                        <span>ফোন :{{ $aphone }}</span><br>
+                                                                        <span>ইমেইল : {{ $aemail }}</span>
                                                                         </div>
 
                                                                         <!-- approver end -->
@@ -153,7 +179,11 @@ aria-labelledby="myModalLabel22">
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                        @if(empty($nothiPropokLists->organization_name))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                         @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @endif
                                                                         @endforeach
                                                                     </div>
                                                                     <!--end prapok  --->
@@ -165,7 +195,11 @@ aria-labelledby="myModalLabel22">
                                                                     @else
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
-                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                    @if(empty($nothiPropokLists->organization_name))
+{{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                         @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -178,9 +212,14 @@ aria-labelledby="myModalLabel22">
 
                                                                     @else
 
-                                                                    <div class="row" class="mt-4">
+                                                                    <div class="row" class="mt-4" style="margin-top: 30px;">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+
+<p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+
+</div>
+
+@endif
                                                                         </div>
 
                                                                         <?php
@@ -208,7 +247,7 @@ aria-labelledby="myModalLabel22">
                                                                         </div>
                                                                     </div>
 
-@endif
+
 
 
 
@@ -221,10 +260,24 @@ aria-labelledby="myModalLabel22">
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
+                                                                    @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।
                                                                     @else
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;<br>
+
+                                                                    @endif
+                                                                    @else
+
+
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};<br>
+
+                                                                    @endif
+
+
 
                                                                     @endif
                                                                     @endforeach
@@ -234,8 +287,29 @@ aria-labelledby="myModalLabel22">
 <!--prapok-->
 <div class="mt-4" style="text-align: right;">
 
-    <span>{{ $appName }}</span><br>
-    <span>{{ $desiName }}</span>
+    @if($potroZariListValue == 1)
+
+    @if(!$nothiApproverLista)
+
+    @else
+    <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/><br>
+    @endif
+
+    @else
+    @endif
+<span>{{ $appName }}</span><br>
+<span>{{ $desiName }}</span>
+
+
+@if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+
+@else
+{!! $officeDetails->extra_text !!}
+@endif
+
+
+<span>ফোন :{{ $aphone }}</span><br>
+<span>ইমেইল : {{ $aemail }}</span>
     </div>
 @endforeach
 </div><!-- modal-content -->

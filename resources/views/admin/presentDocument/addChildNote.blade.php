@@ -675,7 +675,16 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <!--end copy list -->
 <!--prapok-->
 <div class="mt-4" style="text-align: right;">
+    @if($potroZariListValue == 1)
 
+    @if(!$nothiApproverLista)
+
+    @else
+    <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
+    @endif
+
+    @else
+    @endif
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
 

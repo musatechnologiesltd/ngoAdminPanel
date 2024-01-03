@@ -208,7 +208,7 @@ $unsentAtt = DB::table('note_attachments')
 ->where('noteId',$id)
 ->where('nothiId',$nothiId)
 ->where('status',$status)
-->where('admin_id',Auth::guard('admin')->user()->id)
+//->where('admin_id',Auth::guard('admin')->user()->id)
  ->where('child_id',$childNoteNewLists->id)
 ->get();
 

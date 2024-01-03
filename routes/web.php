@@ -71,6 +71,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::controller(ChildNoteController::class)->group(function () {
+
+Route::get('/printPotrangsoPdfForEmail/{status}/{parentId}/{nothiId}/{id}', 'printPotrangsoPdfForEmail')->name('printPotrangsoPdfForEmail');
+
+});
 
 Route::group(['prefix' => 'admin'], function () {
 
@@ -166,6 +171,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
+        Route::get('/deleteAttachment/{id}', 'deleteAttachment')->name('deleteAttachment');
 
         Route::delete('/deleteAllParagraph/{id}/{status}', 'deleteAllParagraph')->name('deleteAllParagraph');
         Route::get('/givePermissionForPotroZari/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionForPotroZari')->name('givePermissionForPotroZari');
