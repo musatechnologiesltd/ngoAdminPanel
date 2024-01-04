@@ -123,16 +123,16 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-                    $ngoStatusRenew = NgoRenewDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusRenew = NgoRenewDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
 
                     $mainCodeCountHeader =$ngoStatusReg+$ngoStatusFDNineOneDak+$ngoStatusFdThreeDak+$ngoStatusFcTwoDak+$ngoStatusFcOneDak+$ngoStatusFdSevenDak+$ngoStatusFdSixDak+$ngoStatusFDNineDak+$ngoStatusNameChange+$ngoStatusRenew;
 

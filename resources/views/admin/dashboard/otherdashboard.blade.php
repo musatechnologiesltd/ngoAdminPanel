@@ -10,6 +10,10 @@
 
                         @foreach($ngoStatusReg as $i=>$allStatusData)
 
+                        @if($allStatusData->nothi_jat_status == 1)
+
+                        @else
+
                         <?php
 
                         //new code
@@ -72,6 +76,17 @@ $formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registrat
                             @else
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$formOneDataId) }}';">দেখুন</button>
                             @endif
+
+
+                            <button  type="button" class="btn-xs btn btn-primary"
+                            data-toggle="tooltip" data-placement="top"
+                            title="নথি জাত করুন"
+                            data-bs-toggle="modal"
+                            data-original-title="" data-bs-target="#nothiJatModal{{ $allStatusData->id }}">
+                            <i class="icofont icofont-rotation"></i> নথি জাত করুন
+                            </button>
+
+                            @include('admin.post.nothiJatModalForRegistration')
 
 
                                                                                      <!--new code-->
@@ -254,9 +269,14 @@ $branchNames = DB::table('branches')
              <!--end new code -->
                         </td>
                     </tr>
+                    @endif
                     @endforeach
 
                     @foreach($ngoStatusRenew as $r=>$allStatusData)
+
+                    @if($allStatusData->nothi_jat_status == 1)
+
+                    @else
 
                     <?php
 
@@ -322,7 +342,15 @@ $formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_statu
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->renew_status_id) }}';">দেখুন</button>
                         @endif
 
+                        <button  type="button" class="btn-xs btn btn-primary"
+                        data-toggle="tooltip" data-placement="top"
+                        title="নথি জাত করুন"
+                        data-bs-toggle="modal"
+                        data-original-title="" data-bs-target="#nothiJatModalrenew{{ $allStatusData->id }}">
+                        <i class="icofont icofont-rotation"></i> নথি জাত করুন
+                        </button>
 
+                        @include('admin.post.nothiJatModalForRenew')
                                         <!--new code-->
              <button type="button" class="btn btn-primary btn-xs"
              data-bs-toggle="modal"
@@ -505,6 +533,7 @@ $branchNames = DB::table('branches')
              <!--end new code -->
                     </td>
                 </tr>
+                @endif
                 @endforeach
 
 

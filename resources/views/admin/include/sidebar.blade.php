@@ -162,6 +162,13 @@
     </a>
 </li>
 
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('nothiJatDakList') ? 'active' : '' }}" href="{{ route('nothiJatDakList') }}">
+        <i data-feather="mail"></i>
+        <span>নথি জাত ডাক</span>
+    </a>
+</li>
+
 
 
 @endif

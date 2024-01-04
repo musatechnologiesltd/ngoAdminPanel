@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\NothiSenderController;
 use App\Http\Controllers\Admin\SendNothiController;
 use App\Http\Controllers\Admin\ReceiveNothiController;
 use App\Http\Controllers\NGO\PotroController;
+use App\Http\Controllers\Admin\NothiJatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,22 @@ Route::get('/printPotrangsoPdfForEmail/{status}/{parentId}/{nothiId}/{id}', 'pri
 });
 
 Route::group(['prefix' => 'admin'], function () {
+
+
+
+    Route::controller(NothiJatController::class)->group(function () {
+
+        Route::get('/returnToAgotoDak/{id}/{status}', 'returnToAgotoDak')->name('returnToAgotoDak');
+        Route::get('/nothiJatDakList', 'nothiJatDakList')->name('nothiJatDakList');
+        Route::get('/updateNothiJat', 'updateNothiJat')->name('updateNothiJat');
+        Route::get('/searchResultNothiJat', 'searchResultNothiJat')->name('searchResultNothiJat');
+
+
+        Route::get('/searchResultNothiJatRenew', 'searchResultNothiJatRenew')->name('searchResultNothiJatRenew');
+
+
+
+    });
 
 
     Route::resource('potroList', PotroController::class);

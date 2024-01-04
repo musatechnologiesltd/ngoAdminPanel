@@ -1,5 +1,9 @@
 @foreach($ngoStatusReg as $i=>$allStatusData)
 
+@if($allStatusData->nothi_jat_status == 1)
+
+@else
+
 <?php
 
 //new code
@@ -233,4 +237,5 @@ $branchNames = DB::table('branches')
 <!--end new code -->
 </td>
 </tr>
+@endif
 @endforeach

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('attraction_attention')->nullable();
             $table->string('dak_detail_id')->nullable();
             $table->string('status')->nullable();
+            $table->string('nothi_jat_id')->nullable();
+            $table->string('nothi_jat_status')->nullable();
             $table->timestamps();
         });
     }

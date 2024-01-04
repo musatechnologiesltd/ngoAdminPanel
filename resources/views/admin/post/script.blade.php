@@ -322,5 +322,124 @@ $("[id^=nothiSearchName]").keyup(function(){
 
     </script>
 
+    <!--- nothi jat script -->
+
+    <script>
+        $("[id^=nothijatRegiFinal]").click(function(){
+
+
+            var dakId = $(this).data('dakid');
+            var nothiId = $(this).data('nothiid');
+            var status = $(this).data('dakstatus');
+
+
+            //alert(dakId+nothiId+status);
+
+
+            $.ajax({
+                url: "{{ route('updateNothiJat') }}",
+                method: 'GET',
+                data: {dakId:dakId,nothiId:nothiId,status:status},
+                success: function(data) {
+
+                     //$("#nothiSearchResultRegi"+result).html(data);
+
+
+                     location.reload(true);
+        alertify.set('notifier','position','top-center');
+          alertify.success('সফলভাবে কপি হয়েছে');
+                }
+                });
+
+
+        });
+
+
+        $("[id^=nothijatRenwFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+        $("[id^=nothijatSearchRegi]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(18);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJat') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultRegi"+result).html(data);
+}
+});
+
+
+
+});
+
+
+
+$("[id^=nothijatSearchRenw]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(18);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatRenew') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultRenw"+result).html(data);
+}
+});
+
+
+
+});
+
+        </script>
+
+    <!-- end nothi jat script -->
+
 
 

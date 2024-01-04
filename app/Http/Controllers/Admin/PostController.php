@@ -1591,6 +1591,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->registration_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+
                  $regDakData->save();
 
                 }
@@ -1626,6 +1628,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->renew_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1659,6 +1662,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->name_change_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1693,6 +1697,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->f_d_nine_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1729,6 +1734,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->f_d_nine_one_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1766,6 +1772,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fd_six_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1802,6 +1809,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fd_seven_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1837,6 +1845,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fc_one_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1870,6 +1879,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fc_two_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
@@ -1902,6 +1912,7 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fd_three_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
                  $regDakData->save();
 
                 }
