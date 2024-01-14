@@ -144,7 +144,9 @@
     <a class="nav-link menu-title link-nav {{ Route::is('addParentNote')  ||  Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
         <i data-feather="mail"></i>
         <span>আগত ডাক</span>
+        <sup>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($mainCodeCountHeader) }}</sup>
     </a>
+
 </li>
 
  <li class="dropdown">
@@ -188,6 +190,7 @@
     <a class="nav-link menu-title link-nav {{  Route::is('receiveNothi.index')  ? 'active' : '' }}" href="{{ route('receiveNothi.index') }}">
         <i data-feather="mail"></i>
         <span>আগত নথি</span>
+        <sup>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalReceiveNothi) }}</sup>
     </a>
 </li>
 @endif

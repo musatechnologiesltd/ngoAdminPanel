@@ -25,12 +25,12 @@ $usr = Auth::guard('admin')->user();
         <div class="nav-right col pull-right right-menu p-0">
             <ul class="nav-menus">
                 <li>
-                    <a href="{{ route('dakBranchList.index') }}"><i data-feather="mail"></i></a>
+                    <a href="{{ route('dakBranchList.index') }}">আগত ডাক</a>
                     <sup>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($mainCodeCountHeader) }}</sup>
                 </li>
 
                 <li>
-                    <a href="{{ route('receiveNothi.index') }}"><i data-feather="file-text"></i></a>
+                    <a href="{{ route('receiveNothi.index') }}">আগত নথি</a>
                     <sup>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalReceiveNothi) }}</sup>
                 </li>
 
