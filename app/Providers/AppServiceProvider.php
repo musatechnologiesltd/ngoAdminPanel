@@ -116,8 +116,24 @@ class AppServiceProvider extends ServiceProvider
                    ->count();
 
 
-                $mainCodeCountHeader =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;
+                    $ngoStatusRenew1 = NgoRenewDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusNameChange1 = NgoNameChangeDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFDNineDak1 = NgoFDNineDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdSixDak1 = NgoFdSixDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdSevenDak1 = NgoFdSevenDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFcOneDak1 = FcOneDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFcTwoDak1 = FcTwoDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdThreeDak1 = FdThreeDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFDNineOneDak1 = NgoFDNineOneDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusReg1 = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
 
+
+                    $mainCodeCountHeader1 =$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
+
+
+                   $mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;
+
+                   $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
 
                 }else{
 
@@ -134,7 +150,28 @@ class AppServiceProvider extends ServiceProvider
                     $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
                     $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
 
-                    $mainCodeCountHeader =$ngoStatusReg+$ngoStatusFDNineOneDak+$ngoStatusFdThreeDak+$ngoStatusFcTwoDak+$ngoStatusFcOneDak+$ngoStatusFdSevenDak+$ngoStatusFdSixDak+$ngoStatusFDNineDak+$ngoStatusNameChange+$ngoStatusRenew;
+                    $mainCodeCountHeader2 =$ngoStatusReg+$ngoStatusFDNineOneDak+$ngoStatusFdThreeDak+$ngoStatusFcTwoDak+$ngoStatusFcOneDak+$ngoStatusFdSevenDak+$ngoStatusFdSixDak+$ngoStatusFDNineDak+$ngoStatusNameChange+$ngoStatusRenew;
+
+
+
+                    $ngoStatusRenew1 = NgoRenewDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusNameChange1 = NgoNameChangeDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFDNineDak1 = NgoFDNineDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdSixDak1 = NgoFdSixDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdSevenDak1 = NgoFdSevenDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFcOneDak1 = FcOneDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFcTwoDak1 = FcTwoDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFdThreeDak1 = FdThreeDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusFDNineOneDak1 = NgoFDNineOneDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusReg1 = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+
+
+                    $mainCodeCountHeader1 =$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
+
+
+                   //$mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;
+
+                   $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
 
                 }
 

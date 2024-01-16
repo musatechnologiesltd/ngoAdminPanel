@@ -4,8 +4,8 @@
 
  <header class="main-nav">
     <div class="sidebar-user text-center">
-        @if ($usr->can('profile.edit'))
-        <a class="setting-primary" href="{{ route('setting.index') }}"><i data-feather="settings"></i>
+        @if ($usr->can('profile.view'))
+        <a class="setting-primary" href="{{ route('profile.index') }}"><i data-feather="settings"></i>
         </a>
         @else
         <a class="setting-primary" href="#"><i data-feather="settings"></i>
