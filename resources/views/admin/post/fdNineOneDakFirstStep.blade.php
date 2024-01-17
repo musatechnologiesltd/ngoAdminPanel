@@ -4,10 +4,12 @@
 
 
  $checkDataAvailableOrNot = DB::table('ngo_f_d_nine_one_daks')
-                                ->where('f_d_nine_one_status_id',$allStatusData->id)
+                                ->where('f_d_nine_one_status_id',$allStatusData->fd9_one_form_id)
                                 ->where('sender_admin_id',Auth::guard('admin')->user()->id)
                                 ->where('status',1)
                                 ->value('id');
+
+                                //dd($checkDataAvailableOrNot);
 
 
                                                                                            //new code
@@ -43,7 +45,7 @@ $decesionName = DB::table('dak_details')
             @else
 <tr>
 <td style="text-align:left;">
-    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+    উৎসঃ{{ $form_one_data->organization_name_ban }} <br>
     প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
     বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট)   </b><br>

@@ -35,7 +35,7 @@ class PostController extends Controller
 {
 
     public function all_dak_list(){
-
+//dd(12);
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
@@ -183,7 +183,7 @@ class PostController extends Controller
 
 
 
-
+//dd(12);
 
 
 // $invID = 1211;

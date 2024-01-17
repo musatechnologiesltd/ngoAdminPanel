@@ -778,10 +778,15 @@ die();
                              //new code
 
 
+                             $allNameChangeDoc = '';
+                             $getformOneId='';
+
+
 
         }elseif($status == 'renew'){
 
-
+            $allNameChangeDoc = '';
+            $getformOneId='';
 
             $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
             $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
@@ -852,15 +857,96 @@ die();
 
 
         }elseif($status == 'nameChange'){
-
-
-
+            $renewInfoData='';
+            $ngoTypeData = '';
+            $mainIdR ='';
             $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
 
 
             $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
+
+
+            ///name change ciew
+
+            $name_change_status_id = DB::table('ngo_name_change_daks')
+              ->where('id',$parentId)
+              ->value('name_change_status_id');
+
+
+            $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$name_change_status_id)->get();
+
+                $getformOneId = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->first();
+
+                $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
+
+
+
+                $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
+                $name_change_status = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
+                $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+
+
+                //new code for old  and new
+
+      $checkOldorNew = DB::table('ngo_type_and_languages')
+      ->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+
+ //end new code for old and new
+
+ if($checkOldorNew == 'Old'){
+
+     $all_data_for_new_list_all = DB::table('ngo_renews')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }else{
+
+     $all_data_for_new_list_all = DB::table('ngo_statuses')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }
+
+
+
+
+                //$all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+
+                $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+                $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+                $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+     $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
+                $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
+
+                $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
+                $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
+
+                $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+                $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+                $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+                $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+                ->first();
+
+
+                $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+                ->get();
+
+                $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+        ->get();
+
+
+
+            ///end name change view
+
+
+
+
 
 
 
@@ -1200,7 +1286,7 @@ die();
 
 
 
-        return view('admin.presentDocument.addChildNote',compact('ngoTypeData','renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data','childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
+        return view('admin.presentDocument.addChildNote',compact('allNameChangeDoc','getformOneId','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data','ngoTypeData','renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data','childNoteNewListValue','childNoteNewList','checkParentFirst','nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
     }
 
 

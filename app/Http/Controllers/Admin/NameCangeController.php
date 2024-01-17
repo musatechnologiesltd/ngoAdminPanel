@@ -51,7 +51,7 @@ class NameCangeController extends Controller
             $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-            $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
+            $convert_name_title = $ngoStatusNameChange->implode("name_change_status_id", " ");
             $separated_data_title = explode(" ", $convert_name_title);
 
             $all_data_for_new_list = DB::table('ngo_name_changes')

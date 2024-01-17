@@ -1350,6 +1350,11 @@ $branchNames = DB::table('branches')
 
     @foreach($ngoStatusFdSixDak as $p=>$allStatusData)
 
+
+    @if($allStatusData->nothi_jat_status == 1)
+
+    @else
+
     <?php
 
 
@@ -1410,6 +1415,16 @@ $decesionName = DB::table('dak_details')
         @else
         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd6Form.show',$allStatusData->fd_six_status_id) }}';">দেখুন</button>
         @endif
+
+        <button  type="button" class="btn-xs btn btn-primary"
+        data-toggle="tooltip" data-placement="top"
+        title="নথি জাত করুন"
+        data-bs-toggle="modal"
+        data-original-title="" data-bs-target="#nothiJatModalFdSix{{ $allStatusData->id }}">
+        <i class="icofont icofont-rotation"></i> নথি জাত করুন
+        </button>
+
+        @include('admin.post.nothiJatModalFdSix')
 
 
              <!--new code-->
@@ -1593,6 +1608,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fdsix code end ---->
@@ -1601,7 +1617,9 @@ $branchNames = DB::table('branches')
 
 
     @foreach($ngoStatusFdSevenDak as $p=>$allStatusData)
+    @if($allStatusData->nothi_jat_status == 1)
 
+    @else
     <?php
 
 
@@ -1663,6 +1681,17 @@ $decesionName = DB::table('dak_details')
         @else
         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd7Form.show',$allStatusData->fd_seven_status_id) }}';">দেখুন</button>
         @endif
+
+
+        <button  type="button" class="btn-xs btn btn-primary"
+        data-toggle="tooltip" data-placement="top"
+        title="নথি জাত করুন"
+        data-bs-toggle="modal"
+        data-original-title="" data-bs-target="#nothiJatModalFdSeven{{ $allStatusData->id }}">
+        <i class="icofont icofont-rotation"></i> নথি জাত করুন
+        </button>
+
+        @include('admin.post.nothiJatModalFdSeven')
 
 
              <!--new code-->
@@ -1846,6 +1875,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fdseven code end ---->
@@ -1853,6 +1883,10 @@ $branchNames = DB::table('branches')
     <!-- fc one code start -->
 
     @foreach($ngoStatusFcOneDak as $p=>$allStatusData)
+
+    @if($allStatusData->nothi_jat_status == 1)
+
+    @else
 
     <?php
 
@@ -1912,6 +1946,17 @@ $decesionName = DB::table('dak_details')
         @else
         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
         @endif
+
+
+        <button  type="button" class="btn-xs btn btn-primary"
+        data-toggle="tooltip" data-placement="top"
+        title="নথি জাত করুন"
+        data-bs-toggle="modal"
+        data-original-title="" data-bs-target="#nothiJatModalFcOne{{ $allStatusData->id }}">
+        <i class="icofont icofont-rotation"></i> নথি জাত করুন
+        </button>
+
+        @include('admin.post.nothiJatModalFcOne')
 
 
              <!--new code-->
@@ -2095,6 +2140,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fc one code end-->
@@ -2104,7 +2150,9 @@ $branchNames = DB::table('branches')
 
 
     @foreach($ngoStatusFcTwoDak as $p=>$allStatusData)
+    @if($allStatusData->nothi_jat_status == 1)
 
+    @else
     <?php
 
                                                                      //new code
@@ -2165,6 +2213,17 @@ $decesionName = DB::table('dak_details')
         @else
         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$allStatusData->fc_two_status_id) }}';">দেখুন</button>
         @endif
+
+
+        <button  type="button" class="btn-xs btn btn-primary"
+        data-toggle="tooltip" data-placement="top"
+        title="নথি জাত করুন"
+        data-bs-toggle="modal"
+        data-original-title="" data-bs-target="#nothiJatModalFcTwo{{ $allStatusData->id }}">
+        <i class="icofont icofont-rotation"></i> নথি জাত করুন
+        </button>
+
+        @include('admin.post.nothiJatModalFcTwo')
 
 
              <!--new code-->
@@ -2348,6 +2407,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fc two code end-->
@@ -2356,7 +2416,9 @@ $branchNames = DB::table('branches')
 
 
      @foreach($ngoStatusFdThreeDak as $p=>$allStatusData)
+     @if($allStatusData->nothi_jat_status == 1)
 
+     @else
      <?php
 
                                                                                                    //new code
@@ -2392,8 +2454,9 @@ $decesionName = DB::table('dak_details')
          উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
          প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
          মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-         বিষয়ঃ <b> এফডি - ৩ {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
-         সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
+         বিষয়ঃ <b> এফডি - ৩ <br>
+         সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span><br>
+         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
      </td>
      <td style="text-align:right;">
 
@@ -2417,6 +2480,16 @@ $decesionName = DB::table('dak_details')
          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd3Form.show',$allStatusData->fd_three_status_id) }}';">দেখুন</button>
          @endif
 
+
+         <button  type="button" class="btn-xs btn btn-primary"
+         data-toggle="tooltip" data-placement="top"
+         title="নথি জাত করুন"
+         data-bs-toggle="modal"
+         data-original-title="" data-bs-target="#nothiJatModalFdThree{{ $allStatusData->id }}">
+         <i class="icofont icofont-rotation"></i> নথি জাত করুন
+         </button>
+
+         @include('admin.post.nothiJatModalFdThree')
 
               <!--new code-->
       <button type="button" class="btn btn-primary btn-xs"
@@ -2599,6 +2672,7 @@ $branchNames = DB::table('branches')
       <!--end new code -->
      </td>
  </tr>
+ @endif
  @endforeach
 
       <!-- fd three form end -->

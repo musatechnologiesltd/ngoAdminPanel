@@ -618,6 +618,305 @@ alertify.success('সফলভাবে কপি হয়েছে');
 //fdNineOne end
 
 
+//fdsix start
+
+$("[id^=nothiJatSearchFdSix]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(19);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFdSix') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFdSix"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFdSixFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+//fdsix end
+
+//fdseven start
+
+
+$("[id^=nothiJatSearchFdSeven]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(21);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFdSeven') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFdSeven"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFdSevenFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+//fdseven end
+
+
+//fcone start
+
+
+$("[id^=nothiJatSearchFcOne]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(19);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFcOne') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFcOne"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFcOneFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+//fcone end
+
+
+//fctwo start
+
+$("[id^=nothiJatSearchFcTwo]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(19);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFcTwo') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFcTwo"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFcTwoFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+//fctwo end
+
+
+//fdthree start
+
+$("[id^=nothiJatSearchFdThree]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(21);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFdThree') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFdThree"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFdThreeFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+//fdthree end
+
+
 
         </script>
 

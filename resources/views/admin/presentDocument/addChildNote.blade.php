@@ -139,6 +139,12 @@
                                                 aria-selected="false"><i
                                         class="icofont icofont-list"></i>নথিপত্র</a></li>
 
+                                                @elseif($status == 'nameChange')
+                                                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                                    data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                                    aria-controls="profile-icon"
+                                                    aria-selected="false"><i
+                                            class="icofont icofont-list"></i>নথিপত্র</a></li>
                                                 @endif
 
                                                 <!-- end new code --->
@@ -778,9 +784,17 @@ $potroZariListValue =  DB::table('nothi_details')
 
        </div>
 
+       @elseIf($status == 'nameChange')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+
+
+       @include('admin.name_change_list.documentListForNothi')
 
 
 
+       </div>
 
        @endif
 

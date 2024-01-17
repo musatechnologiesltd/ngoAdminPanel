@@ -1269,7 +1269,7 @@ $branchNames = DB::table('branches')
                     <!--fdsix code start--->
 
                     @foreach($ngoStatusFdSixDak as $p=>$allStatusData)
-
+                    @if($allStatusData->nothi_jat_status == 1)
                     <?php
 
                                                              //new code
@@ -1314,7 +1314,7 @@ $formOneDataId = DB::table('fd6_forms')->where('id',$allStatusData->fd_six_statu
 
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd6Form.show',$allStatusData->fd_six_status_id) }}';">দেখুন</button>
 
-
+                        <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fdSix']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                              <!--new code-->
                      <button type="button" class="btn btn-primary btn-xs"
@@ -1497,6 +1497,9 @@ $branchNames = DB::table('branches')
                      <!--end new code -->
                     </td>
                 </tr>
+                @else
+
+                @endif
                 @endforeach
 
                     <!--fdsix code end ---->
@@ -1505,6 +1508,8 @@ $branchNames = DB::table('branches')
 
 
                     @foreach($ngoStatusFdSevenDak as $p=>$allStatusData)
+
+                    @if($allStatusData->nothi_jat_status == 1)
 
                     <?php
 
@@ -1551,7 +1556,7 @@ $formOneDataId = DB::table('fd7_forms')->where('id',$allStatusData->fd_seven_sta
 
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd7Form.show',$allStatusData->fd_seven_status_id) }}';">দেখুন</button>
 
-
+                        <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fdSeven']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                              <!--new code-->
                      <button type="button" class="btn btn-primary btn-xs"
@@ -1734,6 +1739,9 @@ $branchNames = DB::table('branches')
                      <!--end new code -->
                     </td>
                 </tr>
+                @else
+
+                @endif
                 @endforeach
 
                     <!--fdseven code end ---->
@@ -1741,7 +1749,7 @@ $branchNames = DB::table('branches')
                     <!-- fc one code start -->
 
                     @foreach($ngoStatusFcOneDak as $p=>$allStatusData)
-
+                    @if($allStatusData->nothi_jat_status == 1)
                     <?php
 
                                                                                                      //new code
@@ -1787,7 +1795,7 @@ $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_statu
 
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
 
-
+                        <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fcOne']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                              <!--new code-->
                      <button type="button" class="btn btn-primary btn-xs"
@@ -1970,6 +1978,9 @@ $branchNames = DB::table('branches')
                      <!--end new code -->
                     </td>
                 </tr>
+                @else
+
+                @endif
                 @endforeach
 
                     <!--fc one code end-->
@@ -1979,7 +1990,7 @@ $branchNames = DB::table('branches')
 
 
                     @foreach($ngoStatusFcTwoDak as $p=>$allStatusData)
-
+                    @if($allStatusData->nothi_jat_status == 1)
                     <?php
                                                                           //new code
                                 $orginalReceverId= DB::table('fc_two_daks')
@@ -2023,7 +2034,7 @@ $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_statu
 
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$allStatusData->fc_two_status_id) }}';">দেখুন</button>
 
-
+                        <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fcTwo']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                              <!--new code-->
                      <button type="button" class="btn btn-primary btn-xs"
@@ -2206,6 +2217,9 @@ $branchNames = DB::table('branches')
                      <!--end new code -->
                     </td>
                 </tr>
+                @else
+
+                @endif
                 @endforeach
 
                     <!--fc two code end-->
@@ -2214,7 +2228,7 @@ $branchNames = DB::table('branches')
 
 
                      @foreach($ngoStatusFdThreeDak as $p=>$allStatusData)
-
+                     @if($allStatusData->nothi_jat_status == 1)
                      <?php
 
 
@@ -2259,7 +2273,7 @@ $branchNames = DB::table('branches')
 
                          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd3Form.show',$allStatusData->fd_three_status_id) }}';">দেখুন</button>
 
-
+                         <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fdThree']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                               <!--new code-->
                       <button type="button" class="btn btn-primary btn-xs"
@@ -2442,6 +2456,9 @@ $branchNames = DB::table('branches')
                       <!--end new code -->
                      </td>
                  </tr>
+                 @else
+
+                 @endif
                  @endforeach
 
                       <!-- fd three form end -->
