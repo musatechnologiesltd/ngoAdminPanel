@@ -528,7 +528,7 @@ $desiNames = DB::table('designation_lists')
 
 
                                 @foreach($ngoStatusNameChange as $k=>$allStatusData)
-
+                                @if($allStatusData->nothi_jat_status == 1)
 
 
                                 <?php
@@ -567,7 +567,7 @@ $formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_
                                     উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                     প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                                     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ </b><br>
+                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তন</b><br>
                                     সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                                     তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                                 </td>
@@ -576,7 +576,7 @@ $formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_
 
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->name_change_status_id) }}';">দেখুন</button>
 
-
+                                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'nameChange']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                                               <!--new code-->
                              <button type="button" class="btn btn-primary btn-xs"
@@ -725,7 +725,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তনের নোটিশ  </h5>
+                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তন</h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -763,11 +763,17 @@ $desiNames = DB::table('designation_lists')
                              <!--end new code -->
                                 </td>
                             </tr>
+                            @else
+
+
+                            @endif
 
                             @endforeach
 
 
                             @foreach($ngoStatusFDNineDak as $m=>$allStatusData)
+
+                            @if($allStatusData->nothi_jat_status == 1)
 
                             <?php
 
@@ -808,7 +814,7 @@ $formOneDataId = DB::table('fd9_forms')
                                 উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                 প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                                 মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা) নোটিশ </b><br>
+                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা) </b><br>
                                 সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                                 তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                             </td>
@@ -817,7 +823,7 @@ $formOneDataId = DB::table('fd9_forms')
 
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->f_d_nine_status_id) }}';">দেখুন</button>
 
-
+                                <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fdNine']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
                                      <!--new code-->
                              <button type="button" class="btn btn-primary btn-xs"
@@ -962,7 +968,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা) নোটিশ </h5>
+                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা) </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -1000,11 +1006,14 @@ $desiNames = DB::table('designation_lists')
                              <!--end new code -->
                             </td>
                         </tr>
+                        @else
+
+                        @endif
                         @endforeach
 
 
                         @foreach($ngoStatusFDNineOneDak as $f=>$allStatusData)
-
+                        @if($allStatusData->nothi_jat_status == 1)
                         <?php
 
                                                                                                                   //new code
@@ -1053,7 +1062,7 @@ $formOneDataId = DB::table('fd9_one_forms')
                             উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                             প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                             মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ  </b><br>
+                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট)</b><br>
                             সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                             তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                         </td>
@@ -1062,7 +1071,7 @@ $formOneDataId = DB::table('fd9_one_forms')
 
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->f_d_nine_one_status_id) }}';">দেখুন</button>
 
-
+                            <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'fdNineOne']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
    <!--new code-->
    <button type="button" class="btn btn-primary btn-xs"
@@ -1208,7 +1217,7 @@ $branchNames = DB::table('branches')
               <div class="card" style="border:2px solid #979797">
                   <div class="card-body">
                       <div class="tracking_box">
-                          <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ </h5>
+                          <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট)</h5>
                           @if(!$dakDetail->main_file)
 
                           @else
@@ -1250,6 +1259,10 @@ $branchNames = DB::table('branches')
 
                         </td>
                     </tr>
+                    @else
+
+
+                    @endif
                     @endforeach
 
 
@@ -1292,7 +1305,7 @@ $formOneDataId = DB::table('fd6_forms')->where('id',$allStatusData->fd_six_statu
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৬ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফডি - ৬ </b><br>
                         সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                     </td>
@@ -1446,7 +1459,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৬ নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফডি - ৬ </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1529,7 +1542,7 @@ $formOneDataId = DB::table('fd7_forms')->where('id',$allStatusData->fd_seven_sta
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৭  নোটিশ  </b><br>
+                        বিষয়ঃ <b> এফডি - ৭  </b><br>
                         সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                     </td>
@@ -1683,7 +1696,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৭  নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফডি - ৭   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1765,7 +1778,7 @@ $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_statu
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফসি-১ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফসি-১ </b><br>
                         সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                     </td>
@@ -1919,7 +1932,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফসি-১ নোটিশ</h5>
+                                            <h5>বিষয়ঃ এফসি-১ </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -2001,7 +2014,7 @@ $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_statu
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফসি-২ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফসি-২ </b><br>
                         সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                     </td>
@@ -2155,7 +2168,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফসি-২ নোটিশ</h5>
+                                            <h5>বিষয়ঃ এফসি-২ </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -2237,7 +2250,7 @@ $branchNames = DB::table('branches')
                          উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                          প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
                          মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                         বিষয়ঃ <b> এফডি - ৩ নোটিশ  </b><br>
+                         বিষয়ঃ <b> এফডি - ৩  </b><br>
                          সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
                          তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                      </td>
@@ -2391,7 +2404,7 @@ $branchNames = DB::table('branches')
                                  <div class="card" style="border:2px solid #979797">
                                      <div class="card-body">
                                          <div class="tracking_box">
-                                             <h5>বিষয়ঃ এফডি - ৩ নোটিশ</h5>
+                                             <h5>বিষয়ঃ এফডি - ৩ </h5>
                                              @if(!$dakDetail->main_file)
 
                                              @else

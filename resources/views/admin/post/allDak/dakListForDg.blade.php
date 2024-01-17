@@ -531,7 +531,7 @@ $orginalReceverId= DB::table('ngo_name_change_daks')
                                     উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                     প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ </b><br>
+                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের   </b><br>
                                     @if(empty($decesionName))
 
                                     @else
@@ -686,7 +686,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তনের নোটিশ  </h5>
+                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তনের    </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -758,7 +758,7 @@ $orginalReceverId= DB::table('ngo_f_d_nine_daks')
                                 উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                 প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                 মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা) নোটিশ </b><br>
+                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা)   </b><br>
                                 @if(empty($decesionName))
 
                                 @else
@@ -912,7 +912,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা) নোটিশ </h5>
+                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা)   </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -986,7 +986,7 @@ $orginalReceverId= DB::table('ngo_f_d_nine_one_daks')
                             উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                             প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                             মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ </b><br>
+                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট)   </b><br>
                             @if(empty($decesionName))
 
                             @else
@@ -1144,7 +1144,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ </h5>
+                                                    <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট)   </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -1220,7 +1220,7 @@ $orginalReceverId= DB::table('ngo_fd_six_daks')
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৬ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফডি - ৬   </b><br>
                         @if(empty($decesionName))
 
                         @else
@@ -1374,7 +1374,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৬ নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফডি - ৬   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1450,7 +1450,7 @@ $orginalReceverId= DB::table('ngo_fd_seven_daks')
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৭ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফডি - ৭   </b><br>
                         @if(empty($decesionName))
 
                         @else
@@ -1604,7 +1604,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৭ নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফডি - ৭   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1680,7 +1680,7 @@ $branchNames = DB::table('branches')
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফসি-১ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফসি-১   </b><br>
                         @if(empty($decesionName))
 
                         @else
@@ -1834,7 +1834,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফসি-১ নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফসি-১   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1908,7 +1908,7 @@ $orginalReceverId= DB::table('fc_two_daks')
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফসি-২ নোটিশ </b><br>
+                        বিষয়ঃ <b> এফসি-২   </b><br>
                         @if(empty($decesionName))
 
                         @else
@@ -2062,7 +2062,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফসি-২ নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফসি-২   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -2136,7 +2136,7 @@ $orginalReceverId= DB::table('fd_three_daks')
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৩ নোটিশ  </b><br>
+                        বিষয়ঃ <b> এফডি - ৩    </b><br>
                         @if(empty($decesionName))
 
     @else
@@ -2290,7 +2290,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৩ নোটিশ </h5>
+                                            <h5>বিষয়ঃ এফডি - ৩   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else

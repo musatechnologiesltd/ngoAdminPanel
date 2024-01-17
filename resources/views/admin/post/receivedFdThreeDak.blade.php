@@ -47,7 +47,7 @@ $decesionName = DB::table('dak_details')
         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-        বিষয়ঃ <b> এফডি - ৩ নোটিশ </b><br>
+        বিষয়ঃ <b> এফডি - ৩   </b><br>
         @if(empty($decesionName))
 
         @else

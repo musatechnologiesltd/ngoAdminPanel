@@ -47,7 +47,7 @@ $decesionName = DB::table('dak_details')
       উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
       প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
       মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-      বিষয়ঃ <b> এফসি-১ নোটিশ </b><br>
+      বিষয়ঃ <b> এফসি-১   </b><br>
       @if(empty($decesionName))
 
       @else
@@ -219,7 +219,7 @@ $branchNames = DB::table('branches')
               <div class="card" style="border:2px solid #979797">
                   <div class="card-body">
                       <div class="tracking_box">
-                          <h5>বিষয়ঃ এফসি-১ নোটিশ</h5>
+                          <h5>বিষয়ঃ এফসি-১  </h5>
                           @if(!$dakDetail->main_file)
 
                           @else

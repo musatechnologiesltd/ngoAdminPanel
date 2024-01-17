@@ -37,7 +37,7 @@ $decesionName = DB::table('dak_details')
         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
         মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
-        বিষয়ঃ <b> এফডি - ৬ নোটিশ  </b><br>
+        বিষয়ঃ <b> এফডি - ৬    </b><br>
         সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
     </td>

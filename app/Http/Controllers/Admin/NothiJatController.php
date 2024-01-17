@@ -73,7 +73,7 @@ class NothiJatController extends Controller
     public function returnToAgotoDak($id, $status){
 
 
-        
+
 
         if($status == 'registration'){
 
@@ -93,19 +93,28 @@ class NothiJatController extends Controller
           }elseif($status == 'nameChange'){
 
 
-
+            $updateDataInsert = NgoNameChangeDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
 
 
           }elseif($status == 'fdNine'){
 
 
-
+            $updateDataInsert = NgoFDNineDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
 
 
           }elseif($status == 'fdNineOne'){
 
 
-
+            $updateDataInsert = NgoFDNineOneDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
 
 
 
@@ -169,19 +178,28 @@ class NothiJatController extends Controller
             }elseif($request->status == 'nameChange'){
 
 
-
+                $updateDataInsert = NgoNameChangeDak::find($request->dakId);
+                $updateDataInsert->nothi_jat_id = $request->nothiId;
+                $updateDataInsert->nothi_jat_status = 1;
+                $updateDataInsert->save();
 
 
             }elseif($request->status == 'fdNine'){
 
 
-
+                $updateDataInsert = NgoFDNineDak::find($request->dakId);
+                $updateDataInsert->nothi_jat_id = $request->nothiId;
+                $updateDataInsert->nothi_jat_status = 1;
+                $updateDataInsert->save();
 
 
             }elseif($request->status == 'fdNineOne'){
 
 
-
+                $updateDataInsert = NgoFDNineOneDak::find($request->dakId);
+                $updateDataInsert->nothi_jat_id = $request->nothiId;
+                $updateDataInsert->nothi_jat_status = 1;
+                $updateDataInsert->save();
 
 
 
@@ -271,6 +289,75 @@ class NothiJatController extends Controller
 
         return response()->json($data);
 
+
+    }
+
+    public function searchResultNothiJatNameChange(Request $request){
+
+        $dakId = $request->result;
+
+
+        $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_year', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
+
+
+        //dd($searchResult);
+
+        $data = view('admin.post.searchResultNothiJatNameChange',compact('searchResult','dakId'))->render();
+
+
+        return response()->json($data);
+
+    }
+
+
+    public function searchResultNothiJatFdNine(Request $request){
+
+        $dakId = $request->result;
+
+
+        $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_year', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
+
+
+        //dd($searchResult);
+
+        $data = view('admin.post.searchResultNothiJatFdNine',compact('searchResult','dakId'))->render();
+
+
+        return response()->json($data);
+
+
+    }
+
+
+    public function searchResultNothiJatFdNineOne(Request $request){
+
+        $dakId = $request->result;
+
+
+        $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
+        ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_year', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
+        ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
+
+
+        //dd($searchResult);
+
+        $data = view('admin.post.searchResultNothiJatFdNineOne',compact('searchResult','dakId'))->render();
+
+
+        return response()->json($data);
 
     }
 

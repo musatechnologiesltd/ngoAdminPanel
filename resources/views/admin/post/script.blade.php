@@ -437,6 +437,188 @@ success: function(data) {
 
 });
 
+//////////////////
+
+//name change start
+
+$("[id^=nothiJatSearchNameChange]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(24);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatNameChange') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultNameChange"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatNameChangeFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+//name change end
+
+
+//fdNine start
+$("[id^=nothiJatSearchFdNine]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(20);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFdNine') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFdNine"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFdNineFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+//fdNine End
+
+
+//fdNineOne start
+
+$("[id^=nothiJatSearchFdNineOne]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(23);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFdNineOne') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultFdNineOne"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatFdNineOneFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+
+//fdNineOne end
+
+
+
         </script>
 
     <!-- end nothi jat script -->

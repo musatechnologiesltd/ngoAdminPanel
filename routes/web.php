@@ -90,6 +90,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/searchResultNothiJat', 'searchResultNothiJat')->name('searchResultNothiJat');
 
 
+        Route::get('/searchResultNothiJatFdNineOne', 'searchResultNothiJatFdNineOne')->name('searchResultNothiJatFdNineOne');
+
+        Route::get('/searchResultNothiJatFdNine', 'searchResultNothiJatFdNine')->name('searchResultNothiJatFdNine');
+        Route::get('/searchResultNothiJatNameChange', 'searchResultNothiJatNameChange')->name('searchResultNothiJatNameChange');
         Route::get('/searchResultNothiJatRenew', 'searchResultNothiJatRenew')->name('searchResultNothiJatRenew');
 
 
