@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Mail;
 use DB;
 use PDF;
+use Mpdf\Mpdf;
 use Carbon\Carbon;
 use Response;
 use App\Models\ForwardingLetter;
@@ -32,11 +33,62 @@ class Fd9OneController extends Controller
 
         \LogActivity::addToLog('verified_fd_nine_one_download');
 
-        $form_one_data = DB::table('fd9_one_forms')->where('id',$id)->value('verified_fd_nine_one_form');
 
-        //dd($form_one_data);
+        $id = $id;
 
-         return view('admin.fd9Oneform.verified_fd_nine_one_download',compact('form_one_data'));
+        $fd9OneList = DB::table('fd9_one_forms')->where('id',$id)->first();
+
+        $ngo_list_all = DB::table('fd_one_forms')->where('id',$fd9OneList->fd_one_form_id)->first();
+
+
+
+
+
+$file_Name_Custome = "Fd9.1_Form";
+
+
+    //     $pdf=PDF::loadView('admin.fd9Oneform.verified_fd_nine_one_download',[
+
+    //         'ngo_list_all'=>$ngo_list_all,
+    //         'fd9OneList'=>$fd9OneList
+
+    //     ],[],['format' => 'A4']);
+    // return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+
+
+    $data =view('admin.fd9Oneform.verified_fd_nine_one_download',[
+
+        'ngo_list_all'=>$ngo_list_all,
+        'fd9OneList'=>$fd9OneList
+
+    ])->render();
+
+
+$pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+$mpdf = new Mpdf([
+   'default_font_size' => 14,
+   'default_font' => 'nikosh'
+]);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output($pdfFilePath, "I");
+die();
+
+
+
+        // $form_one_data = DB::table('fd9_one_forms')->where('id',$id)->value('verified_fd_nine_one_form');
+
+
+
+        //  return view('admin.fd9Oneform.verified_fd_nine_one_download',compact('form_one_data'));
 
     }
     public function index(){
@@ -151,8 +203,26 @@ class Fd9OneController extends Controller
      $ngoTypeData = DB::table('ngo_type_and_languages')
      ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
 
-     $ngoStatus = DB::table('ngo_statuses')
-     ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //new code for old  and new
+
+
+
+//end new code for old and new
+
+if($ngoTypeData->ngo_type_new_old == 'Old'){
+
+$ngoStatus = DB::table('ngo_renews')
+->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+}else{
+
+$ngoStatus = DB::table('ngo_statuses')
+->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+    //  $ngoStatus = DB::table('ngo_statuses')
+    //  ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
 
      //dd($dataFromNVisaFd9Fd1->id);
 
@@ -253,6 +323,44 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+       }
+
+
+       public function forwardingLetterForNothi($id){
+
+
+        \LogActivity::addToLog('download forwardingLetterForNothi');
+
+
+        $data = DB::table('system_information')->first();
+
+
+
+
+            $get_file_data = DB::table('n_visas')
+            ->where('id',$id)->value('forwarding_letter');
+
+
+
+
+
+
+        $file_path = $data->system_admin_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_admin_url.'public/'.$get_file_data;
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        // return Response::download($file,$filename.'.pdf', $headers);
+
+        return Response::make(file_get_contents($file), 200, [
+            'content-type'=>'application/pdf',
+        ]);
+
 
        }
 }

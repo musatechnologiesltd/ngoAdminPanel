@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2024 at 11:58 AM
+-- Generation Time: Jan 18, 2024 at 10:25 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -104,8 +104,8 @@ CREATE TABLE `article_signs` (
 --
 
 INSERT INTO `article_signs` (`id`, `dakDetailId`, `childId`, `sender`, `permissionId`, `back_status`, `created_at`, `updated_at`) VALUES
-(29, '22', '27', 2, '5', '1', '2024-01-01 03:58:18', '2024-01-01 03:58:18'),
-(30, '23', '24', 5, '2', NULL, '2024-01-02 04:36:49', '2024-01-02 04:36:49');
+(31, '24', '4', 5, '2', NULL, '2024-01-18 00:19:41', '2024-01-18 00:19:41'),
+(32, '25', '8', 5, '2', NULL, '2024-01-18 01:57:46', '2024-01-18 01:57:46');
 
 -- --------------------------------------------------------
 
@@ -206,6 +206,13 @@ CREATE TABLE `child_note_for_fd_nines` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `child_note_for_fd_nines`
+--
+
+INSERT INTO `child_note_for_fd_nines` (`id`, `p_note_for_fd_nine_id`, `serial_number`, `description`, `admin_id`, `receiver_id`, `sent_status`, `created_at`, `updated_at`) VALUES
+(8, 2, '0', '<p>for test</p>', '5', '2', '1', '2024-01-17 19:57:11', '2024-01-18 01:57:46');
+
 -- --------------------------------------------------------
 
 --
@@ -296,6 +303,13 @@ CREATE TABLE `child_note_for_name_changes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `child_note_for_name_changes`
+--
+
+INSERT INTO `child_note_for_name_changes` (`id`, `parentnote_name_change_id`, `serial_number`, `description`, `admin_id`, `receiver_id`, `sent_status`, `created_at`, `updated_at`) VALUES
+(4, 10, '0', '<p>for test</p>', '5', '2', '1', '2024-01-18 06:17:20', '2024-01-18 00:19:41');
+
 -- --------------------------------------------------------
 
 --
@@ -314,17 +328,6 @@ CREATE TABLE `child_note_for_registrations` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `child_note_for_registrations`
---
-
-INSERT INTO `child_note_for_registrations` (`id`, `parent_note_regid`, `serial_number`, `description`, `admin_id`, `receiver_id`, `sent_status`, `created_at`, `updated_at`) VALUES
-(24, 16, '0', '<p>yuytuytu</p>', '5', '2', '1', '2024-01-01 04:55:29', '2024-01-01 00:30:13'),
-(25, 16, '0', '<p>dfsdfsdfdfd</p>', '2', NULL, NULL, '2024-01-01 06:31:15', '2024-01-01 00:31:15'),
-(26, 17, '0', '<p>fjughjhjww</p>', '5', NULL, NULL, '2023-12-31 19:13:54', '2024-01-01 03:43:02'),
-(27, 16, '0', '<p>bnmnmn</p>', '2', '5', '1', '2023-12-31 21:57:02', '2024-01-01 03:58:18'),
-(28, 16, '0', '<p>hhh</p>', '5', NULL, NULL, '2024-01-02 05:28:56', '2024-01-01 23:28:56');
-
 -- --------------------------------------------------------
 
 --
@@ -342,13 +345,6 @@ CREATE TABLE `child_note_for_renews` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `child_note_for_renews`
---
-
-INSERT INTO `child_note_for_renews` (`id`, `parent_note_for_renew_id`, `serial_number`, `description`, `admin_id`, `receiver_id`, `sent_status`, `created_at`, `updated_at`) VALUES
-(24, 14, '0', '<p>gfhfgytytrytry <a href=\"http://localhost/databaseUpdate/potroOnuUpdate/admin/renewalFileDownload/committee_members_list/28\">gfdg</a></p>', '5', '2', '1', '2023-12-31 22:52:33', '2024-01-02 04:36:49');
 
 -- --------------------------------------------------------
 
@@ -2476,13 +2472,18 @@ CREATE TABLE `dak_details` (
 --
 
 INSERT INTO `dak_details` (`id`, `sender_id`, `decision_list`, `decision_list_detail`, `priority_list`, `secret_list`, `status`, `comment`, `main_file`, `access_id`, `created_at`, `updated_at`) VALUES
-(53, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'registration', 'iuiu', 'uploads/DakDocument/2023-26-1217035667246132724830.pdf', '26', '2023-12-25 22:58:44', '2023-12-25 22:58:44'),
-(54, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'বিশেষ গোপনীয়', 'registration', NULL, NULL, '26', '2023-12-25 22:59:10', '2023-12-25 22:59:10'),
-(55, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'registration', 'werwer', 'uploads/DakDocument/2023-26-1217035692154699175157.pdf', '27', '2023-12-25 23:40:15', '2023-12-25 23:40:15'),
-(56, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'registration', 'iuiu', 'uploads/DakDocument/2023-30-1217039289346878192230.pdf', '36', '2023-12-30 03:35:34', '2023-12-30 03:35:34'),
-(57, '3', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'বিশেষ গোপনীয়', 'registration', 'iuiu', 'uploads/DakDocument/2023-31-1217040026793439239382.pdf', '36', '2023-12-31 00:04:40', '2023-12-31 00:04:40'),
-(58, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'registration', 'iuiu', 'uploads/DakDocument/2024-01-0117040931692441236288.pdf', '35', '2024-01-01 01:12:49', '2024-01-01 01:12:49'),
-(59, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'renew', 'iuiu', 'uploads/DakDocument/2024-01-0117041061864987309375.pdf', '17', '2024-01-01 04:49:46', '2024-01-01 04:49:46');
+(60, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'বিশেষ গোপনীয়', 'registration', 'iuiu', 'uploads/DakDocument/2024-16-0117054017011628715286.pdf', '40', '2024-01-16 04:41:41', '2024-01-16 04:41:41'),
+(61, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'renew', 'iuiu', 'uploads/DakDocument/2024-16-0117054018153368067855.pdf', '26', '2024-01-16 04:43:35', '2024-01-16 04:43:35'),
+(62, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'nameChange', 'iuiu', 'uploads/DakDocument/2024-17-0117054709439673178867.pdf', '23', '2024-01-16 23:55:43', '2024-01-16 23:55:43'),
+(63, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fdNine', 'iuiu', 'uploads/DakDocument/2024-17-0117054709863115833930.pdf', '7', '2024-01-16 23:56:26', '2024-01-16 23:56:26'),
+(64, '2', 'নথিতে উপস্থাপন করুন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fdNineOne', 'iuiu', 'uploads/DakDocument/2024-17-0117054710246632021402.pdf', '8', '2024-01-16 23:57:04', '2024-01-16 23:57:04'),
+(65, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'বিশেষ গোপনীয়', 'fdSix', 'iuiu', 'uploads/DakDocument/2024-17-0117054781254522279979.pdf', '4', '2024-01-17 01:55:25', '2024-01-17 01:55:25'),
+(66, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fdSeven', 'iuiu', 'uploads/DakDocument/2024-17-0117054805255024770818.pdf', '4', '2024-01-17 02:35:25', '2024-01-17 02:35:25'),
+(67, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fcOne', 'werwer', 'uploads/DakDocument/2024-17-0117054805774225772992.pdf', '5', '2024-01-17 02:36:17', '2024-01-17 02:36:17'),
+(68, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'গোপনীয়', 'fcTwo', 'iuiu', 'uploads/DakDocument/2024-17-0117054806222227238562.pdf', '5', '2024-01-17 02:37:02', '2024-01-17 02:37:02'),
+(69, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fdThree', 'iuiu', 'uploads/DakDocument/2024-17-0117054807638123642693.pdf', '6', '2024-01-17 02:39:23', '2024-01-17 02:39:23'),
+(70, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fdNine', 'iuiu', 'uploads/DakDocument/2024-17-0117054812412667153916.pdf', '7', '2024-01-17 02:47:21', '2024-01-17 02:47:21'),
+(71, '2', 'বিধি মোতাবেক ব্যবস্থা নিন', NULL, 'সর্বোচ্চ  অগ্রাধিকার', 'অতি গোপনীয়', 'fdNineOne', 'werwer', 'uploads/DakDocument/2024-17-0117054813325483064139.pdf', '8', '2024-01-17 02:48:52', '2024-01-17 02:48:52');
 
 -- --------------------------------------------------------
 
@@ -2673,7 +2674,7 @@ CREATE TABLE `fc1_forms` (
 --
 
 INSERT INTO `fc1_forms` (`id`, `fd_one_form_id`, `verified_fc_one_form`, `ngo_name`, `ngo_address`, `ngo_telephone_number`, `ngo_mobile_number`, `ngo_email`, `ngo_website`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `ngo_district`, `ngo_sub_district`, `total_number_of_beneficiaries`, `foreigner_donor_full_name`, `foreigner_donor_occupation`, `foreigner_donor_address`, `foreigner_donor_telephone_number`, `foreigner_donor_fax`, `foreigner_donor_email`, `foreigner_donor_nationality`, `foreigner_donor_is_verified`, `foreigner_donor_is_affiliatedrict`, `organization_name`, `organization_address`, `organization_telephone_number`, `organization_email`, `organization_fax`, `organization_website`, `organization_is_verified`, `organization_ceo_name`, `organization_ceo_designation`, `organization_name_of_executive_responsible_for_bd`, `organization_name_of_executive_responsible_for_bd_designation`, `objectives_of_the_organization`, `relation_with_donor`, `organization_letter_of_commitment`, `organization_name_of_the_job_amount_of_money_and_duration_pdf`, `organization_amount_of_foreign_currency`, `equivalent_amount_of_bd_taka`, `commodities_value_in_bangladeshi_currency`, `bank_name`, `bank_address`, `bank_account_name`, `bank_account_number`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(4, 48, 'uploads/FcOneForm/2023-28-1217037564366801798316.pdf', 'নতুন নাম নতুন লোকাল এনজিও', 'tyuty', '2342343', '01646735100', 'kkajol428@gmail.com', 'www.go.com', '2023-12-28', '2023-12-20', '546', '456', '6456', '54654', '456', '54645', '54645', '45645', 'kk@gmail.com', 'werwer', 'werwer', 'werwe', 'utyutyu', 'tyuty', 'erwerwe', 'k@gmal.com', 'w5345', 'ww.sdasdsa.com', 'wewq', 'wewq', 'qweqw', 'wqeqw', 'qweqw', 'qwewq', 'wqewq', 'হ্যাঁ', 'uploads/FcOneForm/2023-28-1217037564363567763161.pdf', '23423', '1234324', '23234', '23432', '234234', '23432', '234234', 'Ongoing', NULL, '2023-12-28 03:40:36', '2023-12-28 03:40:36');
+(5, 67, 'uploads/FcOneForm/2024-16-0117053939037129044245.pdf', 'Woodard Rasmussen Traders', 'Espinoza and Everett Co', '+1 (878) 436-2357', '55111111111', 'lomisyxiv@mailinator.com', 'Robin Ball', '2024-01-01', '2024-01-01', '546', 'Aut dolorem quae nul', '3453453', 'Harper Dixon', 'Ipsam quia minima vo', 'Aut optio dolore pl', '+1 (695) 885-1851', '+1 (897) 968-1594', 'kk@gmail.com', 'Voluptatem pariatur', 'Neque culpa exercita', 'werwe', 'Woodard Rasmussen Traders', 'Fields Webb Associates', 'erwerwe', 'k@gmal.com', 'w5345', 'ww.sdasdsa.com', 'Anthony Graham Traders', 'Weeks Vega Traders', 'Obrien Camacho Co', 'Parks Butler Associates', 'Peters and Woods LLC', 'Cooper Wright Associates', 'wqewq', 'হ্যাঁ', 'uploads/FcOneForm/2024-16-0117053939033353363771.pdf', '4543543', '345345', '34534543', '34534', '345345', '43534', '4334', 'Ongoing', NULL, '2024-01-16 02:31:43', '2024-01-16 02:40:27');
 
 -- --------------------------------------------------------
 
@@ -2744,7 +2745,7 @@ CREATE TABLE `fc2_forms` (
 --
 
 INSERT INTO `fc2_forms` (`id`, `fd_one_form_id`, `verified_fc_two_form`, `person_full_name`, `person_father_name`, `person_mother_name`, `person_occupation`, `person_nid`, `person_passport`, `person_tin`, `person_nationality`, `person_full_address`, `person_tele_phone_number`, `person_mobile`, `person_email`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `ngo_district`, `ngo_sub_district`, `total_number_of_beneficiaries`, `foreigner_donor_full_name`, `foreigner_donor_occupation`, `foreigner_donor_address`, `foreigner_donor_telephone_number`, `foreigner_donor_fax`, `foreigner_donor_email`, `foreigner_donor_nationality`, `foreigner_donor_is_verified`, `foreigner_donor_is_affiliatedrict`, `organization_name`, `organization_address`, `organization_telephone_number`, `organization_email`, `organization_website`, `organization_is_verified`, `organization_ceo_name`, `organization_ceo_designation`, `organization_name_of_executive_responsible_for_bd`, `organization_name_of_executive_responsible_for_bd_designation`, `objectives_of_the_organization`, `relation_with_donor`, `organization_fax`, `organization_letter_of_commitment`, `organization_name_of_the_job_amount_of_money_and_duration_pdf`, `organization_amount_of_foreign_currency`, `equivalent_amount_of_bd_taka`, `commodities_value_in_bangladeshi_currency`, `bank_name`, `bank_address`, `bank_account_name`, `bank_account_number`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(4, 48, 'uploads/FcOneForm/2023-28-1217037566977554947794.pdf', 'Kibo Hatfield', 'Patrick Leach', 'Jakeem Arnold', 'Sequi dolorem qui te', 'Hic culpa illum occ', 'Quasi autem eum temp', 'Dolore irure et dese', 'Distinctio Modi ver', 'Numquam et dolorem v', '+1 (652) 935-5102', '55111111111', 'fewosogax@mailinator.com', '16-Mar-2011', '26-Sep-1993', 'Dolor eveniet paria', 'Sunt duis quia digni', '528', 'Abel Forbes', 'Rerum qui vitae quia', 'Qui aut excepteur do', '+1 (852) 758-4987', '+1 (825) 321-5713', 'pesi@mailinator.com', 'Voluptatem pariatur', 'Veniam reprehenderi', 'Veniam pariatur Si', 'Morrow and Woodward Inc', 'Moon Russo Traders', 'Goff and Dennis Co', 'sozipixe@mailinator.com', 'Key and Combs Inc', 'Mccoy Howard Trading', 'Mejia and Schneider Inc', 'Wilcox Mccarty Traders', 'Mcclain Patterson LLC', 'Johns Mckinney Co', 'Holder Sharp Trading', 'Amet labore aut eos', 'Stokes and Campbell Associates', 'হ্যাঁ', NULL, '79', '74', '11', 'Kaseem Forbes', 'Exercitationem excep', 'Quamar Wood', '851', 'Ongoing', NULL, '2023-12-28 03:44:57', '2023-12-28 03:44:57');
+(5, 67, 'uploads/FcOneForm/2024-16-0117053972094441675361.pdf', 'Cynthia Murray', 'Jameson Tanner', 'Germane Stark', 'Numquam eos magna q', 'Labore sunt deserunt', 'Quos velit modi null', 'Labore error qui Nam', 'Dolorem ipsam deseru', 'Sed sed dolore adipi', '+1 (479) 539-8038', '11111111111', 'nygizeko@mailinator.com', '2024-01-15', '2024-01-22', '546', '456', '456', '54654', 'Ipsam quia minima vo', '54645', '54645', '+1 (897) 968-1594', 'pesi@mailinator.com', 'Facilis tenetur alia', 'werwer', 'In qui nisi ducimus', 'utyutyu', 'tyuty', 'Goff and Dennis Co', 'k@gmal.com', 'ww.sdasdsa.com', 'Anthony Graham Traders', 'Bullock Richardson Trading', 'Wilcox Mccarty Traders', 'Parks Butler Associates', 'Peters and Woods LLC', 'Sims and Lyons LLC', 'Dolor velit excepte', 'Stokes and Campbell Associates', 'হ্যাঁ', 'uploads/FcOneForm/2024-16-0117053968592922001559.pdf', '54', '45654', '54645', '23432', 'wewqe', 'Quamar Wood', '234234', 'Ongoing', NULL, '2024-01-16 03:20:59', '2024-01-16 03:26:49');
 
 -- --------------------------------------------------------
 
@@ -2768,6 +2769,13 @@ CREATE TABLE `fc_one_daks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fc_one_daks`
+--
+
+INSERT INTO `fc_one_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fc_one_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(2, '2', '5', '5', '1', '', '', '', '67', '1', NULL, '0', '2024-01-17 02:36:05', '2024-01-17 02:36:17');
 
 -- --------------------------------------------------------
 
@@ -2809,6 +2817,13 @@ CREATE TABLE `fc_two_daks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fc_two_daks`
+--
+
+INSERT INTO `fc_two_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fc_two_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(1, '2', '5', '5', '1', '', '', '', '68', '1', NULL, '0', '2024-01-17 02:36:43', '2024-01-17 02:37:02');
 
 -- --------------------------------------------------------
 
@@ -2907,7 +2922,7 @@ CREATE TABLE `fd2_fd7_other_infos` (
 --
 
 INSERT INTO `fd2_fd7_other_infos` (`id`, `fd2_form_for_fd7_form_id`, `file_name`, `file`, `created_at`, `updated_at`) VALUES
-(3, 5, '645645', 'uploads/Fd2FormOtherInfo/2023-28-1217037563396373558442.pdf', '2023-12-28 03:38:59', '2023-12-28 03:38:59');
+(4, 6, '45654', 'uploads/Fd2FormOtherInfo/2024-16-0117053918933715768630.pdf', '2024-01-16 01:58:13', '2024-01-16 01:58:13');
 
 -- --------------------------------------------------------
 
@@ -2938,7 +2953,7 @@ CREATE TABLE `fd2_forms` (
 --
 
 INSERT INTO `fd2_forms` (`id`, `fd_one_form_id`, `fd_six_form_id`, `ngo_name`, `ngo_address`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `proposed_rebate_amount_bangladeshi_taka`, `proposed_rebate_amount_in_foreign_currency`, `fd_2_form_pdf`, `status`, `created_at`, `updated_at`) VALUES
-(3, 48, 'Mw==', 'Elizabeth Rhodes', 'Cupiditate labore qu', 'Laura Joseph', 'Eiusmod qui at asper', '04-Oct-1982', '25-Mar-1999', '54654', '54654', 'uploads/FdTwoForm/2023-28-1217037562204566361512.pdf', 'Ongoing', '2023-12-28 03:37:00', '2023-12-28 03:37:00');
+(4, 67, 'NA==', 'Warren and Noel Inc', 'Espinoza and Everett Co', 'Laura Joseph', 'Eiusmod qui at asper', '2024-01-01', '2024-01-08', '54654', '54654', 'uploads/FdTwoForm/2024-16-0117053886679548858389.pdf', 'Ongoing', '2024-01-16 01:04:27', '2024-01-16 01:04:27');
 
 -- --------------------------------------------------------
 
@@ -2970,7 +2985,7 @@ CREATE TABLE `fd2_form_for_fc1_forms` (
 --
 
 INSERT INTO `fd2_form_for_fc1_forms` (`id`, `fd_one_form_id`, `fc1_form_id`, `ngo_name`, `ngo_address`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `proposed_rebate_amount_bangladeshi_taka`, `proposed_rebate_amount_in_foreign_currency`, `fd_2_form_pdf`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(3, 48, 4, 'নতুন নাম নতুন লোকাল এনজিও', 'tyuty', 'Laura Joseph', 'Eiusmod qui at asper', '2023-12-28', '2023-12-20', '54654', '54654', 'uploads/FdTwoForm/2023-28-1217037564545768306443.pdf', 'Ongoing', NULL, '2023-12-28 03:40:54', '2023-12-28 03:40:54');
+(4, 67, 5, 'Warren and Noel Inc', 'Espinoza and Everett Co', 'Laura Joseph', '546456', '2024-01-01', '2024-01-01', '54654', '54654', 'uploads/FdTwoForm/2024-16-0117053943867943679439.pdf', 'Ongoing', NULL, '2024-01-16 02:39:46', '2024-01-16 02:39:46');
 
 -- --------------------------------------------------------
 
@@ -3002,7 +3017,7 @@ CREATE TABLE `fd2_form_for_fc2_forms` (
 --
 
 INSERT INTO `fd2_form_for_fc2_forms` (`id`, `fd_one_form_id`, `fc2_form_id`, `ngo_name`, `ngo_address`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `proposed_rebate_amount_bangladeshi_taka`, `proposed_rebate_amount_in_foreign_currency`, `fd_2_form_pdf`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(4, 48, 4, 'Elizabeth Rhodes', 'Cupiditate labore qu', 'Laura Joseph', 'Eiusmod qui at asper', '16-Mar-2011', '26-Sep-1993', '54654', '54654', 'uploads/FdTwoForm/2023-28-1217037567188831040385.pdf', 'Ongoing', NULL, '2023-12-28 03:45:18', '2023-12-28 03:45:18');
+(5, 67, 5, 'Elizabeth Rhodes', 'Cupiditate labore qu', 'Laura Joseph', 'Eiusmod qui at asper', '2024-01-15', '2024-01-22', '54654', '54654', 'uploads/FdTwoForm/2024-16-0117053981621209110431.pdf', 'Ongoing', NULL, '2024-01-16 03:42:42', '2024-01-16 03:42:42');
 
 -- --------------------------------------------------------
 
@@ -3034,7 +3049,7 @@ CREATE TABLE `fd2_form_for_fd3_forms` (
 --
 
 INSERT INTO `fd2_form_for_fd3_forms` (`id`, `fd_one_form_id`, `fd3_form_id`, `ngo_name`, `ngo_address`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `proposed_rebate_amount_bangladeshi_taka`, `proposed_rebate_amount_in_foreign_currency`, `fd_2_form_pdf`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(5, 48, 5, 'Jordan Duran', 'Suscipit consequat', 'Shaeleigh Hess', 'Voluptatem reprehend', '17-Oct-2009', '03-Jan-1991', 'Elit in blanditiis', 'Expedita rerum paria', 'uploads/FdTwoForm/2023-28-1217037567825509484680.pdf', 'Ongoing', NULL, '2023-12-28 03:46:22', '2023-12-28 03:46:22');
+(6, 67, 6, 'Warren and Noel Inc', 'Espinoza and Everett Co', 'Laura Joseph', 'Eiusmod qui at asper', '2024-01-01', '2024-01-01', '54654', '54654', 'uploads/FdTwoForm/2024-16-0117053992691324846414.pdf', 'Ongoing', NULL, '2024-01-16 04:01:09', '2024-01-16 04:01:09');
 
 -- --------------------------------------------------------
 
@@ -3066,7 +3081,7 @@ CREATE TABLE `fd2_form_for_fd7_forms` (
 --
 
 INSERT INTO `fd2_form_for_fd7_forms` (`id`, `fd_one_form_id`, `fd7_form_id`, `ngo_name`, `ngo_address`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `proposed_rebate_amount_bangladeshi_taka`, `proposed_rebate_amount_in_foreign_currency`, `fd_2_form_pdf`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(5, 48, 3, 'নতুন নাম নতুন লোকাল এনজিও', 'tyuty', 'Laura Joseph', '546456', '2023-12-22', '2023-12-12', '564565', '5465', 'uploads/FdTwoForm/2023-28-1217037563394329313229.pdf', 'Ongoing', NULL, '2023-12-28 03:38:59', '2023-12-28 03:38:59');
+(6, 67, 4, 'Warren and Noel Inc', 'Espinoza and Everett Co', 'Laura Joseph', '546456', '2024-01-01', '2024-01-01', '54654', '54654', 'uploads/FdTwoForm/2024-16-0117053918933965931878.pdf', 'Ongoing', NULL, '2024-01-16 01:58:13', '2024-01-16 01:58:13');
 
 -- --------------------------------------------------------
 
@@ -3082,13 +3097,6 @@ CREATE TABLE `fd2_form_other_infos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `fd2_form_other_infos`
---
-
-INSERT INTO `fd2_form_other_infos` (`id`, `fd2_form_id`, `file_name`, `file`, `created_at`, `updated_at`) VALUES
-(2, 3, '45654', 'uploads/Fd2FormOtherInfo/2023-28-1217037562209920673423.pdf', '2023-12-28 03:37:00', '2023-12-28 03:37:00');
 
 -- --------------------------------------------------------
 
@@ -3157,7 +3165,7 @@ CREATE TABLE `fd3_forms` (
 --
 
 INSERT INTO `fd3_forms` (`id`, `fd_one_form_id`, `verified_fd_three_form`, `ngo_name`, `ngo_address`, `ngo_registration_number`, `ngo_registration_date`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `project_approval_exemption_letter_memo_number`, `project_approval_exemption_letter_date`, `exemption_amount_in_previous_year`, `money_received_in_the_previous_year`, `date_of_payment`, `type_of_foreign_grant`, `foreign_grant_amount`, `local_grant_amount`, `description_and_price_of_goods`, `foreigner_donor_full_name`, `foreigner_donor_occupation`, `foreigner_donor_address`, `foreigner_donor_telephone_number`, `foreigner_donor_fax`, `foreigner_donor_email`, `foreigner_donor_nationality`, `foreigner_donor_is_verified`, `foreigner_donor_is_affiliatedrict`, `organization_name`, `organization_address`, `organization_telephone_number`, `organization_fax`, `organization_email`, `organization_website`, `organization_is_verified`, `relation_with_donor`, `organization_ceo_name`, `organization_ceo_designation`, `organization_senior_officer_name_one`, `organization_senior_officer_designation_one`, `organization_senior_officer_name_two`, `organization_senior_officer_designation_two`, `organization_name_of_executive_responsible_for_bd`, `organization_name_of_executive_responsible_for_bd_designation`, `objectives_of_the_organization`, `communication_between_NGO_and_donor`, `bank_name`, `bank_address`, `bank_account_name`, `bank_account_number`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(5, 48, 'uploads/FdThreeForm/2023-28-1217037567665342868275.pdf', 'Callie Rojas', 'Nostrud sed quasi vo', '29', '17-Jun-1978', 'Tate Wade', 'Laborum Qui volupta', '219', '13-Jan-2012', '2002', '1981', '16-Feb-1998', 'বহুবর্ষী', 'Cupiditate ea qui vo', 'Repudiandae et autem', '720', 'Galvin Velez', 'Ex laborum Rem rati', 'Consequatur Vero oc', '+1 (303) 234-6796', '+1 (439) 423-6858', 'rowywupu@mailinator.com', 'Enim distinctio Qui', 'Illo pariatur Facil', 'Officia inventore pa', 'Ashley Rodriguez Traders', 'Mcintosh and Curry Associates', 'Klein and Moran Co', 'Cline Ellison LLC', 'nifu@mailinator.com', 'Willis Church Co', 'Mcneil and Lambert Associates', 'Culpa velit sint vol', 'Spence Fletcher Co', 'Wright and Hunt LLC', 'Jennings Griffin Inc', 'Jensen Johns Co', 'Powell Watts Associates', 'Noel and Miranda Trading', 'Carson and Horne Plc', 'Sullivan Gay Inc', 'Sanders Diaz Traders', 'Nam consequatur eli', 'Nina Quinn', 'Ut tempore quae vol', 'Zane Hickman', '533', 'Ongoing', NULL, '2023-12-28 03:46:06', '2023-12-28 03:46:06');
+(6, 67, 'uploads/FdThreeForm/2024-16-0117053987426674835558.pdf', 'Warren and Noel Inc', 'Espinoza and Everett Co', '28122023', '15-01-2024', 'Laura Joseph', 'Eiusmod qui at asper', '219', '2024-01-01', '2002', '1981', '1981', 'এককালীন', 'Cupiditate ea qui vo', 'Repudiandae et autem', '720', '54654', 'Ipsam quia minima vo', '54645', '54645', '+1 (897) 968-1594', 'pesi@mailinator.com', 'Iure labore laudanti', 'werwer', 'werwe', 'utyutyu', 'tyuty', 'erwerwe', 'w5345', 'mofytu@mailinator.com', 'ww.sdasdsa.com', 'Anthony Graham Traders', 'Amet labore aut eos', 'Mejia and Schneider Inc', 'Wilcox Mccarty Traders', 'Jennings Griffin Inc', 'Jensen Johns Co', 'Powell Watts Associates', 'Noel and Miranda Trading', 'Hays and Woods Co', 'Johns Mckinney Co', 'Sims and Lyons LLC', 'Nam consequatur eli', 'Alisa Richard', 'rtyrt', 'Quamar Wood', '234234', 'Ongoing', NULL, '2024-01-16 03:52:22', '2024-01-16 03:53:09');
 
 -- --------------------------------------------------------
 
@@ -3239,7 +3247,7 @@ CREATE TABLE `fd6_forms` (
 --
 
 INSERT INTO `fd6_forms` (`id`, `fd_one_form_id`, `ngo_name`, `ngo_registration_date`, `ngo_last_renew_date`, `ngo_expiration_date`, `ngo_address`, `ngo_telephone_number`, `ngo_mobile_number`, `ngo_email_address`, `ngo_website`, `ngo_prokolpo_name`, `ngo_prokolpo_duration`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `grants_received_from_abroad_first_year`, `grants_received_from_abroad_second_year`, `grants_received_from_abroad_third_year`, `grants_received_from_abroad_fourth_year`, `grants_received_from_abroad_fifth_year`, `grants_received_from_abroad_total`, `grants_received_from_abroad_comment`, `donations_made_by_foreign_donors_first_year`, `donations_made_by_foreign_donors_second_year`, `donations_made_by_foreign_donors_third_year`, `donations_made_by_foreign_donors_fourth_year`, `donations_made_by_foreign_donors_fifth_year`, `donations_made_by_foreign_donors_total`, `donations_made_by_foreign_donors_comment`, `local_grants_first_year`, `local_grants_second_year`, `local_grants_third_year`, `local_grants_fourth_year`, `local_grants_fifth_year`, `local_grants_donors_total`, `local_grants_donors_comment`, `total_first_year`, `total_second_year`, `total_third_year`, `total_fourth_year`, `total_fifth_year`, `total_donors_total`, `total_donors_comment`, `donor_organization_name`, `donor_organization_address`, `donor_organization_phone_mobile_email`, `donor_organization_website`, `money_laundering_and_terrorist_financing`, `project_cost`, `project_cost_ratio`, `administrative_cost`, `administrative_ratio`, `project_and_administrative_cost`, `project_and_administrative_cost_ratio`, `project_name`, `duration_of_project`, `total_allocation_of_project`, `total_allocation_in_project_area`, `total_beneficiaries`, `total_population_in_project_area`, `donor_organization_name_two`, `project_proposal_form`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(3, 48, 'Elizabeth Rhodes', '15-May-1985', '17-Jul-1997', '02-Sep-1990', 'Cupiditate labore qu', '+1 (254) 473-2416', '40733333333', 'poruso@mailinator.com', 'https://www.buraz.me.uk', 'Laura Joseph', 'Eiusmod qui at asper', '04-Oct-1982', '25-Mar-1999', '1983', '2008', '1977', '1984', '1997', 'Laborum tempor qui i', 'Nulla voluptatem ab', '1970', '1982', '2014', '1999', '2005', 'Quidem maxime anim d', 'Quis sit labore lor', '2003', '1979', '1975', '2010', '1981', 'Molestias eos qui et', 'Est placeat adipisi', '1986', '1997', '2008', '2011', '1992', 'Amet quidem sit occ', 'Quia ut nostrum quos', 'Nicholson Golden Inc', 'Sargent and Caldwell Inc', 'juke@mailinator.com', 'Castaneda and Burnett Associates', 'Quo ea officia quibu', 'Velit molestias id l', 'Et ullamco quibusdam', 'Dolorem quaerat cons', 'Autem dolor debitis', 'Labore dolor modi ve', 'Nobis et impedit qu', 'Ashton Brady', 'Corrupti quisquam v', 'Quisquam cumque elit', 'Molestiae consequat', 'Est dolor error quis', 'Vero ipsa voluptate', 'Bridges Stevens LLC', 'uploads/FdSixForm/2023-28-1217037561927672572922.pdf', 'Ongoing', NULL, '2023-12-28 03:36:32', '2023-12-28 03:36:32');
+(4, 67, 'Warren and Noel Inc', '15-01-2024', '15-01-2024', '15-01-2034', 'Espinoza and Everett Co', '+1 (878) 436-2357', '55111111111', 'lomisyxiv@mailinator.com', 'Robin Ball', 'Laura Joseph', 'Eiusmod qui at asper', '2024-01-01', '2024-01-08', '1983', '2008', '1977', '1984', '1997', '333', 'Nulla voluptatem ab', '1970', '1982', '2014', '1999', '2005', '333333', 'Quis sit labore lor', '2003', '1979', '1975', '2010', '1981', '3333', 'Est placeat adipisi', '1986', '1997', '2008', '2011', '1992', '23423', 'Quia ut nostrum quos', 'Nicholson Golden Inc', 'Sargent and Caldwell Inc', '01646735100', 'ww.ffff.com', 'Quo ea officia quibu', '234234', '3', '2342343', '3', '23423423', '234', 'Laura Joseph', 'Eiusmod qui at asper', '234234', '234234', '23423', '234234', 'Nicholson Golden Inc', 'uploads/FdSixForm/2024-16-0117053879467868281727.pdf', 'Ongoing', NULL, '2024-01-16 00:52:26', '2024-01-16 00:52:26');
 
 -- --------------------------------------------------------
 
@@ -3266,7 +3274,7 @@ CREATE TABLE `fd6_form_prokolpo_areas` (
 --
 
 INSERT INTO `fd6_form_prokolpo_areas` (`id`, `fd6_form_id`, `division_name`, `district_name`, `city_corparation_name`, `upozila_name`, `thana_name`, `municipality_name`, `ward_name`, `created_at`, `updated_at`) VALUES
-(3, 3, 'চট্টগ্রাম', 'কক্সবাজার', 'কুমিল্লা সিটি কর্পোরেশন', 'Tyrone Atkinson', 'Carol Mcpherson', 'Keegan Mclaughlin', 'Wayne Johnston', '2023-12-28 03:36:32', '2023-12-28 03:36:32');
+(6, 4, 'খুলনা', 'বাগেরহাট', 'খুলনা সিটি কর্পোরেশন', 'Tyrone Atkinson', 'Carol Mcpherson', 'Keegan Mclaughlin', 'Wayne Johnston', '2024-01-16 01:09:57', '2024-01-16 01:09:57');
 
 -- --------------------------------------------------------
 
@@ -3311,7 +3319,7 @@ CREATE TABLE `fd7_forms` (
 --
 
 INSERT INTO `fd7_forms` (`id`, `fd_one_form_id`, `ngo_name`, `ngo_address`, `ngo_registration_number`, `ngo_registration_date`, `ngo_prokolpo_name`, `donor_organization_description`, `donor_organization_chief_type`, `donor_organization_chief_name`, `donor_organization_name`, `donor_organization_address`, `donor_organization_phone`, `donor_organization_email`, `donor_organization_website`, `ongoing_prokolpo_name`, `total_prokolpo_cost`, `date_of_bureau_approval`, `bureau_approval_pdf`, `percentage_of_the_original_project`, `adverse_impact_on_the_ongoing_project`, `letter_from_donor_agency_pdf`, `ngo_prokolpo_start_date`, `ngo_prokolpo_end_date`, `relief_assistance_project_proposal_pdf`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(3, 48, 'নতুন নাম নতুন লোকাল এনজিও', 'tyuty', '28122023', '28-12-2023', 'Laura Joseph', '556', 'প্রধান নির্বাহী কর্মকর্তা', '54645', '45645', '45645', '1111111111', 'k@gmail.com', 'ww.ffff.com', 'ewqew', '765765', '2023-12-27', 'uploads/FdSevenForm/2023-28-1217037563218992575129.pdf', '546565', '45645', 'uploads/FdSevenForm/2023-28-1217037563212146191022.pdf', '2023-12-22', '2023-12-12', 'uploads/FdSevenForm/2023-28-1217037563219624662103.pdf', 'Ongoing', NULL, '2023-12-28 03:38:41', '2023-12-28 03:38:41');
+(4, 67, 'Warren and Noel Inc', 'Espinoza and Everett Co', '28122023', '15-01-2024', 'Laura Joseph', '556', 'প্রধান নির্বাহী কর্মকর্তা', '54645', 'Nicholson Golden Inc', 'Sargent and Caldwell Inc', '456456456456', 'k@gmail.com', 'ww.ffff.com', 'ewqew', '765765', '2023-12-13', 'uploads/FdSevenForm/2024-16-0117053914942865401715.pdf', '546565', '45645', 'uploads/FdSevenForm/2024-16-0117053914943609648843.pdf', '2024-01-01', '2024-01-01', 'uploads/FdSevenForm/2024-16-0117053914947637622229.pdf', 'Ongoing', NULL, '2024-01-16 01:51:34', '2024-01-16 01:51:34');
 
 -- --------------------------------------------------------
 
@@ -3340,7 +3348,7 @@ CREATE TABLE `fd7_form_prokolpo_areas` (
 --
 
 INSERT INTO `fd7_form_prokolpo_areas` (`id`, `fd7_form_id`, `division_name`, `district_name`, `city_corparation_name`, `upozila_name`, `thana_name`, `municipality_name`, `ward_name`, `allocated_budget`, `number_of_beneficiaries`, `created_at`, `updated_at`) VALUES
-(8, 3, 'খুলনা', 'খুলনা', 'খুলনা সিটি কর্পোরেশন', 'Tyrone Atkinson', 'Carol Mcpherson', 'Keegan Mclaughlin', 'Wayne Johnston', '45645', '456', '2023-12-28 03:38:41', '2023-12-28 03:38:41');
+(9, 4, 'চট্টগ্রাম', 'কক্সবাজার', 'কুমিল্লা সিটি কর্পোরেশন', 'Tyrone Atkinson', 'Carol Mcpherson', NULL, 'Wayne Johnston', '55', '555', '2024-01-16 01:51:34', '2024-01-16 01:51:34');
 
 -- --------------------------------------------------------
 
@@ -3413,7 +3421,7 @@ CREATE TABLE `fd9_forms` (
 --
 
 INSERT INTO `fd9_forms` (`id`, `fd_one_form_id`, `fd9_foreigner_name`, `fd9_father_name`, `fd9_husband_or_wife_name`, `fd9_mother_name`, `fd9_birth_place`, `fd9_dob`, `fd9_passport_number`, `fd9_passport_issue_date`, `fd9_passport_expiration_date`, `fd9_identification_mark_given_in_passport`, `fd9_male_or_female`, `fd9_marital_status`, `fd9_nationality_or_citizenship`, `fd9_details_if_multiple_citizenships`, `fd9_previous_citizenship_is_grounds_for_non_retention`, `fd9_current_address`, `fd9_number_of_family_members`, `fd9_academic_qualification`, `fd9_technical_and_other_qualifications_if_any`, `fd9_past_experience`, `fd9_countries_that_have_traveled`, `fd9_offered_post`, `fd9_name_of_proposed_project`, `fd9_date_of_appointment`, `fd9_extension_date`, `fd9_post_available_for_foreigner_and_working`, `fd9_previous_work_experience_in_bangladesh`, `fd9_total_foreigner_working`, `fd9_other_information`, `fd9_foreigner_passport_size_photo`, `fd9_copy_of_passport`, `verified_fd_nine_form`, `chief_name`, `chief_desi`, `digital_signature`, `digital_seal`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(5, 48, 'dfhgf', 'ghfg', 'fghfgh', 'fghfg', 'fghgf', '2023-12-12', '54645', '2023-12-12', '2023-12-25', '456456', 'পুরুষ', '45645', '456456', '546456', '45645', '45645', '456546', 'uploads/fd9FormInfo/2023-28-1217037530399335522599.pdf', 'uploads/fd9FormInfo/2023-28-1217037530398136885340.pdf', 'uploads/fd9FormInfo/2023-28-1217037530395124702124.pdf', '45645', 'uploads/fd9FormInfo/2023-28-1217037530391347395299.pdf', 'uploads/fd9FormInfo/2023-28-1217037530391448629396.pdf', 'নতুন', '2023-12-20', '55', '45645', '45645', '54654', 'public/uploads/fd9FormInfo/2023-28-1217037530391730945766.png', 'uploads/fd9FormInfo/2023-28-1217037530399086041980.pdf', NULL, 'wewqeqw', 'qweqweqw', 'public/uploads/ngoHead/2023-28-1217037530395692132744.jpg', 'public/uploads/ngoHead/2023-28-1217037530398716708842.jpg', 'Ongoing', NULL, '2023-12-28 02:43:59', '2023-12-28 02:43:59');
+(7, 67, 'dfhgf', 'ghfg', 'fghfgh', 'fghfg', 'fghgf', '2024-01-02', '54645', '2023-12-08', '2023-12-07', '456456', 'পুরুষ', '45645', '456456', 'eqweqwe', 'qweqwew', '45645', '456546', 'uploads/fd9FormInfo/2024-16-0117053838219158611085.pdf', 'uploads/fd9FormInfo/2024-16-0117053838219279338945.pdf', 'uploads/fd9FormInfo/2024-16-0117053838212437506494.pdf', '45645', 'uploads/fd9FormInfo/2024-16-0117053838218096305015.pdf', 'uploads/fd9FormInfo/2024-16-0117053838214148323588.pdf', 'নতুন', '2024-01-02', '55', '45645', '45645', '54654', 'public/uploads/fd9FormInfo/2024-16-0117053838217061495720.PNG', 'uploads/fd9FormInfo/2024-16-0117053838216592917291.pdf', NULL, 'wewqeqw', 'প্রধান নির্বাহী', 'public/uploads/ngoHead/2024-16-0117053838213071250432.png', 'public/uploads/ngoHead/2024-16-0117053838219330895388.png', 'Ongoing', NULL, '2024-01-15 23:43:41', '2024-01-15 23:43:41');
 
 -- --------------------------------------------------------
 
@@ -3472,7 +3480,7 @@ CREATE TABLE `fd9_one_forms` (
 --
 
 INSERT INTO `fd9_one_forms` (`id`, `fd_one_form_id`, `foreigner_name_for_subject`, `sarok_number`, `application_date`, `institute_name`, `prokolpo_name`, `designation_name`, `foreigner_name_for_body`, `expire_from_date`, `expire_to_date`, `attestation_of_appointment_letter`, `copy_of_form_nine`, `foreigner_image`, `arrival_date_in_nvisa`, `copy_of_nvisa`, `proposed_from_date`, `proposed_to_date`, `verified_fd_nine_one_form`, `status`, `chief_name`, `chief_desi`, `place`, `digital_signature`, `digital_seal`, `comment`, `created_at`, `updated_at`) VALUES
-(7, 48, 'qwerwqer', 'werwe', '2023-12-21', 'নতুন নাম নতুন লোকাল এনজিও', 'werwe', 'werwer', 'werwe', '2023-12-21', '2023-12-06', 'uploads/fd9OneFormInfo/2023-28-1217037551563008894669.pdf', 'uploads/fd9OneFormInfo/2023-28-1217037551562601098762.pdf', 'public/uploads/fd9OneFormInfo/2023-28-1217037551563260643638.png', '2023-12-28', 'uploads/fd9OneFormInfo/2023-28-1217037551565620996221.pdf', '2023-12-13', '2023-12-21', NULL, NULL, 'wewqeqw', 'qweqweqw', '0', 'public/uploads/ngoHead/2023-28-1217037551561435087102.jpg', 'public/uploads/ngoHead/2023-28-1217037551561619837513.jpg', NULL, '2023-12-28 03:19:16', '2023-12-28 03:19:16');
+(8, 67, 'qwerwqer', 'werwe', '2024-01-01', 'Warren and Noel Inc', 'werwe', 'werwer', 'werwe', '2023-12-21', '2024-01-01', 'uploads/fd9OneFormInfo/2024-16-0117053854694307881885.pdf', 'uploads/fd9OneFormInfo/2024-16-0117053854697020895980.pdf', 'public/uploads/fd9OneFormInfo/2024-16-0117053854691382112028.PNG', '2024-01-01', 'uploads/fd9OneFormInfo/2024-16-0117053854692145159482.pdf', '2024-01-01', '2024-01-01', NULL, NULL, 'করিম আলী খান', 'প্রধান নির্বাহী', '0', 'public/uploads/ngoHead/2024-16-0117053854691430943080.png', 'public/uploads/ngoHead/2024-16-0117053854694472417420.png', NULL, '2024-01-16 00:11:09', '2024-01-16 00:11:09');
 
 -- --------------------------------------------------------
 
@@ -3491,6 +3499,13 @@ CREATE TABLE `fd_nine_office_saroks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fd_nine_office_saroks`
+--
+
+INSERT INTO `fd_nine_office_saroks` (`id`, `p_note_for_fd_nine_id`, `office_subject`, `office_sutro`, `description`, `extra_text`, `sarok_number`, `created_at`, `updated_at`) VALUES
+(1, 2, '<p>..............................dhgfh.................</p>', '<p>(যদি থাকে):...................fghfghfg............................</p>', '<p>fghfghfgh</p>', NULL, '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪</p>', '2024-01-17 19:57:22', '2024-01-18 01:57:46');
 
 -- --------------------------------------------------------
 
@@ -3531,11 +3546,8 @@ CREATE TABLE `fd_one_adviser_lists` (
 --
 
 INSERT INTO `fd_one_adviser_lists` (`id`, `fd_one_form_id`, `name`, `information`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(16, 48, 'xcvcx', 'qwewqewq', '15:00:12 pm', '2023-12-27 03:00:12', '2023-12-27 03:00:12'),
-(18, 52, 'ফাগডফাগ', 'হাফগজফগ', '11:47:13 am', '2023-12-29 23:47:13', '2023-12-29 23:47:13'),
-(19, 52, 'ডিফাগফ্ড', 'sdfsdfsdfsdf', '11:47:13 am', '2023-12-29 23:47:13', '2023-12-29 23:47:13'),
-(20, 53, 'wqewq', 'qwewqewq', '12:39:07 pm', '2023-12-30 00:39:07', '2023-12-30 00:39:07'),
-(21, 53, 'tyuty', 'qwewqewq', '12:39:07 pm', '2023-12-30 00:39:07', '2023-12-30 00:39:07');
+(27, 67, 'xcvcx', 'qwewqewq', '14:39:06 pm', '2024-01-15 02:39:07', '2024-01-15 02:39:07'),
+(28, 68, 'গফগ', 'হাফগজফগ', '16:21:30 pm', '2024-01-15 04:21:30', '2024-01-15 04:21:30');
 
 -- --------------------------------------------------------
 
@@ -3561,10 +3573,8 @@ CREATE TABLE `fd_one_bank_accounts` (
 --
 
 INSERT INTO `fd_one_bank_accounts` (`id`, `fd_one_form_id`, `account_number`, `account_type`, `name_of_bank`, `branch_name_of_bank`, `bank_address`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(42, 48, '456456', '4565', '456', 'rtyrt', 'rtyrt', '15:00:12 pm', '2023-12-27 03:00:12', '2023-12-27 03:00:12'),
-(45, 51, '456456', 'wewq', '456', '45645', '45654', '15:20:06 pm', '2023-12-27 03:20:06', '2023-12-27 03:20:06'),
-(46, 52, '456456', 'ডিপোজিট', 'বাংলা ব্যাংক', 'গুলশান ১', 'গুলশান ১', '11:47:13 am', '2023-12-28 04:37:50', '2023-12-29 23:47:13'),
-(47, 53, '456456', 'despo', 'gg b', 'ewrwe', 'werwer', '12:39:07 pm', '2023-12-30 00:39:07', '2023-12-30 00:39:07');
+(59, 67, 'rtyrty', 'ডিপোজিট', 'বাংলা ব্যাংক', 'গুলশান ১', 'rtyrt', '14:39:06 pm', '2024-01-15 02:39:06', '2024-01-15 02:39:06'),
+(60, 68, '456456', 'ডিপোজিট', 'qwwq', 'wqwq', '234234', '16:21:30 pm', '2024-01-15 04:21:30', '2024-01-15 04:21:30');
 
 -- --------------------------------------------------------
 
@@ -3627,10 +3637,8 @@ CREATE TABLE `fd_one_forms` (
 --
 
 INSERT INTO `fd_one_forms` (`id`, `user_id`, `registration_number`, `registration_number_given_by_admin`, `organization_name`, `organization_name_ban`, `organization_address`, `address_of_head_office`, `address_of_head_office_eng`, `country_of_origin`, `name_of_head_in_bd`, `job_type`, `address`, `district`, `phone`, `tele_phone_number`, `email`, `citizenship`, `profession`, `plan_of_operation`, `foregin_pdf`, `copy_of_chalan`, `due_vat_pdf`, `change_ac_number`, `local_address`, `annual_budget`, `annual_budget_file`, `treasury_number`, `attach_the__supporting_paper`, `vat_invoice_number`, `board_of_revenue_on_fees`, `time_for_api`, `org_phone`, `org_mobile`, `org_email`, `web_site_name`, `nationality`, `complete_status`, `verified_fd_one_form`, `verified_fd_eight_form_old`, `chief_name`, `chief_desi`, `digital_signature`, `digital_seal`, `place`, `created_at`, `updated_at`) VALUES
-(48, 72, '28122023', '8131261903113800', 'new name new local ngo', 'নতুন নাম নতুন লোকাল এনজিও', 'tyuty', 'tyuty', '234234', 'বাংলাদেশ', 'tyutyu', 'পূর্ণকালীন', 'tyutyu', 'ytryrty,fghghgf', '01646735100', '2342343', 'kkajol428@gmail.com', 'আলবেনিয়ান', 'yuiuyiyuiu', 'uploads/FdOneForm/2023-27-1217036675369417731955.pdf', NULL, '0', '0', '0', '0', '55555555', NULL, '456456', 'uploads/attach_the_supporting_papers/2023-27-1217036676124869111300.pdf', 'rtyrty', 'uploads/board_of_revenue_on_fees/2023-27-1217036676123111443745.pdf', '14:58:40', NULL, NULL, NULL, NULL, NULL, 'save_and_exit_from_three', NULL, '0', 'wewqeqw', 'qweqweqw', 'public/uploads/ngoHead/2023-27-1217036675201970586899.jpg', 'public/uploads/ngoHead/2023-27-1217036675202113584394.jpg', NULL, '2023-12-27 02:58:40', '2023-12-27 03:00:12'),
-(51, 75, '212', '3873781188307278', 'utyutyu', 'yutyu', 'tyuty', '23423', 'tyuty', 'Andorra', 'rtyrtyrt', 'Part Time', 'tyutyu', NULL, '01646735100', '2342343', 'kajolkamruzzaman.cse@gmail.com', 'Algerian', 'wewqe', NULL, 'uploads/FdOneForm/2023-27-1217036687187138868382.pdf', 'uploads/copy_of_chalan/2023-27-1217036688066972019107.pdf', 'uploads/due_vat_pdf/2023-27-1217036688064878692579.pdf', 'uploads/change_ac_number/2023-27-1217036688067327220299.pdf', '0', '55555555', 'uploads/FdOneForm/2023-27-1217036687184148819466.pdf', NULL, NULL, NULL, NULL, '15:18:26', 'wqewqewq', '01646735100', 'kkajol428@gmail.com', 'www.go.com', 'qwewqew', 'save_and_exit_from_three', NULL, '0', 'wewqeqw', 'qweqweqw', 'public/uploads/ngoHead/2023-27-1217036687062038174699.jpg', 'public/uploads/ngoHead/2023-27-1217036687062350146357.jpg', NULL, '2023-12-27 03:18:26', '2023-12-27 03:20:06'),
-(52, 76, '0', '1247116553045725', 'Burns Sims Inc', 'বার্নস সিমস ইনক', 'মিরপুর ১,ঢাকা', 'গুলশান ২,ঢাকা', 'Gulshan 2, Dhaka', 'বাংলাদেশী', 'করিম আলী খান', 'খণ্ডকালীন', 'বনানী ,ঢাকা', 'সম্পূর্ণ বাংলাদেশ  সম্পূর্ণ বাংলাদেশ', '01646735100', '৮৫৫-২৫৯৭', 'bihi@mailinator.com', 'আফগান,ব্রাজিলিয়ান', 'কোনো পেশা নাই', 'uploads/FdOneForm/2023-28-1217037590117795070327.pdf', NULL, '0', '0', '0', '0', '55555555', NULL, '456456', 'uploads/attach_the_supporting_papers/2023-28-1217037598704622835189.pdf', 'rtyrty', 'uploads/board_of_revenue_on_fees/2023-28-1217037598709513211091.pdf', '16:23:08', NULL, NULL, NULL, NULL, NULL, 'save_and_exit_from_three', NULL, '0', 'করিম আলী খান', 'প্রধান নির্বাহী', 'public/uploads/ngoHead/2023-28-1217037589885477128406.jpg', 'public/uploads/ngoHead/2023-28-1217037589887336245748.jpg', NULL, '2023-12-28 04:23:08', '2023-12-29 23:47:13'),
-(53, 77, '0', '6092307231977178', 'Foreign Ngo', 'বিদেশী এনজিও', 'Dhaka,bangladesh', 'গুলশান ২,ঢাকা', 'Gulshan 2, Dhaka', 'Andorra', 'korim ali khan', 'Full Time', 'bonani,dhaka', 'all bangladesh', '01646735100', '2342343', 'kajol1122018@gmail.com', 'Afghanistan,Andorran', 'In odit est fugiat', 'uploads/FdOneForm/2023-30-1217039182214258003285.pdf', NULL, '0', '0', '0', '0', '55555555', NULL, '456456', 'uploads/attach_the_supporting_papers/2023-30-1217039183472015644070.pdf', 'rtyrty', 'uploads/board_of_revenue_on_fees/2023-30-1217039183474009605522.pdf', '12:36:06', NULL, NULL, NULL, NULL, NULL, 'save_and_exit_from_three', NULL, '0', 'Shelby Long', 'Voluptatem Ipsa ei', 'public/uploads/ngoHead/2023-30-1217039181676893118380.jpg', 'public/uploads/ngoHead/2023-30-1217039181675608381747.jpg', 'ewewqe', '2023-12-30 00:36:07', '2023-12-30 00:39:07');
+(67, 86, '28122023', '4041820226818970', 'Reed Hutchinson Associates', 'Warren and Noel Inc', 'Espinoza and Everett Co', 'Pariatur Molestias', 'Sed rerum deserunt d', 'বাংলাদেশী', 'Price Horn', 'খণ্ডকালীন', 'Quas sint incidunt', 'সম্পূর্ণ বাংলাদেশ  সম্পূর্ণ বাংলাদেশ', '55111111111', '+1 (878) 436-2357', 'lomisyxiv@mailinator.com', 'আফগান,স্কটিশ,ওয়েলশ', 'Libero incidunt ut', 'uploads/FdOneForm/2024-15-0117053078712986181527.pdf', NULL, '0', '0', '0', '0', '55555555', NULL, '456456', 'uploads/attach_the_supporting_papers/2024-15-0117053079466852845677.pdf', '23523', 'uploads/board_of_revenue_on_fees/2024-15-0117053079463416893309.pdf', '14:37:32', NULL, NULL, NULL, NULL, NULL, 'next_step_from_four', NULL, '0', 'Ferdinand Robinson', 'Dolores sit ut cons', 'public/uploads/ngoHead/2024-15-0117053078524600466795.png', 'public/uploads/ngoHead/2024-15-0117053078528863091105.png', NULL, '2024-01-15 02:37:32', '2024-01-15 02:39:06'),
+(68, 87, '345', '8226857413825517', 'cacavaqe@mailinator.com', 'paruc@mailinator.com', 'mulydipy@mailinator.com', 'bununi@mailinator.com', 'jeluroryjy@mailinator.com', 'Australia', 'cubid@mailinator.com', 'Part Time', 'lilodeti@mailinator.com', 'সম্পূর্ণ বাংলাদেশ  সম্পূর্ণ বাংলাদেশ', '29011111111', '11111111111', 'jixuta@mailinator.com', 'Australian,Scottish', 'woheqyp@mailinator.com', 'uploads/FdOneForm/2024-15-0117053139864091184899.pdf', NULL, '0', '0', '0', '0', '55555555', NULL, '456456', 'uploads/attach_the_supporting_papers/2024-15-0117053140903838331620.pdf', '23523', 'uploads/board_of_revenue_on_fees/2024-15-0117053140908037324718.pdf', '16:19:19', NULL, NULL, NULL, NULL, NULL, 'next_step_from_four', NULL, '0', 'Violet Carson', 'mirysahes@mailinator.com', 'public/uploads/ngoHead/2024-15-0117053139598435470074.png', 'public/uploads/ngoHead/2024-15-0117053139596586036464.png', 'nycaxuvyg@mailinator.com', '2024-01-15 04:19:19', '2024-01-15 04:21:30');
 
 -- --------------------------------------------------------
 
@@ -3661,14 +3669,10 @@ CREATE TABLE `fd_one_member_lists` (
 --
 
 INSERT INTO `fd_one_member_lists` (`id`, `fd_one_form_id`, `name`, `position`, `address`, `date_of_join`, `mobile`, `email`, `citizenship`, `salary_statement`, `other_occupation`, `now_working_at`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(143, 48, 'rerewr', 'werwer', 'werwe', '2023-12-19', '01646735100', 'k@gmail.com', 'আলবেনিয়ান', '2435432', '43534', NULL, '14:59:41', '2023-12-27 02:59:41', '2023-12-27 02:59:41'),
-(144, 48, 'rerewr', 'werwer', 'werwe', '2023-12-28', '01646735100', 'k@gmail.com', 'আলজেরিয়ান', '2435432', '43534', NULL, '14:59:41', '2023-12-27 02:59:41', '2023-12-27 02:59:41'),
-(149, 51, 'rerewr', 'wewq', 'qwewq', '2023-12-19', '01646735100', 'k@gmail.com', 'Albanian', '12312', '43534', '23123', '15:19:37', '2023-12-27 03:19:37', '2023-12-27 03:19:37'),
-(150, 51, 'qweqw', 'werwer', 'werwe', '2023-12-28', '01646735100', 'k@gmail.com', 'Andorran', '2435432', '123123', '23123', '15:19:37', '2023-12-27 03:19:37', '2023-12-27 03:19:37'),
-(153, 52, 'rerewr', 'werwer', 'werwe', '2023-12-13', '33333333333', 'k@gmail.com', 'আফগান', '2435432', '43534', NULL, '11:45:13', '2023-12-29 23:45:13', '2023-12-29 23:45:13'),
-(154, 52, 'rerewr', 'werwer', 'werwe', '2023-12-18', '11111111111', 'ktttt@gmail.com', 'আলজেরিয়ান', '2435432', '43534', NULL, '11:45:13', '2023-12-29 23:45:13', '2023-12-29 23:45:13'),
-(155, 53, 'rerew', 'werwerw', 'werwe', '2023-12-25', '11111111111', 'k@gmail.com', 'Albanian', '2435432', '43534', '23123', '12:38:21', '2023-12-30 00:38:21', '2023-12-30 00:38:21'),
-(156, 53, 'rerewr', 'fdfdsf', 'werwe', '2023-12-25', '11111111111', 'k@gmail.com', 'Albanian', '2435432', '43534', '23123', '12:38:21', '2023-12-30 00:38:21', '2023-12-30 00:38:21');
+(213, 67, 'rerewr', 'werwer', 'werwe', '2024-01-01', '11111111111', 'k@gmail.com', 'আফগান', '2435432', '43534', NULL, '14:38:31', '2024-01-15 02:38:31', '2024-01-15 02:38:31'),
+(214, 67, 'rerewr', 'werwer', 'dfgfd', '2024-01-01', '11111111111', 'k@gmail.com', 'আলবেনিয়ান', '2435432', '43534', NULL, '14:38:31', '2024-01-15 02:38:31', '2024-01-15 02:38:31'),
+(215, 68, 'rerewr', 'werwer', 'werwe', '2024-01-01', '11111111111', 'k@gmail.com', 'Albanian', '2435432', 'wewewewewe', '23123', '16:20:50', '2024-01-15 04:20:50', '2024-01-15 04:20:50'),
+(216, 68, 'rerewr', 'werwer', 'werwe', '2024-01-01', '11111111111', 'k@gmail.com', 'Albanian', '2435432', '43534', '23123', '16:20:50', '2024-01-15 04:20:50', '2024-01-15 04:20:50');
 
 -- --------------------------------------------------------
 
@@ -3691,10 +3695,8 @@ CREATE TABLE `fd_one_other_pdf_lists` (
 --
 
 INSERT INTO `fd_one_other_pdf_lists` (`id`, `fd_one_form_id`, `information_title`, `information_pdf`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(9, 48, 'qwewqe', 'uploads/FdOneOtherPdfList/2023-27-1217036676122226147201.pdf', '15:00:12 pm', '2023-12-27 03:00:12', '2023-12-27 03:00:12'),
-(12, 51, 'qwewqe', 'uploads/FdOneOtherPdfList/2023-27-1217036688064836584471.pdf', '15:20:06 pm', '2023-12-27 03:20:06', '2023-12-27 03:20:06'),
-(13, 52, 'রবেরত', 'uploads/FdOneOtherPdfList/2023-30-1217039152331636358611.pdf', '11:47:13 am', '2023-12-29 23:47:13', '2023-12-29 23:47:13'),
-(14, 53, 'qwewqe', 'uploads/FdOneOtherPdfList/2023-30-1217039183476749019783.pdf', '12:39:07 pm', '2023-12-30 00:39:07', '2023-12-30 00:39:07');
+(26, 67, 'রবেরত', 'uploads/FdOneOtherPdfList/2024-15-0117053079471764362434.pdf', '14:39:06 pm', '2024-01-15 02:39:07', '2024-01-15 02:39:07'),
+(27, 68, 'রবেরত', 'uploads/FdOneOtherPdfList/2024-15-0117053140907290803314.pdf', '16:21:30 pm', '2024-01-15 04:21:30', '2024-01-15 04:21:30');
 
 -- --------------------------------------------------------
 
@@ -3718,11 +3720,8 @@ CREATE TABLE `fd_one_source_of_funds` (
 --
 
 INSERT INTO `fd_one_source_of_funds` (`id`, `fd_one_form_id`, `name`, `address`, `letter_file`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(15, 48, 'xcvcx', 'xcvxcv', 'uploads/FdOneSourceOfFund/2023-27-1217036675367981640464.pdf', '14:58:56', '2023-12-27 02:58:56', '2023-12-27 02:58:56'),
-(17, 52, 'গফগ', 'কেটের', 'uploads/FdOneSourceOfFund/2023-30-1217039150961713153918.pdf', '11:44:56', '2023-12-29 23:44:56', '2023-12-29 23:44:56'),
-(18, 52, 'সিভিক্সব্বস্ব', 'ঝকঝক', 'uploads/FdOneSourceOfFund/2023-30-1217039150968395326549.pdf', '11:44:56', '2023-12-29 23:44:56', '2023-12-29 23:44:56'),
-(19, 53, 'fre1', 'ad1', 'uploads/FdOneSourceOfFund/2023-30-1217039182219193898335.pdf', '12:37:01', '2023-12-30 00:37:01', '2023-12-30 00:37:01'),
-(20, 53, 'fre2', 'ad2', 'uploads/FdOneSourceOfFund/2023-30-1217039182213905905591.pdf', '12:37:01', '2023-12-30 00:37:01', '2023-12-30 00:37:01');
+(26, 67, 'xcvcx', 'xcvxcv', 'uploads/FdOneSourceOfFund/2024-15-0117053078715478109606.pdf', '14:37:51', '2024-01-15 02:37:51', '2024-01-15 02:37:51'),
+(27, 68, 'গফগ', 'কেটের', 'uploads/FdOneSourceOfFund/2024-15-0117053139861427664979.pdf', '16:19:46', '2024-01-15 04:19:46', '2024-01-15 04:19:46');
 
 -- --------------------------------------------------------
 
@@ -3777,11 +3776,18 @@ CREATE TABLE `fd_three_daks` (
   `attraction_attention` varchar(255) DEFAULT NULL,
   `dak_detail_id` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `nothi_jat_id` varchar(255) NOT NULL,
-  `nothi_jat_status` varchar(255) NOT NULL,
+  `nothi_jat_id` varchar(255) DEFAULT NULL,
+  `nothi_jat_status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fd_three_daks`
+--
+
+INSERT INTO `fd_three_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fd_three_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(2, '2', '5', '6', '1', '', '', '', '69', '1', NULL, '0', '2024-01-17 02:39:10', '2024-01-17 02:39:23');
 
 -- --------------------------------------------------------
 
@@ -3827,10 +3833,8 @@ CREATE TABLE `form_complete_statuses` (
 --
 
 INSERT INTO `form_complete_statuses` (`id`, `user_id`, `fd_one_form_step_one_status`, `fd_one_form_step_two_status`, `fd_one_form_step_three_status`, `fd_one_form_step_four_status`, `form_eight_status`, `ngo_member_status`, `ngo_member_nid_photo_status`, `ngo_other_document_status`, `created_at`, `updated_at`) VALUES
-(45, 72, 1, 1, 1, 1, 1, 1, 1, 1, '2023-12-27 02:58:40', '2023-12-27 03:00:52'),
-(48, 75, 1, 1, 1, 1, 1, 1, 1, 1, '2023-12-27 03:18:26', '2023-12-27 03:20:47'),
-(49, 76, 1, 1, 1, 1, 1, 1, 1, 1, '2023-12-28 04:23:08', '2023-12-29 23:47:13'),
-(50, 77, 1, 1, 1, 1, 1, 1, 1, 1, '2023-12-30 00:36:07', '2023-12-30 00:39:55');
+(64, 86, 1, 1, 1, 1, 1, 1, 1, 1, '2024-01-15 02:37:32', '2024-01-15 02:39:51'),
+(65, 87, 1, 1, 1, 1, 1, 1, 1, 1, '2024-01-15 04:19:20', '2024-01-15 04:22:35');
 
 -- --------------------------------------------------------
 
@@ -4731,7 +4735,376 @@ INSERT INTO `log_activities` (`id`, `subject`, `url`, `method`, `ip_or_mac`, `ag
 (2080, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:02:39 pm', '2024-01-04 04:02:40', '2024-01-04 04:02:40'),
 (2081, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:04:16 pm', '2024-01-04 04:04:16', '2024-01-04 04:04:16'),
 (2082, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:05:10 pm', '2024-01-04 04:05:11', '2024-01-04 04:05:11'),
-(2083, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:05:42 pm', '2024-01-04 04:05:43', '2024-01-04 04:05:43');
+(2083, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:05:42 pm', '2024-01-04 04:05:43', '2024-01-04 04:05:43'),
+(2084, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:05:52 am', '2024-01-13 23:05:54', '2024-01-13 23:05:54'),
+(2085, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:05:56 am', '2024-01-13 23:05:56', '2024-01-13 23:05:56'),
+(2086, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:05:56 am', '2024-01-13 23:05:56', '2024-01-13 23:05:56'),
+(2087, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:12:13 am', '2024-01-13 23:12:14', '2024-01-13 23:12:14'),
+(2088, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:12:14 am', '2024-01-13 23:12:14', '2024-01-13 23:12:14'),
+(2089, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:13:12 am', '2024-01-13 23:13:12', '2024-01-13 23:13:12'),
+(2090, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:13:12 am', '2024-01-13 23:13:13', '2024-01-13 23:13:13'),
+(2091, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:13:37 am', '2024-01-13 23:13:38', '2024-01-13 23:13:38'),
+(2092, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:13:38 am', '2024-01-13 23:13:38', '2024-01-13 23:13:38'),
+(2093, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:14:14 am', '2024-01-13 23:14:15', '2024-01-13 23:14:15'),
+(2094, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:14:15 am', '2024-01-13 23:14:15', '2024-01-13 23:14:15'),
+(2095, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:17:39 am', '2024-01-13 23:17:39', '2024-01-13 23:17:39'),
+(2096, 'view new ngo registration list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newRegistrationList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:18:00 am', '2024-01-13 23:18:00', '2024-01-13 23:18:00'),
+(2097, 'view  ngo registration detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/registrationView/61', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:18:04 am', '2024-01-13 23:18:04', '2024-01-13 23:18:04'),
+(2098, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:18:21 am', '2024-01-13 23:18:21', '2024-01-13 23:18:21'),
+(2099, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:25:11 pm', '2024-01-15 02:25:11', '2024-01-15 02:25:11'),
+(2100, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:25:14 pm', '2024-01-15 02:25:15', '2024-01-15 02:25:15'),
+(2101, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:25:15 pm', '2024-01-15 02:25:15', '2024-01-15 02:25:15'),
+(2102, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:25:23 pm', '2024-01-15 02:25:23', '2024-01-15 02:25:23'),
+(2103, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:25:23 pm', '2024-01-15 02:25:23', '2024-01-15 02:25:23'),
+(2104, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:26:08 pm', '2024-01-15 02:26:09', '2024-01-15 02:26:09'),
+(2105, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:26:09 pm', '2024-01-15 02:26:09', '2024-01-15 02:26:09'),
+(2106, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:26:22 pm', '2024-01-15 02:26:22', '2024-01-15 02:26:22'),
+(2107, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:26:22 pm', '2024-01-15 02:26:23', '2024-01-15 02:26:23'),
+(2108, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:27:09 pm', '2024-01-15 02:27:09', '2024-01-15 02:27:09'),
+(2109, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:27:09 pm', '2024-01-15 02:27:10', '2024-01-15 02:27:10'),
+(2110, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:27:49 pm', '2024-01-15 02:27:49', '2024-01-15 02:27:49'),
+(2111, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:27:49 pm', '2024-01-15 02:27:50', '2024-01-15 02:27:50'),
+(2112, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:32:42 pm', '2024-01-15 02:32:43', '2024-01-15 02:32:43'),
+(2113, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:32:43 pm', '2024-01-15 02:32:43', '2024-01-15 02:32:43'),
+(2114, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:32:57 pm', '2024-01-15 02:32:57', '2024-01-15 02:32:57'),
+(2115, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:34 pm', '2024-01-15 02:40:34', '2024-01-15 02:40:34'),
+(2116, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:35 pm', '2024-01-15 02:40:35', '2024-01-15 02:40:35'),
+(2117, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:35 pm', '2024-01-15 02:40:36', '2024-01-15 02:40:36'),
+(2118, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:41 pm', '2024-01-15 02:40:42', '2024-01-15 02:40:42'),
+(2119, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:40:52 pm', '2024-01-15 02:40:53', '2024-01-15 02:40:53'),
+(2120, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:40:54 pm', '2024-01-15 02:40:54', '2024-01-15 02:40:54'),
+(2121, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:40:54 pm', '2024-01-15 02:40:54', '2024-01-15 02:40:54'),
+(2122, 'view  ngo registration detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/registrationView/67', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:41:06 pm', '2024-01-15 02:41:07', '2024-01-15 02:41:07'),
+(2123, 'update registration status.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/updateStatusRegForm', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:41:33 pm', '2024-01-15 02:41:33', '2024-01-15 02:41:33'),
+(2124, 'view  ngo registration detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/registrationView/67', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:41:41 pm', '2024-01-15 02:41:42', '2024-01-15 02:41:42'),
+(2125, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '02:41:52 pm', '2024-01-15 02:41:52', '2024-01-15 02:41:52');
+INSERT INTO `log_activities` (`id`, `subject`, `url`, `method`, `ip_or_mac`, `agent`, `admin_id`, `activity_time`, `created_at`, `updated_at`) VALUES
+(2126, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:23:30 pm', '2024-01-15 04:23:31', '2024-01-15 04:23:31'),
+(2127, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:23:32 pm', '2024-01-15 04:23:32', '2024-01-15 04:23:32'),
+(2128, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:23:33 pm', '2024-01-15 04:23:33', '2024-01-15 04:23:33'),
+(2129, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:23:46 pm', '2024-01-15 04:23:46', '2024-01-15 04:23:46'),
+(2130, 'view new ngo registration list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newRegistrationList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:24:00 pm', '2024-01-15 04:24:00', '2024-01-15 04:24:00'),
+(2131, 'view  ngo registration detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/registrationView/68', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:24:10 pm', '2024-01-15 04:24:11', '2024-01-15 04:24:11'),
+(2132, 'update registration status.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/updateStatusRegForm', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:24:26 pm', '2024-01-15 04:24:26', '2024-01-15 04:24:26'),
+(2133, 'view  ngo registration detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/registrationView/68', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:24:32 pm', '2024-01-15 04:24:32', '2024-01-15 04:24:32'),
+(2134, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '04:24:44 pm', '2024-01-15 04:24:44', '2024-01-15 04:24:44'),
+(2135, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '05:43:25 pm', '2024-01-15 05:43:25', '2024-01-15 05:43:25'),
+(2136, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '05:43:27 pm', '2024-01-15 05:43:27', '2024-01-15 05:43:27'),
+(2137, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '05:43:27 pm', '2024-01-15 05:43:28', '2024-01-15 05:43:28'),
+(2138, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '05:44:01 pm', '2024-01-15 05:44:01', '2024-01-15 05:44:01'),
+(2139, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:38:43 pm', '2024-01-16 04:38:44', '2024-01-16 04:38:44'),
+(2140, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:38:45 pm', '2024-01-16 04:38:46', '2024-01-16 04:38:46'),
+(2141, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:38:46 pm', '2024-01-16 04:38:46', '2024-01-16 04:38:46'),
+(2142, 'view new ngo registration list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newRegistrationList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:39:04 pm', '2024-01-16 04:39:04', '2024-01-16 04:39:04'),
+(2143, 'view already ngo registration list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/alreadyRegistrationList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:39:14 pm', '2024-01-16 04:39:14', '2024-01-16 04:39:14'),
+(2144, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:39:40 pm', '2024-01-16 04:39:41', '2024-01-16 04:39:41'),
+(2145, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:40:35 pm', '2024-01-16 04:40:35', '2024-01-16 04:40:35'),
+(2146, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/registration/40', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:41:11 pm', '2024-01-16 04:41:11', '2024-01-16 04:41:11'),
+(2147, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=40&mainStatusNew=registration&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:41:21 pm', '2024-01-16 04:41:21', '2024-01-16 04:41:21'),
+(2148, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=registration&main_id=40', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:41:24 pm', '2024-01-16 04:41:24', '2024-01-16 04:41:24'),
+(2149, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:41:41 pm', '2024-01-16 04:41:41', '2024-01-16 04:41:41'),
+(2150, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:41:42 pm', '2024-01-16 04:41:42', '2024-01-16 04:41:42'),
+(2151, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:42:59 pm', '2024-01-16 04:43:00', '2024-01-16 04:43:00'),
+(2152, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/renew/26', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:43:04 pm', '2024-01-16 04:43:04', '2024-01-16 04:43:04'),
+(2153, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=26&mainStatusNew=renew&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:43:22 pm', '2024-01-16 04:43:22', '2024-01-16 04:43:22'),
+(2154, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=renew&main_id=26', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:43:24 pm', '2024-01-16 04:43:24', '2024-01-16 04:43:24'),
+(2155, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:43:34 pm', '2024-01-16 04:43:35', '2024-01-16 04:43:35'),
+(2156, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:43:36 pm', '2024-01-16 04:43:36', '2024-01-16 04:43:36'),
+(2157, 'view profile.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/profile', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:57:14 pm', '2024-01-16 04:57:14', '2024-01-16 04:57:14'),
+(2158, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:57:50 pm', '2024-01-16 04:57:50', '2024-01-16 04:57:50'),
+(2159, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:57:50 pm', '2024-01-16 04:57:50', '2024-01-16 04:57:50'),
+(2160, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:59:57 pm', '2024-01-16 04:59:58', '2024-01-16 04:59:58'),
+(2161, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:45:32 am', '2024-01-16 23:45:33', '2024-01-16 23:45:33'),
+(2162, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:45:37 am', '2024-01-16 23:45:37', '2024-01-16 23:45:37'),
+(2163, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:45:38 am', '2024-01-16 23:45:38', '2024-01-16 23:45:38'),
+(2164, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:54:24 am', '2024-01-16 23:54:24', '2024-01-16 23:54:24'),
+(2165, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:54:25 am', '2024-01-16 23:54:26', '2024-01-16 23:54:26'),
+(2166, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/nameChange/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:55:05 am', '2024-01-16 23:55:05', '2024-01-16 23:55:05'),
+(2167, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=23&mainStatusNew=nameChange&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:55:21 am', '2024-01-16 23:55:21', '2024-01-16 23:55:21'),
+(2168, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=nameChange&main_id=23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:55:23 am', '2024-01-16 23:55:23', '2024-01-16 23:55:23'),
+(2169, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:55:42 am', '2024-01-16 23:55:43', '2024-01-16 23:55:43'),
+(2170, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:55:43 am', '2024-01-16 23:55:43', '2024-01-16 23:55:43'),
+(2171, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdNine/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:55:56 am', '2024-01-16 23:55:56', '2024-01-16 23:55:56'),
+(2172, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=7&mainStatusNew=fdNine&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:10 am', '2024-01-16 23:56:10', '2024-01-16 23:56:10'),
+(2173, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdNine&main_id=7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:12 am', '2024-01-16 23:56:12', '2024-01-16 23:56:12'),
+(2174, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:25 am', '2024-01-16 23:56:26', '2024-01-16 23:56:26'),
+(2175, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:26 am', '2024-01-16 23:56:26', '2024-01-16 23:56:26'),
+(2176, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdNineOne/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:38 am', '2024-01-16 23:56:38', '2024-01-16 23:56:38'),
+(2177, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=8&mainStatusNew=fdNineOne&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:49 am', '2024-01-16 23:56:49', '2024-01-16 23:56:49'),
+(2178, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdNineOne&main_id=8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:56:50 am', '2024-01-16 23:56:51', '2024-01-16 23:56:51'),
+(2179, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:57:04 am', '2024-01-16 23:57:04', '2024-01-16 23:57:04'),
+(2180, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:57:04 am', '2024-01-16 23:57:05', '2024-01-16 23:57:05'),
+(2181, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '11:57:17 am', '2024-01-16 23:57:17', '2024-01-16 23:57:17'),
+(2182, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:02:36 pm', '2024-01-17 00:02:37', '2024-01-17 00:02:37'),
+(2183, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:02:38 pm', '2024-01-17 00:02:38', '2024-01-17 00:02:38'),
+(2184, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:02:38 pm', '2024-01-17 00:02:38', '2024-01-17 00:02:38'),
+(2185, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:03:01 pm', '2024-01-17 00:03:02', '2024-01-17 00:03:02'),
+(2186, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:03:18 pm', '2024-01-17 00:03:19', '2024-01-17 00:03:19'),
+(2187, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:03:19 pm', '2024-01-17 00:03:19', '2024-01-17 00:03:19'),
+(2188, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:03:34 pm', '2024-01-17 00:03:35', '2024-01-17 00:03:35'),
+(2189, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:08:43 pm', '2024-01-17 00:08:44', '2024-01-17 00:08:44'),
+(2190, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:09:14 pm', '2024-01-17 00:09:15', '2024-01-17 00:09:15'),
+(2191, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:11:54 pm', '2024-01-17 00:11:54', '2024-01-17 00:11:54'),
+(2192, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:14:13 pm', '2024-01-17 00:14:14', '2024-01-17 00:14:14'),
+(2193, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:17:14 pm', '2024-01-17 00:17:15', '2024-01-17 00:17:15'),
+(2194, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:18:32 pm', '2024-01-17 00:18:33', '2024-01-17 00:18:33'),
+(2195, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:38:20 pm', '2024-01-17 00:38:20', '2024-01-17 00:38:20'),
+(2196, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:39:02 pm', '2024-01-17 00:39:02', '2024-01-17 00:39:02'),
+(2197, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:40:09 pm', '2024-01-17 00:40:09', '2024-01-17 00:40:09'),
+(2198, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:40:23 pm', '2024-01-17 00:40:24', '2024-01-17 00:40:24'),
+(2199, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:41:25 pm', '2024-01-17 00:41:25', '2024-01-17 00:41:25'),
+(2200, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:42:53 pm', '2024-01-17 00:42:53', '2024-01-17 00:42:53'),
+(2201, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:43:51 pm', '2024-01-17 00:43:52', '2024-01-17 00:43:52'),
+(2202, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:46:18 pm', '2024-01-17 00:46:19', '2024-01-17 00:46:19'),
+(2203, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:46:41 pm', '2024-01-17 00:46:41', '2024-01-17 00:46:41'),
+(2204, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:47:47 pm', '2024-01-17 00:47:48', '2024-01-17 00:47:48'),
+(2205, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:48:00 pm', '2024-01-17 00:48:01', '2024-01-17 00:48:01'),
+(2206, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:51:37 pm', '2024-01-17 00:51:38', '2024-01-17 00:51:38'),
+(2207, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:04:04 pm', '2024-01-17 01:04:05', '2024-01-17 01:04:05'),
+(2208, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:12:03 pm', '2024-01-17 01:12:03', '2024-01-17 01:12:03'),
+(2209, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:19:25 pm', '2024-01-17 01:19:25', '2024-01-17 01:19:25'),
+(2210, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:32:52 pm', '2024-01-17 01:32:53', '2024-01-17 01:32:53'),
+(2211, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:33:19 pm', '2024-01-17 01:33:19', '2024-01-17 01:33:19'),
+(2212, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:33:33 pm', '2024-01-17 01:33:33', '2024-01-17 01:33:33'),
+(2213, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:35:01 pm', '2024-01-17 01:35:01', '2024-01-17 01:35:01'),
+(2214, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:35:21 pm', '2024-01-17 01:35:21', '2024-01-17 01:35:21'),
+(2215, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:46:55 pm', '2024-01-17 01:46:55', '2024-01-17 01:46:55'),
+(2216, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:47:17 pm', '2024-01-17 01:47:19', '2024-01-17 01:47:19'),
+(2217, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:47:33 pm', '2024-01-17 01:47:34', '2024-01-17 01:47:34'),
+(2218, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:49:38 pm', '2024-01-17 01:49:39', '2024-01-17 01:49:39'),
+(2219, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:49:50 pm', '2024-01-17 01:49:50', '2024-01-17 01:49:50'),
+(2220, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:49:51 pm', '2024-01-17 01:49:51', '2024-01-17 01:49:51'),
+(2221, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:49:51 pm', '2024-01-17 01:49:52', '2024-01-17 01:49:52'),
+(2222, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:50:00 pm', '2024-01-17 01:50:01', '2024-01-17 01:50:01'),
+(2223, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdSix/4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:50:33 pm', '2024-01-17 01:50:33', '2024-01-17 01:50:33'),
+(2224, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=4&mainStatusNew=fdSix&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:50:39 pm', '2024-01-17 01:50:39', '2024-01-17 01:50:39'),
+(2225, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdSix&main_id=4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:50:46 pm', '2024-01-17 01:50:46', '2024-01-17 01:50:46'),
+(2226, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdSix/4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:51:01 pm', '2024-01-17 01:51:01', '2024-01-17 01:51:01'),
+(2227, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=4&mainStatusNew=fdSix&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:51:08 pm', '2024-01-17 01:51:09', '2024-01-17 01:51:09'),
+(2228, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdSix&main_id=4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:51:11 pm', '2024-01-17 01:51:11', '2024-01-17 01:51:11'),
+(2229, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdSix&main_id=4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:51:22 pm', '2024-01-17 01:51:22', '2024-01-17 01:51:22'),
+(2230, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdSix/4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:54:50 pm', '2024-01-17 01:54:51', '2024-01-17 01:54:51'),
+(2231, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=4&mainStatusNew=fdSix&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:54:58 pm', '2024-01-17 01:54:58', '2024-01-17 01:54:58'),
+(2232, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdSix&main_id=4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:55:02 pm', '2024-01-17 01:55:03', '2024-01-17 01:55:03'),
+(2233, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:55:24 pm', '2024-01-17 01:55:25', '2024-01-17 01:55:25'),
+(2234, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:55:25 pm', '2024-01-17 01:55:26', '2024-01-17 01:55:26'),
+(2235, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdSeven/4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:55:36 pm', '2024-01-17 01:55:37', '2024-01-17 01:55:37'),
+(2236, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=4&mainStatusNew=fdSeven&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:55:47 pm', '2024-01-17 01:55:47', '2024-01-17 01:55:47'),
+(2237, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdSeven&main_id=4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '01:55:49 pm', '2024-01-17 01:55:50', '2024-01-17 01:55:50'),
+(2238, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:34:34 pm', '2024-01-17 02:34:35', '2024-01-17 02:34:35'),
+(2239, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:34:56 pm', '2024-01-17 02:34:57', '2024-01-17 02:34:57'),
+(2240, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdSeven/4', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:35:05 pm', '2024-01-17 02:35:05', '2024-01-17 02:35:05'),
+(2241, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:35:25 pm', '2024-01-17 02:35:25', '2024-01-17 02:35:25'),
+(2242, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:35:25 pm', '2024-01-17 02:35:26', '2024-01-17 02:35:26'),
+(2243, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fcOne/5', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:35:50 pm', '2024-01-17 02:35:50', '2024-01-17 02:35:50'),
+(2244, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=5&mainStatusNew=fcOne&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:03 pm', '2024-01-17 02:36:03', '2024-01-17 02:36:03'),
+(2245, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fcOne&main_id=5', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:05 pm', '2024-01-17 02:36:05', '2024-01-17 02:36:05'),
+(2246, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:17 pm', '2024-01-17 02:36:17', '2024-01-17 02:36:17'),
+(2247, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:17 pm', '2024-01-17 02:36:18', '2024-01-17 02:36:18'),
+(2248, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fcTwo/5', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:25 pm', '2024-01-17 02:36:25', '2024-01-17 02:36:25'),
+(2249, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=5&mainStatusNew=fcTwo&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:41 pm', '2024-01-17 02:36:41', '2024-01-17 02:36:41'),
+(2250, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fcTwo&main_id=5', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:36:42 pm', '2024-01-17 02:36:43', '2024-01-17 02:36:43'),
+(2251, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:37:02 pm', '2024-01-17 02:37:02', '2024-01-17 02:37:02'),
+(2252, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:37:02 pm', '2024-01-17 02:37:03', '2024-01-17 02:37:03'),
+(2253, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdThree/6', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:37:07 pm', '2024-01-17 02:37:07', '2024-01-17 02:37:07'),
+(2254, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=6&mainStatusNew=fdThree&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:37:21 pm', '2024-01-17 02:37:21', '2024-01-17 02:37:21'),
+(2255, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdThree&main_id=6', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:37:22 pm', '2024-01-17 02:37:22', '2024-01-17 02:37:22'),
+(2256, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdThree&main_id=6', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:37:39 pm', '2024-01-17 02:37:39', '2024-01-17 02:37:39'),
+(2257, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdThree/6', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:38:54 pm', '2024-01-17 02:38:54', '2024-01-17 02:38:54'),
+(2258, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=6&mainStatusNew=fdThree&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:39:08 pm', '2024-01-17 02:39:09', '2024-01-17 02:39:09');
+INSERT INTO `log_activities` (`id`, `subject`, `url`, `method`, `ip_or_mac`, `agent`, `admin_id`, `activity_time`, `created_at`, `updated_at`) VALUES
+(2259, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdThree&main_id=6', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:39:10 pm', '2024-01-17 02:39:10', '2024-01-17 02:39:10'),
+(2260, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:39:23 pm', '2024-01-17 02:39:23', '2024-01-17 02:39:23'),
+(2261, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:39:23 pm', '2024-01-17 02:39:23', '2024-01-17 02:39:23'),
+(2262, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:39:58 pm', '2024-01-17 02:39:58', '2024-01-17 02:39:58'),
+(2263, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:09 pm', '2024-01-17 02:40:09', '2024-01-17 02:40:09'),
+(2264, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:10 pm', '2024-01-17 02:40:11', '2024-01-17 02:40:11'),
+(2265, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:11 pm', '2024-01-17 02:40:11', '2024-01-17 02:40:11'),
+(2266, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:24 pm', '2024-01-17 02:40:24', '2024-01-17 02:40:24'),
+(2267, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:43:06 pm', '2024-01-17 02:43:06', '2024-01-17 02:43:06'),
+(2268, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:43:32 pm', '2024-01-17 02:43:33', '2024-01-17 02:43:33'),
+(2269, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:43:33 pm', '2024-01-17 02:43:34', '2024-01-17 02:43:34'),
+(2270, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:43:34 pm', '2024-01-17 02:43:34', '2024-01-17 02:43:34'),
+(2271, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:43:44 pm', '2024-01-17 02:43:45', '2024-01-17 02:43:45'),
+(2272, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:44:31 pm', '2024-01-17 02:44:31', '2024-01-17 02:44:31'),
+(2273, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:46:51 pm', '2024-01-17 02:46:51', '2024-01-17 02:46:51'),
+(2274, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdNine/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:46:55 pm', '2024-01-17 02:46:56', '2024-01-17 02:46:56'),
+(2275, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=7&mainStatusNew=fdNine&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:47:07 pm', '2024-01-17 02:47:07', '2024-01-17 02:47:07'),
+(2276, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdNine&main_id=7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:47:09 pm', '2024-01-17 02:47:09', '2024-01-17 02:47:09'),
+(2277, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:47:21 pm', '2024-01-17 02:47:21', '2024-01-17 02:47:21'),
+(2278, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:47:21 pm', '2024-01-17 02:47:22', '2024-01-17 02:47:22'),
+(2279, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:00 pm', '2024-01-17 02:48:00', '2024-01-17 02:48:00'),
+(2280, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:18 pm', '2024-01-17 02:48:18', '2024-01-17 02:48:18'),
+(2281, 'show dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataAll/fdNineOne/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:23 pm', '2024-01-17 02:48:24', '2024-01-17 02:48:24'),
+(2282, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWise?mainId=8&mainStatusNew=fdNineOne&mainstatus=desi&totalDesi%5B0%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:38 pm', '2024-01-17 02:48:39', '2024-01-17 02:48:39'),
+(2283, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListFirstStep?admin_id%5B0%5D=5&mainStatusNew=fdNineOne&main_id=8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:40 pm', '2024-01-17 02:48:40', '2024-01-17 02:48:40'),
+(2284, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakListSecondStep', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:51 pm', '2024-01-17 02:48:52', '2024-01-17 02:48:52'),
+(2285, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:48:52 pm', '2024-01-17 02:48:52', '2024-01-17 02:48:52'),
+(2286, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:49:42 pm', '2024-01-17 02:49:42', '2024-01-17 02:49:42'),
+(2287, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:55:11 pm', '2024-01-17 02:55:12', '2024-01-17 02:55:12'),
+(2288, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:55:32 pm', '2024-01-17 02:55:32', '2024-01-17 02:55:32'),
+(2289, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:57:00 pm', '2024-01-17 02:57:01', '2024-01-17 02:57:01'),
+(2290, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:58:07 pm', '2024-01-17 02:58:07', '2024-01-17 02:58:07'),
+(2291, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:58:30 pm', '2024-01-17 02:58:30', '2024-01-17 02:58:30'),
+(2292, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '02:58:38 pm', '2024-01-17 02:58:39', '2024-01-17 02:58:39'),
+(2293, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:01:48 pm', '2024-01-17 03:01:48', '2024-01-17 03:01:48'),
+(2294, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:03:17 pm', '2024-01-17 03:03:17', '2024-01-17 03:03:17'),
+(2295, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:03:40 pm', '2024-01-17 03:03:40', '2024-01-17 03:03:40'),
+(2296, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:04:24 pm', '2024-01-17 03:04:24', '2024-01-17 03:04:24'),
+(2297, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:09:43 pm', '2024-01-17 03:09:43', '2024-01-17 03:09:43'),
+(2298, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:09:44 pm', '2024-01-17 03:09:45', '2024-01-17 03:09:45'),
+(2299, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:09:45 pm', '2024-01-17 03:09:45', '2024-01-17 03:09:45'),
+(2300, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:09:50 pm', '2024-01-17 03:09:50', '2024-01-17 03:09:50'),
+(2301, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:10:38 pm', '2024-01-17 03:10:39', '2024-01-17 03:10:39'),
+(2302, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:10:52 pm', '2024-01-17 03:10:53', '2024-01-17 03:10:53'),
+(2303, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:10:53 pm', '2024-01-17 03:10:54', '2024-01-17 03:10:54'),
+(2304, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:10:54 pm', '2024-01-17 03:10:54', '2024-01-17 03:10:54'),
+(2305, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:10:58 pm', '2024-01-17 03:10:59', '2024-01-17 03:10:59'),
+(2306, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:11:31 pm', '2024-01-17 03:11:31', '2024-01-17 03:11:31'),
+(2307, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '1', '03:11:33 pm', '2024-01-17 03:11:34', '2024-01-17 03:11:34'),
+(2308, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:11:44 pm', '2024-01-17 03:11:44', '2024-01-17 03:11:44'),
+(2309, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:11:45 pm', '2024-01-17 03:11:45', '2024-01-17 03:11:45'),
+(2310, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:11:45 pm', '2024-01-17 03:11:46', '2024-01-17 03:11:46'),
+(2311, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:11:52 pm', '2024-01-17 03:11:52', '2024-01-17 03:11:52'),
+(2312, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:12:29 pm', '2024-01-17 03:12:30', '2024-01-17 03:12:30'),
+(2313, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:15:56 pm', '2024-01-17 03:15:56', '2024-01-17 03:15:56'),
+(2314, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:16:50 pm', '2024-01-17 03:16:50', '2024-01-17 03:16:50'),
+(2315, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:17:28 pm', '2024-01-17 03:17:28', '2024-01-17 03:17:28'),
+(2316, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:17:43 pm', '2024-01-17 03:17:43', '2024-01-17 03:17:43'),
+(2317, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:17:44 pm', '2024-01-17 03:17:44', '2024-01-17 03:17:44'),
+(2318, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:17:44 pm', '2024-01-17 03:17:45', '2024-01-17 03:17:45'),
+(2319, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:18:03 pm', '2024-01-17 03:18:03', '2024-01-17 03:18:03'),
+(2320, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:18:52 pm', '2024-01-17 03:18:53', '2024-01-17 03:18:53'),
+(2321, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:19:03 pm', '2024-01-17 03:19:03', '2024-01-17 03:19:03'),
+(2322, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:19:04 pm', '2024-01-17 03:19:05', '2024-01-17 03:19:05'),
+(2323, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:19:05 pm', '2024-01-17 03:19:05', '2024-01-17 03:19:05'),
+(2324, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '03:19:22 pm', '2024-01-17 03:19:23', '2024-01-17 03:19:23'),
+(2325, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:19:35 pm', '2024-01-17 03:19:35', '2024-01-17 03:19:35'),
+(2326, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:19:36 pm', '2024-01-17 03:19:36', '2024-01-17 03:19:36'),
+(2327, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:19:36 pm', '2024-01-17 03:19:36', '2024-01-17 03:19:36'),
+(2328, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:19:41 pm', '2024-01-17 03:19:41', '2024-01-17 03:19:41'),
+(2329, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:21:02 pm', '2024-01-17 03:21:03', '2024-01-17 03:21:03'),
+(2330, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:39:36 pm', '2024-01-17 03:39:37', '2024-01-17 03:39:37'),
+(2331, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:48:42 pm', '2024-01-17 03:48:42', '2024-01-17 03:48:42'),
+(2332, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:19:48 pm', '2024-01-17 04:19:48', '2024-01-17 04:19:48'),
+(2333, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:24:34 pm', '2024-01-17 04:24:34', '2024-01-17 04:24:34'),
+(2334, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:24:55 pm', '2024-01-17 04:24:55', '2024-01-17 04:24:55'),
+(2335, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:26:13 pm', '2024-01-17 04:26:13', '2024-01-17 04:26:13'),
+(2336, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:28:36 pm', '2024-01-17 04:28:36', '2024-01-17 04:28:36'),
+(2337, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:29:00 pm', '2024-01-17 04:29:00', '2024-01-17 04:29:00'),
+(2338, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:29:20 pm', '2024-01-17 04:29:21', '2024-01-17 04:29:21'),
+(2339, 'new name change list ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newNameChangeList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:39:26 pm', '2024-01-17 04:39:27', '2024-01-17 04:39:27'),
+(2340, 'new name change list ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newNameChangeList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:41:05 pm', '2024-01-17 04:41:06', '2024-01-17 04:41:06'),
+(2341, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:51:21 pm', '2024-01-17 04:51:22', '2024-01-17 04:51:22'),
+(2342, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:51:33 pm', '2024-01-17 04:51:33', '2024-01-17 04:51:33'),
+(2343, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:51:35 pm', '2024-01-17 04:51:35', '2024-01-17 04:51:35'),
+(2344, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:51:35 pm', '2024-01-17 04:51:36', '2024-01-17 04:51:36'),
+(2345, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:51:56 pm', '2024-01-17 04:51:57', '2024-01-17 04:51:57'),
+(2346, 'new name change list ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newNameChangeList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:52:08 pm', '2024-01-17 04:52:09', '2024-01-17 04:52:09'),
+(2347, 'new name change list ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newNameChangeList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:52:23 pm', '2024-01-17 04:52:24', '2024-01-17 04:52:24'),
+(2348, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/22', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:52:25 pm', '2024-01-17 04:52:25', '2024-01-17 04:52:25'),
+(2349, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:52:37 pm', '2024-01-17 04:52:37', '2024-01-17 04:52:37'),
+(2350, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/22', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:53:09 pm', '2024-01-17 04:53:09', '2024-01-17 04:53:09'),
+(2351, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:56:36 pm', '2024-01-17 04:56:36', '2024-01-17 04:56:36'),
+(2352, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:56:51 pm', '2024-01-17 04:56:51', '2024-01-17 04:56:51'),
+(2353, 'download name change pdf ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeDoc/143', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:56:58 pm', '2024-01-17 04:56:58', '2024-01-17 04:56:58'),
+(2354, 'download name change pdf ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeDoc/144', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:57:04 pm', '2024-01-17 04:57:04', '2024-01-17 04:57:04'),
+(2355, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '04:57:30 pm', '2024-01-17 04:57:30', '2024-01-17 04:57:30'),
+(2356, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:59:14 pm', '2024-01-17 04:59:15', '2024-01-17 04:59:15'),
+(2357, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:59:16 pm', '2024-01-17 04:59:16', '2024-01-17 04:59:16'),
+(2358, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:59:16 pm', '2024-01-17 04:59:16', '2024-01-17 04:59:16'),
+(2359, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '04:59:22 pm', '2024-01-17 04:59:22', '2024-01-17 04:59:22'),
+(2360, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:10:53 pm', '2024-01-17 05:10:53', '2024-01-17 05:10:53'),
+(2361, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:12:25 pm', '2024-01-17 05:12:25', '2024-01-17 05:12:25'),
+(2362, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:14:05 pm', '2024-01-17 05:14:05', '2024-01-17 05:14:05'),
+(2363, 'new name change list ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newNameChangeList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:14:27 pm', '2024-01-17 05:14:27', '2024-01-17 05:14:27'),
+(2364, 'new name change list ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/newNameChangeList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:16:08 pm', '2024-01-17 05:16:09', '2024-01-17 05:16:09'),
+(2365, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:16:11 pm', '2024-01-17 05:16:12', '2024-01-17 05:16:12'),
+(2366, 'view name change detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeView/23', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:17:15 pm', '2024-01-17 05:17:15', '2024-01-17 05:17:15'),
+(2367, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:22:30 pm', '2024-01-17 05:22:31', '2024-01-17 05:22:31'),
+(2368, 'download name change pdf ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeDoc/143', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:38:01 pm', '2024-01-17 05:38:01', '2024-01-17 05:38:01'),
+(2369, 'download name change pdf ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeDoc/144', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '05:38:20 pm', '2024-01-17 05:38:21', '2024-01-17 05:38:21'),
+(2370, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:41:35 am', '2024-01-17 23:41:41', '2024-01-17 23:41:41'),
+(2371, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:41:43 am', '2024-01-17 23:41:43', '2024-01-17 23:41:43'),
+(2372, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:42:45 am', '2024-01-17 23:42:45', '2024-01-17 23:42:45'),
+(2373, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '11:43:01 am', '2024-01-17 23:43:01', '2024-01-17 23:43:01'),
+(2374, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '11:43:03 am', '2024-01-17 23:43:03', '2024-01-17 23:43:03'),
+(2375, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '11:43:03 am', '2024-01-17 23:43:03', '2024-01-17 23:43:03'),
+(2376, 'Logged Out.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/logout/submit', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '2', '11:43:36 am', '2024-01-17 23:43:36', '2024-01-17 23:43:36'),
+(2377, 'Logged In.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/login', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:44:57 am', '2024-01-17 23:44:58', '2024-01-17 23:44:58'),
+(2378, 'view dashboard', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:44:58 am', '2024-01-17 23:44:59', '2024-01-17 23:44:59'),
+(2379, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:44:59 am', '2024-01-17 23:44:59', '2024-01-17 23:44:59'),
+(2380, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '11:45:16 am', '2024-01-17 23:45:16', '2024-01-17 23:45:16'),
+(2381, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWiseOne?mainId=12&mainstatus=desi&totalDesi%5B0%5D=2', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:18:42 pm', '2024-01-18 00:18:43', '2024-01-18 00:18:43'),
+(2382, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWiseOne?mainId=12&mainstatus=desi&totalDesi%5B0%5D=2&totalDesi%5B1%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:18:48 pm', '2024-01-18 00:18:48', '2024-01-18 00:18:48'),
+(2383, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWiseOne?mainId=12&mainstatus=desi&totalBranch%5B0%5D=2&totalDesi%5B0%5D=2&totalDesi%5B1%5D=3&totalDesi%5B2%5D=7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:18:55 pm', '2024-01-18 00:18:56', '2024-01-18 00:18:56'),
+(2384, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/savePermissionNothi?admin_id%5B0%5D=2&admin_id%5B1%5D=5&admin_id%5B2%5D=3&mainStatusNew=&main_id=12', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:18:58 pm', '2024-01-18 00:18:59', '2024-01-18 00:18:59'),
+(2385, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWiseOne?mainId=11&mainstatus=desi&totalDesi%5B0%5D=2', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:19:05 pm', '2024-01-18 00:19:06', '2024-01-18 00:19:06'),
+(2386, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWiseOne?mainId=11&mainstatus=desi&totalDesi%5B0%5D=2&totalDesi%5B1%5D=3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:19:07 pm', '2024-01-18 00:19:07', '2024-01-18 00:19:07'),
+(2387, 'show Data Designation Wise.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/showDataDesignationWiseOne?mainId=11&mainstatus=desi&totalBranch%5B0%5D=2&totalDesi%5B0%5D=2&totalDesi%5B1%5D=3&totalDesi%5B2%5D=7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:19:09 pm', '2024-01-18 00:19:10', '2024-01-18 00:19:10'),
+(2388, 'add dak detail.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/savePermissionNothi?admin_id%5B0%5D=2&admin_id%5B1%5D=5&admin_id%5B2%5D=3&mainStatusNew=&main_id=11', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:19:11 pm', '2024-01-18 00:19:12', '2024-01-18 00:19:12'),
+(2389, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:19:17 pm', '2024-01-18 00:19:18', '2024-01-18 00:19:18'),
+(2390, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:19:50 pm', '2024-01-18 00:19:51', '2024-01-18 00:19:51'),
+(2391, 'view fdNine List ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:23:17 pm', '2024-01-18 00:23:18', '2024-01-18 00:23:18'),
+(2392, 'view fdNine List ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:26:24 pm', '2024-01-18 00:26:25', '2024-01-18 00:26:25'),
+(2393, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:27:23 pm', '2024-01-18 00:27:23', '2024-01-18 00:27:23'),
+(2394, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:37:02 pm', '2024-01-18 00:37:03', '2024-01-18 00:37:03');
+INSERT INTO `log_activities` (`id`, `subject`, `url`, `method`, `ip_or_mac`, `agent`, `admin_id`, `activity_time`, `created_at`, `updated_at`) VALUES
+(2395, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:47:46 pm', '2024-01-18 00:47:46', '2024-01-18 00:47:46'),
+(2396, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:49:21 pm', '2024-01-18 00:49:22', '2024-01-18 00:49:22'),
+(2397, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:49:31 pm', '2024-01-18 00:49:31', '2024-01-18 00:49:31'),
+(2398, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:50:27 pm', '2024-01-18 00:50:27', '2024-01-18 00:50:27'),
+(2399, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:51:26 pm', '2024-01-18 00:51:27', '2024-01-18 00:51:27'),
+(2400, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '12:53:04 pm', '2024-01-18 00:53:05', '2024-01-18 00:53:05'),
+(2401, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:02:55 pm', '2024-01-18 01:02:56', '2024-01-18 01:02:56'),
+(2402, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:08:13 pm', '2024-01-18 01:08:14', '2024-01-18 01:08:14'),
+(2403, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:08:17 pm', '2024-01-18 01:08:17', '2024-01-18 01:08:17'),
+(2404, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:10:25 pm', '2024-01-18 01:10:26', '2024-01-18 01:10:26'),
+(2405, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:25:53 pm', '2024-01-18 01:25:54', '2024-01-18 01:25:54'),
+(2406, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:26:03 pm', '2024-01-18 01:26:03', '2024-01-18 01:26:03'),
+(2407, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:27:03 pm', '2024-01-18 01:27:04', '2024-01-18 01:27:04'),
+(2408, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:27:26 pm', '2024-01-18 01:27:26', '2024-01-18 01:27:26'),
+(2409, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:28:43 pm', '2024-01-18 01:28:44', '2024-01-18 01:28:44'),
+(2410, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:31:06 pm', '2024-01-18 01:31:06', '2024-01-18 01:31:06'),
+(2411, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:37:26 pm', '2024-01-18 01:37:27', '2024-01-18 01:37:27'),
+(2412, 'verified_fd_nine_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_download/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:38:28 pm', '2024-01-18 01:38:28', '2024-01-18 01:38:28'),
+(2413, 'view fdNine detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9Form/7', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:47:42 pm', '2024-01-18 01:47:43', '2024-01-18 01:47:43'),
+(2414, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:55:14 pm', '2024-01-18 01:55:15', '2024-01-18 01:55:15'),
+(2415, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:56:46 pm', '2024-01-18 01:56:46', '2024-01-18 01:56:46'),
+(2416, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:58:01 pm', '2024-01-18 01:58:01', '2024-01-18 01:58:01'),
+(2417, 'view fdNineOne List ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:58:31 pm', '2024-01-18 01:58:32', '2024-01-18 01:58:32'),
+(2418, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:58:36 pm', '2024-01-18 01:58:37', '2024-01-18 01:58:37'),
+(2419, 'verified_fd_nine_one_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_one_download/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '01:58:45 pm', '2024-01-18 01:58:46', '2024-01-18 01:58:46'),
+(2420, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:22:43 pm', '2024-01-18 02:22:44', '2024-01-18 02:22:44'),
+(2421, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:27:30 pm', '2024-01-18 02:27:30', '2024-01-18 02:27:30'),
+(2422, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:28:06 pm', '2024-01-18 02:28:06', '2024-01-18 02:28:06'),
+(2423, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:28:37 pm', '2024-01-18 02:28:37', '2024-01-18 02:28:37'),
+(2424, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:29:01 pm', '2024-01-18 02:29:02', '2024-01-18 02:29:02'),
+(2425, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:29:53 pm', '2024-01-18 02:29:54', '2024-01-18 02:29:54'),
+(2426, 'view fdNineOne List ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:29:59 pm', '2024-01-18 02:30:00', '2024-01-18 02:30:00'),
+(2427, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:30:02 pm', '2024-01-18 02:30:03', '2024-01-18 02:30:03'),
+(2428, 'verified_fd_nine_one_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_one_download/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:30:09 pm', '2024-01-18 02:30:09', '2024-01-18 02:30:09'),
+(2429, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:37:27 pm', '2024-01-18 02:37:28', '2024-01-18 02:37:28'),
+(2430, 'verified_fd_nine_one_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_one_download/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:37:35 pm', '2024-01-18 02:37:36', '2024-01-18 02:37:36'),
+(2431, 'verified_fd_nine_one_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_one_download/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:39:46 pm', '2024-01-18 02:39:46', '2024-01-18 02:39:46'),
+(2432, 'verified_fd_nine_one_download', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/verified_fd_nine_one_download/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:33 pm', '2024-01-18 02:40:33', '2024-01-18 02:40:33'),
+(2433, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:40:52 pm', '2024-01-18 02:40:52', '2024-01-18 02:40:52'),
+(2434, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:42:05 pm', '2024-01-18 02:42:06', '2024-01-18 02:42:06'),
+(2435, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:42:30 pm', '2024-01-18 02:42:30', '2024-01-18 02:42:30'),
+(2436, 'view fdNineOne List ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:42:37 pm', '2024-01-18 02:42:37', '2024-01-18 02:42:37'),
+(2437, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:42:41 pm', '2024-01-18 02:42:41', '2024-01-18 02:42:41'),
+(2438, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:46:51 pm', '2024-01-18 02:46:51', '2024-01-18 02:46:51'),
+(2439, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:50:21 pm', '2024-01-18 02:50:22', '2024-01-18 02:50:22'),
+(2440, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '02:54:36 pm', '2024-01-18 02:54:37', '2024-01-18 02:54:37'),
+(2441, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:07:52 pm', '2024-01-18 03:07:53', '2024-01-18 03:07:53'),
+(2442, 'view dak list.', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/dakBranchList', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:08:12 pm', '2024-01-18 03:08:13', '2024-01-18 03:08:13'),
+(2443, 'download fdNineOne pdf ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneDownload/appoinmentLetter/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:18:34 pm', '2024-01-18 03:18:34', '2024-01-18 03:18:34'),
+(2444, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:22:59 pm', '2024-01-18 03:23:00', '2024-01-18 03:23:00'),
+(2445, 'store forwarding letter', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/postForwardingLetter', 'POST', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:23:12 pm', '2024-01-18 03:23:12', '2024-01-18 03:23:12'),
+(2446, 'view fdNineOne detail ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/fd9OneForm/8', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:23:13 pm', '2024-01-18 03:23:13', '2024-01-18 03:23:13'),
+(2447, 'download forwardingLetterForNothi', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/forwardingLetterForNothi/3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:23:45 pm', '2024-01-18 03:23:45', '2024-01-18 03:23:45'),
+(2448, 'download forwardingLetterForNothi', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/forwardingLetterForNothi/3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:24:39 pm', '2024-01-18 03:24:40', '2024-01-18 03:24:40'),
+(2449, 'download forwardingLetterForNothi', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/forwardingLetterForNothi/3', 'GET', 'B0-A7-B9-EB-20-D0   \\Device\\Tcpip_{BE34F30D-E490-468C-860E-1BA42BCC5542}', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', '5', '03:24:54 pm', '2024-01-18 03:24:54', '2024-01-18 03:24:54');
 
 -- --------------------------------------------------------
 
@@ -4946,19 +5319,29 @@ CREATE TABLE `name_change_docs` (
 --
 
 INSERT INTO `name_change_docs` (`id`, `ngo_name_change_id`, `pdf_file_list`, `time_for_api`, `file_size`, `created_at`, `updated_at`) VALUES
-(117, 21, 'uploads/NameChangeDoc/2023-28-1217037485108561285580.pdf', '13:28:30 pm', '0.05', '2023-12-28 01:28:30', '2023-12-28 01:28:30'),
-(118, 21, 'uploads/NameChangeDoc/2023-28-1217037485101365773350.pdf', '13:28:30 pm', '0.01', '2023-12-28 01:28:30', '2023-12-28 01:28:30'),
-(119, 21, 'uploads/NameChangeDoc/2023-28-1217037485102216087386.pdf', '13:28:30 pm', '0.09', '2023-12-28 01:28:30', '2023-12-28 01:28:30'),
-(120, 21, 'uploads/NameChangeDoc/2023-28-1217037485106876283781.pdf', '13:28:30 pm', '0.09', '2023-12-28 01:28:30', '2023-12-28 01:28:30'),
-(121, 21, 'uploads/NameChangeDoc/2023-28-1217037485106869811550.pdf', '13:28:30 pm', '0.09', '2023-12-28 01:28:30', '2023-12-28 01:28:30'),
-(122, 21, 'uploads/NameChangeDoc/2023-28-1217037485101418863897.pdf', '13:28:30 pm', '0.09', '2023-12-28 01:28:30', '2023-12-28 01:28:30'),
-(123, 21, 'uploads/NameChangeDoc/2023-28-1217037485112011901185.pdf', '13:28:30 pm', '0.09', '2023-12-28 01:28:31', '2023-12-28 01:28:31'),
-(124, 21, 'uploads/NameChangeDoc/2023-28-1217037485119864035420.pdf', '13:28:30 pm', '0.09', '2023-12-28 01:28:31', '2023-12-28 01:28:31'),
-(125, 21, 'uploads/NameChangeDoc/2023-28-1217037485119254207194.pdf', '13:28:30 pm', '0.01', '2023-12-28 01:28:31', '2023-12-28 01:28:31'),
-(126, 21, 'uploads/NameChangeDoc/2023-28-1217037485111911287487.pdf', '13:28:30 pm', '0.01', '2023-12-28 01:28:31', '2023-12-28 01:28:31'),
-(127, 21, 'uploads/NameChangeDoc/2023-28-1217037485112286435458.pdf', '13:28:30 pm', '0.02', '2023-12-28 01:28:31', '2023-12-28 01:28:31'),
-(128, 21, 'uploads/NameChangeDoc/2023-28-1217037485114397818890.pdf', '13:28:30 pm', '0.02', '2023-12-28 01:28:31', '2023-12-28 01:28:31'),
-(129, 21, 'uploads/NameChangeDoc/2023-28-1217037485117217816299.pdf', '13:28:30 pm', '0.02', '2023-12-28 01:28:31', '2023-12-28 01:28:31');
+(130, 22, 'uploads/NameChangeDoc/2024-15-0117053101132699466944.pdf', '15:15:13 pm', '0.01', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(131, 22, 'uploads/NameChangeDoc/2024-15-0117053101136608213472.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(132, 22, 'uploads/NameChangeDoc/2024-15-0117053101136117004893.pdf', '15:15:13 pm', '0.01', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(133, 22, 'uploads/NameChangeDoc/2024-15-0117053101135983967921.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(134, 22, 'uploads/NameChangeDoc/2024-15-0117053101137204022818.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(135, 22, 'uploads/NameChangeDoc/2024-15-0117053101133499700131.pdf', '15:15:13 pm', '0.01', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(136, 22, 'uploads/NameChangeDoc/2024-15-0117053101131823057895.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(137, 22, 'uploads/NameChangeDoc/2024-15-0117053101131549639637.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:13', '2024-01-15 03:15:13'),
+(138, 22, 'uploads/NameChangeDoc/2024-15-0117053101149508502392.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:14', '2024-01-15 03:15:14'),
+(139, 22, 'uploads/NameChangeDoc/2024-15-0117053101143986843043.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:14', '2024-01-15 03:15:14'),
+(140, 22, 'uploads/NameChangeDoc/2024-15-0117053101146054140883.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:14', '2024-01-15 03:15:14'),
+(141, 22, 'uploads/NameChangeDoc/2024-15-0117053101145727480099.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:14', '2024-01-15 03:15:14'),
+(142, 22, 'uploads/NameChangeDoc/2024-15-0117053101149132277540.pdf', '15:15:13 pm', '0.02', '2024-01-15 03:15:14', '2024-01-15 03:15:14'),
+(143, 23, 'uploads/NameChangeDoc/2024-15-0117053161936212207851.pdf', '16:56:33 pm', '0.01', '2024-01-15 04:56:33', '2024-01-15 04:56:33'),
+(144, 23, 'uploads/NameChangeDoc/2024-15-0117053161933474291755.pdf', '16:56:33 pm', '0.01', '2024-01-15 04:56:33', '2024-01-15 04:56:33'),
+(145, 23, 'uploads/NameChangeDoc/2024-15-0117053161939805083341.pdf', '16:56:33 pm', '0.02', '2024-01-15 04:56:33', '2024-01-15 04:56:33'),
+(146, 23, 'uploads/NameChangeDoc/2024-15-0117053161932648307626.pdf', '16:56:33 pm', '0.02', '2024-01-15 04:56:33', '2024-01-15 04:56:33'),
+(147, 23, 'uploads/NameChangeDoc/2024-15-0117053161945648034822.pdf', '16:56:33 pm', '0.02', '2024-01-15 04:56:34', '2024-01-15 04:56:34'),
+(148, 23, 'uploads/NameChangeDoc/2024-15-0117053161947736509269.pdf', '16:56:33 pm', '0.02', '2024-01-15 04:56:34', '2024-01-15 04:56:34'),
+(149, 23, 'uploads/NameChangeDoc/2024-15-0117053161941450920350.pdf', '16:56:33 pm', '0.02', '2024-01-15 04:56:34', '2024-01-15 04:56:34'),
+(150, 23, 'uploads/NameChangeDoc/2024-15-0117053161944625092772.pdf', '16:56:33 pm', '0.01', '2024-01-15 04:56:34', '2024-01-15 04:56:34'),
+(151, 23, 'uploads/NameChangeDoc/2024-15-0117053161942253270250.pdf', '16:56:33 pm', '0.01', '2024-01-15 04:56:34', '2024-01-15 04:56:34'),
+(152, 23, 'uploads/NameChangeDoc/2024-15-0117053161946265527526.pdf', '16:56:33 pm', '0.01', '2024-01-15 04:56:34', '2024-01-15 04:56:34');
 
 -- --------------------------------------------------------
 
@@ -4977,6 +5360,13 @@ CREATE TABLE `name_change_office_saroks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `name_change_office_saroks`
+--
+
+INSERT INTO `name_change_office_saroks` (`id`, `parentnote_name_change_id`, `office_subject`, `office_sutro`, `description`, `extra_text`, `sarok_number`, `created_at`, `updated_at`) VALUES
+(2, 10, '<p>343</p>', '<p>3455</p>', '<p>45435345345</p>', NULL, '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪</p>', '2024-01-18 06:17:57', '2024-01-18 00:19:41');
 
 -- --------------------------------------------------------
 
@@ -5000,7 +5390,8 @@ CREATE TABLE `ngo_durations` (
 --
 
 INSERT INTO `ngo_durations` (`id`, `fd_one_form_id`, `ngo_duration_start_date`, `ngo_duration_end_date`, `ngo_status`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(19, 48, '2023-12-28', '2033-12-28', 'Accepted', NULL, '2023-12-28 01:24:46', '2023-12-28 01:24:46');
+(21, 67, '2024-01-15', '2034-01-15', 'Accepted', NULL, '2024-01-15 02:41:33', '2024-01-15 02:41:33'),
+(22, 68, '2024-01-15', '2034-01-15', 'Accepted', NULL, '2024-01-15 04:24:26', '2024-01-15 04:24:26');
 
 -- --------------------------------------------------------
 
@@ -5025,6 +5416,13 @@ CREATE TABLE `ngo_fd_seven_daks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `ngo_fd_seven_daks`
+--
+
+INSERT INTO `ngo_fd_seven_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fd_seven_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(4, '2', '5', '4', '1', '', '', '', '66', '1', NULL, '0', '2024-01-17 01:55:50', '2024-01-17 02:35:25');
+
 -- --------------------------------------------------------
 
 --
@@ -5042,11 +5440,18 @@ CREATE TABLE `ngo_fd_six_daks` (
   `attraction_attention` varchar(255) DEFAULT NULL,
   `dak_detail_id` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `nothi_jat_id` varchar(255) NOT NULL,
-  `nothi_jat_status` varchar(255) NOT NULL,
+  `nothi_jat_id` varchar(255) DEFAULT NULL,
+  `nothi_jat_status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ngo_fd_six_daks`
+--
+
+INSERT INTO `ngo_fd_six_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `fd_six_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(3, '2', '5', '4', '1', '', '', '', '65', '1', '0', '0', '2024-01-17 01:55:03', '2024-01-17 04:28:56');
 
 -- --------------------------------------------------------
 
@@ -5071,6 +5476,13 @@ CREATE TABLE `ngo_f_d_nine_daks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `ngo_f_d_nine_daks`
+--
+
+INSERT INTO `ngo_f_d_nine_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `f_d_nine_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(4, '2', '5', '7', '1', '', '', '', '70', '1', NULL, '0', '2024-01-17 02:47:09', '2024-01-17 02:47:21');
+
 -- --------------------------------------------------------
 
 --
@@ -5093,6 +5505,13 @@ CREATE TABLE `ngo_f_d_nine_one_daks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ngo_f_d_nine_one_daks`
+--
+
+INSERT INTO `ngo_f_d_nine_one_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `f_d_nine_one_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(6, '2', '5', '8', '1', '', '', '', '71', '1', NULL, '0', '2024-01-17 02:48:40', '2024-01-17 02:48:52');
 
 -- --------------------------------------------------------
 
@@ -5162,7 +5581,8 @@ CREATE TABLE `ngo_name_changes` (
 --
 
 INSERT INTO `ngo_name_changes` (`id`, `fd_one_form_id`, `previous_name_eng`, `previous_name_ban`, `present_name_eng`, `present_name_ban`, `status`, `comment`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(21, 48, 'utyutyu', 'yutyu', 'new name new local ngo', 'নতুন নাম নতুন লোকাল এনজিও', 'Accepted', NULL, '13:27:04 pm', '2023-12-28 01:27:04', '2023-12-28 01:27:04');
+(22, 67, 'Reed Hutchinson Associates', 'Warren and Noel Inc', 'local new ngo new name', 'স্থানীয় নতুন এনজিও নতুন নাম', 'Ongoing', NULL, '14:43:40 pm', '2024-01-15 02:43:40', '2024-01-15 02:43:40'),
+(23, 68, 'cacavaqe@mailinator.com', 'paruc@mailinator.com', 'new name new foreign ngo', 'নতুন নাম নতুন বিদেশী এনজিও', 'Ongoing', NULL, '16:26:29 pm', '2024-01-15 04:26:29', '2024-01-15 04:26:29');
 
 -- --------------------------------------------------------
 
@@ -5187,6 +5607,13 @@ CREATE TABLE `ngo_name_change_daks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `ngo_name_change_daks`
+--
+
+INSERT INTO `ngo_name_change_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `name_change_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
+(9, '2', '5', '23', '1', '', '', '', '62', '1', '0', '0', '2024-01-16 23:55:23', '2024-01-17 01:04:01');
+
 -- --------------------------------------------------------
 
 --
@@ -5208,31 +5635,22 @@ CREATE TABLE `ngo_other_docs` (
 --
 
 INSERT INTO `ngo_other_docs` (`id`, `fd_one_form_id`, `pdf_file_list`, `time_for_api`, `file_size`, `created_at`, `updated_at`) VALUES
-(166, 48, 'uploads/NgoOtherDoc/2023-27-1217036676475002262427.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(167, 48, 'uploads/NgoOtherDoc/2023-27-1217036676476983096935.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(168, 48, 'uploads/NgoOtherDoc/2023-27-1217036676473587848598.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(169, 48, 'uploads/NgoOtherDoc/2023-27-1217036676474261319558.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(170, 48, 'uploads/NgoOtherDoc/2023-27-1217036676472462427151.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(171, 48, 'uploads/NgoOtherDoc/2023-27-1217036676471199284996.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(172, 48, 'uploads/NgoOtherDoc/2023-27-1217036676473525857168.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(173, 48, 'uploads/NgoOtherDoc/2023-27-1217036676474897240315.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(174, 48, 'uploads/NgoOtherDoc/2023-27-1217036676477948299549.pdf', '15:00:46 pm', '0.01', '2023-12-27 03:00:47', '2023-12-27 03:00:47'),
-(183, 52, 'uploads/NgoOtherDoc/2023-28-1217037601184204579077.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:58', '2023-12-28 04:41:58'),
-(184, 52, 'uploads/NgoOtherDoc/2023-28-1217037601186235830898.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:58', '2023-12-28 04:41:58'),
-(185, 52, 'uploads/NgoOtherDoc/2023-28-1217037601188613491003.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:58', '2023-12-28 04:41:58'),
-(186, 52, 'uploads/NgoOtherDoc/2023-28-1217037601199513075371.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:59', '2023-12-28 04:41:59'),
-(187, 52, 'uploads/NgoOtherDoc/2023-28-1217037601193722788025.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:59', '2023-12-28 04:41:59'),
-(188, 52, 'uploads/NgoOtherDoc/2023-28-1217037601199832658056.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:59', '2023-12-28 04:41:59'),
-(189, 52, 'uploads/NgoOtherDoc/2023-28-1217037601192283458279.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:59', '2023-12-28 04:41:59'),
-(190, 52, 'uploads/NgoOtherDoc/2023-28-1217037601194382152883.pdf', '16:41:58 pm', '0.01', '2023-12-28 04:41:59', '2023-12-28 04:41:59'),
-(191, 53, 'uploads/NgoOtherDoc/2023-30-1217039183887755388887.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(192, 53, 'uploads/NgoOtherDoc/2023-30-1217039183881478868211.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(193, 53, 'uploads/NgoOtherDoc/2023-30-1217039183887169849266.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(194, 53, 'uploads/NgoOtherDoc/2023-30-1217039183884483986358.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(195, 53, 'uploads/NgoOtherDoc/2023-30-1217039183887115943339.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(196, 53, 'uploads/NgoOtherDoc/2023-30-1217039183885934418341.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(197, 53, 'uploads/NgoOtherDoc/2023-30-1217039183884520796947.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48'),
-(198, 53, 'uploads/NgoOtherDoc/2023-30-1217039183889839159532.pdf', '12:39:48 pm', '0.01', '2023-12-30 00:39:48', '2023-12-30 00:39:48');
+(239, 67, 'uploads/NgoOtherDoc/2024-15-0117053079843268740574.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:44', '2024-01-15 02:39:44'),
+(240, 67, 'uploads/NgoOtherDoc/2024-15-0117053079857630181505.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(241, 67, 'uploads/NgoOtherDoc/2024-15-0117053079857477086331.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(242, 67, 'uploads/NgoOtherDoc/2024-15-0117053079858224739039.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(243, 67, 'uploads/NgoOtherDoc/2024-15-0117053079854028358319.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(244, 67, 'uploads/NgoOtherDoc/2024-15-0117053079851573873757.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(245, 67, 'uploads/NgoOtherDoc/2024-15-0117053079859203895539.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(246, 67, 'uploads/NgoOtherDoc/2024-15-0117053079859154061040.pdf', '14:39:44 pm', '0.02', '2024-01-15 02:39:45', '2024-01-15 02:39:45'),
+(247, 68, 'uploads/NgoOtherDoc/2024-15-0117053141491803202217.pdf', '16:22:29 pm', '0.02', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(248, 68, 'uploads/NgoOtherDoc/2024-15-0117053141494299377162.pdf', '16:22:29 pm', '0.02', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(249, 68, 'uploads/NgoOtherDoc/2024-15-0117053141493179367553.pdf', '16:22:29 pm', '0.02', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(250, 68, 'uploads/NgoOtherDoc/2024-15-0117053141491120669566.pdf', '16:22:29 pm', '0.01', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(251, 68, 'uploads/NgoOtherDoc/2024-15-0117053141493268304436.pdf', '16:22:29 pm', '0.02', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(252, 68, 'uploads/NgoOtherDoc/2024-15-0117053141492912231989.pdf', '16:22:29 pm', '0.02', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(253, 68, 'uploads/NgoOtherDoc/2024-15-0117053141492711228348.pdf', '16:22:29 pm', '0.01', '2024-01-15 04:22:29', '2024-01-15 04:22:29'),
+(254, 68, 'uploads/NgoOtherDoc/2024-15-0117053141499421976839.pdf', '16:22:29 pm', '0.02', '2024-01-15 04:22:29', '2024-01-15 04:22:29');
 
 -- --------------------------------------------------------
 
@@ -5262,9 +5680,7 @@ CREATE TABLE `ngo_registration_daks` (
 --
 
 INSERT INTO `ngo_registration_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `registration_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `status`, `dak_detail_id`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
-(30, '2', '3', '36', '1', '', '', '', '1', '56', NULL, '0', '2023-12-30 03:35:01', '2023-12-30 03:35:34'),
-(31, '3', '5', '36', '1', '', '', '', '1', '57', NULL, '0', '2023-12-31 00:04:10', '2023-12-31 00:04:40'),
-(32, '2', '5', '35', '1', '', '', '', '1', '58', '12', '1', '2024-01-01 01:12:35', '2024-01-04 04:05:42');
+(33, '2', '5', '40', '1', '', '', '', '1', '60', NULL, '0', '2024-01-16 04:41:24', '2024-01-16 04:41:41');
 
 -- --------------------------------------------------------
 
@@ -5287,7 +5703,8 @@ CREATE TABLE `ngo_renews` (
 --
 
 INSERT INTO `ngo_renews` (`id`, `fd_one_form_id`, `status`, `comment`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(17, 48, 'Ongoing', NULL, '13:53:20 pm', '2023-12-28 01:53:20', '2023-12-28 01:53:20');
+(25, 67, 'Ongoing', NULL, '16:15:45 pm', '2024-01-15 04:15:45', '2024-01-15 04:15:45'),
+(26, 68, 'Ongoing', NULL, '17:39:12 pm', '2024-01-15 05:39:12', '2024-01-15 05:39:12');
 
 -- --------------------------------------------------------
 
@@ -5317,7 +5734,7 @@ CREATE TABLE `ngo_renew_daks` (
 --
 
 INSERT INTO `ngo_renew_daks` (`id`, `sender_admin_id`, `receiver_admin_id`, `renew_status_id`, `original_recipient`, `copy_of_work`, `informational_purposes`, `attraction_attention`, `dak_detail_id`, `status`, `nothi_jat_id`, `nothi_jat_status`, `created_at`, `updated_at`) VALUES
-(90, '2', '5', '17', '1', '', '', '', '59', '1', '12', '1', '2024-01-01 04:49:32', '2024-01-04 02:27:51');
+(91, '2', '5', '26', '1', '', '', '', '61', '1', NULL, '0', '2024-01-16 04:43:24', '2024-01-16 04:43:35');
 
 -- --------------------------------------------------------
 
@@ -5380,8 +5797,8 @@ CREATE TABLE `ngo_renew_infos` (
 --
 
 INSERT INTO `ngo_renew_infos` (`id`, `user_id`, `registration_number`, `organization_name`, `organization_address`, `address_of_head_office`, `country_of_origin`, `name_of_head_in_bd`, `job_type`, `nationality`, `verified_form`, `chief_name`, `chief_desi`, `address`, `phone`, `phone_new`, `fd_one_form_id`, `email`, `email_new`, `telephone_number`, `telephone_number_new`, `citizenship`, `profession`, `plan_of_operation`, `district`, `sub_district`, `fee_paid_status`, `supporting_paper`, `foregin_pdf`, `yearly_budget`, `copy_of_chalan`, `due_vat_pdf`, `change_ac_number`, `main_account_number`, `main_account_type`, `main_account_name_of_branch`, `name_of_bank`, `bank_address_main`, `web_site_name`, `mobile_new`, `mobile`, `time_for_api`, `digital_signature`, `digital_seal`, `yearly_budget_file`, `created_at`, `updated_at`) VALUES
-(18, 75, '212', 'utyutyu', 'tyuty', '23423', 'Andorra', 'rtyrtyrt', 'Part Time', 'qwewqew', NULL, 'sdfsd', 'dfsd', 'tyutyu', '2342343', 'wqewqewq', 51, 'kajolkamruzzaman.cse@gmail.com', 'kkajol428@gmail.com', NULL, NULL, NULL, 'wewqe', NULL, NULL, NULL, NULL, NULL, 'uploads/FdOneForm/2023-27-1217036687187138868382.pdf', '55555555', 'uploads/copy_of_chalan/2023-27-1217036688066972019107.pdf', 'uploads/due_vat_pdf/2023-27-1217036688064878692579.pdf', 'uploads/change_ac_number/2023-27-1217036688067327220299.pdf', NULL, NULL, NULL, NULL, NULL, 'www.go.com', '01646735100', '01646735100', NULL, 'public/uploads/ngoHead/2023-27-1217036675201970586899.jpg', 'public/uploads/ngoHead/2023-27-1217036675202113584394.jpg', 'uploads/FdOneForm/2023-27-1217036687184148819466.pdf', '2023-12-27 03:18:27', '2023-12-27 03:20:06'),
-(19, 72, NULL, 'new name new local ngo', 'tyuty', 'tyuty', NULL, 'tyutyu', 'পূর্ণকালীন', 'qwewqew', NULL, 'wewqeqw', 'retert', 'tyutyu', '01646735100', 'sdfsd', 48, 'kkajol428@gmail.com', 'k@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/ngoHead/2023-28-1217037493219448449592.pdf', '55555555', 'uploads/NgoRenewInfo/2023-28-1217037500004133855101.pdf', 'uploads/NgoRenewInfo/2023-28-1217037500005668075499.pdf', 'uploads/NgoRenewInfo/2023-28-1217037500002681386738.pdf', '456456', '4565', 'rtyrt', '456', 'rtyrt', 'www.go.com', '01646735100', '2342343', NULL, 'public/uploads/ngoHead/2023-28-1217037493211506910460.jpg', 'public/uploads/ngoHead/2023-28-1217037493217293819749.jpg', 'uploads/ngoHead/2023-28-1217037493218308491991.pdf', '2023-12-28 01:42:01', '2023-12-28 01:53:20');
+(30, 86, NULL, 'Reed Hutchinson Associates', 'Espinoza and Everett Co', 'Pariatur Molestias', NULL, 'Price Horn', 'খণ্ডকালীন', 'qwewqew', NULL, 'করিম আলী খান', 'প্রধান নির্বাহী', 'Quas sint incidunt', '55111111111', 'sdfsd', 67, 'lomisyxiv@mailinator.com', 'k@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/ngoHead/2024-15-0117053136485315290066.pdf', '55555555', 'uploads/NgoRenewInfo/2024-15-0117053137452570035276.pdf', 'uploads/NgoRenewInfo/2024-15-0117053137451010241787.pdf', 'uploads/NgoRenewInfo/2024-15-0117053137456875410807.pdf', 'rtyrty', 'ডিপোজিট', 'গুলশান ১', 'বাংলা ব্যাংক', 'rtyrt', 'Robin Ball', '01646735100', '+1 (878) 436-2357', NULL, 'public/uploads/ngoHead/2024-15-0117053136482322386807.png', 'public/uploads/ngoHead/2024-15-0117053136487863763380.png', 'uploads/ngoHead/2024-15-0117053136483026200139.pdf', '2024-01-15 04:14:08', '2024-01-15 04:15:45'),
+(31, 87, NULL, 'cacavaqe@mailinator.com', 'mulydipy@mailinator.com', 'bununi@mailinator.com', NULL, 'cubid@mailinator.com', 'Part Time', 'qwewqew', NULL, 'wewqeqw', 'qweqweqw', 'lilodeti@mailinator.com', '29011111111', 'sdfsd', 68, 'jixuta@mailinator.com', 'k@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/ngoHead/2024-15-0117053171247723169338.pdf', '55555555', 'uploads/NgoRenewInfo/2024-15-0117053187528512270900.pdf', 'uploads/NgoRenewInfo/2024-15-0117053187523395051212.pdf', 'uploads/NgoRenewInfo/2024-15-0117053187527846920221.pdf', 'sdfgsd', 'fdgdf', 'dfg', 'বাংলা ব্যাংক', 'dfgdf', 'www.go.com', '01646735100', '11111111111', NULL, 'public/uploads/ngoHead/2024-15-0117053171248149275379.png', 'public/uploads/ngoHead/2024-15-0117053171245555368871.png', 'uploads/ngoHead/2024-15-0117053171242253957790.pdf', '2024-01-15 05:12:04', '2024-01-15 05:39:12');
 
 -- --------------------------------------------------------
 
@@ -5408,9 +5825,8 @@ CREATE TABLE `ngo_statuses` (
 --
 
 INSERT INTO `ngo_statuses` (`id`, `fd_one_form_id`, `email`, `reg_type`, `reg_id`, `print_date`, `status`, `comment`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(32, 48, 'kkajol428@gmail.com', 'NGO Registration', '8131261903113800', NULL, 'Accepted', '0', NULL, '2023-12-28 01:23:19', '2023-12-28 01:23:19'),
-(35, 52, 'kajolkamruzzaman.cse@gmail.com', 'NGO Registration', '1247116553045725', NULL, 'Ongoing', NULL, NULL, '2023-12-30 00:29:37', '2023-12-30 00:29:37'),
-(36, 53, 'kajol1122018@gmail.com', 'NGO Registration', '6092307231977178', NULL, 'Ongoing', NULL, NULL, '2023-12-30 01:13:08', '2023-12-30 01:13:08');
+(39, 67, 'kkajol428@gmail.com', 'NGO Registration', '4041820226818970', NULL, 'Accepted', '0', NULL, '2024-01-15 02:40:02', '2024-01-15 02:40:02'),
+(40, 68, 'kajol1122018@gmail.com', 'NGO Registration', '8226857413825517', NULL, 'Ongoing', '0', NULL, '2024-01-15 04:22:50', '2024-01-15 04:22:50');
 
 -- --------------------------------------------------------
 
@@ -5437,10 +5853,8 @@ CREATE TABLE `ngo_type_and_languages` (
 --
 
 INSERT INTO `ngo_type_and_languages` (`id`, `user_id`, `ngo_type`, `ngo_type_new_old`, `registration`, `last_renew_date`, `ngo_language`, `first_one_form_check_status`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(52, 72, 'দেশিও', 'New', '0', '0', 'en', '1', '14:57:35', '2023-12-27 02:57:35', '2023-12-27 02:57:35'),
-(55, 75, 'Foreign', 'Old', '212', '2023-12-01', 'sp', '1', '15:17:24', '2023-12-27 03:17:24', '2023-12-27 03:17:24'),
-(56, 76, 'দেশিও', 'New', '0', '0', 'en', '1', '16:22:13', '2023-12-28 04:22:13', '2023-12-28 04:22:13'),
-(57, 77, 'Foreign', 'New', '0', '0', 'sp', '1', '12:33:00', '2023-12-30 00:33:00', '2023-12-30 00:33:00');
+(69, 86, 'দেশিও', 'New', '0', '0', 'en', '1', '14:36:18', '2024-01-15 02:36:18', '2024-01-15 02:36:18'),
+(70, 87, 'Foreign', 'New', '0', '0', 'sp', '1', '16:17:50', '2024-01-15 04:17:50', '2024-01-15 04:17:50');
 
 -- --------------------------------------------------------
 
@@ -5467,14 +5881,8 @@ CREATE TABLE `note_attachments` (
 --
 
 INSERT INTO `note_attachments` (`id`, `noteId`, `nothiId`, `dakId`, `status`, `child_id`, `title`, `link`, `admin_id`, `created_at`, `updated_at`) VALUES
-(1, 13, 11, NULL, 'renew', 23, 'বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/foreginPdfDownload/MTI=', 5, '2023-12-25 05:13:37', '2023-12-25 05:13:37'),
-(2, 17, 12, NULL, 'registration', 26, 'পরিচালন পরিকল্পনা', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/formOnePdf/52/plan', 5, '2024-01-01 01:24:51', '2024-01-01 01:24:51'),
-(3, 17, 12, NULL, 'registration', 26, 'এফডি -১ ফরম', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/formOnePdfMain/52', 5, '2024-01-01 01:27:53', '2024-01-01 01:27:53'),
-(4, 17, 12, NULL, 'registration', 26, 'পরিচালন পরিকল্পনা', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/formOnePdf/52/plan', 5, '2024-01-01 01:30:10', '2024-01-01 01:30:10'),
-(5, 17, 12, NULL, 'registration', 26, 'এফডি -১ ফরম', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/formOnePdfMain/52', 5, '2024-01-01 01:58:39', '2024-01-01 01:58:39'),
-(6, 17, 12, NULL, 'registration', 26, 'এফডি -১ ফরম', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/formOnePdfMain/52', 5, '2024-01-01 02:00:15', '2024-01-01 02:00:15'),
-(7, 17, 12, NULL, 'registration', 26, 'এফডি -১ ফরম', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/formOnePdfMain/52', 5, '2024-01-01 02:54:51', '2024-01-01 02:54:51'),
-(10, 14, 12, NULL, 'renew', 24, 'বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/foreginPdfDownload/MTk=', 5, '2024-01-03 00:30:07', '2024-01-03 00:30:07');
+(11, 10, 12, NULL, 'nameChange', 4, '০২টি জাতীয় পত্রিকায় ( বাংলা ও ইংরেজী পত্রিকায় \'নাম পরিবর্তন বিষয়ে বিজ্ঞাপনের মূলকপি', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nameChangeDoc/143', 5, '2024-01-18 00:16:52', '2024-01-18 00:16:52'),
+(12, 2, 12, NULL, 'fdNine', 8, 'একাডেমিক যোগ্যতা (একাডেমিক যোগ্যতার সমর্থনে সনদপত্রের কপি সংযুক্ত করতে হবে', 'http://localhost/databaseUpdate/potroOnuUpdate/admin/nVisaDocumentDownload/academicQualification/7', 5, '2024-01-18 01:57:32', '2024-01-18 01:57:32');
 
 -- --------------------------------------------------------
 
@@ -5492,13 +5900,6 @@ CREATE TABLE `nothi_approvers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `nothi_approvers`
---
-
-INSERT INTO `nothi_approvers` (`id`, `nothiId`, `noteId`, `adminId`, `status`, `bangla_date`, `created_at`, `updated_at`) VALUES
-(22, '12', '14', '2', 'renew', '১৯ পৌষ ১৪৩০', '2024-01-02 01:10:30', '2024-01-02 01:10:30');
 
 -- --------------------------------------------------------
 
@@ -5524,16 +5925,6 @@ CREATE TABLE `nothi_attarcts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `nothi_attarcts`
---
-
-INSERT INTO `nothi_attarcts` (`id`, `nothiId`, `noteId`, `adminId`, `nijOfficeId`, `otherOfficerName`, `otherOfficerAddress`, `otherOfficerDesignation`, `otherOfficerBranch`, `otherOfficerEmail`, `otherOfficerPhone`, `organization_name`, `status`, `created_at`, `updated_at`) VALUES
-(15, '11', '11', '2', 'renew', 'শেখ মোঃ মনিরুজ্জামান', NULL, 'মহাপরিচালক', 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2023-12-25 00:24:21', '2023-12-25 00:24:23'),
-(16, '11', '12', '2', 'renew', 'শেখ মোঃ মনিরুজ্জামান', NULL, 'মহাপরিচালক', 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2023-12-25 01:04:47', '2023-12-25 01:04:55'),
-(17, '12', '14', '2', 'renew', 'শেখ মোঃ মনিরুজ্জামান', NULL, 'মহাপরিচালক', 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2024-01-02 01:46:31', '2024-01-02 03:55:09'),
-(18, '12', '14', NULL, 'renew', NULL, 'dsfdsfdfd', 'fdfddf', NULL, 'kajol1122018@gmail.com', NULL, 'dfdsf', '1', '2024-01-02 03:55:04', '2024-01-02 03:55:09');
-
 -- --------------------------------------------------------
 
 --
@@ -5557,16 +5948,6 @@ CREATE TABLE `nothi_copies` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `nothi_copies`
---
-
-INSERT INTO `nothi_copies` (`id`, `nothiId`, `noteId`, `adminId`, `nijOfficeId`, `otherOfficerName`, `otherOfficerAddress`, `otherOfficerDesignation`, `otherOfficerBranch`, `otherOfficerEmail`, `otherOfficerPhone`, `organization_name`, `status`, `created_at`, `updated_at`) VALUES
-(13, '11', '11', '2', 'renew', 'শেখ মোঃ মনিরুজ্জামান', NULL, 'মহাপরিচালক', 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2023-12-25 00:24:28', '2023-12-25 00:24:31'),
-(14, '11', '12', '2', 'renew', 'শেখ মোঃ মনিরুজ্জামান', NULL, 'মহাপরিচালক', 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2023-12-25 01:04:59', '2023-12-25 01:05:04'),
-(15, '12', '14', '3', 'renew', 'মোঃ আনোয়ার হোসেন', NULL, 'পরিচালক', 'পরিচালক (প্রকল্প-১) শাখা (২)', NULL, '22222222222', NULL, '1', '2024-01-02 01:53:26', '2024-01-02 03:55:42'),
-(16, '12', '14', NULL, 'renew', NULL, 'r4r4rr', 'fff', NULL, NULL, NULL, 'rrr', '1', '2024-01-02 03:55:37', '2024-01-02 03:55:42');
 
 -- --------------------------------------------------------
 
@@ -5596,8 +5977,8 @@ CREATE TABLE `nothi_details` (
 --
 
 INSERT INTO `nothi_details` (`id`, `noteId`, `nothId`, `dakId`, `dakType`, `sender`, `receiver`, `back_status`, `permission_status`, `zari_permission_status`, `potroPdf`, `onumodon_id`, `created_at`, `updated_at`) VALUES
-(22, '16', '11', '31', 'registration', '2', '5', '1', NULL, NULL, NULL, NULL, '2024-01-01 00:30:13', '2024-01-01 00:30:13'),
-(23, '14', '12', '90', 'renew', '5', '2', NULL, '1', '1', 'uploads/IssuedPaper/IssuedPaper-03January2024-1704271990oKPMkT.pdf', NULL, '2024-01-02 04:36:49', '2024-01-02 04:36:49');
+(24, '10', '12', '9', 'nameChange', '5', '2', NULL, NULL, NULL, NULL, NULL, '2024-01-18 00:19:41', '2024-01-18 00:19:41'),
+(25, '2', '12', '4', 'fdNine', '5', '2', NULL, NULL, NULL, NULL, NULL, '2024-01-18 01:57:46', '2024-01-18 01:57:46');
 
 -- --------------------------------------------------------
 
@@ -5622,8 +6003,8 @@ CREATE TABLE `nothi_first_sender_lists` (
 --
 
 INSERT INTO `nothi_first_sender_lists` (`id`, `noteId`, `nothId`, `dakId`, `dakType`, `sender`, `receiver`, `created_at`, `updated_at`) VALUES
-(7, '16', '11', '31', 'registration', '5', '2', '2024-01-01 00:30:12', '2024-01-01 00:30:12'),
-(8, '14', '12', '90', 'renew', '5', '2', '2024-01-02 04:36:49', '2024-01-02 04:36:49');
+(9, '10', '12', '9', 'nameChange', '5', '2', '2024-01-18 00:19:41', '2024-01-18 00:19:41'),
+(10, '2', '12', '4', 'fdNine', '5', '2', '2024-01-18 01:57:46', '2024-01-18 01:57:46');
 
 -- --------------------------------------------------------
 
@@ -5673,18 +6054,12 @@ CREATE TABLE `nothi_permissions` (
 --
 
 INSERT INTO `nothi_permissions` (`id`, `nothId`, `branchId`, `adminId`, `created_at`, `updated_at`) VALUES
-(6, '6', 4, '3', '2023-12-11 23:54:51', '2023-12-11 23:54:51'),
-(7, '6', 2, '2', '2023-12-11 23:55:13', '2023-12-11 23:55:13'),
-(8, '6', 2, '5', '2023-12-12 22:57:35', '2023-12-12 22:57:35'),
-(9, '7', 2, '2', '2023-12-12 23:57:35', '2023-12-12 23:57:35'),
-(10, '7', 2, '5', '2023-12-12 23:57:36', '2023-12-12 23:57:36'),
-(11, '7', 4, '3', '2023-12-12 23:57:36', '2023-12-12 23:57:36'),
-(12, '10', 2, '2', '2023-12-21 02:34:56', '2023-12-21 02:34:56'),
-(13, '10', 2, '5', '2023-12-21 02:34:56', '2023-12-21 02:34:56'),
-(14, '11', 2, '2', '2023-12-23 05:44:54', '2023-12-23 05:44:54'),
-(15, '11', 2, '5', '2023-12-23 05:44:54', '2023-12-23 05:44:54'),
-(16, '11', 4, '3', '2023-12-23 05:44:54', '2023-12-23 05:44:54'),
-(17, '12', 2, '2', '2024-01-01 00:14:53', '2024-01-01 00:14:53');
+(18, '12', 2, '2', '2024-01-18 00:18:59', '2024-01-18 00:18:59'),
+(19, '12', 2, '5', '2024-01-18 00:18:59', '2024-01-18 00:18:59'),
+(20, '12', 4, '3', '2024-01-18 00:18:59', '2024-01-18 00:18:59'),
+(21, '11', 2, '2', '2024-01-18 00:19:12', '2024-01-18 00:19:12'),
+(22, '11', 2, '5', '2024-01-18 00:19:12', '2024-01-18 00:19:12'),
+(23, '11', 4, '3', '2024-01-18 00:19:12', '2024-01-18 00:19:12');
 
 -- --------------------------------------------------------
 
@@ -5710,17 +6085,6 @@ CREATE TABLE `nothi_prapoks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `nothi_prapoks`
---
-
-INSERT INTO `nothi_prapoks` (`id`, `adminId`, `nothiId`, `noteId`, `nijOfficeId`, `otherOfficerName`, `otherOfficerDesignation`, `otherOfficerAddress`, `otherOfficerBranch`, `otherOfficerEmail`, `otherOfficerPhone`, `organization_name`, `status`, `created_at`, `updated_at`) VALUES
-(42, '2', '11', 11, 'renew', 'শেখ মোঃ মনিরুজ্জামান', 'মহাপরিচালক', NULL, 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2023-12-25 00:24:12', '2023-12-25 00:24:16'),
-(43, '2', '11', 12, 'renew', 'শেখ মোঃ মনিরুজ্জামান', 'মহাপরিচালক', NULL, 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2023-12-25 01:04:38', '2023-12-25 01:04:43'),
-(45, '2', '12', 14, 'renew', 'শেখ মোঃ মনিরুজ্জামান', 'মহাপরিচালক', NULL, 'মহাপরিচালক মহোদয়ের শাখা (২)', NULL, '11111111111', NULL, '1', '2024-01-01 05:06:31', '2024-01-02 03:50:24'),
-(48, '3', '12', 14, 'renew', 'মোঃ আনোয়ার হোসেন', 'পরিচালক', NULL, 'পরিচালক (প্রকল্প-১) শাখা (২)', NULL, '22222222222', NULL, '1', '2024-01-01 05:06:33', '2024-01-02 03:50:24'),
-(50, NULL, '12', 14, 'renew', NULL, '5523423', '88823423432', NULL, 'kkajol428@gmail.com', NULL, '22234234', '1', '2024-01-02 03:50:13', '2024-01-02 03:50:24');
-
 -- --------------------------------------------------------
 
 --
@@ -5736,13 +6100,6 @@ CREATE TABLE `nothi_senders` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `nothi_senders`
---
-
-INSERT INTO `nothi_senders` (`id`, `nothiId`, `noteId`, `adminId`, `status`, `created_at`, `updated_at`) VALUES
-(12, '12', '14', '2', 'renew', '2024-01-02 01:36:16', '2024-01-02 01:36:16');
 
 -- --------------------------------------------------------
 
@@ -5789,7 +6146,7 @@ CREATE TABLE `n_visas` (
 --
 
 INSERT INTO `n_visas` (`id`, `fd_one_form_id`, `fd9_one_form_id`, `period_validity`, `permit_efct_date`, `visa_ref_no`, `visa_recomendation_letter_received_way`, `visa_recomendation_letter_ref_no`, `department_in`, `visa_category`, `applicant_photo`, `forwarding_letter`, `salary_remarks`, `other_benefit`, `status`, `created_at`, `updated_at`) VALUES
-(2, 48, 7, 'werwe', '2023-12-12', 'werwe', 'Online', 'werwe', 'NGO', 'N-Visa', 'public/uploads/applicant_photo/2023-28-1217037553306812051559.png', NULL, '34534', '34534', NULL, '2023-12-28 03:22:10', '2023-12-28 03:22:10');
+(3, 67, 8, '2', '2024-01-11', '2222', 'Online', '4555', 'NGO', 'N-Visa', 'public/uploads/applicant_photo/2024-16-0117053866597002117075.jpg', 'uploads/forwardingLetter/2024-18-0117055697927336936715.pdf', 'facos@mailinator.com', 'cimovi@mailinator.com', NULL, '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -5820,7 +6177,7 @@ CREATE TABLE `n_visa_authorized_personal_of_the_orgs` (
 --
 
 INSERT INTO `n_visa_authorized_personal_of_the_orgs` (`id`, `n_visa_id`, `auth_person_org_name`, `auth_person_org_house_no`, `auth_person_org_flat_no`, `auth_person_org_road_no`, `auth_person_org_post_office`, `auth_person_org_mobile`, `auth_person_org_district`, `auth_person_org_thana`, `submission_date`, `expatriate_name`, `expatriate_email`, `created_at`, `updated_at`) VALUES
-(2, 2, '43534', '34534', '34534534', '34534', '34534', '11111111111', '34543', '34534', '2023-12-14', '123412', 'k@gmail.com', '2023-12-28 03:22:11', '2023-12-28 03:22:11');
+(3, 3, 'metor@mailinator.com', 'qifo@mailinator.com', 'qycycoh@mailinator.com', 'fewupu@mailinator.com', 'zirajavuq@mailinator.com', '90654645645', 'fyguwadul@mailinator.com', 'qisuludoho@mailinator.com', '2024-01-16', 'mocede@mailinator.com', 'lytiza@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -5844,13 +6201,13 @@ CREATE TABLE `n_visa_compensation_and_benifits` (
 --
 
 INSERT INTO `n_visa_compensation_and_benifits` (`id`, `n_visa_id`, `salary_category`, `payment_type`, `amount`, `currency`, `created_at`, `updated_at`) VALUES
-(8, 2, 'Annual Bonus', 'Monthly', '34534', '34534', '2023-12-28 03:22:11', '2023-12-28 03:22:11'),
-(9, 2, 'Medical Allowance', 'Monthly', '43534', '34534', '2023-12-28 03:22:11', '2023-12-28 03:22:11'),
-(10, 2, 'Entertainment Allowance', 'Monthly', '34543', '34534', '2023-12-28 03:22:11', '2023-12-28 03:22:11'),
-(11, 2, 'Conveyance', 'Monthly', '34534', '34534', '2023-12-28 03:22:11', '2023-12-28 03:22:11'),
-(12, 2, 'House Rent', 'Yearly', '34543', '435345', '2023-12-28 03:22:11', '2023-12-28 03:22:11'),
-(13, 2, 'Overseas Allowance', 'Monthly', '345', '435', '2023-12-28 03:22:12', '2023-12-28 03:22:12'),
-(14, 2, 'Basic Salary', 'Monthly', '345', '345', '2023-12-28 03:22:12', '2023-12-28 03:22:12');
+(15, 3, 'Annual Bonus', 'Not Applicable', 'balamaribu@mailinator.com', 'zyxace@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59'),
+(16, 3, 'Medical Allowance', 'Not Applicable', 'hygicedyvy@mailinator.com', 'kamir@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59'),
+(17, 3, 'Entertainment Allowance', 'Monthly', 'sahijaz@mailinator.com', 'weruzu@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59'),
+(18, 3, 'Conveyance', 'Yearly', 'ratubyzese@mailinator.com', 'qydoqez@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59'),
+(19, 3, 'House Rent', 'Monthly', 'copirynahy@mailinator.com', 'cuqamy@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59'),
+(20, 3, 'Overseas Allowance', 'Not Applicable', 'vazukul@mailinator.com', 'sohewuni@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59'),
+(21, 3, 'Basic Salary', 'Monthly', 'nifyxibe@mailinator.com', 'vaja@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -5880,7 +6237,7 @@ CREATE TABLE `n_visa_employment_information` (
 --
 
 INSERT INTO `n_visa_employment_information` (`id`, `n_visa_id`, `employed_designation`, `date_of_arrival_in_bangladesh`, `visa_type`, `first_appoinment_date`, `desired_effective_date`, `travel_visa_cate`, `visa_validity`, `brief_job_description`, `employee_justification`, `desired_end_date`, `created_at`, `updated_at`) VALUES
-(2, 2, '3454', '2023-12-12', 'N-Visa', '2023-12-20', '2023-12-19', '2', '3453', '34534', '34534', '2023-12-18', '2023-12-28 03:22:11', '2023-12-28 03:22:11');
+(3, 3, 'tafivucygi@mailinator.com', '2024-01-09', 'N-Visa', '2024-01-10', '2024-01-10', '2', 'rujodakop@mailinator.com', 'Modi veritatis non i', 'Aspernatur consequat', '2024-01-23', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -5909,7 +6266,7 @@ CREATE TABLE `n_visa_manpower_of_the_offices` (
 --
 
 INSERT INTO `n_visa_manpower_of_the_offices` (`id`, `n_visa_id`, `local_executive`, `local_supporting_staff`, `local_total`, `foreign_executive`, `foreign_supporting_staff`, `foreign_total`, `gand_total`, `local_ratio`, `foreign_ratio`, `created_at`, `updated_at`) VALUES
-(2, 2, '4', '4', '4', '4', '4', '4', '4', '4', '4', '2023-12-28 03:22:11', '2023-12-28 03:22:11');
+(3, 3, 'lujuwow@mailinator.com', 'vyfofav@mailinator.com', 'fiminuzafu@mailinator.com', 'xydunu@mailinator.com', 'viqakudi@mailinator.com', 'zikelofy@mailinator.com', 'rudopibaba@mailinator.com', 'kokoxa@mailinator.com', 'rykydaxe@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -5929,13 +6286,6 @@ CREATE TABLE `n_visa_necessary_document_for_work_permits` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `n_visa_necessary_document_for_work_permits`
---
-
-INSERT INTO `n_visa_necessary_document_for_work_permits` (`id`, `n_visa_id`, `nomination_letter_of_buyer`, `registration_letter_of_board_of_investment`, `employee_contract_copy`, `board_of_the_directors_sign_letter`, `share_holder_copy`, `passport_photocopy`, `created_at`, `updated_at`) VALUES
-(1, 2, NULL, NULL, 'uploads/necessaryDocument/2023-28-1217037553313225122900.pdf', 'uploads/necessaryDocument/2023-28-1217037553312060637328.pdf', 'uploads/necessaryDocument/2023-28-1217037553314175805813.pdf', 'uploads/necessaryDocument/2023-28-1217037553312272198780.pdf', '2023-12-28 03:22:11', '2023-12-28 03:22:11');
 
 -- --------------------------------------------------------
 
@@ -5973,7 +6323,7 @@ CREATE TABLE `n_visa_particulars_of_foreign_incumbnets` (
 --
 
 INSERT INTO `n_visa_particulars_of_foreign_incumbnets` (`id`, `n_visa_id`, `name_of_the_foreign_national`, `nationality`, `passport_no`, `passport_issue_date`, `passport_issue_place`, `passport_expiry_date`, `home_country`, `house_no`, `flat_no`, `road_no`, `post_code`, `state`, `phone`, `city`, `fax_no`, `email`, `date_of_birth`, `martial_status`, `created_at`, `updated_at`) VALUES
-(2, 2, 'retert', 'ALB', '345634', '2023-12-20', '34534', '2023-12-18', 'ALA', '34534', '34534', '345', '3454', '3453', '34534', '34534', '34534', 'dg@gmail.com', '2023-12-12', 'Married', '2023-12-28 03:22:11', '2023-12-28 03:22:11');
+(3, 3, '456456', 'BEN', '45646546', '2024-01-11', 'lavyxih@mailinator.com', '2024-01-01', 'HTI', '45654', '456456', '546456', '456456', '654645654', '198', '45645', 'rtytryt', 'novawafol@mailinator.com', '2024-01-24', 'Married', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -6012,7 +6362,7 @@ CREATE TABLE `n_visa_particular_of_sponsor_or_employers` (
 --
 
 INSERT INTO `n_visa_particular_of_sponsor_or_employers` (`id`, `n_visa_id`, `org_name`, `org_house_no`, `org_flat_no`, `org_road_no`, `org_post_code`, `org_post_office`, `org_phone`, `org_district`, `org_thana`, `org_fax_no`, `org_email`, `org_type`, `nature_of_business`, `authorized_capital`, `paid_up_capital`, `remittance_received`, `industry_type`, `recommendation_of_company_board`, `company_share`, `created_at`, `updated_at`) VALUES
-(2, 2, 'werwe', 'werwe', 'werw', 'ewerwe', 'werew', 'wer', 'werwe', 'werwe', 'werew', 'wewe', 'kkajol428@gmail.com', 'NGO', 'wew', 'rtre', 'ertre', 'retre', 'NGO', 'ertr', 'retre', '2023-12-28 03:22:10', '2023-12-28 03:22:10');
+(3, 3, 'werer', 'werewr', '44', '565', '55', '5555', '56565465', '5565', 'hfghgh', 'fghfgh', 'kkajol428@gmail.com', 'NGO', 'fghfgh', 'tryrty', 'rtyt', '4565', 'NGO', '45654', '54654', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -6040,7 +6390,7 @@ CREATE TABLE `n_visa_work_place_addresses` (
 --
 
 INSERT INTO `n_visa_work_place_addresses` (`id`, `n_visa_id`, `work_house_no`, `work_flat_no`, `work_road_no`, `work_org_type`, `contact_person_mobile_number`, `work_district`, `work_thana`, `work_email`, `created_at`, `updated_at`) VALUES
-(2, 2, '34534', '34534', '34', 'NGO', '01646735100', '43534', '43534', '34534', '2023-12-28 03:22:11', '2023-12-28 03:22:11');
+(3, 3, 'xyqyfam@mailinator.com', 'hicasyj@mailinator.com', 'fuhe@mailinator.com', 'NGO', '92456456456', 'mevyl@mailinator.com', 'rolapa@mailinator.com', 'soqat@mailinator.com', '2024-01-16 00:30:59', '2024-01-16 00:30:59');
 
 -- --------------------------------------------------------
 
@@ -6200,6 +6550,13 @@ CREATE TABLE `parent_note_for_fd_nines` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `parent_note_for_fd_nines`
+--
+
+INSERT INTO `parent_note_for_fd_nines` (`id`, `nothi_detail_id`, `serial_number`, `subject`, `name`, `created_at`, `updated_at`) VALUES
+(2, 4, '12', 'নোট এর বিষয় টেস্ট 12', 'নোট', '2024-01-18 06:20:20', '2024-01-18 00:20:20');
+
 -- --------------------------------------------------------
 
 --
@@ -6215,6 +6572,13 @@ CREATE TABLE `parent_note_for_fd_nine_ones` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `parent_note_for_fd_nine_ones`
+--
+
+INSERT INTO `parent_note_for_fd_nine_ones` (`id`, `nothi_detail_id`, `serial_number`, `subject`, `name`, `created_at`, `updated_at`) VALUES
+(1, 6, '12', 'নোট এর বিষয় টেস্ট 123', 'নোট', '2024-01-17 19:58:23', '2024-01-18 01:58:23');
 
 -- --------------------------------------------------------
 
@@ -6264,6 +6628,13 @@ CREATE TABLE `parent_note_for_name_changes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `parent_note_for_name_changes`
+--
+
+INSERT INTO `parent_note_for_name_changes` (`id`, `nothi_detail_id`, `serial_number`, `subject`, `name`, `created_at`, `updated_at`) VALUES
+(10, 9, '12', 'নোট এর বিষয় টেস্ট', 'নোট', '2024-01-16 22:59:48', '2024-01-17 04:59:48');
+
 -- --------------------------------------------------------
 
 --
@@ -6285,10 +6656,7 @@ CREATE TABLE `parent_note_for_registrations` (
 --
 
 INSERT INTO `parent_note_for_registrations` (`id`, `nothi_detail_id`, `serial_number`, `subject`, `name`, `created_at`, `updated_at`) VALUES
-(14, 28, '11', 'নোট এর বিষয় টেস্ট', 'নোট', '2023-12-26 05:00:14', '2023-12-25 23:00:14'),
-(15, 30, '11', 'নোট এর বিষয় টেস্ট', 'নোট', '2023-12-29 22:22:14', '2023-12-30 04:22:14'),
-(16, 31, '11', 'নোট এর বিষয় টেস্ট', 'নোট', '2024-01-01 04:07:22', '2023-12-31 22:07:22'),
-(17, 32, '12', 'নোট এর বিষয় টেস্ট', 'নোট', '2023-12-31 19:13:41', '2024-01-01 01:13:41');
+(18, 33, '12', 'নোট এর বিষয় টেস্ট 1', 'নোট', '2024-01-16 23:11:15', '2024-01-17 05:11:15');
 
 -- --------------------------------------------------------
 
@@ -6311,7 +6679,7 @@ CREATE TABLE `parent_note_for_renews` (
 --
 
 INSERT INTO `parent_note_for_renews` (`id`, `nothi_detail_id`, `serial_number`, `subject`, `name`, `created_at`, `updated_at`) VALUES
-(14, 90, '12', 'নোট এর বিষয় টেস্ট', 'নোট', '2023-12-31 22:52:21', '2024-01-01 04:52:21');
+(15, 91, '12', 'নোট এর বিষয় টেস্ট 11', 'নোট', '2024-01-16 23:12:56', '2024-01-17 05:12:56');
 
 -- --------------------------------------------------------
 
@@ -6502,7 +6870,9 @@ CREATE TABLE `potrangsho_drafts` (
 
 INSERT INTO `potrangsho_drafts` (`id`, `adminId`, `nothiId`, `sarokId`, `noteId`, `receiverId`, `SentStatus`, `status`, `office_subject`, `office_sutro`, `description`, `extra_text`, `sarok_number`, `created_at`, `updated_at`) VALUES
 (12, 5, 12, 16, 14, NULL, 0, 'renew', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি।</p>', '<p>৩৪৫</p>', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি। কিন্তু অনেক সময় আমাদের বাংলাতে লরেম ইপ্সাম প্রয়োজন হয়। বাংলাদেশি ক্লায়েন্ট এর জন্যে লরেম ইপ্সাম দিয়ে ডিজাইন করলে কাজ খুব দ্রুত হত এবং দেখতেও সুন্দর লাগে। সে কথা ভেবেই আমি বাংলায় লরেম ইপ্সাম লিখা কথা ভাবি। ফাইলটি সম্পূর্ণ ফ্রি। এর জন্যে কোনোরকম টাকা দেওয়া লাগবে না।</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>ডাউনোডের জন্যে পাশের $ বক্স এ শুণ্য (০) টাইপ করার পর আপনার জিমেইল চাইবে। সেখানে আপনার জিমেইল দিলে ফাইলের ডাউনলোড লিংকটি চলে আসবে। ফাইলের অনৈতিক ব্যবহার কিছু অংশে কমানোর জন্যে এই প্রসেসটা করা হয়েছে। যদি ফাইলটি আপনার কাজে আসে তবে একটা রিভিউ দিতে পারেন বা বেহান্স এ কমেন্ট করতে পারেন। হয়তো আপনার একটা কমেন্টই আমার দিনটা আরো সুন্দর করে তুলবে</p>', NULL, '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪.৩৪৫</p>', '2024-01-01 21:17:12', '2024-01-02 03:17:12'),
-(13, 5, 12, 16, 14, 2, 1, 'renew', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি।</p>', '<p>৩৪৫</p>', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি। কিন্তু অনেক সময় আমাদের বাংলাতে লরেম ইপ্সাম প্রয়োজন হয়। বাংলাদেশি ক্লায়েন্ট এর জন্যে লরেম ইপ্সাম দিয়ে ডিজাইন করলে কাজ খুব দ্রুত হত এবং দেখতেও সুন্দর লাগে। সে কথা ভেবেই আমি বাংলায় লরেম ইপ্সাম লিখা কথা ভাবি। ফাইলটি সম্পূর্ণ ফ্রি। এর জন্যে কোনোরকম টাকা দেওয়া লাগবে না।</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>ডাউনোডের জন্যে পাশের $ বক্স এ শুণ্য (০) টাইপ করার পর আপনার জিমেইল চাইবে। সেখানে আপনার জিমেইল দিলে ফাইলের ডাউনলোড লিংকটি চলে আসবে। ফাইলের অনৈতিক ব্যবহার কিছু অংশে কমানোর জন্যে এই প্রসেসটা করা হয়েছে। যদি ফাইলটি আপনার কাজে আসে তবে একটা রিভিউ দিতে পারেন বা বেহান্স এ কমেন্ট করতে পারেন। হয়তো আপনার একটা কমেন্টই আমার দিনটা আরো সুন্দর করে তুলবে</p>', '<p>23</p>', '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪.৩৪৫</p>', '2024-01-01 22:17:48', '2024-01-02 04:36:49');
+(13, 5, 12, 16, 14, 2, 1, 'renew', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি।</p>', '<p>৩৪৫</p>', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি। কিন্তু অনেক সময় আমাদের বাংলাতে লরেম ইপ্সাম প্রয়োজন হয়। বাংলাদেশি ক্লায়েন্ট এর জন্যে লরেম ইপ্সাম দিয়ে ডিজাইন করলে কাজ খুব দ্রুত হত এবং দেখতেও সুন্দর লাগে। সে কথা ভেবেই আমি বাংলায় লরেম ইপ্সাম লিখা কথা ভাবি। ফাইলটি সম্পূর্ণ ফ্রি। এর জন্যে কোনোরকম টাকা দেওয়া লাগবে না।</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>ডাউনোডের জন্যে পাশের $ বক্স এ শুণ্য (০) টাইপ করার পর আপনার জিমেইল চাইবে। সেখানে আপনার জিমেইল দিলে ফাইলের ডাউনলোড লিংকটি চলে আসবে। ফাইলের অনৈতিক ব্যবহার কিছু অংশে কমানোর জন্যে এই প্রসেসটা করা হয়েছে। যদি ফাইলটি আপনার কাজে আসে তবে একটা রিভিউ দিতে পারেন বা বেহান্স এ কমেন্ট করতে পারেন। হয়তো আপনার একটা কমেন্টই আমার দিনটা আরো সুন্দর করে তুলবে</p>', '<p>23</p>', '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪.৩৪৫</p>', '2024-01-01 22:17:48', '2024-01-02 04:36:49'),
+(14, 5, 12, 2, 10, 2, 1, 'nameChange', '<p>343</p>', '<p>3455</p>', '<p>45435345345</p>', NULL, '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪</p>', '2024-01-18 06:17:57', '2024-01-18 00:19:41'),
+(15, 5, 12, 1, 2, 2, 1, 'fdNine', '<p>..............................dhgfh.................</p>', '<p>(যদি থাকে):...................fghfghfg............................</p>', '<p>fghfghfgh</p>', NULL, '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪</p>', '2024-01-17 19:57:22', '2024-01-18 01:57:46');
 
 -- --------------------------------------------------------
 
@@ -6562,8 +6932,9 @@ CREATE TABLE `renewal_files` (
 --
 
 INSERT INTO `renewal_files` (`id`, `fd_one_form_id`, `fd_eight_form_data`, `final_fd_eight_form`, `constitution_of_the_organization_has_changed`, `list_of_board_of_directors_or_board_of_trustees`, `organization_by_laws_or_constitution`, `work_procedure_of_organization`, `last_ten_years_audit_report_and_annual_report_of_the_company`, `registration_certificate`, `attested_copy_of_latest_registration_or_renewal_certificate`, `right_to_information_act`, `the_constitution_of_the_company_along_with_fee_if_changed`, `constitution_approved_by_primary_registering_authority`, `clean_copy_of_the_constitution`, `payment_of_change_fee`, `section_sub_section_of_the_constitution`, `previous_constitution_and_current_constitution_compare`, `constitution_of_the_organization_if_unchanged`, `nid_and_image_of_executive_committee_members`, `approval_of_executive_committee`, `committee_members_list`, `registration_renewal_fee`, `time_for_api`, `created_at`, `updated_at`) VALUES
-(27, 51, NULL, NULL, 'No', 'uploads/RenewalFile/2023-27-1217036688438758818999.pdf', 'uploads/RenewalFile/2023-27-1217036688438773796708.pdf', 'uploads/RenewalFile/2023-27-1217036688436356617786.pdf', 'uploads/RenewalFile/2023-27-1217036688435307364006.pdf', 'uploads/RenewalFile/2023-27-1217036688439352320543.pdf', 'uploads/RenewalFile/2023-27-1217036688433363160992.pdf', 'uploads/RenewalFile/2023-27-1217036688437923480784.pdf', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2023-27-1217036688437344166861.pdf', NULL, NULL, NULL, NULL, NULL, '2023-12-27 03:20:43', '2023-12-27 03:20:43'),
-(28, 48, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2023-28-1217037500001890301663.pdf', 'uploads/RenewalFile/2023-28-1217037500007816165917.pdf', 'uploads/RenewalFile/2023-28-1217037500001867385195.pdf', NULL, 'uploads/RenewalFile/2023-28-1217037500005288719034.pdf', 'uploads/RenewalFile/2023-28-1217037500001432891274.pdf', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2023-28-1217037500009045319836.pdf', 'uploads/RenewalFile/2023-28-1217037500006039867168.pdf', 'uploads/RenewalFile/2023-28-1217037500002307314735.pdf', 'uploads/RenewalFile/2023-28-1217037500005861188942.pdf', 'uploads/RenewalFile/2023-28-1217037500007979375195.pdf', NULL, '2023-12-28 01:53:20', '2023-12-28 01:53:20');
+(36, 67, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2024-15-0117053130379868408056.pdf', 'uploads/RenewalFile/2024-15-0117053130374756491946.pdf', 'uploads/RenewalFile/2024-15-0117053130373781837974.pdf', NULL, 'uploads/RenewalFile/2024-15-0117053130374087655748.pdf', 'uploads/RenewalFile/2024-15-0117053130378189416066.pdf', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2024-15-0117053130372185374589.pdf', 'uploads/RenewalFile/2024-15-0117053130374875750611.pdf', 'uploads/RenewalFile/2024-15-0117053130376146730355.pdf', 'uploads/RenewalFile/2024-15-0117053130376253475573.pdf', 'uploads/RenewalFile/2024-15-0117053130379895541694.pdf', NULL, '2024-01-15 04:03:57', '2024-01-15 04:03:57'),
+(37, 67, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2024-15-0117053137456517976759.pdf', 'uploads/RenewalFile/2024-15-0117053137454719480299.pdf', 'uploads/RenewalFile/2024-15-0117053137452835165767.pdf', NULL, 'uploads/RenewalFile/2024-15-0117053137459801869893.pdf', 'uploads/RenewalFile/2024-15-0117053137454916817845.pdf', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2024-15-0117053137453686443592.pdf', 'uploads/RenewalFile/2024-15-0117053137456383696440.pdf', 'uploads/RenewalFile/2024-15-0117053137454773214216.pdf', 'uploads/RenewalFile/2024-15-0117053137453497059651.pdf', 'uploads/RenewalFile/2024-15-0117053137456433981783.pdf', NULL, '2024-01-15 04:15:45', '2024-01-15 04:15:45'),
+(38, 68, NULL, NULL, 'No', 'uploads/RenewalFile/2024-15-0117053187521414013757.pdf', 'uploads/RenewalFile/2024-15-0117053187528809057634.pdf', 'uploads/RenewalFile/2024-15-0117053187524785832511.pdf', 'uploads/RenewalFile/2024-15-0117053187525436012071.pdf', 'uploads/RenewalFile/2024-15-0117053187529300729897.pdf', 'uploads/RenewalFile/2024-15-0117053187526222097253.pdf', 'uploads/RenewalFile/2024-15-0117053187523523832263.pdf', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/RenewalFile/2024-15-0117053187523916326056.pdf', NULL, NULL, NULL, NULL, NULL, '2024-01-15 05:39:12', '2024-01-15 05:39:12');
 
 -- --------------------------------------------------------
 
@@ -6582,13 +6953,6 @@ CREATE TABLE `renew_office_saroks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `renew_office_saroks`
---
-
-INSERT INTO `renew_office_saroks` (`id`, `parent_note_for_renew_id`, `office_subject`, `office_sutro`, `description`, `extra_text`, `sarok_number`, `created_at`, `updated_at`) VALUES
-(16, 14, '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি।</p>', '<p>৩৪৫</p>', '<p>লরেম ইপসাম ইংরেজিটা আমরা সবাই ব্যবহার করে থাকি। কিন্তু অনেক সময় আমাদের বাংলাতে লরেম ইপ্সাম প্রয়োজন হয়। বাংলাদেশি ক্লায়েন্ট এর জন্যে লরেম ইপ্সাম দিয়ে ডিজাইন করলে কাজ খুব দ্রুত হত এবং দেখতেও সুন্দর লাগে। সে কথা ভেবেই আমি বাংলায় লরেম ইপ্সাম লিখা কথা ভাবি। ফাইলটি সম্পূর্ণ ফ্রি। এর জন্যে কোনোরকম টাকা দেওয়া লাগবে না।</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>ডাউনোডের জন্যে পাশের $ বক্স এ শুণ্য (০) টাইপ করার পর আপনার জিমেইল চাইবে। সেখানে আপনার জিমেইল দিলে ফাইলের ডাউনলোড লিংকটি চলে আসবে। ফাইলের অনৈতিক ব্যবহার কিছু অংশে কমানোর জন্যে এই প্রসেসটা করা হয়েছে। যদি ফাইলটি আপনার কাজে আসে তবে একটা রিভিউ দিতে পারেন বা বেহান্স এ কমেন্ট করতে পারেন। হয়তো আপনার একটা কমেন্টই আমার দিনটা আরো সুন্দর করে তুলবে</p>', '<p>23</p>', '<p>০৩.০৭.২৬৬৬.০৩.১৪.০০২.২৪.৩৪৫</p>', '2024-01-01 21:17:12', '2024-01-02 04:36:49');
 
 -- --------------------------------------------------------
 
@@ -6874,10 +7238,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `user_phone`, `user_address`, `user_image`, `email`, `non_verified_email`, `user_email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `is_email_verified`) VALUES
-(72, 'নতুন এনজিও', '01646735100', NULL, NULL, 'kkajol428@gmail.com', 'kkajol428@gmail.com', NULL, '$2y$10$RRCchaEfPqDod2TG55EHZe/PGwJbKqMoRsCrOKrPVXE18VQUMeX2W', NULL, '2023-12-27 02:56:27', '2023-12-27 02:56:48', 1),
-(75, 'foreign old ngo', '01646735100', NULL, NULL, 'kamruzzamankajol.cse@gmail.com', 'kamruzzamankajol.cse@gmail.com', NULL, '$2y$10$E3NDvaGZ3efG6Ezm0c6CyeiBFvCWAnL9/36dcSGBfcwVUR63BjDzO', NULL, '2023-12-27 03:15:45', '2023-12-27 03:16:57', 1),
-(76, 'local new ngo', '01646735100', NULL, NULL, 'kajolkamruzzaman.cse@gmail.com', 'kajolkamruzzaman.cse@gmail.com', NULL, '$2y$10$3Ng9hcxqQ.5pUlJKZqnw3uPfrRz1pj/WzWYVLPhafpAdU94YLDk8u', NULL, '2023-12-28 04:21:22', '2023-12-28 04:21:47', 1),
-(77, 'foreign new ngo', '01646735100', NULL, NULL, 'kajol1122018@gmail.com', 'kajol1122018@gmail.com', NULL, '$2y$10$d67s.qFO/7QXnR75repFzus1e.q.d6sOL72PpaWkNzWabGGENseOq', NULL, '2023-12-30 00:30:27', '2023-12-30 00:32:35', 1);
+(86, 'new local ngo', '01646735100', NULL, NULL, 'kkajol428@gmail.com', 'kkajol428@gmail.com', NULL, '$2y$10$YJx7eJ1s9BpV9nWSq7SGj.vDtayc62AAtYbFFQ5iDL57FNZdWrsCi', NULL, '2024-01-15 02:33:50', '2024-01-15 02:34:51', 1),
+(87, 'foreign old ngo', '01646735100', NULL, NULL, 'kajol1122018@gmail.com', 'kajol1122018@gmail.com', NULL, '$2y$10$mJdLbHobL3URewcjJQrZp./DBSIJEBi8xFvZuo48CeZ1261gPS4TO', NULL, '2024-01-15 04:16:49', '2024-01-15 04:17:17', 1);
 
 -- --------------------------------------------------------
 
@@ -6972,7 +7334,17 @@ INSERT INTO `users_verify` (`user_id`, `token`, `created_at`, `updated_at`) VALU
 (74, 'i0eqx8QqYJ', '2023-12-27 03:09:13', '2023-12-27 03:09:13'),
 (75, 'GeW8I5nmQF', '2023-12-27 03:15:45', '2023-12-27 03:15:45'),
 (76, 'peB6h8xSaH', '2023-12-28 04:21:22', '2023-12-28 04:21:22'),
-(77, 'kfmc53LFcb', '2023-12-30 00:30:27', '2023-12-30 00:30:27');
+(77, 'kfmc53LFcb', '2023-12-30 00:30:27', '2023-12-30 00:30:27'),
+(78, '4TUS7eRvps', '2024-01-12 22:51:34', '2024-01-12 22:51:34'),
+(79, '2uUUozAN1C', '2024-01-13 00:05:52', '2024-01-13 00:05:52'),
+(80, 'cf4FShArEy', '2024-01-13 00:21:48', '2024-01-13 00:21:48'),
+(81, 'pAQTg8Wl3L', '2024-01-13 01:57:06', '2024-01-13 01:57:06'),
+(82, 'GNjl0TAwBr', '2024-01-13 02:33:18', '2024-01-13 02:33:18'),
+(83, 'CFlzV53Bze', '2024-01-13 02:58:06', '2024-01-13 02:58:06'),
+(84, '4CE6PqBHCD', '2024-01-13 03:55:54', '2024-01-13 03:55:54'),
+(85, 'rTMUOax4D7', '2024-01-13 23:38:09', '2024-01-13 23:38:09'),
+(86, 'YMBDSgir6W', '2024-01-15 02:33:50', '2024-01-15 02:33:50'),
+(87, 'FuvlvTN0x9', '2024-01-15 04:16:49', '2024-01-15 04:16:49');
 
 --
 -- Indexes for dumped tables
@@ -7895,7 +8267,7 @@ ALTER TABLE `admin_designation_histories`
 -- AUTO_INCREMENT for table `article_signs`
 --
 ALTER TABLE `article_signs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `attachments`
@@ -7925,7 +8297,7 @@ ALTER TABLE `child_note_for_fc_twos`
 -- AUTO_INCREMENT for table `child_note_for_fd_nines`
 --
 ALTER TABLE `child_note_for_fd_nines`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `child_note_for_fd_nine_ones`
@@ -7955,7 +8327,7 @@ ALTER TABLE `child_note_for_fd_threes`
 -- AUTO_INCREMENT for table `child_note_for_name_changes`
 --
 ALTER TABLE `child_note_for_name_changes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `child_note_for_registrations`
@@ -7985,7 +8357,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `dak_details`
 --
 ALTER TABLE `dak_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `designation_lists`
@@ -8015,19 +8387,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `fc1_forms`
 --
 ALTER TABLE `fc1_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `fc2_forms`
 --
 ALTER TABLE `fc2_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `fc_one_daks`
 --
 ALTER TABLE `fc_one_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fc_one_office_saroks`
@@ -8039,7 +8411,7 @@ ALTER TABLE `fc_one_office_saroks`
 -- AUTO_INCREMENT for table `fc_two_daks`
 --
 ALTER TABLE `fc_two_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `fc_two_office_saroks`
@@ -8069,37 +8441,37 @@ ALTER TABLE `fd2_fd3_other_infos`
 -- AUTO_INCREMENT for table `fd2_fd7_other_infos`
 --
 ALTER TABLE `fd2_fd7_other_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fd2_forms`
 --
 ALTER TABLE `fd2_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fd2_form_for_fc1_forms`
 --
 ALTER TABLE `fd2_form_for_fc1_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fd2_form_for_fc2_forms`
 --
 ALTER TABLE `fd2_form_for_fc2_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `fd2_form_for_fd3_forms`
 --
 ALTER TABLE `fd2_form_for_fd3_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `fd2_form_for_fd7_forms`
 --
 ALTER TABLE `fd2_form_for_fd7_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `fd2_form_other_infos`
@@ -8111,31 +8483,31 @@ ALTER TABLE `fd2_form_other_infos`
 -- AUTO_INCREMENT for table `fd3_forms`
 --
 ALTER TABLE `fd3_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `fd6_forms`
 --
 ALTER TABLE `fd6_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fd6_form_prokolpo_areas`
 --
 ALTER TABLE `fd6_form_prokolpo_areas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `fd7_forms`
 --
 ALTER TABLE `fd7_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fd7_form_prokolpo_areas`
 --
 ALTER TABLE `fd7_form_prokolpo_areas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `fd9_foreigner_employee_family_member_lists`
@@ -8147,7 +8519,7 @@ ALTER TABLE `fd9_foreigner_employee_family_member_lists`
 -- AUTO_INCREMENT for table `fd9_forms`
 --
 ALTER TABLE `fd9_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `fd9_forwarding_letter_edits`
@@ -8159,13 +8531,13 @@ ALTER TABLE `fd9_forwarding_letter_edits`
 -- AUTO_INCREMENT for table `fd9_one_forms`
 --
 ALTER TABLE `fd9_one_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `fd_nine_office_saroks`
 --
 ALTER TABLE `fd_nine_office_saroks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `fd_nine_one_office_saroks`
@@ -8177,37 +8549,37 @@ ALTER TABLE `fd_nine_one_office_saroks`
 -- AUTO_INCREMENT for table `fd_one_adviser_lists`
 --
 ALTER TABLE `fd_one_adviser_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `fd_one_bank_accounts`
 --
 ALTER TABLE `fd_one_bank_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `fd_one_forms`
 --
 ALTER TABLE `fd_one_forms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `fd_one_member_lists`
 --
 ALTER TABLE `fd_one_member_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `fd_one_other_pdf_lists`
 --
 ALTER TABLE `fd_one_other_pdf_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `fd_one_source_of_funds`
 --
 ALTER TABLE `fd_one_source_of_funds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `fd_seven_office_saroks`
@@ -8225,7 +8597,7 @@ ALTER TABLE `fd_six_office_saroks`
 -- AUTO_INCREMENT for table `fd_three_daks`
 --
 ALTER TABLE `fd_three_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fd_three_office_saroks`
@@ -8237,7 +8609,7 @@ ALTER TABLE `fd_three_office_saroks`
 -- AUTO_INCREMENT for table `form_complete_statuses`
 --
 ALTER TABLE `form_complete_statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `form_eights`
@@ -8267,7 +8639,7 @@ ALTER TABLE `job_histories`
 -- AUTO_INCREMENT for table `log_activities`
 --
 ALTER TABLE `log_activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2084;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2450;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -8279,43 +8651,43 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `name_change_docs`
 --
 ALTER TABLE `name_change_docs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `name_change_office_saroks`
 --
 ALTER TABLE `name_change_office_saroks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ngo_durations`
 --
 ALTER TABLE `ngo_durations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `ngo_fd_seven_daks`
 --
 ALTER TABLE `ngo_fd_seven_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ngo_fd_six_daks`
 --
 ALTER TABLE `ngo_fd_six_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ngo_f_d_nine_daks`
 --
 ALTER TABLE `ngo_f_d_nine_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ngo_f_d_nine_one_daks`
 --
 ALTER TABLE `ngo_f_d_nine_one_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ngo_member_lists`
@@ -8333,61 +8705,61 @@ ALTER TABLE `ngo_member_nid_photos`
 -- AUTO_INCREMENT for table `ngo_name_changes`
 --
 ALTER TABLE `ngo_name_changes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `ngo_name_change_daks`
 --
 ALTER TABLE `ngo_name_change_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ngo_other_docs`
 --
 ALTER TABLE `ngo_other_docs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
 
 --
 -- AUTO_INCREMENT for table `ngo_registration_daks`
 --
 ALTER TABLE `ngo_registration_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `ngo_renews`
 --
 ALTER TABLE `ngo_renews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `ngo_renew_daks`
 --
 ALTER TABLE `ngo_renew_daks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `ngo_renew_infos`
 --
 ALTER TABLE `ngo_renew_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `ngo_statuses`
 --
 ALTER TABLE `ngo_statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `ngo_type_and_languages`
 --
 ALTER TABLE `ngo_type_and_languages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `note_attachments`
 --
 ALTER TABLE `note_attachments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `nothi_approvers`
@@ -8411,13 +8783,13 @@ ALTER TABLE `nothi_copies`
 -- AUTO_INCREMENT for table `nothi_details`
 --
 ALTER TABLE `nothi_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `nothi_first_sender_lists`
 --
 ALTER TABLE `nothi_first_sender_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `nothi_lists`
@@ -8429,7 +8801,7 @@ ALTER TABLE `nothi_lists`
 -- AUTO_INCREMENT for table `nothi_permissions`
 --
 ALTER TABLE `nothi_permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `nothi_prapoks`
@@ -8453,31 +8825,31 @@ ALTER TABLE `notices`
 -- AUTO_INCREMENT for table `n_visas`
 --
 ALTER TABLE `n_visas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `n_visa_authorized_personal_of_the_orgs`
 --
 ALTER TABLE `n_visa_authorized_personal_of_the_orgs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `n_visa_compensation_and_benifits`
 --
 ALTER TABLE `n_visa_compensation_and_benifits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `n_visa_employment_information`
 --
 ALTER TABLE `n_visa_employment_information`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `n_visa_manpower_of_the_offices`
 --
 ALTER TABLE `n_visa_manpower_of_the_offices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `n_visa_necessary_document_for_work_permits`
@@ -8489,19 +8861,19 @@ ALTER TABLE `n_visa_necessary_document_for_work_permits`
 -- AUTO_INCREMENT for table `n_visa_particulars_of_foreign_incumbnets`
 --
 ALTER TABLE `n_visa_particulars_of_foreign_incumbnets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `n_visa_particular_of_sponsor_or_employers`
 --
 ALTER TABLE `n_visa_particular_of_sponsor_or_employers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `n_visa_work_place_addresses`
 --
 ALTER TABLE `n_visa_work_place_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -8537,13 +8909,13 @@ ALTER TABLE `parent_note_for_fdsixes`
 -- AUTO_INCREMENT for table `parent_note_for_fd_nines`
 --
 ALTER TABLE `parent_note_for_fd_nines`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `parent_note_for_fd_nine_ones`
 --
 ALTER TABLE `parent_note_for_fd_nine_ones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `parent_note_for_fd_sevens`
@@ -8561,19 +8933,19 @@ ALTER TABLE `parent_note_for_fd_threes`
 -- AUTO_INCREMENT for table `parent_note_for_name_changes`
 --
 ALTER TABLE `parent_note_for_name_changes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `parent_note_for_registrations`
 --
 ALTER TABLE `parent_note_for_registrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `parent_note_for_renews`
 --
 ALTER TABLE `parent_note_for_renews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -8591,7 +8963,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `potrangsho_drafts`
 --
 ALTER TABLE `potrangsho_drafts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `registration_office_saroks`
@@ -8603,7 +8975,7 @@ ALTER TABLE `registration_office_saroks`
 -- AUTO_INCREMENT for table `renewal_files`
 --
 ALTER TABLE `renewal_files`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `renew_office_saroks`
@@ -8633,7 +9005,7 @@ ALTER TABLE `system_information`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- Constraints for dumped tables

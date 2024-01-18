@@ -354,6 +354,8 @@
        <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
         সর্বশেষ সাধারণ সদস্যদের তালিকা
         </a>
+        </td>
+       </tr>
 
         @elseif(($key+1) == 10)
 
@@ -375,6 +377,8 @@
             <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
                 পূর্ববর্তী নামের সকল দায়-দায়িত্ব বর্তমানে পরিবর্তিত নামের সংস্থার উপর বর্তাইবে মর্মে অংগীকার নামা (সভাপতি ও সাধারণ সম্পাদক কর্তৃক স্বাক্ষরিত)।
                 </a>
+                </td>
+            </tr>
 
                 @elseif(($key+1) == 12)
 
@@ -424,7 +428,8 @@
         প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিতো গঠনতন্ত্রের সত্যায়িত কপি
         </a>
 
-
+        </td>
+       </tr>
        @elseif(($key+1) ==16)
 
 
@@ -460,6 +465,8 @@
        <a target="_blank"  href="{{ route('nameChangeDoc',$AllNameChangeInfoDoc->id) }}" >
         গঠনতন্ত্রের কোন ধারা, উপধারা পরিবর্তন ও সংযোজনের বিষয়ে সাধারণ সভার কার্যবিবরণীর সত্যায়িত কপি
         </a>
+        </td>
+       </tr>
        @elseif(($key+1) ==19)
 
 
