@@ -136,6 +136,121 @@
                                                 aria-selected="false"><i
                                         class="icofont icofont-list"></i>নথিপত্র</a></li>
 
+                                        @elseif($status == 'nameChange')
+                                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                            data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                            aria-controls="profile-icon"
+                                            aria-selected="false"><i
+                                    class="icofont icofont-list"></i>নথিপত্র</a></li>
+
+                                    @elseif($status == 'fdNine')
+
+
+
+                                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                    data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                    aria-controls="profile-icon"
+                                    aria-selected="false"><i
+                            class="icofont icofont-list"></i>নথিপত্র</a></li>
+
+                            @elseif($status == 'fdNineOne')
+
+
+                            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                                data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                                aria-controls="profile-icon"
+                                aria-selected="false"><i
+                        class="icofont icofont-file-document"></i>নিরাপত্তা ছাড়পত্র</a></li>
+
+
+                            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                aria-controls="profile-icon"
+                                aria-selected="false"><i
+                        class="icofont icofont-list"></i>নথিপত্র</a></li>
+                        @elseif($status == 'fdSix')
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-file-document"></i>এফডি - ৬ ফরম</a></li>
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+                    @elseif($status == 'fdSeven')
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-file-document"></i>এফডি - ৭ ফরম</a></li>
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+
+                    @elseif($status == 'fcOne')
+
+
+                    <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                        data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                        aria-controls="profile-icon"
+                        aria-selected="false"><i
+                class="icofont icofont-file-document"></i>এফসি -১ ফরম</a></li>
+
+
+                    <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                        data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                        aria-controls="profile-icon"
+                        aria-selected="false"><i
+                class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+                @elseif($status == 'fcTwo')
+
+
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-file-document"></i>এফসি - ২ ফরম</a></li>
+
+
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+
+
+            @elseif($status == 'fdThree')
+
+
+            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                aria-controls="profile-icon"
+                aria-selected="false"><i
+        class="icofont icofont-file-document"></i>এফডি - ৩ ফরম</a></li>
+
+
+            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                aria-controls="profile-icon"
+                aria-selected="false"><i
+        class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
                                                   @endif
 
                                                   <!-- end new code --->
@@ -779,6 +894,113 @@ $potroZariListValue =  DB::table('nothi_details')
       @include('admin.registration_list.registration_document')
 
        @endif
+
+       </div>
+
+       @elseIf($status == 'nameChange')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+
+
+       @include('admin.name_change_list.documentListForNothi')
+
+
+
+       </div>
+       @elseIf($status == 'fdNine')
+
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd9form.fd9formDoc')
+
+       </div>
+
+       @elseIf($status == 'fdNineOne')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd9Oneform.clearanceLetter')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd9Oneform.fd9OneDoc')
+
+       </div>
+
+       @elseIf($status == 'fdSix')
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd6form.fd6Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd6form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fdSeven')
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd7form.fd7Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd7form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fcOne')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fc1form.fc1Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fc1form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fcTwo')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fc2form.fc2Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fc2form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fdThree')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd3form.fd3Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd3form.fd2Form')
 
        </div>
 

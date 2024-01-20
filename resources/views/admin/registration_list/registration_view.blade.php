@@ -188,7 +188,7 @@
 
                                                     @endif
                                                 </a></li>
-                                   
+
 
 
 
@@ -447,7 +447,7 @@ gjgjhgh
           @endif
 
 
-          <form action="{{ route('printCertificateViewDemo') }}" method="get">
+          <form action="{{ route('printCertificateViewDemo') }}" method="get" id="form">
 
             <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
 
@@ -469,7 +469,7 @@ gjgjhgh
                   </div>
                   <div class="modal-body">
 
-                    <form action="{{ route('printCertificateView') }}" method="get">
+                    <form action="{{ route('printCertificateView') }}" method="get" id="form">
 
                         <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
 
@@ -504,7 +504,7 @@ gjgjhgh
                                         <div class="mb-0 m-t-30">
 
 
-                                            <form action="{{ route('updateStatusRegForm') }}" method="post">
+                                            <form action="{{ route('updateStatusRegForm') }}" method="post" id="form">
                                                 @csrf
 
 

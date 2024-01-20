@@ -2,7 +2,7 @@
 @extends('admin.master.master')
 
 @section('title')
-রোল আপডেট করুন 
+রোল আপডেট করুন
 @endsection
 
 
@@ -34,7 +34,7 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                  <form action="{{ route('role.update',$role->id) }}" method="POST">
+                                  <form action="{{ route('role.update',$role->id) }}" method="POST" id="form">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

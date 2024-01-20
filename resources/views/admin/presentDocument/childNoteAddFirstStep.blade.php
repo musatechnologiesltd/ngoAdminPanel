@@ -12,7 +12,7 @@
     </div>
 </div>
 <hr>
-<form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+<form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
     @csrf
 
 

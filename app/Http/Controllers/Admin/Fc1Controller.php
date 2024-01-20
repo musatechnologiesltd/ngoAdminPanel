@@ -38,11 +38,13 @@ class Fc1Controller extends Controller
          ->get();
         }else{
 
+            //dd(12);
+
             $ngoStatusFdSevenDak = FcOneDak::where('status',1)
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get();
 
-            $convert_name_title = $ngoStatusFdSevenDak->implode("fd_seven_status_id", " ");
+            $convert_name_title = $ngoStatusFdSevenDak->implode("fc_one_status_id", " ");
              $separated_data_title = explode(" ", $convert_name_title);
 
 

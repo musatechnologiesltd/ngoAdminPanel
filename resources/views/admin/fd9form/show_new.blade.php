@@ -108,7 +108,7 @@
                             <div class="row">
 
                                 <div class="col-md-12">
-                                    <form action="{{ route('statusUpdateForFd9') }}" method="post">
+                                    <form  id="form" action="{{ route('statusUpdateForFd9') }}" method="post">
                                         @csrf
 
 

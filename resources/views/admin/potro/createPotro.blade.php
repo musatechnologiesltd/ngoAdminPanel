@@ -649,7 +649,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
         ?>
-         <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+         <form id="form" class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
             @csrf
     <div class="row" class="mt-4">
         <div class="col-md-6">
@@ -969,7 +969,7 @@ $totalOnumodonKari = DB::table('nothi_approvers')
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('parentNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form id="form" class="custom-validation" action="{{ route('parentNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                     @csrf
 
                     <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>

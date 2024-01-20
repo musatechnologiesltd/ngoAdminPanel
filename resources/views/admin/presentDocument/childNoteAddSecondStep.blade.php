@@ -60,7 +60,7 @@ $creatorNAme = DB::table('admins')
           <div class="card-body">
 
 
-            <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+            <form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                 @csrf
                 <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
                 <input type="hidden" value="{{ $status }}" name="status"/>

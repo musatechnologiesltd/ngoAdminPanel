@@ -23,7 +23,7 @@
         <div class="col-sm-6 mt-5">
             @if (Auth::guard('admin')->user()->can('permissionAdd'))
             <button class="btn btn-primary add-btn" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="ri-add-line align-bottom me-1"></i>পারমিশন যোগ করুন 
+                <i class="ri-add-line align-bottom me-1"></i>পারমিশন যোগ করুন
                                                 </button>
 
 
@@ -35,7 +35,7 @@
                                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="post" action="{{ route('permission.store') }}" enctype="multipart/form-data">
+                                                            <form id="form" method="post" action="{{ route('permission.store') }}" enctype="multipart/form-data">
                                                                 @csrf
 
                                                                 <div class="row">
@@ -142,7 +142,7 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" action="{{ route('permission.update',$allPermissionGroup->group_name)}}" enctype="multipart/form-data">
+                                                    <form id="form" method="post" action="{{ route('permission.update',$allPermissionGroup->group_name)}}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="row">

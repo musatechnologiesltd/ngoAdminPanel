@@ -41,7 +41,7 @@
                   </div>
                   <div class="card-body">
                     @include('flash_message')
-                                            <form action="{{ route('setting.store') }}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('setting.store') }}" method="post" enctype="multipart/form-data" id="form">
                                                 @csrf
                       <div class="row mb-2">
                         <div class="profile-title">

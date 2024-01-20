@@ -482,7 +482,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                   </div>
                   <div class="modal-body">
 
-                    <form action="{{ route('printCertificateView') }}" method="get">
+                    <form id="form" action="{{ route('printCertificateView') }}" method="get">
 
                         <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
 
@@ -519,7 +519,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
 
 
-                                            <form action="{{ route('updateStatusNameChangeForm') }}" method="post">
+                                            <form id="form" action="{{ route('updateStatusNameChangeForm') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" value="{{ $getformOneId->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />

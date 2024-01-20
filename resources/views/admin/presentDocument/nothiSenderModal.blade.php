@@ -12,7 +12,7 @@ aria-labelledby="myModalLabel2">
 <div class="modal-body">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('nothiSender.store') }}" method="post">
+            <form action="{{ route('nothiSender.store') }}" method="post" id="form">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">অফিসার খুজুন</label> <br>

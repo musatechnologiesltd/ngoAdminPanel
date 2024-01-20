@@ -97,7 +97,7 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <form action="{{ route('country.update',$user->id ) }}" method="POST" enctype="multipart/form-data">
+                                                                        <form id="form" action="{{ route('country.update',$user->id ) }}" method="POST" enctype="multipart/form-data">
                                                                             @method('PUT')
                                                                             @csrf
                                                                             <div class="row">
@@ -182,7 +182,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('country.store') }}" method="post" enctype="multipart/form-data">
+                <form id="form" class="custom-validation" action="{{ route('country.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                       <div class="row">
 

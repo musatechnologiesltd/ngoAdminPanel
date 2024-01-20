@@ -109,7 +109,7 @@ ul {
                     <h5>ডাক প্রেরণ করুন</h5>
                     @include('flash_message')
                 </div>
-                <form class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form  class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
 
                     <input type="hidden" name="access_id" value="{{ $newMainDaKId }}" />

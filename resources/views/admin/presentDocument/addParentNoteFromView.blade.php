@@ -251,7 +251,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                     </div>
                                                     <div class="collapse" id="collapse{{ $key+1 }}" aria-labelledby="heading{{ $key+1 }}" data-bs-parent="#accordion1">
                                                       <div class="card-body">
-                                                        <form class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                        <form id="form" class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                                             @csrf
                                                             @method('PUT')
                                                             <input type="hidden" value="{{ $status }}" name="status"/>
@@ -306,7 +306,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                       <div class="card-body">
 
 
-                                                        <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                        <form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                                             @csrf
                                                             <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
                                                             <input type="hidden" value="{{ $status }}" name="status"/>
@@ -353,7 +353,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
                                              @else
-                                                 <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                 <form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                                     @csrf
                                                     <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
                                                     <input type="hidden" value="{{ $status }}" name="status"/>
@@ -669,7 +669,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                            <form id="form" class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                 @csrf
 
                                 <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
@@ -741,7 +741,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                 <button type="button" class="close newcl" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form  class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
 
                     <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>

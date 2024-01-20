@@ -34,7 +34,7 @@
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('noticeList.store') }}" id="form" data-parsley-validate="" method="post" enctype="multipart/form-data">
+                <form class="custom-validation"  action="{{ route('noticeList.store') }}" id="form" data-parsley-validate="" method="post" enctype="multipart/form-data">
                     @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">নোটিশ হেডলাইন</label>
@@ -109,7 +109,7 @@
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('noticeList.update',$allNoticeLists->id ) }}" method="POST" enctype="multipart/form-data">
+                                                      <form id="form" action="{{ route('noticeList.update',$allNoticeLists->id ) }}" method="POST" enctype="multipart/form-data">
                                                           @method('PUT')
                                                           @csrf
 

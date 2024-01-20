@@ -53,7 +53,7 @@
           <div class="col-12">
             <div class="login-card">
 
-              <form class="theme-form login-form" action="{{route('login.store')}}" method="post">
+              <form class="theme-form login-form" id="form" action="{{route('login.store')}}" method="post">
                 @csrf
                 @include('flash_message')
                 <h4>লগ ইন</h4>

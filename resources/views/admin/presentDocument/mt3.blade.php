@@ -26,7 +26,7 @@ aria-labelledby="myModalLabel2">
 <div class="modal-body">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('saveNothiPermission') }}" method="post">
+            <form action="{{ route('saveNothiPermission') }}" method="post" id="form">
 
                 @csrf
 

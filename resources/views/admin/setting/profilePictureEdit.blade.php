@@ -122,7 +122,7 @@
                   </div>
                   <div class="card-body">
                     @include('flash_message')
-                                            <form action="{{ route('profilePictureUpdate') }}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('profilePictureUpdate') }}" method="post" enctype="multipart/form-data" id="form">
                                                 @csrf
 
 

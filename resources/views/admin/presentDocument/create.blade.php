@@ -40,7 +40,7 @@
                             <div class="card-header pb-0">
                                 <h5>নথি তৈরি করুন</h5>
                             </div>
-                            <form class="form theme-form" action="{{ route('documentPresent.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                            <form  class="form theme-form" action="{{ route('documentPresent.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                  @csrf
 
 

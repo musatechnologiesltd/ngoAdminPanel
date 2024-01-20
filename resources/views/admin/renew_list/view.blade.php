@@ -348,7 +348,7 @@
                   </div>
                   <div class="modal-body">
 
-                    <form action="{{ route('printCertificateView') }}" method="get">
+                    <form action="{{ route('printCertificateView') }}" method="get" id="form">
 
                         <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
 
@@ -383,7 +383,7 @@
                                         <div class="mb-0 m-t-30">
 
 
-                                            <form action="{{ route('updateStatusRenewForm') }}" method="post">
+                                            <form action="{{ route('updateStatusRenewForm') }}" method="post" id="form">
                                                 @csrf
                                                 <input type="hidden" value="{{ $mainIdR->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />

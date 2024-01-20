@@ -68,7 +68,7 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                   </thead>
                                   <tbody>
                                     @foreach($designationList as $j=>$AllDesignationList)
-                                    <form class="custom-validation" action="{{ route('assignedEmployee.store') }}" method="post" id="form" data-parsley-validate="" enctype="multipart/form-data">
+                                    <form class="custom-validation" id="form" action="{{ route('assignedEmployee.store') }}" method="post"  data-parsley-validate="" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="branchId" value="{{ $AllBranchLists->id }}"/>
                                     <?php

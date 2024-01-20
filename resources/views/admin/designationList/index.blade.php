@@ -37,7 +37,7 @@
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form class="custom-validation"  action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="">শাখার নাম <span style="color:red;">*</span></label>
@@ -136,7 +136,7 @@
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('designationList.update',$AllDesignationLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                      <form  action="{{ route('designationList.update',$AllDesignationLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="mb-3">

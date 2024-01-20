@@ -57,7 +57,7 @@ $receiverId = DB::table('nothi_details')
 
 
       <div class="card-body">
-        <form class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+        <form  class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
             @csrf
             @method('PUT')
 

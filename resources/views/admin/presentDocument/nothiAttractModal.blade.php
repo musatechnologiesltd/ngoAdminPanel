@@ -56,7 +56,7 @@ $nothiAttractList = DB::table('nothi_attarcts')->where('nothiId',$nothiId)
             </div>
             <div class="tab-pane fade" id="profile-icon12" role="tabpanel" aria-labelledby="profile-icon-tab">
                 <div id="sms22a"></div>
-                <form action="" class="mt-4" id="registerSubmit2">
+                <form action="" class="mt-4" id="registerSubmit2" >
                     <div class="mb-3">
                         <label class="form-label" for="">অফিসার</label>
                          <input type="text" name="otherOfficerName" id="otherOfficerName2" class="form-control"/>

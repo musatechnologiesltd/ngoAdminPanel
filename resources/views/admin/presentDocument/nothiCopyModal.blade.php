@@ -136,7 +136,7 @@ $nothiCopyList = DB::table('nothi_copies')->where('nothiId',$nothiId)
                     @endforeach
                     @endif
                   </table>
-                  <form action="{{ route('copyStatusUpdate') }}" method="post" class="mt-4" >
+                  <form id="form" action="{{ route('copyStatusUpdate') }}" method="post" class="mt-4" >
 @csrf
                     <input type="hidden" name="fnothiId" value="{{ $nothiId }}"/>
                     <input type="hidden" name="fnoteId" value="{{ $id }}"/>

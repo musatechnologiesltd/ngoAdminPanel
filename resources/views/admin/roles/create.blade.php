@@ -29,7 +29,7 @@
         <!-- end page title -->
         <div class="container-fluid">
 
-                    <form class="custom-validation" action="{{ route('role.store') }}" method="post" enctype="multipart/form-data">
+                    <form class="custom-validation" action="{{ route('role.store') }}" method="post" enctype="multipart/form-data" id="form">
                         @csrf
                         <div class="row">
 

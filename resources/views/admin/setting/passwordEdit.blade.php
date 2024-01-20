@@ -137,7 +137,7 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <form action="{{ route('passwordUpdate') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('passwordUpdate') }}" method="post" enctype="multipart/form-data" id="form">
                     @csrf
 
 

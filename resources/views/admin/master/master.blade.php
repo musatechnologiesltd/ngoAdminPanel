@@ -79,7 +79,24 @@
 }
 
 
+#pageloader
+{
+  background: rgba( 255, 255, 255, 0.8 );
+  display: none;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
 
+#pageloader img
+{
+  left: 50%;
+  margin-left: -32px;
+  margin-top: -32px;
+  position: absolute;
+  top: 50%;
+}
 
         </style>
         @yield('css')
@@ -196,6 +213,7 @@
 
 </head>
 <body>
+    @include('admin.include.loaderTwo')
 <!-- Loader starts-->
 
 @include('admin.include.loader')
@@ -374,7 +392,14 @@ $(document).ready(function() {
   $('.summernote').summernote();
 });
         </script>
-
+<script>
+    $(document).ready(function(){
+  $("#form").on("submit", function(){
+    //alert(123);
+    $("#pageloader").fadeIn();
+  });//submit
+});//document ready
+</script>
 @yield('script')
 <!-- login js-->
 <!-- Plugin used-->

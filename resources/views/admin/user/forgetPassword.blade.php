@@ -53,7 +53,7 @@
           <div class="col-12">
             <div class="login-card">
 
-              <form class="theme-form login-form" action="{{route('checkMailPost')}}" method="post">
+              <form id="form" class="theme-form login-form" action="{{route('checkMailPost')}}" method="post">
                 @csrf
                 @include('flash_message')
                 <h4>পাসওয়ার্ড পরিবর্তন করুন </h4>

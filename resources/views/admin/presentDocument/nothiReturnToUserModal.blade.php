@@ -43,7 +43,7 @@
                             //dd($senderId );
 
                             ?>
-                        <form action="{{ route('saveNothiPermissionReturn') }}" method="post">
+                        <form action="{{ route('saveNothiPermissionReturn') }}" method="post" id="form">
 
                             @csrf
 

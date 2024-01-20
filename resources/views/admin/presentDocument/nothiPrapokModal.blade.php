@@ -135,7 +135,7 @@ aria-labelledby="myModalLabel22">
                     @endforeach
                     @endif
                   </table>
-                  <form action="{{ route('prapokStatusUpdate') }}" method="post" class="mt-4" >
+                  <form action="{{ route('prapokStatusUpdate') }}" method="post" class="mt-4" id="form">
 @csrf
                     <input type="hidden" name="fnothiId" value="{{ $nothiId }}"/>
                     <input type="hidden" name="fnoteId" value="{{ $id }}"/>

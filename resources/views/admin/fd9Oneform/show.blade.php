@@ -305,7 +305,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
+                                            <form id="form" class="custom-validation" action="{{ route('postForwardingLetter') }}"  method="post" enctype="multipart/form-data">
                                                 @csrf
                                                    <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
                                                 <div class="form-group col-md-12 col-sm-12">
@@ -354,7 +354,7 @@
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form class="custom-validation" action="{{ route('postForwardingLetter') }}" id="form" method="post" enctype="multipart/form-data">
+                                                        <form id="form" class="custom-validation" action="{{ route('postForwardingLetter') }}"  method="post" enctype="multipart/form-data">
                                                             @csrf
                                                                <input type="hidden" value="{{ $nVisabasicInfo->id }}" name="id" required>
                                                             <div class="form-group col-md-12 col-sm-12">
@@ -406,7 +406,7 @@
                         <div class="row">
 
                             <div class="col-md-12">
-                                <form action="{{ route('statusUpdateForFd9') }}" method="post">
+                                <form id="form" action="{{ route('statusUpdateForFd9') }}" method="post">
                                     @csrf
 
 
@@ -486,7 +486,7 @@
                             <div class="col-md-12">
                                 @if(count($checkTracking) == 0)
 
-                                <form class="custom-validation" action="{{ route('submitForCheck') }}" id="form" method="post" enctype="multipart/form-data">
+                                <form id="form" class="custom-validation" action="{{ route('submitForCheck') }}"  method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $dataFromNVisaFd9Fd1->id }}" />
                                    <button class="btn btn-primary" type="submit">আবেদনপত্র জমাদিন</button>
