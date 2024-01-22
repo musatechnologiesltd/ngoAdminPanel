@@ -34,93 +34,61 @@ class DesignationStepController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('assignedEmployee.view')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+          return redirect()->route('mainLogin');
                }
 
-               \LogActivity::addToLog('designation step list ');
+          \LogActivity::addToLog('designation step list ');
 
-               $branchLists = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
-
-
-
-
-
-               $designationLists = DesignationList::where('id','!=',1)->
+           $branchLists = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
+           $designationLists = DesignationList::where('id','!=',1)->
                orderBy(
                  Branch::select('branch_step')
                      ->whereColumn('designation_lists.branch_id', 'branches.id'),
                  'asc'
              )->orderBy('designation_serial','asc')->get();
 
-          $designationStepLists = DesignationStep::latest()->get();
-          //$designationLists = DesignationList::latest()->get();
-          $users = Admin::where('id','!=',1)->get();
-          $users_as = Admin::where('id','!=',1)->get();
+           $designationStepLists = DesignationStep::latest()->get();
+           $users = Admin::where('id','!=',1)->get();
+           $users_as = Admin::where('id','!=',1)->get();
 
                return view('admin.designationStepList.index',compact('users_as','users','branchLists','designationLists','designationStepLists'));
            }
 
 
-           public function store(Request $request){
+    public function store(Request $request){
 
-            if (is_null($this->user) || !$this->user->can('assignedEmployee.edit')) {
-                //abort(403, 'Sorry !! You are Unauthorized to Add !');
-                return redirect()->route('mainLogin');
-            }
-            \LogActivity::addToLog('designation step store ');
-//dd($request->all());
-//
-            $request->validate([
-                'designation_list_id' => 'required',
-                'adminId' => 'required',
-                'admin_job_start_date' => 'required',
-              ]);
+        if (is_null($this->user) || !$this->user->can('assignedEmployee.edit')) {
+              return redirect()->route('mainLogin');
+        }
 
+        \LogActivity::addToLog('designation step store ');
 
+        $request->validate([
+            'designation_list_id' => 'required',
+            'adminId' => 'required',
+            'admin_job_start_date' => 'required',
+        ]);
 
+        $dateFormate = date('Y-m-d', strtotime($request->admin_job_start_date));
 
-             $dateFormate = date('Y-m-d', strtotime($request->admin_job_start_date));
+        $newData = Admin::find($request->adminId);
+        $newData->branch_id = $request->branchId;
+        $newData->designation_list_id = $request->designation_list_id;
+        $newData->admin_job_start_date = $dateFormate;
+        $newData->save();
 
+        $saveHistoryData = new AdminDesignationHistory();
+        $saveHistoryData->admin_id = $request->adminId;
+        $saveHistoryData->admin_job_start_date = $dateFormate;
+        $saveHistoryData->designation_list_id = $request->designation_list_id;
+        $saveHistoryData->save();
 
-
-                //dd($dateFormate);
-
-
-                $newData = Admin::find($request->adminId);
-                $newData->branch_id = $request->branchId;
-                $newData->designation_list_id = $request->designation_list_id;
-                $newData->admin_job_start_date = $dateFormate;
-                $newData->save();
-
-
-
-                $saveHistoryData = new AdminDesignationHistory();
-                $saveHistoryData->admin_id = $request->adminId;
-                $saveHistoryData->admin_job_start_date = $dateFormate;
-                $saveHistoryData->designation_list_id = $request->designation_list_id;
-                $saveHistoryData->save();
-
-
-            //   }
-
-
-          //  }
-
-
-
-
-    return redirect()->route('assignedEmployee.index')->with('success','Added successfully!');
-
-
+        return redirect()->route('assignedEmployee.index')->with('success','Added successfully!');
 
         }
 
 
-
-
-
-        public function update(Request $request,$id){
+    public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('designationStepUpdate')) {
                 //abort(403, 'Sorry !! You are Unauthorized to Update !');
@@ -128,11 +96,11 @@ class DesignationStepController extends Controller
             }
 
             \LogActivity::addToLog('designation step update ');
-            $medicine = DesignationStep::findOrFail($id);
+            $designationStep = DesignationStep::findOrFail($id);
 
             $input = $request->all();
 
-            $medicine->fill($input)->save();
+            $designationStep->fill($input)->save();
 
     return redirect()->route('designationStepList.index')->with('success','Updated successfully!');
 

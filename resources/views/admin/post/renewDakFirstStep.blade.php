@@ -1,4 +1,4 @@
-@foreach($all_data_for_renew_list as $r=>$allStatusData)
+@foreach($allDataForRenewList as $r=>$allStatusData)
 
 <?php
 

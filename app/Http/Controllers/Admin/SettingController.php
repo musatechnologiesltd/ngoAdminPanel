@@ -230,11 +230,19 @@ class SettingController extends Controller
                \LogActivity::addToLog('Profile Update.');
 
 
+               $request->validate([
+
+                'digital_signature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:60|dimensions:width=300,height=80'
+
+
+            ]);
+
+
         $admin =  Admin::find($request->id);
 
 
 
-            $productImage = $request->file('admin_sign');
+            $productImage = $request->file('digital_signature');
             $imageName = $time_dy.$productImage->getClientOriginalName();
             $directory = 'public/uploads/';
             $imageUrl = $directory.$imageName;

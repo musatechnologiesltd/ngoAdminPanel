@@ -121,7 +121,25 @@
                     <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                   </div>
                   <div class="card-body">
-                    @include('flash_message')
+                    {{-- //@include('flash_message') --}}
+
+                    @if(Session::has('success'))
+<div class="alert alert-success">
+    {{ Session::get('success') }}
+    @php
+        Session::forget('success');
+    @endphp
+</div>
+@endif
+
+@if ($errors->has('digital_signature'))
+<span class="text-danger">{{ $errors->first('digital_signature') }}</span>
+@endif
+
+<br>
+@if ($errors->has('digital_seal'))
+<span class="text-danger">{{ $errors->first('digital_seal') }}</span>
+@endif
                                             <form action="{{ route('digitalSignatureUpdate') }}" method="post" enctype="multipart/form-data" id="form">
                                                 @csrf
 
@@ -136,8 +154,8 @@
                       <center>  <img src="{{ asset('/') }}{{ Auth::guard('admin')->user()->admin_sign }}" alt="" id="output"> </center>
                       @endif
                     </div>
-                    <input type="file" accept="image/*"
-                    onchange="loadFile(event)" name="admin_sign" required id="upload" hidden/>
+                    <input type="file" accept=".png"
+                    onchange="loadFile(event)" name="digital_signature" required id="upload" hidden/>
              <label class="login_upload_button btn btn-registration"  for="upload">ছবি নির্বাচন করুন</label>
 
 
@@ -145,7 +163,7 @@
                                                 <div class="alert alert-warning d-flex align-items-center mt-3" role="alert">
                                                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                                     <div style="color:black !important">
-                                                        প্রোফাইল স্বাক্ষর অবশ্যই ৩০০ X ৮০ পিক্সেল (প্রস্থ X উচ্চতা ) এবং ফাইল এর আকার অবশ্যই ৫০ কিলো বাইটের কম এবং JPG বা JPEG ফরমেটে হতে হবে
+                                                        প্রোফাইল স্বাক্ষর অবশ্যই ৩০০ X ৮০ পিক্সেল (প্রস্থ X উচ্চতা ) এবং ফাইল এর আকার অবশ্যই ৬০ কিলো বাইটের কম এবং PNG ফরমেটে হতে হবে
                                                     </div>
                                                   </div>
 
@@ -153,6 +171,7 @@
                                                 <div class="form-footer">
                                                     <button type="submit" class="btn btn-primary btn-block">আপডেট করুন</button>
                                                   </div>
+                                                  <small id="digital_signature_text" class="text-danger mt-2" style="font-size:12px;"></small>
 
 
                     </form>
@@ -173,6 +192,23 @@
 @endsection
 
 @section('script')
+<script>
+    $(function(){
+
+
+$('#upload').on('change', function(e) {
+    let size = this.files[0].size;
+
+
+
+    if (size > 60000) {
+        $('#digital_signature_text').text('Please Upload Maximum 60 KB File');
+    }else{
+        $('#digital_signature_text').text('');
+    }
+});
+});
+</script>
 <script>
     var loadFile = function (event) {
         var output = document.getElementById('output');

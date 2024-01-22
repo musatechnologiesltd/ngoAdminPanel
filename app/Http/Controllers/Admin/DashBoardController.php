@@ -50,46 +50,26 @@ class DashBoardController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('dashboard.view')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+              return redirect()->route('mainLogin');
                }
 
-
-
-               \LogActivity::addToLog('view dashboard');
-
+        \LogActivity::addToLog('view dashboard');
 
                $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
                ->latest()->get();
-
                $count_admin = Admin::where('id','!=',1)->count();
-
                $totalRegisteredNgo = DB::table('ngo_statuses')->where('status','Accepted')->count();
                $totalRejectedNgo = DB::table('ngo_statuses')->where('status','Rejected')->count();
-
-
-
                $totalRenewNgoRequest = DB::table('ngo_renews')->count();
                $totalRejectedRenewNgoRequest = DB::table('ngo_renews')->where('status','Rejected')->count();
-
                $totalNameChangeNgoRequest = DB::table('ngo_name_changes')->count();
                $totalRejectedNameChangeNgoRequest = DB::table('ngo_name_changes')->where('status','Rejected')->count();
 
-
-
-
-               \LogActivity::addToLog('view dak list.');
-
                if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-                   $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
-                   $all_data_for_renew_list = DB::table('ngo_renews')->where('status','Ongoing')->latest() ->limit(5)->get();
-                   $all_data_for_name_changes_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest() ->limit(5)->get();
-
-                   // $dataFdNine = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-                   // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-                   // ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
-                   // ->whereNull('fd9_forms.status')->orderBy('fd9_forms.id','desc')->get();
+                   $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
+                   $allDataForRenewList = DB::table('ngo_renews')->where('status','Ongoing')->latest() ->limit(5)->get();
+                   $allDataForNameChangesList = DB::table('ngo_name_changes')->where('status','Ongoing')->latest() ->limit(5)->get();
 
                    $dataFdNineOne = DB::table('fd9_one_forms')
                    ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
@@ -100,18 +80,14 @@ class DashBoardController extends Controller
                    ->limit(5)
                    ->get();
 
-
-                   //dd($dataFdNineOne);
-
                    $dataFdNine = DB::table('fd9_forms')->where('status','Ongoing')->latest()->limit(5)->get();
 
                    $dataFromFd6Form = DB::table('fd6_forms')
                    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
                    ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
-                  ->orderBy('fd6_forms.id','desc')
-                  ->limit(5)
-                  ->get();
-
+                   ->orderBy('fd6_forms.id','desc')
+                   ->limit(5)
+                   ->get();
 
                   $dataFromFd7Form = DB::table('fd7_forms')
                   ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd7_forms.fd_one_form_id')
@@ -120,14 +96,12 @@ class DashBoardController extends Controller
                   ->limit(5)
                   ->get();
 
-
                   $dataFromFc1Form = DB::table('fc1_forms')
                   ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc1_forms.fd_one_form_id')
                   ->select('fd_one_forms.*','fc1_forms.*','fc1_forms.id as mainId')
                   ->orderBy('fc1_forms.id','desc')
                   ->limit(5)
                   ->get();
-
 
                   $dataFromFc2Form = DB::table('fc2_forms')
                   ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
@@ -136,22 +110,12 @@ class DashBoardController extends Controller
                   ->limit(5)
                   ->get();
 
-
                   $dataFromFd3Form = DB::table('fd3_forms')
                   ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd3_forms.fd_one_form_id')
                   ->select('fd_one_forms.*','fd3_forms.*','fd3_forms.id as mainId')
                   ->orderBy('fd3_forms.id','desc')
                   ->limit(5)
                   ->get();
-
-
-
-
-                 // dd($dataFromFd6Form);
-
-                   //return view('admin.post.index',compact());
-
-
 
     return view('admin.dashboard.dashboard',compact(
         'senderNothiList',
@@ -162,63 +126,32 @@ class DashBoardController extends Controller
         'dataFromFd6Form',
         'dataFdNineOne',
         'dataFdNine',
-        'all_data_for_name_changes_list',
-        'all_data_for_renew_list',
-        'all_data_for_new_list',
-       'totalRegisteredNgo',
-       'totalRejectedNgo',
-       'totalRenewNgoRequest',
-       'totalRejectedRenewNgoRequest',
-       'totalNameChangeNgoRequest',
-       'totalRejectedNameChangeNgoRequest',
-       'count_admin'));
-
-
-
-
+        'allDataForNameChangesList',
+        'allDataForRenewList',
+        'allDataForNewList',
+        'totalRegisteredNgo',
+        'totalRejectedNgo',
+        'totalRenewNgoRequest',
+        'totalRejectedRenewNgoRequest',
+        'totalNameChangeNgoRequest',
+        'totalRejectedNameChangeNgoRequest',
+        'count_admin'
+    ));
 
                }else{
 
-                   $nothiList = NothiList::latest()->get();
-
-                   $ngoStatusRenew = NgoRenewDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-                   $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-                   $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-                   $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-
-
-                   $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-                   $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-                   $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-                   $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-                   $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-               $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
-
-
-
-
-
-
-               $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
-
-
-
-
-
+                $nothiList = NothiList::latest()->get();
+                $ngoStatusRenew = NgoRenewDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+                $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
 
                return view('admin.dashboard.dashboardOne',compact(
                 'senderNothiList',
@@ -241,21 +174,7 @@ class DashBoardController extends Controller
                 'totalRejectedNameChangeNgoRequest',
                 'count_admin'));
 
+            }
 
-               }
-
-
-
-
-
-
-    //    return view('admin.dashboard.dashboard',compact(
-    //    'totalRegisteredNgo',
-    //    'totalRejectedNgo',
-    //    'totalRenewNgoRequest',
-    //    'totalRejectedRenewNgoRequest',
-    //    'totalNameChangeNgoRequest',
-    //    'totalRejectedNameChangeNgoRequest',
-    //    'count_admin'));
     }
 }

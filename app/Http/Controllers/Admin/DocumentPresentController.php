@@ -66,11 +66,8 @@ class DocumentPresentController extends Controller
 
     public function searchResultForDak(Request $request){
 
-
         $dakId = $request->result;
         $status = $request->status;
-
-//dd($request->main_value);
 
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
@@ -79,15 +76,9 @@ class DocumentPresentController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.presentDocument.searchResultForDak',compact('searchResult','dakId','status'))->render();
 
-
         return response()->json($data);
-
-
 
     }
 
@@ -95,7 +86,7 @@ class DocumentPresentController extends Controller
     public function create(){
 
         $documentTypeList = DocumentType::latest()->get();
-         return view('admin.presentDocument.create',compact('documentTypeList'));
+        return view('admin.presentDocument.create',compact('documentTypeList'));
 
      }
 
@@ -114,112 +105,43 @@ class DocumentPresentController extends Controller
 
         if($status == 'registration'){
 
-
-            $checkParent = ParentNoteForRegistration::where('registration_doc_id',$id)
-                           ->get();
-
-
+            $checkParent = ParentNoteForRegistration::where('registration_doc_id',$id)->get();
 
         }elseif($status == 'renew'){
 
-
-
-
-            $checkParent = ParentNoteForRenew::where('renew_doc_present_id',$id)
-            ->get();
-
-
+            $checkParent = ParentNoteForRenew::where('renew_doc_present_id',$id)->get();
 
         }elseif($status == 'nameChange'){
 
-
-
-
-
-
-            $checkParent = ParentNoteForNameChange::where('name_chane_doc_present_id',$id)
-            ->get();
-
-
+            $checkParent = ParentNoteForNameChange::where('name_chane_doc_present_id',$id)->get();
 
         }elseif($status == 'fdNine'){
 
-
-
-
-
-
-            $checkParent = ParentNoteForFdNine::where('fd_nine_doc_present_id',$id)
-            ->get();
-
-//dd($checkParent);
-
+            $checkParent = ParentNoteForFdNine::where('fd_nine_doc_present_id',$id)->get();
 
         }elseif($status == 'fdNineOne'){
 
-
-
-
-
-            $checkParent = ParentNoteForFdNineOne::where('fd_nine_one_doc_present_id',$id)
-            ->get();
-
-
-
+            $checkParent = ParentNoteForFdNineOne::where('fd_nine_one_doc_present_id',$id)->get();
 
         }elseif($status == 'fdSix'){
 
-
-
-
-            $checkParent = ParentNoteForFdsix::where('fd_six_doc_present_id',$id)
-            ->get();
-
-
+            $checkParent = ParentNoteForFdsix::where('fd_six_doc_present_id',$id)->get();
 
         }elseif($status == 'fdSeven'){
 
-
-
-
-
-            $checkParent = ParentNoteForFdSeven::where('fd_seven_doc_present_id',$id)
-            ->get();
-
-
+            $checkParent = ParentNoteForFdSeven::where('fd_seven_doc_present_id',$id)->get();
 
         }elseif($status == 'fcOne'){
 
-
-
-            $checkParent = ParentNoteForFcOne::where('fc_one_doc_present_id',$id)
-            ->get();
-
-
-
+            $checkParent = ParentNoteForFcOne::where('fc_one_doc_present_id',$id)->get();
 
         }elseif($status == 'fcTwo'){
 
-
-
-
-            $checkParent = ParentNoteForFcTwo::where('fc_two_doc_present_id',$id)
-            ->get();
-
-
-
-
+            $checkParent = ParentNoteForFcTwo::where('fc_two_doc_present_id',$id)->get();
 
         }elseif($status == 'fdThree'){
 
-
-
-
-
-
-            $checkParent = ParentNoteForFdThree::where('fd_three_doc_present_id',$id)
-            ->get();
-
+            $checkParent = ParentNoteForFdThree::where('fd_three_doc_present_id',$id)->get();
 
         }
 
@@ -239,34 +161,20 @@ class DocumentPresentController extends Controller
      */
     public function index()
     {
+
         $nothiList = NothiList::latest()->get();
-
-
-        //for designation
-
         $totalBranch = Branch::where('id','!=',1)->count();
         $totalDesignation = DesignationList::where('id','!=',1)->count();
         $totaluser = Admin::where('id','!=',1)->count();
-
-
-         $totalDesignationWorking = AdminDesignationHistory::count();
-
+        $totalDesignationWorking = AdminDesignationHistory::count();
         $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
-
 
         $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 
-
-      $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
-
-        //dd($totalEmptyDesignation);
+        $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
 
         $totalBranchList = Branch::where('id','!=',1)->get();
-
-        //for designation
-
-
 
         return view('admin.presentDocument.index',compact('nothiList','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
     }
@@ -281,9 +189,6 @@ class DocumentPresentController extends Controller
      */
     public function store(Request $request)
     {
-
-
-//dd($request->all());
 
         $this->validate($request,[
             'document_branch' => 'required',
@@ -301,43 +206,37 @@ class DocumentPresentController extends Controller
         ->where('id',Auth::guard('admin')->user()->branch_id)
         ->value('branch_code');
 
+        $lastNothiSerialNumber = DB::table('nothi_lists')->orderBy('id','desc')->value('document_serial_number');
+        $convertNumber = intval($lastNothiSerialNumber)+1;
+        $finalSerialNumber = CommonController::englishToBangla(str_pad($convertNumber, 3, '0', STR_PAD_LEFT));
 
-$lastNothiSerialNumber = DB::table('nothi_lists')
-                ->orderBy('id','desc')->value('document_serial_number');
-$convertNumber = intval($lastNothiSerialNumber)+1;
-$finalSerialNumber = CommonController::englishToBangla(str_pad($convertNumber, 3, '0', STR_PAD_LEFT));
+        $main_sarok_number = '০৩.০৭.২৬৬৬.'.$branchCode.'.'.$request->document_number.$finalSerialNumber.'.'.$request->document_year;
 
-$main_sarok_number = '০৩.০৭.২৬৬৬.'.$branchCode.'.'.$request->document_number.$finalSerialNumber.'.'.$request->document_year;
-
-
-$finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
-
-//dd($finalSarokNumber);
-
-                $documentType = new NothiList();
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->document_serial_number =$convertNumber;
-                $documentType->main_sarok_number =$finalSarokNumber;
-                $documentType->save();
+        $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
 
 
-                $mainId = $documentType->id;
+            $documentType = new NothiList();
+            $documentType->document_branch =$request->document_branch;
+            $documentType->document_type_id =$request->document_type_id;
+            $documentType->document_number =$request->document_number;
+            $documentType->document_year =$request->document_year;
+            $documentType->document_class =$request->document_class;
+            $documentType->document_subject =$request->document_subject;
+            $documentType->document_serial_number =$convertNumber;
+            $documentType->main_sarok_number =$finalSarokNumber;
+            $documentType->save();
+
+            $mainId = $documentType->id;
 
 
         if($request->buttonValue == 'নথি অনুমতি'){
-
 
             return redirect()->route('givePermissionToNothi',$mainId)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 
         }else{
 
         return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
-    }
+        }
 }
 
 
@@ -348,25 +247,17 @@ public function givePermissionToNothi($id){
 
     $id = $id;
 
-     $totalBranch = Branch::where('id','!=',1)->count();
-     $totalDesignation = DesignationList::where('id','!=',1)->count();
-     $totaluser = Admin::where('id','!=',1)->count();
+    $totalBranch = Branch::where('id','!=',1)->count();
+    $totalDesignation = DesignationList::where('id','!=',1)->count();
+    $totaluser = Admin::where('id','!=',1)->count();
+    $totalDesignationWorking = AdminDesignationHistory::count();
+    $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
 
+    $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
+    $separated_data_title = explode(" ", $convert_name_title);
 
-      $totalDesignationWorking = AdminDesignationHistory::count();
-
-     $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
-
-
-     $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
-     $separated_data_title = explode(" ", $convert_name_title);
-
-
-   $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
-
-     //dd($totalEmptyDesignation);
-
-     $totalBranchList = Branch::where('id','!=',1)->get();
+    $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
+    $totalBranchList = Branch::where('id','!=',1)->get();
 
      return view('admin.presentDocument.givePermissionToNothi',compact('id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
 
@@ -376,41 +267,31 @@ public function givePermissionToNothi($id){
 
 public function savePermissionNothi(Request $request){
 
-    //dd($request->all());
+  \LogActivity::addToLog('add dak detail.');
 
-    \LogActivity::addToLog('add dak detail.');
+        $number=count($request->admin_id);
+        if($number >0){
 
-         $number=count($request->admin_id);
+            for($i=0;$i<$number;$i++){
 
-
-
-            if($number >0){
-                for($i=0;$i<$number;$i++){
-
-                     $branchId = DB::table('admins')
+            $branchId = DB::table('admins')
                      ->where('id',$request->admin_id[$i])
-                     ->value('branch_id');
+                    ->value('branch_id');
 
-
-                 $regDakData = new NothiPermission();
-                 $regDakData->adminId = $request->admin_id[$i];
-                 $regDakData->nothId =$request->main_id;
-                 $regDakData->branchId =$branchId;
-                 $regDakData->save();
+                    $regDakData = new NothiPermission();
+                    $regDakData->adminId = $request->admin_id[$i];
+                    $regDakData->nothId =$request->main_id;
+                    $regDakData->branchId =$branchId;
+                    $regDakData->save();
 
                 }
 
 
             }
 
-
             $data =route('documentPresent.index');
-
-
             return response()->json($data);
 
-
-            //return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 
 }
 
@@ -430,10 +311,7 @@ public function savePermissionNothi(Request $request){
          $branchId = $request->branchId;
          $nothiId = $request->nothiId;
 
-
-
          $delete = NothiPermission::where('branchId',$branchId)->delete();
-
          $data = view('admin.presentDocument.deleteBrachFromEdit',compact('nothiId'))->render();
 
 
@@ -476,41 +354,30 @@ public function savePermissionNothi(Request $request){
     public function update(Request $request, string $id)
     {
 
-
-
-
-$branchCode = DB::table('branches')
+        $branchCode = DB::table('branches')
         ->where('id',Auth::guard('admin')->user()->branch_id)
         ->value('branch_code');
 
-
-$lastNothiSerialNumber = DB::table('nothi_lists')
+        $lastNothiSerialNumber = DB::table('nothi_lists')
                 ->orderBy('id','desc')->value('document_serial_number');
 
+        $main_sarok_number = '০৩.০৭.২৬৬৬.'.$branchCode.'.'.$request->document_number.$request->document_serial_number.'.'.$request->document_year;
 
-$main_sarok_number = '০৩.০৭.২৬৬৬.'.$branchCode.'.'.$request->document_number.$request->document_serial_number.'.'.$request->document_year;
+        $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
 
+        $documentType = NothiList::find($id);
+        $documentType->document_branch =$request->document_branch;
+        $documentType->document_type_id =$request->document_type_id;
+        $documentType->document_number =$request->document_number;
+        $documentType->document_year =$request->document_year;
+        $documentType->document_class =$request->document_class;
+        $documentType->document_subject =$request->document_subject;
+        $documentType->main_sarok_number =$finalSarokNumber;
+        $documentType->save();
 
-$finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
+    return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংশোধন করা হয়েছে');
 
-
-//dd($finalSarokNumber);
-
-
-
-                $documentType = NothiList::find($id);
-                $documentType->document_branch =$request->document_branch;
-                $documentType->document_type_id =$request->document_type_id;
-                $documentType->document_number =$request->document_number;
-                $documentType->document_year =$request->document_year;
-                $documentType->document_class =$request->document_class;
-                $documentType->document_subject =$request->document_subject;
-                $documentType->main_sarok_number =$finalSarokNumber;
-                $documentType->save();
-
-
-                return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংশোধন করা হয়েছে');
-    }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -518,9 +385,6 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
     public function destroy(string $id)
     {
         $admins = NothiList::where('id',$id)->delete();
-
-
-
         return back()->with('error','সফলভাবে মুছে ফেলা হয়েছে!');
     }
 }

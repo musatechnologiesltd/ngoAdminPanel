@@ -1,4 +1,4 @@
-@foreach($all_data_for_new_list as $i=>$allStatusData)
+@foreach($allDataForNewList as $i=>$allStatusData)
 
 <?php
 

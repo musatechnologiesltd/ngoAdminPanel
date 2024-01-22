@@ -63,10 +63,9 @@ class AppServiceProvider extends ServiceProvider
 
                 if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-                    $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->count();
-                    $all_data_for_renew_list = DB::table('ngo_renews')->where('status','Ongoing')->latest() ->count();
-                    $all_data_for_name_changes_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest() ->count();
-
+                    $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->count();
+                    $allDataForRenewList = DB::table('ngo_renews')->where('status','Ongoing')->latest() ->count();
+                    $allDataForNameChangesList = DB::table('ngo_name_changes')->where('status','Ongoing')->latest() ->count();
 
                     $dataFdNineOne = DB::table('fd9_one_forms')
                     ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
@@ -76,9 +75,6 @@ class AppServiceProvider extends ServiceProvider
                     ->orderBY('fd9_one_forms.id','desc')
                     ->count();
 
-
-                    //dd($dataFdNineOne);
-
                     $dataFdNine = DB::table('fd9_forms')->where('status','Ongoing')->latest()->count();
 
                     $dataFromFd6Form = DB::table('fd6_forms')
@@ -86,7 +82,6 @@ class AppServiceProvider extends ServiceProvider
                     ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
                    ->orderBy('fd6_forms.id','desc')
                    ->count();
-
 
                    $dataFromFd7Form = DB::table('fd7_forms')
                    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd7_forms.fd_one_form_id')
@@ -129,11 +124,9 @@ class AppServiceProvider extends ServiceProvider
 
 
                     $mainCodeCountHeader1 =$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
+                    $mainCodeCountHeader2 =  $allDataForNameChangesList + $allDataForRenewList + $allDataForNewList+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;
 
-
-                   $mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;
-
-                   $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
+                    $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
 
                 }else{
 
@@ -168,10 +161,7 @@ class AppServiceProvider extends ServiceProvider
 
                     $mainCodeCountHeader1 =$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
 
-
-                   //$mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;
-
-                   $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
+                    $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
 
                 }
 
@@ -195,13 +185,13 @@ class AppServiceProvider extends ServiceProvider
             $data = DB::table('system_information')->first();
 
             if (!$data) {
+
                 $icon_name = '';
                 $logo_name ='';
                 $ins_name = '';
                 $ins_add = '';
                 $ins_url = '';
                 $ins_email = '';
-
                 $ins_phone = '';
 
                 view()->share('ins_name', $ins_name);
@@ -219,7 +209,6 @@ class AppServiceProvider extends ServiceProvider
                 view()->share('ins_add', $data->system_address);
                 view()->share('ins_phone', $data->system_phone);
                 view()->share('ins_email', $data->system_email);
-
                 view()->share('ins_url', $data->system_url);
 
             }
@@ -232,8 +221,8 @@ class AppServiceProvider extends ServiceProvider
             $ins_add = '';
             $ins_url = '';
             $ins_email = '';
-
             $ins_phone = '';
+
             view()->share('mainCodeCountHeader', $mainCodeCountHeader);
             view()->share('ins_name', $ins_name);
             view()->share('logo',  $logo_name);
@@ -247,7 +236,6 @@ class AppServiceProvider extends ServiceProvider
         if(\Illuminate\Support\Facades\Schema::hasTable('ngo_statuses')){
 
             $ongoingNgoStatus = DB::table('ngo_statuses')->where('status','Ongoing')->latest()->get();
-
             view()->share('ongoingNgoStatus', $ongoingNgoStatus);
 
 

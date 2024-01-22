@@ -31,12 +31,10 @@ class BranchController extends Controller
 
     $branchStep = $request->branchStep;
 
-    $designationCount = Branch::where('branch_step',$branchStep )
-    //->where('designation_serial',$designationSerial )
+    $designationCount = Branch::where('branch_step',$branchStep)
     ->count();
 
-
-return $designationCount;
+    return $designationCount;
 
    }
 
@@ -54,19 +52,13 @@ return $designationCount;
 
 
         if (is_null($this->user) || !$this->user->can('branchAdd')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                   return redirect()->route('mainLogin');
                }
 
+            \LogActivity::addToLog('branch list ');
 
-               \LogActivity::addToLog('branch list ');
-
-
-          $branchLists = Branch::where('id','!=',1)->get();
-
-          $stepValue = Branch::orderBy('id','desc')->max('branch_step');
-
-          //dd($stepValue);
+            $branchLists = Branch::where('id','!=',1)->get();
+            $stepValue = Branch::orderBy('id','desc')->max('branch_step');
 
                return view('admin.branchList.index',compact('branchLists','stepValue'));
            }
@@ -75,8 +67,7 @@ return $designationCount;
            public function store(Request $request){
 
             if (is_null($this->user) || !$this->user->can('branchAdd')) {
-                //abort(403, 'Sorry !! You are Unauthorized to Add !');
-                return redirect()->route('mainLogin');
+                       return redirect()->route('mainLogin');
             }
 
             $request->validate([
@@ -87,58 +78,39 @@ return $designationCount;
 
               \LogActivity::addToLog('branch store ');
 
+              $input = $request->all();
+              Branch::create($input);
 
-
-
-             $input = $request->all();
-
-             Branch::create($input);
-
-
-
-
-    return redirect()->route('branchList.index')->with('success','Added successfully!');
-
-
+              return redirect()->route('branchList.index')->with('success','Added successfully!');
 
         }
-
-
-
 
 
         public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('branchUpdate')) {
-                //abort(403, 'Sorry !! You are Unauthorized to Update !');
-                return redirect()->route('mainLogin');
+                       return redirect()->route('mainLogin');
             }
 
             \LogActivity::addToLog('branch update ');
 
-            $medicine = Branch::findOrFail($id);
-
+            $branch = Branch::findOrFail($id);
             $input = $request->all();
+            $branch->fill($input)->save();
 
-            $medicine->fill($input)->save();
+            return redirect()->route('branchList.index')->with('success','Updated successfully!');
 
-    return redirect()->route('branchList.index')->with('success','Updated successfully!');
-
-
-
-        }
+    }
 
 
         public function destroy($id)
     {
 
         if (is_null($this->user) || !$this->user->can('branchDelete')) {
-           // abort(403, 'Sorry !! You are Unauthorized to Delete !');
-           return redirect()->route('mainLogin');
+                  return redirect()->route('mainLogin');
         }
 
         \LogActivity::addToLog('branch delete ');
-
 
         Branch::destroy($id);
         return redirect()->route('branchList.index')->with('error','Deleted successfully!');

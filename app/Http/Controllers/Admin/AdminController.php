@@ -74,16 +74,11 @@ class AdminController extends Controller
 
     public function create(){
         if (is_null($this->user) || !$this->user->can('userAdd')) {
-           // abort(403, 'Sorry !! You are Unauthorized to Add !');
-
-           return redirect()->route('mainLogin');
+                 return redirect()->route('mainLogin');
                }
 
                \LogActivity::addToLog('create employee ');
-
-              // dd($path);
-
-              // dd(public_path().'\images');
+;
         $branchLists = Branch::latest()->get();
         $users = Admin::all();
         $roles  = Role::all();
@@ -94,20 +89,15 @@ class AdminController extends Controller
 
     public function edit($id){
         if (is_null($this->user) || !$this->user->can('userAdd')) {
-           // abort(403, 'Sorry !! You are Unauthorized to Add !');
-           return redirect()->route('mainLogin');
+                   return redirect()->route('mainLogin');
                }
 
                \LogActivity::addToLog('edit employee list');
 
                $designationLists = DesignationList::latest()->get();
-
-              // dd($path);
-
-              // dd(public_path().'\images');
-        $branchLists = Branch::latest()->get();
-        $user = Admin::find($id);
-        $roles  = Role::all();
+               $branchLists = Branch::latest()->get();
+               $user = Admin::find($id);
+               $roles  = Role::all();
 
        return view('admin.user.edit', compact('designationLists','branchLists','user','roles'));
     }
@@ -118,19 +108,14 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userView')) {
-           // abort(403, 'Sorry !! You are Unauthorized to View !');
-
-           return redirect()->route('mainLogin');
+                   return redirect()->route('mainLogin');
                }
 
 
                \LogActivity::addToLog('view employee list');
-              // dd($path);
 
-              // dd(public_path().'\images');
-
-        $users = Admin::where('id','!=',1)->get();
-        $roles  = Role::all();
+               $users = Admin::where('id','!=',1)->get();
+               $roles  = Role::all();
 
        return view('admin.user.index', compact('users','roles'));
     }
@@ -140,43 +125,26 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userAdd')) {
-           // abort(403, 'Sorry !! You are Unauthorized to View !');
-           return redirect()->route('mainLogin');
+                   return redirect()->route('mainLogin');
                }
                \LogActivity::addToLog(' employee store');
-               //dd($request->all());
+
 
         // Validation Data
         $request->validate([
             'name' => 'required|string|max:150',
-            //'designation_list_id' => 'required|string|max:200',
             'phone' => 'required|string|size:11',
-           // 'branch_id' => 'required|string|max:200',
-           // 'admin_job_start_date' => 'required|date',
-            // 'admin_job_end_date' => 'required|date',
             'sign' => 'nullable|file|mimes:jpeg,png,jpg',
             'image' => 'nullable|file|mimes:jpeg,png,jpg',
             'email' => 'required|max:100|email|unique:admins',
-            // 'password' => 'required|min:8|confirmed',
         ],
         [
             'name.required' => 'Name is required',
-           // 'designation_list_id.required' => 'designation is required',
             'phone.required' => 'Phone is required',
-             // 'branch_id.required' => 'branch is required',
-            //'admin_job_start_date.required' => 'Admin_job_start_date is required',
-            // 'admin_job_end_date.required' => 'Admin_job_end_dateis required',
             'sign.required' => 'Sign is required',
             'image.required' => 'Image is required',
             'email.required' => 'Email is required',
-            // 'password.required' => 'Password is required',
         ]);
-
-        // $result = CommonController::imageUpload($request);
-
-        // dd($result);
-
-
 
 
         // Create New User
@@ -185,14 +153,10 @@ class AdminController extends Controller
         $admins->admin_name_ban = $request->name_ban;
         $admins->designation_list_id = 1;
         $admins->branch_id = 1;
-        //$admins->admin_job_start_date = $request->admin_job_start_date;
-        // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
-       // $admins->password = Hash::make(12345678);
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
-
 
             $file = $request->file('image');
             $admins->admin_image =  CommonController::imageUpload($request,$file,$filePath);
@@ -206,14 +170,11 @@ class AdminController extends Controller
 
         }
 
-
-        $admins->save();
+           $admins->save();
 
         if ($request->roles) {
             $admins->assignRole($request->roles);
         }
-
-
 
         Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
             $message->to($request->email);
@@ -229,31 +190,22 @@ class AdminController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('userUpdate')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                   return redirect()->route('mainLogin');
                }
 
                \LogActivity::addToLog('update employee list');
 
-$adminEmail = Admin::where('id',$id)->value('email');
+               $adminEmail = Admin::where('id',$id)->value('email');
 
 
         // Create New User
         $admins = Admin::find($id);
         $admins->admin_name = $request->name;
         $admins->admin_name_ban = $request->name_ban;
-        // $admins->designation_list_id = 1;
-        // $admins->branch_id = 1;
-        //$admins->admin_job_start_date = $request->admin_job_start_date;
-        // $admins->admin_job_end_date = $request->admin_job_end_date;
         $admins->admin_mobile = $request->phone;
         $admins->email = $request->email;
-        if ($request->password) {
-            // $admins->password = Hash::make($request->password);
-        }
         $filePath = 'adminImage';
         if ($request->hasfile('image')) {
-
 
             $file = $request->file('image');
             $admins->admin_image =  CommonController::imageUpload($request,$file,$filePath);
@@ -269,9 +221,6 @@ $adminEmail = Admin::where('id',$id)->value('email');
 
 
         if($adminEmail == $request->email){
-
-
-
         }else{
             Mail::send('emails.passwordChangeEmail', ['id' =>$request->email], function($message) use($request){
                 $message->to($request->email);
@@ -287,10 +236,6 @@ $adminEmail = Admin::where('id',$id)->value('email');
             $admins->assignRole($request->roles);
         }
 
-
-
-
-
         return redirect()->route('user.index')->with('success','Updated successfully!');;
     }
 
@@ -299,8 +244,7 @@ $adminEmail = Admin::where('id',$id)->value('email');
     {
 
         if (is_null($this->user) || !$this->user->can('userDelete')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                   return redirect()->route('mainLogin');
                }
 
                \LogActivity::addToLog('delete employee from list');
@@ -320,9 +264,7 @@ $adminEmail = Admin::where('id',$id)->value('email');
     public function accountPasswordChange($id){
 
         \LogActivity::addToLog('accountPasswordChange');
-
-
-       $email = $id;
+              $email = $id;
        return view('admin.user.accountPasswordChange',compact('email'));
 
     }
@@ -344,35 +286,26 @@ $adminEmail = Admin::where('id',$id)->value('email');
 
     \LogActivity::addToLog('employeeEndDatePost');
 
-//dd($request->all());
-
-$admin_job_end_date = date('Y-m-d', strtotime($request->admin_job_end_date));
-
-
+    $admin_job_end_date = date('Y-m-d', strtotime($request->admin_job_end_date));
     $getTheAdminValue = Admin::where('id',$request->id)->first();
 
- $admins = Admin::find($request->id);
- $admins->admin_job_end_start_date =$getTheAdminValue->admin_job_start_date;
- $admins->admin_job_end_date = $admin_job_end_date;
- $admins->admin_job_start_date = $request->admin_job_start_date;
-//  $admins->designation_list_id = $request->designation_list_id;
-//  $admins->branch_id = $request->branch_id;
- $admins->save();
+    $admins = Admin::find($request->id);
+    $admins->admin_job_end_start_date =$getTheAdminValue->admin_job_start_date;
+    $admins->admin_job_end_date = $admin_job_end_date;
+    $admins->admin_job_start_date = $request->admin_job_start_date;
+    $admins->save();
 
 
- $jobHistory = new JobHistory();
- $jobHistory->admin_id  = $request->id;
- $jobHistory->designation_list_id  =$getTheAdminValue->designation_list_id;
- $jobHistory->start_date  = $getTheAdminValue->admin_job_start_date;
- $jobHistory->end_date  = $admin_job_end_date;
+    $jobHistory = new JobHistory();
+    $jobHistory->admin_id  = $request->id;
+    $jobHistory->designation_list_id  =$getTheAdminValue->designation_list_id;
+    $jobHistory->start_date  = $getTheAdminValue->admin_job_start_date;
+    $jobHistory->end_date  = $admin_job_end_date;
 
 
-AdminDesignationHistory::where('id',$request->desi_id)->delete();
+    AdminDesignationHistory::where('id',$request->desi_id)->delete();
 
-
-
-
- return redirect()->back()->with('info','Added successfully!');
+    return redirect()->back()->with('info','Added successfully!');
   }
 
 
