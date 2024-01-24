@@ -39,8 +39,6 @@
 
                         <div class="text-end">
 
-
-
                             @if($dataFromFd3Form->status == 'Ongoing')
                             <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdThree','id'=>$dataFromFd3Form->mainId]) }}';" type="button" class="btn btn-primary add-btn">ডাক দেখুন</button>
 
@@ -106,10 +104,7 @@
                                             <form id="form" action="{{ route('statusUpdateForFd3') }}" method="post">
                                                 @csrf
 
-
                                                 <input type="hidden" value="{{ $dataFromFd3Form->mainId }}" name="id" />
-
-
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
 
                                                 <label>স্টেটাস:</label>

@@ -37,7 +37,6 @@ class SettingController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
 
@@ -48,8 +47,7 @@ class SettingController extends Controller
 
     public function basicInformationEdit(){
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+               return redirect()->route('mainLogin');
                }
 
         return view('admin.setting.setting');
@@ -60,8 +58,7 @@ class SettingController extends Controller
     public function digitalSignatureEdit(){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+               return redirect()->route('mainLogin');
                }
 
         return view('admin.setting.digitalSignatureEdit');
@@ -72,7 +69,7 @@ class SettingController extends Controller
     public function passwordEdit(){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
                }
 
@@ -83,7 +80,7 @@ class SettingController extends Controller
     public function profilePictureEdit(){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
                }
 
@@ -94,12 +91,12 @@ class SettingController extends Controller
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
                }
 
 
-               \LogActivity::addToLog('Profile Update.');
+        \LogActivity::addToLog('Profile Update.');
 
         $time_dy = time().date("Ymd");
         $admin =  Admin::find($request->id);
@@ -206,23 +203,16 @@ class SettingController extends Controller
             return redirect()->back()->with('error','Current password not match');
         }
 
-
-
-
-
     }
 
 
 
     public function digitalSignatureUpdate(Request $request){
 
-
-        //dd($request->all());
-
         $time_dy = time().date("Ymd");
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
                }
 
@@ -230,36 +220,23 @@ class SettingController extends Controller
                \LogActivity::addToLog('Profile Update.');
 
 
-               $request->validate([
+        $request->validate([
 
-                'digital_signature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:60|dimensions:width=300,height=80'
-
-
-            ]);
+           'digital_signature' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:60|dimensions:width=300,height=80'
+        ]);
 
 
         $admin =  Admin::find($request->id);
-
-
-
-            $productImage = $request->file('digital_signature');
-            $imageName = $time_dy.$productImage->getClientOriginalName();
-            $directory = 'public/uploads/';
-            $imageUrl = $directory.$imageName;
-
-            $img=Image::make($productImage)->resize(300,80);
-            $img->save($imageUrl);
-
-             $admin->admin_sign =  'public/uploads/'.$imageName;
-
-
+        $productImage = $request->file('digital_signature');
+        $imageName = $time_dy.$productImage->getClientOriginalName();
+        $directory = 'public/uploads/';
+        $imageUrl = $directory.$imageName;
+        $img=Image::make($productImage)->resize(300,80);
+        $img->save($imageUrl);
+        $admin->admin_sign =  'public/uploads/'.$imageName;
         $admin->save();
 
         return redirect()->back()->with('success','Updated Succesfully');
-
-
-
-
     }
 
 

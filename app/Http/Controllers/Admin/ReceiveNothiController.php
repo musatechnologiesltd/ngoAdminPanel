@@ -10,15 +10,8 @@ class ReceiveNothiController extends Controller
 {
     public function index(){
 
-
-
-        $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
-                                      ->latest()->get();
-
-
-            return view('admin.receiveNothi.index',compact('senderNothiList'));
-
-
+        $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->latest()->get();
+        return view('admin.receiveNothi.index',compact('senderNothiList'));
 
     }
 }

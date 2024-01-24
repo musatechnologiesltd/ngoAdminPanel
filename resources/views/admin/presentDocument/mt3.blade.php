@@ -53,13 +53,7 @@ aria-labelledby="myModalLabel2">
 
                 <input type="hidden" value="{{ $id }}" placeholder="নোট এর বিষয়" class="form-control" name="noteId" id=""/>
 
-                {{-- <div class="mb-3">
-                    <label class="form-label" for="">অগ্রাধিকার বাছাই করুন </label>
-                    <select class="js-example-basic-single col-sm-12">
-                        <option value="AL">অগ্রাধিকার বাছাই করুন</option>
-                        <option value="WY">X</option>
-                    </select>
-                </div> --}}
+               
                 <div class="row mt-3">
                     <div class="col-1">
 

@@ -59,11 +59,6 @@
                                                     <button class="btn btn-outline-success" data-bs-toggle="modal" data-original-title="" data-bs-target="#myModal3" data-bs-original-title="" title=""><i class="fa fa-calendar"></i> নতুন নোট</button>
    <!-- end add note button -->
 
-
-
-
-
-
                                                     @if(count($checkParent) == 0)
 
                                                     @else

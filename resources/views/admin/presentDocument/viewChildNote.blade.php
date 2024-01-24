@@ -62,11 +62,6 @@
                                         <button class="btn btn-outline-success" data-bs-toggle="modal" data-original-title="" data-bs-target="#myModal3" data-bs-original-title="" title=""><i class="fa fa-calendar"></i> নতুন নোট</button>
 <!-- end add note button -->
 
-
-
-
-
-
                                         @if(count($checkParent) == 0)
 
                                         @else
@@ -422,10 +417,9 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
     ->where('nothId',$nothiId)
     ->where('dakId',$parentId)
     ->where('dakType',$status)
-    //->where('sender',Auth::guard('admin')->user()->id)
     ->where('receiver',Auth::guard('admin')->user()->id)
     ->value('id');
-//dd($firstSenderId);
+
     ?>
 
 @if(!empty($firstSenderId))
@@ -464,26 +458,6 @@ $potroZariListValue =  DB::table('nothi_details')
 
 @endif
 
-    {{-- <div class="dropdown me-2">
-        <button class="btn btn-primary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-            পত্র অনুমোদন করুন
-        </button>
-        <div class="dropdown-menu"
-             aria-labelledby="dropdownMenuButton1">
-            <div>
-                <h3 class="popover-header">পত্র অনুমোদন </h3>
-                <div class="popover-body">আপনি কি পত্র অনুমোদন করতে চান</div>
-                <div class="d-flex justify-content-center p-2">
-                    <button onclick="location.href = '{{ route('givePermissionToNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'childnote'=>$childNoteNewListValue]) }}';" class="btn btn-primary me-2">হ্যাঁ</button>
-                    <button class="btn btn-danger">না</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <button class="btn btn-primary me-2" onclick="location.href = '{{ route('createPotroForReceiver', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'activeCode' =>$activeCode]) }}';"><i class="fa fa-pencil"></i> সংশোধন করুন</button>
     <a target="_blank"    class="btn btn-primary me-2" href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}'><i class="fa fa-print"></i> প্রিন্ট করুন</a>
 
@@ -584,18 +558,7 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">
-
-          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
-
-
-
-
-                  {!! $potrangshoDraft->description !!}
-
-
-
-  </div>
+  <div class="col-xl-12 mt-2">{!! $potrangshoDraft->description !!}</div>
 </div>
 
 @else
@@ -616,40 +579,14 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">
-
-          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
-
-
-
-
-                  {!! $officeDetails->description !!}
-
-
-
-  </div>
+  <div class="col-xl-12 mt-2"> {!! $officeDetails->description !!}</div>
 </div>
 
 @endif
 @endif
 
 
-
-
-
-
-
-
-
-
-
-
-
-                                                                        <!-- approver start --->
-
-
-
-                                                                        <div class="mt-4" style="text-align: right;">
+        <div class="mt-4" style="text-align: right;">
 
                                                                             @if($potroZariListValue == 1)
 
@@ -831,9 +768,8 @@ $potroZariListValue =  DB::table('nothi_details')
 
 
     @endif
-
-                                                                            <span>ফোন :{{ $aphone }}</span><br>
-                                                                            <span>ইমেইল : {{ $aemail }}</span>
+<span>ফোন :{{ $aphone }}</span><br>
+<span>ইমেইল : {{ $aemail }}</span>
     </div>
     @endif
 @endforeach

@@ -31,11 +31,12 @@ class Fc2Controller extends Controller
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-          $dataFromFc2Form = DB::table('fc2_forms')
-          ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
-          ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
-         ->orderBy('fc2_forms.id','desc')
-         ->get();
+           $dataFromFc2Form = DB::table('fc2_forms')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
+           ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
+           ->orderBy('fc2_forms.id','desc')
+           ->get();
+
         }else{
 
             $ngoStatusFdSevenDak = FcTwoDak::where('status',1)
@@ -43,129 +44,102 @@ class Fc2Controller extends Controller
             ->latest()->get();
 
             $convert_name_title = $ngoStatusFdSevenDak->implode("fc_two_status_id", " ");
-             $separated_data_title = explode(" ", $convert_name_title);
-
-
+            $separated_data_title = explode(" ", $convert_name_title);
 
             $dataFromFc2Form = DB::table('fc2_forms')
-              ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
-              ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
-              ->whereIn('fc2_forms.id',$separated_data_title)
-             ->orderBy('fc2_forms.id','desc')
-             ->get();
-
-
-
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
+            ->whereIn('fc2_forms.id',$separated_data_title)
+            ->orderBy('fc2_forms.id','desc')
+            ->get();
 
         }
 
+        return view('admin.fc2form.index',compact('dataFromFc2Form'));
+
+    }
 
 
-         //dd($dataFromNVisaFd9Fd1);
-             return view('admin.fc2form.index',compact('dataFromFc2Form'));
+    public function show($id){
 
-         }
+        \LogActivity::addToLog('view fdSeven List Detail');
 
+        $dataFromFc2Form = DB::table('fc2_forms')
+        ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
+        ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
+        ->where('fc2_forms.id',$id)
+        ->orderBy('fc2_forms.id','desc')
+        ->first();
 
-         public function show($id){
-
-            \LogActivity::addToLog('view fdSeven List Detail');
-
-              $dataFromFc2Form = DB::table('fc2_forms')
-              ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
-              ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
-              ->where('fc2_forms.id',$id)
-             ->orderBy('fc2_forms.id','desc')
-             ->first();
-             $get_email_from_user = DB::table('users')->where('id',$dataFromFc2Form->user_id)->value('email');
-
-             $fd2FormList = DB::table('fd2_form_for_fc2_forms')->where('fd_one_form_id',$dataFromFc2Form->fd_one_form_id)
+        $get_email_from_user = DB::table('users')->where('id',$dataFromFc2Form->user_id)->value('email');
+        $fd2FormList = DB::table('fd2_form_for_fc2_forms')->where('fd_one_form_id',$dataFromFc2Form->fd_one_form_id)
              ->where('fc2_form_id',$dataFromFc2Form->mainId)->latest()->first();
+        $fd2OtherInfo = DB::table('fd2_fc2_other_infos')->where('fd2_form_for_fc2_form_id',$fd2FormList->id)->latest()->get();
 
-             $fd2OtherInfo = DB::table('fd2_fc2_other_infos')->where('fd2_form_for_fc2_form_id',$fd2FormList->id)->latest()->get();
+        return view('admin.fc2form.show',compact('get_email_from_user','dataFromFc2Form','fd2FormList','fd2OtherInfo'));
 
-
-
-
-             //dd($dataFromNVisaFd9Fd1);
-                 return view('admin.fc2form.show',compact('get_email_from_user','dataFromFc2Form','fd2FormList','fd2OtherInfo'));
-
-             }
+    }
 
 
-             public function fc2PdfDownload($id){
+    public function fc2PdfDownload($id){
 
-                \LogActivity::addToLog('organization name of the job amount of money and duration pdf');
+        \LogActivity::addToLog('organization name of the job amount of money and duration pdf');
 
-                $form_one_data = DB::table('fc2_forms')->where('id',$id)->value('organization_name_of_the_job_amount_of_money_and_duration_pdf');
+        $form_one_data = DB::table('fc2_forms')->where('id',$id)->value('organization_name_of_the_job_amount_of_money_and_duration_pdf');
 
-                 return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
+        return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
 
-             }
-
-
-             public function verified_fc_two_form($id){
-
-                \LogActivity::addToLog('verified_fc_two_form pdf');
-
-                $form_one_data = DB::table('fc2_forms')->where('id',$id)->value('verified_fc_two_form');
-
-                //dd($form_one_data);
-
-                 return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
-             }
-
-             public function fc2fd2PdfDownload($id){
-
-                \LogActivity::addToLog('fd2 pdf download.');
-
-                $form_one_data = DB::table('fd2_form_for_fc2_forms')->where('id',$id)->value('fd_2_form_pdf');
-
-                 return view('admin.fc2form.fc2fd2PdfDownload',compact('form_one_data'));
-             }
+    }
 
 
-             public function fc2fd2OtherPdfDownload($id){
+    public function verified_fc_two_form($id){
+
+        \LogActivity::addToLog('verified_fc_two_form pdf');
+
+        $form_one_data = DB::table('fc2_forms')->where('id',$id)->value('verified_fc_two_form');
+
+        return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
+    }
+
+    public function fc2fd2PdfDownload($id){
+
+        \LogActivity::addToLog('fd2 pdf download.');
+
+        $form_one_data = DB::table('fd2_form_for_fc2_forms')->where('id',$id)->value('fd_2_form_pdf');
+
+        return view('admin.fc2form.fc2fd2PdfDownload',compact('form_one_data'));
+
+    }
 
 
-                \LogActivity::addToLog('fd2 other pdf download.');
+    public function fc2fd2OtherPdfDownload($id){
 
-                $form_one_data = DB::table('fd2_fc2_other_infos')->where('id',$id)->value('file');
+        \LogActivity::addToLog('fd2 other pdf download.');
 
-                 return view('admin.fc2form.fc2fd2OtherPdfDownload',compact('form_one_data'));
+        $form_one_data = DB::table('fd2_fc2_other_infos')->where('id',$id)->value('file');
 
+        return view('admin.fc2form.fc2fd2OtherPdfDownload',compact('form_one_data'));
 
-             }
+    }
 
+    public function statusUpdateForFc2(Request $request){
 
-             public function statusUpdateForFc2(Request $request){
+        \LogActivity::addToLog('update fcTwo Status ');
 
-           // dd($request->all());
-
-
-                \LogActivity::addToLog('update fcTwo Status ');
-
-
-                DB::table('fc2_forms')->where('id',$request->id)
+        DB::table('fc2_forms')->where('id',$request->id)
                 ->update([
                     'status' => $request->status,
                     'comment' => $request->comment,
                 ]);
 
+        $get_user_id = DB::table('fc2_forms')->where('id',$request->id)->value('fd_one_form_id');
 
-                $get_user_id = DB::table('fc2_forms')->where('id',$request->id)->value('fd_one_form_id');
+        Mail::send('emails.grantApplicationTwo', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('One time grant application form');
+        });
 
+        return redirect()->back()->with('success','Updated successfully!');
 
-                    Mail::send('emails.grantApplicationTwo', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
-                        $message->to($request->email);
-                        $message->subject('One time grant application form');
-                    });
-
-
-
-
-
-
-                return redirect()->back()->with('success','Updated successfully!');
-             }
+    }
 }

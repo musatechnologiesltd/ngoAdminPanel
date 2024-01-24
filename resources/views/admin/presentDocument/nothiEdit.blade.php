@@ -17,27 +17,12 @@ $branchList = DB::table('admins')->whereIn('id',$separated_data_title)
 ->get();
 
 
-
-
-
-
-
-
 $convert_name_title1 = $branchList->implode("branch_id", " ");
 $separated_data_title1 = explode(" ", $convert_name_title1);
 
 
 $getAllbranchName = DB::table('branches')
       ->whereIn('id',$separated_data_title1)->orderBy('branch_step','asc')->get();
-
-
-
-
-
-
-
-
-
 
 
 ?>

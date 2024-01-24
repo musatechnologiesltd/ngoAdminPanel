@@ -39,9 +39,8 @@
 
                         <div class="text-end">
 
-
-
                             @if($dataFromFc2Form->status == 'Ongoing')
+
                             <button onclick="location.href = '{{ route('showDataAll',['status'=>'fcTwo','id'=>$dataFromFc2Form->mainId]) }}';" type="button" class="btn btn-primary add-btn">ডাক দেখুন</button>
 
                             @else
@@ -106,17 +105,13 @@
                                             <form id="form" action="{{ route('statusUpdateForFc2') }}" method="post">
                                                 @csrf
 
-
                                                 <input type="hidden" value="{{ $dataFromFc2Form->mainId }}" name="id" />
-
-
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
 
                                                 <label>স্টেটাস:</label>
                                                 <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $dataFromFc2Form->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
-
                                                     <option value="Accepted" {{ $dataFromFc2Form->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
                                                     <option value="Correct" {{ $dataFromFc2Form->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $dataFromFc2Form->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
@@ -147,9 +142,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
 
                     </div>

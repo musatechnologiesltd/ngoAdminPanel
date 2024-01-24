@@ -1,10 +1,6 @@
 <?php
 
-
 $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_data->id)->latest()->get();
-
-
-
 
 ?>
 <table class="table table-bordered">
@@ -12,12 +8,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
         <th>নথির নাম</th>
         <th>নথি দেখুন</th>
     </tr>
-    {{-- <tr>
-        <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ এফডি-৮ ফরম এর ফাইনাল কপি </td>
-        <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'final_pdf_eight']) }}">
-            <i class="fa fa-eye"></i>
-        </a></td>
-    </tr> --}}
+    
 @foreach($renewalFileList as $ngoOtherDocListsFirst)
 
 
@@ -46,10 +37,6 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
        @endif
 
        <!--end if -->
-
-
-
-
 
 <!--new start -->
 @if(empty($ngoOtherDocListsFirst->organization_by_laws_or_constitution))

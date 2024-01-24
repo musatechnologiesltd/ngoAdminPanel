@@ -81,14 +81,12 @@
                                     data='{{asset('/') }}{{ 'public/'.$allNoticeLists->pdf }}'
                                     type="application/pdf"
                                     width="200"
-                                    height="200"
-                                  >
+                                    height="200">
 
                                     <iframe
                                       src='{{asset('/') }}{{ 'public/'.$allNoticeLists->pdf }}'
                                       width="200"
-                                      height="200"
-                                    >
+                                      height="200">
                                     <p>This browser does not support PDF!</p>
                                     </iframe>
                                   </object>

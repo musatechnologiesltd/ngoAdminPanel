@@ -14,9 +14,6 @@
         </tr>
           <?php
 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-// dd($getngoForLanguage);
-
-
 $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
 
 

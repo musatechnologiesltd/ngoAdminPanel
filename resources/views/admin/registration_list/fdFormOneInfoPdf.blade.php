@@ -99,13 +99,7 @@
             <td>{{ $allformOneData->organization_name }} <br> {{ trans('fd_one_step_one.Organization_address')}}: {{ $allformOneData->organization_address}}</td>
             @endif
         </tr>
-        <!-- <tr>
-            <td></td>
-            <td class="number_section">(ii)</td>
-            <td>{{ trans('fd_one_step_one.Organization_address')}}</td>
-            <td style="width:4px">:</td>
-            <td>{{ $allformOneData->organization_address }}</td>
-        </tr>-->
+        
         <tr>
             <td></td>
             <td class="number_section">(iii)</td>
@@ -168,12 +162,7 @@
             <td>{{ $allformOneData->name_of_head_in_bd }}</td>
         </tr>
 
-       <?php
-
-                                   $getJobType =$allformOneData->job_type;
-
-
-                                  ?>
+       <?php $getJobType =$allformOneData->job_type; ?>
 
         <tr>
             <td></td>
@@ -194,12 +183,7 @@
                 @endif {{ $allformOneData->email }}</td>
         </tr>
 
-       <?php
-
-                                    $getCityzendata = $allformOneData->citizenship;
-
-
-                                  ?>
+       <?php $getCityzendata = $allformOneData->citizenship; ?>
         <tr>
             <td></td>
             <td></td>
@@ -335,16 +319,11 @@
             <td>{{ $allFormOneMemberList->address }}</td>
         </tr>
 
-      <?php
+        <?php
+            $convetArray = explode(",",$allFormOneMemberList->citizenship);
+            $getCityzendata = DB::table('countries')->whereIn('country_people_bangla',$convetArray)->get();
+        ?>
 
-                                  $convetArray = explode(",",$allFormOneMemberList->citizenship);
-
-
-
-                                    $getCityzendata = DB::table('countries')->whereIn('country_people_bangla',$convetArray)->get();
-
-                                  //dd($getCityzendata);
-                                  ?>
         <tr>
             <td></td>
 
@@ -537,9 +516,7 @@ attached
 </table>
 
 <table style=" margin-top: 15px">
-    {{-- <tr>
-        <td style="text-align: right; padding-right: 14%" colspan="3">{{ trans('fd_one_step_one.tt_4')}}</td>
-    </tr> --}}
+    
     <tr>
         <td style="width: 65%"></td>
         <td style="text-align: left; width:5%;">{{ trans('fd_one_step_one.tt_5')}}</td>

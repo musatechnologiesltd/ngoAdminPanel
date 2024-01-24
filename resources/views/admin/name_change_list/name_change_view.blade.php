@@ -59,8 +59,7 @@
                                 <h4>{{ $form_one_data->organization_name_ban }}</h4>
                               <h6>{{ $form_one_data->address_of_head_office }}</h6>
                                 @endif
-                                <!--<h6>{{ $form_one_data->email }}</h6>-->
-                               <!-- <p>{{ $form_one_data->phone }}</p> -->
+
 
 
                                @if($getNgoType == 'Foreign')
@@ -81,18 +80,12 @@
                             <div class="follow">
                                 <ul class="follow-list">
                                     <li>
-                                        <div class="follow-num">
-
-
-                                            {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
-
-
-
-                                        </div>
+                                        <div class="follow-num">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}</div>
                                         <span>জমাদানের তারিখ</span>
                                     </li>
                                     <li>
-                                        <div class="follow-num"> @if($all_data_for_new_list_all->status == 'Accepted')
+                                        <div class="follow-num">
+                                            @if($all_data_for_new_list_all->status == 'Accepted')
 
                                             <button class="btn btn-secondary " type="button">
                                                 গৃহীত
@@ -326,25 +319,17 @@
     </tr>
 
     @if($ngoTypeData->ngo_type_new_old == 'Old')
+    <?php
+
+$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
+$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+?>
     <tr>
         <td></td>
         <td>(i)</td>
         <td>নিবন্ধন নম্বর</td>
-        <td>:
-
-
-
-
-
-
-
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}
-
-
-
-
-
-      </td>
+        <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}</td>
     </tr>
     <tr>
         <td></td>
@@ -358,19 +343,7 @@
         <td></td>
         <td>(iii)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:
-<?php
-
-$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
-$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
-
-?>
-
-
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}
-
-
-      </td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}</td>
     </tr>
 
 
@@ -378,14 +351,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(iv)</td>
         <td>শেষ নবায়ন তারিখ</td>
-        <td>:
-
-
-
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}
-
-
-      </td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}</td>
     </tr>
 
 
@@ -394,13 +360,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(i)</td>
         <td>ডাইরি নম্বর </td>
-        <td>:
-
-
-
-
-
-          @if($form_one_data->registration_number == 0)
+        <td>:@if($form_one_data->registration_number == 0)
 
 
           @else
@@ -430,9 +390,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(iv)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:
-
-          @if(empty($duration_list_all))
+        <td>:@if(empty($duration_list_all))
 
 
           @else
@@ -448,8 +406,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
-        <td>:
-            @if(empty($duration_list_all))
+        <td>:@if(empty($duration_list_all))
 
 
           @else
@@ -502,7 +459,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
     </tbody>
 </table>
 
-<!---vvvvvvvvv-->
+
                                         </div>
                                     </div>
                                     @else

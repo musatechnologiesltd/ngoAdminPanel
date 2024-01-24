@@ -3,14 +3,6 @@
 $get_user_id = DB::table('fd_one_forms')->where('id',$ngoId)->value('organization_name');
 $get_user_id1 = DB::table('fd_one_forms')->where('id',$ngoId)->value('registration_number');
 ?>
-{{-- <p>CongraYour Request Has Been {{ $id }}</p>
-
-<h2>------------------</h2>
-<p><b>NGO Affairs Bureau</b> <br>
-    Prime Minister's Office <br>
-    Plot-E-13/B, Agargaon. Sher-e-Bangla Nagar, Dhaka-1207
-</p> --}}
-
 
 @if($id == 'Ongoing')
 Dear <b>{{$get_user_id}}</b>,

@@ -311,52 +311,12 @@
                 </tbody>
             </table>
 
-            {{-- <h5 class="text-center mt-3 mb-3">ঘোষণা</h5>
-            <p class="mt-3">আমি এই মর্মে ঘোষণা করছি যে, আমি সংশ্লিষ্ট সকল আইন-কানুন পড়েছি এবং উল্লেখিত
-                সকল তথ্য সত্য ও সঠিক। </p>
-
-            <div class="row">
-                <div class="col-lg-6 col-sm-12"></div>
-                <div class="col-lg-6 col-sm-12">
-                    <table class="table table-borderless">
-                        <tr>
-                            <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
-                        </tr>
-                        <tr>
-                            <td>নামঃ</td>
-                        </tr>
-                        <tr>
-                            <td>পদবীঃ</td>
-                        </tr>
-                        <tr>
-                            <td>তারিখঃ</td>
-                        </tr>
-                    </table>
-                </div>
-            </div> --}}
+            
 
             <h4 style="text-align:center; font-weight:bold; font-size:20px;">ঘোষণা</h4>
 <p>আমি এই মর্মে ঘোষণা করছি যে ,আমি সংশ্লিষ্ট সকল আইন-কানুন পড়িয়াছি এবং উল্লিখিত সকল তথ্য সত্য ও সঠিক।</p>
 
-        {{-- <table style="text-align: right; margin-top: 100px;  width:100%">
-            <tr>
-                <td colspan="2">{{ trans('fd_one_step_one.tt_4')}}</td>
-            </tr>
 
-            <tr>
-                <td style="text-align: right; width: 80%"> {{ trans('fd_one_step_one.tt_5')}}</td>
-                <td style="width:35%; text-align: left; width: 20%">:  {{ $dataFromNVisaFd9Fd1->chief_name }}</td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 80%"> {{ trans('fd_one_step_one.tt_6')}}</td>
-                <td style="width:35%; text-align: left; width: 20%">:  {{ $dataFromNVisaFd9Fd1->chief_desi }}</td>
-            </tr>
-
-            <tr>
-                <td style="text-align: right; width: 80%">{{ trans('fd_one_step_one.tt_7')}}</td>
-                <td style="width:35%; text-align: left; width: 20%">:  {{  App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromNVisaFd9Fd1->created_at->format('d/m/Y')) }}</td>
-            </tr>
-        </table> --}}
         <table style=" margin-top: 15px;width:100%">
 
             <tr>

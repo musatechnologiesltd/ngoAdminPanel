@@ -64,19 +64,7 @@
                     <input class="form-control" name="email" id="mainEmail" type="email" required="" placeholder="Test@gmail.com">
                   </div>
                 </div>
-                {{-- <div class="form-group">
-                  <label>পাসওয়ার্ড</label>
-                  <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
-                    <input class="form-control" type="password" id="password" name="password" required="" placeholder="*********">
-                    {{-- <div class="show-hide"><span class="show">                         </span></div> --}}
-                  {{-- </div>
-                </div> --}}
-                {{-- <div class="form-group">
-                  <div class="checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label class="text-muted" for="checkbox1" onclick="myFunction()">পাসওয়ার্ড দেখুন </label>
-              </div><a class="link" href="{{ route('forgetPassword') }}">Forgot password?</a>
-                </div> --}}
+                
                 <div class="form-group">
                   <button class="btn btn-primary btn-block" id="finalValue" type="submit">জমা দিন</button>
                 </div>

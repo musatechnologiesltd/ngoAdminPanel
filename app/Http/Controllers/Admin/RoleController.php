@@ -29,11 +29,10 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleView')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
-               }
+                return redirect()->route('mainLogin');
+        }
 
-               \LogActivity::addToLog('Role List.');
+        \LogActivity::addToLog('Role List.');
 
         $permissions = Permission::all();
         $roles = Role::all();
@@ -46,14 +45,14 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleAdd')) {
-            ///abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                return redirect()->route('mainLogin');
                }
 
-               \LogActivity::addToLog('Create Role.');
+        \LogActivity::addToLog('Create Role.');
 
         $all_permissions  = Permission::all();
         $permission_groups = Admin::getpermissionGroups();
+
         return view('admin.roles.create', compact('all_permissions', 'permission_groups'));
     }
 
@@ -62,11 +61,10 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('roleAdd')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                return redirect()->route('mainLogin');
                }
 
-               \LogActivity::addToLog('Store Role.');
+        \LogActivity::addToLog('Store Role.');
 
         // Validation Data
         $request->validate([
@@ -91,11 +89,10 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleUpdate')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+               return redirect()->route('mainLogin');
                }
 
-               \LogActivity::addToLog('View Role Edit Page.');
+        \LogActivity::addToLog('View Role Edit Page.');
         $role = Role::findById($id,'admin');
         $all_permissions = Permission::all();
         $permission_groups = Admin::getpermissionGroups();
@@ -107,11 +104,12 @@ class RoleController extends Controller
     {
 
         if (is_null($this->user) || !$this->user->can('roleUpdate')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
+
                }
 
-               \LogActivity::addToLog('Update Role.');
+        \LogActivity::addToLog('Update Role.');
 
         $role = Role::find($id);
         $permissions = $request->input('permissions');
@@ -129,11 +127,10 @@ class RoleController extends Controller
     public function destroy($id)
     {
         if (is_null($this->user) || !$this->user->can('roleDelete')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                return redirect()->route('mainLogin');
                }
 
-               \LogActivity::addToLog('Delete Role.');
+        \LogActivity::addToLog('Delete Role.');
 
         $role = Role::findById($id,'admin');
         if (!is_null($role)) {

@@ -75,8 +75,7 @@
                                 <h4>{{ $form_one_data->organization_name_ban }}</h4>
                               <h6>{{ $form_one_data->address_of_head_office }}</h6>
                                 @endif
-                                <!--<h6>{{ $form_one_data->email }}</h6>-->
-                               <!-- <p>{{ $form_one_data->phone }}</p> -->
+                             
 
                                @if($getNgoType == 'Foreign')
                                <h6>বিদেশী এনজিও </h6>
@@ -310,21 +309,7 @@
         <td></td>
         <td>(i)</td>
         <td>নিবন্ধন নম্বর</td>
-        <td>:
-
-
-
-
-
-
-
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}
-
-
-
-
-
-      </td>
+        <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}</td>
     </tr>
     <tr>
         <td></td>
@@ -358,14 +343,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(iv)</td>
         <td>শেষ নবায়ন তারিখ</td>
-        <td>:
-
-
-
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}
-
-
-      </td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}</td>
     </tr>
 
 
@@ -374,13 +352,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(i)</td>
         <td>নিবন্ধন নম্বর</td>
-        <td>:
-
-
-
-
-
-          @if($form_one_data->registration_number == 0)
+        <td>:@if($form_one_data->registration_number == 0)
 
 
           @else
@@ -410,9 +382,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(iv)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:
-
-          @if(empty($duration_list_all))
+        <td>: @if(empty($duration_list_all))
 
 
           @else
@@ -428,8 +398,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
-        <td>:
-            @if(empty($duration_list_all))
+        <td>:@if(empty($duration_list_all))
 
 
           @else
@@ -443,9 +412,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td colspan="3"><!-- Button trigger modal -->
 
 
-
-
-           @if($form_one_data->registration_number_given_by_admin == 0)
+            @if($form_one_data->registration_number_given_by_admin == 0)
            <button type="button" disabled class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             প্রিন্ট করুন
             </button>
@@ -497,7 +464,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
     </tbody>
 </table>
 
-<!---vvvvvvvvv-->
+
                                         </div>
                                     </div>
                                     @else

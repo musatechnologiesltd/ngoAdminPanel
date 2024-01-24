@@ -92,89 +92,10 @@
                           @endif
                             </div>
 
-                            {{-- <div class="card">
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="">Appoint Date</label>
-                                        <input type="text" class="form-control" id="datepicker"  name="admin_job_start_date" value="{{ $user->admin_job_start_date }}" placeholder="Enter Date" required>
-
-                                        @if ($errors->has('admin_job_start_date'))
-                                        <span class="text-danger">{{ $errors->first('admin_job_start_date') }}</span>
-                                    @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="">Branch</label>
-                                        <select class="form-control" required name="branch_id" id="branch_id" type="text" placeholder="">
-                                            <option value="">--Please Select--</option>
-                                            @foreach($branchLists as $AllBranchLists)
-                                            <option value="{{ $AllBranchLists->id }}"  {{ $user->branch_id == $AllBranchLists->id ? 'selected':''  }} >{{ $AllBranchLists->branch_name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('branch_id'))
-                                        <span class="text-danger">{{ $errors->first('branch_id') }}</span>
-                                    @endif
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="">Designation</label>
-                                        <select class="form-control" required name="designation_list_id" id="designation_list_id" type="text" placeholder="">
-                                            <option value="">--Please Select--</option>
-
-                                            @foreach($designationLists as $AllDesignationLists)
-                                            <option value="{{ $AllDesignationLists->id }}" {{ $AllDesignationLists->id == $user->designation_list_id ? 'selected':''  }}>{{ $AllDesignationLists->designation_name }}</option>
-                                            @endforeach
-
-                                        </select>
-                                        @if ($errors->has('designation_list_id'))
-                                        <span class="text-danger">{{ $errors->first('designation_list_id') }}</span>
-                                    @endif
-                                    </div>
-
-                                    {{-- <div class="mb-3">
-                                        <label class="form-label" for="">End Date</label>
-                                        <input type="text" class="form-control" id="datepicker1"  name="admin_job_end_date" value="{{ $user->admin_job_end_date }}" placeholder="Enter Date" required>
-
-                                        @if ($errors->has('admin_job_end_date'))
-                                        <span class="text-danger">{{ $errors->first('admin_job_end_date') }}</span>
-                                    @endif
-                                    </div> </div>
-                                </div>--}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                           </div>
 
-                          {{-- <div class="row">
-                              <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password">Password</label>
-                                  <input type="password" class="form-control form-control-sm" id="password"  parsley-minlength="8"
-                                  parsley-required="true" name="password" placeholder="Enter Password">
 
-                                  @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-
-                              </div>
-                              <div class="form-group col-md-6 col-sm-12">
-                                  <label for="password_confirmation">Confirm Password</label>
-                                  <input type="password" class="form-control form-control-sm" data-parsley-equalto="#password"
-                                  parsley-required="true" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
-
-
-                              </div>
-                          </div> --}}
 
                           <div class="row">
                               <div class="form-group col-md-6 col-sm-12">

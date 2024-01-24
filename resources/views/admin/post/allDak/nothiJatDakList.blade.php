@@ -56,31 +56,14 @@ $orginalReceverId= DB::table('ngo_registration_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-
-
-$formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)
-                                            ->value('fd_one_form_id');
-
-                                     $form_one_data = DB::table('fd_one_forms')
-                                     ->where('id',$formOneDataId)->first();
-
-
-                                     $adminNamePrapok = DB::table('admins')
-                                            ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                                            $adminNamePrerok = DB::table('admins')
-                                            ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-                        $decesionName = DB::table('dak_details')
-                        ->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
-                                        ?>
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->registration_status_id)->orderBy('id','desc')->first();
+                                       ?>
                                     <tr>
                                         <td style="text-align:left;">
                                             উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
@@ -117,19 +100,6 @@ $formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registrat
                             </div>
 
                             <div class="modal-body">
-
-                                <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->registration_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                                    ?>
 
                                     @if(!$dakDetail)
 
@@ -248,10 +218,6 @@ $desiNames = DB::table('designation_lists')
                                                     <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                                      @endif
 
-
-
-
-
                                                     <hr>
                                                     <ul>
                                                         <li>প্রেরক : {{ $senderName }}</li>
@@ -294,28 +260,13 @@ $desiNames = DB::table('designation_lists')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-$formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_status_id)
-                                        ->value('fd_one_form_id');
-
-                                 $form_one_data = DB::table('fd_one_forms')
-                                 ->where('id',$formOneDataId)->first();
-
-
-                                 $adminNamePrapok = DB::table('admins')
-                                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                                        $adminNamePrerok = DB::table('admins')
-                                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-                    $decesionName = DB::table('dak_details')
-                    ->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->renew_status_id)->orderBy('id','desc')->first();
                                     ?>
                                 <tr>
                                     <td style="text-align:left;">
@@ -357,19 +308,6 @@ $formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_statu
                             </div>
 
                             <div class="modal-body">
-
-                                <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->renew_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                                    ?>
 
                                     @if(!$dakDetail)
 
@@ -492,10 +430,6 @@ $desiNames = DB::table('designation_lists')
                                                     <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                                      @endif
 
-
-
-
-
                                                     <hr>
                                                     <ul>
                                                         <li>প্রেরক : {{ $senderName }}</li>
@@ -539,28 +473,13 @@ $orginalReceverId= DB::table('ngo_name_change_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-$formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_change_status_id)
-                                    ->value('fd_one_form_id');
-
-                             $form_one_data = DB::table('fd_one_forms')
-                             ->where('id',$formOneDataId)->first();
-
-
-                             $adminNamePrapok = DB::table('admins')
-                                    ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                                    $adminNamePrerok = DB::table('admins')
-                                    ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-                $decesionName = DB::table('dak_details')
-                ->where('id',$allStatusData->dak_detail_id)->where('status','nameChange')->value('decision_list');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_change_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','nameChange')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->name_change_status_id)->orderBy('id','desc')->first();
                                 ?>
                             <tr>
                                 <td style="text-align:left;">
@@ -598,19 +517,6 @@ $formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_
                             </div>
 
                             <div class="modal-body">
-
-                                <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->name_change_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                                    ?>
 
                                     @if(!$dakDetail)
 
@@ -734,10 +640,6 @@ $desiNames = DB::table('designation_lists')
                                                     <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                                      @endif
 
-
-
-
-
                                                     <hr>
                                                     <ul>
                                                         <li>প্রেরক : {{ $senderName }}</li>
@@ -783,31 +685,13 @@ $orginalReceverId= DB::table('ngo_f_d_nine_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-$formOneDataId = DB::table('fd9_forms')
-// ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-            // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-            // ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
-            ->where('id',$allStatusData->f_d_nine_status_id)->value('fd_one_form_id');
-
-                         $form_one_data = DB::table('fd_one_forms')
-                         ->where('id',$formOneDataId)->first();
-
-
-                         $adminNamePrapok = DB::table('admins')
-                                ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                                $adminNamePrerok = DB::table('admins')
-                                ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-            $decesionName = DB::table('dak_details')
-            ->where('id',$allStatusData->dak_detail_id)->where('status','fdNine')->value('decision_list');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('fd9_forms')->where('id',$allStatusData->f_d_nine_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdNine')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->f_d_nine_status_id)->orderBy('id','desc')->first();
                             ?>
                         <tr>
                             <td style="text-align:left;">
@@ -845,19 +729,6 @@ $formOneDataId = DB::table('fd9_forms')
                             </div>
 
                             <div class="modal-body">
-
-                                <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->f_d_nine_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                                    ?>
 
                                     @if(!$dakDetail)
 
@@ -1022,40 +893,16 @@ $orginalReceverId= DB::table('ngo_f_d_nine_one_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-$formOneDataId = DB::table('fd9_one_forms')
-->where('id',$allStatusData->f_d_nine_one_status_id)
-                            ->value('fd_one_form_id');
-
-
-
-                            $form9OneDataId = DB::table('fd9_one_forms')
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('fd9_one_forms')->where('id',$allStatusData->f_d_nine_one_status_id)->value('fd_one_form_id');
+$form9OneDataId = DB::table('fd9_one_forms')
 ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
-
-->where('n_visas.id',$allStatusData->f_d_nine_one_status_id)
-                            ->value('n_visas.fd9_one_form_id');
-
-
-                           // dd($formOneDataId);
-
-                     $form_one_data = DB::table('fd_one_forms')
-                     ->where('id',$formOneDataId)->first();
-
-
-                     $adminNamePrapok = DB::table('admins')
-                            ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                            $adminNamePrerok = DB::table('admins')
-                            ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-        $decesionName = DB::table('dak_details')
-        ->where('id',$allStatusData->dak_detail_id)->where('status','fdNineOne')->value('decision_list');
+->where('n_visas.id',$allStatusData->f_d_nine_one_status_id)->value('n_visas.fd9_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins') ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdNineOne')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->f_d_nine_one_status_id)->orderBy('id','desc')->first();
                         ?>
                     <tr>
                         <td style="text-align:left;">
@@ -1093,19 +940,6 @@ aria-labelledby="myModalLabel2">
   </div>
 
   <div class="modal-body">
-
-      <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->f_d_nine_one_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-          ?>
 
           @if(!$dakDetail)
 
@@ -1272,33 +1106,17 @@ $branchNames = DB::table('branches')
                     @if($allStatusData->nothi_jat_status == 1)
                     <?php
 
-                                                             //new code
-                                                             $orginalReceverId= DB::table('ngo_fd_six_daks')
+                $orginalReceverId= DB::table('ngo_fd_six_daks')
                 ->where('fd_six_status_id',$allStatusData->fd_six_status_id)
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 $formOneDataId = DB::table('fd6_forms')->where('id',$allStatusData->fd_six_status_id)->value('fd_one_form_id');
-
-                 $form_one_data = DB::table('fd_one_forms')
-                 ->where('id',$formOneDataId)->first();
-
-
-                 $adminNamePrapok = DB::table('admins')
-                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                        $adminNamePrerok = DB::table('admins')
-                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-    $decesionName = DB::table('dak_details')
-    ->where('id',$allStatusData->dak_detail_id)->where('status','fdSix')->value('decision_list');
+$form_one_data = DB::table('fd_one_forms') ->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdSix')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_six_status_id)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
@@ -1337,18 +1155,6 @@ $formOneDataId = DB::table('fd6_forms')->where('id',$allStatusData->fd_six_statu
 
                     <div class="modal-body">
 
-                        <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->fd_six_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                            ?>
 
                             @if(!$dakDetail)
 
@@ -1467,11 +1273,6 @@ $branchNames = DB::table('branches')
 
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
-
-
-
-
-
                                             <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
@@ -1520,27 +1321,14 @@ $orginalReceverId= DB::table('ngo_fd_seven_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 $formOneDataId = DB::table('fd7_forms')->where('id',$allStatusData->fd_seven_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms') ->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdSeven')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_seven_status_id)->orderBy('id','desc')->first();
 
-                 $form_one_data = DB::table('fd_one_forms')
-                 ->where('id',$formOneDataId)->first();
-
-
-                 $adminNamePrapok = DB::table('admins')
-                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                        $adminNamePrerok = DB::table('admins')
-                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-    $decesionName = DB::table('dak_details')
-    ->where('id',$allStatusData->dak_detail_id)->where('status','fdSeven')->value('decision_list');
                     ?>
                 <tr>
                     <td style="text-align:left;">
@@ -1578,20 +1366,6 @@ $formOneDataId = DB::table('fd7_forms')->where('id',$allStatusData->fd_seven_sta
                     </div>
 
                     <div class="modal-body">
-
-                        <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->fd_seven_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                            ?>
-
                             @if(!$dakDetail)
 
                             @else
@@ -1710,10 +1484,6 @@ $branchNames = DB::table('branches')
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
 
-
-
-
-
                                             <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
@@ -1752,34 +1522,19 @@ $branchNames = DB::table('branches')
                     @if($allStatusData->nothi_jat_status == 1)
                     <?php
 
-                                                                                                     //new code
-                                                       //new code
-                                                       $orginalReceverId= DB::table('fc_one_daks')
+
+$orginalReceverId= DB::table('fc_one_daks')
                 ->where('fc_one_status_id',$allStatusData->fc_one_status_id)
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_status_id)->value('fd_one_form_id');
-
-                 $form_one_data = DB::table('fd_one_forms')
-                 ->where('id',$formOneDataId)->first();
-
-
-                 $adminNamePrapok = DB::table('admins')
-                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                        $adminNamePrerok = DB::table('admins')
-                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-    $decesionName = DB::table('dak_details')
-    ->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_one_status_id)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
@@ -1817,19 +1572,6 @@ $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_statu
                     </div>
 
                     <div class="modal-body">
-
-                        <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->fc_one_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                            ?>
 
                             @if(!$dakDetail)
 
@@ -1949,10 +1691,6 @@ $branchNames = DB::table('branches')
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
 
-
-
-
-
                                             <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
@@ -1992,33 +1730,19 @@ $branchNames = DB::table('branches')
                     @foreach($ngoStatusFcTwoDak as $p=>$allStatusData)
                     @if($allStatusData->nothi_jat_status == 1)
                     <?php
-                                                                          //new code
-                                $orginalReceverId= DB::table('fc_two_daks')
+
+$orginalReceverId= DB::table('fc_two_daks')
                 ->where('fc_two_status_id',$allStatusData->fc_two_status_id)
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_status_id)->value('fd_one_form_id');
-
-                 $form_one_data = DB::table('fd_one_forms')
-                 ->where('id',$formOneDataId)->first();
-
-
-                 $adminNamePrapok = DB::table('admins')
-                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                        $adminNamePrerok = DB::table('admins')
-                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-    $decesionName = DB::table('dak_details')
-    ->where('id',$allStatusData->dak_detail_id)->where('status','fcTwo')->value('decision_list');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details') ->where('id',$allStatusData->dak_detail_id)->where('status','fcTwo')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_two_status_id)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
@@ -2056,19 +1780,6 @@ $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_statu
                     </div>
 
                     <div class="modal-body">
-
-                        <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->fc_two_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                            ?>
 
                             @if(!$dakDetail)
 
@@ -2188,10 +1899,6 @@ $branchNames = DB::table('branches')
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
 
-
-
-
-
                                             <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
@@ -2233,31 +1940,18 @@ $branchNames = DB::table('branches')
 
 
                                                                                                   //new code
-                    $orginalReceverId= DB::table('fd_three_daks')
+                $orginalReceverId= DB::table('fd_three_daks')
                 ->where('fd_three_status_id',$allStatusData->fd_three_status_id)
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
- $formOneDataId = DB::table('fd3_forms')->where('id',$allStatusData->fd_three_status_id)->value('fd_one_form_id');
-
-                  $form_one_data = DB::table('fd_one_forms')
-                  ->where('id',$formOneDataId)->first();
-
-
-                  $adminNamePrapok = DB::table('admins')
-                         ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                         $adminNamePrerok = DB::table('admins')
-                         ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-     $decesionName = DB::table('dak_details')
-     ->where('id',$allStatusData->dak_detail_id)->where('status','fdThree')->value('decision_list');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('fd3_forms')->where('id',$allStatusData->fd_three_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins') ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdThree')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_three_status_id)->orderBy('id','desc')->first();
                      ?>
                  <tr>
                      <td style="text-align:left;">
@@ -2295,19 +1989,6 @@ $branchNames = DB::table('branches')
                      </div>
 
                      <div class="modal-body">
-
-                         <?php
-
- $dakDetail = DB::table('dak_details')
- ->where('access_id',$allStatusData->fd_three_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                             ?>
 
                              @if(!$dakDetail)
 
@@ -2426,10 +2107,6 @@ $branchNames = DB::table('branches')
 
                                              <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                               @endif
-
-
-
-
 
                                              <hr>
                                              <ul>

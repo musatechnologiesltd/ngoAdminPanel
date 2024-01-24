@@ -84,27 +84,24 @@
 
                                 <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromFd6FormAll->ngo_prokolpo_start_date .' - '. $dataFromFd6FormAll->ngo_prokolpo_end_date) }}</td>
                                 <td>@if($dataFromFd6FormAll->status == 'Ongoing')
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                    চলমান
-                                    </button>
-                                                                       @elseif($dataFromFd6FormAll->status == 'Accepted')
 
-                                                                        <button class="btn btn-secondary btn-xs" type="button">
-                                                                            গৃহীত
+                                        <button class="btn btn-secondary btn-xs" type="button">চলমান</button>
 
-                                                                        </button>
+                                    @elseif($dataFromFd6FormAll->status == 'Accepted')
 
-                                                                        @elseif($dataFromFd6FormAll->status == 'Correct')
-                                                                        <button class="btn btn-secondary btn-xs" type="button">
-                                                                            সংশোধন করুন
+                                        <button class="btn btn-secondary btn-xs" type="button">গৃহীত</button>
 
-                                                                        </button>
-                                                                        @else
-                                                                        <button class="btn btn-secondary btn-xs" type="button">
-                                                                            প্রত্যাখ্যান
+                                    @elseif($dataFromFd6FormAll->status == 'Correct')
 
-                                                                        </button>
-                                                                        @endif</td>
+                                        <button class="btn btn-secondary btn-xs" type="button">সংশোধন করুন</button>
+
+                                    @else
+
+                                        <button class="btn btn-secondary btn-xs" type="button">প্রত্যাখ্যান</button>
+
+                                    @endif
+
+                                </td>
                                 <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($dataFromFd6FormAll->created_at) }}</td>
                                 <td>
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$dataFromFd6FormAll->id) }}';">বিস্তারিত দেখুন</button>

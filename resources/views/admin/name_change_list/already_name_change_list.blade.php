@@ -37,52 +37,36 @@
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
+                                <tr>
 
-                            
-      <tr>
-
-                                <th>নিবন্ধন নম্বর</th>
-                                <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
-                                <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
-                                <th>পেমেন্ট</th>
-                                <th>স্ট্যাটাস</th>
-                                <th>জমাদানের তারিখ</th>
-                                <th>কার্যকলাপ</th>
-                            </tr>
+                                    <th>নিবন্ধন নম্বর</th>
+                                    <th>আগের এনজিওর নাম (বাংলা ও ইংরেজি)</th>
+                                    <th>অনুরোধ করা এনজিও নাম (বাংলা ও ইংরেজি)</th>
+                                    <th>পেমেন্ট</th>
+                                    <th>স্ট্যাটাস</th>
+                                    <th>জমাদানের তারিখ</th>
+                                    <th>কার্যকলাপ</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach($all_data_for_new_list as $all_data_for_new_list_all)
 
                                 <?php
  $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
-                         $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type');
-                             // dd($getngoForLanguage);
+ $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
+ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type');
+ $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
+ $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type_new_old');
+    if($getngoForLanguage =='দেশিও'){
 
-                             $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
-
-
-// dd($getngoForLanguage);
-
-$ngoOldNew = DB::table('ngo_type_and_languages')
-->where('user_id',$fdOneFormId)
-->value('ngo_type_new_old');
-
-
-                                  if($getngoForLanguage =='দেশিও'){
-
-                                    $reg_name = $reg_number->organization_name_ban;
-
-                                  }else{
-                                    $reg_name = $reg_number->organization_name;
-                                  }
-                                $reg_address =$reg_number->organization_address;
+        $reg_name = $reg_number->organization_name_ban;
+    }else{
+        $reg_name = $reg_number->organization_name;
+    }
+$reg_address =$reg_number->organization_address;
 
                                 ?>
                             <tr>
-                              
-
-
                                 <td>
                                     @if($ngoOldNew == 'Old')
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
@@ -100,21 +84,16 @@ $ngoOldNew = DB::table('ngo_type_and_languages')
 
                                     @if($all_data_for_new_list_all->status == 'Accepted')
 
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        গৃহীত
+                                    <button class="btn btn-secondary btn-xs" type="button">গৃহীত</button>
 
-                                    </button>
                                     @elseif($all_data_for_new_list_all->status == 'Ongoing')
 
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
+                                    <button class="btn btn-secondary btn-xs" type="button"> চলমান</button>
 
-                                    </button>
                                     @else
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        প্রত্যাখ্যান
 
-                                    </button>
+                                    <button class="btn btn-secondary btn-xs" type="button">প্রত্যাখ্যান</button>
+
                                     @endif
                                 </td>
                                 <td>

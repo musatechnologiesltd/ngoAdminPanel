@@ -89,19 +89,4 @@
     </script>
 
 
-    {{-- <script>
-      window.onload = function () {
-        $('#basic').editableSelect();
-        $('#default').editableSelect({ effects: 'default' });
-        $('#slide').editableSelect({ effects: 'slide' });
-        $('#fade').editableSelect({ effects: 'fade' });
-        $('#filter').editableSelect({ filter: false });
-        $('#html').editableSelect();
-        $('#onselect').editableSelect({
-          onSelect: function (element) {
-            $('#afterSelect').html($(this).val());
-          }
-        });
-      }
-    </script> --}}
 @endsection

@@ -55,19 +55,11 @@ $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_det
 ->where('id',$id)
    ->first();
 
-
-   $childNoteNewList = DB::table('child_note_for_registrations')
-           ->where('parent_note_regid',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_registrations')
-           ->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
 
 
 }elseif($status == 'renew'){
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -75,21 +67,10 @@ $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id'
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_renews')
-           ->where('parent_note_for_renew_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_renews')
-           ->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
-
-
+$childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'nameChange'){
-
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -97,21 +78,10 @@ $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_deta
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_name_changes')
-           ->where('parentnote_name_change_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_name_changes')
-           ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
-
+$childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fdNine'){
-
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -119,78 +89,40 @@ $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_i
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_fd_nines')
-           ->where('p_note_for_fd_nine_id',$id)->get();
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-           ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-//dd($checkParent);
-
+$childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fdNineOne'){
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-           ->where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-           ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
+$childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fdSix'){
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fd_sixes')
-           ->where('parent_note_for_fdsix_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-           ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-
+$childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fdSeven'){
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fd_sevens')
-           ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-           ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
+$childNoteNewList = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fcOne'){
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -198,42 +130,20 @@ $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_fc_ones')
-           ->where('parent_note_for_fc_one_id',$id)->get();
-
-           $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-           ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
+$childNoteNewList = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fcTwo'){
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fc_twos')
-           ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-           $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-           ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
+$childNoteNewList = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
 
 }elseif($status == 'fdThree'){
-
-
-
-
-
 
 $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -241,20 +151,13 @@ $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_fd_threes')
-           ->where('parent_note_for_fd_three_id',$id)->get();
-
-           $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-           ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->get();
+$childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
 }
 
-
-
-
-
-                                    ?>
+?>
 
    <!-- Container-fluid starts-->
    <div class="container-fluid list-products">
@@ -465,23 +368,6 @@ $branchName = DB::table('branches')
                                                                                    @endif
                                                                                    @endif
 
-
-
-
-
-
-
-
-
-
-                                                                        <!-- approver start --->
-
-
-
-
-
-                                                                        <!-- approver end -->
-
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
@@ -682,36 +568,16 @@ $branchName = DB::table('branches')
                                </textarea>
             </p>
 
-
-            {{-- <span id="idOfElement1"
-                  class="block">
-            <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
-            <span class="preview"></span> --}}
         </div>
         <div class="row">
             <div class="col-xl-12">
-
-                    {{-- <label class="form-label">সম্পাদন শেষ করুন</label>
-
-                    <br><br>
-
-<button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
-
-aria-expanded="false">
-সংরক্ষন করুন
-</button>
-<br><br>
-                        <textarea id="editor1222" class="mainEdit"  name="maindes" >
-
-                        </textarea> --}}
-
 
                         <label class="btn btn-primary" id="sompadonButton">সম্পাদন করুন</label>
 
 
                         <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
 <br>
-                        {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
+                       
 
                         <div id="firstBisoyBostu">পত্রের বিষয়বস্তু.........................</div>
 

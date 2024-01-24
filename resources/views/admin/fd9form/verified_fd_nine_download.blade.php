@@ -298,7 +298,7 @@ $familyData = DB::table('fd9_foreigner_employee_family_member_lists')
 
                         @else
 
-                        {{-- <img src="{{ asset('/') }}{{ $fdNineData->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output"> --}}
+                       
                         সংযুক্ত
 @endif
                     </td>
@@ -323,29 +323,7 @@ $familyData = DB::table('fd9_foreigner_employee_family_member_lists')
                 </tbody>
             </table>
 
-            {{-- <h5 class="text-center mt-3 mb-3">ঘোষণা</h5>
-            <p class="mt-3">আমি এই মর্মে ঘোষণা করছি যে, আমি সংশ্লিষ্ট সকল আইন-কানুন পড়েছি এবং উল্লেখিত
-                সকল তথ্য সত্য ও সঠিক। </p>
 
-            <div class="row">
-                <div class="col-lg-6 col-sm-12"></div>
-                <div class="col-lg-6 col-sm-12">
-                    <table class="table table-borderless">
-                        <tr>
-                            <td>প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
-                        </tr>
-                        <tr>
-                            <td>নামঃ</td>
-                        </tr>
-                        <tr>
-                            <td>পদবীঃ</td>
-                        </tr>
-                        <tr>
-                            <td>তারিখঃ</td>
-                        </tr>
-                    </table>
-                </div>
-            </div> --}}
 
             <h4 style="text-align:center; font-weight:bold; font-size:20px;">{{ trans('fd_one_step_one.tt_1')}}</h4>
 <p>{{ trans('fd_one_step_one.tt_2')}},{{ trans('fd_one_step_one.tt_3')}}</p>

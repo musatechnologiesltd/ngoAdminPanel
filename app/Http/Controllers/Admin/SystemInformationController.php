@@ -25,8 +25,7 @@ class SystemInformationController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('systemInformationView')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                  return redirect()->route('mainLogin');
                }
 
 
@@ -42,8 +41,7 @@ class SystemInformationController extends Controller
     public function store(Request $request){
 
         if (is_null($this->user) || !$this->user->can('systemInformationAdd')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+              return redirect()->route('mainLogin');
                }
 
 
@@ -111,8 +109,9 @@ class SystemInformationController extends Controller
     public function update(Request $request,$id){
 
         if (is_null($this->user) || !$this->user->can('systemInformationUpdate')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
+            
                }
 
 

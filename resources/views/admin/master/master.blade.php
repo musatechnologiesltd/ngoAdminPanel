@@ -55,59 +55,56 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 <!-- Plugins css start-->
 <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/tree.css">
-    <style>
 
-        .swal2-confirm{
-
-            margin-left:10px;
-        }
-
-
-
-
-        .select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  height: 22px !important;
-  width: 22px !important;
-  margin: 0 !important;
-  text-align: center !important;
-  color: #e74c3c !important;
-  font-weight: bold !important;
-  font-size: 16px !important;
-}
-
-
-#pageloader
-{
-  background: rgba( 255, 255, 255, 0.8 );
-  display: none;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
-}
-
-#pageloader img
-{
-  left: 50%;
-  margin-left: -32px;
-  margin-top: -32px;
-  position: absolute;
-  top: 50%;
-}
-
-        </style>
         @yield('css')
 
-        {{-- <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script> --}}
+
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
         <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
 <script src="{{ asset('/')}}public/parsely1.js"></script>
 <style>
 
+.swal2-confirm{
+
+margin-left:10px;
+}
+
+
+
+
+.select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+position: absolute !important;
+top: 0 !important;
+left: 0 !important;
+height: 22px !important;
+width: 22px !important;
+margin: 0 !important;
+text-align: center !important;
+color: #e74c3c !important;
+font-weight: bold !important;
+font-size: 16px !important;
+}
+
+
+#pageloader
+{
+background: rgba( 255, 255, 255, 0.8 );
+display: none;
+height: 100%;
+position: fixed;
+width: 100%;
+z-index: 9999;
+}
+
+#pageloader img
+{
+left: 50%;
+margin-left: -32px;
+margin-top: -32px;
+position: absolute;
+top: 50%;
+}
     .parsley-required{
 
         margin-top:10px;
@@ -207,9 +204,6 @@
     </style>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-
-
 
 </head>
 <body>

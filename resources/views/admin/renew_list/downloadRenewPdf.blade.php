@@ -415,9 +415,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
 </table>
 
         <table style=" margin-top: 10px;width:100%">
-            {{-- <tr>
-                <td style="text-align: right; padding-right: 14%" colspan="3">প্রধান নির্বাহীর স্বাক্ষর ও সিল</td>
-            </tr> --}}
+          
             <tr>
                 <td style="width: 65%"></td>
                 <td style="text-align: left; width:5%;">নাম</td>

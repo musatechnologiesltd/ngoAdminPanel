@@ -23,8 +23,7 @@ class ProfileController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('profile.view')) {
-          //  abort(403, 'Sorry !! You are Unauthorized to View !');
-          return redirect()->route('mainLogin');
+               return redirect()->route('mainLogin');
                }
 
                \LogActivity::addToLog('view profile.');

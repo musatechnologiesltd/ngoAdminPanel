@@ -59,8 +59,7 @@
                                 <h4>{{ $form_one_data->organization_name_ban }}</h4>
                               <h6>{{ $form_one_data->address_of_head_office }}</h6>
                                 @endif
-                                <!--<h6>{{ $form_one_data->email }}</h6>-->
-                               <!-- <p>{{ $form_one_data->phone }}</p> -->
+                               
 
                                @if($getNgoType == 'Foreign')
                                <h6>বিদেশী এনজিও </h6>
@@ -302,21 +301,7 @@ gjgjhgh
         <td></td>
         <td>(i)</td>
         <td>নিবন্ধন নম্বর</td>
-        <td>:
-
-
-
-
-
-
-
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}
-
-
-
-
-
-      </td>
+        <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}</td>
     </tr>
     <tr>
         <td></td>
@@ -325,24 +310,17 @@ gjgjhgh
         <td>: {{ $form_one_data->organization_name_ban }}</td>
     </tr>
 
+    <?php
 
+    $lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
+    $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+    ?>
     <tr>
         <td></td>
         <td>(iii)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:
-            <?php
-
-            $lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
-            $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
-
-            ?>
-
-
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}
-
-
-      </td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}</td>
     </tr>
 
 
@@ -350,14 +328,7 @@ gjgjhgh
         <td></td>
         <td>(iv)</td>
         <td>শেষ নবায়ন তারিখ</td>
-        <td>:
-
-
-
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}
-
-
-      </td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}</td>
     </tr>
 
 
@@ -366,13 +337,7 @@ gjgjhgh
         <td></td>
         <td>(i)</td>
         <td>নিবন্ধন নম্বর</td>
-        <td>:
-
-
-
-
-
-          @if($form_one_data->registration_number == 0)
+        <td>:@if($form_one_data->registration_number == 0)
 
 
           @else
@@ -402,9 +367,7 @@ gjgjhgh
         <td></td>
         <td>(iv)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:
-
-          @if(empty($duration_list_all))
+        <td>:@if(empty($duration_list_all))
 
 
           @else
@@ -420,8 +383,7 @@ gjgjhgh
         <td></td>
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
-        <td>:
-            @if(empty($duration_list_all))
+        <td>:@if(empty($duration_list_all))
 
 
           @else
@@ -488,8 +450,7 @@ gjgjhgh
     </tbody>
 </table>
 
-<!---vvvvvvvvv-->
-                                        </div>
+</div>
                                     </div>
                                     @else
                                     <?php

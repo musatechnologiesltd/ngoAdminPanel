@@ -1,14 +1,5 @@
 
-
-
-
-
-
-
-                     <!-- fd three form start -->
-
-
-                     @foreach($ngoStatusFdThreeDak as $p=>$allStatusData)
+@foreach($ngoStatusFdThreeDak as $p=>$allStatusData)
 
                      <?php
 
@@ -18,27 +9,13 @@ $orginalReceverId= DB::table('fd_three_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
- $formOneDataId = DB::table('fd3_forms')->where('id',$allStatusData->fd_three_status_id)->value('fd_one_form_id');
-
-                  $form_one_data = DB::table('fd_one_forms')
-                  ->where('id',$formOneDataId)->first();
-
-
-                  $adminNamePrapok = DB::table('admins')
-                         ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-                         $adminNamePrerok = DB::table('admins')
-                         ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-     $decesionName = DB::table('dak_details')
-     ->where('id',$allStatusData->dak_detail_id)->where('status','fdThree')->value('decision_list');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('fd3_forms')->where('id',$allStatusData->fd_three_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdThree')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_three_status_id)->orderBy('id','desc')->first();
                      ?>
                  <tr>
                      <td style="text-align:left;">
@@ -51,14 +28,7 @@ $orginalReceverId= DB::table('fd_three_daks')
                      </td>
                      <td style="text-align:right;">
 
-
-
-
-                         {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdThree','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-                         {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdThree','id'=>$allStatusData->fd_three_status_id]) }}';">প্রেরণ</button> --}}
                          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd3Form.show',$allStatusData->fd_three_status_id) }}';">দেখুন</button>
-
-
 
                               <!--new code-->
                       <button type="button" class="btn btn-primary btn-xs"
@@ -80,20 +50,7 @@ $orginalReceverId= DB::table('fd_three_daks')
                      </div>
 
                      <div class="modal-body">
-
-                         <?php
-
- $dakDetail = DB::table('dak_details')
- ->where('access_id',$allStatusData->fd_three_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-                             ?>
-
+                        
                              @if(!$dakDetail)
 
                              @else

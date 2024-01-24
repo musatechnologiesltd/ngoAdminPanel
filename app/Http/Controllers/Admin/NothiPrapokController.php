@@ -14,61 +14,46 @@ class NothiPrapokController extends Controller
     public function selfOfficerAdd(Request $request){
 
 
-         $selfOfficerList = $request->selfOfficerList;
-         $snothiId = $request->snothiId;
-         $sstatus = $request->sstatus;
+        $selfOfficerList = $request->selfOfficerList;
+        $snothiId = $request->snothiId;
+        $sstatus = $request->sstatus;
+        $adminIdList = Admin::where('id',$selfOfficerList)->first();
+
+        if(!$adminIdList){
+
+            return $data =  0;
+
+        }else{
 
 
-         $adminIdList = Admin::where('id',$selfOfficerList)->first();
+            $designationName = DB::table('designation_lists')->where('id',$adminIdList->designation_list_id)
+                ->value('designation_name');
+
+            $branchName = DB::table('branches')->where('id',$adminIdList->branch_id)
+                ->value('branch_name');
+
+            $nothiPrapok = new NothiPrapok();
+            $nothiPrapok->adminId = $selfOfficerList;
+            $nothiPrapok->nothiId = $snothiId;
+            $nothiPrapok->nijOfficeId =  $sstatus;
+            $nothiPrapok->noteId =  $request->snoteId;
+            $nothiPrapok->otherOfficerName = $adminIdList->admin_name_ban;
+            $nothiPrapok->otherOfficerDesignation = $designationName;
+            $nothiPrapok->otherOfficerBranch =  $branchName;
+            $nothiPrapok->otherOfficerEmail = $adminIdList->email;
+            $nothiPrapok->otherOfficerPhone = $adminIdList->admin_mobile;
+            $nothiPrapok->save();
 
 
-         if(!$adminIdList){
-
-              return $data =  0;
-
-         }else{
-
-
-            $designationName = DB::table('designation_lists')
-                 ->where('id',$adminIdList->designation_list_id)
-                 ->value('designation_name');
-
-                 $branchName = DB::table('branches')
-                 ->where('id',$adminIdList->branch_id)
-                 ->value('branch_name');
-
-
-
-                 //snoteId
-
-                $nothiPrapok = new NothiPrapok();
-                $nothiPrapok->adminId = $selfOfficerList;
-                $nothiPrapok->nothiId = $snothiId;
-                $nothiPrapok->nijOfficeId =  $sstatus;
-                $nothiPrapok->noteId =  $request->snoteId;
-                $nothiPrapok->otherOfficerName = $adminIdList->admin_name_ban;
-                $nothiPrapok->otherOfficerDesignation = $designationName;
-                $nothiPrapok->otherOfficerBranch =  $branchName;
-                $nothiPrapok->otherOfficerEmail = $adminIdList->email;
-                $nothiPrapok->otherOfficerPhone = $adminIdList->admin_mobile;
-                $nothiPrapok->save();
-
-
-
-                $nothiPrapokList = NothiPrapok::where('nothiId',$request->snothiId)
+            $nothiPrapokList = NothiPrapok::where('nothiId',$request->snothiId)
                 ->where('nijOfficeId',$request->sstatus)
                 ->where('noteId',$request->snoteId)
                 ->get();
 
+            $data = view('admin.presentDocument.selfOfficerAdd',compact('nothiPrapokList'))->render();
+            return response()->json(['totalPrapok'=>count($nothiPrapokList),'data'=>$data]);
 
-                $data = view('admin.presentDocument.selfOfficerAdd',compact('nothiPrapokList'))->render();
-
-                return response()->json(['totalPrapok'=>count($nothiPrapokList),'data'=>$data]);
-
-                //return response()->json($data);
-
-
-         }
+            }
 
     }
 
@@ -83,7 +68,7 @@ class NothiPrapokController extends Controller
 
     public function otherOfficerAdd(Request $request){
 
-        //dd($request->all());
+
 
         $validator = Validator::make($request->all(), [
             'organizationName' => 'required',
@@ -122,13 +107,10 @@ class NothiPrapokController extends Controller
 
     public function prapokStatusUpdate(Request $request){
 
-
-
-
-        NothiPrapok::where('nothiId', $request->fnothiId)
+       NothiPrapok::where('nothiId', $request->fnothiId)
         ->where('noteId', $request->fnoteId)
         ->where('nijOfficeId', $request->fstatus)
-       ->update([
+        ->update([
            'status' => 1
         ]);
 

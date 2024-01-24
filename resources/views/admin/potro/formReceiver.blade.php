@@ -63,13 +63,10 @@
 
                                                                                 <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
     <br>
-                                                                                {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
+                                                                               
 
                                                                                 <div id="firstBisoyBostu"> {!! $potrangshoDraft->description !!}</div>
 
-                                                                                {{-- <textarea id="editor1222"   class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
-                                                                                        {!! $potrangshoDraft->description !!}
-                                                                                    </textarea> --}}
 
                                                                                     <textarea   style="display: none;" class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
                                                                                         {!! $potrangshoDraft->description !!}

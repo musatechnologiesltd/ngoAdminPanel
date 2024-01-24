@@ -83,12 +83,7 @@
     </td>
     </tr>
 
-    {{-- <tr>
-        <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ ফরম - ০১ এর ফাইনাল কপি </td>
-        <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'final_pdf']) }}">
-            <i class="fa fa-eye"></i>
-        </a></td>
-    </tr> --}}
+    
 
 
     @foreach($all_source_of_fund as $all_get_all_source_of_fund_data)

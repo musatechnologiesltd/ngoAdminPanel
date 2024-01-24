@@ -104,21 +104,13 @@
                             </thead>
                             <tbody>
                                 @foreach($designationLists as $key=>$AllDesignationLists)
+                                <?php
+                                $branchName = DB::table('branches')->where('id',$AllDesignationLists->branch_id)->value('branch_name');
+                                ?>
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>
-                                    <?php
-
-                                    $branchName = DB::table('branches')->where('id',$AllDesignationLists->branch_id)->value('branch_name');
-
-
-                                        ?>
-                                        {{ $branchName }}
-
-
-                                                                    </td>
+                                <td>{{ $branchName }}</td>
                                 <td>{{ $AllDesignationLists->designation_name }}</td>
-
                                 <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($AllDesignationLists->designation_serial) }}</td>
                                 <td>
                                     @if (Auth::guard('admin')->user()->can('designationUpdate'))
@@ -178,12 +170,12 @@
 
 @endif
 
-{{-- <button type="button" class="btn btn-primary waves-light waves-effect  btn-sm" onclick="window.location.href='{{ route('admin.users.view',$AllDesignationLists->id) }}'"><i class="fa fa-eye"></i></button> --}}
+
 
 @if($AllDesignationLists->id == 2)
 
 @else
-                            @if (Auth::guard('admin')->user()->can('designationDelete'))
+    @if (Auth::guard('admin')->user()->can('designationDelete'))
 
 <button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm" onclick="deleteTag({{ $AllDesignationLists->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
               <form id="delete-form-{{ $AllDesignationLists->id }}" action="{{ route('designationList.destroy',$AllDesignationLists->id) }}" method="POST" style="display: none;">

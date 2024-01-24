@@ -9,7 +9,6 @@ use Auth;
 use Hash;
 use DateTime;
 use DateTimezone;
-
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -27,13 +26,8 @@ class OfficeSarokController extends Controller
 {
     public function store(Request $request){
 
-
-
-
-       //dd($request->all());
-
-
         $request->validate([
+
             'subject' => 'required',
             'maindes' => 'required',
 
@@ -61,196 +55,130 @@ class OfficeSarokController extends Controller
             $getAllData->created_at =$created_at;
             $getAllData->save();
             //end new code during update
-
-
-
-
         }else{
 
+            $dt = new DateTime();
+            $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+            $created_at = $dt->format('Y-m-d h:i:s');
+
+            if($request->statusForPotrangso == 'registration'){
+
+                $saveNewData = new RegistrationOfficeSarok();
+                $saveNewData->parent_note_regid = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
+
+            }elseif($request->statusForPotrangso == 'renew'){
+
+                $saveNewData = new RenewOfficeSarok();
+                $saveNewData->parent_note_for_renew_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
+
+            }elseif($request->statusForPotrangso == 'nameChange'){
+
+                $saveNewData = new NameChangeOfficeSarok();
+                $saveNewData->parentnote_name_change_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
+
+            }elseif($request->statusForPotrangso == 'fdNine'){
+
+                $saveNewData = new FdNineOfficeSarok();
+                $saveNewData->p_note_for_fd_nine_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
+
+            }elseif($request->statusForPotrangso == 'fdNineOne'){
+
+                $saveNewData = new FdNineOneOfficeSarok();
+                $saveNewData->p_note_for_fd_nine_one_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
+
+            }elseif($request->statusForPotrangso == 'fdSix'){
+
+                $saveNewData = new FdSixOfficeSarok();
+                $saveNewData->parent_note_for_fdsix_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
+
+            }elseif($request->statusForPotrangso == 'fdSeven'){
+
+                $saveNewData = new FdSevenOfficeSarok();
+                $saveNewData->parent_note_for_fd_seven_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
 
 
-        //dd($request->all());
+            }elseif($request->statusForPotrangso == 'fcOne'){
 
-        $dt = new DateTime();
-        $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
-        $created_at = $dt->format('Y-m-d h:i:s');
+                $saveNewData = new FcOneOfficeSarok();
+                $saveNewData->parent_note_for_fc_one_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
 
+            }elseif($request->statusForPotrangso == 'fcTwo'){
 
-
-
-
-
-        if($request->statusForPotrangso == 'registration'){
-
-
-            $saveNewData = new RegistrationOfficeSarok();
-            $saveNewData->parent_note_regid = $request->parentIdForPotrangso;
-            // $saveNewData->office_subject = $request->subject;
-            // $saveNewData->office_sutro = $request->sutro;
-            // $saveNewData->description =$request->maindes;
-            $saveNewData->created_at =$created_at;
-            $saveNewData->save();
+                $saveNewData = new FcTwoOfficeSarok();
+                $saveNewData->parent_note_for_fc_two_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
 
 
-     }elseif($request->statusForPotrangso == 'renew'){
+            }elseif($request->statusForPotrangso == 'fdThree'){
+
+                $saveNewData = new FdThreeOfficeSarok();
+                $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+                $saveNewData->created_at =$created_at;
+                $saveNewData->save();
 
 
-         $saveNewData = new RenewOfficeSarok();
-         $saveNewData->parent_note_for_renew_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
+            }
+
+            $sarokId = $saveNewData->id;
+
+            $getAllData = new PotrangshoDraft();
+            $getAllData->adminId = Auth::guard('admin')->user()->id;
+            $getAllData->nothiId = $request->nothiId;
+            $getAllData->sarokId = $sarokId;
+            $getAllData->noteId = $request->noteId;
+            $getAllData->status = $request->status;
+            $getAllData->sarok_number = $request->sarok_number;
+            $getAllData->extra_text = $request->extra_text;
+            $getAllData->SentStatus = 0;
+            $getAllData->office_subject= $request->subject;
+            $getAllData->office_sutro = $request->sutro;
+            $getAllData->description =$request->maindes;
+            $getAllData->created_at =$created_at;
+            $getAllData->save();
 
 
-
-     }elseif($request->statusForPotrangso == 'nameChange'){
-
-         $saveNewData = new NameChangeOfficeSarok();
-         $saveNewData->parentnote_name_change_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-
-
-     }elseif($request->statusForPotrangso == 'fdNine'){
-
-         $saveNewData = new FdNineOfficeSarok();
-         $saveNewData->p_note_for_fd_nine_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-
-     }elseif($request->statusForPotrangso == 'fdNineOne'){
-
-         $saveNewData = new FdNineOneOfficeSarok();
-         $saveNewData->p_note_for_fd_nine_one_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-     }elseif($request->statusForPotrangso == 'fdSix'){
-
-         $saveNewData = new FdSixOfficeSarok();
-         $saveNewData->parent_note_for_fdsix_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-     }elseif($request->statusForPotrangso == 'fdSeven'){
-
-            $saveNewData = new FdSevenOfficeSarok();
-            $saveNewData->parent_note_for_fd_seven_id = $request->parentIdForPotrangso;
-            // $saveNewData->office_subject = $request->subject;
-            // $saveNewData->office_sutro = $request->sutro;
-            // $saveNewData->description =$request->maindes;
-            $saveNewData->created_at =$created_at;
-            $saveNewData->save();
-
-
-     }elseif($request->statusForPotrangso == 'fcOne'){
-
-         $saveNewData = new FcOneOfficeSarok();
-         $saveNewData->parent_note_for_fc_one_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-     }elseif($request->statusForPotrangso == 'fcTwo'){
-
-
-         $saveNewData = new FcTwoOfficeSarok();
-         $saveNewData->parent_note_for_fc_two_id = $request->parentIdForPotrangso;
-            // $saveNewData->office_subject = $request->subject;
-            // $saveNewData->office_sutro = $request->sutro;
-            // $saveNewData->description =$request->maindes;
-            $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-
-     }elseif($request->statusForPotrangso == 'fdThree'){
-
-         $saveNewData = new FdThreeOfficeSarok();
-         $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
-        //  $saveNewData->office_subject = $request->subject;
-        //  $saveNewData->office_sutro = $request->sutro;
-        //  $saveNewData->description =$request->maindes;
-         $saveNewData->created_at =$created_at;
-         $saveNewData->save();
-
-
-     }
-
-     $sarokId = $saveNewData->id;
-
-     $getAllData = new PotrangshoDraft();
-     $getAllData->adminId = Auth::guard('admin')->user()->id;
-     $getAllData->nothiId = $request->nothiId;
-     $getAllData->sarokId = $sarokId;
-     $getAllData->noteId = $request->noteId;
-     $getAllData->status = $request->status;
-     $getAllData->sarok_number = $request->sarok_number;
-     $getAllData->extra_text = $request->extra_text;
-     $getAllData->SentStatus = 0;
-     $getAllData->office_subject= $request->subject;
-     $getAllData->office_sutro = $request->sutro;
-     $getAllData->description =$request->maindes;
-     $getAllData->created_at =$created_at;
-     $getAllData->save();
-
-
-    }
-
-    if($request->updateOrSubmit == 1){
-
-
-
-
-        if($request->receiveEnd == 1){
-
-            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
-        }else{
-            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }
 
+        if($request->updateOrSubmit == 1){
+           if($request->receiveEnd == 1){
 
+             return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
 
+           }else{
 
+             return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
 
+           }
 
-
-        // return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
-    }else{
-
-
-
-        if($request->receiveEnd == 1){
-
-            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
         }else{
-            return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
+
+            if($request->receiveEnd == 1){
+
+             return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
+
+            }else{
+
+             return redirect()->back()->with('success','সফলভাবে সংশোধন করা হয়েছে');
+
+            }
+
         }
-
-
-        // if($request->receiveEnd == 1){
-        //     return redirect('admin/viewChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
-        // }else{
-        // return redirect('admin/addChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
-        // }
-   // return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
-    }
     }
 }

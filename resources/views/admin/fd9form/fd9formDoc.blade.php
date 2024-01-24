@@ -12,44 +12,6 @@
                 </tr>
                 @if(!$nVisaDocs)
 
-                        {{-- <tr>
-                            <td>১</td>
-                            <td>ক্রেতার প্রতিনিধি নিয়োগের ক্ষেত্রে ক্রেতার মনোনয়ন পত্রের অনুলিপি</td>
-                            <td>
-
-
-
-
-
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>২</td>
-                            <td>বিনিয়োগ বোর্ডের নিবন্ধন পত্রের অনুলিপি, যদি আগে জমা না দেওয়া হয়</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>৩</td>
-                            <td>কর্মচারীর ক্ষেত্রে পরিষেবা চুক্তি/চুক্তি/নিয়োগ পত্রের অনুলিপি</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>৪</td>
-                            <td>বিদেশী নাগরিকদের নিয়োগ সংক্রান্ত কোম্পানির পরিচালক পর্ষদের সিদ্ধান্ত (সীমিত কোম্পানির ক্ষেত্রে) বেতন এবং অন্যান্য সুবিধা দেখায় শুধুমাত্র সভায় উপস্থিত পরিচালকদের দ্বারা স্বাক্ষরিত কোম্পানির</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>৫</td>
-                            <td>মেমোরেন্ডাম এবং আর্টিকেল অফ অ্যাসোসিয়েশন শেয়ারহোল্ডারদের দ্বারা যথাযথভাবে স্বাক্ষরিত এবং অন্তর্ভুক্তির শংসাপত্র সহ (লিমিটেড কোম্পানির ক্ষেত্রে), যদি আগে জমা না দেওয়া হয়</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>৬</td>
-                            <td>কর্মচারীদের জন্য ই-টাইপ ভিসা সহ পাসপোর্টের ফটোকপি/বিনিয়োগকারীদের জন্য পিআই-টাইপ ভিসা</td>
-                            <td></td>
-                        </tr> --}}
 
                         @else
 
@@ -61,15 +23,7 @@
 
                             <td>ক্রেতার প্রতিনিধি নিয়োগের ক্ষেত্রে ক্রেতার মনোনয়ন পত্রের অনুলিপি</td>
                             <td>
-
-ff
-
-
                                 <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
-
-
-
                             </td>
                         </tr>
                         @endif
@@ -81,13 +35,7 @@ ff
 
                             <td>বিনিয়োগ বোর্ডের নিবন্ধন পত্রের অনুলিপি, যদি আগে জমা না দেওয়া হয়</td>
                             <td>
-
-
-
-                                 <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
-
-
+                                <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                             </td>
                         </tr>
                         @endif
@@ -99,31 +47,19 @@ ff
 
                             <td>কর্মচারীর ক্ষেত্রে পরিষেবা চুক্তি/চুক্তি/নিয়োগ পত্রের অনুলিপি</td>
                             <td>
-
-
-
-                                 <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
-
-
+                                <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'contract','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                             </td>
                         </tr>
                         @endif
                         @if(empty($nVisaDocs->board_of_the_directors_sign_lette))
 
 
-                                @else
+                        @else
                         <tr>
 
                             <td>বিদেশী নাগরিকদের নিয়োগ সংক্রান্ত কোম্পানির পরিচালক পর্ষদের সিদ্ধান্ত (সীমিত কোম্পানির ক্ষেত্রে) বেতন এবং অন্যান্য সুবিধা দেখায় শুধুমাত্র সভায় উপস্থিত পরিচালকদের দ্বারা স্বাক্ষরিত কোম্পানির</td>
                             <td>
-
-
-
-                                 <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
-
-
+                                <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'directors','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                             </td>
                         </tr>
                         @endif
@@ -135,11 +71,7 @@ ff
 
                             <td>মেমোরেন্ডাম এবং আর্টিকেল অফ অ্যাসোসিয়েশন শেয়ারহোল্ডারদের দ্বারা যথাযথভাবে স্বাক্ষরিত এবং অন্তর্ভুক্তির শংসাপত্র সহ (লিমিটেড কোম্পানির ক্ষেত্রে), যদি আগে জমা না দেওয়া হয়</td>
                             <td>
-
-
-                                 <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
-
-
+                                <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'shareHolder','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
                             </td>
                         </tr>
                         @endif
@@ -151,11 +83,7 @@ ff
 
                             <td>কর্মচারীদের জন্য ই-টাইপ ভিসা সহ পাসপোর্টের ফটোকপি/বিনিয়োগকারীদের জন্য পিআই-টাইপ ভিসা</td>
                             <td>
-
-
-                                 <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
-
+                                <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'passportCopy','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                             </td>
                         </tr>
                         @endif
@@ -165,12 +93,10 @@ ff
                         <tr>
                             <td>এফডি - ৯ ফরম</td>
                             <td>:
-
-
                                 <a target="_blank" href="{{ route('verified_fd_nine_download',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                 <button  href="{{ route('verified_fd_nine_download',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-secondary" id="attLink1"  data-name="এফডি - ৯ ফরম"><i class="fa fa-paperclip"></i></button>
                                 <button  href="{{ route('verified_fd_nine_download',$dataFromNVisaFd9Fd1->id) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
-                                </td>
+                            </td>
                         </tr>
 
                         @else
@@ -185,7 +111,6 @@ ff
                             <td>একাডেমিক যোগ্যতা (একাডেমিক যোগ্যতার সমর্থনে সনদপত্রের কপি সংযুক্ত করতে হবে</td>
                             <td>:
 
-
                                 <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'academicQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
@@ -193,7 +118,7 @@ ff
                                 <button  href="{{ route('nVisaDocumentDownload',['cat'=>'academicQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 
                                 @endif
-                                </td>
+                            </td>
                         </tr>
                         @endif
                         @if(!$dataFromNVisaFd9Fd1->fd9_technical_and_other_qualifications_if_any)
@@ -205,7 +130,6 @@ ff
                                 হবে)
                             </td>
                             <td>:
-
 
                                 <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'techQualification','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
@@ -248,9 +172,7 @@ ff
                             </td>
                             <td>:
 
-
                                 <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
 
                                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
@@ -270,9 +192,7 @@ ff
                             </td>
                             <td>:
 
-
                                 <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'proposedProject','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
 
                                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
@@ -294,7 +214,6 @@ ff
 
                                 <img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
 
-
                             </td>
                         </tr>
                         @endif
@@ -306,9 +225,7 @@ ff
                             <td>পাসপোর্টের কপি সংযুক্ত</td>
                             <td>:
 
-
                                 <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'copyOfPassport','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
-
 
                                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
@@ -317,9 +234,7 @@ ff
 
                                 @endif
 
-
-
-                                </td>
+                            </td>
                         </tr>
                         @endif
 
@@ -327,6 +242,5 @@ ff
         </div>
 
     </div>
-
 
 </div>

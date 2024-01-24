@@ -293,11 +293,7 @@
 
                             <?php
 
-
-                            $forwardingLetterData =DB::table('forwarding_letters')
-            ->where('fd9_form_id',$dataFromNVisaFd9Fd1->id)->first();
-
-//dd($forwardingLetterData);
+                                $forwardingLetterData =DB::table('forwarding_letters')->where('fd9_form_id',$dataFromNVisaFd9Fd1->id)->first();
 
                             ?>
                             @if (empty($nVisabasicInfo->forwarding_letter))
@@ -381,8 +377,7 @@
 
 
 
-                                            <iframe src=
-                                            "{{ url('public/'.$nVisabasicInfo->forwarding_letter) }}"
+                                            <iframe src="{{ url('public/'.$nVisabasicInfo->forwarding_letter) }}"
                                                             width="100%"
                                                             height="800">
                                                     </iframe>

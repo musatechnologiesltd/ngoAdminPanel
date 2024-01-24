@@ -6,14 +6,14 @@
     </tr>
       <?php
 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-// dd($getngoForLanguage);
-if($getngoForLanguage =='দেশিও'){
 
-$reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
+    if($getngoForLanguage =='দেশিও'){
 
-}else{
-$reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name');
-}
+    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
+
+    }else{
+    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name');
+    }
       ?>
     <tr>
         <td></td>
@@ -31,9 +31,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <td></td>
         <td>(iii)</td>
         <td>নিবন্ধন নম্বর</td>
-        <td>:
-
-          @if($form_one_data->registration_number == 0)
+        <td>:@if($form_one_data->registration_number == 0)
 
 
           @else

@@ -3,7 +3,7 @@
                        $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
 
                        $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
-                        ?>
+?>
 
 <div class="mb-0 m-t-30">
     <table class="table table-bordered">
@@ -15,10 +15,7 @@
             <th>নথির নাম</th>
             <th>নথি দেখুন</th>
         </tr>
-        {{-- <tr>
-            <td>প্রধান নির্বাহীর স্বাক্ষরকৃত এফডি - ৮ ফরম </td>
-            <td><a target="_blank"  href="{{ route('verifiedFdEightDownload',base64_encode($renewInfoData->id)) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a></td>
-        </tr> --}}
+       
 
  <tr>
            <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ এফডি -৮ এর ফাইনাল কপি</td>
@@ -44,12 +41,7 @@
        </tr>
         <?php
 
-
 $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_data->id)->latest()->get();
-
-
-
-
 ?>
 
 

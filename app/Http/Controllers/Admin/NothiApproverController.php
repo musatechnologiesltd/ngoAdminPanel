@@ -15,13 +15,11 @@ class NothiApproverController extends Controller
 
         $nothiApproverList = NothiApprover::orderBy('id','desc')->value('id');
 
-
-
         if(empty($nothiApproverList)){
 
 
         }else{
-        $deleteData = NothiApprover::where('id','<=',$nothiApproverList)->delete();
+            $deleteData = NothiApprover::where('id','<=',$nothiApproverList)->delete();
         }
 
         $dataInsert = new NothiApprover();
@@ -34,7 +32,6 @@ class NothiApproverController extends Controller
 
 
         return redirect()->back()->with('success','সফলভাবে সংরক্ষণ হয়েছে');
-
 
     }
 }

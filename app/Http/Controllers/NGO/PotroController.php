@@ -35,7 +35,6 @@ use App\Models\NothiCopy;
 use DB;
 use DateTime;
 use DateTimezone;
-
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -55,16 +54,10 @@ class PotroController extends Controller
 {
     public function createPotro($status,$parentId,$nothiId,$id,$activeCode){
 
-        //dd(11);
-
-
         if($status == 'registration'){
 
-          $getIdSarok = RegistrationOfficeSarok::where('parent_note_regid',$id)
-                       ->value('id');
-
-
-                       $potrangshoDraftNew =  DB::table('potrangsho_drafts')
+            $getIdSarok = RegistrationOfficeSarok::where('parent_note_regid',$id)->value('id');
+            $potrangshoDraftNew =  DB::table('potrangsho_drafts')
                        ->where('sarokId',$getIdSarok)
                        ->where('status',$status)
                        ->orderBy('id','desc')
@@ -83,16 +76,11 @@ class PotroController extends Controller
             $getIdSarok = RenewOfficeSarok::where('parent_note_for_renew_id',$id)
                        ->value('id');
 
-
-                       $potrangshoDraftNew =  DB::table('potrangsho_drafts')
+            $potrangshoDraftNew =  DB::table('potrangsho_drafts')
                        ->where('sarokId',$getIdSarok)
                        ->where('status',$status)
                        ->orderBy('id','desc')
                        ->first();
-
-                       //dd($potrangshoDraftNew);
-
-
 
             $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
             $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
@@ -143,8 +131,6 @@ class PotroController extends Controller
             $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
-
-//dd($checkParent);
 
 
         }elseif($status == 'fdNineOne'){
@@ -286,12 +272,11 @@ class PotroController extends Controller
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-$nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         $user = Admin::where('id','!=',1)->get();
 
 
-        $nothiPropokListUpdate = NothiPrapok::
-        where('nothiId',$nothiId)
+        $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
@@ -325,48 +310,41 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
         if($status == 'registration'){
 
+
             $getIdSarok = RegistrationOfficeSarok::where('parent_note_regid',$id)
                          ->value('id');
-
-
-                         $potrangshoDraftNew =  DB::table('potrangsho_drafts')
+            $potrangshoDraftNew =  DB::table('potrangsho_drafts')
                          ->where('sarokId',$getIdSarok)
                          ->where('status',$status)
                          ->orderBy('id','desc')
                          ->first();
 
-              $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
-              $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
               ->where('serial_number',$nothiId)
                              ->get();
 
 
 
-          }elseif($status == 'renew'){
+        }elseif($status == 'renew'){
 
 
-              $getIdSarok = RenewOfficeSarok::where('parent_note_for_renew_id',$id)
+            $getIdSarok = RenewOfficeSarok::where('parent_note_for_renew_id',$id)
                          ->value('id');
-
-
-                         $potrangshoDraftNew =  DB::table('potrangsho_drafts')
+            $potrangshoDraftNew =  DB::table('potrangsho_drafts')
                          ->where('sarokId',$getIdSarok)
                          ->where('status',$status)
                          ->orderBy('id','desc')
                          ->first();
 
-                         //dd($potrangshoDraftNew);
-
-
-
-              $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
-              $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
               ->where('serial_number',$nothiId)
               ->get();
 
 
 
-          }elseif($status == 'nameChange'){
+        }elseif($status == 'nameChange'){
 
 
               $getIdSarok = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)
@@ -379,11 +357,7 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
               ->orderBy('id','desc')
               ->first();
 
-
-
               $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
-
-
               $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
               ->where('serial_number',$nothiId)
               ->get();
@@ -409,10 +383,7 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
               ->where('serial_number',$nothiId)
               ->get();
 
-  //dd($checkParent);
-
-
-          }elseif($status == 'fdNineOne'){
+            }elseif($status == 'fdNineOne'){
 
               $getIdSarok = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)
               ->value('id');
@@ -432,10 +403,7 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
               ->where('serial_number',$nothiId)
               ->get();
 
-
-
-
-          }elseif($status == 'fdSix'){
+            }elseif($status == 'fdSix'){
 
 
               $getIdSarok = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)
@@ -496,12 +464,13 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
 
               $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
               $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
+              ->where('serial_number',$nothiId)
               ->get();
 
 
 
 
-          }elseif($status == 'fcTwo'){
+        }elseif($status == 'fcTwo'){
 
               $getIdSarok = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)
               ->value('id');
@@ -521,10 +490,7 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
               ->get();
 
 
-
-
-
-          }elseif($status == 'fdThree'){
+        }elseif($status == 'fdThree'){
 
 
               $getIdSarok = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)
@@ -537,26 +503,21 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
               ->orderBy('id','desc')
               ->first();
 
-              $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
-
-
-
-
-              $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
               ->where('serial_number',$nothiId)
               ->get();
 
 
-          }
+        }
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-$nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         $user = Admin::where('id','!=',1)->get();
 
 
-        $nothiPropokListUpdate = NothiPrapok::
-        where('nothiId',$nothiId)
+        $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
@@ -564,10 +525,7 @@ $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
         ->where('noteId',$id)->where('status',1)->get();
 
 
-
         $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
-
         $convert_name_title = $permissionNothiList->implode("branchId", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 

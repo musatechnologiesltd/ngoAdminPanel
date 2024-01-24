@@ -25,12 +25,11 @@ class PermissionController extends Controller
     public function index(){
 
         if (is_null($this->user) || !$this->user->can('permissionView')) {
-           // abort(403, 'Sorry !! You are Unauthorized to View !');
-           return redirect()->route('mainLogin');
-               }
-               \LogActivity::addToLog('permission list');
+                  return redirect()->route('mainLogin');
+        }
+            \LogActivity::addToLog('permission list');
+            $pers = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
 
-        $pers = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
         return view('admin.permission.index',compact('pers'));
     }
 
@@ -39,9 +38,8 @@ class PermissionController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('permissionAdd')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
-               }
+        }
 
 
 
@@ -72,16 +70,15 @@ class PermissionController extends Controller
                 return redirect()->back()->with('success','Created successfully!');
 
                 }
-        }
+    }
 
 
 
-        public function update(Request $request,$id){
+    public function update(Request $request,$id){
 
             if (is_null($this->user) || !$this->user->can('permissionUpdate')) {
-                //abort(403, 'Sorry !! You are Unauthorized to View !');
-                return redirect()->route('mainLogin');
-                   }
+                   return redirect()->route('mainLogin');
+            }
 
                    \LogActivity::addToLog(' update permission ');
 
@@ -103,22 +100,17 @@ class PermissionController extends Controller
             }
 
             return redirect()->back()->with('success','Created successfully!');
-        }
+    }
 
 
 
-        public function destroy($id)
-        {
+    public function destroy($id){
 
             if (is_null($this->user) || !$this->user->can('permissionDelete')) {
-                //abort(403, 'Sorry !! You are Unauthorized to View !');
+               return redirect()->route('mainLogin');
+            }
 
-                return redirect()->route('mainLogin');
-
-                   }
-
-
-                   \LogActivity::addToLog(' delete permission ');
+            \LogActivity::addToLog(' delete permission ');
 
 
             $getGroupName = DB::table('permissions')
@@ -127,5 +119,5 @@ class PermissionController extends Controller
 
             Permission::where('group_name', $getGroupName)->delete();
             return redirect()->back()->with('error','Deleted successfully!');
-        }
+    }
 }

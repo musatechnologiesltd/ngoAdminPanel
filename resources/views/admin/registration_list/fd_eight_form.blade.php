@@ -6,13 +6,9 @@
     </tr>
       <?php
 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-// dd($getngoForLanguage);
-
-
 $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
 
-
-      ?>
+?>
     <tr>
         <td></td>
         <td>(i)</td>
@@ -29,16 +25,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <td></td>
         <td>(iii)</td>
         <td>ডাইরি নম্বর </td>
-        <td>:
-
-
-
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration )}}
-
-
-
-
-      </td>
+        <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration )}}</td>
     </tr>
     <tr>
         <td></td>
@@ -115,9 +102,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <td>২.</td>
         <td colspan="2">বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ (প্রকল্প ওয়ারী তথাদির সংক্ষিপ্তসার সংযুক্ত করতে হবে)
         </td>
-        <td>:
-
-            @if(!$form_one_data)
+        <td>: @if(!$form_one_data)
 
 
             @else

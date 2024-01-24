@@ -114,39 +114,13 @@ aria-labelledby="myModalLabel22">
 
                                                                         @else
                                                                         <div class="d-flex justify-content-start">
-                                                                            <p style="font-weight:bold">সুত্রঃ </p>
-
-                                                                                     {!! $officeDetails->office_sutro !!}
-
-
-
+                                                                            <p style="font-weight:bold">সুত্রঃ </p>{!! $officeDetails->office_sutro !!}
                                                                         </div>
                                                                         @endif
 
                                                                     <div class="row">
-                                                                        <div class="col-xl-12 mt-3">
-
-
-                                                                                        {!! $officeDetails->description !!}
-
-
-
-                                                                        </div>
+                                                                        <div class="col-xl-12 mt-3">{!! $officeDetails->description !!}</div>
                                                                     </div>
-
-
-
-
-
-
-
-
-
-
-
-                                                                        <!-- approver start --->
-
-
 
                                                                         <div class="mt-4" style="text-align: right;">
                                                                             @if($potroZariListValue == 1)
@@ -246,10 +220,6 @@ aria-labelledby="myModalLabel22">
                                                                             </table>
                                                                         </div>
                                                                     </div>
-
-
-
-
 
                                                                     <!-- end sarok number -->
 

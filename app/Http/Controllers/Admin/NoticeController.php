@@ -33,14 +33,12 @@ class NoticeController extends Controller
 
 
         if (is_null($this->user) || !$this->user->can('noticeAdd')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
-            return redirect()->route('mainLogin');
+                  return redirect()->route('mainLogin');
                }
 
 
                \LogActivity::addToLog('notice list ');
-
-          $noticeLists = Notice::latest()->get();
+               $noticeLists = Notice::latest()->get();
 
                return view('admin.noticeLists.index',compact('noticeLists'));
            }
@@ -50,13 +48,11 @@ class NoticeController extends Controller
            public function store(Request $request){
 
             if (is_null($this->user) || !$this->user->can('noticeAdd')) {
-                //abort(403, 'Sorry !! You are Unauthorized to view any country !');
-                return redirect()->route('mainLogin');
+               return redirect()->route('mainLogin');
             }
 
 
             \LogActivity::addToLog(' create notice ');
-
 
             $noticeLists = new Notice();
             $noticeLists->headline = $request->headline;
@@ -78,7 +74,6 @@ class NoticeController extends Controller
            public function update(Request $request){
 
             if (is_null($this->user) || !$this->user->can('noticeUpdate')) {
-                //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                 return redirect()->route('mainLogin');
             }
 
@@ -104,9 +99,8 @@ class NoticeController extends Controller
 
            public function destroy($id)
            {
-               //dd(1);
+
                if (is_null($this->user) || !$this->user->can('noticeDelete')) {
-                   //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                    return redirect()->route('mainLogin');
                }
 

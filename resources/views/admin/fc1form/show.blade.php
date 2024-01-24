@@ -39,11 +39,8 @@
 
                         <div class="text-end">
 
-
-
                             @if($dataFromFc1Form->status == 'Ongoing')
                             <button onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$dataFromFc1Form->mainId]) }}';" type="button" class="btn btn-primary add-btn">ডাক দেখুন</button>
-
                             @else
 
                             @endif

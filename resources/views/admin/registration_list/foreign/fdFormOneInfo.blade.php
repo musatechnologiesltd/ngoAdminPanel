@@ -1,19 +1,14 @@
 
               <?php
 
-       $allformOneData = DB::table('fd_one_forms')
-       ->where('user_id',Auth::user()->id)->first();
+       $allformOneData = DB::table('fd_one_forms')->where('user_id',Auth::user()->id)->first();
         $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$allformOneData->id)->first();
         $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$allformOneData->id)->get();
         $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$allformOneData->id)->get();
         $formOneMemberList = DB::table('fd_one_member_lists')->where('fd_one_form_id',$allformOneData->id)->get();
         $get_all_source_of_fund_data = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$allformOneData->id)->get();
 
-
-
-
-
-              ?>
+        ?>
 
                     @include('flash_message')
                     <div class="user_dashboard_right">
@@ -74,13 +69,7 @@
                                 </tr>
                             </table>
  <?php
-
-                    $data = DB::table('fd_one_forms')->where('user_id',Auth::user()->id)
-                           ->first();
-
-
-
-
+$data = DB::table('fd_one_forms')->where('user_id',Auth::user()->id)->first();
 $count = 0;
 foreach ($data   as $a) {
     if (is_null($a)) {
@@ -88,14 +77,9 @@ foreach ($data   as $a) {
   }
 }
 
-
-
-                    ?>
-
-
-
-                        </div>
-                    </div>
+?>
+</div>
+        </div>
 
 
 

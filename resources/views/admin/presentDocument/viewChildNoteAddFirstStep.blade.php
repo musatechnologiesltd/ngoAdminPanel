@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-4 col-xs-4">
         <div class="d-flex flex-row-reverse">
-            {{-- <a  href ="" class="btn btn-outline-danger btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+
         </div>
     </div>
 </div>
@@ -50,13 +50,7 @@ $unsentAtt = DB::table('note_attachments')
 <div class="d-flex flex-row-reverse mt-3">
 
     <div class="dropdown">
-        {{-- <button class="btn btn-success" value="সংরক্ষন ও খসড়া" name="final_button" type="submit"
-
-        aria-expanded="false">
-        সংরক্ষন ও খসড়া
-</button> --}}
-
-
+        
         <button class="btn btn-primary" value="সংরক্ষন করুন" type="submit" name="final_button"
 
                 aria-expanded="false">

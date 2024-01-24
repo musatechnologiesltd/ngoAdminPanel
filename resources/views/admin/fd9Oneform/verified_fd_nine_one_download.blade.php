@@ -51,10 +51,7 @@
         </div>
 
         <div class="form9_upper_box">
-            {{-- <h3 style="font-family: 'bangla', sans-serif;">এফডি-৯(১) ফরম</h3>
-            <h4 style="font-family: 'bangla', sans-serif;">বিদেশি বিশেষজ্ঞ, উপদেষ্টা, কর্মকর্তা বা স্বেচ্ছাসেবী এর ওয়ার্ক পারমিটের (কার্যানুমতি)
-                আবেদন ফরম</h4>
-            <h5 style="font-family: 'bangla', sans-serif;">(আবশ্যকাবে বাংলা নিকস ফন্টে পুরণ করে দাখিল করতে হবে)</h5> --}}
+
 
             <div>
                 <p>বরাবর <br>
@@ -130,7 +127,7 @@
                 <td>০৩</td>
                 <td>ছবি</td>
                 <td>: সংযুক্ত
-                    {{-- <img src="{{ asset('/') }}{{ $fd9OneList->foreigner_image }}" style="height:40px;"/> --}}
+                  
                 </td>
             </tr>
             <tr>

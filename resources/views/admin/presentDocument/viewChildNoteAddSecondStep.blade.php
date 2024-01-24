@@ -126,10 +126,6 @@ $senderIdNew122 = DB::table('nothi_details')
     </div>
 </div>
 
-
-
-
-
                 @endif
 
 

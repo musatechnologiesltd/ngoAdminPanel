@@ -45,8 +45,8 @@
 
                     <?php
 
-$designationList = DB::table('designation_lists')->where('branch_id',$AllBranchLists->id)
-                ->orderBy('designation_serial','asc')->get();
+$designationList = DB::table('designation_lists')->where('branch_id',$AllBranchLists->id)->orderBy('designation_serial','asc')->get();
+
                      ?>
                     <div class="card">
 
@@ -68,17 +68,20 @@ $designationList = DB::table('designation_lists')->where('branch_id',$AllBranchL
                                   </thead>
                                   <tbody>
                                     @foreach($designationList as $j=>$AllDesignationList)
+
+                                    <?php
+
+                                    $adminId =  DB::table('admin_designation_histories')->where('designation_list_id',$AllDesignationList->id)
+                                                ->orderBy('id','desc')->value('admin_id');
+
+                                    $adminDate =  DB::table('admin_designation_histories')->where('designation_list_id',$AllDesignationList->id)
+                                                ->orderBy('id','desc')->value('admin_job_start_date');
+                                     ?>
+
                                     <form class="custom-validation" id="form" action="{{ route('assignedEmployee.store') }}" method="post"  data-parsley-validate="" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="branchId" value="{{ $AllBranchLists->id }}"/>
-                                    <?php
 
-                                   $adminId =  DB::table('admin_designation_histories')->where('designation_list_id',$AllDesignationList->id)
-                                               ->orderBy('id','desc')->value('admin_id');
-
-                                               $adminDate =  DB::table('admin_designation_histories')->where('designation_list_id',$AllDesignationList->id)
-                                               ->orderBy('id','desc')->value('admin_job_start_date');
-                                    ?>
                                     <input type="hidden" name="designation_list_id" value="{{ $AllDesignationList->id }}" />
                                     <tr>
                                         <td>

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
@@ -39,7 +38,6 @@ use App\Models\NothiFirstSenderList;
 use DB;
 use DateTime;
 use DateTimezone;
-
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -72,25 +70,21 @@ class NothiJatController extends Controller
 
     public function returnToAgotoDak($id, $status){
 
-
-
-
         if($status == 'registration'){
 
             $updateDataInsert = NgoRegistrationDak::find($id);
-
             $updateDataInsert->nothi_jat_id = 0;
             $updateDataInsert->nothi_jat_status =0;
             $updateDataInsert->save();
 
-          }elseif($status == 'renew'){
+        }elseif($status == 'renew'){
 
-              $updateDataInsert = NgoRenewDak::find($id);
-              $updateDataInsert->nothi_jat_id = 0;
-              $updateDataInsert->nothi_jat_status = 0;
-              $updateDataInsert->save();
+            $updateDataInsert = NgoRenewDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
 
-          }elseif($status == 'nameChange'){
+        }elseif($status == 'nameChange'){
 
 
             $updateDataInsert = NgoNameChangeDak::find($id);
@@ -99,7 +93,7 @@ class NothiJatController extends Controller
             $updateDataInsert->save();
 
 
-          }elseif($status == 'fdNine'){
+        }elseif($status == 'fdNine'){
 
 
             $updateDataInsert = NgoFDNineDak::find($id);
@@ -108,7 +102,7 @@ class NothiJatController extends Controller
             $updateDataInsert->save();
 
 
-          }elseif($status == 'fdNineOne'){
+        }elseif($status == 'fdNineOne'){
 
 
             $updateDataInsert = NgoFDNineOneDak::find($id);
@@ -118,7 +112,7 @@ class NothiJatController extends Controller
 
 
 
-          }elseif($status == 'fdSix'){
+        }elseif($status == 'fdSix'){
 
             $updateDataInsert = NgoFdSixDak::find($id);
             $updateDataInsert->nothi_jat_id = 0;
@@ -127,7 +121,7 @@ class NothiJatController extends Controller
 
 
 
-          }elseif($status == 'fdSeven'){
+        }elseif($status == 'fdSeven'){
 
             $updateDataInsert = NgoFdSevenDak::find($id);
             $updateDataInsert->nothi_jat_id = 0;
@@ -135,140 +129,113 @@ class NothiJatController extends Controller
             $updateDataInsert->save();
 
 
-          }elseif($status == 'fcOne'){
-
-
+        }elseif($status == 'fcOne'){
 
             $updateDataInsert = FcOneDak::find($id);
             $updateDataInsert->nothi_jat_id = 0;
             $updateDataInsert->nothi_jat_status = 0;
             $updateDataInsert->save();
 
-
-          }elseif($status == 'fcTwo'){
-
-
+        }elseif($status == 'fcTwo'){
 
             $updateDataInsert = FcTwoDak::find($id);
             $updateDataInsert->nothi_jat_id = 0;
             $updateDataInsert->nothi_jat_status = 0;
             $updateDataInsert->save();
 
-
-
-          }elseif(status == 'fdThree'){
+        }elseif(status == 'fdThree'){
 
             $updateDataInsert = FdThreeDak::find($id);
             $updateDataInsert->nothi_jat_id = 0;
             $updateDataInsert->nothi_jat_status = 0;
             $updateDataInsert->save();
 
+        }
 
-
-
-          }
-
-          return redirect()->back()->with('success','সফলভাবে ফেরত আনা দেওয়া হয়েছে');
+        return redirect()->back()->with('success','সফলভাবে ফেরত আনা দেওয়া হয়েছে');
 
     }
     public function updateNothiJat(Request $request){
 
-
-
         if($request->status == 'registration'){
 
-              $updateDataInsert = NgoRegistrationDak::find($request->dakId);
+            $updateDataInsert = NgoRegistrationDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
-              $updateDataInsert->nothi_jat_id = $request->nothiId;
-              $updateDataInsert->nothi_jat_status = 1;
-              $updateDataInsert->save();
+        }elseif($request->status == 'renew'){
 
-            }elseif($request->status == 'renew'){
+            $updateDataInsert = NgoRenewDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
-                $updateDataInsert = NgoRenewDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
-
-            }elseif($request->status == 'nameChange'){
-
-
-                $updateDataInsert = NgoNameChangeDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
+        }elseif($request->status == 'nameChange'){
 
 
-            }elseif($request->status == 'fdNine'){
+            $updateDataInsert = NgoNameChangeDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
 
-                $updateDataInsert = NgoFDNineDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
+        }elseif($request->status == 'fdNine'){
 
 
-            }elseif($request->status == 'fdNineOne'){
+            $updateDataInsert = NgoFDNineDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
 
-                $updateDataInsert = NgoFDNineOneDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
+        }elseif($request->status == 'fdNineOne'){
+
+            $updateDataInsert = NgoFDNineOneDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
+
+        }elseif($request->status == 'fdSix'){
+
+            $updateDataInsert = NgoFdSixDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
+
+        }elseif($request->status == 'fdSeven'){
+
+            $updateDataInsert = NgoFdSevenDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
 
+        }elseif($request->status == 'fcOne'){
 
-            }elseif($request->status == 'fdSix'){
+            $updateDataInsert = FcOneDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
+        }elseif($request->status == 'fcTwo'){
 
-                $updateDataInsert = NgoFdSixDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
+            $updateDataInsert = FcTwoDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
+        }elseif($request->status == 'fdThree'){
 
-            }elseif($request->status == 'fdSeven'){
-
-                $updateDataInsert = NgoFdSevenDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
-
-
-            }elseif($request->status == 'fcOne'){
-
-
-
-                $updateDataInsert = FcOneDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
+            $updateDataInsert = FdThreeDak::find($request->dakId);
+            $updateDataInsert->nothi_jat_id = $request->nothiId;
+            $updateDataInsert->nothi_jat_status = 1;
+            $updateDataInsert->save();
 
 
-            }elseif($request->status == 'fcTwo'){
+        }
 
-
-
-                $updateDataInsert = FcTwoDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
-
-
-
-            }elseif($request->status == 'fdThree'){
-
-
-
-                $updateDataInsert = FdThreeDak::find($request->dakId);
-                $updateDataInsert->nothi_jat_id = $request->nothiId;
-                $updateDataInsert->nothi_jat_status = 1;
-                $updateDataInsert->save();
-
-
-            }
-
-  return 1;
+        return 1;
     }
 
 
@@ -278,7 +245,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -286,12 +252,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJat',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
 
@@ -303,7 +264,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -311,12 +271,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatRenew',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
 
@@ -326,7 +281,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -334,12 +288,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatNameChange',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -349,7 +298,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -357,12 +305,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFdNine',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
 
@@ -373,7 +316,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -381,12 +323,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFdNineOne',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -396,7 +333,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -404,12 +340,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFdSix',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -419,7 +350,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -427,12 +357,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFdSeven',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -442,7 +367,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -450,12 +374,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFcOne',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -465,7 +384,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -473,12 +391,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFcTwo',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -488,7 +401,6 @@ class NothiJatController extends Controller
 
         $dakId = $request->result;
 
-
         $searchResult = NothiList::where('document_branch', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_type_id', 'LIKE', '%'.$request->main_value.'%')
         ->orWhere('document_number', 'LIKE',  '%'.$request->main_value.'%')
@@ -496,12 +408,7 @@ class NothiJatController extends Controller
         ->orWhere('document_class', 'LIKE',  '%'.$request->main_value.'%')
         ->orWhere('document_subject', 'LIKE',  '%'.$request->main_value.'%')->get();
 
-
-        //dd($searchResult);
-
         $data = view('admin.post.searchResultNothiJatFdThree',compact('searchResult','dakId'))->render();
-
-
         return response()->json($data);
 
     }
@@ -517,38 +424,29 @@ class NothiJatController extends Controller
         ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('renew_status_id');
 
-        //dd($ngoStatusRenew);
-
-
         $ngoStatusNameChange = NgoNameChangeDak::where('nothi_jat_status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
-    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('name_change_status_id');
-
 
         $ngoStatusFDNineDak = NgoFDNineDak::where('nothi_jat_status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
         ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('f_d_nine_status_id');
 
-
         $ngoStatusFdSixDak = NgoFdSixDak::where('nothi_jat_status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
         ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('fd_six_status_id');
 
-
-
-
         $ngoStatusFdSevenDak = NgoFdSevenDak::where('nothi_jat_status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
-    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('fd_seven_status_id');
-
 
         $ngoStatusFcOneDak = FcOneDak::where('nothi_jat_status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
-    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('fc_one_status_id');
 
         $ngoStatusFcTwoDak = FcTwoDak::where('nothi_jat_status',1)
@@ -561,28 +459,19 @@ class NothiJatController extends Controller
         ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('fd_three_status_id');
 
-
         $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('nothi_jat_status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
-    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('f_d_nine_one_status_id');
 
+        $ngoStatusReg = NgoRegistrationDak::where('nothi_jat_status',1)
+        ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+        ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->latest()->get()->unique('registration_status_id');
 
-    $ngoStatusReg = NgoRegistrationDak::where('nothi_jat_status',1)
-    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
-    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
-    ->latest()->get()->unique('registration_status_id');
+        $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-
-
-
-
-
-
-
-    $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
-
-    return view('admin.post.allDak.nothiJatDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+        return view('admin.post.allDak.nothiJatDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
     }
 }

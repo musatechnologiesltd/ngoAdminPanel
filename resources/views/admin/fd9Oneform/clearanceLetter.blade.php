@@ -481,41 +481,6 @@ E.COMPENSATION AND BENIFITS
 
                         @else
 
-
-                        {{-- <tr>
-                            <td>1</td>
-                            <td>Copy of buyer's nomination letter in case of employment of buyer;s representative</td>
-                            <td>
-
-
-                               @if(empty($nVisaDocs->nomination_letter_of_buyer))
-
-
-                               @else
-
-                                <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'nomination','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-
-                                @endif
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Copy of registration letter of board of investment, if not submitted earlier</td>
-                            <td>
-
-                                @if(empty($nVisaDocs->registration_letter_of_board_of_investment))
-
-
-                                @else
-
-                                 <a target="_blank"  href="{{ route('nVisaDocumentDownload',['cat'=>'investment','id'=>$nVisaDocs->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
-
-                                 @endif
-
-                            </td>
-                        </tr> --}}
                         <tr>
                             <td>1</td>
                             <td>Copy of service contract/agreement/ appointment letter in case of employee</td>

@@ -86,13 +86,7 @@
 @endif
                                 </td>
 
-                                {{-- <td>
-                                    @if(empty($user->admin_sign))
-                                    @else
-                                    <img src="{{ asset('/') }}{{ $user->admin_sign }}" style="height:40px" />
-                                    @endif
 
-                                                                    </td> --}}
 
                                     <td>
 

@@ -68,12 +68,6 @@
                                                                              </div>
                                                                          </div>
 
-
-
-
-
-
-
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
                                                                                  <label for="formrow-inputZip" class="form-label">ফোন নম্বর</label>
@@ -88,7 +82,6 @@
                                                                                  <small></small>
                                                                              </div>
                                                                          </div>
-
 
                                                                          <div class="col-md-6">
                                                                              <div class="mb-4">
@@ -116,11 +109,6 @@
 
 
                                                                      </div>
-
-
-
-
-
 
                                                                      <div>
                                                                          <button type="submit" class="btn btn-primary w-md">জমা দিন </button>
@@ -217,11 +205,6 @@
                                                             </div>
 
 
-
-
-
-
-
                                                             <div class="col-md-6">
                                                                 <div class="mb-4">
                                                                     <label for="formrow-inputZip" class="form-label">ফোন নম্বর</label>
@@ -264,11 +247,6 @@
 
 
                                                         </div>
-
-
-
-
-
 
                                                         <div>
                                                             <button type="submit" class="btn btn-primary w-md">আপডেট করুন</button>

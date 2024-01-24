@@ -123,13 +123,7 @@
             <td class="number_section">(v)</td>
             <td>Address of the Principal/Head Office</td>
             <td style="width:4px">:</td>
-            <td>
-
-                {{ $allformOneData->address_of_head_office_eng  }}
-
-
-
-            </td>
+            <td>{{ $allformOneData->address_of_head_office_eng  }}</td>
         </tr>
         <tr>
             <td></td>
@@ -146,13 +140,7 @@
             <td>{{ $allformOneData->name_of_head_in_bd }}</td>
         </tr>
 
-       <?php
-
-
-                                   $getJobType =$allformOneData->job_type;
-
-
-                                  ?>
+       <?php $getJobType =$allformOneData->job_type; ?>
 
         <tr>
             <td></td>
@@ -169,13 +157,7 @@
             <td>{{ $allformOneData->organization_address }}, {{ $allformOneData->tele_phone_number }}, {{ $allformOneData->phone }}, {{ $allformOneData->email }}</td>
         </tr>
 
-       <?php
-
-
-                                    $getCityzendata = $allformOneData->citizenship;
-
-
-                                  ?>
+       <?php $getCityzendata = $allformOneData->citizenship; ?>
         <tr>
             <td></td>
             <td></td>
@@ -252,11 +234,7 @@
             <td>3.</td>
             <td colspan="2">What is your expected Annual Budget (Foreign Currency Or Bangladeshi taka</td>
             <td style="width:4px">:</td>
-            <td>
-
-                {{ $allformOneData->annual_budget }}
-
-                </td>
+            <td>{{ $allformOneData->annual_budget }}</td>
         </tr>
         <tr>
             <td>4.</td>
@@ -295,13 +273,9 @@
         </tr>
 
       <?php
+        $convetArray = explode(",",$allFormOneMemberList->citizenship);
 
-                                  $convetArray = explode(",",$allFormOneMemberList->citizenship);
-
-
-
-
-                                    $getCityzendata = $allFormOneMemberList->citizenship;
+        $getCityzendata = $allFormOneMemberList->citizenship;
 
                                   ?>
         <tr>
@@ -469,9 +443,7 @@ attached
     </tr>
 </table>
 <table style=" margin-top: 15px">
-    {{-- <tr>
-        <td style="text-align: right; padding-right: 14%" colspan="3">{{ trans('fd_one_step_one.tt_4')}}</td>
-    </tr> --}}
+    
     <tr>
         <td style="width: 65%"></td>
         <td style="text-align: left; width:5%;">Name</td>

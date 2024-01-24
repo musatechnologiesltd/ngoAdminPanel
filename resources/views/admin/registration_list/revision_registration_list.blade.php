@@ -55,29 +55,18 @@
                                 <?php
 
                                 $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                  $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
-
-                                  $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
-
-
-                             // dd($getngoForLanguage);
-
-                             $ngoOldNew = DB::table('ngo_type_and_languages')
-                             ->where('user_id',$fdOneFormId)
-                             ->value('ngo_type_new_old');
+                                $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
+                                $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
+                                $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type_new_old');
 
 
-                                  if($getngoForLanguage =='দেশিও'){
+                                        if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
+                                            $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
 
-                                  }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
-                                  }
-
-                                  ?>
-
-                                <?php
+                                        }else{
+                                            $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
+                                        }
 
                                 $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
 
@@ -92,7 +81,8 @@
                                     @else
 
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}
-@endif
+                                   
+                                    @endif
 
                                 </td>
                                 <td><h6>

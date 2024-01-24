@@ -52,32 +52,27 @@
 
                                 <?php
  $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
-                         $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type');
-                             // dd($getngoForLanguage);
-
-                             $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
-
-
-// dd($getngoForLanguage);
-
-$ngoOldNew = DB::table('ngo_type_and_languages')
-->where('user_id',$fdOneFormId)
-->value('ngo_type_new_old');
+ $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
+ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type');
+ $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
+ $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type_new_old');
 
 
-                                  if($getngoForLanguage =='দেশিও'){
+            if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = $reg_number->organization_name_ban;
+                $reg_name = $reg_number->organization_name_ban;
 
-                                  }else{
-                                    $reg_name = $reg_number->organization_name;
-                                  }
-                                $reg_address =$reg_number->organization_address;
+            }else{
+
+                $reg_name = $reg_number->organization_name;
+
+            }
+
+ $reg_address =$reg_number->organization_address;
 
                                 ?>
                             <tr>
-                              
+
 
 
                                 <td>
@@ -118,13 +113,7 @@ $ngoOldNew = DB::table('ngo_type_and_languages')
                                     </button>
                                     @endif
                                 </td>
-                                <td>
-
-
-                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
-
-
-                                </td>
+                                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}</td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))

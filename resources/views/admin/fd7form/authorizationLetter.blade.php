@@ -35,14 +35,12 @@
             data='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
             type="application/pdf"
             width="500"
-            height="900"
-          >
+            height="900">
 
             <iframe
               src='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
               width="500"
-              height="900"
-            >
+              height="900" >
             <p>This browser does not support PDF!</p>
             </iframe>
           </object>

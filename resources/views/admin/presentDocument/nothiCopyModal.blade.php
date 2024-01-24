@@ -41,9 +41,7 @@ $nothiCopyList = DB::table('nothi_copies')->where('nothiId',$nothiId)
 
                         <input type="hidden" id="snothiId3" value="{{ $nothiId }}"/>
                         <input type="hidden" id="sstatus3" value="{{ $status }}"/>
-
-
-                        <input type="hidden" id="snoteId3" value="{{ $id }}"/>
+                         <input type="hidden" id="snoteId3" value="{{ $id }}"/>
 
 
 

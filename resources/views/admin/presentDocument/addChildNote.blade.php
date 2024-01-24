@@ -532,12 +532,6 @@ $potroZariListValue =  DB::table('nothi_details')
 
 @endif
 
-
-
-
-
-
-
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
                                                                                 <table class="table table-borderless">
@@ -583,24 +577,14 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">
-
-
-                  {!! $potrangshoDraft->description !!}
-
-
-
-  </div>
+  <div class="col-xl-12 mt-2">{!! $potrangshoDraft->description !!}</div>
 </div>
 
 @else
 <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
 <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
 <div class="d-flex justify-content-start mt-3">
-  <p style="font-weight:bold;">বিষয় : </p>
-
-        {!! $officeDetails->office_subject !!}
-
+  <p style="font-weight:bold;">বিষয় : </p>{!! $officeDetails->office_subject !!}
 </div>
 <div class="d-flex justify-content-start">
   @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
@@ -614,36 +598,12 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">
-
-
-                  {!! $officeDetails->description !!}
-
-
-
-  </div>
+  <div class="col-xl-12 mt-2">{!! $officeDetails->description !!}</div>
 </div>
 @endif
 @endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                        <!-- approver start --->
-
-
-
-                                                                        <div class="mt-4" style="text-align: right;">
+<div class="mt-4" style="text-align: right;">
                                                                             @if($potroZariListValue == 1)
 
                                                                             @if(!$nothiApproverLista)

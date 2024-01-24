@@ -159,12 +159,8 @@
                                 </div>
                               </div>
 
-
-
                               <div class="mb-3 row">
                                 <label class="col-sm-3 col-form-label">নতুন পাসওয়ার্ড :</label>
-
-
 
                                 <div class="col-sm-9">
 
@@ -173,12 +169,8 @@
                                         <i class="fa fa-eye"></i>
                                       </div>
 
-
-
-                                </div>
+                                    </div>
                               </div>
-
-
 
                               <div class="mb-3 row">
                                 <label class="col-sm-3 col-form-label">পুনরায় পাসওয়ার্ড:</label>
@@ -189,10 +181,6 @@
                                   </div>
                                 </div>
                               </div>
-
-
-
-
 
                             </div>
                           </div>

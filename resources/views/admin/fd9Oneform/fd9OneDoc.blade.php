@@ -45,7 +45,7 @@
                 <button  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="ফর্ম ৯ এর কপি"><i class="fa fa-paperclip"></i></button>
                 <button  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
                      @endif
-                     {{-- <a href="{{ route('formNinePdfDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a> --}}
+
 </td>
             </tr>
             <tr>
@@ -78,11 +78,8 @@
 
                 @endif
                 @endif
-{{-- <a href="{{ route('nVisaCopyDownload',$dataFromNVisaFd9Fd1->id) }}" target="_blank">{{ $filename.'.'.$extension  }}</a>, --}}
+
                 {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($dataFromNVisaFd9Fd1->arrival_date_in_nvisa))) }}
-
-
-
 
             </td>
             </tr>

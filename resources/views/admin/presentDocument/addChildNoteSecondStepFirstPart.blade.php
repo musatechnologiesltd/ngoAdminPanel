@@ -89,7 +89,6 @@ $senderIdNew = DB::table('nothi_details')
             ->where('dakId',$parentId)
             ->where('dakType',$status)
             ->whereNull('back_status')
-            //->where('sender',Auth::guard('admin')->user()->id)
             ->first();
 
 ?>
@@ -105,7 +104,7 @@ $mainSenderIdNew =DB::table('article_signs')
 ->where('dakDetailId',$senderIdNew->id)
 ->where('childId',$childNoteNewLists->id)->get();
 
-//dd($mainSenderIdNew);
+
 ?>
 
 @if(count($mainSenderIdNew) == 0)
@@ -216,10 +215,7 @@ $unsentAtt = DB::table('note_attachments')
 
     <div class="d-flex flex-row-reverse mt-3">
 
-        {{-- <button class="btn btn-danger ms-3" type="button">
-            <i class="fa fa-send"></i>
-            বাতিল করুন
-        </button> --}}
+   
         <div class="dropdown">
             <?php
 
@@ -229,7 +225,6 @@ $unsentAtt = DB::table('note_attachments')
             ->where('dakId',$parentId)
             ->where('dakType',$status)
             ->whereNull('back_status')
-            //->where('sender',Auth::guard('admin')->user()->id)
             ->value('permission_status');
 
                         ?>

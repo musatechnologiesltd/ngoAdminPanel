@@ -39,9 +39,8 @@
 
                         <div class="text-end">
 
-
-
                             @if($dataFromFd7Form->status == 'Ongoing')
+
                             <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdSeven','id'=>$dataFromFd7Form->mainId]) }}';" type="button" class="btn btn-primary add-btn">ডাক দেখুন</button>
 
                             @else
@@ -115,7 +114,6 @@
                                                 <select class="form-control form-control-sm mt-4" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $dataFromFd7Form->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
-
                                                     <option value="Accepted" {{ $dataFromFd7Form->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
                                                     <option value="Correct" {{ $dataFromFd7Form->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $dataFromFd7Form->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>

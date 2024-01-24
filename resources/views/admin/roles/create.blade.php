@@ -148,38 +148,7 @@
             implementAllChecked();
          }
 
-         //nnnn
-
-
-//          $(document).on('click', '.bbb', function(){
-
-
-// var mainstatus = $(this).data('status');
-
-
-// var totalBranch = $('input[name="groupName[]"]:checked').map(function (idx, ele) {
-// return $(ele).val();
-// }).get();
-
-
-// var totalDesi = $('input[name="permissions[]"]:checked').map(function (idx, ele) {
-// return $(ele).val();
-// }).get();
-
-
-
-
-
-// console.log(totalBranch);
-// console.log(totalDesi);
-
-
-
-
-
-
-// });
-
+      
 </script>
 
 @endsection

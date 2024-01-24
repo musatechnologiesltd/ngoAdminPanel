@@ -61,13 +61,7 @@ aria-labelledby="myModalLabel2">
                 @else
 
                 @endif
-                {{-- <div class="mb-3">
-                    <label class="form-label" for="">অগ্রাধিকার বাছাই করুন </label>
-                    <select class="js-example-basic-single col-sm-12">
-                        <option value="AL">অগ্রাধিকার বাছাই করুন</option>
-                        <option value="WY">X</option>
-                    </select>
-                </div> --}}
+              
                 <div class="row mt-3">
                     <div class="col-1">
 
