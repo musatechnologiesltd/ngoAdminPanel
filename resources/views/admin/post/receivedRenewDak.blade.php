@@ -4,42 +4,19 @@
     ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
     ->latest()->get();
 
-
-
 ?>
  @foreach($ngoStatusRenew as $r=>$allStatusData)
 
  <?php
-
-
-             //new code
-             $orginalReceverId= DB::table('ngo_renew_daks')
-                ->where('renew_status_id',$allStatusData->renew_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-$formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_status_id)
-     ->value('fd_one_form_id');
-
-$form_one_data = DB::table('fd_one_forms')
-->where('id',$formOneDataId)->first();
-
-
-$adminNamePrapok = DB::table('admins')
-     ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-     $adminNamePrerok = DB::table('admins')
-     ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-$decesionName = DB::table('dak_details')
-->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
+//new code
+$orginalReceverId= DB::table('ngo_renew_daks')->where('renew_status_id',$allStatusData->renew_status_id)->where('original_recipient',1)->value('receiver_admin_id');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
+$formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')>where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->renew_status_id)->orderBy('id','desc')->first();
  ?>
 <tr>
  <td style="text-align:left;">
@@ -64,10 +41,6 @@ $decesionName = DB::table('dak_details')
 
 @include('admin.post.renothiModal')
 
-
-
-
-     {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'renew','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
      <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->renew_status_id]) }}';">প্রেরণ</button>
      <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$formOneDataId) }}';">দেখুন</button>
      @else
@@ -96,19 +69,6 @@ aria-labelledby="myModalLabel2">
 
 <div class="modal-body">
 
-<?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->renew_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
- ?>
-
  @if(!$dakDetail)
 
  @else
@@ -120,17 +80,12 @@ $mainDetail = DB::table('ngo_renew_daks')
 ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
 ->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
 
-
-//dd($mainDetail);
-
  ?>
 
 @foreach($mainDetail as  $key=>$allMainDetail)
 
 
 <?php
-
-
 
 $senderName = DB::table('admins')
 ->where('id',$allMainDetail->sender_admin_id)
@@ -189,8 +144,6 @@ $desiNames = DB::table('designation_lists')
 $branchNames = DB::table('branches')
 ->where('id',$branchIds)->value('branch_name');
 
-
-
 ?>
 
 <div class="d-flex mb-2">
@@ -230,10 +183,6 @@ $branchNames = DB::table('branches')
                  <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                   @endif
 
-
-
-
-
                  <hr>
                  <ul>
                      <li>প্রেরক : {{ $senderName }}</li>
@@ -250,8 +199,6 @@ $branchNames = DB::table('branches')
 @endforeach
 
 @endif
-
-
 
 </div><!-- modal-content -->
 </div><!-- modal-dialog -->

@@ -2,33 +2,18 @@
 
 <?php
 
-  $checkDataAvailableOrNot = DB::table('ngo_registration_daks')
+$checkDataAvailableOrNot = DB::table('ngo_registration_daks')
                 ->where('registration_status_id',$allStatusData->id)
                 ->where('sender_admin_id',Auth::guard('admin')->user()->id)
                 ->where('status',1)
                 ->value('id');
 
-
-//new code
-$orginalReceverId= DB::table('ngo_registration_daks')
-                ->where('registration_status_id',$allStatusData->id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+$orginalReceverId= DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->where('original_recipient',1)->value('receiver_admin_id');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-
-$decesionNameId = DB::table('ngo_registration_daks')
-->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
-
-$decesionName = DB::table('dak_details')
-->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
-
+$decesionNameId = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
+$decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
 ?>
 
 @if(!empty($checkDataAvailableOrNot))
@@ -76,19 +61,6 @@ aria-labelledby="myModalLabel2">
 
 <div class="modal-body">
 
-<?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-?>
-
 @if(!$dakDetail)
 
 @else
@@ -104,8 +76,6 @@ $mainDetail = DB::table('ngo_registration_daks')
 
 
 <?php
-
-
 
 $senderName = DB::table('admins')
 ->where('id',$allMainDetail->sender_admin_id)
@@ -164,8 +134,6 @@ $desiNames = DB::table('designation_lists')
 $branchNames = DB::table('branches')
 ->where('id',$branchIds)->value('branch_name');
 
-
-
 ?>
 
 <div class="d-flex mb-2">
@@ -201,13 +169,8 @@ $branchNames = DB::table('branches')
 
             @else
 
-
             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
              @endif
-
-
-
-
 
             <hr>
             <ul>
@@ -226,19 +189,10 @@ $branchNames = DB::table('branches')
 
 @endif
 
-
-
 </div><!-- modal-content -->
 </div><!-- modal-dialog -->
 </div><!-- modal -->
 <!--end new code -->
-
-
-
-
-
-
-
 </td>
 </tr>
 @endif

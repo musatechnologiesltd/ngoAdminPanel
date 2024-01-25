@@ -3,9 +3,6 @@
     ->where('fc_one_status_id',$allStatusData->id)
     ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
     ->latest()->get();
-
-
-
 ?>
   <!-- fc one code start -->
 
@@ -13,34 +10,16 @@
 
   <?php
 
-
-                                                                                 //new code
-                                                                                 $orginalReceverId= DB::table('fc_one_daks')
-                ->where('fc_one_status_id',$allStatusData->fc_one_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+//new code
+$orginalReceverId= DB::table('fc_one_daks')->where('fc_one_status_id',$allStatusData->fc_one_status_id)->where('original_recipient',1)->value('receiver_admin_id');
+$orginalReceverName= DB::table('admins')>where('id',$orginalReceverId)->value('admin_name_ban');
 $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_status_id)->value('fd_one_form_id');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_one_status_id)->orderBy('id','desc')->first();
 
-$form_one_data = DB::table('fd_one_forms')
-->where('id',$formOneDataId)->first();
-
-
-$adminNamePrapok = DB::table('admins')
-      ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-      $adminNamePrerok = DB::table('admins')
-      ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-$decesionName = DB::table('dak_details')
-->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
   ?>
 <tr>
   <td style="text-align:left;">
@@ -68,7 +47,7 @@ $decesionName = DB::table('dak_details')
               </button>
 
               @include('admin.post.fconenothiModal')
-      {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcOne','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+
       <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$allStatusData->fc_one_status_id]) }}';">প্রেরণ</button>
       <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
       @else
@@ -96,20 +75,6 @@ aria-labelledby="myModalLabel2">
   </div>
 
   <div class="modal-body">
-
-      <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->fc_one_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-          ?>
-
           @if(!$dakDetail)
 
           @else
@@ -127,8 +92,6 @@ $mainDetail = DB::table('fc_one_daks')
 
 
 <?php
-
-
 
 $senderName = DB::table('admins')
 ->where('id',$allMainDetail->sender_admin_id)
@@ -228,10 +191,6 @@ $branchNames = DB::table('branches')
                           <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                            @endif
 
-
-
-
-
                           <hr>
                           <ul>
                               <li>প্রেরক : {{ $senderName }}</li>
@@ -248,8 +207,6 @@ $branchNames = DB::table('branches')
       @endforeach
 
       @endif
-
-
 
   </div><!-- modal-content -->
 </div><!-- modal-dialog -->

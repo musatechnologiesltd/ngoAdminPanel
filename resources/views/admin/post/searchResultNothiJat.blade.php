@@ -14,7 +14,7 @@
                 <span style="text-align:left;">
                     <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                     <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                    {{-- <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শ্রেণী: </span> {{ $nothiLists->document_class }}</span> --}}
+                   
         </p>
     </td>
     <td>

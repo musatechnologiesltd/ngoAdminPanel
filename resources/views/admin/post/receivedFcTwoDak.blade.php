@@ -4,43 +4,22 @@
     ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
     ->latest()->get();
 
-
-
 ?>
   <!-- fc two code start -->
-
 
   @foreach($ngoStatusFcTwoDak as $p=>$allStatusData)
 
   <?php
 
-                                                                          //new code
-$orginalReceverId= DB::table('fc_two_daks')
-                ->where('fc_two_status_id',$allStatusData->fc_two_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
+//new code
+$orginalReceverId= DB::table('fc_two_daks')->where('fc_two_status_id',$allStatusData->fc_two_status_id)->where('original_recipient',1)->value('receiver_admin_id');
+$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_status_id)->value('fd_one_form_id');
-
-$form_one_data = DB::table('fd_one_forms')
-->where('id',$formOneDataId)->first();
-
-
-$adminNamePrapok = DB::table('admins')
-      ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-
-      $adminNamePrerok = DB::table('admins')
-      ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-
-
-$decesionName = DB::table('dak_details')
-->where('id',$allStatusData->dak_detail_id)->where('status','fcTwo')->value('decision_list');
+$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fcTwo')->value('decision_list');
+$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_two_status_id)->orderBy('id','desc')->first();
   ?>
 <tr>
   <td style="text-align:left;">
@@ -69,8 +48,6 @@ $decesionName = DB::table('dak_details')
 
               @include('admin.post.fctwonothiModal')
 
-
-      {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcTwo','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
       <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcTwo','id'=>$allStatusData->fc_two_status_id]) }}';">প্রেরণ</button>
       <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$allStatusData->fc_two_status_id) }}';">দেখুন</button>
       @else
@@ -98,19 +75,6 @@ aria-labelledby="myModalLabel2">
   </div>
 
   <div class="modal-body">
-
-      <?php
-
-$dakDetail = DB::table('dak_details')
-->where('access_id',$allStatusData->fc_two_status_id)->orderBy('id','desc')->first();
-
-
-
-
-
-
-
-          ?>
 
           @if(!$dakDetail)
 
@@ -226,13 +190,8 @@ $branchNames = DB::table('branches')
 
                           @else
 
-
                           <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                            @endif
-
-
-
-
 
                           <hr>
                           <ul>
@@ -250,8 +209,6 @@ $branchNames = DB::table('branches')
       @endforeach
 
       @endif
-
-
 
   </div><!-- modal-content -->
 </div><!-- modal-dialog -->
