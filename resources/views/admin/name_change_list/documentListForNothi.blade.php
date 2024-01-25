@@ -1,8 +1,8 @@
 
 <?php
 
-$getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-$ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+$getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
+$ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
 
  ?>
 <div class="mb-0 m-t-30">

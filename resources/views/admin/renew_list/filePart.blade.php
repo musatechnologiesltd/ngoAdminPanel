@@ -1,8 +1,8 @@
 <?php
 
-                       $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
+                       $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
 
-                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
 ?>
 
 <div class="mb-0 m-t-30">
@@ -15,7 +15,7 @@
             <th>নথির নাম</th>
             <th>নথি দেখুন</th>
         </tr>
-       
+
 
  <tr>
            <td>কর্মকর্তার স্বাক্ষর ও তারিখ সহ এফডি -৮ এর ফাইনাল কপি</td>
@@ -41,7 +41,7 @@
        </tr>
         <?php
 
-$renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_data->id)->latest()->get();
+$renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$formOneData->id)->latest()->get();
 ?>
 
 

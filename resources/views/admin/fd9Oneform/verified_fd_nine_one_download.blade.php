@@ -66,7 +66,7 @@
         <table class="table table-borderless">
             <tr>
                 <td>বিষয়:</td>
-                <td>{{ $ngo_list_all->organization_name }} সংস্থার বিদেশি বিশেষজ্ঞউপদেষ্টা/কর্মকর্ত/সেচ্ছাসেবী {{ $fd9OneList->foreigner_name_for_subject }}  এর
+                <td>{{ $ngoListAll->organization_name }} সংস্থার বিদেশি বিশেষজ্ঞউপদেষ্টা/কর্মকর্ত/সেচ্ছাসেবী {{ $fd9OneList->foreigner_name_for_subject }}  এর
                     ওয়ার্ক পারমিট প্রসঙ্গে।
                 </td>
             </tr>
@@ -94,10 +94,10 @@
 
 <?php
 
-                     $file_path = url($fd9OneList->attestation_of_appointment_letter);
-                     $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                     $filePath = url($fd9OneList->attestation_of_appointment_letter);
+                     $filename  = pathinfo($filePath, PATHINFO_FILENAME);
 
-                     $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                      ?>
 সংযুক্ত
                      @endif
@@ -113,10 +113,10 @@
 
 <?php
 
-                     $file_path = url($fd9OneList->copy_of_form_nine);
-                     $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                     $filePath = url($fd9OneList->copy_of_form_nine);
+                     $filename  = pathinfo($filePath, PATHINFO_FILENAME);
 
-                     $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                      ?>
 সংযুক্ত
                      @endif
@@ -127,7 +127,7 @@
                 <td>০৩</td>
                 <td>ছবি</td>
                 <td>: সংযুক্ত
-                  
+
                 </td>
             </tr>
             <tr>
@@ -141,10 +141,10 @@
 
 <?php
 
-                $file_path = url($fd9OneList->copy_of_nvisa);
-                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                $filePath = url($fd9OneList->copy_of_nvisa);
+                $filename  = pathinfo($filePath, PATHINFO_FILENAME);
 
-                $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                 ?>
 সংযুক্ত ,
                 @endif

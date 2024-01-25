@@ -2,11 +2,11 @@
               <?php
 
        $allformOneData = DB::table('fd_one_forms')->where('user_id',Auth::user()->id)->first();
-        $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$allformOneData->id)->first();
-        $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$allformOneData->id)->get();
-        $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+        $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$allformOneData->id)->first();
+        $GetAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$allformOneData->id)->get();
+        $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$allformOneData->id)->get();
         $formOneMemberList = DB::table('fd_one_member_lists')->where('fd_one_form_id',$allformOneData->id)->get();
-        $get_all_source_of_fund_data = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$allformOneData->id)->get();
+        $getAllSourceOfFundData = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$allformOneData->id)->get();
 
         ?>
 
@@ -249,28 +249,28 @@ foreach ($data   as $a) {
                                     <td>{{ trans('fd_one_step_two.Source_of_Fund')}}</td>
                                     <td></td>
                                 </tr>
-                                @foreach($get_all_source_of_fund_data as $all_get_all_source_of_fund_data)
+                                @foreach($getAllSourceOfFundData as $allGetAllSourceOfFundData)
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td>(i) {{ trans('fd_one_step_two.dd')}}</td>
-                                    <td>: {{ $all_get_all_source_of_fund_data->name }}, {{ $all_get_all_source_of_fund_data->address }}</td>
+                                    <td>: {{ $allGetAllSourceOfFundData->name }}, {{ $allGetAllSourceOfFundData->address }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td>(ii) {{ trans('fd_one_step_two.copy')}}</td>
-                                    <td>: @if(empty($all_get_all_source_of_fund_data->letter_file))
+                                    <td>: @if(empty($allGetAllSourceOfFundData->letter_file))
 
                                         @else
 
                                         @if(session()->get('locale') == 'en' || empty(session()->get('locale')))
 
-                                        <a target="_blank"  href="{{ route('sourceOfFundDocDownload',base64_encode($all_get_all_source_of_fund_data->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+                                        <a target="_blank"  href="{{ route('sourceOfFundDocDownload',base64_encode($allGetAllSourceOfFundData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
 
                                         @else
 
-                                        <a target="_blank"  href="{{ route('sourceOfFundDocDownload',base64_encode($all_get_all_source_of_fund_data->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
+                                        <a target="_blank"  href="{{ route('sourceOfFundDocDownload',base64_encode($allGetAllSourceOfFundData->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
                                         @endif
                                         @endif</td>
@@ -422,7 +422,7 @@ foreach ($data   as $a) {
                                     <td colspan="3">{{ trans('fd_one_step_four.tt')}}
                                     </td>
                                 </tr>
-                                @foreach($get_all_data_adviser as $key=>$all_get_all_data_adviser)
+                                @foreach($getAllDataAdviser as $key=>$allGetAllDataAdviser)
                                 <tr>
                                     @if(session()->get('locale') == 'en' || empty(session()->get('locale')))
                                     <td></td>
@@ -441,13 +441,13 @@ foreach ($data   as $a) {
                                     <td></td>
                                     <td>({{ trans('form 8_bn.a')}})</td>
                                     <td>{{ trans('fd_one_step_four.advisor_name')}}</td>
-                                    <td>:{{ $all_get_all_data_adviser->name }}</td>
+                                    <td>:{{ $allGetAllDataAdviser->name }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>({{ trans('form 8_bn.b')}})</td>
                                     <td>{{ trans('fd_one_step_four.tt2')}}</td>
-                                    <td>: {{ $all_get_all_data_adviser->information	 }}</td>
+                                    <td>: {{ $allGetAllDataAdviser->information	 }}</td>
                                 </tr>
                                 @endforeach
                                 <tr>
@@ -456,7 +456,7 @@ foreach ($data   as $a) {
                                     </td>
                                 </tr>
 
-                                @if(!$get_all_data_adviser_bank)
+                                @if(!$getAllDataAdviserBank)
 
 
                                 @else
@@ -466,9 +466,9 @@ foreach ($data   as $a) {
                                     <td>{{ trans('fd_one_step_four.account_number')}}</td>
                                     <td>:
                                         @if(session()->get('locale') == 'en' || empty(session()->get('locale')))
-                                        {{App\Http\Controllers\NGO\CommonController::englishToBangla($get_all_data_adviser_bank->account_number)}}
+                                        {{App\Http\Controllers\NGO\CommonController::englishToBangla($getAllDataAdviserBank->account_number)}}
                                         @else
-                                        {{ $get_all_data_adviser_bank->account_number }}
+                                        {{ $getAllDataAdviserBank->account_number }}
                                         @endif
 
                                     </td>
@@ -477,25 +477,25 @@ foreach ($data   as $a) {
                                     <td></td>
                                     <td>({{ trans('form 8_bn.b')}})</td>
                                     <td>{{ trans('fd_one_step_four.account_type')}}</td>
-                                    <td>: {{ $get_all_data_adviser_bank->account_type }}</td>
+                                    <td>: {{ $getAllDataAdviserBank->account_type }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>({{ trans('form 8_bn.c')}})</td>
                                     <td>{{ trans('fd_one_step_four.name_of_bank')}}</td>
-                                    <td>: {{ $get_all_data_adviser_bank->name_of_bank }}</td>
+                                    <td>: {{ $getAllDataAdviserBank->name_of_bank }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>({{ trans('form 8_bn.d')}})</td>
                                     <td>{{ trans('fd_one_step_four.branch_name_of_bank')}}</td>
-                                    <td>: {{ $get_all_data_adviser_bank->branch_name_of_bank }}</td>
+                                    <td>: {{ $getAllDataAdviserBank->branch_name_of_bank }}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>({{ trans('form 8_bn.e')}})</td>
                                     <td>{{ trans('fd_one_step_four.bank_address')}}</td>
-                                    <td>: {{ $get_all_data_adviser_bank->bank_address }}</td>
+                                    <td>: {{ $getAllDataAdviserBank->bank_address }}</td>
                                 </tr>
                                 @endif
                                 <tr>
@@ -503,19 +503,19 @@ foreach ($data   as $a) {
                                     <td colspan="2">{{ trans('fd_one_step_four.tt4')}}
                                     </td>
                                     <td>:
-@foreach($get_all_data_other as $all_get_all_data_other)
+@foreach($getAllDataOther as $AllGetAllDataOther)
 
-@if(empty($all_get_all_data_other->information_pdf))
+@if(empty($AllGetAllDataOther->information_pdf))
 
 @else
 
 @if(session()->get('locale') == 'en' || empty(session()->get('locale')))
 
-<a target="_blank"  href="{{ route('otherInfoFromOneDownload',base64_encode($all_get_all_data_other->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
+<a target="_blank"  href="{{ route('otherInfoFromOneDownload',base64_encode($AllGetAllDataOther->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
 
 @else
 
-<a target="_blank"  href="{{ route('otherInfoFromOneDownload',base64_encode($all_get_all_data_other->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
+<a target="_blank"  href="{{ route('otherInfoFromOneDownload',base64_encode($AllGetAllDataOther->id)) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> Open </a>
 
 
 

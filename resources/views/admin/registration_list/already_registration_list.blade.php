@@ -48,11 +48,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($all_data_for_new_list as $all_data_for_new_list_all)
+                                @foreach($allDataForNewList as $allDataForNewListAll)
 
                                 <?php
 
-                                $fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
+                                $fdOneFormId = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('user_id');
                                 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type');
                                 $getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
                                 $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type_new_old');
@@ -60,16 +60,16 @@
 
                                   if($getngoForLanguage =='দেশিও'){
 
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name_ban');
+                                    $regName = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_name_ban');
 
                                   }else{
-                                    $reg_name = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_name');
+                                    $regName = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_name');
                                   }
 
-                                
-                                $reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('registration_number_given_by_admin');
 
-                                $reg_address = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('organization_address');
+                                $regNumber = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('registration_number_given_by_admin');
+
+                                $regAddress = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_address');
 
                                 ?>
                             <tr>
@@ -78,15 +78,15 @@
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
                                     @else
 
-                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number) }}
-                                   
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($regNumber) }}
+
                                     @endif
 
                                 </td>
                                 <td><h6>
-                                     {{ $reg_name  }}<br>
+                                     {{ $regName  }}<br>
 
-                                </h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                </h6><span>ঠিকানা: {{ $regAddress }}</td>
                                     <td> @if($ngoOldNew == 'Old')
                                         পুরাতন
                                         @else
@@ -96,13 +96,13 @@
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 
-                                    @if($all_data_for_new_list_all->status == 'Accepted')
+                                    @if($allDataForNewListAll->status == 'Accepted')
 
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         গৃহীত
 
                                     </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+                                    @elseif($allDataForNewListAll->status == 'Ongoing')
 
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         চলমান
@@ -118,13 +118,13 @@
                                 <td>
 
 
-                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
+                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allDataForNewListAll->created_at))) }}
 
                                 </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$all_data_for_new_list_all->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$allDataForNewListAll->fd_one_form_id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 

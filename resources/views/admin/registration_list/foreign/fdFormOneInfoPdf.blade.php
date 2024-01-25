@@ -206,20 +206,20 @@
             <td>Source (s) of Fund</td>
             <td></td>
         </tr>
-        @foreach($get_all_source_of_fund_data as $all_get_all_source_of_fund_data)
+        @foreach($getAllSourceOfFundData as $allGetAllSourceOfFundData)
         <tr>
             <td></td>
             <td></td>
             <td>(i) Please give names of organization (s) with address</td>
             <td style="width:4px">:</td>
-            <td>{{ $all_get_all_source_of_fund_data->name }}, {{ $all_get_all_source_of_fund_data->address }}</td>
+            <td>{{ $allGetAllSourceOfFundData->name }}, {{ $allGetAllSourceOfFundData->address }}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>(ii) If there is/are letter(s) of commitment from prospective donor(s) (copies) thereof</td>
             <td style="width:4px">:</td>
-            <td> @if(empty($all_get_all_source_of_fund_data->letter_file))
+            <td> @if(empty($allGetAllSourceOfFundData->letter_file))
 
                 @else
 
@@ -334,7 +334,7 @@
             <td colspan="4">Name & Details of Consultant (s) If Proposed to be employed
             </td>
         </tr>
-        @foreach($get_all_data_adviser as $key=>$all_get_all_data_adviser)
+        @foreach($getAllDataAdviser as $key=>$allGetAllDataAdviser)
         <tr>
 
             <td></td>
@@ -349,14 +349,14 @@
 
             <td class="padding-left" colspan="2">(a) Advisor Name</td>
             <td style="width:4px">:</td>
-            <td>{{ $all_get_all_data_adviser->name }}</td>
+            <td>{{ $allGetAllDataAdviser->name }}</td>
         </tr>
         <tr>
             <td></td>
 
             <td class="padding-left" colspan="2">(b) Detailed description</td>
             <td style="width:4px">:</td>
-            <td> {{ $all_get_all_data_adviser->information	 }}</td>
+            <td> {{ $allGetAllDataAdviser->information	 }}</td>
         </tr>
         @endforeach
         <tr>
@@ -364,7 +364,7 @@
             <td colspan="4">Name, address and account No. of Bank in Bangladesh through: which the Foreign Donations would be received
             </td>
         </tr>
-        @if(!$get_all_data_adviser_bank)
+        @if(!$getAllDataAdviserBank)
 
         @else
         <tr>
@@ -373,7 +373,7 @@
             <td>Account Number</td>
             <td style="width:4px">:</td>
             <td>
-                {{ $get_all_data_adviser_bank->account_number }}
+                {{ $getAllDataAdviserBank->account_number }}
                 </td>
         </tr>
         <tr>
@@ -381,28 +381,28 @@
             <td>(b)</td>
             <td>Account Type</td>
             <td style="width:4px">:</td>
-            <td>{{ $get_all_data_adviser_bank->account_type }}</td>
+            <td>{{ $getAllDataAdviserBank->account_type }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(c)</td>
             <td>Name of Bank</td>
             <td style="width:4px">:</td>
-            <td>{{ $get_all_data_adviser_bank->name_of_bank }}</td>
+            <td>{{ $getAllDataAdviserBank->name_of_bank }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(d)</td>
             <td>Branch Name of Bank</td>
             <td style="width:4px">:</td>
-            <td>{{ $get_all_data_adviser_bank->branch_name_of_bank }}</td>
+            <td>{{ $getAllDataAdviserBank->branch_name_of_bank }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(e)</td>
             <td>Bank Address</td>
             <td style="width:4px">:</td>
-            <td>{{ $get_all_data_adviser_bank->bank_address }}</td>
+            <td>{{ $getAllDataAdviserBank->bank_address }}</td>
         </tr>
         @endif
         <tr>
@@ -411,9 +411,9 @@
             </td>
             <td style="width:4px">:</td>
             <td>
-@foreach($get_all_data_other as $all_get_all_data_other)
+@foreach($getAllDataOther as $AllGetAllDataOther)
 
-@if(empty($all_get_all_data_other->information_title))
+@if(empty($AllGetAllDataOther->information_title))
 
 @else
 
@@ -443,7 +443,7 @@ attached
     </tr>
 </table>
 <table style=" margin-top: 15px">
-    
+
     <tr>
         <td style="width: 65%"></td>
         <td style="text-align: left; width:5%;">Name</td>

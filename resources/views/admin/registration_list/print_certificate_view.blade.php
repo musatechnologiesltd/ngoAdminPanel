@@ -81,7 +81,7 @@
 </head>
 <body>
 <?php
-  $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+  $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
 
 ?>
 <div class="pdf_back">
@@ -97,7 +97,7 @@
 
                     @else
 
-                    {{ $form_one_data->registration_number }}
+                    {{ $formOneData->registration_number }}
 
                     @endif
 
@@ -109,14 +109,14 @@
         <table class="second_table">
             <tr>
                 <td class="para_first">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->organization_name }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $formOneData->organization_name }}
                 </td>
             </tr>
         </table>
         <table class="third_table">
             <tr>
                 <td class="para_first1">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->address_of_head_office_eng }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $formOneData->address_of_head_office_eng }}
                 </td>
             </tr>
         </table>
@@ -137,8 +137,8 @@
 
             @else
             <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
+                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($durationListAll->ngo_duration_start_date ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($durationListAll->ngo_duration_end_date ))}}</td>
             </tr>
             @endif
         </table>

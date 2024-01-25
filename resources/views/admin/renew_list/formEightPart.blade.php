@@ -1,9 +1,9 @@
 
 <?php
 
-                       $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
+                       $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
 
-                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
                         ?>
 <div class="mb-0 m-t-30">
     <table class="table table-bordered">
@@ -13,8 +13,8 @@
             <td colspan="3">সংস্থার বিবরণ:</td>
         </tr>
           <?php
-$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-$reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
+$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
+$reg_name = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->value('organization_name_ban');
 
 
           ?>
@@ -28,7 +28,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <td></td>
             <td>(ii)</td>
             <td>সংস্থার ঠিকানা</td>
-            <td>: {{ $form_one_data->organization_address}}</td>
+            <td>: {{ $formOneData->organization_address}}</td>
         </tr>
         <tr>
             <td></td>
@@ -41,12 +41,12 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}
                 @else
 
-              @if($form_one_data->registration_number == 0)
+              @if($formOneData->registration_number == 0)
 
 
               @else
 
-              {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number)}}
+              {{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->registration_number)}}
 
               @endif
 
@@ -59,13 +59,13 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <td></td>
             <td>(iv)</td>
             <td>কোন দেশীয় সংস্থা</td>
-            <td>: {{ $form_one_data->country_of_origin }}</td>
+            <td>: {{ $formOneData->country_of_origin }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(v)</td>
             <td>প্রধান কার্যালয়ের ঠিকানা</td>
-            <td>: {{ $form_one_data->address_of_head_office }}</td>
+            <td>: {{ $formOneData->address_of_head_office }}</td>
         </tr>
         <tr>
             <td></td>
@@ -89,19 +89,19 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <td></td>
             <td></td>
             <td>ক) নাম</td>
-            <td>: {{ $form_one_data->name_of_head_in_bd }}</td>
+            <td>: {{ $formOneData->name_of_head_in_bd }}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>খ) পূর্ণকালীন/ খণ্ডকালীন</td>
-            <td>: {{ $form_one_data->job_type }}</td>
+            <td>: {{ $formOneData->job_type }}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>গ) ঠিকানা,টেলিফোন নম্বর ,মোবাইল নম্বর, ইমেইল</td>
-            <td>:{{ $form_one_data->address }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($renewInfoData->mobile) }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}, {{ $form_one_data->email }}</td>
+            <td>:{{ $formOneData->address }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($renewInfoData->mobile) }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->phone) }}, {{ $formOneData->email }}</td>
         </tr>
         <tr>
             <td></td>
@@ -109,13 +109,13 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <td>ঘ) নাগরিকত্ব (পূর্বতন নাগরিকত্ব যদি থাকে তাও উল্লেখ
                 করতে হবে)
             </td>
-            <td>: {{ $form_one_data->citizenship }}</td>
+            <td>: {{ $formOneData->citizenship }}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>ঙ) পেশা (বর্তমান পেশা উল্লেখ করতে হবে)</td>
-            <td>: {{ $form_one_data->profession }}</td>
+            <td>: {{ $formOneData->profession }}</td>
         </tr>
 
         <tr>
@@ -185,7 +185,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 উপস্থাপন করতে হবে
             </td>
         </tr>
-        @foreach($all_partiw as $key=>$all_all_parti)
+        @foreach($allPartiw as $key=>$allAllParti)
         <tr>
             <td></td>
             <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
@@ -196,51 +196,51 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <td></td>
             <td>(ক)</td>
             <td>নাম</td>
-            <td>: {{ $all_all_parti->name }}</td>
+            <td>: {{ $allAllParti->name }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(খ)</td>
             <td>পদবি</td>
-            <td>: {{ $all_all_parti->position }}</td>
+            <td>: {{ $allAllParti->position }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(গ)</td>
             <td>ঠিকানা</td>
-            <td>: {{ $all_all_parti->address }}</td>
+            <td>: {{ $allAllParti->address }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(ঘ)</td>
             <td>নাগরিকত্ব (দ্বৈত নাগরিকত্ব থাকলে উল্লেখ করতে হবে)
             </td>
-            <td>: {{ $all_all_parti->citizenship }}</td>
+            <td>: {{ $allAllParti->citizenship }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(ঙ)</td>
             <td>যোগদানের তারিখ</td>
-            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($all_all_parti->date_of_join))) }}</td>
+            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($allAllParti->date_of_join))) }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(চ)</td>
             <td>বেতন ভাতাদি</td>
-            <td>: {{ $all_all_parti->salary_statement }}</td>
+            <td>: {{ $allAllParti->salary_statement }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(ছ)</td>
             <td>মোবাইল নম্বর </td>
-            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->mobile) }}</td>
+            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($allAllParti->mobile) }}</td>
         </tr>
 
         <tr>
             <td></td>
             <td>(জ)</td>
             <td>ইমেইল এড্রেস</td>
-            <td>: {{ $all_all_parti->email }}</td>
+            <td>: {{ $allAllParti->email }}</td>
         </tr>
 
 
@@ -248,7 +248,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
             <td></td>
             <td>(ঝ)</td>
             <td>সম্পৃক্ত অন্য পেশার বিবরণ</td>
-            <td>: {{ $all_all_parti->other_occupation }}</td>
+            <td>: {{ $allAllParti->other_occupation }}</td>
         </tr>
         @endforeach
 
@@ -320,38 +320,38 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 নাম,শাখা ও বিস্তারিত ঠিকানা)
             </td>
         </tr>
-        @if(!$get_all_data_adviser_bank)
+        @if(!$getAllDataAdviserBank)
 
         @else
         <tr>
             <td></td>
             <td>(ক)</td>
             <td>হিসাব নম্বর</td>
-            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_adviser_bank->account_number) }}</td>
+            <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataAdviserBank->account_number) }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(খ)</td>
             <td>ধরণ</td>
-            <td>: {{ $get_all_data_adviser_bank->account_type }}</td>
+            <td>: {{ $getAllDataAdviserBank->account_type }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(গ)</td>
             <td>ব্যাংকের নাম</td>
-            <td>: {{ $get_all_data_adviser_bank->name_of_bank }}</td>
+            <td>: {{ $getAllDataAdviserBank->name_of_bank }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(ঘ)</td>
             <td>শাখা</td>
-            <td>: {{ $get_all_data_adviser_bank->branch_name_of_bank }}</td>
+            <td>: {{ $getAllDataAdviserBank->branch_name_of_bank }}</td>
         </tr>
         <tr>
             <td></td>
             <td>(ঙ)</td>
             <td>বিস্তারিত ঠিকানা</td>
-            <td>: {{ $get_all_data_adviser_bank->bank_address }}</td>
+            <td>: {{ $getAllDataAdviserBank->bank_address }}</td>
         </tr>
         @endif
         <tr>

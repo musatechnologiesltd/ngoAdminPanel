@@ -109,7 +109,7 @@
                                                 <input type="hidden" value="{{ $dataFromFd6Form->mainId }}" name="id" />
 
 
-                                                <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
+                                                <input type="hidden" value="{{ $getEmailFromUser }}" name="email" />
 
                                                 <label>স্টেটাস:</label>
                                                 <select class="form-control form-control-sm mt-4" name="status" id="regStatus">

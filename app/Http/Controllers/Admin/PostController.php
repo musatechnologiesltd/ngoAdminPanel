@@ -39,9 +39,9 @@ class PostController extends Controller
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-            $all_data_for_new_list = DB::table('ngo_statuses')->latest()->get();
-            $all_data_for_renew_list = DB::table('ngo_renews')->latest()->get();
-            $all_data_for_name_changes_list = DB::table('ngo_name_changes')->latest()->get();
+            $allDataForNewList = DB::table('ngo_statuses')->latest()->get();
+            $allDataForRenewList = DB::table('ngo_renews')->latest()->get();
+            $allDataForNameChangesList = DB::table('ngo_name_changes')->latest()->get();
 
             $dataFdNineOne = DB::table('fd9_one_forms')
             ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
@@ -87,7 +87,7 @@ class PostController extends Controller
            ->orderBy('fd3_forms.id','desc')
            ->get();
 
-           return view('admin.post.allDak.dakListForDg',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
+           return view('admin.post.allDak.dakListForDg',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','allDataForNameChangesList','allDataForRenewList','allDataForNewList'));
 
         }else{
 
@@ -152,7 +152,7 @@ class PostController extends Controller
             ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get()->unique('registration_status_id');
 
-            $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
+            $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
             return view('admin.post.allDak.all_dak_list',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
@@ -167,9 +167,9 @@ class PostController extends Controller
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
-            $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
-            $all_data_for_renew_list = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
-            $all_data_for_name_changes_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
+            $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
+            $allDataForRenewList = DB::table('ngo_renews')->where('status','Ongoing')->latest()->get();
+            $allDataForNameChangesList = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
 
             $dataFdNineOne = DB::table('fd9_one_forms')
             ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
@@ -215,7 +215,7 @@ class PostController extends Controller
            ->orderBy('fd3_forms.id','desc')
            ->get();
 
-           return view('admin.post.index',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
+           return view('admin.post.index',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','allDataForNameChangesList','allDataForRenewList','allDataForNewList'));
 
         }else{
 
@@ -230,7 +230,7 @@ class PostController extends Controller
             $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
             $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
             $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-            $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
+            $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
             return view('admin.post.otherMemberIndex',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
         }
@@ -288,7 +288,7 @@ class PostController extends Controller
            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
            ->get()->unique('registration_status_id');
 
-           $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
+           $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
         return view('admin.post.sentDak.sentDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 

@@ -43,13 +43,13 @@ class Fc1Controller extends Controller
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get();
 
-            $convert_name_title = $ngoStatusFdSevenDak->implode("fc_one_status_id", " ");
-            $separated_data_title = explode(" ", $convert_name_title);
+            $convertNameTitle = $ngoStatusFdSevenDak->implode("fc_one_status_id", " ");
+            $separatedDataTitle = explode(" ", $convertNameTitle);
 
             $dataFromFc1Form = DB::table('fc1_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc1_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fc1_forms.*','fc1_forms.id as mainId')
-            ->whereIn('fc1_forms.id',$separated_data_title)
+            ->whereIn('fc1_forms.id',$separatedDataTitle)
             ->orderBy('fc1_forms.id','desc')
             ->get();
 
@@ -71,12 +71,12 @@ class Fc1Controller extends Controller
             ->orderBy('fc1_forms.id','desc')
             ->first();
 
-            $get_email_from_user = DB::table('users')->where('id',$dataFromFc1Form->user_id)->value('email');
+            $getEmailFromUser = DB::table('users')->where('id',$dataFromFc1Form->user_id)->value('email');
             $fd2FormList = DB::table('fd2_form_for_fc1_forms')->where('fd_one_form_id',$dataFromFc1Form->fd_one_form_id)
              ->where('fc1_form_id',$dataFromFc1Form->mainId)->latest()->first();
             $fd2OtherInfo = DB::table('fd2_fc1_other_infos')->where('fd2_form_for_fc1_form_id',$fd2FormList->id)->latest()->get();
 
-            return view('admin.fc1form.show',compact('get_email_from_user','dataFromFc1Form','fd2FormList','fd2OtherInfo'));
+            return view('admin.fc1form.show',compact('getEmailFromUser','dataFromFc1Form','fd2FormList','fd2OtherInfo'));
 
     }
 
@@ -84,9 +84,9 @@ class Fc1Controller extends Controller
 
         \LogActivity::addToLog('organization name of the job amount of money and duration pdf');
 
-        $form_one_data = DB::table('fc1_forms')->where('id',$id)->value('organization_name_of_the_job_amount_of_money_and_duration_pdf');
+        $formOneData = DB::table('fc1_forms')->where('id',$id)->value('organization_name_of_the_job_amount_of_money_and_duration_pdf');
 
-        return view('admin.fc1form.fc1PdfDownload',compact('form_one_data'));
+        return view('admin.fc1form.fc1PdfDownload',compact('formOneData'));
 
     }
 
@@ -94,9 +94,9 @@ class Fc1Controller extends Controller
 
         \LogActivity::addToLog('verified_fc_one_form pdf');
 
-        $form_one_data = DB::table('fc1_forms')->where('id',$id)->value('verified_fc_one_form');
+        $formOneData = DB::table('fc1_forms')->where('id',$id)->value('verified_fc_one_form');
 
-        return view('admin.fc1form.fc1PdfDownload',compact('form_one_data'));
+        return view('admin.fc1form.fc1PdfDownload',compact('formOneData'));
 
     }
 
@@ -104,9 +104,9 @@ class Fc1Controller extends Controller
 
         \LogActivity::addToLog('fd2 pdf download.');
 
-        $form_one_data = DB::table('fd2_form_for_fc1_forms')->where('id',$id)->value('fd_2_form_pdf');
+        $formOneData = DB::table('fd2_form_for_fc1_forms')->where('id',$id)->value('fd_2_form_pdf');
 
-        return view('admin.fc1form.fc1fd2PdfDownload',compact('form_one_data'));
+        return view('admin.fc1form.fc1fd2PdfDownload',compact('formOneData'));
 
     }
 
@@ -114,9 +114,9 @@ class Fc1Controller extends Controller
 
         \LogActivity::addToLog('fd2 other pdf download.');
 
-        $form_one_data = DB::table('fd2_fc1_other_infos')->where('id',$id)->value('file');
+        $formOneData = DB::table('fd2_fc1_other_infos')->where('id',$id)->value('file');
 
-        return view('admin.fc1form.fc1fd2OtherPdfDownload',compact('form_one_data'));
+        return view('admin.fc1form.fc1fd2OtherPdfDownload',compact('formOneData'));
 
     }
 

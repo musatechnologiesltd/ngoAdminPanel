@@ -42,7 +42,7 @@ class NameCangeController extends Controller
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
 
-            $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
+            $allDataForNewList = DB::table('ngo_name_changes')->where('status','Ongoing')->latest()->get();
 
         }else{
 
@@ -50,16 +50,16 @@ class NameCangeController extends Controller
             $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-            $convert_name_title = $ngoStatusNameChange->implode("name_change_status_id", " ");
-            $separated_data_title = explode(" ", $convert_name_title);
+            $convertNameTitle = $ngoStatusNameChange->implode("name_change_status_id", " ");
+            $separatedDataTitle = explode(" ", $convertNameTitle);
 
-            $all_data_for_new_list = DB::table('ngo_name_changes')
-            ->whereIn('id',$separated_data_title)
+            $allDataForNewList = DB::table('ngo_name_changes')
+            ->whereIn('id',$separatedDataTitle)
             ->where('status','Ongoing')->latest()->get();
 
         }
 
-        return view('admin.name_change_list.new_name_change_list',compact('all_data_for_new_list'));
+        return view('admin.name_change_list.new_name_change_list',compact('allDataForNewList'));
     }
 
 
@@ -75,7 +75,7 @@ class NameCangeController extends Controller
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
 
-                $all_data_for_new_list = DB::table('ngo_name_changes')->whereIn('status',['Rejected','Correct'])->latest()->get();
+                $allDataForNewList = DB::table('ngo_name_changes')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
         }else{
 
@@ -83,16 +83,16 @@ class NameCangeController extends Controller
                 $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
                 ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-                $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
-                $separated_data_title = explode(" ", $convert_name_title);
+                $convertNameTitle = $ngoStatusRenew->implode("name_change_status_id", " ");
+                $separatedDataTitle = explode(" ", $convertNameTitle);
 
-                $all_data_for_new_list = DB::table('ngo_name_changes')
-                ->whereIn('id',$separated_data_title)
+                $allDataForNewList = DB::table('ngo_name_changes')
+                ->whereIn('id',$separatedDataTitle)
                 ->whereIn('status',['Rejected','Correct'])->latest()->get();
 
         }
 
-        return view('admin.name_change_list.revision_name_change_list',compact('all_data_for_new_list'));
+        return view('admin.name_change_list.revision_name_change_list',compact('allDataForNewList'));
     }
 
 
@@ -108,7 +108,7 @@ class NameCangeController extends Controller
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
 
-                $all_data_for_new_list = DB::table('ngo_name_changes')->where('status','Accepted')->latest()->get();
+                $allDataForNewList = DB::table('ngo_name_changes')->where('status','Accepted')->latest()->get();
 
         }else{
 
@@ -116,16 +116,16 @@ class NameCangeController extends Controller
                 $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
                 ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-                $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
-                $separated_data_title = explode(" ", $convert_name_title);
+                $convertNameTitle = $ngoStatusRenew->implode("name_change_status_id", " ");
+                $separatedDataTitle = explode(" ", $convertNameTitle);
 
-                $all_data_for_new_list = DB::table('ngo_name_changes')
-                ->whereIn('id',$separated_data_title)
+                $allDataForNewList = DB::table('ngo_name_changes')
+                ->whereIn('id',$separatedDataTitle)
                 ->where('status','Accepted')->latest()->get();
 
        }
 
-        return view('admin.name_change_list.already_name_change_list',compact('all_data_for_new_list'));
+        return view('admin.name_change_list.already_name_change_list',compact('allDataForNewList'));
     }
 
 
@@ -136,36 +136,36 @@ class NameCangeController extends Controller
 
         $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$id)->get();
         $getformOneId = DB::table('ngo_name_changes')->where('id',$id)->first();
-        $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
-        $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
-        $name_change_status = DB::table('ngo_name_changes')->where('id',$id)->value('status');
-        $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+        $formOneData = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
+        $rStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$formOneData->id)->value('status');
+        $nameChangeStatus = DB::table('ngo_name_changes')->where('id',$id)->value('status');
+        $renewStatus = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->value('status');
 
-        $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+        $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type_new_old');
 
         if($checkOldorNew == 'Old'){
 
-            $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+            $allDataForNewListAll = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->first();
         }else{
 
-            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+            $allDataForNewListAll = DB::table('ngo_statuses')->where('fd_one_form_id',$formOneData->id)->first();
         }
 
-        $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
-        $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-        $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
-        $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
-        $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
-        $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
-        $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
-        $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-        $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-        $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-        $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-        $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-        $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+        $formEightData = DB::table('form_eights')->where('fd_one_form_id',$formOneData->id)->get();
+        $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+        $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$formOneData->id)->get();
+        $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$formOneData->id)->value('ngo_duration_end_date');
+        $durationListAll = DB::table('ngo_durations')->where('fd_one_form_id',$formOneData->id)->value('ngo_duration_start_date');
+        $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$formOneData->id)->get();
+        $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$formOneData->id)->get();
+        $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+        $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+        $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+        $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+        $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+        $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
-        return view('admin.name_change_list.name_change_view',compact('allNameChangeDoc','getformOneId','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+        return view('admin.name_change_list.name_change_view',compact('allNameChangeDoc','getformOneId','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
     }
 
 
@@ -180,21 +180,21 @@ class NameCangeController extends Controller
         ]);
 
 
-        $get_user_id = DB::table('ngo_name_changes')->where('id',$request->id)->value('fd_one_form_id');
-        $present_name_eng = DB::table('ngo_name_changes')->where('id',$request->id)->value('present_name_eng');
-        $present_name_ban = DB::table('ngo_name_changes')->where('id',$request->id)->value('present_name_ban');
-        $form_one_data = DB::table('fd_one_forms')->where('id',$get_user_id)->first();
+        $getUserId = DB::table('ngo_name_changes')->where('id',$request->id)->value('fd_one_form_id');
+        $presentNameEng = DB::table('ngo_name_changes')->where('id',$request->id)->value('present_name_eng');
+        $presentNameBan = DB::table('ngo_name_changes')->where('id',$request->id)->value('present_name_ban');
+        $formOneData = DB::table('fd_one_forms')->where('id',$getUserId)->first();
 
 
         if($request->status == 'Accepted'){
 
-            DB::table('fd_one_forms')->where('id', $form_one_data->id)
+            DB::table('fd_one_forms')->where('id', $formOneData->id)
             ->update([
-                'organization_name' => $present_name_eng,
-                'organization_name_ban' => $present_name_ban,
+                'organization_name' => $presentNameEng,
+                'organization_name_ban' => $presentNameBan,
              ]);
         }
-        Mail::send('emails.passwordResetEmailName', ['comment'=>$request->comment,'id' => $request->status,'ngoId'=>$form_one_data->id], function($message) use($request){
+        Mail::send('emails.passwordResetEmailName', ['comment'=>$request->comment,'id' => $request->status,'ngoId'=>$formOneData->id], function($message) use($request){
             $message->to($request->email);
             $message->subject('NGOAB Registration Service || Ngo Name Chnage Status');
         });
@@ -207,9 +207,9 @@ class NameCangeController extends Controller
 
         \LogActivity::addToLog('download name change pdf ');
 
-        $form_one_data = DB::table('name_change_docs')->where('id',$id)->value('pdf_file_list');
+        $formOneData = DB::table('name_change_docs')->where('id',$id)->value('pdf_file_list');
 
-        return view('admin.name_change_list.nameChangeDoc',compact('form_one_data'));
+        return view('admin.name_change_list.nameChangeDoc',compact('formOneData'));
 
     }
 }

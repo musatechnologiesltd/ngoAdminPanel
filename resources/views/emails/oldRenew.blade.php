@@ -1,9 +1,9 @@
 
 <?php
-$get_user_id = DB::table('fd_one_forms')->where('id',$ngoId)->value('organization_name');
-$get_user_id1 = DB::table('fd_one_forms')->where('id',$ngoId)->value('registration_number');
+$getUserId = DB::table('fd_one_forms')->where('id',$ngoId)->value('organization_name');
+$getUserId1 = DB::table('fd_one_forms')->where('id',$ngoId)->value('registration_number');
 ?>
-Dear <b>{{$get_user_id}}</b>,
+Dear <b>{{$getUserId}}</b>,
 
 @if($id == 'Accepted')
 

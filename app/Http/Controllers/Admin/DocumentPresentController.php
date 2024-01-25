@@ -33,8 +33,6 @@ use App\Models\AdminDesignationHistory;
 use App\Models\FdThreeDak;
 use App\Models\DocumentType;
 use App\Models\NothiList;
-
-
 use App\Models\ChildNoteForFcOne;
 use App\Models\ChildNoteForFcTwo;
 use App\Models\ChildNoteForFdNine;
@@ -45,7 +43,6 @@ use App\Models\ChildNoteForFdThree;
 use App\Models\ChildNoteForNameChange;
 use App\Models\ChildNoteForRegistration;
 use App\Models\ChildNoteForRenew;
-
 use App\Models\ParentNoteForFcOne;
 use App\Models\ParentNoteForFcTwo;
 use App\Models\ParentNoteForFdNine;
@@ -56,8 +53,6 @@ use App\Models\ParentNoteForFdThree;
 use App\Models\ParentNoteForNameChange;
 use App\Models\ParentNoteForRegistration;
 use App\Models\ParentNoteForRenew;
-
-
 use App\Http\Controllers\Admin\CommonController;
 
 class DocumentPresentController extends Controller
@@ -169,10 +164,10 @@ class DocumentPresentController extends Controller
         $totalDesignationWorking = AdminDesignationHistory::count();
         $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
 
-        $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
-        $separated_data_title = explode(" ", $convert_name_title);
+        $convertNameTitle = $totalDesignationId->implode("designation_list_id", " ");
+        $separatedDataTitle = explode(" ", $convertNameTitle);
 
-        $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
+        $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separatedDataTitle )->count();
 
         $totalBranchList = Branch::where('id','!=',1)->get();
 
@@ -253,10 +248,10 @@ public function givePermissionToNothi($id){
     $totalDesignationWorking = AdminDesignationHistory::count();
     $totalDesignationId = AdminDesignationHistory::select('designation_list_id')->get();
 
-    $convert_name_title = $totalDesignationId->implode("designation_list_id", " ");
-    $separated_data_title = explode(" ", $convert_name_title);
+    $convertNameTitle = $totalDesignationId->implode("designation_list_id", " ");
+    $separatedDataTitle = explode(" ", $convertNameTitle);
 
-    $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separated_data_title )->count();
+    $totalEmptyDesignation = DesignationList::where('id','!=',1)->whereNotIn('id', $separatedDataTitle )->count();
     $totalBranchList = Branch::where('id','!=',1)->get();
 
      return view('admin.presentDocument.givePermissionToNothi',compact('id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));

@@ -37,27 +37,27 @@
                   <div class="card profile-header me-4">
                     <div class="userpro-box">
                         <div class="img-wrraper">
-                            @if(empty($users_info->image))
+                            @if(empty($usersInfo->image))
                             <div class="avatar"><img class="img-fluid" alt="" src="{{ asset('/') }}public/admin/user.png"></div>
                             @else
-                            <div class="avatar"><img class="img-fluid" alt="" src="{{ $ins_url }}{{ $users_info->image }}"></div>
+                            <div class="avatar"><img class="img-fluid" alt="" src="{{ $ins_url }}{{ $usersInfo->image }}"></div>
                             @endif
                         </div>
 
                         <?php
 
-                       $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
-                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+                       $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
+                       $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
 
                         ?>
                         <div class="user-designation">
                             <div class="title">
                                 @if($getNgoType == 'Foreign')
-                                <h4>{{ $form_one_data->organization_name }}</h4>
-                              <h6>{{ $form_one_data->address_of_head_office_eng }}</h6>
+                                <h4>{{ $formOneData->organization_name }}</h4>
+                              <h6>{{ $formOneData->address_of_head_office_eng }}</h6>
                                 @else
-                                <h4>{{ $form_one_data->organization_name_ban }}</h4>
-                              <h6>{{ $form_one_data->address_of_head_office }}</h6>
+                                <h4>{{ $formOneData->organization_name_ban }}</h4>
+                              <h6>{{ $formOneData->address_of_head_office }}</h6>
                                 @endif
 
 
@@ -80,18 +80,18 @@
                             <div class="follow">
                                 <ul class="follow-list">
                                     <li>
-                                        <div class="follow-num">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}</div>
+                                        <div class="follow-num">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allDataForNewListAll->created_at))) }}</div>
                                         <span>জমাদানের তারিখ</span>
                                     </li>
                                     <li>
                                         <div class="follow-num">
-                                            @if($all_data_for_new_list_all->status == 'Accepted')
+                                            @if($allDataForNewListAll->status == 'Accepted')
 
                                             <button class="btn btn-secondary " type="button">
                                                 গৃহীত
 
                                             </button>
-                                            @elseif($all_data_for_new_list_all->status == 'Ongoing')
+                                            @elseif($allDataForNewListAll->status == 'Ongoing')
 
                                             <button class="btn btn-secondary " type="button">
                                                 চলমান
@@ -117,15 +117,15 @@
                   <div class="card-body text-center">
                     <div class="userpro-box">
                         <div class="user-designation">
-                            <h4>{{ $form_one_data->name_of_head_in_bd }}</h4>
+                            <h4>{{ $formOneData->name_of_head_in_bd }}</h4>
                             <h5>ঠিকানা:  @if($getNgoType == 'Foreign')
-                                    {{ $form_one_data->address_of_head_office_eng }}
+                                    {{ $formOneData->address_of_head_office_eng }}
                                     @else
 
-                             {{ $form_one_data->address_of_head_office }}
+                             {{ $formOneData->address_of_head_office }}
                                     @endif</h5>
-                            <h5>মোবাইল নম্বর:    {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->phone) }}</h5>
-                            <h5>ইমেইল:    {{ $form_one_data->email }}</h5>
+                            <h5>মোবাইল নম্বর:    {{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->phone) }}</h5>
+                            <h5>ইমেইল:    {{ $formOneData->email }}</h5>
                           </div>
                     </div>
                   </div>
@@ -206,7 +206,7 @@
 
 
 
-                                    @if($name_change_status == "Accepted")
+                                    @if($nameChangeStatus == "Accepted")
 
                                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                                         data-bs-toggle="pill" href="#pills-darkdoc1"
@@ -299,7 +299,7 @@
 
 
 
-                                    @if($name_change_status == "Accepted")
+                                    @if($nameChangeStatus == "Accepted")
 
 
 
@@ -335,7 +335,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $form_one_data->organization_name_ban }}</td>
+        <td>: {{ $formOneData->organization_name_ban }}</td>
     </tr>
 
 
@@ -360,12 +360,12 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(i)</td>
         <td>ডাইরি নম্বর </td>
-        <td>:@if($form_one_data->registration_number == 0)
+        <td>:@if($formOneData->registration_number == 0)
 
 
           @else
 
-          {{ $form_one_data->registration_number}}
+          {{ $formOneData->registration_number}}
 
           @endif
 
@@ -377,25 +377,25 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $form_one_data->organization_name_ban }}</td>
+        <td>: {{ $formOneData->organization_name_ban }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(iii)</td>
         <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $form_one_data->address_of_head_office }}</td>
+        <td>: {{ $formOneData->address_of_head_office }}</td>
     </tr>
 
     <tr>
         <td></td>
         <td>(iv)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:@if(empty($duration_list_all))
+        <td>:@if(empty($durationListAll))
 
 
           @else
 
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all )))}}
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($durationListAll )))}}
           @endif
 
       </td>
@@ -406,11 +406,11 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
-        <td>:@if(empty($duration_list_all))
+        <td>:@if(empty($durationListAll))
 
 
           @else
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($durationListAll1 )))}}
       @endif
       </td>
     </tr>
@@ -419,7 +419,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td></td>
         <td colspan="3"><!-- Button trigger modal -->
 
-           @if($form_one_data->registration_number_given_by_admin == 0)
+           @if($formOneData->registration_number_given_by_admin == 0)
            <button type="button" disabled class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             প্রিন্ট করুন
             </button>
@@ -441,7 +441,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
                     <form id="form" action="{{ route('printCertificateView') }}" method="get">
 
-                        <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
+                        <input type="hidden" name="user_id" value="{{ $formOneData->user_id  }}"/>
 
                         <input type="date" name="main_date" value="<?php   echo  date('Y-m-d'); ?>" class="form-control"/>
 
@@ -464,8 +464,8 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                                     </div>
                                     @else
                                     <?php
-                                    $fdOneFormId = DB::table('fd_one_forms')->where('id',$form_one_data->id)->value('user_id');
-                                    $get_email_from_user = DB::table('users')->where('id',$fdOneFormId)->value('email');
+                                    $fdOneFormId = DB::table('fd_one_forms')->where('id',$formOneData->id)->value('user_id');
+                                    $getEmailFromUser = DB::table('users')->where('id',$fdOneFormId)->value('email');
 
                                             ?>
                                     <!--new-->
@@ -479,12 +479,12 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                                             <form id="form" action="{{ route('updateStatusNameChangeForm') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" value="{{ $getformOneId->id }}" name="id" />
-                                                <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
+                                                <input type="hidden" value="{{ $getEmailFromUser }}" name="email" />
                                                 <select class="form-control form-control-sm" name="status" id="regStatus">
 
                                                     <option value="Ongoing" {{ $getformOneId->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
                                                     <option value="Accepted" {{ $getformOneId->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
-                                                    <option value="Correct" {{ $all_data_for_new_list_all->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
+                                                    <option value="Correct" {{ $allDataForNewListAll->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
                                                     <option value="Rejected" {{ $getformOneId->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>

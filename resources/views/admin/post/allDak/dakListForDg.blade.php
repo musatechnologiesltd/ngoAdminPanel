@@ -43,7 +43,7 @@
                                 <table class="display" id="basic-1">
                                     <tbody>
 
-                                        @foreach($all_data_for_new_list as $i=>$allStatusData)
+                                        @foreach($allDataForNewList as $i=>$allStatusData)
 
                                         <?php
 
@@ -55,15 +55,15 @@ $orginalReceverId= DB::table('ngo_registration_daks')
 
 $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
 //end new code
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
                                         ?>
                                     <tr>
                                         <td style="text-align:left;">
-                                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                            প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                            উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                            প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                             মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                                             বিষয়ঃ <b> এনজিও নিবন্ধন</b><br>
                                             @if(empty($decesionName))
@@ -244,7 +244,7 @@ $desiNames = DB::table('designation_lists')
                                     </tr>
                                     @endforeach
 
-                                    @foreach($all_data_for_renew_list as $r=>$allStatusData)
+                                    @foreach($allDataForRenewList as $r=>$allStatusData)
 
                                     <?php
 
@@ -258,15 +258,15 @@ $orginalReceverName= DB::table('admins')
                 ->where('id',$orginalReceverId)
                 ->value('admin_name_ban');
 
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_renew_daks')->where('renew_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','renew')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
                                     ?>
                                 <tr>
                                     <td style="text-align:left;">
-                                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                                         বিষয়ঃ <b> এনজিও নবায়ন</b><br>
                                         @if(empty($decesionName))
@@ -449,7 +449,7 @@ $desiNames = DB::table('designation_lists')
                                 @endforeach
 
 
-                                @foreach($all_data_for_name_changes_list as $k=>$allStatusData)
+                                @foreach($allDataForNameChangesList as $k=>$allStatusData)
 
                                 <?php
 
@@ -464,15 +464,15 @@ $orginalReceverName= DB::table('admins')
                 ->value('admin_name_ban');
 
 //end new code
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_name_change_daks')->where('name_change_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','nameChange')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
                                 ?>
                             <tr>
                                 <td style="text-align:left;">
-                                    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                    প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                    উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                    প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                                     বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের   </b><br>
                                     @if(empty($decesionName))
@@ -668,15 +668,15 @@ $orginalReceverId= DB::table('ngo_f_d_nine_daks')
                 ->value('admin_name_ban');
 
 //end new code
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_f_d_nine_daks')->where('f_d_nine_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fdNine')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
                             ?>
                         <tr>
                             <td style="text-align:left;">
-                                উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                                প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                                উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                                 মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                                 বিষয়ঃ <b> এফডি৯ (এন-ভিসা)   </b><br>
                                 @if(empty($decesionName))
@@ -870,15 +870,15 @@ $orginalReceverId= DB::table('ngo_f_d_nine_one_daks')
                 ->value('admin_name_ban');
 
 //end new code
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_f_d_nine_one_daks')->where('f_d_nine_one_status_id',$allStatusData->fd9_one_form_id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details') ->where('id',$decesionNameId)->where('status','fdNineOne')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd9_one_form_id)->orderBy('id','desc')->first();
                         ?>
                     <tr>
                         <td style="text-align:left;">
-                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                            প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                            উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                            প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                             মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                             বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট)   </b><br>
                             @if(empty($decesionName))
@@ -1076,15 +1076,15 @@ $orginalReceverId= DB::table('ngo_fd_six_daks')
                 ->value('receiver_admin_id');
 
 $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_fd_six_daks')->where('fd_six_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fdSix')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফডি - ৬   </b><br>
                         @if(empty($decesionName))
@@ -1280,15 +1280,15 @@ $orginalReceverId= DB::table('ngo_fd_seven_daks')
                 ->value('receiver_admin_id');
 
 $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('ngo_fd_seven_daks')->where('fd_seven_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fdSeven')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফডি - ৭   </b><br>
                         @if(empty($decesionName))
@@ -1482,15 +1482,15 @@ $orginalReceverId= DB::table('fc_one_daks')
                 ->value('receiver_admin_id');
 
 $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('fc_one_daks')->where('fc_one_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fcOne')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফসি-১   </b><br>
                         @if(empty($decesionName))
@@ -1684,15 +1684,15 @@ $orginalReceverId= DB::table('fc_two_daks')
                 ->value('receiver_admin_id');
 
 $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('fc_two_daks')->where('fc_two_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fcTwo')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফসি-২   </b><br>
                         @if(empty($decesionName))
@@ -1886,15 +1886,15 @@ $orginalReceverId= DB::table('fd_three_daks')
                 ->value('receiver_admin_id');
 
 $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
 $decesionNameId = DB::table('fd_three_daks')->where('fd_three_status_id',$allStatusData->id)->value('dak_detail_id');
 $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fdThree')->value('decision_list');
 $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফডি - ৩    </b><br>
                         @if(empty($decesionName))

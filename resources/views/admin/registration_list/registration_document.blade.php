@@ -10,15 +10,15 @@
         <td></td>
         <td>
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdfMain',['id'=>$form_one_data->id]) }}" >
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdfMain',['id'=>$formOneData->id]) }}" >
             <i class="fa fa-eye"></i>
         </a>
 
 
         @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-        <button  href="{{ route('formOnePdfMain',['id'=>$form_one_data->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="এফডি -১ ফরম"><i class="fa fa-paperclip"></i></button>
-        <button  href="{{ route('formOnePdfMain',['id'=>$form_one_data->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        <button  href="{{ route('formOnePdfMain',['id'=>$formOneData->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="এফডি -১ ফরম"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdfMain',['id'=>$formOneData->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
         @else
 
         @endif
@@ -31,15 +31,15 @@
         <td></td>
         <td>
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'plan']) }}" >
             <i class="fa fa-eye"></i>
         </a>
 
 
         @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-secondary" id="attLink1"  data-name="পরিচালন পরিকল্পনা"><i class="fa fa-paperclip"></i></button>
-        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'plan']) }}" class="btn btn-secondary" id="attLink1"  data-name="পরিচালন পরিকল্পনা"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'plan']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
         @else
 
         @endif
@@ -52,13 +52,13 @@
         <td></td>
         <td>
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}">
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'invoice']) }}">
             <i class="fa fa-eye"></i>
         </a>
         @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-secondary" id="attLink1"  data-name="চালানের কপি"><i class="fa fa-paperclip"></i></button>
-        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'invoice']) }}" class="btn btn-secondary" id="attLink1"  data-name="চালানের কপি"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'invoice']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
         @else
 
         @endif
@@ -70,13 +70,13 @@
         <td></td>
         <td>
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}">
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'treasury_bill']) }}">
             <i class="fa fa-eye"></i>
         </a>
         @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}" class="btn btn-secondary" id="attLink1"  data-name="ট্রেজারি চালানের মূলকপি"><i class="fa fa-paperclip"></i></button>
-        <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'treasury_bill']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'treasury_bill']) }}" class="btn btn-secondary" id="attLink1"  data-name="ট্রেজারি চালানের মূলকপি"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'treasury_bill']) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
         @else
 
         @endif
@@ -86,22 +86,22 @@
 
 
 
-    @foreach($all_source_of_fund as $all_get_all_source_of_fund_data)
+    @foreach($allSourceOfFund as $allGetAllSourceOfFund)
     <tr>
         <td>
         সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি(দাতা সংস্থার নাম)
         </td>
-        <td>{{ $all_get_all_source_of_fund_data->name }}</td>
+        <td>{{ $allGetAllSourceOfFund->name }}</td>
         <td>
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}">
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$allGetAllSourceOfFund->id ) }}">
             <i class="fa fa-eye"></i>
         </a>
 
         @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি"><i class="fa fa-paperclip"></i></button>
-        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+        <button  href="{{ route('sourceOfFund',$allGetAllSourceOfFund->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সম্ভাব্য দাতার কাছ থেকে প্রতিশ্রুতির চিঠি"><i class="fa fa-paperclip"></i></button>
+        <button  href="{{ route('sourceOfFund',$allGetAllSourceOfFund->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
         @else
 
         @endif
@@ -112,20 +112,20 @@
 
     @endforeach
 
-    @foreach($get_all_data_other as $key=>$all_get_all_data_other)
+    @foreach($getAllDataOther as $key=>$AllGetAllDataOther)
 
     <tr>
-    <td>{{ $all_get_all_data_other->information_title }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
+    <td>{{ $AllGetAllDataOther->information_title }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
     <td></td>
     <td>
 
-        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}">
+        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$AllGetAllDataOther->id ) }}">
         <i class="fa fa-eye"></i>
     </a>
     @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-    <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="{{ $all_get_all_data_other->information_title }}"><i class="fa fa-paperclip"></i></button>
-    <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+    <button  href="{{ route('otherPdfView',$AllGetAllDataOther->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="{{ $AllGetAllDataOther->information_title }}"><i class="fa fa-paperclip"></i></button>
+    <button  href="{{ route('otherPdfView',$AllGetAllDataOther->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
     @else
 
     @endif
@@ -135,20 +135,20 @@
 </tr>
 @endforeach
 
-@foreach($form_member_data_doc as $key=>$all_form_member_data_doc)
+@foreach($formMemberDataDoc as $key=>$allRormMemberDataDoc)
 
 <tr>
     <td>এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</td>
     <td></td>
     <td>
 
-        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}">
+        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoMemberDocPdfView',$allRormMemberDataDoc->id ) }}">
         <i class="fa fa-eye"></i>
     </a>
     @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-    <button  href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}"><i class="fa fa-paperclip"></i></button>
-    <button  href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+    <button  href="{{ route('ngoMemberDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="এনজিও  কর্মকর্তাদের  নথি {{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}"><i class="fa fa-paperclip"></i></button>
+    <button  href="{{ route('ngoMemberDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
     @else
 
     @endif
@@ -160,10 +160,10 @@
 
 
 
-@foreach($form_ngo_data_doc as $key=>$all_form_member_data_doc)
+@foreach($formNgoDataDoc as $key=>$allRormMemberDataDoc)
 <?php
 
-$ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
+$ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
 
 ?>
 
@@ -223,7 +223,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
     <td></td>
     <td>
 
-        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
+        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}">
         <i class="fa fa-eye"></i>
     </a>
 
@@ -233,25 +233,25 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
     @if($key+1 == 1)
 
-    <button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="ফরম নং - ৮"><i class="fa fa-paperclip"></i></button>
+    <button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="ফরম নং - ৮"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 2)
 
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="নির্বাহী কমিটির সদস্যদের পাসপোর্ট সাইজের ছবিসহ জাতীয় পরিচয়পত্রে সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="নির্বাহী কমিটির সদস্যদের পাসপোর্ট সাইজের ছবিসহ জাতীয় পরিচয়পত্রে সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 3)
 
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="প্রাথমিক নিবন্ধনকারী কতৃপক্ষের অনুমোদিত নির্বাহী কমিটির তালিকা ও নিবন্ধন সনদপত্রের সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 4)
 
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের (প্রাথমিক নিবন্ধন কতৃপক্ষ কতৃক অনুমোদিত ) সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="গঠনতন্ত্রের (প্রাথমিক নিবন্ধন কতৃপক্ষ কতৃক অনুমোদিত ) সত্যায়িত অনুলিপি"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 5)
 
 
@@ -259,26 +259,26 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার কার্যক্রম প্রতিবেদন"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার কার্যক্রম প্রতিবেদন"><i class="fa fa-paperclip"></i></button>
 
 @elseif($key+1 == 6)
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="দাতা সংস্থার প্রতিশ্রুতিপত্র (সংস্থার প্রধান কতৃক সত্যায়িত )"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="দাতা সংস্থার প্রতিশ্রুতিপত্র (সংস্থার প্রধান কতৃক সত্যায়িত )"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 7)
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="কোড নং -১-০৩২৩-০০০০-১৮৩৬-এ তফসিল-১ নির্ধারিত ফি জমা প্রদান করে ট্রেজারি চালানের মূল কপিসহ"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="কোড নং -১-০৩২৩-০০০০-১৮৩৬-এ তফসিল-১ নির্ধারিত ফি জমা প্রদান করে ট্রেজারি চালানের মূল কপিসহ"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 8)
 
 
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার নির্বাহী কমিটি গঠন সংক্রান্ত সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি (উপস্থিত সাধারণ সদস্যদের উপস্থিতির স্বাক্ষরিত তালিকাসহ )"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার নির্বাহী কমিটি গঠন সংক্রান্ত সাধারণ সভার কার্যবিবরণীর সত্যায়িত অনুলিপি (উপস্থিত সাধারণ সদস্যদের উপস্থিতির স্বাক্ষরিত তালিকাসহ )"><i class="fa fa-paperclip"></i></button>
 @elseif($key+1 == 9)
 
-<button  href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার সাধারণ সদস্যদের নামের তালিকা (প্রত্যেক সদস্যদের স্বাক্ষরসহ নাম, পিতা /মাতা, স্বামী/স্ত্রী'র নাম ও ঠিকানা ,জাতীয় পরিচয়পত্র নম্বর )"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-secondary" id="attLink1"  data-name="সংস্থার সাধারণ সদস্যদের নামের তালিকা (প্রত্যেক সদস্যদের স্বাক্ষরসহ নাম, পিতা /মাতা, স্বামী/স্ত্রী'র নাম ও ঠিকানা ,জাতীয় পরিচয়পত্র নম্বর )"><i class="fa fa-paperclip"></i></button>
 @endif
 
 
@@ -287,7 +287,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 
 
-    <button  href="{{ route('ngoMemberDocPdfView',$all_form_member_data_doc->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+    <button  href="{{ route('ngoMemberDocPdfView',$allRormMemberDataDoc->id ) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
     @else
 
     @endif
@@ -318,7 +318,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
     <td></td>
     <td>
 
-        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$all_form_member_data_doc->id ) }}">
+        <a  target="_blank" class="btn btn-sm btn-success" href="{{ route('ngoDocPdfView',$allRormMemberDataDoc->id ) }}">
         <i class="fa fa-eye"></i>
     </a>
 
@@ -338,15 +338,15 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 
 ?>
 
-@if(count($form_member_data_doc_renew) == 0)
+@if(count($formMemberDataDocRenew) == 0)
 
 
 @else
-@foreach($form_member_data_doc_renew as $all)
+@foreach($formMemberDataDocRenew as $all)
 <tr>
     <td>বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ (প্রকল্প ওয়ারী তথাদির সংক্ষিপ্তসার সংযুক্ত করতে হবে)</td>
     <td></td>
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'f']) }}">
+    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$formOneData->user_id,'id'=>'f']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
 </tr>
@@ -355,7 +355,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 <tr>
     <td>সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট (উৎসসহ)</td>
     <td></td>
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'y']) }}">
+    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$formOneData->user_id,'id'=>'y']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
 </tr>
@@ -364,7 +364,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 <tr>
     <td>নিবন্ধন ফি ও ভ্যাট পরিশোধ করা হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)</td>
     <td></td>
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'c']) }}">
+    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$formOneData->user_id,'id'=>'c']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
 </tr>
@@ -373,7 +373,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 <tr>
     <td>তফসিল-১ এ বর্ণিত যেকোন ফি এর ভ্যাট বকেয়া থাকলে পরিশোধ করা হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)</td>
     <td></td>
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'d']) }}">
+    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$formOneData->user_id,'id'=>'d']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
 </tr>
@@ -382,7 +382,7 @@ $ngoTypeInfo = DB::table('ngo_type_and_languages')->where('user_id',$form_one_da
 <tr>
     <td>ব্যাংক হিসাব নম্বর পরিবর্তন হয়ে থাকলে ব্যুরোর অনুমদনপত্রের কপি সংযুক্ত করতে হবে</td>
     <td></td>
-    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$form_one_data->user_id,'id'=>'ch']) }}">
+    <td><a target="_blank" class="btn btn-sm btn-success" href="{{ route('renewPdfList',['main_id'=>$formOneData->user_id,'id'=>'ch']) }}">
         <i class="fa fa-eye"></i>
     </a></td>
 </tr>

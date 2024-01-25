@@ -43,13 +43,13 @@ class FD3Controller extends Controller
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get();
 
-            $convert_name_title = $ngoStatusFdSevenDak->implode("fd_three_status_id", " ");
-            $separated_data_title = explode(" ", $convert_name_title);
+            $convertNameTitle = $ngoStatusFdSevenDak->implode("fd_three_status_id", " ");
+            $separatedDataTitle = explode(" ", $convertNameTitle);
 
             $dataFromFd3Form = DB::table('fd3_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd3_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd3_forms.*','fd3_forms.id as mainId')
-            ->whereIn('fd3_forms.id',$separated_data_title)
+            ->whereIn('fd3_forms.id',$separatedDataTitle)
             ->orderBy('fd3_forms.id','desc')
             ->get();
 
@@ -71,12 +71,12 @@ class FD3Controller extends Controller
         ->orderBy('fd3_forms.id','desc')
         ->first();
 
-        $get_email_from_user = DB::table('users')->where('id',$dataFromFd3Form->user_id)->value('email');
+        $getEmailFromUser = DB::table('users')->where('id',$dataFromFd3Form->user_id)->value('email');
         $fd2FormList = DB::table('fd2_form_for_fd3_forms')->where('fd_one_form_id',$dataFromFd3Form->fd_one_form_id)
              ->where('fd3_form_id',$dataFromFd3Form->mainId)->latest()->first();
         $fd2OtherInfo = DB::table('fd2_fd3_other_infos')->where('fd2_form_for_fd3_form_id',$fd2FormList->id)->latest()->get();
 
-        return view('admin.fd3form.show',compact('get_email_from_user','dataFromFd3Form','fd2FormList','fd2OtherInfo'));
+        return view('admin.fd3form.show',compact('getEmailFromUser','dataFromFd3Form','fd2FormList','fd2OtherInfo'));
 
     }
 
@@ -84,9 +84,9 @@ class FD3Controller extends Controller
 
         \LogActivity::addToLog('verified_fd_three_form pdf');
 
-        $form_one_data = DB::table('fd3_forms')->where('id',$id)->value('verified_fd_three_form');
+        $formOneData = DB::table('fd3_forms')->where('id',$id)->value('verified_fd_three_form');
 
-        return view('admin.fd3form.verified_fd_three_form',compact('form_one_data'));
+        return view('admin.fd3form.verified_fd_three_form',compact('formOneData'));
 
     }
 
@@ -95,9 +95,9 @@ class FD3Controller extends Controller
 
         \LogActivity::addToLog('fd2 pdf download.');
 
-        $form_one_data = DB::table('fd2_form_for_fd3_forms')->where('id',$id)->value('fd_2_form_pdf');
+        $formOneData = DB::table('fd2_form_for_fd3_forms')->where('id',$id)->value('fd_2_form_pdf');
 
-        return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
+        return view('admin.fd6form.fd2PdfDownload',compact('formOneData'));
     }
 
 
@@ -105,9 +105,9 @@ class FD3Controller extends Controller
 
         \LogActivity::addToLog('fd2 other pdf download.');
 
-        $form_one_data = DB::table('fd2_fd3_other_infos')->where('id',$id)->value('file');
+        $formOneData = DB::table('fd2_fd3_other_infos')->where('id',$id)->value('file');
 
-        return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
+        return view('admin.fd6form.fd2PdfDownload',compact('formOneData'));
 
     }
 

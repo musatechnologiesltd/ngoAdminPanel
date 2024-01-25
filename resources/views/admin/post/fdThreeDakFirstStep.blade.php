@@ -11,7 +11,7 @@
                     //new code
     $orginalReceverId= DB::table('fd_three_daks')->where('fd_three_status_id',$allStatusData->id)->where('original_recipient',1)->value('receiver_admin_id');
     $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-    $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+    $formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
     $decesionNameId = DB::table('fd_three_daks')->where('fd_three_status_id',$allStatusData->id)->value('dak_detail_id');
     $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fdThree')->value('decision_list');
     $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
@@ -24,8 +24,8 @@
                                     @else
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফডি - ৩    </b><br>
                         @if(empty($decesionName))

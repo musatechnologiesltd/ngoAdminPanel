@@ -5,27 +5,27 @@
         <td colspan="3">সংস্থার বিবরণ:</td>
     </tr>
       <?php
-$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type');
+$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
 
     if($getngoForLanguage =='দেশিও'){
 
-    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name_ban');
+    $regName = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->value('organization_name_ban');
 
     }else{
-    $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)->value('organization_name');
+    $regName = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->value('organization_name');
     }
       ?>
     <tr>
         <td></td>
         <td>(i)</td>
         <td>সংস্থার নাম</td>
-        <td>: {{ $reg_name }}</td>
+        <td>: {{ $regName }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ii)</td>
         <td>সংস্থার ঠিকানা</td>
-        <td>: {{ $form_one_data->organization_address }}</td>
+        <td>: {{ $formOneData->organization_address }}</td>
     </tr>
     <tr>
         <td></td>
@@ -33,12 +33,12 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td>নিবন্ধন নম্বর</td>
         <td>:
 
-          @if($form_one_data->registration_number == 0)
+          @if($formOneData->registration_number == 0)
 
 
           @else
 
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number)}}
+          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->registration_number)}}
 
           @endif
 
@@ -49,13 +49,13 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td></td>
         <td>(iv)</td>
         <td>{{ trans('fd_one_step_one.Country_of_Origin')}}</td>
-        <td>: {{ $form_one_data->country_of_origin }}</td>
+        <td>: {{ $formOneData->country_of_origin }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(v)</td>
         <td>প্রধান কার্যালয়ের ঠিকানা</td>
-        <td>: {{ $form_one_data->address_of_head_office_eng }}</td>
+        <td>: {{ $formOneData->address_of_head_office_eng }}</td>
     </tr>
     <tr>
         <td></td>
@@ -67,19 +67,19 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td></td>
         <td></td>
         <td>ক) নাম</td>
-        <td>: {{ $form_one_data->name_of_head_in_bd }}</td>
+        <td>: {{ $formOneData->name_of_head_in_bd }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>খ) পূর্ণকালীন/ খণ্ডকালীন</td>
-        <td>: {{ $form_one_data->job_type }}</td>
+        <td>: {{ $formOneData->job_type }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>গ) {{ trans('fd_one_step_one.Address_Mobile_Number_Email')}}</td>
-        <td>:{{ $form_one_data->address }}, {{ $form_one_data->tele_phone_number.', '.$form_one_data->phone }}, {{ $form_one_data->email }}</td>
+        <td>:{{ $formOneData->address }}, {{ $formOneData->tele_phone_number.', '.$formOneData->phone }}, {{ $formOneData->email }}</td>
     </tr>
     <tr>
         <td></td>
@@ -87,13 +87,13 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td>ঘ) নাগরিকত্ব (পূর্বতন নাগরিকত্ব যদি থাকে তাও উল্লেখ
             করতে হবে)
         </td>
-        <td>: {{ $form_one_data->citizenship }}</td>
+        <td>: {{ $formOneData->citizenship }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>ঙ) পেশা (বর্তমান পেশা উল্লেখ করতে হবে)</td>
-        <td>: {{ $form_one_data->profession }}</td>
+        <td>: {{ $formOneData->profession }}</td>
     </tr>
     <tr>
         <td>২.</td>
@@ -106,16 +106,16 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td>ক</td>
         <td>(i) পরিচালন পরিকল্পনা (Plan of Operation)</td>
         <td>:
-            @if(empty($form_one_data->plan_of_operation))
+            @if(empty($formOneData->plan_of_operation))
 
             @else
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" >
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'plan']) }}" >
                 <i class="fa fa-file-pdf-o"></i> দেখুন
             </a>
 
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="পরিচালন পরিকল্পনা"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'plan']) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+            <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'plan']) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="পরিচালন পরিকল্পনা"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
+            <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'plan']) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
 
             @endif
         </td>
@@ -124,7 +124,7 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td></td>
         <td></td>
         <td>(ii) প্রকল্প এলাকা (জেলা ও উপজেলা)</td>
-        <td>: {{ $form_one_data->district }}</td>
+        <td>: {{ $formOneData->district }}</td>
     </tr>
     <tr>
         <td></td>
@@ -132,18 +132,18 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td>তহবিলের উৎস</td>
         <td></td>
     </tr>
-    @foreach($all_source_of_fund as $all_get_all_source_of_fund_data)
+    @foreach($allSourceOfFund as $allGetAllSourceOfFundData)
     <tr>
         <td></td>
         <td></td>
         <td>(i) দাতা/দাতা সংস্থাসমূহের নাম ও ঠিকানা</td>
-        <td>: {{ $all_get_all_source_of_fund_data->name }},{{ $all_get_all_source_of_fund_data->address }}</td>
+        <td>: {{ $allGetAllSourceOfFundData->name }},{{ $allGetAllSourceOfFundData->address }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>(ii) দাতা /দাতাসংস্থার অঙ্গীকারপত্রের কপি</td>
-        <td>: @if(empty($all_get_all_source_of_fund_data->letter_file))
+        <td>: @if(empty($allGetAllSourceOfFundData->letter_file))
 
             @else
 
@@ -151,12 +151,12 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
 
 
 
-        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" >
+        <a target="_blank" class="btn btn-sm btn-success" href="{{ route('sourceOfFund',$allGetAllSourceOfFundData->id ) }}" >
             <i class="fa fa-file-pdf-o"></i> দেখুন
         </a>
 
-        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="দাতা /দাতাসংস্থার অঙ্গীকারপত্রের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-        <button  href="{{ route('sourceOfFund',$all_get_all_source_of_fund_data->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+        <button  href="{{ route('sourceOfFund',$allGetAllSourceOfFundData->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="দাতা /দাতাসংস্থার অঙ্গীকারপত্রের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
+        <button  href="{{ route('sourceOfFund',$allGetAllSourceOfFundData->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
 
             @endif</td>
     </tr>
@@ -166,7 +166,7 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td colspan="2">অঙ্গীকারকৃত অনুদানের পরিমাণ (বৈদেশিক
             মুদ্রা/বাংলাদেশ টাকায়)
         </td>
-        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->annual_budget) }}</td>
+        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->annual_budget) }}</td>
     </tr>
     <tr>
         <td>৪.</td>
@@ -175,7 +175,7 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
             উপস্থাপন করতে হবে
         </td>
     </tr>
-    @foreach($all_partiw as $key=>$all_all_parti)
+    @foreach($allPartiw as $key=>$allAllParti)
     <tr>
         <td></td>
         <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
@@ -186,44 +186,44 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td></td>
         <td>(ক)</td>
         <td>নাম</td>
-        <td>: {{ $all_all_parti->name }}</td>
+        <td>: {{ $allAllParti->name }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(খ)</td>
         <td>পদবি</td>
-        <td>: {{ $all_all_parti->position }}</td>
+        <td>: {{ $allAllParti->position }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(গ)</td>
         <td>ঠিকানা</td>
-        <td>: {{ $all_all_parti->address }}</td>
+        <td>: {{ $allAllParti->address }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঘ)</td>
         <td>নাগরিকত্ব (দ্বৈত নাগরিকত্ব থাকলে উল্লেখ করতে হবে)
         </td>
-        <td>: {{ $all_all_parti->citizenship }}</td>
+        <td>: {{ $allAllParti->citizenship }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঙ)</td>
         <td>যোগদানের তারিখ</td>
-        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->date_of_join) }}</td>
+        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($allAllParti->date_of_join) }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(চ)</td>
         <td>বেতন ভাতাদি</td>
-        <td>: {{ $all_all_parti->salary_statement }}</td>
+        <td>: {{ $allAllParti->salary_statement }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ছ)</td>
         <td>সম্পৃক্ত অন্য পেশার বিবরণ</td>
-        <td>: {{ $all_all_parti->other_occupation }}</td>
+        <td>: {{ $allAllParti->other_occupation }}</td>
     </tr>
     @endforeach
 
@@ -233,18 +233,18 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
             কিনা (চালানের কপি সংযুক্ত করতে
             হবে)
         </td>
-        <td>:  @if(empty($form_one_data->attach_the__supporting_paper))
+        <td>:  @if(empty($formOneData->attach_the__supporting_paper))
 
             @else
 
 
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" >
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'invoice']) }}" >
                 <i class="fa fa-file-pdf-o"></i> দেখুন
             </a>
 
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="নিবন্ধন ফি ও ভ্যাট পরিশোধ চালানের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-            <button  href="{{ route('formOnePdf',['main_id'=>$form_one_data->id,'id'=>'invoice']) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+            <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'invoice']) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="নিবন্ধন ফি ও ভ্যাট পরিশোধ চালানের কপি"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
+            <button  href="{{ route('formOnePdf',['main_id'=>$formOneData->id,'id'=>'invoice']) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
 
             @endif</td>
     </tr>
@@ -255,7 +255,7 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
             তথ্য(যদি থাকে)
         </td>
     </tr>
-    @foreach($get_all_data_adviser as $key=>$all_get_all_data_adviser)
+    @foreach($getAllDataAdviser as $key=>$allGetAllDataAdviser)
     <tr>
         <td></td>
         <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
@@ -266,13 +266,13 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
         <td></td>
         <td>(ক)</td>
         <td>নাম</td>
-        <td>: {{ $all_get_all_data_adviser->name }}</td>
+        <td>: {{ $allGetAllDataAdviser->name }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(খ)</td>
         <td>বিস্তারিত বর্ণনা</td>
-        <td>: {{ $all_get_all_data_adviser->information	 }}</td>
+        <td>: {{ $allGetAllDataAdviser->information	 }}</td>
     </tr>
     @endforeach
     <tr>
@@ -282,38 +282,38 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
             নাম,শাখা ও বিস্তারিত ঠিকানা)
         </td>
     </tr>
-    @if(!$get_all_data_adviser_bank)
+    @if(!$getAllDataAdviserBank)
 
     @else
     <tr>
         <td></td>
         <td>(ক)</td>
         <td>হিসাব নম্বর</td>
-        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_adviser_bank->account_number) }}</td>
+        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataAdviserBank->account_number) }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(খ)</td>
         <td>ধরণ</td>
-        <td>: {{ $get_all_data_adviser_bank->account_type }}</td>
+        <td>: {{ $getAllDataAdviserBank->account_type }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(গ)</td>
         <td>ব্যাংকের নাম</td>
-        <td>: {{ $get_all_data_adviser_bank->name_of_bank }}</td>
+        <td>: {{ $getAllDataAdviserBank->name_of_bank }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঘ)</td>
         <td>শাখা</td>
-        <td>: {{ $get_all_data_adviser_bank->branch_name_of_bank }}</td>
+        <td>: {{ $getAllDataAdviserBank->branch_name_of_bank }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঙ)</td>
         <td>বিস্তারিত ঠিকানা</td>
-        <td>: {{ $get_all_data_adviser_bank->bank_address }}</td>
+        <td>: {{ $getAllDataAdviserBank->bank_address }}</td>
     </tr>
     @endif
     <tr>
@@ -322,21 +322,21 @@ $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$form_
             উল্লেখ করতে ইচ্ছুক (পৃথক
             কাগজে সংযুক্ত করতে হবে)
         </td>
-        <td>: @foreach($get_all_data_other as $all_get_all_data_other)
+        <td>: @foreach($getAllDataOther as $AllGetAllDataOther)
 
-            @if(empty($all_get_all_data_other->information_pdf))
+            @if(empty($AllGetAllDataOther->information_pdf))
 
             @else
 
 
 
-            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" >
+            <a target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$AllGetAllDataOther->id ) }}" >
                 <i class="fa fa-file-pdf-o"></i> দেখুন
             </a>
 
 
-            <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="অন্য কোন গুরুত্বপূর্ণ তথ্য"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
-            <button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+            <button  href="{{ route('otherPdfView',$AllGetAllDataOther->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="অন্য কোন গুরুত্বপূর্ণ তথ্য"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
+            <button  href="{{ route('otherPdfView',$AllGetAllDataOther->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
             @endif
 
 

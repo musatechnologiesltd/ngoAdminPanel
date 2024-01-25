@@ -47,25 +47,25 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($all_data_for_new_list as $all_data_for_new_list_all)
+                                @foreach($allDataForNewList as $allDataForNewListAll)
 
                                 <?php
 
-$fdOneFormId = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->value('user_id');
-$reg_number = DB::table('fd_one_forms')->where('id',$all_data_for_new_list_all->fd_one_form_id)->first();
-$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$reg_number->user_id)->value('ngo_type'$getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
+$fdOneFormId = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('user_id');
+$regNumber = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->first();
+$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$regNumber->user_id)->value('ngo_type'$getngoForLanguageNewO = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('registration');
 $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type_new_old');
 
         if($getngoForLanguage =='দেশিও'){
 
-            $reg_name = $reg_number->organization_name_ban;
+            $regName = $regNumber->organization_name_ban;
 
         }else{
 
-            $reg_name = $reg_number->organization_name;
+            $regName = $regNumber->organization_name;
 
         }
-$reg_address =$reg_number->organization_address;
+$regAddress =$regNumber->organization_address;
 
                                 ?>
                             <tr>
@@ -75,27 +75,27 @@ $reg_address =$reg_number->organization_address;
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
                                     @else
 
-                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($reg_number->registration_number) }}
+                                    #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($regNumber->registration_number) }}
 @endif
 
                                 </td>
-                                <td><h6> এনজিওর নাম: {{ $reg_name  }}</h6><span>ঠিকানা: {{ $reg_address }}</td>
+                                <td><h6> এনজিওর নাম: {{ $regName  }}</h6><span>ঠিকানা: {{ $regAddress }}</td>
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 
-                                    @if($all_data_for_new_list_all->status == 'Accepted')
+                                    @if($allDataForNewListAll->status == 'Accepted')
 
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         গৃহীত
 
                                     </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Ongoing')
+                                    @elseif($allDataForNewListAll->status == 'Ongoing')
 
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         চলমান
 
                                     </button>
-                                    @elseif($all_data_for_new_list_all->status == 'Correct')
+                                    @elseif($allDataForNewListAll->status == 'Correct')
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         সংশোধন করুন
 
@@ -107,13 +107,13 @@ $reg_address =$reg_number->organization_address;
                                     </button>
                                     @endif
                                 </td>
-                                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($all_data_for_new_list_all->created_at))) }}
+                                <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allDataForNewListAll->created_at))) }}
 
                                 </td>
                                 <td>
 
                                     @if (Auth::guard('admin')->user()->can('register_list_view'))
-                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$all_data_for_new_list_all->id) }}';">বিস্তারিত দেখুন</button>
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allDataForNewListAll->id) }}';">বিস্তারিত দেখুন</button>
 @endif
 
 

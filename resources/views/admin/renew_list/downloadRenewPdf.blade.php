@@ -79,11 +79,11 @@
         <td colspan="3">সংস্থার বিবরণ:</td>
     </tr>
       <?php
-$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$all_partiw1->user_id)->value('ngo_type');
+$getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$allPartiw1->user_id)->value('ngo_type');
 // dd($getngoForLanguage);
 
 
-$reg_name = DB::table('fd_one_forms')->where('user_id',$all_partiw1->user_id)->value('organization_name_ban');
+$reg_name = DB::table('fd_one_forms')->where('user_id',$allPartiw1->user_id)->value('organization_name_ban');
 
 
       ?>
@@ -91,7 +91,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$all_partiw1->user_id)->v
         <td></td>
         <td>অ)</td>
         <td>সংস্থার নাম ও সংস্থার ঠিকানা</td>
-        <td>: {{ $reg_name }}, {{ $all_partiw1->organization_address}}</td>
+        <td>: {{ $reg_name }}, {{ $allPartiw1->organization_address}}</td>
     </tr>
 
     <tr>
@@ -100,10 +100,10 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$all_partiw1->user_id)->v
         <td>নিবন্ধন নম্বর</td>
         <td>:
             <?php
-$getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_partiw1->user_id)->value('ngo_type');
-            $mainNgoTypeRenew = DB::table('ngo_type_and_languages')->where('user_id',$all_partiw1->user_id)->value('ngo_type_new_old');
+$getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$allPartiw1->user_id)->value('ngo_type');
+            $mainNgoTypeRenew = DB::table('ngo_type_and_languages')->where('user_id',$allPartiw1->user_id)->value('ngo_type_new_old');
 
-            $registrationNumberForOld = DB::table('ngo_type_and_languages')->where('user_id',$all_partiw1->user_id)->value('registration');
+            $registrationNumberForOld = DB::table('ngo_type_and_languages')->where('user_id',$allPartiw1->user_id)->value('registration');
 
 ?>
 
@@ -113,17 +113,17 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
 @else
 
 
-          @if($all_partiw1->registration_number == 0)
+          @if($allPartiw1->registration_number == 0)
 
 
           @else
 
           @if(session()->get('locale') == 'en' || empty(session()->get('locale')))
 
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_partiw1->registration_number)}}
+          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($allPartiw1->registration_number)}}
           @else
 
-          {{ $all_partiw1->registration_number}}
+          {{ $allPartiw1->registration_number}}
 @endif
           @endif
 
@@ -137,17 +137,17 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td></td>
         <td>ই)</td>
         <td>প্রধান কার্যালয়ের ঠিকানা</td>
-        <td>: {{ $all_partiw1->address_of_head_office }}</td>
+        <td>: {{ $allPartiw1->address_of_head_office }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>(টেলিফোন নম্বর ,মোবাইল নম্বর ,ইমেইল  ও ওয়েব এড্রেস)</td>
         <td>:
-            @if(!$get_all_data_new )
+            @if(!$getAllDataNew )
 
             @else
-            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_new ->phone_new) }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_new ->mobile_new) }},{{ $get_all_data_new ->email_new }},{{ $get_all_data_new ->web_site_name }}
+            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataNew ->phone_new) }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataNew ->mobile_new) }},{{ $getAllDataNew ->email_new }},{{ $getAllDataNew ->web_site_name }}
             @endif
         </td>
     </tr>
@@ -161,16 +161,16 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td></td>
         <td></td>
         <td>ক) নাম</td>
-        <td>: {{ $all_partiw1->name_of_head_in_bd }}</td>
+        <td>: {{ $allPartiw1->name_of_head_in_bd }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>খ) জাতীয়তা</td>
-        <td>:          @if(!$get_all_data_new )
+        <td>:          @if(!$getAllDataNew )
 
             @else
-            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_new ->nationality) }}
+            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataNew ->nationality) }}
             @endif
         </td>
     </tr>
@@ -178,13 +178,13 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td></td>
         <td></td>
         <td>গ) পূর্ণকালীন/ খণ্ডকালীন</td>
-        <td>: {{ $all_partiw1->job_type }}</td>
+        <td>: {{ $allPartiw1->job_type }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
         <td>ঘ) ঠিকানা,টেলিফোন নম্বর ,মোবাইল নম্বর, ইমেইল</td>
-        <td>:{{ $all_partiw1->address }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_new ->mobile) }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_partiw1->phone) }}, {{ $all_partiw1->email }}</td>
+        <td>:{{ $allPartiw1->address }},{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataNew ->mobile) }} {{ App\Http\Controllers\Admin\CommonController::englishToBangla($allPartiw1->phone) }}, {{ $allPartiw1->email }}</td>
     </tr>
     <tr>
         <td></td>
@@ -192,7 +192,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td>ঙ) নাগরিকত্ব (পূর্বতন নাগরিকত্ব যদি থাকে তাও উল্লেখ
             করতে হবে)
         </td>
-        <td>: {{ $all_partiw1->citizenship }}</td>
+        <td>: {{ $allPartiw1->citizenship }}</td>
     </tr>
 
 
@@ -202,11 +202,11 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         </td>
         <td>:
 
-            @if(!$get_all_data_new )
+            @if(!$getAllDataNew )
 
 
             @else
-            @if(empty($get_all_data_new ->foregin_pdf))
+            @if(empty($getAllDataNew ->foregin_pdf))
 
             @else
             সংযুক্ত
@@ -220,11 +220,11 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td>৩.</td>
         <td colspan="2">সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট (উৎসসহ)
         </td>
-        <td>:          @if(!$get_all_data_new )
+        <td>:          @if(!$getAllDataNew )
 
 
             @else
-            @if(empty($get_all_data_new ->yearly_budget))
+            @if(empty($getAllDataNew ->yearly_budget))
 
             @else
             সংযুক্ত
@@ -238,7 +238,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td colspan="3">৫(পাঁচ) জন ঊর্ধ্বতন কর্মকর্তার তথ্যাদি :
         </td>
     </tr>
-    @foreach($all_partiw as $key=>$all_all_parti)
+    @foreach($allPartiw as $key=>$allAllParti)
     <tr>
         <td></td>
         <td>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1 )}}.</td>
@@ -249,51 +249,51 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td></td>
         <td>(ক)</td>
         <td>নাম</td>
-        <td>: {{ $all_all_parti->name }}</td>
+        <td>: {{ $allAllParti->name }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(খ)</td>
         <td>পদবি</td>
-        <td>: {{ $all_all_parti->position }}</td>
+        <td>: {{ $allAllParti->position }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(গ)</td>
         <td>ঠিকানা</td>
-        <td>: {{ $all_all_parti->address }}</td>
+        <td>: {{ $allAllParti->address }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঘ)</td>
         <td>নাগরিকত্ব (পূর্বতন নাগরিকত্ব যদি থাকে উল্লেখ করতে হবে)
         </td>
-        <td>: {{ $all_all_parti->citizenship }}</td>
+        <td>: {{ $allAllParti->citizenship }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঙ)</td>
         <td>যোগদানের তারিখ</td>
-        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($all_all_parti->date_of_join))) }}</td>
+        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($allAllParti->date_of_join))) }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(চ)</td>
         <td>বেতন ভাতাদি</td>
-        <td>: {{ $all_all_parti->salary_statement }}</td>
+        <td>: {{ $allAllParti->salary_statement }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ছ)</td>
         <td>মোবাইল নম্বর </td>
-        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($all_all_parti->mobile) }}</td>
+        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($allAllParti->mobile) }}</td>
     </tr>
 
     <tr>
         <td></td>
         <td>(জ)</td>
         <td>ইমেইল এড্রেস</td>
-        <td>: {{ $all_all_parti->email }}</td>
+        <td>: {{ $allAllParti->email }}</td>
     </tr>
 
 
@@ -301,7 +301,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td></td>
         <td>(ঝ)</td>
         <td>সম্পৃক্ত অন্য পেশার বিবরণ</td>
-        <td>: {{ $all_all_parti->other_occupation }}</td>
+        <td>: {{ $allAllParti->other_occupation }}</td>
     </tr>
     @endforeach
 
@@ -311,11 +311,11 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
             কিনা (চালানের কপি সংযুক্ত করতে
             হবে)
         </td>
-        <td>: @if(!$get_all_data_new )
+        <td>: @if(!$getAllDataNew )
 
 
             @else
-            @if(empty($get_all_data_new ->copy_of_chalan))
+            @if(empty($getAllDataNew ->copy_of_chalan))
 
             @else
             সংযুক্ত
@@ -327,11 +327,11 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
         <td>৬.</td>
         <td colspan="2">তফসিল -১ এ বর্ণিত যেকোন ফি এর ভ্যাট বকেয়া থাকলে পরিশোধ হয়েছে কিনা (চালানের কপি সংযুক্ত করতে হবে)
         </td>
-        <td>: @if(!$get_all_data_new )
+        <td>: @if(!$getAllDataNew )
 
 
             @else
-            @if(empty($get_all_data_new ->due_vat_pdf))
+            @if(empty($getAllDataNew ->due_vat_pdf))
 
             @else
             সংযুক্ত
@@ -346,49 +346,49 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
             নাম,শাখা ও বিস্তারিত ঠিকানা)
         </td>
     </tr>
-    @if(!$get_all_data_adviser_bank)
+    @if(!$getAllDataAdviserBank)
 
     @else
     <tr>
         <td></td>
         <td>(ক)</td>
         <td>হিসাব নম্বর</td>
-        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($get_all_data_adviser_bank->account_number) }}</td>
+        <td>: {{ App\Http\Controllers\Admin\CommonController::englishToBangla($getAllDataAdviserBank->account_number) }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(খ)</td>
         <td>ধরণ</td>
-        <td>: {{ $get_all_data_adviser_bank->account_type }}</td>
+        <td>: {{ $getAllDataAdviserBank->account_type }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(গ)</td>
         <td>ব্যাংকের নাম</td>
-        <td>: {{ $get_all_data_adviser_bank->name_of_bank }}</td>
+        <td>: {{ $getAllDataAdviserBank->name_of_bank }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঘ)</td>
         <td>শাখা</td>
-        <td>: {{ $get_all_data_adviser_bank->branch_name_of_bank }}</td>
+        <td>: {{ $getAllDataAdviserBank->branch_name_of_bank }}</td>
     </tr>
     <tr>
         <td></td>
         <td>(ঙ)</td>
         <td>বিস্তারিত ঠিকানা</td>
-        <td>: {{ $get_all_data_adviser_bank->bank_address }}</td>
+        <td>: {{ $getAllDataAdviserBank->bank_address }}</td>
     </tr>
     @endif
     <tr>
         <td>৮.</td>
         <td colspan="2">ব্যাংক হিসাব নম্বর পরিবর্তন হয়ে থাকলে ব্যুরোর অনুমোদনপত্রের কপি সংযুক্ত করতে হবে
         </td>
-        <td>: @if(!$get_all_data_new )
+        <td>: @if(!$getAllDataNew )
 
 
             @else
-            @if(empty($get_all_data_new->change_ac_number))
+            @if(empty($getAllDataNew->change_ac_number))
 
             @else
             সংযুক্ত
@@ -407,24 +407,24 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
 <table style=" margin-top: 15px;width:100%">
 
     <tr>
-        <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $get_all_data_new->digital_signature}}"/></td>
+        <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $getAllDataNew->digital_signature}}"/></td>
     </tr>
     <tr>
-        <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $get_all_data_new->digital_seal}}"/></td>
+        <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $getAllDataNew->digital_seal}}"/></td>
     </tr>
 </table>
 
         <table style=" margin-top: 10px;width:100%">
-          
+
             <tr>
                 <td style="width: 65%"></td>
                 <td style="text-align: left; width:5%;">নাম</td>
-                <td style="width:30%; text-align: left;">: {{ $get_all_data_new->chief_name }}</td>
+                <td style="width:30%; text-align: left;">: {{ $getAllDataNew->chief_name }}</td>
             </tr>
             <tr>
                 <td style="width: 65%"></td>
                 <td style="text-align: left; width: 5%;">পদবি</td>
-                <td style="width:30%; text-align: left;">: {{ $get_all_data_new->chief_desi }}</td>
+                <td style="width:30%; text-align: left;">: {{ $getAllDataNew->chief_desi }}</td>
             </tr>
 
             <tr>
@@ -434,7 +434,7 @@ $getNgoTypeForPdf =DB::table('ngo_type_and_languages')->where('user_id',$all_par
                 <td style="width:30%; text-align: left;">:
 
 
-                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($get_all_data_new->created_at))) }}
+                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($getAllDataNew->created_at))) }}
                 </td>
 
             </tr>

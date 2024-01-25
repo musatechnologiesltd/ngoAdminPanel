@@ -11,10 +11,10 @@
 
 <?php
 
-                     $file_path = url($dataFromNVisaFd9Fd1->attestation_of_appointment_letter);
-                     $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                     $filePath = url($dataFromNVisaFd9Fd1->attestation_of_appointment_letter);
+                     $filename  = pathinfo($filePath, PATHINFO_FILENAME);
 
-                     $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                      ?>
                 <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'appoinmentLetter','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
 
@@ -35,10 +35,10 @@
 
 <?php
 
-                     $file_path = url($dataFromNVisaFd9Fd1->copy_of_form_nine);
-                     $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                     $filePath = url($dataFromNVisaFd9Fd1->copy_of_form_nine);
+                     $filename  = pathinfo($filePath, PATHINFO_FILENAME);
 
-                     $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                      ?>
                 <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'fd9Copy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
 
@@ -64,10 +64,10 @@
 
 <?php
 
-                $file_path = url($dataFromNVisaFd9Fd1->copy_of_nvisa);
-                $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+                $filePath = url($dataFromNVisaFd9Fd1->copy_of_nvisa);
+                $filename  = pathinfo($filePath, PATHINFO_FILENAME);
 
-                $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
                 ?>
                 <a target="_blank"  href="{{ route('fd9OneDownload',['cat'=>'visacopy','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন </a>
 

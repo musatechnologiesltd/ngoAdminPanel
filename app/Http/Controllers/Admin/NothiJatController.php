@@ -469,8 +469,7 @@ class NothiJatController extends Controller
         ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
         ->latest()->get()->unique('registration_status_id');
 
-        $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
-
+   
         return view('admin.post.allDak.nothiJatDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
     }

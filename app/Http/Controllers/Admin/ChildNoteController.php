@@ -478,26 +478,26 @@ class ChildNoteController extends Controller
             $registration_status_id = DB::table('ngo_registration_daks')
             ->where('id',$parentId)->value('registration_status_id');
             $fdOneIdForNothi = DB::table('ngo_statuses')->where('id',$registration_status_id)->value('fd_one_form_id');
-            $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
-            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
-            $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
-            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->first();
-            $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneIdForNothi)->first();
-            $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+            $rStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $nameChangeStatus = DB::table('ngo_name_changes')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $renewStatus = DB::table('ngo_renews')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $allDataForNewListAll = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->first();
+            $formOneData = DB::table('fd_one_forms')->where('id',$fdOneIdForNothi)->first();
+            $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
             $signDataNew = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->first();
-            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_start_date');
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $formEghtData = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $formMemberData = DB::table('ngo_member_lists')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_end_date');
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_start_date');
+            $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+            $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+            $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+            $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
                              //new code
 
         }elseif($status == 'renew'){
@@ -520,25 +520,25 @@ class ChildNoteController extends Controller
               ->where('id',$parentId)->value('renew_status_id');
             $mainIdR = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
             $fdOneFormId = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
-            $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
-            $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
-            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
-            $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
-            $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
-            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
-            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $formOneData = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
+            $rStatus = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->value('status');
+            $nameChangeStatus = DB::table('ngo_name_changes')->where('fd_one_form_id',$formOneData->id)->value('status');
+            $renewStatus = DB::table('ngo_renews')->where('id',$id)->value('status');
+            $allDataForNewListAll = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->first();
+            $formEghtData = DB::table('form_eights')->where('fd_one_form_id',$formOneData->id)->get();
+            $formMemberData = DB::table('ngo_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
             $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
-            $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
-            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
+            $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+            $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+            $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+            $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
 
         }elseif($status == 'nameChange'){
@@ -560,33 +560,33 @@ class ChildNoteController extends Controller
             $name_change_status_id = DB::table('ngo_name_change_daks')->where('id',$parentId)->value('name_change_status_id');
             $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$name_change_status_id)->get();
             $getformOneId = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->first();
-            $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
-            $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
-            $name_change_status = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
-            $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
-            $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+            $formOneData = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
+            $rStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$formOneData->id)->value('status');
+            $nameChangeStatus = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
+            $renewStatus = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->value('status');
+            $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type_new_old');
 
             if($checkOldorNew == 'Old'){
 
-             $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+             $allDataForNewListAll = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->first();
             }else{
 
-             $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+             $allDataForNewListAll = DB::table('ngo_statuses')->where('fd_one_form_id',$formOneData->id)->first();
             }
 
-            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
-            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
-            $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
-            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $formEghtData = DB::table('form_eights')->where('fd_one_form_id',$formOneData->id)->get();
+            $formMemberData = DB::table('ngo_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$formOneData->id)->get();
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$formOneData->id)->value('ngo_duration_end_date');
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$formOneData->id)->value('ngo_duration_start_date');
+            $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$formOneData->id)->get();
+            $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$formOneData->id)->get();
+            $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+            $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+            $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+            $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
         }elseif($status == 'fdNine'){
 
@@ -595,13 +595,13 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$form_one_data=0;$all_data_for_new_list_all=0;
-            $form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
-            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
-            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;
-            $duration_list_all = 0;$renew_status = 0;$name_change_status = 0;
-            $r_status = 0;$form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;$dataFromFd6Form =0;
+            $renewInfoData=0;$formOneData=0;$allDataForNewListAll=0;
+            $formEghtData=0;$formMemberData=0;$formMemberDataDoc=0;
+            $formNgoDataDoc=0;$usersInfo=0;$allSourceOfFund=0;$allPartiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$durationListAll1 =0;
+            $durationListAll1 = 0;$renewStatus = 0;$nameChangeStatus = 0;
+            $rStatus = 0;$formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;$dataFromFd6Form =0;
             $fd2FormList=0;$fd2OtherInfo=0;$prokolpoAreaList=0;$dataFromFd7Form=0;
             $dataFromFc1Form=0;$dataFromFc2Form=0;
 
@@ -639,14 +639,14 @@ class ChildNoteController extends Controller
 
             $dataFromFd3Form = 0;$dataFromFd6Form =0;$fd2FormList=0;
             $fd2OtherInfo=0;$prokolpoAreaList=0;$mainIdR=0;
-            $renewInfoData=0;$dataFromFd7Form=0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;
+            $renewInfoData=0;$dataFromFd7Form=0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;
             $dataFromFc1Form=0;$dataFromFc2Form=0;
 
             $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
@@ -714,13 +714,13 @@ class ChildNoteController extends Controller
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
             $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$dataFromFc2Form=0;
-            $form_one_data=0;$all_data_for_new_list_all=0;$form_eight_data=0;
-            $form_member_data=0;$form_member_data_doc=0;$form_ngo_data_doc=0;
-            $users_info=0; $all_source_of_fund=0;$all_partiw=0;
-            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;
-            $duration_list_all = 0;$renew_status = 0;$name_change_status = 0;
-            $r_status = 0;$form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;$dataFromFc1Form=0;
+            $formOneData=0;$allDataForNewListAll=0;$formEghtData=0;
+            $formMemberData=0;$formMemberDataDoc=0;$formNgoDataDoc=0;
+            $usersInfo=0; $allSourceOfFund=0;$allPartiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$durationListAll1 =0;
+            $durationListAll1 = 0;$renewStatus = 0;$nameChangeStatus = 0;
+            $rStatus = 0;$formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;$dataFromFc1Form=0;
 
 
             $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
@@ -754,14 +754,14 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;$get_all_data_other=0;
-            $get_all_data_adviser_bank=0;$dataFromFc2Form=0;$dataFromFc1Form=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;$getAllDataOther=0;
+            $getAllDataAdviserBank=0;$dataFromFc2Form=0;$dataFromFc1Form=0;
 
             $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
             $fd_seven_status_id = DB::table('ngo_fd_seven_daks')
@@ -795,14 +795,14 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;$get_all_data_other=0;
-            $get_all_data_adviser_bank=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;$getAllDataOther=0;
+            $getAllDataAdviserBank=0;
 
 
             $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
@@ -839,13 +839,13 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0; $form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;
-            $all_partiw=0;$allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;
-            $duration_list_all = 0;$renew_status = 0;$name_change_status = 0;
-            $r_status = 0;$form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0; $formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;$allSourceOfFund=0;
+            $allPartiw=0;$allNameChangeDoc = 0;$getformOneId= 0;$durationListAll1 =0;
+            $durationListAll1 = 0;$renewStatus = 0;$nameChangeStatus = 0;
+            $rStatus = 0;$formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;
 
 
             $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
@@ -880,14 +880,14 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0; $form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0; $formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;
 
             $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
 
@@ -1023,27 +1023,27 @@ class ChildNoteController extends Controller
             'dataFromNVisaFd9Fd1',
             'allNameChangeDoc',
             'getformOneId',
-            'duration_list_all1',
-            'duration_list_all',
-            'r_status',
+            'durationListAll1',
+            'durationListAll1',
+            'rStatus',
             'ngoTypeData',
             'renewInfoData',
             'mainIdR',
-            'renew_status',
-            'name_change_status',
-            'form_member_data_doc_renew',
-            'get_all_data_adviser',
-            'get_all_data_other',
-            'get_all_data_adviser_bank',
-            'all_partiw',
-            'all_source_of_fund',
-            'users_info',
-            'form_ngo_data_doc',
-            'form_member_data_doc',
-            'form_member_data',
-            'form_eight_data',
-            'all_data_for_new_list_all',
-            'form_one_data',
+            'renewStatus',
+            'nameChangeStatus',
+            'formMemberDataDocRenew',
+            'getAllDataAdviser',
+            'getAllDataOther',
+            'getAllDataAdviserBank',
+            'allPartiw',
+            'allSourceOfFund',
+            'usersInfo',
+            'formNgoDataDoc',
+            'formMemberDataDoc',
+            'formMemberData',
+            'formEghtData',
+            'allDataForNewListAll',
+            'formOneData',
             'childNoteNewListValue',
             'childNoteNewList',
             'checkParentFirst',
@@ -1090,26 +1090,26 @@ class ChildNoteController extends Controller
               ->where('id',$parentId)->value('registration_status_id');
 
             $fdOneIdForNothi = DB::table('ngo_statuses')->where('id',$registration_status_id)->value('fd_one_form_id');
-            $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
-            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
-            $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
-            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->first();
-            $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneIdForNothi)->first();
-            $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
+            $rStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $nameChangeStatus = DB::table('ngo_name_changes')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $renewStatus = DB::table('ngo_renews')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $allDataForNewListAll = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->first();
+            $formOneData = DB::table('fd_one_forms')->where('id',$fdOneIdForNothi)->first();
+            $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
             $signDataNew = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->first();
-            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_start_date');
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneIdForNothi)->get();
-            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $formEghtData = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $formMemberData = DB::table('ngo_member_lists')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_end_date');
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_start_date');
+            $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+            $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+            $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+            $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
         }elseif($status == 'renew'){
 
@@ -1132,25 +1132,25 @@ class ChildNoteController extends Controller
 
             $mainIdR = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
             $fdOneFormId = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
-            $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
-            $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
-            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
-            $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
-            $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
-            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
-            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+            $formOneData = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
+            $rStatus = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->value('status');
+            $nameChangeStatus = DB::table('ngo_name_changes')->where('fd_one_form_id',$formOneData->id)->value('status');
+            $renewStatus = DB::table('ngo_renews')->where('id',$id)->value('status');
+            $allDataForNewListAll = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->first();
+            $formEghtData = DB::table('form_eights')->where('fd_one_form_id',$formOneData->id)->get();
+            $formMemberData = DB::table('ngo_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
             $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
-            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
-            $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
-            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
-            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
-            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
-            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id) ->get();
+            $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+            $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
+            $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+            $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+            $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+            $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+            $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+            $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id) ->get();
 
 
         }elseif($status == 'nameChange'){
@@ -1172,33 +1172,33 @@ class ChildNoteController extends Controller
 
            $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$name_change_status_id)->get();
            $getformOneId = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->first();
-           $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
-           $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
-           $name_change_status = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
-           $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
-           $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+           $formOneData = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
+           $rStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$formOneData->id)->value('status');
+           $nameChangeStatus = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
+           $renewStatus = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->value('status');
+           $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type_new_old');
 
           if($checkOldorNew == 'Old'){
 
-            $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+            $allDataForNewListAll = DB::table('ngo_renews')->where('fd_one_form_id',$formOneData->id)->first();
            }else{
 
-            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+            $allDataForNewListAll = DB::table('ngo_statuses')->where('fd_one_form_id',$formOneData->id)->first();
            }
 
-              $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
-              $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-              $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
-              $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
-              $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
-              $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
-              $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
-              $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-              $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
-              $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-              $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)->first();
-              $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)->get();
-              $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+              $formEghtData = DB::table('form_eights')->where('fd_one_form_id',$formOneData->id)->get();
+              $formMemberData = DB::table('ngo_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+              $formMemberDataDocRenew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$formOneData->id)->get();
+              $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$formOneData->id)->value('ngo_duration_end_date');
+              $durationListAll1 = DB::table('ngo_durations')->where('fd_one_form_id',$formOneData->id)->value('ngo_duration_start_date');
+              $formMemberDataDoc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$formOneData->id)->get();
+              $formNgoDataDoc = DB::table('ngo_other_docs')->where('fd_one_form_id',$formOneData->id)->get();
+              $usersInfo = DB::table('users')->where('id',$formOneData->user_id)->first();
+              $allSourceOfFund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$formOneData->id)->get();
+              $allPartiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$formOneData->id)->get();
+              $getAllDataAdviserBank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$formOneData->id)->first();
+              $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
+              $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
               $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
               $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
@@ -1213,13 +1213,13 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$form_one_data=0;$all_data_for_new_list_all=0;
-            $form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
-            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
-            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;
-            $duration_list_all = 0;$renew_status = 0;$name_change_status = 0;
-            $r_status = 0;$form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;$dataFromFd6Form =0;
+            $renewInfoData=0;$formOneData=0;$allDataForNewListAll=0;
+            $formEghtData=0;$formMemberData=0;$formMemberDataDoc=0;
+            $formNgoDataDoc=0;$usersInfo=0;$allSourceOfFund=0;$allPartiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$durationListAll1 =0;
+            $durationListAll1 = 0;$renewStatus = 0;$nameChangeStatus = 0;
+            $rStatus = 0;$formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;$dataFromFd6Form =0;
             $fd2FormList=0;$fd2OtherInfo=0;$prokolpoAreaList=0;$dataFromFd7Form=0;
             $dataFromFc1Form=0;$dataFromFc2Form=0;
 
@@ -1257,14 +1257,14 @@ class ChildNoteController extends Controller
 
             $dataFromFd3Form = 0;$dataFromFd6Form =0;$fd2FormList=0;
             $fd2OtherInfo=0;$prokolpoAreaList=0;$mainIdR=0;
-            $renewInfoData=0;$dataFromFd7Form=0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;
+            $renewInfoData=0;$dataFromFd7Form=0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;
             $dataFromFc1Form=0;$dataFromFc2Form=0;
 
             $fd_nine_one_status_id = DB::table('ngo_f_d_nine_one_daks')
@@ -1321,13 +1321,13 @@ class ChildNoteController extends Controller
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
             $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$dataFromFc2Form=0;
-            $form_one_data=0;$all_data_for_new_list_all=0;$form_eight_data=0;
-            $form_member_data=0;$form_member_data_doc=0;$form_ngo_data_doc=0;
-            $users_info=0; $all_source_of_fund=0;$all_partiw=0;
-            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;
-            $duration_list_all = 0;$renew_status = 0;$name_change_status = 0;
-            $r_status = 0;$form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;$dataFromFc1Form=0;
+            $formOneData=0;$allDataForNewListAll=0;$formEghtData=0;
+            $formMemberData=0;$formMemberDataDoc=0;$formNgoDataDoc=0;
+            $usersInfo=0; $allSourceOfFund=0;$allPartiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$durationListAll1 =0;
+            $durationListAll1 = 0;$renewStatus = 0;$nameChangeStatus = 0;
+            $rStatus = 0;$formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;$dataFromFc1Form=0;
 
             $fd_six_status_id = DB::table('ngo_fd_six_daks')->where('id',$parentId)->value('fd_six_status_id');
 
@@ -1358,14 +1358,14 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;$get_all_data_other=0;
-            $get_all_data_adviser_bank=0;$dataFromFc2Form=0;$dataFromFc1Form=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;$getAllDataOther=0;
+            $getAllDataAdviserBank=0;$dataFromFc2Form=0;$dataFromFc1Form=0;
 
             $fd_seven_status_id = DB::table('ngo_fd_seven_daks')
             ->where('id',$parentId)
@@ -1400,14 +1400,14 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;$get_all_data_other=0;
-            $get_all_data_adviser_bank=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;$getAllDataOther=0;
+            $getAllDataAdviserBank=0;
 
 
             $fc_one_status_id = DB::table('fc_one_daks')
@@ -1440,13 +1440,13 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0;$form_eight_data=0; $form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;
-            $all_partiw=0;$allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;
-            $duration_list_all = 0;$renew_status = 0;$name_change_status = 0;
-            $r_status = 0;$form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0;$formEghtData=0; $formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;$allSourceOfFund=0;
+            $allPartiw=0;$allNameChangeDoc = 0;$getformOneId= 0;$durationListAll1 =0;
+            $durationListAll1 = 0;$renewStatus = 0;$nameChangeStatus = 0;
+            $rStatus = 0;$formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;
 
             $fc_two_status_id = DB::table('fc_two_daks')
             ->where('id',$parentId)
@@ -1483,14 +1483,14 @@ class ChildNoteController extends Controller
             $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;
             $nVisaForeignerInfo=0;$nVisaManPower=0;$nVisaEmploye=0;
             $nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;$mainIdR=0;
-            $renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
-            $all_data_for_new_list_all=0; $form_eight_data=0;$form_member_data=0;
-            $form_member_data_doc=0;$form_ngo_data_doc=0;$users_info=0;
-            $all_source_of_fund=0;$all_partiw=0;$allNameChangeDoc = 0;
-            $getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
-            $renew_status = 0;$name_change_status = 0;$r_status = 0;
-            $form_member_data_doc_renew =0;$get_all_data_adviser=0;
-            $get_all_data_other=0;$get_all_data_adviser_bank=0;
+            $renewInfoData=0;$mainIdFdNineOne =0;$formOneData=0;
+            $allDataForNewListAll=0; $formEghtData=0;$formMemberData=0;
+            $formMemberDataDoc=0;$formNgoDataDoc=0;$usersInfo=0;
+            $allSourceOfFund=0;$allPartiw=0;$allNameChangeDoc = 0;
+            $getformOneId= 0;$durationListAll1 =0;$durationListAll1 = 0;
+            $renewStatus = 0;$nameChangeStatus = 0;$rStatus = 0;
+            $formMemberDataDocRenew =0;$getAllDataAdviser=0;
+            $getAllDataOther=0;$getAllDataAdviserBank=0;
 
 
 
@@ -1630,27 +1630,27 @@ class ChildNoteController extends Controller
         'dataFromNVisaFd9Fd1',
         'allNameChangeDoc',
         'getformOneId',
-        'duration_list_all1',
-        'duration_list_all',
-        'r_status',
+        'durationListAll1',
+        'durationListAll1',
+        'rStatus',
         'ngoTypeData',
         'renewInfoData',
         'mainIdR',
-        'renew_status',
-        'name_change_status',
-        'form_member_data_doc_renew',
-        'get_all_data_adviser',
-        'get_all_data_other',
-        'get_all_data_adviser_bank',
-        'all_partiw',
-        'all_source_of_fund',
-        'users_info',
-        'form_ngo_data_doc',
-        'form_member_data_doc',
-        'form_member_data',
-        'form_eight_data',
-        'all_data_for_new_list_all',
-        'form_one_data',
+        'renewStatus',
+        'nameChangeStatus',
+        'formMemberDataDocRenew',
+        'getAllDataAdviser',
+        'getAllDataOther',
+        'getAllDataAdviserBank',
+        'allPartiw',
+        'allSourceOfFund',
+        'usersInfo',
+        'formNgoDataDoc',
+        'formMemberDataDoc',
+        'formMemberData',
+        'formEghtData',
+        'allDataForNewListAll',
+        'formOneData',
         'childNoteNewListValue',
         'childNoteNewList',
         'checkParentFirst',

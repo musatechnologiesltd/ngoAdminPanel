@@ -65,7 +65,7 @@
                             এনডিসা প্রাপ্তির সুপারিশপত্র
                             পাওয়ার জন্য আবেদন করছিঃ</p>
                         @else
-                        <p>নিম্নলখিত নিয়োগপ্রাপ্ত বিদেশি নাগরিক/নাগরিকগণকে এ সংস্থায় (নিবন্ধন নম্বরঃ {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngo_list_all->registration_number)}}
+                        <p>নিম্নলখিত নিয়োগপ্রাপ্ত বিদেশি নাগরিক/নাগরিকগণকে এ সংস্থায় (নিবন্ধন নম্বরঃ {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoListAll->registration_number)}}
                             তারিখঃ {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($ngoStatus->updated_at))) }}) বৈদেশিক
                             অনুদান (স্বেচ্ছাসেবামূলক কর্মকান্ড) রেগুলেশন আইন ২০১৬ অনুযায়ী নিয়োগপত্র সত্যায়ন ও
                             এনডিসা প্রাপ্তির সুপারিশপত্র
@@ -298,7 +298,7 @@ $familyData = DB::table('fd9_foreigner_employee_family_member_lists')
 
                         @else
 
-                       
+
                         সংযুক্ত
 @endif
                     </td>

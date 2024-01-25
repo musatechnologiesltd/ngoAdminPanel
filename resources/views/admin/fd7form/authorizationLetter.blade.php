@@ -32,13 +32,13 @@
         <div class="row">
 
             <object
-            data='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
+            data='{{ $ins_url }}{{ 'public/'.$formOneData }}'
             type="application/pdf"
             width="500"
             height="900">
 
             <iframe
-              src='{{ $ins_url }}{{ 'public/'.$form_one_data }}'
+              src='{{ $ins_url }}{{ 'public/'.$formOneData }}'
               width="500"
               height="900" >
             <p>This browser does not support PDF!</p>

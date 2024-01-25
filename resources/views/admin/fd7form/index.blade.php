@@ -54,12 +54,12 @@
 
                            <?php
 
-                           $form_one_data = DB::table('fd_one_forms')
+                           $formOneData = DB::table('fd_one_forms')
                            ->where('id',$dataFromFd6FormAll->fd_one_form_id)->first();
 
 
                            $ngoTypeData = DB::table('ngo_type_and_languages')
-                           ->where('user_id',$form_one_data->user_id)->first();
+                           ->where('user_id',$formOneData->user_id)->first();
 
                                                            ?>
                             <tr>
@@ -68,7 +68,7 @@
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration) }}
                                     @else
 
-                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number) }}
+                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->registration_number) }}
                                      @endif</td>
                                 <td><h6> {{ $dataFromFd6FormAll->organization_name_ban }} </h6><span>Address: {{ $dataFromFd6FormAll->organization_address }}</span></td>
                                 <td>{{ $dataFromFd6FormAll->ngo_prokolpo_name }}</td>

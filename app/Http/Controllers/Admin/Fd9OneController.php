@@ -32,18 +32,18 @@ class Fd9OneController extends Controller
         \LogActivity::addToLog('verified_fd_nine_one_download');
         $id = $id;
         $fd9OneList = DB::table('fd9_one_forms')->where('id',$id)->first();
-        $ngo_list_all = DB::table('fd_one_forms')->where('id',$fd9OneList->fd_one_form_id)->first();
-        $file_Name_Custome = "Fd9.1_Form";
+        $ngoListAll = DB::table('fd_one_forms')->where('id',$fd9OneList->fd_one_form_id)->first();
+        $fileNameCustome = "Fd9.1_Form";
 
         $data =view('admin.fd9Oneform.verified_fd_nine_one_download',[
 
-            'ngo_list_all'=>$ngo_list_all,
+            'ngoListAll'=>$ngoListAll,
             'fd9OneList'=>$fd9OneList
 
         ])->render();
 
 
-        $pdfFilePath =$file_Name_Custome.'.pdf';
+        $pdfFilePath =$fileNameCustome.'.pdf';
 
 
         $mpdf = new Mpdf([
@@ -72,13 +72,13 @@ class Fd9OneController extends Controller
         }else{
 
             $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-            $convert_name_title = $ngoStatusFDNineOneDak->implode("f_d_nine_one_status_id", " ");
-            $separated_data_title = explode(" ", $convert_name_title);
+            $convertNameTitle = $ngoStatusFDNineOneDak->implode("f_d_nine_one_status_id", " ");
+            $separatedDataTitle = explode(" ", $convertNameTitle);
 
             $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
             ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
             ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal')
-            ->whereIn('fd9_one_forms.id',$separated_data_title)
+            ->whereIn('fd9_one_forms.id',$separatedDataTitle)
             ->orderBy('fd9_one_forms.id','desc')->get();
         }
 
@@ -99,9 +99,11 @@ class Fd9OneController extends Controller
             'comment' => $request->comment,
         ]);
 
+        $getUserId  =  DB::table('fd9_one_forms')->where('id',$request->id)->value('fd_one_form_id');
+
         if($request->status == 'Rejected' || $request->status == 'Correct'){
 
-            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$getUserId], function($message) use($request){
                 $message->to($request->email);
                 $message->subject('NGOAB Registration Service || Ngo Renew Status');
             });
@@ -179,20 +181,20 @@ class Fd9OneController extends Controller
 
         if($cat == 'appoinmentLetter'){
 
-            $get_file_data = DB::table('fd9_one_forms')->where('id',$id)->value('attestation_of_appointment_letter');
+            $getFileData = DB::table('fd9_one_forms')->where('id',$id)->value('attestation_of_appointment_letter');
         }elseif($cat == 'fd9Copy'){
 
-            $get_file_data = DB::table('fd9_one_forms')->where('id',$id)->value('copy_of_form_nine');
+            $getFileData = DB::table('fd9_one_forms')->where('id',$id)->value('copy_of_form_nine');
 
         }elseif($cat == 'visacopy'){
 
-            $get_file_data = DB::table('fd9_one_forms')->where('id',$id)->value('copy_of_nvisa');
+            $getFileData = DB::table('fd9_one_forms')->where('id',$id)->value('copy_of_nvisa');
 
         }
 
-        $file_path = $data->system_url.'public/'.$get_file_data;
-        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-        $file=$data->system_url.'public/'.$get_file_data;
+        $filePath = $data->system_url.'public/'.$getFileData;
+        $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+        $file=$data->system_url.'public/'.$getFileData;
 
         $headers = array(
                   'Content-Type: application/pdf',
@@ -211,11 +213,11 @@ class Fd9OneController extends Controller
         \LogActivity::addToLog('download forwardingLetterForNothi');
 
         $data = DB::table('system_information')->first();
-        $get_file_data = DB::table('n_visas')->where('id',$id)->value('forwarding_letter');
+        $getFileData = DB::table('n_visas')->where('id',$id)->value('forwarding_letter');
 
-        $file_path = $data->system_admin_url.'public/'.$get_file_data;
-        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-        $file=$data->system_admin_url.'public/'.$get_file_data;
+        $filePath = $data->system_admin_url.'public/'.$getFileData;
+        $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+        $file=$data->system_admin_url.'public/'.$getFileData;
 
         $headers = array(
                   'Content-Type: application/pdf',

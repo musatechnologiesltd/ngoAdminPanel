@@ -1,6 +1,6 @@
 <?php
 
-$renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_data->id)->latest()->get();
+$renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$formOneData->id)->latest()->get();
 
 ?>
 <table class="table table-bordered">
@@ -8,7 +8,7 @@ $renewalFileList = DB::table('renewal_files')->where('fd_one_form_id',$form_one_
         <th>নথির নাম</th>
         <th>নথি দেখুন</th>
     </tr>
-    
+
 @foreach($renewalFileList as $ngoOtherDocListsFirst)
 
 

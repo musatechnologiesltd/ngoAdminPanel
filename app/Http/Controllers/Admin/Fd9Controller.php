@@ -38,38 +38,38 @@ class Fd9Controller extends Controller
 
         \LogActivity::addToLog('verified_fd_nine_download');
 
-        $form_one_data = DB::table('fd9_forms')->where('id',$id)->value('verified_fd_nine_form');
+        $formOneData = DB::table('fd9_forms')->where('id',$id)->value('verified_fd_nine_form');
         $nVisaId = $id;
         $fdNineData =DB::table('fd9_forms')->where('id',$nVisaId)->first();
         $getCityzenshipData = DB::table('countries')->whereNotNull('country_people_english')->whereNotNull('country_people_bangla')->orderBy('id','asc')->get();
         $countryList = DB::table('countries')->orderBy('id','asc')->get();
-        $ngo_list_all = DB::table('fd_one_forms')->where('id',$fdNineData->fd_one_form_id)->first();
-        $checkNgoTypeForForeginNgo = DB::table('ngo_type_and_languages')->where('user_id',$ngo_list_all->user_id)->first();
-        $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$ngo_list_all->user_id)->value('ngo_type_new_old');
+        $ngoListAll = DB::table('fd_one_forms')->where('id',$fdNineData->fd_one_form_id)->first();
+        $checkNgoTypeForForeginNgo = DB::table('ngo_type_and_languages')->where('user_id',$ngoListAll->user_id)->first();
+        $checkOldorNew = DB::table('ngo_type_and_languages')->where('user_id',$ngoListAll->user_id)->value('ngo_type_new_old');
 
         if($checkOldorNew == 'Old'){
 
-          $ngoStatus = DB::table('ngo_renews')->where('fd_one_form_id',$ngo_list_all->id)->first();
+          $ngoStatus = DB::table('ngo_renews')->where('fd_one_form_id',$ngoListAll->id)->first();
 
         }else{
 
-          $ngoStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$ngo_list_all->id)->first();
+          $ngoStatus = DB::table('ngo_statuses')->where('fd_one_form_id',$ngoListAll->id)->first();
         }
 
 
-        $file_Name_Custome = 'fd_nine_form';
+        $fileNameCustome = 'fd_nine_form';
         $data =view('admin.fd9form.verified_fd_nine_download',[
                  'checkNgoTypeForForeginNgo'=>$checkNgoTypeForForeginNgo,
                  'fdNineData'=>$fdNineData,
                  'fdNineData'=>$fdNineData,
                  'getCityzenshipData'=>$getCityzenshipData,
                  'countryList'=>$countryList,
-                 'ngo_list_all'=>$ngo_list_all,
+                 'ngoListAll'=>$ngoListAll,
                  'ngoStatus'=>$ngoStatus
                 ])->render();
 
 
-        $pdfFilePath =$file_Name_Custome.'.pdf';
+        $pdfFilePath =$fileNameCustome.'.pdf';
 
 
          $mpdf = new Mpdf([
@@ -96,10 +96,11 @@ class Fd9Controller extends Controller
             'comment' => $request->comment,
         ]);
 
+        $getUserId  =  DB::table('fd9_forms')->where('id',$request->id)->value('fd_one_form_id');
 
         if($request->status == 'Rejected' || $request->status == 'Correct'){
 
-            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$get_user_id], function($message) use($request){
+            Mail::send('emails.passwordResetEmailRenew', ['comment' => $request->comment,'id' => $request->status,'ngoId'=>$getUserId], function($message) use($request){
                 $message->to($request->email);
                 $message->subject('NGOAB Registration Service || Ngo Renew Status');
             });
@@ -128,14 +129,14 @@ class Fd9Controller extends Controller
             $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-            $convert_name_title = $ngoStatusFDNineDak->implode("f_d_nine_status_id", " ");
-            $separated_data_title = explode(" ", $convert_name_title);
+            $convertNameTitle = $ngoStatusFDNineDak->implode("f_d_nine_status_id", " ");
+            $separatedDataTitle = explode(" ", $convertNameTitle);
 
 
             $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd9_forms.*')
-            ->whereIn('fd9_forms.id',$separated_data_title)
+            ->whereIn('fd9_forms.id',$separatedDataTitle)
             ->orderBy('fd9_forms.id','desc')
             ->get();
 
@@ -182,7 +183,7 @@ class Fd9Controller extends Controller
         $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
         $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
 
-        $file_Name_Custome ='WPN-'.date('d').date('F').date('Y').'-'.time().CommonController::generateRandomInteger();
+        $fileNameCustome ='WPN-'.date('d').date('F').date('Y').'-'.time().CommonController::generateRandomInteger();
         $url = public_path('uploads/forwardingLetter');
         File::makeDirectory($url, 0777, true, true);
 
@@ -204,12 +205,12 @@ class Fd9Controller extends Controller
         'dataFromNVisaFd9Fd1'=>$dataFromNVisaFd9Fd1,
         'nVisaAuthPerson'=>$nVisaAuthPerson,
 
-        ],[],['format' => 'A4'])->save($url. '/' .$file_Name_Custome.'.pdf');
+        ],[],['format' => 'A4'])->save($url. '/' .$fileNameCustome.'.pdf');
 
 
         DB::table('n_visas')->where('id',$dataFromNVisaFd9Fd1->nVisaId)
           ->update(
-            array('forwarding_letter' =>'uploads/forwardingLetter/'.$file_Name_Custome.'.pdf')
+            array('forwarding_letter' =>'uploads/forwardingLetter/'.$fileNameCustome.'.pdf')
         );
 
     }
@@ -226,7 +227,7 @@ class Fd9Controller extends Controller
         ->where('fd9_forms.id',$id)
         ->first();
 
-        $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
+        $getEmailFromUser = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
         $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$id)->orderBy('id','desc')->value('id');
         $forwardingLetterOnulipi = ForwardingLetterOnulipi::where('forwarding_letter_id',$forwardId)->get();
         $editCheck = Fd9ForwardingLetterEdit::where('forwarding_letter_id',$forwardId)->orderBy('id','desc')->value('pdf_part_one');
@@ -253,7 +254,7 @@ class Fd9Controller extends Controller
         $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
         $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
-        return view('admin.fd9form.show_new',compact('get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+        return view('admin.fd9form.show_new',compact('getEmailFromUser','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
 
     }
 
@@ -364,9 +365,9 @@ class Fd9Controller extends Controller
         $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
         $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
-        $file_Name_Custome = 'fd9form';
+        $fileNameCustome = 'fd9form';
         $pdf=PDF::loadView('admin.fd9form.pdf',['ngoStatus'=>$ngoStatus,'checkNgoTypeForForeginNgo'=>$checkNgoTypeForForeginNgo,'dataFromNVisaFd9Fd1'=>$dataFromNVisaFd9Fd1]);
-        return $pdf->stream($file_Name_Custome.''.'.pdf');
+        return $pdf->stream($fileNameCustome.''.'.pdf');
 
     }
 
@@ -379,94 +380,94 @@ class Fd9Controller extends Controller
 
         if($cat == 'nomination'){
 
-            $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('nomination_letter_of_buyer');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('nomination_letter_of_buyer');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'investment'){
 
-            $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('registration_letter_of_board_of_investment');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('registration_letter_of_board_of_investment');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'contract'){
 
-            $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('employee_contract_copy');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('employee_contract_copy');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'directors'){
 
-            $get_file_data =DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('board_of_the_directors_sign_letter');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData =DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('board_of_the_directors_sign_letter');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'shareHolder'){
 
-            $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('share_holder_copy');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('share_holder_copy');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'passportCopy'){
 
-            $get_file_data = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('passport_photocopy');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('n_visa_necessary_document_for_work_permits')->where('id',$id)->value('passport_photocopy');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'academicQualification'){
 
-            $get_file_data = DB::table('fd9_forms')->where('id',$id)->value('fd9_academic_qualification');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('fd9_forms')->where('id',$id)->value('fd9_academic_qualification');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'techQualification'){
 
-            $get_file_data = DB::table('fd9_forms')->where('id',$id)->value('fd9_technical_and_other_qualifications_if_any');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('fd9_forms')->where('id',$id)->value('fd9_technical_and_other_qualifications_if_any');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'pastExperience'){
 
-            $get_file_data = DB::table('fd9_forms')->where('id',$id)->value('fd9_past_experience');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('fd9_forms')->where('id',$id)->value('fd9_past_experience');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'offeredPost'){
 
-            $get_file_data = DB::table('fd9_forms')->where('id',$id)->value('fd9_offered_post');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('fd9_forms')->where('id',$id)->value('fd9_offered_post');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'proposedProject'){
 
-            $get_file_data = DB::table('fd9_forms')->where('id',$id)->value('fd9_name_of_proposed_project');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('fd9_forms')->where('id',$id)->value('fd9_name_of_proposed_project');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'copyOfPassport'){
 
-            $get_file_data = DB::table('fd9_forms')->where('id',$id)->value('fd9_copy_of_passport');
-            $file_path =$data->system_url.'public/'.$get_file_data;
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=$data->system_url.'public/'.$get_file_data;
+            $getFileData = DB::table('fd9_forms')->where('id',$id)->value('fd9_copy_of_passport');
+            $filePath =$data->system_url.'public/'.$getFileData;
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=$data->system_url.'public/'.$getFileData;
 
         }elseif($cat == 'forwarding_letter'){
 
-            $get_file_data = DB::table('n_visas')->where('id', $id)->value('forwarding_letter');
-            $file_path =url('public/'.$get_file_data);
-            $filename  = pathinfo($file_path, PATHINFO_FILENAME);
-            $file=url('public/'.$get_file_data);
+            $getFileData = DB::table('n_visas')->where('id', $id)->value('forwarding_letter');
+            $filePath =url('public/'.$getFileData);
+            $filename  = pathinfo($filePath, PATHINFO_FILENAME);
+            $file=url('public/'.$getFileData);
 
         }
 

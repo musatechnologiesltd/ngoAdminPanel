@@ -49,13 +49,13 @@ class FD6Controller extends Controller
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get();
 
-            $convert_name_title = $ngoStatusFdSixDak->implode("fd_six_status_id", " ");
-            $separated_data_title = explode(" ", $convert_name_title);
+            $convertNameTitle = $ngoStatusFdSixDak->implode("fd_six_status_id", " ");
+            $separatedDataTitle = explode(" ", $convertNameTitle);
 
             $dataFromFd6Form = DB::table('fd6_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
-            ->whereIn('fd6_forms.id',$separated_data_title)
+            ->whereIn('fd6_forms.id',$separatedDataTitle)
             ->orderBy('fd6_forms.id','desc')
             ->get();
 
@@ -77,13 +77,13 @@ class FD6Controller extends Controller
         ->where('fd6_forms.id',$id)
         ->orderBy('fd6_forms.id','desc')
         ->first();
-        $get_email_from_user = DB::table('users')->where('id',$dataFromFd6Form->user_id)->value('email');
+        $getEmailFromUser = DB::table('users')->where('id',$dataFromFd6Form->user_id)->value('email');
         $fd2FormList = DB::table('fd2_forms')->where('fd_one_form_id',$dataFromFd6Form->fd_one_form_id)
          ->where('fd_six_form_id',base64_encode($dataFromFd6Form->mainId))->latest()->first();
         $fd2OtherInfo = DB::table('fd2_form_other_infos')->where('fd2_form_id',$fd2FormList->id)->latest()->get();
         $prokolpoAreaList = DB::table('fd6_form_prokolpo_areas')->where('fd6_form_id',$dataFromFd6Form->mainId)->latest()->get();
 
-        return view('admin.fd6form.show',compact('get_email_from_user','dataFromFd6Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
+        return view('admin.fd6form.show',compact('getEmailFromUser','dataFromFd6Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
 
     }
 
@@ -92,9 +92,9 @@ class FD6Controller extends Controller
 
         \LogActivity::addToLog('fd6 pdf download.');
 
-        $form_one_data = DB::table('fd6_forms')->where('id',$id)->value('project_proposal_form');
+        $formOneData = DB::table('fd6_forms')->where('id',$id)->value('project_proposal_form');
 
-        return view('admin.fd6form.fd6PdfDownload',compact('form_one_data'));
+        return view('admin.fd6form.fd6PdfDownload',compact('formOneData'));
 
     }
 
@@ -103,9 +103,9 @@ class FD6Controller extends Controller
 
         \LogActivity::addToLog('fd2 pdf download.');
 
-        $form_one_data = DB::table('fd2_forms')->where('id',$id)->value('fd_2_form_pdf');
+        $formOneData = DB::table('fd2_forms')->where('id',$id)->value('fd_2_form_pdf');
 
-        return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
+        return view('admin.fd6form.fd2PdfDownload',compact('formOneData'));
     }
 
 
@@ -113,9 +113,9 @@ class FD6Controller extends Controller
 
         \LogActivity::addToLog('fd2 other pdf download.');
 
-        $form_one_data = DB::table('fd2_form_other_infos')->where('id',$id)->value('file');
+        $formOneData = DB::table('fd2_form_other_infos')->where('id',$id)->value('file');
 
-        return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
+        return view('admin.fd6form.fd2PdfDownload',compact('formOneData'));
 
     }
 

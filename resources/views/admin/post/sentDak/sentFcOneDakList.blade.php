@@ -14,7 +14,7 @@ $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)>value('a
 //end new code
 
 $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_status_id)->value('fd_one_form_id');
-$form_one_data = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
+$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
 $adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
 $adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
 $decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
@@ -22,7 +22,7 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_one_
 ?>
 <tr>
  <td style="text-align:left;">
-     উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+     উৎসঃ {{ $formOneData->organization_name_ban }} <br>
      প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
      মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
      বিষয়ঃ <b> এফসি-১   </b> <br>
