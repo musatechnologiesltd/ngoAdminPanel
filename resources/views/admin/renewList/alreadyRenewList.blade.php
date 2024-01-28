@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-নতুন নবায়ন অনুরোধের তালিকা  | {{ $ins_name }}
+ইতিমধ্যে নবায়নকৃত তালিকা  | {{ $insName }}
 @endsection
 
 
@@ -14,11 +14,11 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>নতুন নবায়ন অনুরোধের  তালিকা </h3>
+                <h3>ইতিমধ্যে নবায়নকৃত তালিকা </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">এনজিও নবায়ন</li>
-                    <li class="breadcrumb-item">নতুন নবায়ন অনুরোধের তালিকা</li>
+                    <li class="breadcrumb-item">ইতিমধ্যে নবায়নকৃত তালিকা </li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -36,18 +36,9 @@
                 <div class="card-body">
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
-                            <thead>
-                                                   <tr>
-                                <th>নিবন্ধন নম্বর</th>
-                                <th>এনজিওর নাম ও ঠিকানা</th>
-                                <th>পেমেন্ট</th>
-                                <th>স্ট্যাটাস</th>
-                                <th>জমাদানের তারিখ</th>
-                                <th>কার্যকলাপ</th>
-                            </tr>
-                            </thead>
+
                             <tbody>
-                                @foreach($allDataForNewLisas $allDataForNewListAll)
+                                @foreach($allDataForNewList as $allDataForNewListAll)
 
                                 <?php
 
@@ -59,10 +50,11 @@ $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)-
 
         if($getngoForLanguage =='দেশিও'){
 
-                $regName = $regNumber->organization_name_ban;
+            $regName = $regNumber->organization_name_ban;
 
         }else{
-                $regName = $regNumber->organization_name;
+
+            $regName = $regNumber->organization_name;
 
         }
 $regAddress =$regNumber->organization_address;

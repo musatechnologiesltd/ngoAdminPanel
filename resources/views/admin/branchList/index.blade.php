@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-শাখার  তালিকা | {{ $ins_name }}
+শাখার  তালিকা | {{ $insName }}
 @endsection
 
 

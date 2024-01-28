@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ $ins_name }}" />
-	<meta property="og:title" content="{{ $ins_name }}" />
-	<meta property="og:description" content="{{ $ins_name }}" />
+    <meta name="description" content="{{ $insName }}" />
+	<meta property="og:title" content="{{ $insName }}" />
+	<meta property="og:description" content="{{ $insName }}" />
 	<meta property="og:image" content="{{ asset('/') }}{{ $logo }}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -50,159 +50,124 @@
     <link id="color" rel="stylesheet" href="{{ asset('/') }}public/admin/assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/responsive.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/tree.css">
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
+    <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
+    <style>
 
-<!-- CSS -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-<!-- Plugins css start-->
-<link rel="stylesheet" type="text/css" href="{{ asset('/') }}public/admin/assets/css/tree.css">
+        .swal2-confirm{
+        margin-left:10px;
+        }
+        .select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 22px !important;
+        width: 22px !important;
+        margin: 0 !important;
+        text-align: center !important;
+        color: #e74c3c !important;
+        font-weight: bold !important;
+        font-size: 16px !important;
+        }
+        #pageloader
+        {
+        background: rgba( 255, 255, 255, 0.8 );
+        display: none;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 9999;
+        }
 
-        @yield('css')
+        #pageloader img
+        {
+        left: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        position: absolute;
+        top: 50%;
+        }
+            .parsley-required{
 
+                margin-top:10px;
+            }
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
-        <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
-<script src="{{ asset('/')}}public/parsely1.js"></script>
-<style>
+            .box
+            {
 
-.swal2-confirm{
+             width:100%;
+             max-width:600px;
+             background-color:#f9f9f9;
+             border:1px solid #ccc;
+             border-radius:5px;
+             padding:16px;
+             margin:0 auto;
 
-margin-left:10px;
-}
+            }
 
+            input.parsley-success,
 
+            select.parsley-success,
 
+            textarea.parsley-success {
 
-.select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
-position: absolute !important;
-top: 0 !important;
-left: 0 !important;
-height: 22px !important;
-width: 22px !important;
-margin: 0 !important;
-text-align: center !important;
-color: #e74c3c !important;
-font-weight: bold !important;
-font-size: 16px !important;
-}
+              color: #468847;
+              background-color: #DFF0D8;
+              border: 1px solid #D6E9C6;
 
+            }
 
-#pageloader
-{
-background: rgba( 255, 255, 255, 0.8 );
-display: none;
-height: 100%;
-position: fixed;
-width: 100%;
-z-index: 9999;
-}
+            input.parsley-error,
 
-#pageloader img
-{
-left: 50%;
-margin-left: -32px;
-margin-top: -32px;
-position: absolute;
-top: 50%;
-}
-    .parsley-required{
+            select.parsley-error,
 
-        margin-top:10px;
-    }
+            textarea.parsley-error {
 
-    .box
+              color: #B94A48;
+              background-color: #F2DEDE;
+              border: 1px solid #EED3D7;
 
-    {
-
-     width:100%;
-
-     max-width:600px;
-
-     background-color:#f9f9f9;
-
-     border:1px solid #ccc;
-
-     border-radius:5px;
-
-     padding:16px;
-
-     margin:0 auto;
-
-    }
-
-    input.parsley-success,
-
-    select.parsley-success,
-
-    textarea.parsley-success {
-
-      color: #468847;
-
-      background-color: #DFF0D8;
-
-      border: 1px solid #D6E9C6;
-
-    }
-
-    input.parsley-error,
-
-    select.parsley-error,
-
-    textarea.parsley-error {
-
-      color: #B94A48;
-
-      background-color: #F2DEDE;
-
-      border: 1px solid #EED3D7;
-
-    }
+            }
 
 
-    .parsley-errors-list {
+            .parsley-errors-list {
 
-      margin: 2px 0 3px;
+              margin: 2px 0 3px;
+              padding: 0;
+              list-style-type: none;
+              font-size: 0.9em;
+              line-height: 0.9em;
+              opacity: 0;
+              transition: all .3s ease-in;
+              -o-transition: all .3s ease-in;
+              -moz-transition: all .3s ease-in;
+              -webkit-transition: all .3s ease-in;
 
-      padding: 0;
-
-      list-style-type: none;
-
-      font-size: 0.9em;
-
-      line-height: 0.9em;
-
-      opacity: 0;
-
-
-      transition: all .3s ease-in;
-
-      -o-transition: all .3s ease-in;
-
-      -moz-transition: all .3s ease-in;
-
-      -webkit-transition: all .3s ease-in;
-
-    }
+            }
 
 
-    .parsley-errors-list.filled {
+            .parsley-errors-list.filled {
 
-      opacity: 1;
+              opacity: 1;
 
-    }
+            }
 
+            .error,.parsley-type, .parsley-required, .parsley-equalto, .parsley-pattern, .parsley-length{
 
+             color:#ff0000;
 
-    .error,.parsley-type, .parsley-required, .parsley-equalto, .parsley-pattern, .parsley-length{
-
-     color:#ff0000;
-
-    }
-
-
+            }
 
     </style>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    @yield('css')
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="{{ asset('/')}}public/parsely1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 </head>
@@ -210,7 +175,7 @@ top: 50%;
     @include('admin.include.loaderTwo')
 <!-- Loader starts-->
 
-@include('admin.include.loader')
+    @include('admin.include.loader')
 <!-- Loader ends-->
 <!-- page-wrapper Start       -->
 <div class="page-wrapper compact-wrapper" id="pageWrapper">
@@ -366,10 +331,6 @@ top: 50%;
     autoclose: true
        });
    });
-
-
-
-
 
      </script>
 

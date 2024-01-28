@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ওয়ার্ক পারমিট | {{ $ins_name }}
+ওয়ার্ক পারমিট | {{ $insName }}
 @endsection
 
 
@@ -209,7 +209,7 @@
                                 <tr>
                                     <td>০৩</td>
                             <td>ছবি</td>
-                                     <td>:<img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
+                                     <td>:<img src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
                                 </tr>
 
                                 <tr>
@@ -235,12 +235,12 @@
                                     <table class="table table-borderless">
 
                                         <tr>
-                                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                                            <td><img width="150" height="60" src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
                                         </tr>
 
 
                                         <tr>
-                                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                                            <td><img width="150" height="60" src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
                                         </tr>
 
                                         <tr>

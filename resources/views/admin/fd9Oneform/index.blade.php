@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ওয়ার্কিং পারমিটের তালিকা | {{ $ins_name }}
+ওয়ার্কিং পারমিটের তালিকা | {{ $insName }}
 @endsection
 
 
@@ -98,7 +98,7 @@
                                     @else
 
                                         <button class="btn btn-secondary btn-xs" type="button">প্রত্যাখ্যান</button>
-                                        
+
                                     @endif
 
                                 </td>

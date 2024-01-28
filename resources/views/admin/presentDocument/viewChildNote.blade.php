@@ -54,7 +54,7 @@
                         <div class="card-body">
                             <div class="row">
 
-@include('flash_message')
+@include('flashMessage')
                                 <div class="col-lg-2 col-sm-12">
                                     <div style="border-right: 1px solid gray; height:100%">
 
@@ -796,12 +796,12 @@ $potroZariListValue =  DB::table('nothi_details')
        <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
        aria-labelledby="profile-icon-tab_form_eight">
 
-       @include('admin.renew_list.formEightPart')
+       @include('admin.renewList.formEightPart')
        </div>
 
        <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
        aria-labelledby="profile-icon-tab_form_eight_nothi">
-       @include('admin.renew_list.filePart')
+       @include('admin.renewList.filePart')
 
        </div>
        @elseIf($status == 'registration')
@@ -811,10 +811,10 @@ $potroZariListValue =  DB::table('nothi_details')
        aria-labelledby="profile-icon-tab_form_eight">
 
        @if($ngoTypeData->ngo_type == 'Foreign')
-       @include('admin.registration_list.foreign.fd_one_form_nothi')
+       @include('admin.registrationList.foreign.fdOneFormNothi')
        @else
 
-       @include('admin.registration_list.fd_one_form_nothi')
+       @include('admin.registrationList.fdOneFormNothi')
 
        @endif
        </div>
@@ -823,11 +823,11 @@ $potroZariListValue =  DB::table('nothi_details')
        aria-labelledby="profile-icon-tab_form_eight_nothi">
 
        @if($ngoTypeData->ngo_type == 'Foreign')
-       @include('admin.registration_list.foreign.registration_document')
+       @include('admin.registrationList.foreign.registrationDocument')
 
        @else
 
-      @include('admin.registration_list.registration_document')
+      @include('admin.registrationList.registrationDocument')
 
        @endif
 
@@ -839,7 +839,7 @@ $potroZariListValue =  DB::table('nothi_details')
        aria-labelledby="profile-icon-tab_form_eight_nothi">
 
 
-       @include('admin.name_change_list.documentListForNothi')
+       @include('admin.nameChangeList.documentListForNothi')
 
 
 

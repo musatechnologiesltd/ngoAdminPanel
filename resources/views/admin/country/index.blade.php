@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-দেশের তালিকা | {{ $ins_name }}
+দেশের তালিকা | {{ $insName }}
 @endsection
 
 
@@ -45,7 +45,7 @@
             <h5>দেশের তালিকা</h5>
           </div>
           <div class="card-body">
-            @include('flash_message')
+            @include('flashMessage')
             <div class="table-responsive">
                 <table id="basic-1" class="table table-bordered dt-responsive nowrap"
                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">

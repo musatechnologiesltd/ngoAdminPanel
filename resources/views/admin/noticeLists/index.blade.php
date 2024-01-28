@@ -59,7 +59,7 @@
         <!-- Individual column searching (text inputs) Starts-->
         <div class="col-sm-12">
             <div class="card">
-                @include('flash_message')
+                @include('flashMessage')
                 <div class="card-body">
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">

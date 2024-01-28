@@ -59,7 +59,7 @@ class NameCangeController extends Controller
 
         }
 
-        return view('admin.name_change_list.new_name_change_list',compact('allDataForNewList'));
+        return view('admin.nameChangeList.newNameChangeList',compact('allDataForNewList'));
     }
 
 
@@ -92,7 +92,7 @@ class NameCangeController extends Controller
 
         }
 
-        return view('admin.name_change_list.revision_name_change_list',compact('allDataForNewList'));
+        return view('admin.nameChangeList.revisionNameChangeList',compact('allDataForNewList'));
     }
 
 
@@ -125,7 +125,7 @@ class NameCangeController extends Controller
 
        }
 
-        return view('admin.name_change_list.already_name_change_list',compact('allDataForNewList'));
+        return view('admin.nameChangeList.alreadyNameChangeList',compact('allDataForNewList'));
     }
 
 
@@ -165,7 +165,7 @@ class NameCangeController extends Controller
         $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
         $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
-        return view('admin.name_change_list.name_change_view',compact('allNameChangeDoc','getformOneId','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
+        return view('admin.nameChangeList.nameChangeView',compact('allNameChangeDoc','getformOneId','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
     }
 
 
@@ -209,7 +209,7 @@ class NameCangeController extends Controller
 
         $formOneData = DB::table('name_change_docs')->where('id',$id)->value('pdf_file_list');
 
-        return view('admin.name_change_list.nameChangeDoc',compact('formOneData'));
+        return view('admin.nameChangeList.nameChangeDoc',compact('formOneData'));
 
     }
 }

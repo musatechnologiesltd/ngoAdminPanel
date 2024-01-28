@@ -36,7 +36,7 @@
             <div class="col-lg-12">
                 <div class="card">
                   <div class="card-body">
-                        @include('flash_message')
+                        @include('flashMessage')
                         <table id="basic-1" class="display table table-bordered" style="width:100%">
                             <thead>
                                 <tr>

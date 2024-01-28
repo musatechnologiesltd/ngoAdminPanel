@@ -286,7 +286,7 @@
 
                         @else
 
-                        <img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
+                        <img src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
 
 @endif
                     </td>
@@ -311,7 +311,7 @@
                 </tbody>
             </table>
 
-            
+
 
             <h4 style="text-align:center; font-weight:bold; font-size:20px;">ঘোষণা</h4>
 <p>আমি এই মর্মে ঘোষণা করছি যে ,আমি সংশ্লিষ্ট সকল আইন-কানুন পড়িয়াছি এবং উল্লিখিত সকল তথ্য সত্য ও সঠিক।</p>
@@ -320,10 +320,10 @@
         <table style=" margin-top: 15px;width:100%">
 
             <tr>
-                <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
             </tr>
             <tr>
-                <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                <td style="text-align: right; padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
             </tr>
         </table>
 

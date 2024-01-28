@@ -51,7 +51,7 @@
             <tr>
                 <td>০৩</td>
                 <td>ছবি</td>
-                <td>:<img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
+                <td>:<img src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->foreigner_image }}" style="height:40px;"/></td>
             </tr>
             <tr>
                 <td>০৪</td>

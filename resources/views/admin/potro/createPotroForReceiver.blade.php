@@ -168,7 +168,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_no
                         <div class="card-body">
                             <div class="row">
 
-@include('flash_message')
+@include('flashMessage')
 
                                 <div class="col-lg-12 col-sm-12">
                             <ul class="nav nav-tabs" id="icon-tab" role="tablist">
@@ -577,7 +577,7 @@ $branchName = DB::table('branches')
 
                         <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
 <br>
-                       
+
 
                         <div id="firstBisoyBostu">পত্রের বিষয়বস্তু.........................</div>
 

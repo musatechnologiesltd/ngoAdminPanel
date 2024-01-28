@@ -145,7 +145,7 @@
                 <div class="card">
                     <div class="card-header pb-0">
                       <h4 class="card-title mb-0">পাসওয়ার্ড পরিবর্তন করুন </h4>
-                      @include('flash_message')
+                      @include('flashMessage')
                     </div>
                     <div class="card-body">
 

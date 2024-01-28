@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এফডি - ৭ ফরম  | {{ $ins_name }}
+এফডি - ৭ ফরম  | {{ $insName }}
 @endsection
 
 
@@ -32,13 +32,13 @@
         <div class="row">
 
             <object
-            data='{{ $ins_url }}{{ 'public/'.$formOneData }}'
+            data='{{ $insUrl }}{{ 'public/'.$formOneData }}'
             type="application/pdf"
             width="500"
             height="900">
 
             <iframe
-              src='{{ $ins_url }}{{ 'public/'.$formOneData }}'
+              src='{{ $insUrl }}{{ 'public/'.$formOneData }}'
               width="500"
               height="900" >
             <p>This browser does not support PDF!</p>

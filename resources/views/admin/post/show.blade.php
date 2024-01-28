@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ডাক প্রেরণ | {{ $ins_name }}
+ডাক প্রেরণ | {{ $insName }}
 @endsection
 
 
@@ -107,7 +107,7 @@ ul {
             <div class="card">
                 <div class="card-header pb-0">
                     <h5>ডাক প্রেরণ করুন</h5>
-                    @include('flash_message')
+                    @include('flashMessage')
                 </div>
                 <form  class="custom-validation" action="{{ route('dakListSecondStep') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
@@ -520,7 +520,7 @@ ul {
             </div>
         </div>
         <div class="modal-footer">
-        
+
 
         </div>
       </div>

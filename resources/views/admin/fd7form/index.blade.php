@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এফডি - ৭ ফরম | {{ $ins_name }}
+এফডি - ৭ ফরম | {{ $insName }}
 @endsection
 
 

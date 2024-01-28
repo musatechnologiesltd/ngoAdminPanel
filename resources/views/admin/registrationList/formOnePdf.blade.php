@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-অন্যান্য পিডিএফ | {{ $ins_name }}
+এফডি -০১ ফর্ম| {{ $insName }}
 @endsection
 
 
@@ -15,10 +15,10 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>অন্যান্য পিডিএফ</h3>
+                <h3>এফডি -০১ ফর্ম</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">অন্যান্য পিডিএফ</li>
+                    <li class="breadcrumb-item">এফডি -০১ ফর্ম </li>
                     <li class="breadcrumb-item active">পিডিএফ</li>
                 </ol>
             </div>
@@ -27,18 +27,25 @@
         </div>
     </div>
 </div>
+
+<?php
+
+$getCurrentUrl = url();
+
+
+?>
 <div class="container-fluid">
     <div class="user-profile">
         <div class="row">
 
             <object
-            data='{{ $ins_url }}{{ 'public/'.$formOneData }}'
+            data='{{ $insUrl }}{{ 'public/'.$formOneData }}'
             type="application/pdf"
             width="500"
-            height="900">
+            height="678">
 
             <iframe
-              src='{{ $ins_url }}{{ 'public/'.$formOneData }}'
+              src='{{ $insUrl }}{{ 'public/'.$formOneData }}'
               width="500"
               height="900">
             <p>This browser does not support PDF!</p>

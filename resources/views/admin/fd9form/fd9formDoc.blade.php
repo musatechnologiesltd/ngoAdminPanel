@@ -212,7 +212,7 @@
                             <td>বিদেশি নাগরিকের পাসপোর্ট সাইজের ছবি</td>
                             <td>:
 
-                                <img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
+                                <img src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
 
                             </td>
                         </tr>

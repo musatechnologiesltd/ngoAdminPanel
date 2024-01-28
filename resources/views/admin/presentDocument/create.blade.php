@@ -150,7 +150,7 @@ $finalSerialNumber = App\Http\Controllers\Admin\CommonController::englishToBangl
                         <div class="card">
                             <div class="card-header pb-0">
                                 <h5>নথি ধরনের তালিকা</h5>
-                                @include('flash_message')
+                                @include('flashMessage')
                             </div>
                             <div class="card-body">
                                 <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">নতুন ধরন তৈরি করুন</button>

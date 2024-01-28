@@ -5,13 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ $ins_name }}" />
-	<meta property="og:title" content="{{ $ins_name }}" />
-	<meta property="og:description" content="{{ $ins_name }}" />
+    <meta name="description" content="{{ $insName }}" />
+	<meta property="og:title" content="{{ $insName }}" />
+	<meta property="og:description" content="{{ $insName }}" />
 	<meta property="og:image" content="{{ asset('/') }}{{ $logo }}" />
     <link rel="icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('/') }}{{ $icon }}" type="image/x-icon">
-    <title>পাসওয়ার্ড পরিবর্তন করুন | {{ $ins_name }}</title>
+    <title>পাসওয়ার্ড পরিবর্তন করুন | {{ $insName }}</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
           <div class="col-12">
             <div class="login-card">
 
-                @include('flash_message')
+                @include('flashMessage')
                 <h4>ই মেইল সফলভাবে পাঠানো হয়েছে</h4>
 
             </div>

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এনজিও নিবন্ধন নবায়ন এর  বিস্তারিত  | {{ $ins_name }}
+এনজিও নাম পরিবর্তন  এর  বিস্তারিত  | {{ $insName }}
 @endsection
 
 
@@ -15,10 +15,10 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>এনজিও নিবন্ধন নবায়ন তথ্য</h3>
+                <h3>এনজিও নাম পরিবর্তন  তথ্য</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
-                    <li class="breadcrumb-item">এনজিও নিবন্ধন নবায়ন তথ্য</li>
+                    <li class="breadcrumb-item">এনজিও নাম পরিবর্তন  তথ্য</li>
                     <li class="breadcrumb-item active">এনজিও প্রোফাইল</li>
                 </ol>
             </div>
@@ -40,15 +40,15 @@
                             @if(empty($usersInfo->image))
                             <div class="avatar"><img class="img-fluid" alt="" src="{{ asset('/') }}public/admin/user.png"></div>
                             @else
-                            <div class="avatar"><img class="img-fluid" alt="" src="{{ $ins_url }}{{ $usersInfo->image }}"></div>
+                            <div class="avatar"><img class="img-fluid" alt="" src="{{ $insUrl }}{{ $usersInfo->image }}"></div>
                             @endif
                         </div>
 
                         <?php
 
                        $getNgoType = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
-
                        $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->first();
+
                         ?>
                         <div class="user-designation">
                             <div class="title">
@@ -59,41 +59,39 @@
                                 <h4>{{ $formOneData->organization_name_ban }}</h4>
                               <h6>{{ $formOneData->address_of_head_office }}</h6>
                                 @endif
-                                <!--<h6>{{ $formOneData->email }}</h6>-->
-                               <!-- <p>{{ $formOneData->phone }}</p> -->
-                            </div>    @if($getNgoType == 'Foreign')
-                            <h6>বিদেশী এনজিও </h6>
-                            @else
-                            <h6>দেশীয় এনজিও </h6>
 
-                            @endif
-                            @if($ngoTypeData->ngo_type_new_old == 'Old')
-                            <h6>এনজিও'র ধরন : পুরাতন</h6>
-                            @else
 
-                            <h6>এনজিও'র ধরন : নতুন</h6>
-                            @endif
+
+                               @if($getNgoType == 'Foreign')
+                               <h6>বিদেশী এনজিও </h6>
+                               @else
+                               <h6>দেশি এনজিও </h6>
+
+                               @endif
+                               @if($ngoTypeData->ngo_type_new_old == 'Old')
+                               <h6>এনজিও'র ধরন : পুরাতন</h6>
+                               @else
+
+                               <h6>এনজিও'র ধরন : নতুন</h6>
+                               @endif
+
+
+                            </div>
                             <div class="follow">
                                 <ul class="follow-list">
                                     <li>
-                                        <div class="follow-num">
-
-
-                                            {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allDataForNewListAll->created_at))) }}
-
-
-
-                                        </div>
+                                        <div class="follow-num">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allDataForNewListAll->created_at))) }}</div>
                                         <span>জমাদানের তারিখ</span>
                                     </li>
                                     <li>
-                                        <div class="follow-num"> @if($mainIdR->status == 'Accepted')
+                                        <div class="follow-num">
+                                            @if($allDataForNewListAll->status == 'Accepted')
 
                                             <button class="btn btn-secondary " type="button">
                                                 গৃহীত
 
                                             </button>
-                                            @elseif($mainIdR->status == 'Ongoing')
+                                            @elseif($allDataForNewListAll->status == 'Ongoing')
 
                                             <button class="btn btn-secondary " type="button">
                                                 চলমান
@@ -148,7 +146,7 @@
                     <div class="col-sm-12">
                         <div class="card height-equal">
                             <div class="card-header pb-0">
-                                <h5>এনজিও নিবন্ধন নবায়ন</h5>
+                                <h5>এনজিও নাম পরিবর্তন  সমস্ত তথ্য</h5>
                             </div>
                             <div class="card-body">
 
@@ -158,26 +156,41 @@
 
                                         <div class="text-end">
 
-                                           @if($mainIdR->status == 'Ongoing')
-                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$mainIdR->id]) }}';" type="button" class="btn btn-primary float-right">ডাক প্রেরণ</button>
+                                           @if($getformOneId->status == 'Ongoing')
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$getformOneId->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
 
                                             @else
 
                                             @endif
+
                                         </div>
                                     </div>
                                 </div>
 
 
-
                                 <ul class="nav nav-dark" id="pills-darktab" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" id="pills-darkhome-tab"
-                                        data-bs-toggle="pill" href="#pills-darkhome"
-                                        role="tab" aria-controls="pills-darkhome"
-                                        aria-selected="true" style=""><i
-                                class="icofont icofont-ui-home"></i>এফডি -৮ ফরম</a></li>
 
 
+                                    @if($getNgoType == 'Foreign' || $getNgoType == 'দেশিও')
+
+                                    <li class="nav-item"><a class="nav-link active" id="pills-darkdoc-tab"
+                                        data-bs-toggle="pill" href="#pills-darkdoc"
+                                        role="tab" aria-controls="pills-darkdoc"
+                                        aria-selected="false" style=""><i
+                                class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
+                </li>
+
+
+
+
+
+                                    @else
+                <li class="nav-item"><a class="nav-link active" id="pills-darkprofile-tab"
+                                        data-bs-toggle="pill" href="#pills-darkprofile"
+                                        role="tab" aria-controls="pills-darkprofile"
+                                        aria-selected="false" style=""><i
+                                class="icofont icofont-man-in-glasses"></i>ফরম -৮</a>
+                </li>
 
 
 
@@ -189,9 +202,11 @@
                                 class="icofont icofont-animal-lemur"></i>নথিপত্র</a>
                 </li>
 
+                @endif
 
 
-                                    @if($renewStatus == "Accepted")
+
+                                    @if($nameChangeStatus == "Accepted")
 
                                     <li class="nav-item"><a class="nav-link" id="pills-darkdoc1-tab"
                                         data-bs-toggle="pill" href="#pills-darkdoc1"
@@ -215,23 +230,76 @@
 
                                 </ul>
                                 <div class="tab-content" id="pills-darktabContent">
-                                    <div class="tab-pane fade active show" id="pills-darkhome"
-                                         role="tabpanel" aria-labelledby="pills-darkhome-tab">
-                                       @include('admin.renew_list.formEightPart')
 
+
+
+                                    @if($getNgoType == 'Foreign' || $getNgoType == 'দেশিও')
+                                    <div class="tab-pane fade " id="pills-darkprofile" role="tabpanel"
+                                    aria-labelledby="pills-darkprofile-tab">
+                                    @else
+
+                                    <div class="tab-pane fade active show" id="pills-darkprofile" role="tabpanel"
+                                         aria-labelledby="pills-darkprofile-tab">
+
+@endif
+
+
+                                        <div class="mb-0 m-t-30">
+                                          <div class="table-responsive">
+                                            <table class="table table-bordered overflow-scroll">
+                                                <tr>
+                                                    <th rowspan="2">ক্রঃ নং</th>
+                                                    <th rowspan="2">নাম ও পদবী</th>
+                                                    <th rowspan="2">জন্ম তারিখ</th>
+                                                    <th rowspan="2">এনএইডি এবং মোবাইল নং</th>
+                                                    <th rowspan="2">বাবার নাম</th>
+                                                    <th colspan="2">ঠিকানা</th>
+                                                    <th rowspan="2">স্বামী/স্ত্রীর নাম</th>
+                                                    <th rowspan="2">শিক্ষাগত যোগ্যতা</th>
+                                                    <th colspan="3">পেশা</th>
+                                                    <th rowspan="2">তিনি কি অন্য কোন এনজিওর সদস্য বা
+                                                        পরিষেবাধারী ছিলেন (যদি তা হয় তবে অনুগ্রহ করে
+                                                        চিহ্নিত করুন)
+                                                    </th>
+                                                    <th rowspan="2">মন্তব্য</th>
+                                                    <th rowspan="2">স্বাক্ষর এবং তারিখ</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>বর্তমান ঠিকানা</th>
+                                                    <th>স্থায়ী ঠিকানা</th>
+                                                    <th>সরকারী/আধা সরকারী/সরকারি স্বায়ত্তশাসিত</th>
+                                                    <th>ব্যক্তিগত সেবা</th>
+                                                    <th>স্ব সেবা</th>
+                                                </tr>
+
+                                            </table>
+                                          </div>
+                                        </div>
                                     </div>
 
 
+                                    @if($getNgoType == 'Foreign' || $getNgoType == 'দেশিও')
+
+                                    <div class="tab-pane fade active show" id="pills-darkdoc" role="tabpanel"
+                                    aria-labelledby="pills-darkdoc-tab">
+
+
+                                    @else
 
                                     <div class="tab-pane fade" id="pills-darkdoc" role="tabpanel"
                                          aria-labelledby="pills-darkdoc-tab">
-                                         @include('admin.renew_list.filePart')
+
+                                         @endif
+
+
+
+
+                                      @include('admin.name_change_list.documentList')
                                     </div>
 
 
 
-                                    @if($renewStatus == "Accepted")
-
+                                    @if($nameChangeStatus == "Accepted")
 
 
 
@@ -249,30 +317,55 @@
         <td>১.</td>
         <td colspan="3">সংস্থার বিবরণ:</td>
     </tr>
+
+    @if($ngoTypeData->ngo_type_new_old == 'Old')
+    <?php
+
+$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
+$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+?>
+    <tr>
+        <td></td>
+        <td>(i)</td>
+        <td>নিবন্ধন নম্বর</td>
+        <td>:{{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>(i)</td>
+        <td>সংস্থার নাম</td>
+        <td>: {{ $formOneData->organization_name_ban }}</td>
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>(iii)</td>
+        <td>মেয়াদ শুরু </td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}</td>
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>(iv)</td>
+        <td>শেষ নবায়ন তারিখ</td>
+        <td>:{{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}</td>
+    </tr>
+
+
+    @else
     <tr>
         <td></td>
         <td>(i)</td>
         <td>ডাইরি নম্বর </td>
-        <td>:
-
-
-            @if($ngoTypeData->ngo_type_new_old == 'Old')
-
-            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->registration)}}
-            @else
-
-
-
-
-          @if($formOneData->registration_number == 0)
+        <td>:@if($formOneData->registration_number == 0)
 
 
           @else
 
-          {{ App\Http\Controllers\Admin\CommonController::englishToBangla($formOneData->registration_number)}}
-
-          @endif
-
+          {{ $formOneData->registration_number}}
 
           @endif
 
@@ -297,9 +390,7 @@
         <td></td>
         <td>(iv)</td>
         <td>মেয়াদ শুরু </td>
-        <td>:
-
-          @if(empty($durationListAll))
+        <td>:@if(empty($durationListAll))
 
 
           @else
@@ -315,8 +406,7 @@
         <td></td>
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
-        <td>:
-            @if(empty($durationListAll))
+        <td>:@if(empty($durationListAll))
 
 
           @else
@@ -324,6 +414,7 @@
       @endif
       </td>
     </tr>
+    @endif
     <tr>
         <td></td>
         <td colspan="3"><!-- Button trigger modal -->
@@ -348,7 +439,7 @@
                   </div>
                   <div class="modal-body">
 
-                    <form action="{{ route('printCertificateView') }}" method="get" id="form">
+                    <form id="form" action="{{ route('printCertificateView') }}" method="get">
 
                         <input type="hidden" name="user_id" value="{{ $formOneData->user_id  }}"/>
 
@@ -364,10 +455,11 @@
               </div>
             </div></td>
     </tr>
+
     </tbody>
 </table>
 
-<!---vvvvvvvvv-->
+
                                         </div>
                                     </div>
                                     @else
@@ -383,16 +475,17 @@
                                         <div class="mb-0 m-t-30">
 
 
-                                            <form action="{{ route('updateStatusRenewForm') }}" method="post" id="form">
+
+                                            <form id="form" action="{{ route('updateStatusNameChangeForm') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" value="{{ $mainIdR->id }}" name="id" />
+                                                <input type="hidden" value="{{ $getformOneId->id }}" name="id" />
                                                 <input type="hidden" value="{{ $getEmailFromUser }}" name="email" />
                                                 <select class="form-control form-control-sm" name="status" id="regStatus">
 
-                                                    <option value="Ongoing" {{ $mainIdR->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
-                                                    <option value="Accepted" {{ $mainIdR->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
+                                                    <option value="Ongoing" {{ $getformOneId->status == 'Ongoing' ? 'selected':''  }}>চলমান</option>
+                                                    <option value="Accepted" {{ $getformOneId->status == 'Accepted' ? 'selected':''  }}>গৃহীত</option>
                                                     <option value="Correct" {{ $allDataForNewListAll->status == 'Correct' ? 'selected':''  }}>সংশোধন করুন</option>
-                                                    <option value="Rejected" {{ $mainIdR->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
+                                                    <option value="Rejected" {{ $getformOneId->status == 'Rejected' ? 'selected':''  }}>প্রত্যাখ্যান করুন</option>
 
                                                 </select>
 

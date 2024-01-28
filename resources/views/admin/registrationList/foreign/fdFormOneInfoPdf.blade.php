@@ -436,10 +436,10 @@ attached
 <table style=" margin-top: 15px;width:100%">
 
     <tr>
-        <td style="text-align: right;padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $allformOneData->digital_signature}}"/></td>
+        <td style="text-align: right;padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $insUrl }}{{ $allformOneData->digital_signature}}"/></td>
     </tr>
     <tr>
-        <td style="text-align: right;padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $allformOneData->digital_seal}}"/></td>
+        <td style="text-align: right;padding-right: 14%" colspan="3"><img width="150" height="60" src="{{ $insUrl }}{{ $allformOneData->digital_seal}}"/></td>
     </tr>
 </table>
 <table style=" margin-top: 15px">

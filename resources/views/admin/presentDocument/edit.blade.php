@@ -60,7 +60,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label" for="">নথি ধরণ</label>
                                                 <select class="js-example-basic-single form-control" name="document_type_id" id="document_type_id" required>
-                                                    
+
                                                     <option value=""> -- বছর বাছাই করুন -- </option>
                                                     @foreach($documentTypeList as $documentTypeLists)
                                                     <option value="{{ $documentTypeLists->id }}" {{ $nothiList->document_type_id == $documentTypeLists->id ? 'selected':'' }}>{{ $documentTypeLists->document_type }}</option>
@@ -80,7 +80,7 @@
                                                                  ->orderBy('id','desc')->value('document_serial_number');
                                         $convertNumber = intval($lastNothiSerialNumber)+1;
                                         $finalSerialNumber = App\Http\Controllers\Admin\CommonController::englishToBangla(str_pad($nothiList->document_serial_number, 3, '0', STR_PAD_LEFT));
-                                
+
 
 
                                                                                 ?>
@@ -140,7 +140,7 @@
                         <div class="card">
                             <div class="card-header pb-0">
                                 <h5>নথি ধরনের তালিকা</h5>
-                                @include('flash_message')
+                                @include('flashMessage')
                             </div>
                             <div class="card-body">
                                 <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">নতুন ধরন তৈরি করুন</button>

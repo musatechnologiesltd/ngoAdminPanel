@@ -58,7 +58,7 @@ class RegisterController extends Controller
 
         }
 
-        return view('admin.registration_list.new_registration_list',compact('allDataForNewList'));
+        return view('admin.registrationList.newRegistrationList',compact('allDataForNewList'));
     }
 
 
@@ -88,7 +88,7 @@ class RegisterController extends Controller
 
         }
 
-        return view('admin.registration_list.revision_registration_list',compact('allDataForNewList'));
+        return view('admin.registrationList.revisionRegistrationList',compact('allDataForNewList'));
     }
 
 
@@ -119,7 +119,7 @@ class RegisterController extends Controller
 
         }
 
-        return view('admin.registration_list.already_registration_list',compact('allDataForNewList'));
+        return view('admin.registrationList.alreadyRegistrationList',compact('allDataForNewList'));
     }
 
 
@@ -150,9 +150,9 @@ class RegisterController extends Controller
         $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
         if($ngoTypeData->ngo_type == 'দেশিও'){
-                return view('admin.registration_list.registration_view',compact('signDataNew','ngoTypeData','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
+                return view('admin.registrationList.registrationView',compact('signDataNew','ngoTypeData','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
         }else{
-                return view('admin.registration_list.foreign.registration_view',compact('signDataNew','ngoTypeData','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
+                return view('admin.registrationList.foreign.registrationView',compact('signDataNew','ngoTypeData','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
         }
     }
 
@@ -240,7 +240,7 @@ class RegisterController extends Controller
 
         $mainDate = $request->main_date;
         $fileNameCustome = 'certificate';
-        $pdf=PDF::loadView('admin.registration_list.print_certificate_view',
+        $pdf=PDF::loadView('admin.registrationList.printCertificateView',
         ['newyear'=>$newyear,
         'ngoTypeData'=>$ngoTypeData,
         'newmonth'=>$newmonth,
@@ -272,7 +272,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
         $mainDate = $request->main_date;
         $fileNameCustome = 'certificate';
-        $pdf=PDF::loadView('admin.registration_list.printCertificateViewDemo',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
+        $pdf=PDF::loadView('admin.registrationList.printCertificateViewDemo',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
 'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'formOneData'=>$formOneData,'durationListAll'=>$durationListAll],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($fileNameCustome.''.'.pdf');
@@ -356,7 +356,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
         $fileNameCustome = '(এফডি-১ ফরম)';
 
-        $data =view('admin.registration_list.foreign.fdFormOneInfoPdf',[
+        $data =view('admin.registrationList.foreign.fdFormOneInfoPdf',[
         'getNgoTypeForPdf'=>$getNgoTypeForPdf,
 
         'getAllSourceOfFundData'=>$getAllSourceOfFundData,
@@ -393,7 +393,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
         $fileNameCustome = '(এফডি-১ ফরম)';
 
-        $data =view('admin.registration_list.fdFormOneInfoPdf',[
+        $data =view('admin.registrationList.fdFormOneInfoPdf',[
         'getNgoTypeForPdf'=>$getNgoTypeForPdf,
 
         'getAllSourceOfFundData'=>$getAllSourceOfFundData,
@@ -448,7 +448,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
         }
 
-        return view('admin.registration_list.form_one_pdf',compact('formOneData'));
+        return view('admin.registrationList.formOnePdf',compact('formOneData'));
     }
 
 
@@ -458,7 +458,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
           $formOneData = DB::table('form_eights')->where('fd_one_form_id',$main_id)->value('verified_form_eight');
 
-        return view('admin.registration_list.form_eight_pdf',compact('formOneData'));
+        return view('admin.registrationList.formEightPdf',compact('formOneData'));
     }
 
     public function sourceOfFund($id){
@@ -467,7 +467,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
          $formOneData = DB::table('fd_one_source_of_funds')->where('id',$id)->value('letter_file');
 
-         return view('admin.registration_list.source_of_fund',compact('formOneData'));
+         return view('admin.registrationList.sourceOfFund',compact('formOneData'));
     }
 
     public function otherPdfView($id){
@@ -476,7 +476,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
          $formOneData = DB::table('fd_one_other_pdf_lists')->where('id',$id)->value('information_pdf');
 
-        return view('admin.registration_list.other_pdf_view',compact('formOneData'));
+        return view('admin.registrationList.otherPdfView',compact('formOneData'));
     }
 
 
@@ -486,7 +486,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
 
          $formOneData = DB::table('ngo_member_nid_photos')->where('id',$id)->value('member_nid_copy');
 
-        return view('admin.registration_list.ngo_member_doc__pdf_view',compact('formOneData'));
+        return view('admin.registrationList.ngoMemberDocPdfView',compact('formOneData'));
     }
 
 
@@ -495,7 +495,7 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
         \LogActivity::addToLog('registration pdf download.');
 
          $formOneData = DB::table('ngo_other_docs')->where('id',$id)->value('pdf_file_list');
-        return view('admin.registration_list.ngo_doc__pdf_view',compact('formOneData'));
+        return view('admin.registrationList.ngoDocPdfView',compact('formOneData'));
     }
 
 
@@ -523,6 +523,6 @@ return $pdf->stream($fileNameCustome.''.'.pdf');
             $formOneData = DB::table('ngo_renew_infos')->where('user_id',$main_id)->value('change_ac_number');
         }
 
-        return view('admin.registration_list.renew_pdf_list',compact('formOneData'));
+        return view('admin.registrationList.renewPdfList',compact('formOneData'));
     }
 }

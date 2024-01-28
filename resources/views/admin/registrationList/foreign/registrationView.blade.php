@@ -5,7 +5,7 @@
                           এনজিও নবায়নের সকল তথ্য
                                 @else
                       এনজিও নিবন্ধন সকল তথ্য
-                                @endif | {{ $ins_name }}
+                                @endif | {{ $insName }}
 @endsection
 
 
@@ -56,7 +56,7 @@
                             @if(empty($usersInfo->image))
                             <div class="avatar"><img class="img-fluid" alt="" src="{{ asset('/') }}public/admin/user.png"></div>
                             @else
-                            <div class="avatar"><img class="img-fluid" alt="" src="{{ $ins_url }}{{ $usersInfo->image }}"></div>
+                            <div class="avatar"><img class="img-fluid" alt="" src="{{ $insUrl }}{{ $usersInfo->image }}"></div>
                             @endif
                         </div>
 
@@ -254,10 +254,10 @@
 
                                             @if($ngoTypeData->ngo_type_new_old == 'Old')
 
-                                            @include('admin.registration_list.foreign.fd_eight_form')
+                                            @include('admin.registrationList.foreign.fdEightForm')
                                             @else
 
-                                            @include('admin.registration_list.foreign.fd_one_form')
+                                            @include('admin.registrationList.foreign.fdOneForm')
                                             @endif
 
                                           </div>
@@ -275,10 +275,10 @@
 
                                             @if($ngoTypeData->ngo_type_new_old == 'Old')
 
-                                            @include('admin.registration_list.foreign.renew_document')
+                                            @include('admin.registrationList.foreign.renewDocument')
                                             @else
 
-@include('admin.registration_list.foreign.registration_document')
+@include('admin.registrationList.foreign.registrationDocument')
                                             @endif
 
                                         </div>

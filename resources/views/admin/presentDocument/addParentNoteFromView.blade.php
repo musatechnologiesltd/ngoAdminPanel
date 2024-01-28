@@ -51,7 +51,7 @@
                                     <div class="card-body">
                                         <div class="row">
 
-@include('flash_message')
+@include('flashMessage')
                                             <div class="col-lg-2 col-sm-12">
                                                 <div style="border-right: 1px solid gray; height:100%">
 
@@ -353,7 +353,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                 aria-expanded="false">
                                                             সংরক্ষন করুন
                                                         </button>
-                                                        
+
                                                     </div>
                                                 </div>
                                                  </form>

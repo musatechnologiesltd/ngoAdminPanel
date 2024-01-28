@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-কর্মকর্তাদের তালিকা  | {{ $ins_name }}
+কর্মকর্তাদের তালিকা  | {{ $insName }}
 @endsection
 
 
@@ -43,7 +43,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        @include('flash_message')
+                        @include('flashMessage')
                         <div class="table-responsive">
                         <table id="basic-1" class="display table table-bordered" style="width:100%">
                             <thead>

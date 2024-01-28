@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ইতিমধ্যে পরিবর্তিত নাম তালিকা | {{ $ins_name }}
+ইতিমধ্যে পরিবর্তিত নাম তালিকা | {{ $insName }}
 @endsection
 
 

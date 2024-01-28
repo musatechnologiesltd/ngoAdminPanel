@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-কর্মকর্তাদের নিয়োগের তালিকা  | {{ $ins_name }}
+কর্মকর্তাদের নিয়োগের তালিকা  | {{ $insName }}
 @endsection
 
 
@@ -33,7 +33,7 @@
 
     <div class="row">
         <!-- Individual column searching (text inputs) Starts-->
-        @include('flash_message')
+        @include('flashMessage')
         <div class="col-sm-12">
             <div class="card">
 

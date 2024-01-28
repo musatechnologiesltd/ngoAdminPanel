@@ -45,7 +45,7 @@ class RenewController extends Controller
 
         $fileNameCustome = 'fd_eight_form';
 
-        $data =view('admin.renew_list.downloadRenewPdf',[
+        $data =view('admin.renewList.downloadRenewPdf',[
 
                 'getAllDataNew'=>$getAllDataNew,
                 'allPartiw1'=>$allPartiw1,
@@ -99,7 +99,7 @@ class RenewController extends Controller
         }
 
 
-      return view('admin.renew_list.new_renew_list',compact('allDataForNewList'));
+      return view('admin.renewList.newRenewList',compact('allDataForNewList'));
     }
 
 
@@ -141,7 +141,7 @@ class RenewController extends Controller
         $allDataForNewList = DB::table('ngo_renews')->whereIn('status',['Rejected','Correct'])->latest()->get();
 
 
-      return view('admin.renew_list.revision_renew_list',compact('allDataForNewList'));
+      return view('admin.renewList.revisionRenewList',compact('allDataForNewList'));
     }
 
 
@@ -175,7 +175,7 @@ class RenewController extends Controller
         }
 
 
-        return view('admin.renew_list.already_renew_list',compact('allDataForNewList'));
+        return view('admin.renewList.alreadyRenewList',compact('allDataForNewList'));
     }
 
 
@@ -205,7 +205,7 @@ class RenewController extends Controller
         $getAllDataOther= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$formOneData->id)->get();
         $getAllDataAdviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$formOneData->id)->get();
 
-        return view('admin.renew_list.view',compact('renewInfoData','mainIdR','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
+        return view('admin.renewList.view',compact('renewInfoData','mainIdR','durationListAll1','durationListAll','renewStatus','nameChangeStatus','rStatus','formMemberDataDocRenew','getAllDataAdviser','getAllDataOther','getAllDataAdviserBank','allPartiw','allSourceOfFund','usersInfo','formNgoDataDoc','formMemberDataDoc','formMemberData','formEightData','allDataForNewListAll','formOneData'));
     }
 
 

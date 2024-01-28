@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-সীল তৈরি করুন | {{ $ins_name }}
+সীল তৈরি করুন | {{ $insName }}
 @endsection
 
 
@@ -188,7 +188,7 @@ ul {
                                                         </ul>
                                                     </li>
                                                     @endforeach
-                                                    
+
                                                 </ul>
 
 

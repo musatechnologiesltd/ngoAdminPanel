@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-পদবী তালিকা | {{ $ins_name }}
+পদবী তালিকা | {{ $insName }}
 @endsection
 
 

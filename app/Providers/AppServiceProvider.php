@@ -186,51 +186,51 @@ class AppServiceProvider extends ServiceProvider
 
             if (!$data) {
 
-                $icon_name = '';
-                $logo_name ='';
-                $ins_name = '';
-                $ins_add = '';
-                $ins_url = '';
-                $ins_email = '';
-                $ins_phone = '';
+                $iconName = '';
+                $logoName ='';
+                $insName = '';
+                $insAdd = '';
+                $insUrl = '';
+                $insEmail = '';
+                $insPhone = '';
 
-                view()->share('ins_name', $ins_name);
-                view()->share('logo',  $logo_name);
-                view()->share('icon', $icon_name);
-                view()->share('ins_add', $ins_add);
-                view()->share('ins_phone', $ins_phone);
-                view()->share('ins_email', $ins_email);
-                view()->share('ins_url', $ins_url);
+                view()->share('insName', $insName);
+                view()->share('logo',  $logoName);
+                view()->share('icon', $iconName);
+                view()->share('insAdd', $insAdd);
+                view()->share('insPhone', $insPhone);
+                view()->share('insEmail', $insEmail);
+                view()->share('insUrl', $insUrl);
 
             }else{
-                view()->share('ins_name', $data->system_name);
+                view()->share('insName', $data->system_name);
                 view()->share('logo',  $data->system_logo);
                 view()->share('icon', $data->system_icon);
-                view()->share('ins_add', $data->system_address);
-                view()->share('ins_phone', $data->system_phone);
-                view()->share('ins_email', $data->system_email);
-                view()->share('ins_url', $data->system_url);
+                view()->share('insAdd', $data->system_address);
+                view()->share('insPhone', $data->system_phone);
+                view()->share('insEmail', $data->system_email);
+                view()->share('insUrl', $data->system_url);
 
             }
 
         }else{
             $mainCodeCountHeader = 0;
-            $icon_name = '';
-            $logo_name ='';
-            $ins_name = '';
-            $ins_add = '';
-            $ins_url = '';
-            $ins_email = '';
-            $ins_phone = '';
+            $iconName = '';
+            $logoName ='';
+            $insName = '';
+            $insAdd = '';
+            $insUrl = '';
+            $insEmail = '';
+            $insPhone = '';
 
             view()->share('mainCodeCountHeader', $mainCodeCountHeader);
-            view()->share('ins_name', $ins_name);
-            view()->share('logo',  $logo_name);
-            view()->share('icon', $icon_name);
-            view()->share('ins_add', $ins_add);
-            view()->share('ins_phone', $ins_phone);
-            view()->share('ins_email', $ins_email);
-            view()->share('ins_url', $ins_url);
+            view()->share('insName', $insName);
+            view()->share('logo',  $logoName);
+            view()->share('icon', $iconName);
+            view()->share('insAdd', $insAdd);
+            view()->share('insPhone', $insPhone);
+            view()->share('insEmail', $insEmail);
+            view()->share('insUrl', $insUrl);
         }
 
         if(\Illuminate\Support\Facades\Schema::hasTable('ngo_statuses')){

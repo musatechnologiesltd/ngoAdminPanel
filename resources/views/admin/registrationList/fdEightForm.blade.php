@@ -8,7 +8,7 @@
 $getngoForLanguage = DB::table('ngo_type_and_languages')->where('user_id',$formOneData->user_id)->value('ngo_type');
 $regName = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->value('organization_name_ban');
 
-   ?>
+?>
     <tr>
         <td></td>
         <td>(i)</td>
@@ -102,9 +102,7 @@ $regName = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->va
         <td>২.</td>
         <td colspan="2">বিগত ১০(দশ) বছরে বৈদেশিক অনুদানে পরিচালত কার্যক্রমের বিবরণ (প্রকল্প ওয়ারী তথাদির সংক্ষিপ্তসার সংযুক্ত করতে হবে)
         </td>
-        <td>:
-
-            @if(!$formOneData)
+        <td>: @if(!$formOneData)
 
 
             @else
@@ -122,7 +120,7 @@ $regName = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->va
         <td>৩.</td>
         <td colspan="2">সংস্থার সম্ভাব্য/প্রত্যাশিত বার্ষিক বাজেট (উৎসসহ)
         </td>
-        <td>:       @if(!$formOneData)
+        <td>:          @if(!$formOneData)
 
 
             @else
@@ -307,10 +305,10 @@ $regName = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->va
 <table style=" margin-top: 15px;width:100%">
 
     <tr>
-        <td style="padding-left:1130px;" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $formOneData->digital_signature}}"/></td>
+        <td style="padding-left:1130px;" colspan="3"><img width="150" height="60" src="{{ $insUrl }}{{ $formOneData->digital_signature}}"/></td>
     </tr>
     <tr>
-        <td style="padding-left:1130px;" colspan="3"><img width="150" height="60" src="{{ $ins_url }}{{ $formOneData->digital_seal}}"/></td>
+        <td style="padding-left:1130px;" colspan="3"><img width="150" height="60" src="{{ $insUrl }}{{ $formOneData->digital_seal}}"/></td>
     </tr>
 </table>
 

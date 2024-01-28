@@ -53,7 +53,7 @@
                                 @if(!$nVisabasicInfo->applicant_photo)
                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="height: 80px;" alt="">
                                 @else
-                                <img src="{{ $ins_url }}{{ $nVisabasicInfo->applicant_photo }}" style="height: 80px;" alt="">
+                                <img src="{{ $insUrl }}{{ $nVisabasicInfo->applicant_photo }}" style="height: 80px;" alt="">
                                 @endif
                             </div>
                         </div>

@@ -10,7 +10,7 @@
 
         ?>
 
-                    @include('flash_message')
+                    @include('flashMessage')
                     <div class="user_dashboard_right">
                         <h4>{{ trans('fd_one_step_one.f_form')}} </h4>
                     </div>

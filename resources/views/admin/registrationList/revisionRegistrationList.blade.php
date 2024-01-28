@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-নিবন্ধন আবেদন তালিকা | {{ $ins_name }}
+পুনর্বিবেচনা নিবন্ধন  তালিকা | {{ $insName }}
 @endsection
 
 
@@ -14,11 +14,11 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>নিবন্ধন আবেদন তালিকা</h3>
+                <h3>পুনর্বিবেচনা নিবন্ধন </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">এনজিও নিবন্ধন</li>
-                    <li class="breadcrumb-item">নিবন্ধন আবেদন তালিকা</li>
+                    <li class="breadcrumb-item">পুনর্বিবেচনা নিবন্ধন  তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -60,15 +60,13 @@
                                 $ngoOldNew = DB::table('ngo_type_and_languages')->where('user_id',$fdOneFormId)->value('ngo_type_new_old');
 
 
-                                    if($getngoForLanguage =='দেশিও'){
+                                        if($getngoForLanguage =='দেশিও'){
 
-                                        $regName = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_name_ban');
+                                            $regName = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_name_ban');
 
-                                    }else{
-                                        $regName = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_name');
-                                    }
-
-
+                                        }else{
+                                            $regName = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('organization_name');
+                                        }
 
                                 $regNumber = DB::table('fd_one_forms')->where('id',$allDataForNewListAll->fd_one_form_id)->value('registration_number_given_by_admin');
 
@@ -76,8 +74,8 @@
 
                                 ?>
                             <tr>
-
                                 <td>
+
                                     @if($ngoOldNew == 'Old')
                                     #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
                                     @else
@@ -86,20 +84,24 @@
 
                                     @endif
 
-   </td>
-
+                                </td>
                                 <td><h6>
                                      {{ $regName  }}<br>
 
                                 </h6><span>ঠিকানা: {{ $regAddress }}</td>
+
+
 
                                     <td> @if($ngoOldNew == 'Old')
                                         পুরাতন
                                         @else
 
                                         নতুন
-@endif
-</td>
+                                        @endif</td>
+
+
+
+
                                 <td>হ্যাঁ</td>
                                 <td class="font-success">
 
@@ -115,18 +117,16 @@
                                         চলমান
 
                                     </button>
-                                    @elseif($allDataForNewListAll->status == 'Rejected')
+                                    @elseif($allDataForNewListAll->status == 'Correct')
+                                    <button class="btn btn-secondary btn-xs" type="button">
+                                        সংশোধন করুন
+
+                                    </button>
+                                    @else
                                     <button class="btn btn-secondary btn-xs" type="button">
                                         প্রত্যাখ্যান
 
                                     </button>
-
-                                    @else
-                                    <button class="btn btn-secondary btn-xs" type="button">
-                                        চলমান
-
-                                    </button>
-
                                     @endif
                                 </td>
                                 <td>

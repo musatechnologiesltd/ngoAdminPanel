@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-এফডি৯ (এন-ভিসা) | {{ $ins_name }}
+এফডি৯ (এন-ভিসা) | {{ $insName }}
 @endsection
 
 

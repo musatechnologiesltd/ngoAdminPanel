@@ -245,7 +245,7 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
 
                         @else
 
-                        <img src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
+                        <img src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->fd9_foreigner_passport_size_photo }}" alt="" style="height:40px;" id="output">
 
 @endif
                     </td>
@@ -270,12 +270,12 @@ $banglaValue =App\Http\Controllers\Admin\CommonController::englishToBangla($form
                     <table class="table table-borderless">
 
                         <tr>
-                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
+                            <td><img width="150" height="60" src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->digital_signature}}"/></td>
                         </tr>
 
 
                         <tr>
-                            <td><img width="150" height="60" src="{{ $ins_url }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
+                            <td><img width="150" height="60" src="{{ $insUrl }}{{ $dataFromNVisaFd9Fd1->digital_seal}}"/></td>
                         </tr>
 
                         <tr>
