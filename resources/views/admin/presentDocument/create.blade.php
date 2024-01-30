@@ -98,7 +98,7 @@ $finalSerialNumber = App\Http\Controllers\Admin\CommonController::englishToBangl
                                                     <span class="input-group-text">০৩.০৭.২৬৬৬.{{ $branchCode }}.</span>
                                                     <input class="form-control" name="document_number" readonly id="document_number" type="text" placeholder="" required>
 
-                                                    <input class="form-control" name="document_serial_number" readonly id="document_serial_number" value="{{ $finalSerialNumber }}" type="text" placeholder="" required>
+                                                    <input class="form-control" name="document_serial_number"  id="document_serial_number" value="{{ $convertNumber }}" type="text" placeholder="" required>
 
                                                     <select class="form-control" name="document_year" id="" required>
                                                         <option value="">বছর বাছাই করুন</option>

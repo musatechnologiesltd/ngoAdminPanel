@@ -217,7 +217,7 @@ class DocumentPresentController extends Controller
             $documentType->document_year =$request->document_year;
             $documentType->document_class =$request->document_class;
             $documentType->document_subject =$request->document_subject;
-            $documentType->document_serial_number =$convertNumber;
+            $documentType->document_serial_number =$request->document_serial_number;
             $documentType->main_sarok_number =$finalSarokNumber;
             $documentType->save();
 

@@ -381,6 +381,38 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$formOneData->user_id)->v
 @endif</td>
         </tr>
 
+        <tr>
+            <td>৯.</td>
+            <td colspan="3">অন্য কোন গুরুত্বপূর্ণ তথ্য যা আবেদনকারী
+উল্লেখ করতে ইচ্ছুক (পৃথক
+কাগজে সংযুক্ত করতে হবে)
+            </td>
+
+        </tr>
+
+        @foreach($get_all_data_other as $key=>$all_get_all_data_other)
+
+
+         <tr>
+             <td></td>
+             <td>(৯.{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }})</td>
+             <td>{{ $all_get_all_data_other->information_title }}</td>
+             <td>:             @if(empty($all_get_all_data_other->information_pdf))
+
+@else
+
+
+
+<a target="_blank" class="btn btn-sm btn-success" href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" >
+<i class="fa fa-file-pdf-o"></i> দেখুন
+</a>
+
+
+<button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-outline-secondary" id="attLink1"  data-name="অন্য কোন গুরুত্বপূর্ণ তথ্য"><i class="fa fa-paperclip"></i> সংযুক্তি </button>
+<button  href="{{ route('otherPdfView',$all_get_all_data_other->id ) }}" class="btn btn-outline-danger" id="copyLink1"><i class="fa fa-copy"></i> কপি করুন </button>
+@endiff</td>
+         </tr>
+
         </tbody>
     </table>
 

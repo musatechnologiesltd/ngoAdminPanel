@@ -73,6 +73,29 @@ class CommonController extends Controller
         return $finalResult;
     }
 
+
+    public static function banglaToEnglish($data){
+
+
+        $engDATE = array('1','2','3','4','5','6','7','8','9','0','January','February','March','April',
+        'May','June','July','August','September','October','November','December','Saturday','Sunday',
+        'Monday','Tuesday','Wednesday','Thursday','Friday');
+
+
+
+        $bangDATE = array('১','২','৩','৪','৫','৬','৭','৮','৯','০','জানুয়ারী','ফেব্রুয়ারী','মার্চ','এপ্রিল','মে',
+        'জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর','শনিবার','রবিবার','সোমবার','মঙ্গলবার','
+        বুধবার','বৃহস্পতিবার','শুক্রবার'
+        );
+
+
+        $finalResult = str_replace($bangDATE,$engDATE,$data);
+
+        return $finalResult;
+    }
+
+
+
     public static function  generateRandomString($length = 10) {
 
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -179,7 +202,7 @@ class CommonController extends Controller
 
    $nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
-					  
+
 
 
     $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
