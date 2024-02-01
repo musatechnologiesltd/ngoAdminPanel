@@ -512,7 +512,16 @@ class RenewController extends Controller
                 $getFileData = DB::table('renewal_files')->where('id',$id)->value('list_of_board_of_directors_or_board_of_trustees');
             }elseif($title == 'laws_or_constitution'){
                 $getFileData = DB::table('renewal_files')->where('id',$id)->value('organization_by_laws_or_constitution');
-            }elseif($title == 'final_fd_eight_form'){
+            }elseif($title == 'form_eight_executive_committee_member'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('form_eight_executive_committee_member');
+            }elseif($title == 'last_ten_year_annual_report'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('last_ten_year_annual_reportwe');
+            }elseif($title == 'constitution_extra'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('constitution_extra');
+            }
+
+
+            elseif($title == 'final_fd_eight_form'){
                 $getFileData = DB::table('renewal_files')->where('id',$id)->value('final_fd_eight_form');
             }elseif($title == 'work_procedure'){
                 $getFileData = DB::table('renewal_files')->where('id',$id)->value('work_procedure_of_organization');

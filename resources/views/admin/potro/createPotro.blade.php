@@ -26,6 +26,12 @@
             max-width: 80%;
             margin: 20px auto;
         }
+
+        thead, tbody, tfoot, tr, td, th
+		{
+			border-width: 1px !important;
+			border-color: black !important;
+		}
     </style>
 
 
@@ -387,9 +393,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_no
                                                                         <span>
 
                                                                             @if(empty($nothiPropokLists->organization_name))
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                              @else
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span>।<br>
                                                                             @endif
 
 
@@ -405,7 +411,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_no
                                                                     <p class="mt-4" style="font-weight:bold">দৃষ্টি আকর্ষণ</p>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     <span>@if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span> ।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -473,9 +479,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_no
 
                                                                     @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>
                                                                     @else
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
 
                                                                     @endif
                                                                     @else

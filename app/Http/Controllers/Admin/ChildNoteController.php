@@ -59,6 +59,93 @@ use App\Models\PotrangshoDraft;
 class ChildNoteController extends Controller
 {
 
+    public function getdataforNothiList(Request $request){
+
+        //dd(12);
+        $nothiCopyListId=$request->getFinalValue;
+
+        $eid=$request->eid;
+
+        if($request->mmStatus == 'registration'){
+
+            $childNoteNewList = DB::table('child_note_for_registrations')
+            ->where('id',$request->getFinalValue)->first();
+
+
+            }elseif($request->mmStatus == 'renew'){
+
+            $childNoteNewList = DB::table('child_note_for_renews')
+            ->where('id',$request->getFinalValue)->first();
+
+
+            }elseif($request->mmStatus == 'nameChange'){
+
+            $childNoteNewList = DB::table('child_note_for_name_changes')
+            ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'fdNine'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_nines')
+            ->where('id',$request->getFinalValue)->first();
+
+
+            }elseif($request->mmStatus == 'fdNineOne'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+            ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'fdSix'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')
+            ->where('id',$request->getFinalValue)->first();
+
+
+            }elseif($request->mmStatus == 'fdSeven'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_sevens')
+            ->where('id',$request->getFinalValue)->first();
+
+
+            }elseif($request->mmStatus == 'fcOne'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fc_ones')
+            ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'fcTwo'){
+
+
+
+            $childNoteNewList = DB::table('child_note_for_fc_twos')
+            ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'fdThree'){
+
+
+            $childNoteNewList = DB::table('child_note_for_fd_threes')
+            ->where('id',$request->getFinalValue)->first();
+
+
+
+            }
+
+        $data = view('admin.presentDocument.getdataforTest',compact('eid','nothiCopyListId','childNoteNewList'))->render();
+            return response()->json(['data'=>$data]);
+
+    }
+
 
     public function deleteAttachment($id){
 

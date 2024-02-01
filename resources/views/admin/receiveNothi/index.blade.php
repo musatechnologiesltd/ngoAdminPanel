@@ -64,7 +64,7 @@ $allNoteListNew = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail
 
 }elseif($nothiLists1->dakType == 'fdSix'){
 
-allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
+$allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
 ->where('serial_number',$nothiLists1->nothId)->get();
 
 }elseif($nothiLists1->dakType == 'fdSeven'){

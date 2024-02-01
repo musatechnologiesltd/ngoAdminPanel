@@ -26,6 +26,12 @@
             max-width: 80%;
             margin: 20px auto;
         }
+
+        thead, tbody, tfoot, tr, td, th
+		{
+			border-width: 1px !important;
+			border-color: black !important;
+		}
     </style>
 
 
@@ -649,9 +655,9 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
                                                                         @if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                          @else
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span>।<br>
                                                                         @endif
                                                                         @endforeach
                                                                     </div>
@@ -665,7 +671,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     @if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো,</span>।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -728,9 +734,9 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
                                                                     @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।
                                                                     @else
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
 
                                                                     @endif
                                                                     @else
@@ -998,7 +1004,7 @@ $potroZariListValue =  DB::table('nothi_details')
                 <form id="form" class="custom-validation" action="{{ route('parentNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                     @csrf
 
-                    <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
+                    <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id="mmStatus"/>
                     <input type="hidden" value="{{ $parentId }}" placeholder="নোট এর বিষয়" class="form-control" name="dakId" id=""/>
                     <input type="hidden" value="{{ $nothiId }}" placeholder="নোট এর বিষয়" class="form-control" name="nothiId" id=""/>
                     <div class="mb-3">
@@ -1072,6 +1078,53 @@ $potroZariListValue =  DB::table('nothi_details')
 @section('script')
 
 <script>
+    $(document).ready(function(){
+  $("[id^=dataMain]").click(function(){
+
+    //alert(123);
+
+    var eid =   $(this).data("eid");
+
+    //mmStatus
+    var mmStatus = $('#mmStatus').val();
+    var value = $(this).attr('id');
+    var getFinalValue = value.slice(8);
+
+
+
+
+
+
+
+    $.ajax({
+    url: "{{ route('getdataforNothiList') }}",
+    method: 'get',
+    data: {mmStatus:mmStatus,getFinalValue:getFinalValue,eid:eid},
+    success: function(data) {
+
+
+
+        $('#tableListNnn'+getFinalValue).html(data.data);
+
+
+
+
+    },
+    beforeSend: function(){
+        $('#pageloader').show()
+    },
+    complete: function(){
+        $('#pageloader').hide()
+    }
+    });
+
+
+  });
+});
+</script>
+
+
+<script>
 
 $(document).on('click', 'a.editButtonFirst', function () {
 
@@ -1084,9 +1137,9 @@ $(document).on('click', 'a.editButtonFirst', function () {
 
 
      $("#descriptionFirst"+id).hide();
-    $(".maineditorOne"+id).show();
-    $(".maineditorOne"+id).attr('id','editor'+id);
-    onSelectedChanged();
+    // $(".maineditorOne"+id).show();
+    // $(".maineditorOne"+id).attr('id','editor'+id);
+    // onSelectedChanged();
 
     });
 
@@ -1561,4 +1614,13 @@ $.ajax({
     });
 
     </script>
+
+
+<script>
+    $('.maineditorForAdd').each(function () {
+
+var ii = $(this).prop('id');
+   CKEDITOR.replace(ii);
+});
+ </script>
 @endsection

@@ -79,7 +79,9 @@ $receiverId = DB::table('nothi_details')
             {!! $childNoteNewLists->description !!}
         </textarea>
     </div>
+    <div id="tableListNnn{{ $childNoteNewLists->id }}">
 
+    </div>
 <!--start sign code -->
 <?php
 
@@ -214,8 +216,6 @@ $unsentAtt = DB::table('note_attachments')
  </ul>
 
     <div class="d-flex flex-row-reverse mt-3">
-
-   
         <div class="dropdown">
             <?php
 
@@ -248,7 +248,7 @@ $unsentAtt = DB::table('note_attachments')
 
     @if(empty($receiverId))
 
-    <a class="btn-sm btn btn-primary editButtonFirst"  data-eid="{{ $key+1 }}">
+    <a class="btn-sm btn btn-primary editButtonFirst" id="dataMain{{ $childNoteNewLists->id }}"  data-eid="{{ $key+1 }}">
     সংশোধন করুন
 </a>
 

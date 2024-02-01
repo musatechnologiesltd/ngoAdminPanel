@@ -198,6 +198,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
+        Route::get('/getdataforNothiList', 'getdataforNothiList')->name('getdataforNothiList');
+
         Route::get('/deleteAttachment/{id}', 'deleteAttachment')->name('deleteAttachment');
 
         Route::delete('/deleteAllParagraph/{id}/{status}', 'deleteAllParagraph')->name('deleteAllParagraph');

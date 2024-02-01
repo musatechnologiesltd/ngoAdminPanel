@@ -154,7 +154,7 @@ aria-labelledby="myModalLabel22">
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
                                                                         @if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}</span> ।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -170,7 +170,7 @@ aria-labelledby="myModalLabel22">
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     @if(empty($nothiPropokLists->organization_name))
-{{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭</span> ।<br>
+{{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -232,9 +232,9 @@ aria-labelledby="myModalLabel22">
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
                                                                     @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।
                                                                     @else
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
 
                                                                     @endif
                                                                     @else

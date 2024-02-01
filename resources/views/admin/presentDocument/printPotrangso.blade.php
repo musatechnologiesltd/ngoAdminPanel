@@ -292,7 +292,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 
         @if(empty($nothiPropokLists->organization_name))
-        <td colspan="2">{{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭। </td>
+        <td colspan="2">{{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো। </td>
          @else
          <td colspan="2">{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}। </td>
         @endif
@@ -308,7 +308,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 
         @if(empty($nothiPropokLists->organization_name))
-        <td style="padding-left:20px; padding-top: 10px;"> {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭। </td>
+        <td style="padding-left:20px; padding-top: 10px;"> {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো। </td>
                                                                          @else
                                                                          <td style="padding-left:20px; padding-top: 10px;">  {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}। </td>
                                                                         @endif
@@ -364,9 +364,9 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
         @if(empty($nothiPropokLists->organization_name))
         @if(count($nothiCopyListUpdate) == ($key+1))
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭।</td>
+        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।</td>
         @else
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>, প্লট-ই-১৩/বি, আগারগাঁও। শেরেবাংলা নগর, ঢাকা-১২০৭;</td>
+        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;</td>
 
         @endif
         @else

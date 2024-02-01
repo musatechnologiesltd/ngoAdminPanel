@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4 col-xs-4">
             <div class="d-flex flex-row-reverse">
-               
+
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@ $creatorNAme = DB::table('admins')
                 <input type="hidden" value="{{ $parentId }}" name="dakId"/>
 
             <div id="container">
-                <textarea class="maineditor" id="mainpeditor"  name="mainPartNote">
+                <textarea class="maineditorForAdd" id="mainpeditor"  name="mainPartNote">
                     <p>লিখুন</p>
                 </textarea>
             </div>
