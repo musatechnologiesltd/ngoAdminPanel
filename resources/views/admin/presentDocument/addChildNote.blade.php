@@ -27,7 +27,7 @@
             margin: 20px auto;
         }
 
-        thead, tbody, tfoot, tr, td, th
+		thead, tbody, tfoot, tr, td, th
 		{
 			border-width: 1px !important;
 			border-color: black !important;
@@ -503,16 +503,29 @@ $potroZariListValue =  DB::table('nothi_details')
 
  <!-- new button code end -->
 
-                                                                        <div class="text-center mb-3 mt-2">
-                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
-                                                                            <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-                                                                                সরকার</h3>
-                                                                            <h5>এনজিও বিষয়ক ব্যুরো <br>
-                                                                                প্রধানমন্ত্রীর কার্যালয় <br>
-                                                                                প্লট-ই, ১৩/বি, আগারগাঁও <br>
-                                                                                শেরেবাংলা নগর, ঢাকা-১২০৭
-                                                                            </h5>
-                                                                        </div>
+
+	<table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			</td>
+		</tr>
+	</tbody>
+
+	</table>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
 
@@ -526,32 +539,37 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                                   ?>
 
 @if(!$potrangshoDraft)
-<p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+<p ><span>স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
 @else
 <div style="display: flex;">
 @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
-<p ><span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+<p ><span> স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
 @else
-<p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+<p ><span> স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
 @endif
 </div>
 
 @endif
 
+
+
+
+
+
+
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
-                                                                                <table class="table table-borderless">
-                                                                                    <tr>
-                                                                                        <td style="width: 60%;font-weight:bold;">তারিখ:</td>
-                                                                                        <td style="text-align: left; padding-left: 10px;">
-                                                                                            @if($potroZariListValue == 1)
+																			<div style="display:flex; justify-content:right;">
+																			<p>তারিখ:</p>
+																			<p>
+																			@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
 
                                                                                             @endif
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </table>
+																			</p>
+																			</div>
+
                                                                             </div>
                                                                         </div>
 
@@ -566,7 +584,7 @@ $potroZariListValue =  DB::table('nothi_details')
 <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
 <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
 <div class="d-flex justify-content-start mt-3">
-  <p style="font-weight:bold;">বিষয় : </p>
+  <p >বিষয় : </p>
 
         {!! $potrangshoDraft->office_subject !!}
 
@@ -575,7 +593,7 @@ $potroZariListValue =  DB::table('nothi_details')
   @if($potrangshoDraft->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
   @else
-  <p style="font-weight:bold;">সুত্রঃ</p>
+  <p >সুত্রঃ</p>
 
 {!! $potrangshoDraft->office_sutro !!}
   @endif
@@ -583,20 +601,30 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">{!! $potrangshoDraft->description !!}</div>
+  <div class="col-xl-12 mt-2">
+
+
+                  {!! $potrangshoDraft->description !!}
+
+
+
+  </div>
 </div>
 
 @else
 <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
 <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
 <div class="d-flex justify-content-start mt-3">
-  <p style="font-weight:bold;">বিষয় : </p>{!! $officeDetails->office_subject !!}
+  <p >বিষয় : </p>
+
+        {!! $officeDetails->office_subject !!}
+
 </div>
 <div class="d-flex justify-content-start">
   @if($officeDetails->office_sutro == '<p>(যদি থাকে):...............................................</p>')
 
   @else
-  <p style="font-weight:bold;">সুত্রঃ</p>
+  <p style="">সুত্রঃ</p>
 
 {!! $officeDetails->office_sutro !!}
   @endif
@@ -604,12 +632,36 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">{!! $officeDetails->description !!}</div>
+  <div class="col-xl-12 mt-2">
+
+
+                  {!! $officeDetails->description !!}
+
+
+
+  </div>
 </div>
 @endif
 @endif
 
-<div class="mt-4" style="text-align: right;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        <!-- approver start --->
+
+
+
+                                                                        <div class="mt-4" style="text-align: right;">
                                                                             @if($potroZariListValue == 1)
 
                                                                             @if(!$nothiApproverLista)
@@ -624,19 +676,20 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         <span>{{ $desiName }}</span>
 
                                                                         @if(!$potrangshoDraft)
+                                                                        <br>
 
 @else
 
 @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
 @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-
+<br>
 @else
 {!! $potrangshoDraft->extra_text !!}
 @endif
 @else
 @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-
+<br>
 @else
 {!! $officeDetails->extra_text !!}
 @endif
@@ -657,7 +710,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         @if(empty($nothiPropokLists->organization_name))
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                          @else
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span>।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
                                                                         @endforeach
                                                                     </div>
@@ -671,7 +724,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     @if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো,</span>।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -689,33 +742,29 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <div class="row" class="mt-5" style="margin-top:20px;">
                                                                         <div class="col-md-6">
                                                                             @if(!$potrangshoDraft)
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                            <p ><span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                             @else
                                                                             <div style="display: flex;">
                                                                             @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                            <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
                                                                             @else
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+                                                                            <p ><span > স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
                                                                             @endif
                                                                             </div>
 
                                                                             @endif
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
-                                                                            <table class="table table-borderless">
-                                                                                <tr>
-                                                                                    <td style="width: 60%;font-weight:bold;">তারিখ:</td>
-                                                                                    <td style="text-align: left; padding-left: 10px;">
+                                                                            <div style="display:flex; justify-content:right;">
+																			<p>তারিখ:</p>
+																			<p>
+																			@if($potroZariListValue == 1)
+                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                            @else
 
-                                                                                        @if($potroZariListValue == 1)
-                                                                                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                        @else
-
-                                                                                        @endif
-
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
+                                                                                            @endif
+																			</p>
+																			</div>
                                                                         </div>
                                                                     </div>
 
@@ -772,19 +821,19 @@ $potroZariListValue =  DB::table('nothi_details')
     <span>{{ $desiName }}</span>
 
     @if(!$potrangshoDraft)
-
+<br>
     @else
 
     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
     @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-
+<br>
     @else
     {!! $potrangshoDraft->extra_text !!}
     @endif
     @else
     @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-
+<br>
     @else
     {!! $officeDetails->extra_text !!}
     @endif
@@ -852,10 +901,10 @@ $potroZariListValue =  DB::table('nothi_details')
        aria-labelledby="profile-icon-tab_form_eight_nothi">
 
        @if($ngoTypeData->ngo_type == 'Foreign')
-       @include('admin.registrationList.foreign.registration_document')
+       @include('admin.registrationList.foreign.registrationDocument')
 
        @else
-       @include('admin.registrationList.registration_document')
+       @include('admin.registrationList.registrationDocument')
 
        @endif
 
@@ -1076,7 +1125,6 @@ $potroZariListValue =  DB::table('nothi_details')
 
 
 @section('script')
-
 <script>
     $(document).ready(function(){
   $("[id^=dataMain]").click(function(){
@@ -1123,7 +1171,6 @@ $potroZariListValue =  DB::table('nothi_details')
 });
 </script>
 
-
 <script>
 
 $(document).on('click', 'a.editButtonFirst', function () {
@@ -1137,9 +1184,9 @@ $(document).on('click', 'a.editButtonFirst', function () {
 
 
      $("#descriptionFirst"+id).hide();
-    // $(".maineditorOne"+id).show();
-    // $(".maineditorOne"+id).attr('id','editor'+id);
-    // onSelectedChanged();
+   // $(".maineditorOne"+id).show();
+   // $(".maineditorOne"+id).attr('id','editor'+id);
+   // onSelectedChanged();
 
     });
 
@@ -1614,9 +1661,7 @@ $.ajax({
     });
 
     </script>
-
-
-<script>
+	<script>
     $('.maineditorForAdd').each(function () {
 
 var ii = $(this).prop('id');

@@ -26,8 +26,7 @@
             max-width: 80%;
             margin: 20px auto;
         }
-
-        thead, tbody, tfoot, tr, td, th
+		thead, tbody, tfoot, tr, td, th
 		{
 			border-width: 1px !important;
 			border-color: black !important;
@@ -67,6 +66,11 @@
                                         <!-- add note button -->
                                         <button class="btn btn-outline-success" data-bs-toggle="modal" data-original-title="" data-bs-target="#myModal3" data-bs-original-title="" title=""><i class="fa fa-calendar"></i> নতুন নোট</button>
 <!-- end add note button -->
+
+
+
+
+
 
                                         @if(count($checkParent) == 0)
 
@@ -423,9 +427,10 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
     ->where('nothId',$nothiId)
     ->where('dakId',$parentId)
     ->where('dakType',$status)
+    //->where('sender',Auth::guard('admin')->user()->id)
     ->where('receiver',Auth::guard('admin')->user()->id)
     ->value('id');
-
+//dd($firstSenderId);
     ?>
 
 @if(!empty($firstSenderId))
@@ -464,6 +469,26 @@ $potroZariListValue =  DB::table('nothi_details')
 
 @endif
 
+    {{-- <div class="dropdown me-2">
+        <button class="btn btn-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+            পত্র অনুমোদন করুন
+        </button>
+        <div class="dropdown-menu"
+             aria-labelledby="dropdownMenuButton1">
+            <div>
+                <h3 class="popover-header">পত্র অনুমোদন </h3>
+                <div class="popover-body">আপনি কি পত্র অনুমোদন করতে চান</div>
+                <div class="d-flex justify-content-center p-2">
+                    <button onclick="location.href = '{{ route('givePermissionToNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'childnote'=>$childNoteNewListValue]) }}';" class="btn btn-primary me-2">হ্যাঁ</button>
+                    <button class="btn btn-danger">না</button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
     <button class="btn btn-primary me-2" onclick="location.href = '{{ route('createPotroForReceiver', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'activeCode' =>$activeCode]) }}';"><i class="fa fa-pencil"></i> সংশোধন করুন</button>
     <a target="_blank"    class="btn btn-primary me-2" href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}'><i class="fa fa-print"></i> প্রিন্ট করুন</a>
 
@@ -493,49 +518,62 @@ $potroZariListValue =  DB::table('nothi_details')
 </div>
 
  <!-- new button code end -->
-                                                                        <div class="text-center mb-3">
-                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
-                                                                            <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-                                                                                সরকার</h3>
-                                                                            <h5>এনজিও বিষয়ক ব্যুরো <br>
-                                                                                প্রধানমন্ত্রীর কার্যালয় <br>
-                                                                                প্লট-ই, ১৩/বি, আগারগাঁও <br>
-                                                                                শেরেবাংলা নগর, ঢাকা-১২০৭
-                                                                            </h5>
+                                                                        <div >
+                                                                            <table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			</td>
+		</tr>
+	</tbody>
+	</table>
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p >@if(!$potrangshoDraft)
-                                                                                    <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                                <p >
+
+                                                                                    @if(!$potrangshoDraft)
+                                                                                    <p ><span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                                     @else
                                                                                     <div style="display: flex;">
                                                                                     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
-                                                                                    <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                                    <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
                                                                                     @else
-                                                                                    <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+
+                                                                                    @if(empty($officeDetails->sarok_number))
+                                                                                    <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                                    @else
+                                                                                    <p ><span > স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+                                                                                    @endif
                                                                                     @endif
                                                                                     </div>
 
                                                                                     @endif</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
-                                                                                <table class="table table-borderless">
-                                                                                    <tr>
-                                                                                        <td style="width: 60%;">তারিখ:</td>
-                                                                                        <td style="text-align: left; padding-left: 10px;">
+                                                                                <div style="display:flex; justify-content:right;">
+                                                                                    <p>তারিখ:</p>
+                                                                                    <p>
+                                                                                    @if($potroZariListValue == 1)
+                                                                                                    {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                                    @else
 
-                                                                                            @if($potroZariListValue == 1)
-                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                            @else
-
-                                                                                            @endif
-
-                                                                                            {{-- {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ --}}
-
-
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </table>
+                                                                                                    @endif
+                                                                                    </p>
+                                                                                    </div>
                                                                             </div>
                                                                         </div>
 
@@ -564,9 +602,53 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2">{!! $potrangshoDraft->description !!}</div>
+  <div class="col-xl-12 mt-2">
+
+          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
+
+
+
+
+                  {!! $potrangshoDraft->description !!}
+
+
+
+  </div>
 </div>
 
+@else
+
+@if(empty($officeDetails->office_subject))
+<input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
+<input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
+<div class="d-flex justify-content-start mt-3">
+  <p>বিষয় :</p>{!! $potrangshoDraft->office_subject !!}
+
+
+</div>
+<div class="d-flex justify-content-start">
+  @if($potrangshoDraft->office_sutro == '<p>(যদি থাকে):...............................................</p>')
+
+  @else
+  <p>সুত্রঃ</p>{!! $potrangshoDraft->office_sutro !!}
+  @endif
+  <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
+                       <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
+</div>
+<div class="row">
+  <div class="col-xl-12 mt-2">
+
+          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
+
+
+
+
+                  {!! $potrangshoDraft->description !!}
+
+
+
+  </div>
+</div>
 @else
 <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
 <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
@@ -585,14 +667,40 @@ $potroZariListValue =  DB::table('nothi_details')
                        <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
 </div>
 <div class="row">
-  <div class="col-xl-12 mt-2"> {!! $officeDetails->description !!}</div>
+  <div class="col-xl-12 mt-2">
+
+          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
+
+
+
+
+                  {!! $officeDetails->description !!}
+
+
+
+  </div>
 </div>
-
 @endif
 @endif
+@endif
 
 
-        <div class="mt-4" style="text-align: right;">
+
+
+
+
+
+
+
+
+
+
+
+                                                                        <!-- approver start --->
+
+
+
+                                                                        <div class="mt-4" style="text-align: right;">
 
                                                                             @if($potroZariListValue == 1)
 
@@ -609,19 +717,20 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
                                                                         @if(!$potrangshoDraft)
+                                                                        <br>
 
     @else
 
     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
     @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-
+<br>
     @else
     {!! $potrangshoDraft->extra_text !!}
     @endif
     @else
     @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-
+<br>
     @else
     {!! $officeDetails->extra_text !!}
     @endif
@@ -672,33 +781,33 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <div class="row" class="mt-4" style="margin-top:20px;">
                                                                         <div class="col-md-6">
                                                                             <p >@if(!$potrangshoDraft)
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                                <p ><span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                                 @else
                                                                                 <div style="display: flex;">
                                                                                 @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                                <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
                                                                                 @else
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+                                                                                <p ><span > স্মারক নং:</span>@if(empty($officeDetails->sarok_number))
+                                                                                    {!! $potrangshoDraft->sarok_number !!}
+                                                                                    @else
+                                                                                    {!! $officeDetails->sarok_number !!}
+                                                                                    @endif</p>
                                                                                 @endif
                                                                                 </div>
 
                                                                                 @endif</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
-                                                                            <table class="table table-borderless">
-                                                                                <tr>
-                                                                                    <td style="width: 60%;">তারিখ:</td>
-                                                                                    <td style="text-align: left; padding-left: 10px;">
+                                                                            <div style="display:flex; justify-content:right;">
+                                                                                <p>তারিখ:</p>
+                                                                                <p>
+                                                                                @if($potroZariListValue == 1)
+                                                                                                {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                                @else
 
-                                                                                        @if($potroZariListValue == 1)
-                                                                                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                        @else
-
-                                                                                        @endif
-
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
+                                                                                                @endif
+                                                                                </p>
+                                                                                </div>
                                                                         </div>
                                                                     </div>
 
@@ -754,28 +863,39 @@ $potroZariListValue =  DB::table('nothi_details')
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
     @if(!$potrangshoDraft)
-
+<br>
     @else
 
     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
     @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-
+<br>
     @else
     {!! $potrangshoDraft->extra_text !!}
     @endif
     @else
-    @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
 
+
+    @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+<br>
+    @else
+    @if(empty($officeDetails->extra_text ))
+    {!! $potrangshoDraft->extra_text !!}
     @else
     {!! $officeDetails->extra_text !!}
     @endif
     @endif
 
 
+
+
     @endif
-<span>ফোন :{{ $aphone }}</span><br>
-<span>ইমেইল : {{ $aemail }}</span>
+
+
+    @endif
+
+                                                                            <span>ফোন :{{ $aphone }}</span><br>
+                                                                            <span>ইমেইল : {{ $aemail }}</span>
     </div>
     @endif
 @endforeach

@@ -20,6 +20,11 @@
         /* font-size: 14px; */
 
         }
+		table
+		{
+			width: 100%;
+			border-collapse: collapse;
+		}
         .upper_section
         {
             text-align:center;
@@ -38,8 +43,9 @@
         {
             border-collapse: collapse;
             width: 100%;
-            margin: 25px 0;
+            margin: 10px 0;
         }
+
 
         .bt{
   /* font-family: 'banglabold', sans-serif; */
@@ -61,17 +67,28 @@ $potroZariListValue =  DB::table('nothi_details')
 
     ?>
 
-<div class="upper_section">
-    <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
-    <div class="text_section">
-        <p>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
-            মন্ত্রণালয়ের নাম লিখুন <br>
-            এনজিও বিষয়ক ব্যুরো <br>
-            সহকারী পরিচালক-১ (নিবন্ধন ও নবায়ন শাখা) <br>
-            আগারগাঁও, শেরেবাংলানগর <br>
-            ঢাকা-১২০৭</p>
-    </div>
-</div>
+
+	<table>
+		<tr>
+			<td style="width: 25%; vertical-align: top;">
+				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			</td>
+			<td style="width: 50%; text-align:center">
+				<p style="line-height:.8;">
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top;">
+				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			</td>
+		</tr>
+	</table>
+
+
 
 <?php
 $nothiApproverList = DB::table('nothi_approvers')->where('nothiId',$nothiId)
@@ -138,24 +155,39 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
   ?>
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">
-        <span style="">স্মারক নম্বর:</span> @if(!$potrangshoDraft)
-{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
-@else
-<div style="display: flex;">
-@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
-{!! $potrangshoDraft->sarok_number !!}
-@else
-{!! $officeDetails->sarok_number !!}
-@endif
-</div>
+        <td style="font-weight:bold; width:60%">
+		<table>
+			<tr>
+				<td  style="width:65px;">
+				<span style="">স্মারক নং: -</span>
+				</td>
+				<td>
+				@if(!$potrangshoDraft)
+				{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+				@else
+				<div style="display: flex;">
+				@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+				{!! $potrangshoDraft->sarok_number !!}
+				@else
 
-@endif
+				@if(empty($officeDetails->sarok_number))
+                {!! $potrangshoDraft->sarok_number !!}
+                @else
+				{!! $officeDetails->sarok_number !!}
+                @endif
+				@endif
+				</div>
+
+				@endif
+				</td>
+			</tr>
+		</table>
+
         </td>
-        <td style="text-align: right">
+        <td style="text-align: right; width:40%">
             <table class="pdf_table">
                 <tr>
-                    <td style="width: 58%;font-weight:bold;"><span class="bt">তারিখ:</span></td>
+                    <td style="width: 38%;"><span>তারিখ:</span></td>
                     <td style="text-align: left; padding-left: 10px;">
                         @if($potroZariListValue == 1)
                         {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
@@ -181,7 +213,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 <table class="pdf_table">
     <tr style="font-weight:bold;">
-        <td style="width: 7%;font-weight:bold;"> বিষয়: </td>
+        <td style="width: 15px"> বিষয়: </td>
         <td>{!! $potrangshoDraft->office_subject !!} </td>
     </tr>
 </table>
@@ -191,7 +223,32 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 @else
 <table class="pdf_table">
     <tr>
-        <td style="width: 5%;font-weight:bold;"> সূত্র:</td>
+        <td style="width: 15px"> সূত্র:</td>
+        <td> {!! $potrangshoDraft->office_sutro !!}</td>
+    </tr>
+</table>
+@endif
+<table class="pdf_table">
+    <tr>
+        <td>{!! $potrangshoDraft->description !!}</td>
+    </tr>
+</table>
+
+@else
+@if(empty($officeDetails->sarok_number))
+<table class="pdf_table">
+    <tr style="">
+        <td style="width: 15px"> বিষয়: </td>
+        <td>{!! $potrangshoDraft->office_subject !!} </td>
+    </tr>
+</table>
+
+@if($potrangshoDraft->office_sutro == '<p>(যদি থাকে):...............................................</p>')
+
+@else
+<table class="pdf_table">
+    <tr>
+        <td style="width: 15px"> সূত্র:</td>
         <td> {!! $potrangshoDraft->office_sutro !!}</td>
     </tr>
 </table>
@@ -204,8 +261,8 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 @else
 <table class="pdf_table">
-    <tr style="font-weight:bold;">
-        <td style="width: 7%;font-weight:bold;"> বিষয়: </td>
+    <tr style="">
+        <td style="width: 15px"> বিষয়: </td>
         <td>{!! $officeDetails->office_subject !!} </td>
     </tr>
 </table>
@@ -215,7 +272,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 @else
 <table class="pdf_table">
     <tr>
-        <td style="width: 5%;font-weight:bold;"> সূত্র:</td>
+        <td style="width: 15px"> সূত্র:</td>
         <td> {!! $officeDetails->office_sutro !!}</td>
     </tr>
 </table>
@@ -230,7 +287,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 
 @endif
-
+@endif
 
 <?php
     $potroZariListValue =  DB::table('nothi_details')
@@ -245,14 +302,17 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
         ?>
 <table class="pdf_table">
     <tr>
-        <td style="width:80%"></td>
+        <td style="width:65%"></td>
         <td style="text-align:center; line-height:1">
             @if($potroZariListValue == 1)
 
             @if(!$nothiApproverList)
 
             @else
-            <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/>
+            <div style="height: 300px; width: 100%; clear:both; line-height:300px;">
+                {{-- <img src="{{ asset('/') }}{{ $appSignature }}" style="height:300px;"/> --}}
+            </div>
+
             @endif
 
             @else
@@ -308,9 +368,9 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 
         @if(empty($nothiPropokLists->organization_name))
-        <td style="padding-left:20px; padding-top: 10px;"> {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো। </td>
+        <td> {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো। </td>
                                                                          @else
-                                                                         <td style="padding-left:20px; padding-top: 10px;">  {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}। </td>
+                                                                         <td >  {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}। </td>
                                                                         @endif
     </tr>
     @endforeach
@@ -321,22 +381,42 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 @else
 <table class="pdf_table">
     <tr>
-        <td style="font-weight:bold;">স্মারক নম্বর:  @if(!$potrangshoDraft)
-            {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
-            @else
-            <div style="display: flex;">
-            @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
-            {!! $potrangshoDraft->sarok_number !!}
-            @else
-            {!! $officeDetails->sarok_number !!}
-            @endif
-            </div>
+        <td>
+		<table>
+			<tr>
+				<td  style="width:65px;">
+				<span style="">স্মারক নং: -</span>
+				</td>
+				<td>
+				@if(!$potrangshoDraft)
+				{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+				@else
+				<div style="display: flex;">
+				@if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+				{!! $potrangshoDraft->sarok_number !!}
+				@else
 
-            @endif</td>
+                @if(empty($officeDetails->sarok_number))
+
+                {!! $potrangshoDraft->sarok_number !!}
+                @else
+
+				{!! $officeDetails->sarok_number !!}
+
+@endif
+				@endif
+				</div>
+
+				@endif
+				</td>
+			</tr>
+		</table>
+
+		</td>
         <td style="text-align: right">
             <table class="pdf_table">
                 <tr>
-                    <td style="width: 58%;font-weight:bold;">তারিখ:</td>
+                    <td style="width: 58%;">তারিখ:</td>
                     <td style="text-align: left; padding-left: 10px;">
                         @if($potroZariListValue == 1)
                         {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
@@ -364,18 +444,18 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
         @if(empty($nothiPropokLists->organization_name))
         @if(count($nothiCopyListUpdate) == ($key+1))
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।</td>
+        <td >{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।</td>
         @else
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;</td>
+        <td >{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;</td>
 
         @endif
         @else
 
 
         @if(count($nothiCopyListUpdate) == ($key+1))
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।</td>
+        <td >{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।</td>
         @else
-        <td style="padding-left:20px; padding-top: 10px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};</td>
+        <td >{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};</td>
 
         @endif
 
@@ -391,7 +471,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
 
 <table class="pdf_table">
     <tr>
-        <td style="width:80%"></td>
+        <td style="width:65%"></td>
         <td style="text-align:center; line-height:1">
             @if($potroZariListValue == 1)
 

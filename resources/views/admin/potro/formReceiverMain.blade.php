@@ -4,7 +4,7 @@
         <div class="col-md-6">
 
             <div class="d-flex justify-content-start">
-                <span style="font-weight:900;">স্মারক নং: </span>
+                <span > স্মারক নং: </span>
 
 
 
@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-6" style="text-align: right;">
             <div class="d-flex justify-content-end">
-                <p style="font-weight:bold">তারিখ: </p>
+                <p >তারিখ: </p>
                 <p>@if($potroZariListValue == 1)
                         {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                         @else
@@ -60,11 +60,13 @@
 
                                                                                 <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
     <br>
-
+                                                                                {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
 
                                                                                 <div id="firstBisoyBostu"> {!! $officeDetails->description !!}</div>
 
-                                                                            
+                                                                                {{-- <textarea id="editor1222"   class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
+                                                                                        {!! $officeDetails->description !!}
+                                                                                    </textarea> --}}
 
                                                                                     <textarea   style="display: none;" class="mainEdit mt-2 secondBisoyBostu"  name="maindes" >
                                                                                         {!! $officeDetails->description !!}

@@ -27,7 +27,7 @@
             margin: 20px auto;
         }
 
-        thead, tbody, tfoot, tr, td, th
+		thead, tbody, tfoot, tr, td, th
 		{
 			border-width: 1px !important;
 			border-color: black !important;
@@ -61,11 +61,19 @@ $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_det
 ->where('id',$id)
    ->first();
 
-$childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
+
+   $childNoteNewList = DB::table('child_note_for_registrations')
+           ->where('parent_note_regid',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_registrations')
+           ->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
 
 
 }elseif($status == 'renew'){
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -73,10 +81,21 @@ $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id'
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_renews')
+           ->where('parent_note_for_renew_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_renews')
+           ->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
+
+
 
 }elseif($status == 'nameChange'){
+
+
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -84,10 +103,21 @@ $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_deta
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_name_changes')
+           ->where('parentnote_name_change_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_name_changes')
+           ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
 
 }elseif($status == 'fdNine'){
+
+
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -95,40 +125,78 @@ $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_i
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fd_nines')
+           ->where('p_note_for_fd_nine_id',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+           ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+//dd($checkParent);
+
 
 }elseif($status == 'fdNineOne'){
+
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+           ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+           ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
 
 }elseif($status == 'fdSix'){
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fd_sixes')
+           ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+           ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
 
 }elseif($status == 'fdSeven'){
+
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fd_sevens')
+           ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+           ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
 
 }elseif($status == 'fcOne'){
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -136,20 +204,42 @@ $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fc_ones')
+           ->where('parent_note_for_fc_one_id',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+           ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
 
 }elseif($status == 'fcTwo'){
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
 ->where('id',$id)
 ->first();
 
-$childNoteNewList = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fc_twos')
+           ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+           $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+           ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
 
 }elseif($status == 'fdThree'){
+
+
+
+
+
 
 $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
 ->where('serial_number',$nothiId)
@@ -157,13 +247,20 @@ $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_
 ->first();
 
 
-$childNoteNewList = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->get();
-$childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+$childNoteNewList = DB::table('child_note_for_fd_threes')
+           ->where('parent_note_for_fd_three_id',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+           ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
 }
 
-?>
+
+
+
+
+                                    ?>
 
    <!-- Container-fluid starts-->
    <div class="container-fluid list-products">
@@ -330,15 +427,29 @@ $branchName = DB::table('branches')
 
 
 
-                                                                        <div class="text-center mb-3 mt-2">
-                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
-                                                                            <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-                                                                                সরকার</h3>
-                                                                            <h5>এনজিও বিষয়ক ব্যুরো <br>
-                                                                                প্রধানমন্ত্রীর কার্যালয় <br>
-                                                                                প্লট-ই, ১৩/বি, আগারগাঁও <br>
-                                                                                শেরেবাংলা নগর, ঢাকা-১২০৭
-                                                                            </h5>
+                                                                        <div >
+																		<table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			</td>
+		</tr>
+	</tbody>
+	</table>
+
                                                                         </div>
 
                                                                         <?php
@@ -370,17 +481,39 @@ $branchName = DB::table('branches')
                                                                                    @include('admin.potro.formReceiver')
 
                                                                                    @else
+
+                                                                                   @if(empty($officeDetails->sarok_number))
+                                                                                   @include('admin.potro.formReceiver')
+                                                                                   @else
                                                                                    @include('admin.potro.formReceiverMain')
                                                                                    @endif
                                                                                    @endif
+                                                                                   @endif
+
+
+
+
+
+
+
+
+
+
+                                                                        <!-- approver start --->
+
+
+
+
+
+                                                                        <!-- approver end -->
 
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $nothiPropokLists)
                                                                         <span>@if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                          @else
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span>।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
                                                                         @endforeach
                                                                     </div>
@@ -394,7 +527,7 @@ $branchName = DB::table('branches')
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     <span>@if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span> ।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -412,7 +545,7 @@ $branchName = DB::table('branches')
                                                                             @if(!$potrangshoDraft)
 
 
-                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+                                                                            <span >স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
 
                                                                             @else
 
@@ -421,10 +554,14 @@ $branchName = DB::table('branches')
 
                                                                             @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
-                                                                            <span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}
+                                                                            <span >স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}
 
                                                                             @else
-                                                                            <span style="font-weight:900;">স্মারক নং:</span> {!! $officeDetails->sarok_number !!}
+                                                                            <span >স্মারক নং:</span> @if(empty($officeDetails->sarok_number))
+                                                                            {!! $potrangshoDraft->sarok_number !!}
+                                                                            @else
+                                                                            {!! $officeDetails->sarok_number !!}
+                                                                            @endif
                                                                             @endif
 
                                                                             </div>
@@ -433,7 +570,7 @@ $branchName = DB::table('branches')
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p style="font-weight:bold;">তারিখ: </p>
+                                                                                    <p >তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -495,7 +632,7 @@ $branchName = DB::table('branches')
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
     @if(empty($potrangshoDraft->extra_text))
-
+<br>
     @else
 
     <span>{!! $potrangshoDraft->extra_text !!}</span>
@@ -508,14 +645,28 @@ $branchName = DB::table('branches')
     @else
 
     <!-- no data available  -->
-    <div class="text-center mb-3 mt-2">
-        <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-            সরকার</h3>
-        <h5>এনজিও বিষয়ক ব্যুরো <br>
-            প্রধানমন্ত্রীর কার্যালয় <br>
-            প্লট-ই, ১৩/বি, আগারগাঁও <br>
-            শেরেবাংলা নগর, ঢাকা-১২০৭
-        </h5>
+    <div>
+<table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			</td>
+		</tr>
+	</tbody>
+	</table>
     </div>
 
     <?php
@@ -531,11 +682,11 @@ $branchName = DB::table('branches')
         ?>
     <div class="row" class="mt-4">
         <div class="col-md-6">
-            <span style="font-weight:900;">স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+            <span >স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p style="font-weight:bold;">তারিখ: </p>
+                                                                                    <p >তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -574,16 +725,36 @@ $branchName = DB::table('branches')
                                </textarea>
             </p>
 
+
+            {{-- <span id="idOfElement1"
+                  class="block">
+            <textarea class=" form-control edit"   id="" >.............................................................................................</textarea>
+            <span class="preview"></span> --}}
         </div>
         <div class="row">
             <div class="col-xl-12">
+
+                    {{-- <label class="form-label">সম্পাদন শেষ করুন</label>
+
+                    <br><br>
+
+<button class="btn btn-primary  mt-2" id="sorkariSarokSubmit"
+
+aria-expanded="false">
+সংরক্ষন করুন
+</button>
+<br><br>
+                        <textarea id="editor1222" class="mainEdit"  name="maindes" >
+
+                        </textarea> --}}
+
 
                         <label class="btn btn-primary" id="sompadonButton">সম্পাদন করুন</label>
 
 
                         <button class="btn btn-primary" type="submit" style="display: none;" id="sompadonButtonOne">সম্পাদনা শেষ করুন </button>
 <br>
-
+                        {{-- <p>পত্রের বিষয়বস্তু.........................</p> --}}
 
                         <div id="firstBisoyBostu">পত্রের বিষয়বস্তু.........................</div>
 
@@ -637,7 +808,7 @@ $branchName = DB::table('branches')
             @else
             <div class="row" class="mt-4">
                 <div class="col-md-6">
-                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+                    <span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
