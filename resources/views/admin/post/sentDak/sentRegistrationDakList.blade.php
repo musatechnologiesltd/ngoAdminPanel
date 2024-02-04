@@ -12,17 +12,32 @@ $orginalReceverId= DB::table('ngo_registration_daks')
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
-$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->registration_status_id)->orderBy('id','desc')->first();
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
+$formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)
+    ->value('fd_one_form_id');
+
+$form_one_data = DB::table('fd_one_forms')
+->where('id',$formOneDataId)->first();
+
+
+$adminNamePrapok = DB::table('admins')
+    ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+    $adminNamePrerok = DB::table('admins')
+    ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+$decesionName = DB::table('dak_details')
+->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
 ?>
 <tr>
 <td style="text-align:left;">
-    উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
     প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
     মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
     বিষয়ঃ <b> এনজিও নিবন্ধন</b> <br>
@@ -31,7 +46,16 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->registr
 </td>
 <td style="text-align:right;">
 
+
+
+
+
+    {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'registration','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+    {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->registration_status_id]) }}';">প্রেরণ</button> --}}
     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$formOneDataId) }}';">দেখুন</button>
+
+
+
 
                                                              <!--new code-->
 <button type="button" class="btn btn-primary btn-xs"
@@ -53,6 +77,19 @@ aria-labelledby="myModalLabel2">
 </div>
 
 <div class="modal-body">
+
+<?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->registration_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+?>
 
 @if(!$dakDetail)
 

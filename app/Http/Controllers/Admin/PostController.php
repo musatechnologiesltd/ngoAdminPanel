@@ -34,7 +34,7 @@ use Mpdf\Mpdf;
 class PostController extends Controller
 {
 
-    public function all_dak_list(){
+    public function allDakList(){
 
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
@@ -154,7 +154,7 @@ class PostController extends Controller
 
             $allDataForNewList = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-            return view('admin.post.allDak.all_dak_list',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+            return view('admin.post.allDak.allDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
         }
 
@@ -237,7 +237,7 @@ class PostController extends Controller
     }
 
 
-    public function sent_dak(){
+    public function sentDak(){
 
         \LogActivity::addToLog('view sent dak detail.');
 

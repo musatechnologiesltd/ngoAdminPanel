@@ -4,6 +4,7 @@ aria-labelledby="myModalLabel22">
 <div class="modal-dialog modal-xl" role="document">
 <div class="modal-content">
 <div class="modal-header">
+<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
     <h4 class="modal-title" id="myModalLabel2">
         পত্র প্রদর্শন </h4>
 </div>
@@ -62,7 +63,7 @@ aria-labelledby="myModalLabel22">
             <tbody style="border-width:0 !important">
                     <tr style="border-width:0 !important">
                     <td style="width: 25%; vertical-align: top; border-width:0 !important">
-                        <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+                        {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
                     </td>
                     <td style="width: 50%; text-align:center; border-width:0 !important">
                         <p>
@@ -74,7 +75,7 @@ aria-labelledby="myModalLabel22">
                         </p>
                     </td>
                     <td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-                        <img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+                        {{-- <img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;"> --}}
                     </td>
                 </tr>
             </tbody>
@@ -242,7 +243,7 @@ aria-labelledby="myModalLabel22">
                                                                         <p>
                                                                             @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                         @if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }},</span>।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }},</span> এনজিও বিষয়ক ব্যুরো।<br>
                                                                              @else
                                                                             {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                             @endif

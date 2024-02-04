@@ -1,19 +1,34 @@
-@foreach($allDataForNewList as $i=>$allStatusData)
+@foreach($all_data_for_new_list as $i=>$allStatusData)
 
 <?php
 
-$checkDataAvailableOrNot = DB::table('ngo_registration_daks')
+  $checkDataAvailableOrNot = DB::table('ngo_registration_daks')
                 ->where('registration_status_id',$allStatusData->id)
                 ->where('sender_admin_id',Auth::guard('admin')->user()->id)
                 ->where('status',1)
                 ->value('id');
 
-$orginalReceverId= DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->where('original_recipient',1)->value('receiver_admin_id');
-$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-$decesionNameId = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
-$decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+//new code
+$orginalReceverId= DB::table('ngo_registration_daks')
+                ->where('registration_status_id',$allStatusData->id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
+$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+$decesionNameId = DB::table('ngo_registration_daks')
+->where('registration_status_id',$allStatusData->id)->value('dak_detail_id');
+
+$decesionName = DB::table('dak_details')
+->where('id',$decesionNameId)->where('status','registration')->value('decision_list');
+
 ?>
 
 @if(!empty($checkDataAvailableOrNot))
@@ -24,8 +39,8 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->or
 @else
 <tr>
 <td style="text-align:left;">
-    উৎসঃ {{ $formOneData->organization_name_ban }} <br>
-    প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+    প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
     বিষয়ঃ <b> এনজিও নিবন্ধন</b> <br>
     @if(empty($decesionName))
@@ -61,6 +76,19 @@ aria-labelledby="myModalLabel2">
 
 <div class="modal-body">
 
+<?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+?>
+
 @if(!$dakDetail)
 
 @else
@@ -76,6 +104,8 @@ $mainDetail = DB::table('ngo_registration_daks')
 
 
 <?php
+
+
 
 $senderName = DB::table('admins')
 ->where('id',$allMainDetail->sender_admin_id)
@@ -134,6 +164,8 @@ $desiNames = DB::table('designation_lists')
 $branchNames = DB::table('branches')
 ->where('id',$branchIds)->value('branch_name');
 
+
+
 ?>
 
 <div class="d-flex mb-2">
@@ -169,8 +201,13 @@ $branchNames = DB::table('branches')
 
             @else
 
+
             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
              @endif
+
+
+
+
 
             <hr>
             <ul>
@@ -189,10 +226,19 @@ $branchNames = DB::table('branches')
 
 @endif
 
+
+
 </div><!-- modal-content -->
 </div><!-- modal-dialog -->
 </div><!-- modal -->
 <!--end new code -->
+
+
+
+
+
+
+
 </td>
 </tr>
 @endif

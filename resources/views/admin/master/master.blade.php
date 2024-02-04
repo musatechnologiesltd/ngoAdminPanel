@@ -355,6 +355,13 @@ $(document).ready(function() {
   });//submit
 });//document ready
 </script>
+<script>
+    $(document).on('click', '#pp', function(e) {
+
+
+          $('.bd-example-modal-lg').modal('hide');
+  });
+  </script>
 @yield('script')
 <!-- login js-->
 <!-- Plugin used-->

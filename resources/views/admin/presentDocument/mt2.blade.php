@@ -5,6 +5,7 @@ aria-labelledby="myModalLabel2">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
 <div class="modal-header">
+    <button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
     <h4 class="modal-title" id="myModalLabel2">
         পরবর্তী কার্যক্রমের জন্যে প্রেরণ করুন
         <br>
@@ -61,7 +62,26 @@ aria-labelledby="myModalLabel2">
                 @else
 
                 @endif
-              
+                {{-- <div class="mb-3">
+                    <label class="form-label" for="">অগ্রাধিকার বাছাই করুন </label>
+                    <select class="js-example-basic-single col-sm-12">
+                        <option value="AL">অগ্রাধিকার বাছাই করুন</option>
+                        <option value="WY">X</option>
+                    </select>
+                </div> --}}
+				
+				 @if(count($branchListForSerial) == 0)
+                <div class="mt-3">
+                    <div style="text-align:right;">
+                        <a class="btn btn-primary" type="button" href="{{ route('documentPresent.index') }}">
+                            অনুমতি সংশোধন
+                        </a>
+
+                      
+                    </div>
+                </div>
+
+                @else
                 <div class="row mt-3">
                     <div class="col-1">
 
@@ -154,6 +174,7 @@ $getAlldesignationName = DB::table('designation_lists')
                         @endif
                     </div>
                 </div>
+				@endif
             </form>
         </div>
     </div>

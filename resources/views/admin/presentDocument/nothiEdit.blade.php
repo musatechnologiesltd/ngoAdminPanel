@@ -17,6 +17,12 @@ $branchList = DB::table('admins')->whereIn('id',$separated_data_title)
 ->get();
 
 
+
+
+
+
+
+
 $convert_name_title1 = $branchList->implode("branch_id", " ");
 $separated_data_title1 = explode(" ", $convert_name_title1);
 
@@ -25,12 +31,22 @@ $getAllbranchName = DB::table('branches')
       ->whereIn('id',$separated_data_title1)->orderBy('branch_step','asc')->get();
 
 
+
+
+
+
+
+
+
+
+
 ?>
 <!--new code  -->
 <div class="modal right fade bd-example-modal-lg" id="myModal{{ $nothiLists->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-lg-custom" role="document">
     <div class="modal-content">
     <div class="modal-header">
+	    <button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
         <h4 class="modal-title" id="myModalLabel2">
             অনুমতিপ্রাপ্ত ব্যাক্তি বাছাই করুন </h4>
 
@@ -174,6 +190,9 @@ $getAllbranchName = DB::table('branches')
                                     <h5>নির্বাচিত পদসমূহ</h5>
                                 </div>
                                 <div class="card-body">
+								  @if(count($getAllbranchName) == 0)
+
+                                    @else
                                     <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active"
                                                                 id="pills-darkhome-tab"
@@ -275,7 +294,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                             </div>
                                         </div>
                                     </div>
-
+@endif
 
                                     <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active"

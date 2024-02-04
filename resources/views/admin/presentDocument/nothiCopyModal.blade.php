@@ -4,6 +4,7 @@ aria-labelledby="myModalLabel22">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
 <div class="modal-header">
+<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
     <h4 class="modal-title" id="myModalLabel2">
         অনুলিপি  </h4>
 </div>
@@ -41,7 +42,9 @@ $nothiCopyList = DB::table('nothi_copies')->where('nothiId',$nothiId)
 
                         <input type="hidden" id="snothiId3" value="{{ $nothiId }}"/>
                         <input type="hidden" id="sstatus3" value="{{ $status }}"/>
-                         <input type="hidden" id="snoteId3" value="{{ $id }}"/>
+
+
+                        <input type="hidden" id="snoteId3" value="{{ $id }}"/>
 
 
 

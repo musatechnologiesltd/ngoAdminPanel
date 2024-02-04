@@ -91,6 +91,11 @@
                 //cleanData
 
 
+
+
+
+
+
                 // $("#serial_part_one"+id_for_pass).val(data);
                  $("#sm").html('<div class="alert" style=" padding: 20px;background-color: #1b4c43 !important;color: white;"><strong>ডেটা সফলভাবে যোগ করা হয়েছে</strong></div>');
                  $("#icon-home1").html('');
@@ -101,8 +106,8 @@
                  $("#finalMain").remove();
 
                  $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
-                 $('#staticBackdrop').modal('hide');
 
+$('#staticBackdrop').modal('hide');
             }
             });
 });

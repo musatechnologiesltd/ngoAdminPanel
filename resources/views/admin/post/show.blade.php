@@ -141,7 +141,15 @@ ul {
 
                         </div>
 
-
+                        <!--<input type="text" placeholder="সিদ্ধান্ত নিজে লিখুন " class="form-control digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail"/>-->
+                        {{-- <select class="form-select digits mt-3" style="display: none;" name="decision_list_detail" id="decision_list_detail" >
+                            <option value="">-- অনুগ্রহ করে নির্বাচন করুন --</option>
+                            <option value="দেখলাম কাজ শুরু হচ্ছে">দেখলাম কাজ শুরু হচ্ছে</option>
+                            <option value="পেশ করুন">পেশ করুন</option>
+                            <option value="তদন্ত পূর্বক প্রতিবেদন দিবেন">তদন্ত পূর্বক প্রতিবেদন দিবেন</option>
+                            <option value="দেখলাম পেশ করুন">দেখলাম পেশ করুন</option>
+                            <option value="নথিজাত করুন">নথিজাত করুন</option>
+                        </select> --}}
                         <div class="nothi_header_box" id="mm2">
                             <span id="result_one">বিধি মোতাবেক ব্যবস্থা নিন</span><span style="color:red;">*</span>
                         </div>
@@ -179,7 +187,9 @@ ul {
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row-reverse bd-highlight">
-
+                                    {{-- <button  type="submit" class="btn btn-primary"><i class="fa fa-send"></i>
+                                        প্রেরন
+                                    </button> --}}
 
 
                                     <a class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-plus"></i> নতুন
@@ -477,10 +487,32 @@ ul {
                                                      @endif
                                                      @endforeach
 
+                                                     {{-- <li class="last">
+                                                         <input type="checkbox" name="tall-3" id="tall-3">
+                                                         <label for="tall-3" class="custom-unchecked">Two sandwiches</label>
+                                                     </li> --}}
                                                 </ul>
                                             </li>
                                             @endforeach
+                                            {{-- <li class="last">
+                                                <input type="checkbox" class="passBranch1" value="2" name="short" id="short">
+                                                <label for="short" class="custom-unchecked">Short Things</label>
 
+                                                <ul>
+                                                     <li>
+                                                         <input type="checkbox" name="short-1" id="short-1">
+                                                         <label for="short-1" class="custom-unchecked">Smurfs</label>
+                                                     </li>
+                                                     <li>
+                                                         <input type="checkbox" name="short-2" id="short-2">
+                                                         <label for="short-2" class="custom-unchecked">Mushrooms</label>
+                                                     </li>
+                                                     <li class="last">
+                                                         <input type="checkbox" name="short-3" id="short-3">
+                                                         <label for="short-3" class="custom-unchecked">One Sandwich</label>
+                                                     </li>
+                                                </ul>
+                                            </li> --}}
                                         </ul>
 
 
@@ -520,7 +552,8 @@ ul {
             </div>
         </div>
         <div class="modal-footer">
-
+            {{-- <button type="button" id="finalMainPage" class="btn btn-success">দাখিল করুন </button> --}}
+          <!--<button type="button" class="btn btn-primary" data-bs-dismiss="modal">বন্ধ করুন</button>-->
 
         </div>
       </div>

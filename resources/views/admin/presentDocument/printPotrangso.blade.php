@@ -71,7 +71,7 @@ $potroZariListValue =  DB::table('nothi_details')
 	<table>
 		<tr>
 			<td style="width: 25%; vertical-align: top;">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center">
 				<p style="line-height:.8;">
@@ -83,7 +83,7 @@ $potroZariListValue =  DB::table('nothi_details')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</table>
@@ -309,10 +309,7 @@ $potrangshoDraft =  DB::table('potrangsho_drafts')
             @if(!$nothiApproverList)
 
             @else
-            <div style="height: 300px; width: 100%; clear:both; line-height:300px;">
-                {{-- <img src="{{ asset('/') }}{{ $appSignature }}" style="height:300px;"/> --}}
-            </div>
-
+            <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/>
             @endif
 
             @else

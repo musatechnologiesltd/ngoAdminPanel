@@ -7,6 +7,7 @@
     <div class="modal-dialog modal-lg-custom" role="document">
         <div class="modal-content">
             <div class="modal-header">
+			<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
                 <h4 class="modal-title">
                     পরবর্তী কার্যক্রমের জন্যে প্রেরণ করুন
                     <br>

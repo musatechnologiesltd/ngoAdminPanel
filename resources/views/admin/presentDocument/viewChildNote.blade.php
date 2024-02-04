@@ -26,11 +26,7 @@
             max-width: 80%;
             margin: 20px auto;
         }
-		thead, tbody, tfoot, tr, td, th
-		{
-			border-width: 1px !important;
-			border-color: black !important;
-		}
+
     </style>
 
 
@@ -271,9 +267,9 @@
 
                                  @if(count($childNoteNewList) > 0)
 
-@include('admin.presentDocument.viewChildNoteAddSecondStep')
+flashMessageclude('admin.presentDocument.viewChildNoteAddSecondStep')
                                  @else
-@include('admin.presentDocument.viewChildNoteAddFirstStep')
+flashMessageclude('admin.presentDocument.viewChildNoteAddFirstStep')
                                     @endif
                                     @endif
 
@@ -523,7 +519,7 @@ $potroZariListValue =  DB::table('nothi_details')
 	<tbody style="border-width:0 !important">
 			<tr style="border-width:0 !important">
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
@@ -535,7 +531,7 @@ $potroZariListValue =  DB::table('nothi_details')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</tbody>
@@ -543,28 +539,21 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p >
-
-                                                                                    @if(!$potrangshoDraft)
+                                                                                <p >@if(!$potrangshoDraft)
                                                                                     <p ><span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
                                                                                     @else
                                                                                     <div style="display: flex;">
                                                                                     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
                                                                                     <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
                                                                                     @else
-
-                                                                                    @if(empty($officeDetails->sarok_number))
-                                                                                    <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
-                                                                                    @else
                                                                                     <p ><span > স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
-                                                                                    @endif
                                                                                     @endif
                                                                                     </div>
 
                                                                                     @endif</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
-                                                                                <div style="display:flex; justify-content:right;">
+                                                                               <div style="display:flex; justify-content:right;">
                                                                                     <p>তারিখ:</p>
                                                                                     <p>
                                                                                     @if($potroZariListValue == 1)
@@ -617,39 +606,6 @@ $potroZariListValue =  DB::table('nothi_details')
 </div>
 
 @else
-
-@if(empty($officeDetails->office_subject))
-<input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
-<input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
-<div class="d-flex justify-content-start mt-3">
-  <p>বিষয় :</p>{!! $potrangshoDraft->office_subject !!}
-
-
-</div>
-<div class="d-flex justify-content-start">
-  @if($potrangshoDraft->office_sutro == '<p>(যদি থাকে):...............................................</p>')
-
-  @else
-  <p>সুত্রঃ</p>{!! $potrangshoDraft->office_sutro !!}
-  @endif
-  <input type="hidden" name="parentIdForPotrangso" id="parentIdForPotrangso" value="{{ $id }}"/>
-                       <input type="hidden" name="statusForPotrangso" id="statusForPotrangso" value="{{ $status }}"/>
-</div>
-<div class="row">
-  <div class="col-xl-12 mt-2">
-
-          {{-- <label class="form-label">সম্পাদন শেষ করুন</label> --}}
-
-
-
-
-                  {!! $potrangshoDraft->description !!}
-
-
-
-  </div>
-</div>
-@else
 <input type="hidden" name="updateOrSubmit" id="updateOrSubmit" value="1"/>
 <input type="hidden" name="sorkariUpdateId" id="sorkariUpdateId" value="{{ $officeDetails->id }}"/>
 <div class="d-flex justify-content-start mt-3">
@@ -680,7 +636,7 @@ $potroZariListValue =  DB::table('nothi_details')
 
   </div>
 </div>
-@endif
+
 @endif
 @endif
 
@@ -717,7 +673,7 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
                                                                         @if(!$potrangshoDraft)
-                                                                        <br>
+																			<br>
 
     @else
 
@@ -730,7 +686,7 @@ $potroZariListValue =  DB::table('nothi_details')
     @endif
     @else
     @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-<br>
+
     @else
     {!! $officeDetails->extra_text !!}
     @endif
@@ -787,27 +743,23 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                                 @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
                                                                                 <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
                                                                                 @else
-                                                                                <p ><span > স্মারক নং:</span>@if(empty($officeDetails->sarok_number))
-                                                                                    {!! $potrangshoDraft->sarok_number !!}
-                                                                                    @else
-                                                                                    {!! $officeDetails->sarok_number !!}
-                                                                                    @endif</p>
+                                                                                <p ><span > স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
                                                                                 @endif
                                                                                 </div>
 
                                                                                 @endif</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
-                                                                            <div style="display:flex; justify-content:right;">
-                                                                                <p>তারিখ:</p>
-                                                                                <p>
-                                                                                @if($potroZariListValue == 1)
-                                                                                                {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                                @else
+                                                                     <div style="display:flex; justify-content:right;">
+                                                                                    <p>তারিখ:</p>
+                                                                                    <p>
+                                                                                    @if($potroZariListValue == 1)
+                                                                                                    {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                                    @else
 
-                                                                                                @endif
-                                                                                </p>
-                                                                                </div>
+                                                                                                    @endif
+                                                                                    </p>
+                                                                                    </div>
                                                                         </div>
                                                                     </div>
 
@@ -863,32 +815,22 @@ $potroZariListValue =  DB::table('nothi_details')
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
     @if(!$potrangshoDraft)
-<br>
+
     @else
 
     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
     @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-<br>
+
     @else
     {!! $potrangshoDraft->extra_text !!}
     @endif
     @else
-
-
     @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-<br>
-    @else
-    @if(empty($officeDetails->extra_text ))
-    {!! $potrangshoDraft->extra_text !!}
+
     @else
     {!! $officeDetails->extra_text !!}
     @endif
-    @endif
-
-
-
-
     @endif
 
 

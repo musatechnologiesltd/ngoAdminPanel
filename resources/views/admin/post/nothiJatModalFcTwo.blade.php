@@ -1,4 +1,7 @@
 
+
+
+
 <!-- Modal -->
 <div class="modal right fade bd-example-modal-lg"
      id="nothiJatModalFcTwo{{ $allStatusData->id }}" tabindex="-1" role="dialog"

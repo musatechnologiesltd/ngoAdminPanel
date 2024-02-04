@@ -328,8 +328,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(PostController::class)->group(function () {
 
-        Route::get('/all_dak_list', 'all_dak_list')->name('all_dak_list');
-        Route::get('/sent_dak', 'sent_dak')->name('receiver_dak');
+        Route::get('/allDakList', 'allDakList')->name('all_dak_list');
+        Route::get('/sentDak', 'sentDak')->name('receiver_dak');
         Route::get('/main_doc_download/{id}', 'main_doc_download')->name('main_doc_download');
         Route::get('/deleteMemberList/{status}/{id}', 'deleteMemberList')->name('deleteMemberList');
         Route::get('/deleteMemberListAjax', 'deleteMemberListAjax')->name('deleteMemberListAjax');

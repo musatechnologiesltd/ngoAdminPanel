@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-সকল ডাক তালিকা | {{ $insName }}
+ডাক তালিকা | {{ $insName }}
 @endsection
 
 
@@ -14,11 +14,11 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>সকল ডাক তালিকা</h3>
+                <h3>ডাক তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">ডাক </li>
-                    <li class="breadcrumb-item">সকল ডাক তালিকা</li>
+                    <li class="breadcrumb-item">ডাক তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -47,38 +47,55 @@
 
                                         <?php
 
+$formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)
+                                            ->value('fd_one_form_id');
 
-//new code
-$orginalReceverId= DB::table('ngo_registration_daks')
-                ->where('registration_status_id',$allStatusData->registration_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
+                                     $form_one_data = DB::table('fd_one_forms')
+                                     ->where('id',$formOneDataId)->first();
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
 
-//end new code
-$formOneDataId = DB::table('ngo_statuses')->where('id',$allStatusData->registration_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->registration_status_id)->orderBy('id','desc')->first();
+                                     $adminNamePrapok = DB::table('admins')
+                                            ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                                            $adminNamePrerok = DB::table('admins')
+                                            ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+                        $decesionName = DB::table('dak_details')
+                        ->where('id',$allStatusData->dak_detail_id)->where('status','registration')->value('decision_list');
                                         ?>
                                     <tr>
                                         <td style="text-align:left;">
-                                            উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                             প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                                            মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                            বিষয়ঃ <b> এনজিও নিবন্ধন</b><br>
-                                            সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                                            তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                                            মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                                            বিষয়ঃ <b> এনজিও নিবন্ধনের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                            সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                                         </td>
                                         <td style="text-align:right;">
 
 
+
+ @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
+
+ @else
+                                            <button  type="button" class="btn-xs btn btn-primary"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="নথিতে উপস্থাপন করুন"
+                                            data-bs-toggle="modal"
+                                            data-original-title="" data-bs-target="#myModal{{ $allStatusData->id }}">
+                                        <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                    </button>
+                        @endif
+
+                                    @include('admin.post.nothiModal')
+
+                                            {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'registration','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'registration','id'=>$allStatusData->registration_status_id]) }}';">প্রেরণ</button>
                                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('registrationView',$formOneDataId) }}';">দেখুন</button>
+
+
+
 
                                                                                                      <!--new code-->
                              <button type="button" class="btn btn-primary btn-xs"
@@ -101,6 +118,19 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->registr
 
                             <div class="modal-body">
 
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->registration_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
                                     @if(!$dakDetail)
 
                                     @else
@@ -108,7 +138,9 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->registr
                                     <?php
 
 $mainDetail = DB::table('ngo_registration_daks')
-->where('registration_status_id',$allStatusData->registration_status_id)->orderBy('id','asc')->get();
+->where('registration_status_id',$allStatusData->id)
+->where('sender_admin_id',Auth::guard('admin')->user()->id)
+->orwhere('receiver_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
 
                                     ?>
 
@@ -209,7 +241,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও নিবন্ধন</h5>
+                                                    <h5>বিষয়ঃ এনজিও নিবন্ধনের নোটিশ </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -218,7 +250,11 @@ $desiNames = DB::table('designation_lists')
                                                     <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                                      @endif
 
-                                              <hr>
+
+
+
+
+                                                    <hr>
                                                     <ul>
                                                         <li>প্রেরক : {{ $senderName }}</li>
                                                         <li>প্রাপক : {{ $receiverName }}</li>
@@ -249,42 +285,55 @@ $desiNames = DB::table('designation_lists')
 
                                     <?php
 
-                                     //new code
-             $orginalReceverId= DB::table('ngo_renew_daks')
-                ->where('renew_status_id',$allStatusData->renew_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
+$formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_status_id)
+                                        ->value('fd_one_form_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
+                                 $form_one_data = DB::table('fd_one_forms')
+                                 ->where('id',$formOneDataId)->first();
 
-//end new code
 
-$formOneDataId = DB::table('ngo_renews')->where('id',$allStatusData->renew_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->renew_status_id)->orderBy('id','desc')->first();
+                                 $adminNamePrapok = DB::table('admins')
+                                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                                        $adminNamePrerok = DB::table('admins')
+                                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+                    $decesionName = DB::table('dak_details')
+                    ->where('id',$allStatusData->dak_detail_id)->where('status','renew')->value('decision_list');
                                     ?>
                                 <tr>
                                     <td style="text-align:left;">
-                                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                                        মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                        বিষয়ঃ <b> এনজিও নবায়ন</b><br>
-                                        @if(empty($decesionName))
-
-                                        @else
-                                        সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                                        @endif
-                                        তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                                        মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                                        বিষয়ঃ <b> এনজিও নিবন্ধন নবায়নের নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                        সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                                     </td>
                                     <td style="text-align:right;">
 
+                                      @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
-                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->renew_status_id) }}';">দেখুন</button>
+ @else
+
+                                        <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#remyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+
+                                @endif
+
+                                @include('admin.post.renothiModal')
+
+
+
+
+                                        {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'renew','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->renew_status_id]) }}';">প্রেরণ</button>
+                                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$formOneDataId) }}';">দেখুন</button>
 
 
 
@@ -308,6 +357,19 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->renew_s
                             </div>
 
                             <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->renew_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
 
                                     @if(!$dakDetail)
 
@@ -421,7 +483,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও নবায়ন</h5>
+                                                    <h5>বিষয়ঃ এনজিও নিবন্ধন নবায়নের নোটিশ  </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -429,6 +491,10 @@ $desiNames = DB::table('designation_lists')
 
                                                     <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                                      @endif
+
+
+
+
 
                                                     <hr>
                                                     <ul>
@@ -462,37 +528,51 @@ $desiNames = DB::table('designation_lists')
 
                                 <?php
 
-                                                                       //new code
-$orginalReceverId= DB::table('ngo_name_change_daks')
-                ->where('name_change_status_id',$allStatusData->name_change_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
+$formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_change_status_id)
+                                    ->value('fd_one_form_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
+                             $form_one_data = DB::table('fd_one_forms')
+                             ->where('id',$formOneDataId)->first();
 
-//end new code
 
-$formOneDataId = DB::table('ngo_name_changes')->where('id',$allStatusData->name_change_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','nameChange')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->name_change_status_id)->orderBy('id','desc')->first();
+                             $adminNamePrapok = DB::table('admins')
+                                    ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                                    $adminNamePrerok = DB::table('admins')
+                                    ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+                $decesionName = DB::table('dak_details')
+                ->where('id',$allStatusData->dak_detail_id)->where('status','nameChange')->value('decision_list');
                                 ?>
                             <tr>
                                 <td style="text-align:left;">
-                                    উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                     প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                                    মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের   </b><br>
-                                    সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                                    তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                                    মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                                    বিষয়ঃ <b> এনজিও'র নাম পরিবর্তনের নোটিশ                                    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                    সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                                 </td>
                                 <td style="text-align:right;">
 
+                                    @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                                    <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#nammyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+                                @endif
+
+                                @include('admin.post.namnothiModal')
+
+
+                                    {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'nameChange','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                                    <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'nameChange','id'=>$allStatusData->name_change_status_id]) }}';">প্রেরণ</button>
                                     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('nameChangeView',$allStatusData->name_change_status_id) }}';">দেখুন</button>
 
 
@@ -518,6 +598,19 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->name_ch
 
                             <div class="modal-body">
 
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->name_change_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
+
                                     @if(!$dakDetail)
 
                                     @else
@@ -528,6 +621,9 @@ $mainDetail = DB::table('ngo_name_change_daks')
 ->where('name_change_status_id',$allStatusData->name_change_status_id)
 ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
 ->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)
+
+
+
 ->orderBy('id','asc')->get();
 
                                     ?>
@@ -628,7 +724,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তনের    </h5>
+                                                    <h5>বিষয়ঃ এনজিও'র নাম পরিবর্তনের নোটিশ  </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -636,6 +732,10 @@ $desiNames = DB::table('designation_lists')
 
                                                     <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                                      @endif
+
+
+
+
 
                                                     <hr>
                                                     <ul>
@@ -669,37 +769,55 @@ $desiNames = DB::table('designation_lists')
 
                             <?php
 
-                                                                                                      //new code
-$orginalReceverId= DB::table('ngo_f_d_nine_daks')
-->where('f_d_nine_status_id',$allStatusData->f_d_nine_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
+$formOneDataId = DB::table('fd9_forms')
+// ->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
+            // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
+            // ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
+            ->where('id',$allStatusData->f_d_nine_status_id)->value('fd_one_form_id');
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
+                         $form_one_data = DB::table('fd_one_forms')
+                         ->where('id',$formOneDataId)->first();
 
-//end new code
 
-$formOneDataId = DB::table('fd9_forms')->where('id',$allStatusData->f_d_nine_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')>where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdNine')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->f_d_nine_status_id)->orderBy('id','desc')->first();
+                         $adminNamePrapok = DB::table('admins')
+                                ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                                $adminNamePrerok = DB::table('admins')
+                                ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+            $decesionName = DB::table('dak_details')
+            ->where('id',$allStatusData->dak_detail_id)->where('status','fdNine')->value('decision_list');
                             ?>
                         <tr>
                             <td style="text-align:left;">
-                                উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                                উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                                 প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                                মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা)   </b><br>
-                                সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                                তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                                মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                                বিষয়ঃ <b> এফডি৯ (এন-ভিসা) নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                                সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                             </td>
                             <td style="text-align:right;">
 
+                          @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                                <button type="button" class="btn-xs btn btn-primary"
+                                data-toggle="tooltip" data-placement="top"
+                                title="নথিতে উপস্থাপন করুন"
+                                data-bs-toggle="modal"
+                                data-original-title="" data-bs-target="#fdninemyModal{{ $allStatusData->id }}">
+                            <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                        </button>
+                        @endif
+
+                        @include('admin.post.fdninenothiModal')
+
+
+
+                                {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdNine','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                                <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNine','id'=>$allStatusData->f_d_nine_status_id]) }}';">প্রেরণ</button>
                                 <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9Form.show',$allStatusData->f_d_nine_status_id) }}';">দেখুন</button>
 
 
@@ -724,6 +842,19 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->f_d_nin
                             </div>
 
                             <div class="modal-body">
+
+                                <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->f_d_nine_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                                    ?>
 
                                     @if(!$dakDetail)
 
@@ -834,7 +965,7 @@ $desiNames = DB::table('designation_lists')
                                         <div class="card" style="border:2px solid #979797">
                                             <div class="card-body">
                                                 <div class="tracking_box">
-                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা)   </h5>
+                                                    <h5>বিষয়ঃ এফডি৯ (এন-ভিসা) নোটিশ </h5>
                                                     @if(!$dakDetail->main_file)
 
                                                     @else
@@ -879,41 +1010,63 @@ $desiNames = DB::table('designation_lists')
 
                         <?php
 
-                                                                                                                  //new code
-$orginalReceverId= DB::table('ngo_f_d_nine_one_daks')
-                ->where('f_d_nine_one_status_id',$allStatusData->f_d_nine_one_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
-$formOneDataId = DB::table('fd9_one_forms')->where('id',$allStatusData->f_d_nine_one_status_id)
+$formOneDataId = DB::table('fd9_one_forms')
+->where('id',$allStatusData->f_d_nine_one_status_id)
                             ->value('fd_one_form_id');
-$form9OneDataId = DB::table('fd9_one_forms')
+
+
+
+                            $form9OneDataId = DB::table('fd9_one_forms')
 ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
-->where('n_visas.id',$allStatusData->f_d_nine_one_status_id)->value('n_visas.fd9_one_form_id');
- $formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdNineOne')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->f_d_nine_one_status_id)->orderBy('id','desc')->first();
+
+->where('n_visas.id',$allStatusData->f_d_nine_one_status_id)
+                            ->value('n_visas.fd9_one_form_id');
+
+
+                           // dd($formOneDataId);
+
+                     $form_one_data = DB::table('fd_one_forms')
+                     ->where('id',$formOneDataId)->first();
+
+
+                     $adminNamePrapok = DB::table('admins')
+                            ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                            $adminNamePrerok = DB::table('admins')
+                            ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+        $decesionName = DB::table('dak_details')
+        ->where('id',$allStatusData->dak_detail_id)->where('status','fdNineOne')->value('decision_list');
                         ?>
                     <tr>
                         <td style="text-align:left;">
-                            উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                            উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                             প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                            মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট)    </b><br>
-                            সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                            তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                            মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                            বিষয়ঃ <b> এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                            সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                         </td>
                         <td style="text-align:right;">
 
+                            @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                            <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#fdnineonemyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+@endif
+                                @include('admin.post.fdnineonenothiModal')
+
+
+
+                            {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdNineOne','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                            <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdNineOne','id'=>$allStatusData->f_d_nine_one_status_id]) }}';">প্রেরণ</button>
                             <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd9OneForm.show',$allStatusData->f_d_nine_one_status_id) }}';">দেখুন</button>
 
 
@@ -938,6 +1091,19 @@ aria-labelledby="myModalLabel2">
   </div>
 
   <div class="modal-body">
+
+      <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->f_d_nine_one_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+          ?>
 
           @if(!$dakDetail)
 
@@ -1049,7 +1215,7 @@ $branchNames = DB::table('branches')
               <div class="card" style="border:2px solid #979797">
                   <div class="card-body">
                       <div class="tracking_box">
-                          <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট)   </h5>
+                          <h5>বিষয়ঃ এফডি৯.১ (ওয়ার্ক পারমিট) নোটিশ </h5>
                           @if(!$dakDetail->main_file)
 
                           @else
@@ -1057,7 +1223,12 @@ $branchNames = DB::table('branches')
 
                           <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                            @endif
-<hr>
+
+
+
+
+
+                          <hr>
                           <ul>
                               <li>প্রেরক : {{ $senderName }}</li>
                               <li>প্রাপক : {{ $receiverName }}</li>
@@ -1095,37 +1266,49 @@ $branchNames = DB::table('branches')
 
                     <?php
 
-                                                             //new code
-                $orginalReceverId= DB::table('ngo_fd_six_daks')
-                ->where('fd_six_status_id',$allStatusData->fd_six_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
 $formOneDataId = DB::table('fd6_forms')->where('id',$allStatusData->fd_six_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdSix')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_six_status_id)->orderBy('id','desc')->first();
+
+                 $form_one_data = DB::table('fd_one_forms')
+                 ->where('id',$formOneDataId)->first();
+
+
+                 $adminNamePrapok = DB::table('admins')
+                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                        $adminNamePrerok = DB::table('admins')
+                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+    $decesionName = DB::table('dak_details')
+    ->where('id',$allStatusData->dak_detail_id)->where('status','fdSix')->value('decision_list');
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                        মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৬   </b><br>
-                        সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                        তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                        মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                        বিষয়ঃ <b> এফডি - ৬ নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                        সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                     </td>
                     <td style="text-align:right;">
 
+                       @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                        <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#fdsixmyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+                                @endif
+
+                                @include('admin.post.fdsixnothiModal')
+
+                        {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdSix','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdSix','id'=>$allStatusData->fd_six_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd6Form.show',$allStatusData->fd_six_status_id) }}';">দেখুন</button>
 
 
@@ -1151,6 +1334,18 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_six_
 
                     <div class="modal-body">
 
+                        <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->fd_six_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                            ?>
 
                             @if(!$dakDetail)
 
@@ -1261,7 +1456,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৬   </h5>
+                                            <h5>বিষয়ঃ এফডি - ৬ নোটিশ </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1269,7 +1464,12 @@ $branchNames = DB::table('branches')
 
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
-<hr>
+
+
+
+
+
+                                            <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
                                                 <li>প্রাপক : {{ $receiverName }}</li>
@@ -1305,39 +1505,50 @@ $branchNames = DB::table('branches')
 
                     <?php
 
-
-                                                                                                  //new code
-                 $orginalReceverId= DB::table('ngo_fd_seven_daks')
-                ->where('fd_seven_status_id',$allStatusData->fd_seven_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
 $formOneDataId = DB::table('fd7_forms')->where('id',$allStatusData->fd_seven_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')>where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdSeven')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_seven_status_id)->orderBy('id','desc')->first();
 
+                 $form_one_data = DB::table('fd_one_forms')
+                 ->where('id',$formOneDataId)->first();
+
+
+                 $adminNamePrapok = DB::table('admins')
+                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                        $adminNamePrerok = DB::table('admins')
+                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+    $decesionName = DB::table('dak_details')
+    ->where('id',$allStatusData->dak_detail_id)->where('status','fdSeven')->value('decision_list');
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                        মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফডি - ৭     </b><br>
-                        সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                        তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                        মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                        বিষয়ঃ <b> এফডি - ৭  নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                        সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                     </td>
                     <td style="text-align:right;">
 
+                       @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                        <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#fdsevenmyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+                                @endif
+
+                                @include('admin.post.fdsevennothiModal')
+
+
+                        {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdSeven','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdSeven','id'=>$allStatusData->fd_seven_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd7Form.show',$allStatusData->fd_seven_status_id) }}';">দেখুন</button>
 
 
@@ -1362,6 +1573,19 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_seve
                     </div>
 
                     <div class="modal-body">
+
+                        <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->fd_seven_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                            ?>
 
                             @if(!$dakDetail)
 
@@ -1472,7 +1696,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফডি - ৭    </h5>
+                                            <h5>বিষয়ঃ এফডি - ৭  নোটিশ </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1480,6 +1704,10 @@ $branchNames = DB::table('branches')
 
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
+
+
+
+
 
                                             <hr>
                                             <ul>
@@ -1516,39 +1744,49 @@ $branchNames = DB::table('branches')
 
                     <?php
 
-                                                                                                     //new code
-                                                       //new code
-                $orginalReceverId= DB::table('fc_one_daks')
-                ->where('fc_one_status_id',$allStatusData->fc_one_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
-
 $formOneDataId = DB::table('fc1_forms')->where('id',$allStatusData->fc_one_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_one_status_id)->orderBy('id','desc')->first();
 
+                 $form_one_data = DB::table('fd_one_forms')
+                 ->where('id',$formOneDataId)->first();
+
+
+                 $adminNamePrapok = DB::table('admins')
+                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                        $adminNamePrerok = DB::table('admins')
+                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+    $decesionName = DB::table('dak_details')
+    ->where('id',$allStatusData->dak_detail_id)->where('status','fcOne')->value('decision_list');
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                        মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফসি-১   </b><br>
-                        সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                        তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                        মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                        বিষয়ঃ <b> এফসি-১ নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                        সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                     </td>
                     <td style="text-align:right;">
 
+                       @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                        <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#fconemyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+
+                                @endif
+
+                                @include('admin.post.fconenothiModal')
+                        {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcOne','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcOne','id'=>$allStatusData->fc_one_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc1Form.show',$allStatusData->fc_one_status_id) }}';">দেখুন</button>
 
 
@@ -1574,6 +1812,18 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_one_
 
                     <div class="modal-body">
 
+                        <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->fc_one_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                            ?>
 
                             @if(!$dakDetail)
 
@@ -1684,7 +1934,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফসি-১  </h5>
+                                            <h5>বিষয়ঃ এফসি-১ নোটিশ</h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1692,6 +1942,10 @@ $branchNames = DB::table('branches')
 
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
+
+
+
+
 
                                             <hr>
                                             <ul>
@@ -1729,37 +1983,50 @@ $branchNames = DB::table('branches')
                     @foreach($ngoStatusFcTwoDak as $p=>$allStatusData)
 
                     <?php
-                                                                          //new code
-                $orginalReceverId= DB::table('fc_two_daks')
-                ->where('fc_two_status_id',$allStatusData->fc_two_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
-
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
-
-//end new code
 
 $formOneDataId = DB::table('fc2_forms')->where('id',$allStatusData->fc_two_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fcTwo')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_two_status_id)->orderBy('id','desc')->first();
+
+                 $form_one_data = DB::table('fd_one_forms')
+                 ->where('id',$formOneDataId)->first();
+
+
+                 $adminNamePrapok = DB::table('admins')
+                        ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                        $adminNamePrerok = DB::table('admins')
+                        ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+    $decesionName = DB::table('dak_details')
+    ->where('id',$allStatusData->dak_detail_id)->where('status','fcTwo')->value('decision_list');
                     ?>
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                        মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> এফসি-২   </b><br>
-                        সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                        তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                        মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                        বিষয়ঃ <b> এফসি-২ নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                        সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                     </td>
                     <td style="text-align:right;">
 
+                     @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                        <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#fctwomyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+@endif
+                                @include('admin.post.fctwonothiModal')
+
+
+                        {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fcTwo','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fcTwo','id'=>$allStatusData->fc_two_status_id]) }}';">প্রেরণ</button>
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fc2Form.show',$allStatusData->fc_two_status_id) }}';">দেখুন</button>
 
 
@@ -1785,6 +2052,18 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fc_two_
 
                     <div class="modal-body">
 
+                        <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->fc_two_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                            ?>
 
                             @if(!$dakDetail)
 
@@ -1895,7 +2174,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ এফসি-২  </h5>
+                                            <h5>বিষয়ঃ এফসি-২ নোটিশ</h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else
@@ -1905,7 +2184,10 @@ $branchNames = DB::table('branches')
                                              @endif
 
 
-                                             <hr>
+
+
+
+                                            <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
                                                 <li>প্রাপক : {{ $receiverName }}</li>
@@ -1941,37 +2223,50 @@ $branchNames = DB::table('branches')
 
                      <?php
 
+ $formOneDataId = DB::table('fd3_forms')->where('id',$allStatusData->fd_three_status_id)->value('fd_one_form_id');
 
-                                                                                                  //new code
-                    $orginalReceverId= DB::table('fd_three_daks')
-                ->where('fd_three_status_id',$allStatusData->fd_three_status_id)
-                ->where('original_recipient',1)
-                ->value('receiver_admin_id');
+                  $form_one_data = DB::table('fd_one_forms')
+                  ->where('id',$formOneDataId)->first();
 
-                $orginalReceverName= DB::table('admins')
-                ->where('id',$orginalReceverId)
-                ->value('admin_name_ban');
 
-//end new code
-$formOneDataId = DB::table('fd3_forms')->where('id',$allStatusData->fd_three_status_id)->value('fd_one_form_id');
-$formOneData = DB::table('fd_one_forms')->where('id',$formOneDataId)->first();
-$adminNamePrapok = DB::table('admins')->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
-$adminNamePrerok = DB::table('admins')->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
-$decesionName = DB::table('dak_details')->where('id',$allStatusData->dak_detail_id)->where('status','fdThree')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_three_status_id)->orderBy('id','desc')->first();
+                  $adminNamePrapok = DB::table('admins')
+                         ->where('id',$allStatusData->receiver_admin_id)->value('admin_name_ban');
+
+                         $adminNamePrerok = DB::table('admins')
+                         ->where('id',$allStatusData->sender_admin_id)->value('admin_name_ban');
+
+
+     $decesionName = DB::table('dak_details')
+     ->where('id',$allStatusData->dak_detail_id)->where('status','fdThree')->value('decision_list');
                      ?>
                  <tr>
                      <td style="text-align:left;">
-                         উৎসঃ {{ $formOneData->organization_name_ban }} <br>
+                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                          প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
-                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                         বিষয়ঃ <b> এফডি - ৩    </b><br>
-                         সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
-                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
+                         মূল - প্রাপক: {{ $adminNamePrapok}}</span>  <br>
+                         বিষয়ঃ <b> এফডি - ৩ নোটিশ                                     {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b> <br>
+                         সিধান্তঃ <span style="color:blue;">{{ $decesionName }}। </span>
                      </td>
                      <td style="text-align:right;">
 
+                         @if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1)
 
+ @else
+
+                         <button type="button" class="btn-xs btn btn-primary"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="নথিতে উপস্থাপন করুন"
+                                        data-bs-toggle="modal"
+                                        data-original-title="" data-bs-target="#fdthreemyModal{{ $allStatusData->id }}">
+                                    <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
+                                </button>
+                                @endif
+
+                                @include('admin.post.fdthreenothiModal')
+
+
+                         {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdThree','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
+                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdThree','id'=>$allStatusData->fd_three_status_id]) }}';">প্রেরণ</button>
                          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd3Form.show',$allStatusData->fd_three_status_id) }}';">দেখুন</button>
 
 
@@ -1996,6 +2291,19 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_thre
                      </div>
 
                      <div class="modal-body">
+
+                         <?php
+
+ $dakDetail = DB::table('dak_details')
+ ->where('access_id',$allStatusData->fd_three_status_id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                             ?>
 
                              @if(!$dakDetail)
 
@@ -2106,12 +2414,18 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->fd_thre
                                  <div class="card" style="border:2px solid #979797">
                                      <div class="card-body">
                                          <div class="tracking_box">
-                                             <h5>বিষয়ঃ এফডি - ৩  </h5>
+                                             <h5>বিষয়ঃ এফডি - ৩ নোটিশ</h5>
                                              @if(!$dakDetail->main_file)
 
                                              @else
-                        <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+
+
+                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                               @endif
+
+
+
+
 
                                              <hr>
                                              <ul>

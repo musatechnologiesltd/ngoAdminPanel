@@ -4,6 +4,7 @@ id="myModal22" role="dialog"
 aria-labelledby="myModalLabel22">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
+<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
 <div class="modal-header">
     <h4 class="modal-title" id="myModalLabel2">
         প্রাপক </h4>

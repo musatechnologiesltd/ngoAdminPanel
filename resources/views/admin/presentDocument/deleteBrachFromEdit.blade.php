@@ -16,12 +16,26 @@ $branchList = DB::table('admins')->whereIn('id',$separated_data_title)
 
 
 
+
+
+
+
+
 $convert_name_title1 = $branchList->implode("branch_id", " ");
 $separated_data_title1 = explode(" ", $convert_name_title1);
 
 
 $getAllbranchName = DB::table('branches')
       ->whereIn('id',$separated_data_title1)->orderBy('branch_step','asc')->get();
+
+
+
+
+
+
+
+
+
 
 
 ?>
@@ -51,6 +65,10 @@ $separated_data_title2 = explode(" ", $convert_name_title2);
 
 $getAlldesignationName = DB::table('designation_lists')
 ->whereIn('id',$separated_data_title2)->orderBy('designation_serial','asc')->get();
+
+
+
+
 
 
     ?>

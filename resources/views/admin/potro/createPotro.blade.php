@@ -437,7 +437,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 	<tbody style="border-width:0 !important">
 			<tr style="border-width:0 !important">
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+				 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
@@ -449,7 +449,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+				 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</tbody>
@@ -510,7 +510,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                         <span>
 
                                                                             @if(empty($nothiPropokLists->organization_name))
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}</span>, এনজিও বিষয়ক ব্যুরো।<br>
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}</span>।<br>
                                                                              @else
                                                                             {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                             @endif
@@ -528,7 +528,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     <p class="mt-4" style="font-weight:bold">দৃষ্টি আকর্ষণ</p>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     <span>@if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }},</span> এনজিও বিষয়ক ব্যুরো।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }},</span>।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
@@ -653,7 +653,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 	<tbody style="border-width:0 !important">
 			<tr style="border-width:0 !important">
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+				 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
@@ -665,7 +665,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</tbody>

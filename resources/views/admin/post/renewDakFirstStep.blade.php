@@ -1,6 +1,8 @@
-@foreach($allDataForRenewList as $r=>$allStatusData)
+@foreach($all_data_for_renew_list as $r=>$allStatusData)
 
 <?php
+
+
 
   $checkDataAvailableOrNot = DB::table('ngo_renew_daks')
                     ->where('renew_status_id',$allStatusData->id)
@@ -8,12 +10,28 @@
                     ->where('status',1)
                     ->value('id');
 
-$orginalReceverId= DB::table('ngo_renew_daks')->where('renew_status_id',$allStatusData->id)->where('original_recipient',1)>value('receiver_admin_id');
-$orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-$formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-$decesionNameId = DB::table('ngo_renew_daks')->where('renew_status_id',$allStatusData->id)->value('dak_detail_id');
-$decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','renew')->value('decision_list');
-$dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+                    //new code
+$orginalReceverId= DB::table('ngo_renew_daks')
+                ->where('renew_status_id',$allStatusData->id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
+
+$form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+$decesionNameId = DB::table('ngo_renew_daks')
+->where('renew_status_id',$allStatusData->id)->value('dak_detail_id');
+
+$decesionName = DB::table('dak_details')
+->where('id',$decesionNameId)->where('status','renew')->value('decision_list');
+
 ?>
 @if(!empty($checkDataAvailableOrNot))
 
@@ -22,8 +40,8 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->or
 @else
 <tr>
 <td style="text-align:left;">
-    উৎসঃ {{ $formOneData->organization_name_ban }} <br>
-    প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+    উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+    প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
     মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
     বিষয়ঃ <b> এনজিও নবায়ন</b> <br>
     @if(empty($decesionName))
@@ -37,6 +55,9 @@ $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->id)->or
     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'renew','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
     <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('renewView',$allStatusData->id) }}';">দেখুন</button>
 
+
+
+
    <!--new code-->
 <button type="button" class="btn btn-primary btn-xs"
 data-bs-toggle="modal"
@@ -44,7 +65,8 @@ data-original-title="" data-bs-target="#myModalrenew{{ $r }}">
 ডাক গতিবিধি
 </button>
 
-<!---Modal -->
+
+<!-- Modal -->
 <div class="modal right fade bd-example-modal-lg"
 id="myModalrenew{{ $r }}" tabindex="-1" role="dialog"
 aria-labelledby="myModalLabel2">
@@ -56,6 +78,19 @@ aria-labelledby="myModalLabel2">
 </div>
 
 <div class="modal-body">
+
+<?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->id)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+?>
 
 @if(!$dakDetail)
 
@@ -72,6 +107,8 @@ $mainDetail = DB::table('ngo_renew_daks')
 
 
 <?php
+
+
 
 $senderName = DB::table('admins')
 ->where('id',$allMainDetail->sender_admin_id)
@@ -167,8 +204,13 @@ $branchNames = DB::table('branches')
 
                 @else
 
+
                 <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                  @endif
+
+
+
+
 
                 <hr>
                 <ul>
@@ -187,10 +229,13 @@ $branchNames = DB::table('branches')
 
 @endif
 
+
+
 </div><!-- modal-content -->
 </div><!-- modal-dialog -->
 </div><!-- modal -->
 <!--end new code -->
+
 </td>
 </tr>
 @endif

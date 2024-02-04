@@ -4,7 +4,7 @@
    <table class="table table-bordered mt-3">
     <tr>
         <th>
-
+            {{-- <button class="btn btn-outline-success">#</button> --}}
         </th>
         <th>পদবী</th>
         <th>নাম</th>
@@ -34,8 +34,13 @@
 ?>
     <tr>
         <td>
+            {{-- <div class="d-flex justify-content-center">
+                <button class="btn btn-outline-success"><i class="fa fa-trash"></i></button>
+            </div> --}}
+
 
             <div class="d-flex justify-content-center">
+            {{-- <a   type="button" class="btn btn-outline-success"  ><i class="fa fa-trash"></i></a> --}}
 
             <button data-id="{{ $showAllRegistrationDak->id }}" data-status="{{ $mainDataStatus }}" class="btn btn-outline-success remove-input-field-newm"><i class="fa fa-trash"></i></button>
 
@@ -126,14 +131,14 @@
             method: 'GET',
             data: {id:id,status:status},
             success: function(data) {
-
+                
           //alert(data);
                 if(data  >= 1){
-
+                    
                                      $("#lastButton").html('<button class="btn btn-primary" type="submit" ><i class="fa fa-send"></i>প্রেরণ</button>');
-
+                    
                 }else{
-
+                    
                                      $("#lastButton").html('<a class="btn btn-danger"><i class="fa fa-send"></i>প্রেরণ এর পূর্বে, দয়া করে সিল তৈরী  করুন</a>');
                 }
 
@@ -181,6 +186,41 @@ $("#echeck"+mainPrapokId).prop('checked', false);
 
 
 
+// //     alert(mainPrapokId);
+
+
+//     var receiver_id_ajax = $('input[name="receiverIdAjax[]"]').map(function (idx, ele) {
+//    return $(ele).val();
+// }).get();
+
+// var receiver_id_ajax_new = $.grep(receiver_id_ajax, function(value) {
+//   return value != mainPrapokId;
+// });
+
+// //alert(y);
+
+// for (var i = 0; i < receiver_id_ajax_new.length; i++) {
+
+
+//     $("#check"+receiver_id_ajax_new[i] << 0).removeAttr('disabled');
+//     $("#icheck"+receiver_id_ajax_new[i] << 0).removeAttr('disabled');
+//     $("#echeck"+receiver_id_ajax_new[i] << 0).removeAttr('disabled');
+
+// }
+
+
+//     if($(this).is(':checked')){
+
+//     $("#check"+mainPrapokId).attr('disabled', 'disabled');
+//     $("#icheck"+mainPrapokId).attr('disabled', 'disabled');
+//     $("#echeck"+mainPrapokId).attr('disabled', 'disabled');
+//     }else{
+
+//     $("#check"+mainPrapokId).removeAttr('disabled');
+//     $("#icheck"+mainPrapokId).removeAttr('disabled');
+//     $("#echeck"+mainPrapokId).removeAttr('disabled');
+
+//     }
 });
 
 /////

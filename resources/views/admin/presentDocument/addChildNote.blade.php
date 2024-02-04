@@ -27,11 +27,6 @@
             margin: 20px auto;
         }
 
-		thead, tbody, tfoot, tr, td, th
-		{
-			border-width: 1px !important;
-			border-color: black !important;
-		}
     </style>
 
 
@@ -508,7 +503,7 @@ $potroZariListValue =  DB::table('nothi_details')
 	<tbody style="border-width:0 !important">
 			<tr style="border-width:0 !important">
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+		 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
@@ -520,7 +515,7 @@ $potroZariListValue =  DB::table('nothi_details')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+		 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</tbody>
@@ -676,20 +671,19 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                         <span>{{ $desiName }}</span>
 
                                                                         @if(!$potrangshoDraft)
-                                                                        <br>
 
 @else
 
 @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
 @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-<br>
+
 @else
 {!! $potrangshoDraft->extra_text !!}
 @endif
 @else
 @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-<br>
+
 @else
 {!! $officeDetails->extra_text !!}
 @endif
@@ -821,19 +815,19 @@ $potroZariListValue =  DB::table('nothi_details')
     <span>{{ $desiName }}</span>
 
     @if(!$potrangshoDraft)
-<br>
+
     @else
 
     @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
     @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
-<br>
+
     @else
     {!! $potrangshoDraft->extra_text !!}
     @endif
     @else
     @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
-<br>
+
     @else
     {!! $officeDetails->extra_text !!}
     @endif

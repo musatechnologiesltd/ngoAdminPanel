@@ -4,6 +4,7 @@ aria-labelledby="myModalLabel22">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
 <div class="modal-header">
+<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
     <h4 class="modal-title" id="myModalLabel2">
         দৃষ্টি আকর্ষণ  </h4>
 </div>

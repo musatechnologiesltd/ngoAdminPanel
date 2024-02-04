@@ -432,7 +432,7 @@ $branchName = DB::table('branches')
 	<tbody style="border-width:0 !important">
 			<tr style="border-width:0 !important">
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+ {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
@@ -444,7 +444,7 @@ $branchName = DB::table('branches')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</tbody>
@@ -481,7 +481,6 @@ $branchName = DB::table('branches')
                                                                                    @include('admin.potro.formReceiver')
 
                                                                                    @else
-
                                                                                    @if(empty($officeDetails->sarok_number))
                                                                                    @include('admin.potro.formReceiver')
                                                                                    @else
@@ -545,7 +544,7 @@ $branchName = DB::table('branches')
                                                                             @if(!$potrangshoDraft)
 
 
-                                                                            <span >স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
 
                                                                             @else
 
@@ -554,10 +553,10 @@ $branchName = DB::table('branches')
 
                                                                             @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
 
-                                                                            <span >স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}
 
                                                                             @else
-                                                                            <span >স্মারক নং:</span> @if(empty($officeDetails->sarok_number))
+                                                                            <span style="font-weight:900;">স্মারক নং:</span>  @if(empty($officeDetails->sarok_number))
                                                                             {!! $potrangshoDraft->sarok_number !!}
                                                                             @else
                                                                             {!! $officeDetails->sarok_number !!}
@@ -570,7 +569,7 @@ $branchName = DB::table('branches')
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p >তারিখ: </p>
+                                                                                    <p style="font-weight:bold;">তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -650,7 +649,7 @@ $branchName = DB::table('branches')
 	<tbody style="border-width:0 !important">
 			<tr style="border-width:0 !important">
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
-				<img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
@@ -662,7 +661,7 @@ $branchName = DB::table('branches')
 				</p>
 			</td>
 			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
-				<img src="{{ asset('/') }}public/mujib100.png" alt="" style="height: 80px;width:120px;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
 		</tr>
 	</tbody>
@@ -808,7 +807,7 @@ aria-expanded="false">
             @else
             <div class="row" class="mt-4">
                 <div class="col-md-6">
-                    <span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+                    <span > নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">

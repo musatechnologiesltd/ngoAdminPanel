@@ -1,20 +1,43 @@
 
-@foreach($dataFromFd3Form as $ps=>$allStatusData)
+
+
+
+                    <!-- fd three form start -->
+
+
+                    @foreach($dataFromFd3Form as $ps=>$allStatusData)
 
                     <?php
 
 
-    $checkDataAvailableOrNot = DB::table('fd_three_daks')->where('fd_three_status_id',$allStatusData->id)
-                    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
-                    ->where('status',1)->value('id');
+                      $checkDataAvailableOrNot = DB::table('fd_three_daks')
+                                                        ->where('fd_three_status_id',$allStatusData->id)
+                                                        ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+                                                        ->where('status',1)
+                                                        ->value('id');
 
-                    //new code
-    $orginalReceverId= DB::table('fd_three_daks')->where('fd_three_status_id',$allStatusData->id)->where('original_recipient',1)->value('receiver_admin_id');
-    $orginalReceverName= DB::table('admins')->where('id',$orginalReceverId)->value('admin_name_ban');
-    $formOneData = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
-    $decesionNameId = DB::table('fd_three_daks')->where('fd_three_status_id',$allStatusData->id)->value('dak_detail_id');
-    $decesionName = DB::table('dak_details')->where('id',$decesionNameId)->where('status','fdThree')->value('decision_list');
-    $dakDetail = DB::table('dak_details')->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
+
+                                                                                                //new code
+$orginalReceverId= DB::table('fd_three_daks')
+                ->where('fd_three_status_id',$allStatusData->id)
+                ->where('original_recipient',1)
+                ->value('receiver_admin_id');
+
+                $orginalReceverName= DB::table('admins')
+                ->where('id',$orginalReceverId)
+                ->value('admin_name_ban');
+
+//end new code
+
+
+                 $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+
+                 $decesionNameId = DB::table('fd_three_daks')
+    ->where('fd_three_status_id',$allStatusData->id)->value('dak_detail_id');
+
+                 $decesionName = DB::table('dak_details')
+    ->where('id',$decesionNameId)->where('status','fdThree')->value('decision_list');
+
                     ?>
 
                      @if(!empty($checkDataAvailableOrNot))
@@ -24,8 +47,8 @@
                                     @else
                 <tr>
                     <td style="text-align:left;">
-                        উৎসঃ {{ $formOneData->organization_name_ban }} <br>
-                        প্রেরকঃ {{ $formOneData->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
+                        উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
+                        প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
                         বিষয়ঃ <b> এফডি - ৩    </b><br>
                         @if(empty($decesionName))
@@ -60,6 +83,19 @@
                     </div>
 
                     <div class="modal-body">
+
+                        <?php
+
+$dakDetail = DB::table('dak_details')
+->where('access_id',$allStatusData->mainId)->orderBy('id','desc')->first();
+
+
+
+
+
+
+
+                            ?>
 
                             @if(!$dakDetail)
 
@@ -177,6 +213,10 @@ $branchNames = DB::table('branches')
                                             <a target="_blank" href="{{ route('main_doc_download',['id'=>$dakDetail->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
                                              @endif
 
+
+
+
+
                                             <hr>
                                             <ul>
                                                 <li>প্রেরক : {{ $senderName }}</li>
@@ -193,6 +233,9 @@ $branchNames = DB::table('branches')
                         @endforeach
 
                         @endif
+
+
+
                     </div><!-- modal-content -->
                 </div><!-- modal-dialog -->
             </div><!-- modal -->

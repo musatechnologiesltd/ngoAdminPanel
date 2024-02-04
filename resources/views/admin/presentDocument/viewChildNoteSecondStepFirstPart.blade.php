@@ -1,11 +1,22 @@
-
+<style>
+    .custom_table_accordion	thead,
+    .custom_table_accordion tbody,
+    .custom_table_accordion tfoot,
+    .custom_table_accordion tr,
+    .custom_table_accordion td,
+    .custom_table_accordion th
+    {
+        border-width: 1px !important;
+        border-color: black !important;
+    }
+</style>
 
 <div class="card">
     <div class="card-header bg-primary" id="heading{{ $key+1 }}">
       <h5 class="mb-0">
         <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapse{{ $key+1 }}" aria-expanded="true" aria-controls="collapseFour">
 
-            অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($activeCode.'.'.$key+1) }}</span> <span style="padding-right:40px;">{{ '('.$creatorNAme}} <span style="font-size: 10px;padding-right:60px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->created_at))).')'  }}</span>
+            অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($activeCode.'.'.$key+1) }}</span> <span style="padding-right:40px;"><span style="font-size: 10px;padding-right:60px;">({{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->created_at))).')'  }}</span>
         </button>
 
         @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)

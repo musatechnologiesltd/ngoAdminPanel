@@ -59,6 +59,11 @@
                                                     <button class="btn btn-outline-success" data-bs-toggle="modal" data-original-title="" data-bs-target="#myModal3" data-bs-original-title="" title=""><i class="fa fa-calendar"></i> নতুন নোট</button>
    <!-- end add note button -->
 
+
+
+
+
+
                                                     @if(count($checkParent) == 0)
 
                                                     @else
@@ -270,7 +275,15 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     aria-expanded="false">
                                                                     সংশোধন করুন
                                                             </button>
-
+                                                            {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
+                                                                        অনুচ্ছেদ</a></li>
+                                                                <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
+                                                                </li>
+                                                            </ul> --}}
                                                         </div>
                                                     </div>
 
@@ -314,7 +327,15 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                         aria-expanded="false">
                                                                     সংরক্ষন করুন
                                                                 </button>
-
+                                                                {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
+                                                                            অনুচ্ছেদ</a></li>
+                                                                    <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
+                                                                    </li>
+                                                                </ul> --}}
                                                             </div>
                                                         </div>
                                                          </form>
@@ -353,7 +374,15 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                 aria-expanded="false">
                                                             সংরক্ষন করুন
                                                         </button>
-
+                                                        {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">সংরক্ষন করুন</a></li>
+                                                            <li><a class="dropdown-item" href="#">সংরক্ষন ও খসড়া</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">সংরক্ষন ও নতুন
+                                                                    অনুচ্ছেদ</a></li>
+                                                            <li><a class="dropdown-item" href="#">সংরক্ষন ও প্রেরণ</a>
+                                                            </li>
+                                                        </ul> --}}
                                                     </div>
                                                 </div>
                                                  </form>

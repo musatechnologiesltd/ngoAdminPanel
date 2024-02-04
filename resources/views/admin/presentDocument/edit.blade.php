@@ -60,7 +60,11 @@
                                             <div class="mb-3">
                                                 <label class="form-label" for="">নথি ধরণ</label>
                                                 <select class="js-example-basic-single form-control" name="document_type_id" id="document_type_id" required>
-
+                                                    {{-- <option value="">অডিট আপত্তি/অর্থ আত্মসাৎ/আর্থিক ক্ষতি</option>
+                                                    <option value="">অর্থ/অগ্রিম </option>
+                                                    <option value="">অনিষ্পন্ন বিষয়ের তালিকা প্রণয়ন </option>
+                                                    <option value="">আইনগত/ মামলা পরিচালনা কার্যক্রম গ্রহণ</option>
+                                                    <option value="">বিবিধ </option> --}}
                                                     <option value=""> -- বছর বাছাই করুন -- </option>
                                                     @foreach($documentTypeList as $documentTypeLists)
                                                     <option value="{{ $documentTypeLists->id }}" {{ $nothiList->document_type_id == $documentTypeLists->id ? 'selected':'' }}>{{ $documentTypeLists->document_type }}</option>
@@ -80,7 +84,7 @@
                                                                  ->orderBy('id','desc')->value('document_serial_number');
                                         $convertNumber = intval($lastNothiSerialNumber)+1;
                                         $finalSerialNumber = App\Http\Controllers\Admin\CommonController::englishToBangla(str_pad($nothiList->document_serial_number, 3, '0', STR_PAD_LEFT));
-
+                                        //dd($finalSerialNumber);
 
 
                                                                                 ?>
