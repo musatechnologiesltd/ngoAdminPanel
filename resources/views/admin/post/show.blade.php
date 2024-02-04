@@ -730,7 +730,13 @@ ul {
 
 
 
-            }
+            },
+            beforeSend: function(){
+        $('#pageloader').show()
+    },
+    complete: function(){
+        $('#pageloader').hide()
+    }
             });
 
     });

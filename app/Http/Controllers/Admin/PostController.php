@@ -1613,6 +1613,9 @@ class PostController extends Controller
 
     public function showDataDesignationWiseOne(Request $request){
 
+
+        //dd(12);
+
         \LogActivity::addToLog('show Data Designation Wise.');
 
         $mainstatus = $request->mainstatus;

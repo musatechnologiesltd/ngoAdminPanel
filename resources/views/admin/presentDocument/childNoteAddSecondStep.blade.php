@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4 col-xs-4">
             <div class="d-flex flex-row-reverse">
-                {{-- <a  href ="" class="btn btn-outline-danger btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+                {{-- <a  href ="" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
             </div>
         </div>
     </div>

@@ -27,6 +27,12 @@
             margin: 20px auto;
         }
 
+        thead, tbody, tfoot, tr, td, th
+		{
+			border-width: 1px !important;
+			border-color: black !important;
+		}
+
     </style>
 
 
@@ -267,9 +273,9 @@
 
                                  @if(count($childNoteNewList) > 0)
 
-flashMessageclude('admin.presentDocument.viewChildNoteAddSecondStep')
+@include('admin.presentDocument.viewChildNoteAddSecondStep')
                                  @else
-flashMessageclude('admin.presentDocument.viewChildNoteAddFirstStep')
+@include('admin.presentDocument.viewChildNoteAddFirstStep')
                                     @endif
                                     @endif
 

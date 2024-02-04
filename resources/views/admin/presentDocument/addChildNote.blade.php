@@ -26,7 +26,11 @@
             max-width: 80%;
             margin: 20px auto;
         }
-
+        thead, tbody, tfoot, tr, td, th
+		{
+			border-width: 1px !important;
+			border-color: black !important;
+		}
     </style>
 
 

@@ -201,7 +201,7 @@ aria-labelledby="myModalLabel22">
                                                                             @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
 
                                                                             @else
-                                                                            {!! $officeDetails->extra_text !!}
+                                                                  
 
 
                                                                             @if(empty($officeDetails->sarok_number))

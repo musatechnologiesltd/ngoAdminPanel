@@ -1,9 +1,9 @@
 <style>
-    	.custom_table_accordion	thead, 
-		.custom_table_accordion tbody, 
-		.custom_table_accordion tfoot, 
-		.custom_table_accordion tr, 
-		.custom_table_accordion td, 
+    	.custom_table_accordion	thead,
+		.custom_table_accordion tbody,
+		.custom_table_accordion tfoot,
+		.custom_table_accordion tr,
+		.custom_table_accordion td,
 		.custom_table_accordion th
 		{
 			border-width: 1px !important;
@@ -39,7 +39,7 @@ $receiverId = DB::table('nothi_details')
 @else
 
         <!-- new delete code -->
-        <a class="btn-sm btn btn-outline-danger"  onclick="deleteTag({{ $childNoteNewLists->id}})">
+        <a class="btn-sm btn btn-primary"  onclick="deleteTag({{ $childNoteNewLists->id}})">
 
 
         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -85,7 +85,7 @@ $receiverId = DB::table('nothi_details')
              <div id="container mt-2">
 
                 <div class="custom_table_accordion" id="descriptionFirst{{ $key+1 }}">
-				
+
                 {!! $childNoteNewLists->description !!}
                 </div>
 

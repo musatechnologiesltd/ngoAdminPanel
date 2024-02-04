@@ -600,6 +600,10 @@ class ChildNoteController extends Controller
             $fd2OtherInfo=0;$prokolpoAreaList=0;$dataFromFd7Form=0;$dataFromFc2Form=0;
 
             $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+
+
+//dd(count($officeDetail));
+
             $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)->get();
 

@@ -26,6 +26,9 @@ class OfficeSarokController extends Controller
 {
     public function store(Request $request){
 
+
+        //dd($request->all());
+
         $request->validate([
 
             'subject' => 'required',
@@ -57,6 +60,8 @@ class OfficeSarokController extends Controller
             //end new code during update
         }else{
 
+
+
             $dt = new DateTime();
             $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
             $created_at = $dt->format('Y-m-d h:i:s');
@@ -69,7 +74,7 @@ class OfficeSarokController extends Controller
                 $saveNewData->save();
 
             }elseif($request->statusForPotrangso == 'renew'){
-
+                //dd(12);
                 $saveNewData = new RenewOfficeSarok();
                 $saveNewData->parent_note_for_renew_id = $request->parentIdForPotrangso;
                 $saveNewData->created_at =$created_at;

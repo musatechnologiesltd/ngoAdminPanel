@@ -3,7 +3,82 @@
 @section('title')
 সকল নথি
 @endsection
+@section('css')
+<style>
+    * { margin: 0; padding: 0; }
 
+#page-wrap {
+  margin: auto 0;
+}
+
+.treeview {
+  margin: 10px 0 0 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+.treeview li {
+  background: url(http://jquery.bassistance.de/treeview/images/treeview-default-line.gif) 0 0 no-repeat;
+  padding: 2px 0 2px 16px;
+}
+
+.treeview > li:first-child > label {
+  /* style for the root element - IE8 supports :first-child
+  but not :last-child ..... */
+
+}
+
+.treeview li.last {
+  background-position: 0 -1766px;
+}
+
+.treeview li > input {
+  height: 16px;
+  width: 16px;
+  /* hide the inputs but keep them in the layout with events (use opacity) */
+  opacity: 0;
+  filter: alpha(opacity=0); /* internet explorer */
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=0)"; /*IE8*/
+}
+
+.treeview li > label {
+  background: url(http://www.thecssninja.com/demo/css_custom-forms/gr_custom-inputs.png) 0 -1px no-repeat;
+  /* move left to cover the original checkbox area */
+  margin-left: -20px;
+  /* pad the text to make room for image */
+  padding-left: 20px;
+}
+
+/* Unchecked styles */
+
+.treeview .custom-unchecked {
+  background-position: 0 -1px;
+}
+.treeview .custom-unchecked:hover {
+  background-position: 0 -21px;
+}
+
+/* Checked styles */
+
+.treeview .custom-checked {
+  background-position: 0 -81px;
+}
+.treeview .custom-checked:hover {
+  background-position: 0 -101px;
+}
+
+/* Indeterminate styles */
+
+.treeview .custom-indeterminate {
+  background-position: 0 -141px;
+}
+.treeview .custom-indeterminate:hover {
+  background-position: 0 -121px;
+}
+</style>
+@endsection
 
 @section('body')
 
@@ -248,6 +323,9 @@
             success: function(data) {
 
 
+                $("#pills-darktabContent").hide();
+
+                $("#pills-darktab").hide();
 
                 // $("#serial_part_one"+id_for_pass).val(data);
                  $("#final_result"+mainId).html(data);
@@ -255,7 +333,13 @@
 
 
 
-            }
+            },
+            beforeSend: function(){
+        $('#pageloader').show()
+    },
+    complete: function(){
+        $('#pageloader').hide()
+    }
             });
 
     });

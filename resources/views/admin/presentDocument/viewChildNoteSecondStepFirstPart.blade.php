@@ -32,7 +32,7 @@
 
 @else
 <!-- new delete code -->
-<a class="btn-sm btn btn-outline-danger"  onclick="deleteTag({{ $childNoteNewLists->id}})">
+<a class="btn-sm btn btn-primary"  onclick="deleteTag({{ $childNoteNewLists->id}})">
 
 
     <i class="fa fa-trash" aria-hidden="true"></i>

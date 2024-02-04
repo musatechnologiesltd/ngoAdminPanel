@@ -315,7 +315,7 @@ $branchName = DB::table('branches')
    </div>
    <div class="col-sm-4 col-xs-4">
        <div class="d-flex flex-row-reverse">
-        <a  href ="{{  url('admin/viewChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-warning"aria-expanded="false">সংরক্ষন করুন</a>
+        <a  href ="{{  url('admin/viewChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-primary"aria-expanded="false">সংরক্ষন করুন</a>
        </div>
    </div>
 </div>

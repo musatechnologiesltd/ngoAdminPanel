@@ -1,5 +1,5 @@
 
-@foreach($all_data_for_name_changes_list as $k=>$allStatusData)
+@foreach($allDataForNameChangesList as $k=>$allStatusData)
 
 <?php
 

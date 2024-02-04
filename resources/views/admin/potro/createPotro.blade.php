@@ -315,7 +315,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
     </div>
     <div class="col-sm-4 col-xs-4">
         <div class="d-flex flex-row-reverse">
-            <a  href ="{{  url('admin/addChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-warning"aria-expanded="false">সংরক্ষন করুন</a>
+            <a  href ="{{  url('admin/addChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-primary"aria-expanded="false">সংরক্ষন করুন</a>
         </div>
     </div>
 </div>
@@ -510,9 +510,9 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                         <span>
 
                                                                             @if(empty($nothiPropokLists->organization_name))
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}</span>।<br>
+                                                                           {{ $nothiPropokLists->otherOfficerDesignation }}</span>, এনজিও বিষয়ক ব্যুরো।<br>
                                                                              @else
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                          {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                             @endif
 
 
@@ -528,7 +528,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                                     <p class="mt-4" style="font-weight:bold">দৃষ্টি আকর্ষণ</p>
                                                                     @foreach($nothiAttractListUpdate as $nothiPropokLists)
                                                                     <span>@if(empty($nothiPropokLists->organization_name))
-                                                                        {{ $nothiPropokLists->otherOfficerDesignation }},</span>।<br>
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }},</span> এনজিও বিষয়ক ব্যুরো।<br>
                                                                          @else
                                                                         {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                         @endif
