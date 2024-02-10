@@ -1818,6 +1818,12 @@ $mainIdFdNineOne =0;
 
 
 
+
+
+
+
+
+
         }elseif($status == 'nameChange'){
 
 
@@ -3121,7 +3127,13 @@ $childNoteNewListUpdate = DB::table('child_note_for_renews')
 ->where('receiver_id',Auth::guard('admin')->user()->id)
 ->update(array('view_status' => 1));
 
+//new code
 
+
+
+
+
+// new code enf
 
 }elseif($status == 'nameChange'){
 
@@ -3698,6 +3710,8 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
 
  public function saveNothiPermission($data){
+
+    //dd(12);
     $dt = new DateTime();
     $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
     $created_at = $dt->format('Y-m-d h:i:s ');
@@ -3886,15 +3900,153 @@ if($data['button_value'] == 'return'){
 
             return redirect()->back()->with('error','সফলভাবে ফেরত আনা হয়েছে');
 
+        }elseif($data['button_value'] == 'returnOther'){
+
+
+            $mainId = DB::table('nothi_details')
+            ->where('childId',$data['child_note_id'])
+            ->where('noteId',$data['noteId'])
+            ->where('nothId',$data['nothiId'])
+            ->where('dakId',$data['dakId'])
+            ->where('dakType',$data['status'])
+            ->where('sender',Auth::guard('admin')->user()->id)
+            ->value('id');
+
+
+
+            $mainIdSender = DB::table('nothi_details')
+            ->where('childId',$data['child_note_id'])
+            ->where('noteId',$data['noteId'])
+            ->where('nothId',$data['nothiId'])
+            ->where('dakId',$data['dakId'])
+            ->where('dakType',$data['status'])
+            ->where('receiver',Auth::guard('admin')->user()->id)
+            ->orderBy('id','desc')
+            ->value('sender');
+
+
+            $mainIdReceIver = DB::table('nothi_details')
+            ->where('childId',$data['child_note_id'])
+            ->where('noteId',$data['noteId'])
+            ->where('nothId',$data['nothiId'])
+            ->where('dakId',$data['dakId'])
+            ->where('dakType',$data['status'])
+            ->where('sender',Auth::guard('admin')->user()->id)
+            ->orderBy('id','desc')
+            ->value('receiver');
+
+
+            if($data['status'] == 'renew'){
+
+               $getCreatorValue =  DB::table('child_note_for_renews')
+               ->where('id',$data['child_note_id'])->value('admin_id');
+            }
+
+
+            if($getCreatorValue == $mainIdReceIver){
+
+                $deleteDatatwoOne = SealStatus::where('nothiId',$data['nothiId'])
+                ->where('childId',$data['child_note_id'])->where('status',$data['status'])
+                ->where('receiver',Auth::guard('admin')->user()->id)
+                ->update([
+                    'seal_status'=> 2,
+                 ]);
+
+            }else{
+
+
+
+
+
+            $deleteDatatwo = SealStatus::where('nothiId',$data['nothiId'])
+            ->where('childId',$data['child_note_id'])->where('status',$data['status'])
+            ->where('receiver',$mainIdReceIver)
+            ->delete();
+
+
+
+            $deleteDatatwoOne = SealStatus::where('nothiId',$data['nothiId'])
+            ->where('childId',$data['child_note_id'])->where('status',$data['status'])
+            ->where('receiver',Auth::guard('admin')->user()->id)
+            ->update([
+                'seal_status'=> 2,
+             ]);
+
+            }
+
+
+            if($data['status'] == 'renew'){
+
+                DB::table('child_note_for_renews')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                    // 'sent_status'=> DB::raw('NULL'),
+                    // 'view_status'=> DB::raw('NULL'),
+                    // 'back_sign_status' => 1
+                 ]);
+
+            }
+
+
+            $deleteData = NothiDetail::where('childId',$data['child_note_id'])
+     ->where('noteId',$data['noteId'])
+     ->where('nothId',$data['nothiId'])
+     ->where('dakId',$data['dakId'])
+     ->where('dakType',$data['status'])->where('sender',$mainIdSender)
+     ->where('receiver',Auth::guard('admin')->user()->id)
+     ->update([
+
+         'sent_status'=> DB::raw('NULL'),
+
+     ]);
+
+
+     $deleteData = NothiDetail::where('childId',$data['child_note_id'])
+     ->where('noteId',$data['noteId'])
+     ->where('nothId',$data['nothiId'])
+     ->where('dakId',$data['dakId'])
+     ->where('dakType',$data['status'])->where('receiver',$mainIdReceIver)
+     ->where('sender',Auth::guard('admin')->user()->id)->delete();
+
+
+
+     return redirect()->route('receiveNothi.index')->with('error','সফলভাবে ফেরত আনা হয়েছে');
+
         }else{
-//dd(12);
-        //ArticleSign
+
+
+            ///start new code
+
+      $firstNothiSenderNew = NothiDetail::where('childId',$data['child_note_id'])
+     ->where('noteId',$data['noteId'])
+     ->where('nothId',$data['nothiId'])
+     ->where('dakId',$data['dakId'])
+     ->where('dakType',$data['status'])
+     ->whereNull('back_nothi')
+     ->where('sender',$data['nothiPermissionId'])->value('id');
+
+
+     $deleteData1 = NothiDetail::where('id',$firstNothiSenderNew)
+     ->update([
+
+         'back_nothi'=> 1,
+
+     ]);
+
+
+
+
+
+            //end new code
+
         $mainSaveData = new NothiDetail();
         $mainSaveData ->noteId = $data['noteId'];
         $mainSaveData ->nothId = $data['nothiId'];
         $mainSaveData ->childId = $data['child_note_id'];
         $mainSaveData ->dakId = $data['dakId'];
         $mainSaveData ->dakType = $data['status'];
+        $mainSaveData ->sent_status_other = 1;
         $mainSaveData ->sender = Auth::guard('admin')->user()->id;
         $mainSaveData ->receiver = $data['nothiPermissionId'];
         $mainSaveData ->created_at= $created_at;
@@ -4217,6 +4369,31 @@ if($data['status'] == 'renew'){
      ]);
 
 }
+
+
+ ///start new code
+
+ $firstNothiSenderNew = NothiDetail::where('childId',$data['child_note_id'])
+ ->where('noteId',$data['noteId'])
+ ->where('nothId',$data['nothiId'])
+ ->where('dakId',$data['dakId'])
+ ->where('dakType',$data['status'])
+ ->whereNull('back_nothi')
+ ->where('sender',$data['nothiPermissionId'])->value('id');
+
+
+ $deleteData1 = NothiDetail::where('id',$firstNothiSenderNew)
+ ->update([
+
+     'back_nothi'=> 1,
+
+ ]);
+
+
+
+
+
+        //end new code
 //end new code -->
 $mainSaveData = new NothiDetail();
 $mainSaveData ->noteId = $data['noteId'];
@@ -4224,6 +4401,7 @@ $mainSaveData ->nothId = $data['nothiId'];
 $mainSaveData ->childId = $data['child_note_id'];
 $mainSaveData ->dakId = $data['dakId'];
 $mainSaveData ->dakType = $data['status'];
+$mainSaveData ->sent_status_other = 1;
 $mainSaveData ->created_at= $created_at;
 $mainSaveData ->sender = Auth::guard('admin')->user()->id;
 $mainSaveData ->receiver = $data['nothiPermissionId'];
@@ -4697,7 +4875,7 @@ $childDataId = $saveNewData->id;
         }else{
 
 //dd($request->button_value);
-            if($request->button_value  == 'send' || $request->button_value  == 'return'){
+            if($request->button_value  == 'send' || $request->button_value  == 'return' || $request->button_value  == 'returnOther'){
 
                 return $this->saveNothiPermission($data);
 

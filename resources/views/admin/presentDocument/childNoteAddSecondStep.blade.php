@@ -42,7 +42,21 @@ $creatorNAme = DB::table('admins')
      @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
 
      @else
+     <?php
+     $multipleCheck = DB::table('seal_statuses')
+     ->where('noteId',$id)
+     ->where('nothiId',$nothiId)
+     ->where('status',$status)
+     ->where('childId',$childNoteNewLists->id)
+     ->where('receiver',Auth::guard('admin')->user()->id)
+     ->value('seal_status');
 
+     ?>
+
+    @if($multipleCheck == 1)
+
+    @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
+    @endif
 
      @endif
 

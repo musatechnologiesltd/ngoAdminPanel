@@ -7,7 +7,7 @@ aria-labelledby="myModalLabel2">
 <div class="modal-header">
     <a id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>
     <h4 class="modal-title" id="myModalLabel2">
-     পরবর্তী কার্যক্রমের জন্যে প্রেরণ করুন
+    পরবর্তী কার্যক্রমের জন্যে প্রেরণ করুন
         <br>
         <small> <span style="background: gray; border-radius: 5px; padding: 2px 5px;">
 

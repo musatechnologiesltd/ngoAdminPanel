@@ -35,6 +35,19 @@ $creatorNAme = DB::table('admins')
 
 @if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id))
 
+
+<?php
+$paraSentStatus = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('childId',$childNoteNewLists->id)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            ->update(array('view_status' => 1));
+
+
+?>
 @include('admin.presentDocument.viewChildNoteSecondStepFirstPart')
 
 @else

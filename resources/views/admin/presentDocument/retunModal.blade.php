@@ -6,7 +6,7 @@
             <div class="modal-header">
 			<a id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>
                 <h4 class="modal-title">
-                    {{-- ফেরত পাঠান --}}
+                  {{-- ফেরত পাঠান --}}
                     <br>
                     <small> <span style="background: gray; border-radius: 5px; padding: 2px 5px;">
 

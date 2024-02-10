@@ -23,6 +23,31 @@ $receiverId = DB::table('nothi_details')
 ->where('sender',Auth::guard('admin')->user()->id)
 ->value('receiver');
 
+
+
+$paraSentStatus = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('childId',$childNoteNewLists->id)
+                            ->where('sender',Auth::guard('admin')->user()->id)
+                            ->orderBy('id','desc')
+                            ->value('sent_status_other');
+
+
+                            $paraViewStatus = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('childId',$childNoteNewLists->id)
+                            ->orderBy('id','desc')
+                            ->where('sender',Auth::guard('admin')->user()->id)
+                            ->value('view_status');
+
+
+
 ?>
 
 <div class="card">
@@ -183,7 +208,17 @@ $senderIdNews = DB::table('seal_statuses')
 
 
 
-
+<?php
+$paraSentStatus = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('childId',$childNoteNewLists->id)
+                            ->orderBy('id','desc')
+                            ->where('sender',Auth::guard('admin')->user()->id)
+                            ->value('sent_status_other');
+?>
 
 
 
@@ -349,22 +384,24 @@ $unsentAtt = DB::table('note_attachments')
 
 
 
-@if(empty($childNoteNewLists->sent_status))
+@if(empty($paraSentStatus))
 
-@if($childNoteNewLists->back_sign_status == 1)
-
-@else
+@if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
 
 <a class="btn-sm btn btn-primary editButtonFirst" id="dataMain{{ $childNoteNewLists->id }}"  data-eid="{{ $key+1 }}">
 সংশোধন করুন
 </a>
-@endif
+
 
 <button class="btn-sm btn btn-primary editButtonSecond{{ $key+1 }}" style="display: none;"  value="সংশোধন" name="final_button" type="submit"
 
 aria-expanded="false">
 সংরক্ষণ করুন
 </button>
+
+@else
+
+@endif
 
 
                 <button data-bs-toggle="modal"
@@ -380,20 +417,72 @@ aria-expanded="false">
 
                 @else
 
+
+                @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id )
                 @if($childNoteNewLists->view_status == 1)
+
+                @if($paraViewStatus == 1)
+
 
                 @else
 
-                <button data-bs-toggle="modal"
+
+                <button type="button" class="btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+                    <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
+                  </button>
+                 <!-- nothi sender list -->
+                 @include('admin.presentDocument.updateRturnModalOther')
+                 <!-- end nothi sender list -->
+                @endif
+
+                @else
+
+                {{-- <button data-bs-toggle="modal"
                 data-original-title="" data-bs-target="#modalfornewsenderreturn1{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
                     <i class="btn-sm fa fa-arrow-circle-left"></i>
                     ফেরত আনুন
-                </button>
+                </button> --}}
+
+
+                <button type="button" class="btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+                    <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
+                  </button>
+
+
+                  <!-- Modal -->
+                <!-- nothi sender list -->
+                @include('admin.presentDocument.updateRturnModal')
+                <!-- end nothi sender list -->
 
                 <!-- nothi sender list -->
 @include('admin.presentDocument.mainReturn')
 <!-- end nothi sender list -->
                 @endif
+
+@else
+
+<!-- new-->
+
+@if($paraViewStatus == 1)
+
+
+@else
+
+
+<button type="button" class="btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+    <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
+  </button>
+ <!-- nothi sender list -->
+ @include('admin.presentDocument.updateRturnModalOther')
+ <!-- end nothi sender list -->
+@endif
+
+<!--end new code -->
+@endif
+
+
+
+
                 @endif
 
         @endif
@@ -404,7 +493,7 @@ aria-expanded="false">
 
 
 
- @if($childNoteNewLists->sent_status == 1)
+ @if($paraSentStatus == 1)
 
         <a href="javascript:void(0)" id="newPara" class=" btn-sm btn btn-primary">নতুন অনুচ্ছেদ</a>
 

@@ -295,13 +295,44 @@ $unsentAtt = DB::table('note_attachments')
         @if($childNoteNewLists->sent_status == 1 && Auth::guard('admin')->user()->id == $childNoteNewLists->admin_id )
         @if($childNoteNewLists->view_status == 1)
 
-        @else
+        @if($childNoteNewLists->receiver_id == $childNoteNewLists->admin_id )
 
         <button data-bs-toggle="modal"
+        data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
+            <i class="fa fa-send"></i>
+            নথি প্রেরণ
+        </button>
+
+        <!-- nothi sender list -->
+@include('admin.presentDocument.retunModal')
+
+@include('admin.presentDocument.newReturnModal')
+<!-- end nothi sender list -->
+        @endif
+
+        @else
+
+        {{-- <button data-bs-toggle="modal"
         data-original-title="" data-bs-target="#modalforsenderreturnnn{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
             <i class="btn-sm fa fa-arrow-circle-left"></i>
             ফেরত আনুন
-        </button>
+        </button> --}}
+
+        @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
+        <button type="button" class="btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+            <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
+          </button>
+          @else
+          <button type="button" class=" ob2 btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+            <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
+          </button>
+
+          @endif
+
+          <!-- Modal -->
+        <!-- nothi sender list -->
+        @include('admin.presentDocument.updateRturnModal')
+        <!-- end nothi sender list -->
 
 @endif
         @else
@@ -323,19 +354,22 @@ data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id 
 
 @if(Auth::guard('admin')->user()->id == $childNoteNewLists->admin_id )
 
-@if($childNoteNewLists->back_sign_status == 1)
+@if($childNoteNewLists->receiver_id == $childNoteNewLists->admin_id )
 
 @else
 <a class="btn-sm btn btn-primary editButtonFirst" id="dataMain{{ $childNoteNewLists->id }}"  data-eid="{{ $childNoteNewLists->id }}">
     সংশোধন করুন
     </a>
-@endif
+
 
     <button class="btn-sm btn btn-primary editButtonSecond{{ $childNoteNewLists->id }}" style="display: none;"  value="সংশোধন" name="final_button" type="submit"
 
     aria-expanded="false">
     সংরক্ষণ করুন
     </button>
+
+@endif
+
 @endif
 <a href="javascript:void(0)" id="newPara" class=" btn-sm btn btn-primary">নতুন অনুচ্ছেদ</a>
 

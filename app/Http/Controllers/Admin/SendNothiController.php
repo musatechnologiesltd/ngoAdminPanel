@@ -10,9 +10,10 @@ class SendNothiController extends Controller
 {
     public function index(){
 
-
+//dd()
 
         $senderNothiList = NothiDetail::where('sender',Auth::guard('admin')->user()->id)
+        ->whereNull('back_nothi')
         ->latest()->get();
 
 
