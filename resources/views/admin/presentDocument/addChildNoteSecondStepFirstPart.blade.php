@@ -83,6 +83,13 @@ $paraSentStatus = DB::table('nothi_details')
     @endif
 
     @endif
+
+    <a target="_blank" href ="{{ route('printParagraphAddSingle', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'childIdNew'=>$childNoteNewLists->id]) }}" class="btn-sm btn btn-primary"  >
+
+
+        <i class="fa fa-print" aria-hidden="true"></i>
+
+    </a>
   </h5>
 
 
@@ -268,13 +275,13 @@ $mainSenderIdNews21=DB::table('admins')->where('id',$mainSenderIdNewss44->receiv
 
 ?>
 
-@foreach($mainSenderIdNews21 as $mainSenderIdNews22 )
+
 
 <?php
 $desiName1 = DB::table('designation_lists')
-    ->where('id',$mainSenderIdNews22->designation_list_id)
+    ->where('id',$mainSenderIdNewss44->e_designation)
     ->value('designation_name');
-$branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)->value('branch_name');
+$branchName1 = DB::table('branches')->where('id',$mainSenderIdNewss44->e_branch)->value('branch_name');
 
 ?>
 
@@ -293,7 +300,7 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)
 
 <div class="text-center">
     @if($mainSenderIdNewss44->seal_status == 1)
-<img src="{{ asset('/') }}{{ $mainSenderIdNews22->admin_sign }}" alt="" height="50" width="180">
+<img src="{{ asset('/') }}{{ $mainSenderIdNewss44->e_sign }}" alt="" height="50" width="180">
 @else
 
 @endif
@@ -307,13 +314,13 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)
 
 
 @endif
-{{ $mainSenderIdNews22->admin_name_ban }} <br>
+{{ $mainSenderIdNewss44->e_name }} <br>
 {{ $desiName1 }} <br>
 {{ $branchName1 }}</p>
 </div>
 </div>
 
-        @endforeach
+
 
         @endforeach
 
@@ -416,6 +423,19 @@ aria-expanded="false">
 <!-- end nothi sender list -->
 
                 @else
+
+                @if($childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id )
+  <button data-bs-toggle="modal"
+                data-original-title="" data-bs-target="#modalforsenderpp{{ $childNoteNewLists->id }}" class="btn-sm btn btn-info ms-3" type="button">
+                    <i class="fa fa-send"></i>
+                    নথি প্রেরণ
+                </button>
+
+
+<!-- nothi sender list -->
+@include('admin.presentDocument.mt2')
+<!-- end nothi sender list -->
+                @endif
 
 
                 @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id )

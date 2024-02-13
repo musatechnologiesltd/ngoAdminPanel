@@ -197,7 +197,17 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::controller(ChildNoteController::class)->group(function () {
-		
+
+
+        Route::get('/printParagraphViewSingle/{status}/{parentId}/{nothiId}/{id}/{childIdNew}', 'printParagraphViewSingle')->name('printParagraphViewSingle');
+        Route::get('/printParagraphAddSingle/{status}/{parentId}/{nothiId}/{id}/{childIdNew}', 'printParagraphAddSingle')->name('printParagraphAddSingle');
+
+
+
+
+        Route::get('/printAllParagraph/{status}/{parentId}/{nothiId}/{id}', 'printAllParagraph')->name('printAllParagraph');
+        Route::get('/printAllParagraphFromSend/{status}/{parentId}/{nothiId}/{id}', 'printAllParagraphFromSend')->name('printAllParagraphFromSend');
+
 		Route::get('/getdataforNothiList', 'getdataforNothiList')->name('getdataforNothiList');
 
         Route::get('/deleteAttachment/{id}', 'deleteAttachment')->name('deleteAttachment');

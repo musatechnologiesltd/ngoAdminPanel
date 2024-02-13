@@ -13,10 +13,14 @@ class ReceiveNothiController extends Controller
 
 
         $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-                                      ->latest()->get();
+        ->where('dakType','renew')->latest()->get();
 
 
-            return view('admin.receiveNothi.index',compact('senderNothiList'));
+        $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+        ->where('dakType','registration')->latest()->get();
+
+
+            return view('admin.receiveNothi.index',compact('senderNothiList','senderNothiListRegistration'));
 
 
 

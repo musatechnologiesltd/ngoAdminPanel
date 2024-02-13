@@ -10,7 +10,7 @@
 
                         @foreach($ngoStatusReg as $i=>$allStatusData)
 
-                        @if($allStatusData->nothi_jat_status == 1)
+                        @if($allStatusData->nothi_jat_status == 1 || $allStatusData->present_status == 1)
 
                         @else
 
@@ -274,7 +274,7 @@ $branchNames = DB::table('branches')
 
                     @foreach($ngoStatusRenew as $r=>$allStatusData)
 
-                    @if($allStatusData->nothi_jat_status == 1)
+                    @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
                     @else
 

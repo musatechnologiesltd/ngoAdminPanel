@@ -792,6 +792,3217 @@ die();
 
     }
 
+    ///code for 11 february
+
+
+    public function printAllParagraph($status,$parentId,$nothiId,$id){
+
+
+        if($status == 'registration'){
+
+
+
+            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+                           ->get();
+
+
+                             //new code
+                             $mainIdR = '';
+                             $fdOneFormId = '';
+                             $renewInfoData = '';
+                             $dataFromFd3Form = 0;
+                             $dataFromNVisaFd9Fd1='';
+                             $allNameChangeDoc = '';
+                             $getformOneId='';
+
+                             $nVisaDocs='';
+                             $ngoStatus='';
+                             $get_email_from_user=0;
+$mainIdFdNineOne=0;
+$nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+
+$dataFromFc1Form=0;
+$dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+
+            $dataFromFd7Form=0;
+            $dataFromFc2Form=0;
+
+                         $registration_status_id = DB::table('ngo_registration_daks')
+              ->where('id',$parentId)
+              ->value('registration_status_id');
+
+              $fdOneIdForNothi = DB::table('ngo_statuses')->where('id',$registration_status_id)->value('fd_one_form_id');
+
+
+                         $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+
+
+            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->first();
+            $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneIdForNothi)->first();
+
+
+            $ngoTypeData = DB::table('ngo_type_and_languages')
+            ->where('user_id',$form_one_data->user_id)->first();
+
+
+            $signDataNew = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->first();
+
+
+            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+
+
+            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+
+
+ $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_end_date');
+            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_start_date');
+
+            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+
+            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+            ->first();
+
+
+            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+            ->get();
+
+            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+    ->get();
+                             //new code
+
+        }elseif($status == 'renew'){
+            $dataFromFd3Form = 0;
+            $allNameChangeDoc = '';
+            $getformOneId='';
+
+            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+              //new code  start
+
+              $renew_status_id = DB::table('ngo_renew_daks')
+              ->where('id',$parentId)
+              ->value('renew_status_id');
+
+
+              $mainIdR = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $fdOneFormId = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
+
+              $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
+
+
+          $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+
+          $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+          $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+
+          $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
+
+          //dd($renewInfoData);
+
+
+
+          $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+
+        $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+          $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
+
+          $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+          $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+          $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+          $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+          $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+          $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+          ->first();
+
+
+          $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+          ->get();
+
+          $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+  ->get();
+
+  $ngoTypeData = '';
+  $dataFromNVisaFd9Fd1='';
+  $nVisaDocs='';
+  $ngoStatus='';
+  $get_email_from_user=0;
+$mainIdFdNineOne=0;
+$nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+         //end new code
+         $dataFromFc1Form=0;
+         $dataFromFd6Form =0;
+         $fd2FormList=0;
+         $fd2OtherInfo=0;
+         $prokolpoAreaList=0;
+
+         $dataFromFd7Form=0;
+         $dataFromFc2Form=0;
+        }elseif($status == 'nameChange'){
+            $dataFromFd3Form = 0;
+            $renewInfoData='';
+            $ngoTypeData = '';
+            $mainIdR ='';
+            $dataFromNVisaFd9Fd1='';
+            $nVisaDocs='';
+            $ngoStatus='';
+            $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+
+
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+            ///name change ciew
+
+            $name_change_status_id = DB::table('ngo_name_change_daks')
+              ->where('id',$parentId)
+              ->value('name_change_status_id');
+
+
+            $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$name_change_status_id)->get();
+
+                $getformOneId = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->first();
+
+                $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
+
+
+
+                $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
+                $name_change_status = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
+                $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+
+
+                //new code for old  and new
+
+      $checkOldorNew = DB::table('ngo_type_and_languages')
+      ->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+
+ //end new code for old and new
+
+ if($checkOldorNew == 'Old'){
+
+     $all_data_for_new_list_all = DB::table('ngo_renews')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }else{
+
+     $all_data_for_new_list_all = DB::table('ngo_statuses')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }
+
+
+
+
+                //$all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+
+                $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+                $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+                $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+     $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
+                $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
+
+                $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
+                $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
+
+                $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+                $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+                $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+                $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+                ->first();
+
+
+                $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+                ->get();
+
+                $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+        ->get();
+
+
+
+            ///end name change view
+
+            $get_email_from_user=0;
+            $mainIdFdNineOne=0;
+            $nVisabasicInfo=0;
+            $forwardingLetterOnulipi=0;
+            $editCheck1=0;
+            $editCheck=0;
+            $statusData=0;
+            $nVisaWorkPlace=0;
+            $nVisaSponSor=0;
+            $nVisaForeignerInfo=0;
+            $nVisaManPower=0;
+            $nVisaEmploye=0;
+            $nVisaCompensationAndBenifits=0;
+            $nVisaAuthPerson=0;
+
+
+            $dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+            $dataFromFd7Form=0;
+        }elseif($status == 'fdNine'){
+
+
+
+
+            $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+//dd($checkParent);
+
+$fd_nine_status_id = DB::table('ngo_f_d_nine_daks')
+->where('id',$parentId)
+->value('f_d_nine_status_id');
+
+//dd($fd_nine_status_id);
+
+
+///fd nine view
+// $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+//      ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+//      ->select('fd_one_forms.*','fd9_forms.*')
+//      ->where('fd9_forms.id',$fd_nine_status_id)
+//     ->orderBy('fd9_forms.id','desc')
+//     ->get();
+
+    $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_forms.*')
+    ->where('fd9_forms.id',$fd_nine_status_id)
+     ->first();
+
+       //new code for old  and new
+       $ngoTypeData = DB::table('ngo_type_and_languages')
+       ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+       $checkOldorNew = DB::table('ngo_type_and_languages')
+       ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+  //end new code for old and new
+
+  if($checkOldorNew == 'Old'){
+
+      $ngoStatus = DB::table('ngo_renews')
+      ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+  }else{
+
+      $ngoStatus = DB::table('ngo_statuses')
+      ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+  }
+  $nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+  ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+///end fd nine view end
+$dataFromFd3Form = 0;
+$get_email_from_user=0;
+$mainIdFdNineOne=0;
+$nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+
+$mainIdR=0;
+$renewInfoData=0;
+
+$form_one_data=0;
+$all_data_for_new_list_all=0;
+$form_eight_data=0;
+$form_member_data=0;
+$form_member_data_doc=0;
+$form_ngo_data_doc=0;
+$users_info=0;
+$all_source_of_fund=0;
+$all_partiw=0;
+$allNameChangeDoc = 0;
+$getformOneId= 0;
+$duration_list_all1 =0;
+$duration_list_all = 0;
+$renew_status = 0;
+$name_change_status = 0;
+$r_status = 0;
+$form_member_data_doc_renew =0;
+$get_all_data_adviser=0;
+$get_all_data_other=0;
+$get_all_data_adviser_bank=0;
+$dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+
+            $dataFromFd7Form=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+        }elseif($status == 'fdNineOne'){
+            $dataFromFd3Form = 0;
+            $dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+
+            $dataFromFd7Form=0;
+
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+
+            $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+            $fd_nine_one_status_id = DB::table('ngo_f_d_nine_one_daks')
+->where('id',$parentId)
+->value('f_d_nine_one_status_id');
+
+
+
+            $mainIdFdNineOne = $fd_nine_one_status_id;
+
+        $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
+        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
+        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal','fd9_one_forms.created_at as chiefDate')
+        ->orderBy('fd9_one_forms.id','desc')
+        ->where('fd9_one_forms.id',$fd_nine_one_status_id)
+        ->first();
+
+        $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
+        //dd($dataFromNVisaFd9Fd1);
+
+
+        $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$dataFromNVisaFd9Fd1->mainId)
+     ->orderBy('id','desc')->value('id');
+
+     $forwardingLetterOnulipi = DB::table('forwarding_letter_onulipis')->where('forwarding_letter_id',$forwardId)
+     ->get();
+     $editCheck = DB::table('fd9_forwarding_letter_edits')->where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_one');
+
+
+     $editCheck1 = DB::table('fd9_forwarding_letter_edits')->where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_two');
+
+
+     $ngoTypeData = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+
+
+     //new code for old  and new
+
+
+
+//end new code for old and new
+
+if($ngoTypeData->ngo_type_new_old == 'Old'){
+
+$ngoStatus = DB::table('ngo_renews')
+->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+}else{
+
+$ngoStatus = DB::table('ngo_statuses')
+->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+    //  $ngoStatus = DB::table('ngo_statuses')
+    //  ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //dd($dataFromNVisaFd9Fd1->id);
+
+
+
+     $nVisabasicInfo = DB::table('n_visas')
+     ->where('fd9_one_form_id',$dataFromNVisaFd9Fd1->mainId)->first();
+
+     $statusData = DB::table('secruity_checks')->where('n_visa_id',$nVisabasicInfo->id)->value('created_at');
+
+
+
+$nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->get();
+
+$nVisaEmploye = DB::table('n_visa_employment_information')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+ $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+
+
+        }elseif($status == 'fdSix'){
+            $dataFromFd3Form = 0;
+            $dataFromFd7Form=0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+
+            $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+
+
+                //////new code
+
+                $fd_six_status_id = DB::table('ngo_fd_six_daks')
+                ->where('id',$parentId)
+                ->value('fd_six_status_id');
+
+
+                $dataFromFd6Form = DB::table('fd6_forms')
+                ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
+                ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
+                ->where('fd6_forms.id',$fd_six_status_id)
+               ->orderBy('fd6_forms.id','desc')
+               ->first();
+               $get_email_from_user = DB::table('users')->where('id',$dataFromFd6Form->user_id)->value('email');
+
+               $fd2FormList = DB::table('fd2_forms')->where('fd_one_form_id',$dataFromFd6Form->fd_one_form_id)
+               ->where('fd_six_form_id',base64_encode($dataFromFd6Form->mainId))->latest()->first();
+
+               $fd2OtherInfo = DB::table('fd2_form_other_infos')->where('fd2_form_id',$fd2FormList->id)->latest()->get();
+
+
+               $prokolpoAreaList = DB::table('fd6_form_prokolpo_areas')->where('fd6_form_id',$dataFromFd6Form->mainId)->latest()->get();
+
+
+
+
+                         ///end new code
+
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdSeven'){
+            $dataFromFd3Form = 0;
+            $dataFromFd6Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+            $dataFromFc2Form=0;
+            $dataFromFc1Form=0;
+
+            $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+
+
+            // new code start
+
+            $fd_seven_status_id = DB::table('ngo_fd_seven_daks')
+            ->where('id',$parentId)
+            ->value('fd_seven_status_id');
+
+
+            $dataFromFd7Form = DB::table('fd7_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd7_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fd7_forms.*','fd7_forms.id as mainId')
+            ->where('fd7_forms.id',$fd_seven_status_id)
+           ->orderBy('fd7_forms.id','desc')
+           ->first();
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFd7Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fd7_forms')->where('fd_one_form_id',$dataFromFd7Form->fd_one_form_id)
+           ->where('fd7_form_id',$dataFromFd7Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fd7_other_infos')->where('fd2_form_for_fd7_form_id',$fd2FormList->id)->latest()->get();
+
+
+           $prokolpoAreaList = DB::table('fd7_form_prokolpo_areas')->where('fd7_form_id',$dataFromFd7Form->mainId)->latest()->get();
+
+
+
+            // new code end
+
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fcOne'){
+            $dataFromFd3Form = 0;
+            $dataFromFc2Form=0;
+            $prokolpoAreaList=0;
+            $dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+
+            $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+
+            $fc_one_status_id = DB::table('fc_one_daks')
+            ->where('id',$parentId)
+            ->value('fc_one_status_id');
+
+
+
+            $dataFromFc1Form = DB::table('fc1_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc1_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fc1_forms.*','fc1_forms.id as mainId')
+            ->where('fc1_forms.id',$fc_one_status_id)
+           ->orderBy('fc1_forms.id','desc')
+           ->first();
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFc1Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fc1_forms')->where('fd_one_form_id',$dataFromFc1Form->fd_one_form_id)
+           ->where('fc1_form_id',$dataFromFc1Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fc1_other_infos')->where('fd2_form_for_fc1_form_id',$fd2FormList->id)->latest()->get();
+
+
+
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fcTwo'){
+            $dataFromFd3Form = 0;
+            $dataFromFc1Form =0;
+            $prokolpoAreaList=0;
+            $dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+
+            $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+
+
+            $fc_two_status_id = DB::table('fc_two_daks')
+            ->where('id',$parentId)
+            ->value('fc_two_status_id');
+
+
+            $dataFromFc2Form = DB::table('fc2_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
+            ->where('fc2_forms.id',$fc_two_status_id)
+           ->orderBy('fc2_forms.id','desc')
+           ->first();
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFc2Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fc2_forms')->where('fd_one_form_id',$dataFromFc2Form->fd_one_form_id)
+           ->where('fc2_form_id',$dataFromFc2Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fc2_other_infos')->where('fd2_form_for_fc2_form_id',$fd2FormList->id)->latest()->get();
+
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+            $dataFromFc2Form =0;
+            $dataFromFc1Form =0;
+            $prokolpoAreaList=0;
+            $dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+
+
+            $fd_three_status_id = DB::table('fd_three_daks')
+            ->where('id',$parentId)
+            ->value('fd_three_status_id');
+
+            $dataFromFd3Form = DB::table('fd3_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd3_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fd3_forms.*','fd3_forms.id as mainId')
+            ->where('fd3_forms.id',$fd_three_status_id)
+           ->orderBy('fd3_forms.id','desc')
+           ->first();
+
+//dd($dataFromFd3Form);
+
+
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFd3Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fd3_forms')->where('fd_one_form_id',$dataFromFd3Form->fd_one_form_id)
+           ->where('fd3_form_id',$dataFromFd3Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fd3_other_infos')->where('fd2_form_for_fd3_form_id',$fd2FormList->id)->latest()->get();
+
+
+
+
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }
+
+
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+
+        $user = Admin::where('id','!=',1)->get();
+
+
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("designationId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
+        ->orderBy('designation_serial','asc')->get();
+
+
+        //new code december 23
+
+
+
+
+        if($status == 'registration'){
+
+
+        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+           ->first();
+
+
+           $childNoteNewList = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)
+                   ->whereNull('sent_status')
+
+                   ->orwhere('sent_status',1)
+                   ->value('id');
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)
+                   ->whereNull('sent_status')
+->orwhere('sent_status',1)
+                   ->value('id');
+
+
+
+
+
+
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+        //dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+        }
+
+
+
+
+
+
+
+        //end new code december 23
+
+
+        $sarokCode = 1;
+
+
+
+
+
+
+
+
+        $data = view('admin.presentDocument.printAllParagraph',compact(
+
+            'get_email_from_user',
+            'dataFromFd6Form',
+            'fd2FormList',
+            'fd2OtherInfo',
+            'prokolpoAreaList',
+            'dataFromFd7Form',
+            'dataFromFc1Form',
+            'dataFromFc2Form',
+            'dataFromFd3Form',
+            'mainIdFdNineOne',
+            'nVisabasicInfo',
+            'forwardingLetterOnulipi',
+            'editCheck1',
+            'editCheck',
+            'statusData',
+            'ngoStatus',
+            'nVisaWorkPlace',
+            'nVisaSponSor',
+            'nVisaForeignerInfo',
+            'nVisaManPower',
+            'nVisaEmploye',
+            'nVisaCompensationAndBenifits',
+            'nVisaAuthPerson',
+            'nVisaDocs',
+            'dataFromNVisaFd9Fd1',
+            'allNameChangeDoc',
+            'getformOneId',
+            'duration_list_all1',
+            'duration_list_all',
+            'r_status',
+            'ngoTypeData',
+            'renewInfoData',
+            'mainIdR',
+            'renew_status',
+            'name_change_status',
+            'form_member_data_doc_renew',
+            'get_all_data_adviser',
+            'get_all_data_other',
+            'get_all_data_adviser_bank',
+            'all_partiw',
+            'all_source_of_fund',
+            'users_info',
+            'form_ngo_data_doc',
+            'form_member_data_doc',
+            'form_member_data',
+            'form_eight_data',
+            'all_data_for_new_list_all',
+            'form_one_data',
+            'childNoteNewListValue',
+            'childNoteNewList',
+            'checkParentFirst',
+            'nothiYear',
+            'branchListForSerial',
+            'permissionNothiList',
+            'nothiCopyListUpdate',
+            'nothiAttractListUpdate',
+            'nothiPropokListUpdate',
+            'user',
+            'nothiId',
+            'nothiNumber',
+            'officeDetail',
+            'checkParent',
+            'status',
+            'id',
+            'parentId',
+
+        ));
+
+        $mpdf = new Mpdf([
+            //'default_font_size' => 14,
+            'default_font' => 'nikosh'
+        ]);
+
+        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+        $mpdf->WriteHTML($data);
+
+
+
+        $mpdf->Output();
+        die();
+
+    }
+
+    //end code for 11 february
+
+    //new start 11
+
+
+    public function printAllParagraphFromSend($status,$parentId,$nothiId,$id){
+
+        if($status == 'registration'){
+
+
+
+            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+                           ->get();
+
+
+                             //new code
+                             $mainIdR = '';
+                             $fdOneFormId = '';
+                             $renewInfoData = '';
+                             $dataFromFd3Form = 0;
+                             $dataFromNVisaFd9Fd1='';
+                             $allNameChangeDoc = '';
+                             $getformOneId='';
+
+                             $nVisaDocs='';
+                             $ngoStatus='';
+                             $get_email_from_user=0;
+$mainIdFdNineOne=0;
+$nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+
+$dataFromFc1Form=0;
+$dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+
+            $dataFromFd7Form=0;
+            $dataFromFc2Form=0;
+
+                         $registration_status_id = DB::table('ngo_registration_daks')
+              ->where('id',$parentId)
+              ->value('registration_status_id');
+
+              $fdOneIdForNothi = DB::table('ngo_statuses')->where('id',$registration_status_id)->value('fd_one_form_id');
+
+
+                         $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+            $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$fdOneIdForNothi)->value('status');
+
+
+            $all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$fdOneIdForNothi)->first();
+            $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneIdForNothi)->first();
+
+
+            $ngoTypeData = DB::table('ngo_type_and_languages')
+            ->where('user_id',$form_one_data->user_id)->first();
+
+
+            $signDataNew = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->first();
+
+
+            $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+
+
+            $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+
+
+ $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_end_date');
+            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneIdForNothi)->value('ngo_duration_start_date');
+
+            $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+            $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneIdForNothi)->get();
+
+            $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+            $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+            $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+            $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+            ->first();
+
+
+            $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+            ->get();
+
+            $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+    ->get();
+                             //new code
+
+        }elseif($status == 'renew'){
+            $dataFromFd3Form = 0;
+            $allNameChangeDoc = '';
+            $getformOneId='';
+
+            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+              //new code  start
+
+              $renew_status_id = DB::table('ngo_renew_daks')
+              ->where('id',$parentId)
+              ->value('renew_status_id');
+
+
+              $mainIdR = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $fdOneFormId = DB::table('ngo_renews')->where('id',$renew_status_id)->first();
+
+              $form_one_data = DB::table('fd_one_forms')->where('id',$fdOneFormId->fd_one_form_id)->first();
+
+              $r_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $name_change_status = DB::table('ngo_name_changes')->where('fd_one_form_id',$form_one_data->id)->value('status');
+          $renew_status = DB::table('ngo_renews')->where('id',$id)->value('status');
+
+
+          $all_data_for_new_list_all = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->first();
+
+          $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+          $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+
+          $renewInfoData = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->first();
+
+          //dd($renewInfoData);
+
+
+
+          $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+
+        $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_end_date');
+          $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->value('ngo_duration_start_date');
+
+          $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+          $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$fdOneFormId->fd_one_form_id)->get();
+
+          $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+          $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+          $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+          $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+          ->first();
+
+
+          $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+          ->get();
+
+          $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+  ->get();
+
+  $ngoTypeData = '';
+  $dataFromNVisaFd9Fd1='';
+  $nVisaDocs='';
+  $ngoStatus='';
+  $get_email_from_user=0;
+$mainIdFdNineOne=0;
+$nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+         //end new code
+         $dataFromFc1Form=0;
+         $dataFromFd6Form =0;
+         $fd2FormList=0;
+         $fd2OtherInfo=0;
+         $prokolpoAreaList=0;
+
+         $dataFromFd7Form=0;
+         $dataFromFc2Form=0;
+        }elseif($status == 'nameChange'){
+            $dataFromFd3Form = 0;
+            $renewInfoData='';
+            $ngoTypeData = '';
+            $mainIdR ='';
+            $dataFromNVisaFd9Fd1='';
+            $nVisaDocs='';
+            $ngoStatus='';
+            $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+
+
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+            ///name change ciew
+
+            $name_change_status_id = DB::table('ngo_name_change_daks')
+              ->where('id',$parentId)
+              ->value('name_change_status_id');
+
+
+            $allNameChangeDoc = DB::table('name_change_docs')->where('ngo_name_change_id',$name_change_status_id)->get();
+
+                $getformOneId = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->first();
+
+                $form_one_data = DB::table('fd_one_forms')->where('id',$getformOneId->fd_one_form_id)->first();
+
+
+
+                $r_status = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->value('status');
+                $name_change_status = DB::table('ngo_name_changes')->where('id',$name_change_status_id)->value('status');
+                $renew_status = DB::table('ngo_renews')->where('fd_one_form_id',$form_one_data->id)->value('status');
+
+
+                //new code for old  and new
+
+      $checkOldorNew = DB::table('ngo_type_and_languages')
+      ->where('user_id',$form_one_data->user_id)->value('ngo_type_new_old');
+
+ //end new code for old and new
+
+ if($checkOldorNew == 'Old'){
+
+     $all_data_for_new_list_all = DB::table('ngo_renews')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }else{
+
+     $all_data_for_new_list_all = DB::table('ngo_statuses')
+     ->where('fd_one_form_id',$form_one_data->id)->first();
+ }
+
+
+
+
+                //$all_data_for_new_list_all = DB::table('ngo_statuses')->where('fd_one_form_id',$form_one_data->id)->first();
+
+                $form_eight_data = DB::table('form_eights')->where('fd_one_form_id',$form_one_data->id)->get();
+                $form_member_data = DB::table('ngo_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+                $form_member_data_doc_renew = DB::table('ngo_renew_infos')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+     $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
+                $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
+
+                $form_member_data_doc = DB::table('ngo_member_nid_photos')->where('fd_one_form_id',$form_one_data->id)->get();
+                $form_ngo_data_doc = DB::table('ngo_other_docs')->where('fd_one_form_id',$form_one_data->id)->get();
+
+                $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
+
+                $all_source_of_fund = DB::table('fd_one_source_of_funds')->where('fd_one_form_id',$form_one_data->id)->get();
+
+                $all_partiw = DB::table('fd_one_member_lists')->where('fd_one_form_id',$form_one_data->id)->get();
+
+
+                $get_all_data_adviser_bank = DB::table('fd_one_bank_accounts')->where('fd_one_form_id',$form_one_data->id)
+                ->first();
+
+
+                $get_all_data_other= DB::table('fd_one_other_pdf_lists')->where('fd_one_form_id',$form_one_data->id)
+                ->get();
+
+                $get_all_data_adviser = DB::table('fd_one_adviser_lists')->where('fd_one_form_id',$form_one_data->id)
+        ->get();
+
+
+
+            ///end name change view
+
+            $get_email_from_user=0;
+            $mainIdFdNineOne=0;
+            $nVisabasicInfo=0;
+            $forwardingLetterOnulipi=0;
+            $editCheck1=0;
+            $editCheck=0;
+            $statusData=0;
+            $nVisaWorkPlace=0;
+            $nVisaSponSor=0;
+            $nVisaForeignerInfo=0;
+            $nVisaManPower=0;
+            $nVisaEmploye=0;
+            $nVisaCompensationAndBenifits=0;
+            $nVisaAuthPerson=0;
+
+
+            $dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+            $dataFromFd7Form=0;
+        }elseif($status == 'fdNine'){
+
+
+
+
+            $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+//dd($checkParent);
+
+$fd_nine_status_id = DB::table('ngo_f_d_nine_daks')
+->where('id',$parentId)
+->value('f_d_nine_status_id');
+
+//dd($fd_nine_status_id);
+
+
+///fd nine view
+// $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+//      ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+//      ->select('fd_one_forms.*','fd9_forms.*')
+//      ->where('fd9_forms.id',$fd_nine_status_id)
+//     ->orderBy('fd9_forms.id','desc')
+//     ->get();
+
+    $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
+    ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
+    ->select('fd_one_forms.*','fd9_forms.*')
+    ->where('fd9_forms.id',$fd_nine_status_id)
+     ->first();
+
+       //new code for old  and new
+       $ngoTypeData = DB::table('ngo_type_and_languages')
+       ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+       $checkOldorNew = DB::table('ngo_type_and_languages')
+       ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->value('ngo_type_new_old');
+
+  //end new code for old and new
+
+  if($checkOldorNew == 'Old'){
+
+      $ngoStatus = DB::table('ngo_renews')
+      ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+  }else{
+
+      $ngoStatus = DB::table('ngo_statuses')
+      ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+  }
+  $nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+  ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
+///end fd nine view end
+$dataFromFd3Form = 0;
+$get_email_from_user=0;
+$mainIdFdNineOne=0;
+$nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+
+$mainIdR=0;
+$renewInfoData=0;
+
+$form_one_data=0;
+$all_data_for_new_list_all=0;
+$form_eight_data=0;
+$form_member_data=0;
+$form_member_data_doc=0;
+$form_ngo_data_doc=0;
+$users_info=0;
+$all_source_of_fund=0;
+$all_partiw=0;
+$allNameChangeDoc = 0;
+$getformOneId= 0;
+$duration_list_all1 =0;
+$duration_list_all = 0;
+$renew_status = 0;
+$name_change_status = 0;
+$r_status = 0;
+$form_member_data_doc_renew =0;
+$get_all_data_adviser=0;
+$get_all_data_other=0;
+$get_all_data_adviser_bank=0;
+$dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+
+            $dataFromFd7Form=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+        }elseif($status == 'fdNineOne'){
+            $dataFromFd3Form = 0;
+            $dataFromFd6Form =0;
+            $fd2FormList=0;
+            $fd2OtherInfo=0;
+            $prokolpoAreaList=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+
+            $dataFromFd7Form=0;
+
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+
+            $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+            $fd_nine_one_status_id = DB::table('ngo_f_d_nine_one_daks')
+->where('id',$parentId)
+->value('f_d_nine_one_status_id');
+
+
+
+            $mainIdFdNineOne = $fd_nine_one_status_id;
+
+        $dataFromNVisaFd9Fd1 = DB::table('fd9_one_forms')
+        ->join('fd_one_forms', 'fd9_one_forms.fd_one_form_id', '=', 'fd_one_forms.id')
+        ->select('fd_one_forms.*','fd9_one_forms.*','fd9_one_forms.id as mainId','fd9_one_forms.chief_name as chiefName','fd9_one_forms.chief_desi as chiefDesi','fd9_one_forms.digital_signature as chiefSign','fd9_one_forms.digital_seal as chiefSeal','fd9_one_forms.created_at as chiefDate')
+        ->orderBy('fd9_one_forms.id','desc')
+        ->where('fd9_one_forms.id',$fd_nine_one_status_id)
+        ->first();
+
+        $get_email_from_user = DB::table('users')->where('id',$dataFromNVisaFd9Fd1->user_id)->value('email');
+        //dd($dataFromNVisaFd9Fd1);
+
+
+        $forwardId =  DB::table('forwarding_letters')->where('fd9_form_id',$dataFromNVisaFd9Fd1->mainId)
+     ->orderBy('id','desc')->value('id');
+
+     $forwardingLetterOnulipi = DB::table('forwarding_letter_onulipis')->where('forwarding_letter_id',$forwardId)
+     ->get();
+     $editCheck = DB::table('fd9_forwarding_letter_edits')->where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_one');
+
+
+     $editCheck1 = DB::table('fd9_forwarding_letter_edits')->where('forwarding_letter_id',$forwardId)
+     ->orderBy('id','desc')->value('pdf_part_two');
+
+
+     $ngoTypeData = DB::table('ngo_type_and_languages')
+     ->where('user_id',$dataFromNVisaFd9Fd1->user_id)->first();
+
+
+     //new code for old  and new
+
+
+
+//end new code for old and new
+
+if($ngoTypeData->ngo_type_new_old == 'Old'){
+
+$ngoStatus = DB::table('ngo_renews')
+->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+}else{
+
+$ngoStatus = DB::table('ngo_statuses')
+->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+}
+
+    //  $ngoStatus = DB::table('ngo_statuses')
+    //  ->where('fd_one_form_id',$dataFromNVisaFd9Fd1->fd_one_form_id)->first();
+
+     //dd($dataFromNVisaFd9Fd1->id);
+
+
+
+     $nVisabasicInfo = DB::table('n_visas')
+     ->where('fd9_one_form_id',$dataFromNVisaFd9Fd1->mainId)->first();
+
+     $statusData = DB::table('secruity_checks')->where('n_visa_id',$nVisabasicInfo->id)->value('created_at');
+
+
+
+$nVisaAuthPerson = DB::table('n_visa_authorized_personal_of_the_orgs')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaCompensationAndBenifits = DB::table('n_visa_compensation_and_benifits')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->get();
+
+$nVisaEmploye = DB::table('n_visa_employment_information')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaManPower = DB::table('n_visa_manpower_of_the_offices')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaDocs = DB::table('n_visa_necessary_document_for_work_permits')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+ $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+$nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
+                   ->where('n_visa_id',$nVisabasicInfo->id)->first();
+
+
+
+        }elseif($status == 'fdSix'){
+            $dataFromFd3Form = 0;
+            $dataFromFd7Form=0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+            $dataFromFc1Form=0;
+            $dataFromFc2Form=0;
+
+            $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+
+
+                //////new code
+
+                $fd_six_status_id = DB::table('ngo_fd_six_daks')
+                ->where('id',$parentId)
+                ->value('fd_six_status_id');
+
+
+                $dataFromFd6Form = DB::table('fd6_forms')
+                ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
+                ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
+                ->where('fd6_forms.id',$fd_six_status_id)
+               ->orderBy('fd6_forms.id','desc')
+               ->first();
+               $get_email_from_user = DB::table('users')->where('id',$dataFromFd6Form->user_id)->value('email');
+
+               $fd2FormList = DB::table('fd2_forms')->where('fd_one_form_id',$dataFromFd6Form->fd_one_form_id)
+               ->where('fd_six_form_id',base64_encode($dataFromFd6Form->mainId))->latest()->first();
+
+               $fd2OtherInfo = DB::table('fd2_form_other_infos')->where('fd2_form_id',$fd2FormList->id)->latest()->get();
+
+
+               $prokolpoAreaList = DB::table('fd6_form_prokolpo_areas')->where('fd6_form_id',$dataFromFd6Form->mainId)->latest()->get();
+
+
+
+
+                         ///end new code
+
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fdSeven'){
+            $dataFromFd3Form = 0;
+            $dataFromFd6Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+            $dataFromFc2Form=0;
+            $dataFromFc1Form=0;
+
+            $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+
+
+            // new code start
+
+            $fd_seven_status_id = DB::table('ngo_fd_seven_daks')
+            ->where('id',$parentId)
+            ->value('fd_seven_status_id');
+
+
+            $dataFromFd7Form = DB::table('fd7_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd7_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fd7_forms.*','fd7_forms.id as mainId')
+            ->where('fd7_forms.id',$fd_seven_status_id)
+           ->orderBy('fd7_forms.id','desc')
+           ->first();
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFd7Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fd7_forms')->where('fd_one_form_id',$dataFromFd7Form->fd_one_form_id)
+           ->where('fd7_form_id',$dataFromFd7Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fd7_other_infos')->where('fd2_form_for_fd7_form_id',$fd2FormList->id)->latest()->get();
+
+
+           $prokolpoAreaList = DB::table('fd7_form_prokolpo_areas')->where('fd7_form_id',$dataFromFd7Form->mainId)->latest()->get();
+
+
+
+            // new code end
+
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'fcOne'){
+            $dataFromFd3Form = 0;
+            $dataFromFc2Form=0;
+            $prokolpoAreaList=0;
+            $dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+
+            $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+
+            $fc_one_status_id = DB::table('fc_one_daks')
+            ->where('id',$parentId)
+            ->value('fc_one_status_id');
+
+
+
+            $dataFromFc1Form = DB::table('fc1_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc1_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fc1_forms.*','fc1_forms.id as mainId')
+            ->where('fc1_forms.id',$fc_one_status_id)
+           ->orderBy('fc1_forms.id','desc')
+           ->first();
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFc1Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fc1_forms')->where('fd_one_form_id',$dataFromFc1Form->fd_one_form_id)
+           ->where('fc1_form_id',$dataFromFc1Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fc1_other_infos')->where('fd2_form_for_fc1_form_id',$fd2FormList->id)->latest()->get();
+
+
+
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
+            ->get();
+
+
+
+
+        }elseif($status == 'fcTwo'){
+            $dataFromFd3Form = 0;
+            $dataFromFc1Form =0;
+            $prokolpoAreaList=0;
+            $dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+
+            $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+
+
+            $fc_two_status_id = DB::table('fc_two_daks')
+            ->where('id',$parentId)
+            ->value('fc_two_status_id');
+
+
+            $dataFromFc2Form = DB::table('fc2_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fc2_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fc2_forms.*','fc2_forms.id as mainId')
+            ->where('fc2_forms.id',$fc_two_status_id)
+           ->orderBy('fc2_forms.id','desc')
+           ->first();
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFc2Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fc2_forms')->where('fd_one_form_id',$dataFromFc2Form->fd_one_form_id)
+           ->where('fc2_form_id',$dataFromFc2Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fc2_other_infos')->where('fd2_form_for_fc2_form_id',$fd2FormList->id)->latest()->get();
+
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+            $dataFromFc2Form =0;
+            $dataFromFc1Form =0;
+            $prokolpoAreaList=0;
+            $dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;
+            $ngoStatus=0;
+            $ngoTypeData=0;
+            $nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;
+            $nVisabasicInfo=0;
+$forwardingLetterOnulipi=0;
+$editCheck1=0;
+$editCheck=0;
+$statusData=0;
+$nVisaWorkPlace=0;
+$nVisaSponSor=0;
+$nVisaForeignerInfo=0;
+$nVisaManPower=0;
+$nVisaEmploye=0;
+$nVisaCompensationAndBenifits=0;
+$nVisaAuthPerson=0;
+            $mainIdR=0;
+            $renewInfoData=0;
+$mainIdFdNineOne =0;
+            $form_one_data=0;
+            $all_data_for_new_list_all=0;
+            $form_eight_data=0;
+            $form_member_data=0;
+            $form_member_data_doc=0;
+            $form_ngo_data_doc=0;
+            $users_info=0;
+            $all_source_of_fund=0;
+            $all_partiw=0;
+            $allNameChangeDoc = 0;
+            $getformOneId= 0;
+            $duration_list_all1 =0;
+            $duration_list_all = 0;
+            $renew_status = 0;
+            $name_change_status = 0;
+            $r_status = 0;
+            $form_member_data_doc_renew =0;
+            $get_all_data_adviser=0;
+            $get_all_data_other=0;
+            $get_all_data_adviser_bank=0;
+
+            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+
+
+            $fd_three_status_id = DB::table('fd_three_daks')
+            ->where('id',$parentId)
+            ->value('fd_three_status_id');
+
+            $dataFromFd3Form = DB::table('fd3_forms')
+            ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd3_forms.fd_one_form_id')
+            ->select('fd_one_forms.*','fd3_forms.*','fd3_forms.id as mainId')
+            ->where('fd3_forms.id',$fd_three_status_id)
+           ->orderBy('fd3_forms.id','desc')
+           ->first();
+
+//dd($dataFromFd3Form);
+
+
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromFd3Form->user_id)->value('email');
+
+           $fd2FormList = DB::table('fd2_form_for_fd3_forms')->where('fd_one_form_id',$dataFromFd3Form->fd_one_form_id)
+           ->where('fd3_form_id',$dataFromFd3Form->mainId)->latest()->first();
+
+           $fd2OtherInfo = DB::table('fd2_fd3_other_infos')->where('fd2_form_for_fd3_form_id',$fd2FormList->id)->latest()->get();
+
+
+
+
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }
+
+
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+
+        $user = Admin::where('id','!=',1)->get();
+
+
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("designationId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
+        ->orderBy('designation_serial','asc')->get();
+
+
+        //new code december 23
+
+
+
+
+        if($status == 'registration'){
+
+
+        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+           ->first();
+
+
+           $childNoteNewList = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)
+                   ->whereNull('sent_status')
+
+                   ->orwhere('sent_status',1)
+                   ->value('id');
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)
+                   ->whereNull('sent_status')
+->orwhere('sent_status',1)
+                   ->value('id');
+
+
+
+
+
+
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+        //dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+        }
+
+
+
+
+        $data = view('admin.presentDocument.printAllParagraphSend',compact(
+
+            'get_email_from_user',
+            'dataFromFd6Form',
+            'fd2FormList',
+            'fd2OtherInfo',
+            'prokolpoAreaList',
+            'dataFromFd7Form',
+            'dataFromFc1Form',
+            'dataFromFc2Form',
+            'dataFromFd3Form',
+            'mainIdFdNineOne',
+            'nVisabasicInfo',
+            'forwardingLetterOnulipi',
+            'editCheck1',
+            'editCheck',
+            'statusData',
+            'ngoStatus',
+            'nVisaWorkPlace',
+            'nVisaSponSor',
+            'nVisaForeignerInfo',
+            'nVisaManPower',
+            'nVisaEmploye',
+            'nVisaCompensationAndBenifits',
+            'nVisaAuthPerson',
+            'nVisaDocs',
+            'dataFromNVisaFd9Fd1',
+            'allNameChangeDoc',
+            'getformOneId',
+            'duration_list_all1',
+            'duration_list_all',
+            'r_status',
+            'ngoTypeData',
+            'renewInfoData',
+            'mainIdR',
+            'renew_status',
+            'name_change_status',
+            'form_member_data_doc_renew',
+            'get_all_data_adviser',
+            'get_all_data_other',
+            'get_all_data_adviser_bank',
+            'all_partiw',
+            'all_source_of_fund',
+            'users_info',
+            'form_ngo_data_doc',
+            'form_member_data_doc',
+            'form_member_data',
+            'form_eight_data',
+            'all_data_for_new_list_all',
+            'form_one_data',
+            'childNoteNewListValue',
+            'childNoteNewList',
+            'checkParentFirst',
+            'nothiYear',
+            'branchListForSerial',
+            'permissionNothiList',
+            'nothiCopyListUpdate',
+            'nothiAttractListUpdate',
+            'nothiPropokListUpdate',
+            'user',
+            'nothiId',
+            'nothiNumber',
+            'officeDetail',
+            'checkParent',
+            'status',
+            'id',
+            'parentId',
+
+        ));
+
+        $mpdf = new Mpdf([
+            //'default_font_size' => 14,
+            'default_font' => 'nikosh'
+        ]);
+
+        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+        $mpdf->WriteHTML($data);
+
+
+
+        $mpdf->Output();
+        die();
+
+
+        //end new code december 23
+    }
+    //end new start 11
+
+
+    public function printParagraphViewSingle($status,$parentId,$nothiId,$id,$childIdNew){
+
+
+
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+
+        $user = Admin::where('id','!=',1)->get();
+
+
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("designationId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
+        ->orderBy('designation_serial','asc')->get();
+
+
+        //new code december 23
+
+
+
+
+        if($status == 'registration'){
+
+
+        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+           ->first();
+
+
+           $childNoteNewList = DB::table('child_note_for_registrations')
+           ->where('id',$childIdNew)
+                   ->where('parent_note_regid',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)
+                   ->whereNull('sent_status')
+
+                   ->orwhere('sent_status',1)
+                   ->value('id');
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_renews')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_renew_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)
+                   ->whereNull('sent_status')
+->orwhere('sent_status',1)
+                   ->value('id');
+
+
+
+
+
+
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$childIdNew)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_name_changes')
+        ->where('id',$childIdNew)
+                   ->where('parentnote_name_change_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_nines')
+        ->where('id',$childIdNew)
+                   ->where('p_note_for_fd_nine_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+        //dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+        ->where('id',$childIdNew)
+                   ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sixes')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sevens')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fc_ones')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fc_one_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fc_twos')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_threes')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fd_three_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+        }
+
+
+
+
+
+
+
+        //end new code december 23
+
+
+
+       $data = view('admin.presentDocument.printParagraphViewSingle',compact(
+
+'status','parentId','nothiId','id','childIdNew',
+            'childNoteNewListValue',
+            'childNoteNewList',
+            'checkParentFirst',
+
+        ));
+
+        $mpdf = new Mpdf([
+            //'default_font_size' => 14,
+            'default_font' => 'nikosh'
+        ]);
+
+        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+        $mpdf->WriteHTML($data);
+
+
+
+        $mpdf->Output();
+        die();
+
+    }
+
+
+    public function printParagraphAddSingle($status,$parentId,$nothiId,$id,$childIdNew){
+
+
+
+        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+
+        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+
+        $user = Admin::where('id','!=',1)->get();
+
+
+        $nothiPropokListUpdate = NothiPrapok::
+        where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+        ->where('noteId',$id)->where('status',1)->get();
+
+
+
+        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+
+
+        $convert_name_title = $permissionNothiList->implode("designationId", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+
+
+        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
+        ->orderBy('designation_serial','asc')->get();
+
+
+        //new code december 23
+
+
+
+
+        if($status == 'registration'){
+
+
+        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+           ->first();
+
+
+           $childNoteNewList = DB::table('child_note_for_registrations')
+           ->where('id',$childIdNew)
+                   ->where('parent_note_regid',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_registrations')
+                   ->where('parent_note_regid',$id)
+                   ->whereNull('sent_status')
+
+                   ->orwhere('sent_status',1)
+                   ->value('id');
+
+
+        }elseif($status == 'renew'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_renews')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_renew_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_renews')
+                   ->where('parent_note_for_renew_id',$id)
+                   ->whereNull('sent_status')
+->orwhere('sent_status',1)
+                   ->value('id');
+
+
+
+
+
+
+
+
+
+        }elseif($status == 'nameChange'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$childIdNew)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_name_changes')
+        ->where('id',$childIdNew)
+                   ->where('parentnote_name_change_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
+                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fdNine'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_nines')
+        ->where('id',$childIdNew)
+                   ->where('p_note_for_fd_nine_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
+                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
+
+        //dd($checkParent);
+
+
+        }elseif($status == 'fdNineOne'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
+        ->where('id',$childIdNew)
+                   ->where('p_note_for_fd_nine_one_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
+                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fdSix'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sixes')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fdsix_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
+                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+
+        }elseif($status == 'fdSeven'){
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fd_sevens')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fd_seven_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
+                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+        }elseif($status == 'fcOne'){
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fc_ones')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fc_one_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
+                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+        }elseif($status == 'fcTwo'){
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+        $childNoteNewList = DB::table('child_note_for_fc_twos')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fc_two_id',$id)->get();
+
+
+                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
+                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+
+
+
+
+        }elseif($status == 'fdThree'){
+
+
+
+
+
+
+        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
+        ->where('serial_number',$nothiId)
+        ->where('id',$id)
+        ->first();
+
+
+        $childNoteNewList = DB::table('child_note_for_fd_threes')
+        ->where('id',$childIdNew)
+                   ->where('parent_note_for_fd_three_id',$id)->get();
+
+                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
+                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+
+        }
+
+
+
+
+
+
+
+        //end new code december 23
+
+
+
+       $data = view('admin.presentDocument.printParagraphAddSingle',compact(
+
+'status','parentId','nothiId','id','childIdNew',
+            'childNoteNewListValue',
+            'childNoteNewList',
+            'checkParentFirst',
+
+        ));
+
+        $mpdf = new Mpdf([
+            //'default_font_size' => 14,
+            'default_font' => 'nikosh'
+        ]);
+
+        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+        $mpdf->WriteHTML($data);
+
+
+
+        $mpdf->Output();
+        die();
+
+    }
+
     public function addChildNote($status,$parentId,$nothiId,$id,$activeCode){
 
 //dd(bangla_date(time(),"bn","d-m-y"));
@@ -3711,7 +6922,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
  public function saveNothiPermission($data){
 
-    //dd(12);
+   // dd($data);
     $dt = new DateTime();
     $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
     $created_at = $dt->format('Y-m-d h:i:s ');
@@ -3896,6 +7107,19 @@ if($data['button_value'] == 'return'){
                     'back_sign_status' => 1
                  ]);
 
+            }elseif($data['status'] == 'registration'){
+
+
+                DB::table('child_note_for_registrations')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+
             }
 
             return redirect()->back()->with('error','সফলভাবে ফেরত আনা হয়েছে');
@@ -3940,6 +7164,11 @@ if($data['button_value'] == 'return'){
 
                $getCreatorValue =  DB::table('child_note_for_renews')
                ->where('id',$data['child_note_id'])->value('admin_id');
+            }elseif($data['status'] == 'registration'){
+
+                $getCreatorValue =  DB::table('child_note_for_registrations')
+                ->where('id',$data['child_note_id'])->value('admin_id');
+
             }
 
 
@@ -3978,6 +7207,18 @@ if($data['button_value'] == 'return'){
             if($data['status'] == 'renew'){
 
                 DB::table('child_note_for_renews')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                    // 'sent_status'=> DB::raw('NULL'),
+                    // 'view_status'=> DB::raw('NULL'),
+                    // 'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'registration'){
+
+
+                DB::table('child_note_for_registrations')->where('id',$data['child_note_id'])
                 ->update([
                     'sender_id'=> $mainIdSender,
                     'receiver_id'=>Auth::guard('admin')->user()->id,
@@ -4068,10 +7309,30 @@ if($data['button_value'] == 'return'){
       $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
       ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
       ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+      ->orderBy('id','desc')
       ->value('seal_status');
 
       if(empty($checkPreviousCode)){
-      //dd(44);
+
+
+
+        $adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])
+        ->value('admin_name_ban');
+
+
+        $adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])
+        ->value('designation_list_id');
+
+
+        $adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])
+        ->value('branch_id');
+
+
+        $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
+        ->value('admin_sign');
+
+
+
       $mainSaveData = new SealStatus();
       $mainSaveData ->noteId = $data['noteId'];
       $mainSaveData ->nothiId = $data['nothiId'];
@@ -4080,6 +7341,13 @@ if($data['button_value'] == 'return'){
       $mainSaveData ->seal_status = 2;
       $mainSaveData ->receiver = $data['nothiPermissionId'];
       $mainSaveData ->created_at= $created_at;
+
+      $mainSaveData ->e_name= $adminName;
+      $mainSaveData ->e_designation= $adminNameDesi;
+      $mainSaveData ->e_branch= $adminNamebran;
+      $mainSaveData ->e_sign= $adminNameSign;
+
+
       $mainSaveData->save();
 
 
@@ -4091,27 +7359,35 @@ if($data['button_value'] == 'return'){
           $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
       ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
       ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
-
+      ->orderBy('id','desc')
       ->update(array('seal_status' => 1,'updated_at'=>$created_at));
 
 
 
        //more code start
 
-if($data['status'] == 'renew'){
 
-    $getCreatorId = ChildNoteForRenew::where('id',$data['child_note_id'])->value('admin_id');
-
-
-}
 
 
 //more code end
 
-if($getCreatorId == $data['nothiPermissionId']){
 
 
-}else{
+$adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('admin_name_ban');
+
+
+$adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('designation_list_id');
+
+
+$adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('branch_id');
+
+
+$adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('admin_sign');
+
 
     $mainSaveData = new SealStatus();
     $mainSaveData ->noteId = $data['noteId'];
@@ -4121,8 +7397,14 @@ if($getCreatorId == $data['nothiPermissionId']){
     $mainSaveData ->seal_status = 2;
     $mainSaveData ->created_at= $created_at;
     $mainSaveData ->receiver = $data['nothiPermissionId'];
+
+    $mainSaveData ->e_name= $adminName;
+      $mainSaveData ->e_designation= $adminNameDesi;
+      $mainSaveData ->e_branch= $adminNamebran;
+      $mainSaveData ->e_sign= $adminNameSign;
+
     $mainSaveData->save();
-}
+
 
       }
 
@@ -4143,13 +7425,48 @@ if($getCreatorId == $data['nothiPermissionId']){
                 'back_sign_status' => DB::raw('NULL')
              ]);
 
+        }elseif($data['status'] == 'registration'){
+
+            DB::table('child_note_for_registrations')->where('id',$data['child_note_id'])
+            ->update([
+
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
         }
+
+        //new code 12 february  start
+        if($data['status'] == 'renew'){
+
+            DB::table('ngo_renew_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+
+        }elseif($data['status'] == 'registration'){
+
+
+            DB::table('ngo_registration_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+
+        }
+        //new code 12 february end
 
 
         if($data['status'] == 'registration'){
 
             $saveNewData = ChildNoteForRegistration::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
 
@@ -4231,7 +7548,7 @@ if($getCreatorId == $data['nothiPermissionId']){
 
     public function saveNothiPermissionReturn($data){
 
-      //  dd(667);
+
       $dt = new DateTime();
       $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
       $created_at = $dt->format('Y-m-d h:i:s ');
@@ -4298,10 +7615,30 @@ if($getCreatorId == $data['nothiPermissionId']){
 $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
 ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
 ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+->orderBy('id','desc')
 ->value('seal_status');
+
+
+//dd($checkPreviousCode);
 
 if(empty($checkPreviousCode)){
 //dd(44);
+
+$adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('admin_name_ban');
+
+
+$adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('designation_list_id');
+
+
+$adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('branch_id');
+
+
+$adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('admin_sign');
+
 $mainSaveData = new SealStatus();
 $mainSaveData ->noteId = $data['noteId'];
 $mainSaveData ->nothiId = $data['nothiId'];
@@ -4310,6 +7647,13 @@ $mainSaveData ->status = $data['status'];
 $mainSaveData ->seal_status = 2;
 $mainSaveData ->created_at= $created_at;
 $mainSaveData ->receiver = $data['nothiPermissionId'];
+
+$mainSaveData ->e_name= $adminName;
+      $mainSaveData ->e_designation= $adminNameDesi;
+      $mainSaveData ->e_branch= $adminNamebran;
+      $mainSaveData ->e_sign= $adminNameSign;
+
+
 $mainSaveData->save();
 
 
@@ -4321,26 +7665,31 @@ if($checkPreviousCode == 2){
     $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
 ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
 ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
-
+->orderBy('id','desc')
 ->update(array('seal_status' => 1,'updated_at'=>$created_at));
 
 
 //more code start
 
-if($data['status'] == 'renew'){
 
-    $getCreatorId = ChildNoteForRenew::where('id',$data['child_note_id'])->value('admin_id');
-
-
-}
 
 
 //more code end
 
-if($getCreatorId == $data['nothiPermissionId']){
+$adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('admin_name_ban');
 
 
-}else{
+$adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('designation_list_id');
+
+
+$adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('branch_id');
+
+
+$adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
+->value('admin_sign');
 
     $mainSaveData = new SealStatus();
     $mainSaveData ->noteId = $data['noteId'];
@@ -4350,8 +7699,17 @@ if($getCreatorId == $data['nothiPermissionId']){
     $mainSaveData ->seal_status = 2;
     $mainSaveData ->created_at= $created_at;
     $mainSaveData ->receiver = $data['nothiPermissionId'];
+
+    $mainSaveData ->e_name= $adminName;
+      $mainSaveData ->e_designation= $adminNameDesi;
+      $mainSaveData ->e_branch= $adminNamebran;
+      $mainSaveData ->e_sign= $adminNameSign;
     $mainSaveData->save();
-}
+
+}else{
+
+
+
 }
 
 
@@ -4368,6 +7726,13 @@ if($data['status'] == 'renew'){
         'back_sign_status' => DB::raw('NULL')
      ]);
 
+}elseif($data['status'] == 'registration'){
+
+    DB::table('child_note_for_registrations')->where('id',$data['child_note_id'])
+    ->update([
+
+        'back_sign_status' => DB::raw('NULL')
+     ]);
 }
 
 
@@ -4534,6 +7899,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForRegistration::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData->sent_status = 1;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
 

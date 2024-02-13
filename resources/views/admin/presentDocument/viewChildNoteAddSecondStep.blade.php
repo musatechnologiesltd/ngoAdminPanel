@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-4 col-xs-4">
         <div class="d-flex flex-row-reverse">
-            {{-- <a  href ="" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+             <a target="_blank" href ="{{ route('printAllParagraph', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id]) }}" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a>
         </div>
     </div>
 </div>
@@ -51,6 +51,41 @@ $paraSentStatus = DB::table('nothi_details')
 @include('admin.presentDocument.viewChildNoteSecondStepFirstPart')
 
 @else
+
+<?php
+$paraSentStatusNewOneTwo = DB::table('seal_statuses')
+                            ->where('nothiId',$nothiId)
+                            ->where('status',$status)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            //->orderBy('id','asc')
+                            //->where('seal_status',1)
+                            ->value('nothiId');
+
+                            $paraSentStatusNewOneTwoThree = DB::table('seal_statuses')
+                            ->where('nothiId',$nothiId)
+                            ->where('status',$status)
+                          //  ->where('receiver',Auth::guard('admin')->user()->id)
+                           // ->orderBy('id','asc')
+                            //->where('seal_status',1)
+
+                            ->where('childId',$childNoteNewLists->id)
+                            ->value('nothiId');
+
+?>
+
+<!-- new code  start-->
+
+
+
+@if($paraSentStatusNewOneTwo  == $paraSentStatusNewOneTwoThree)
+
+@include('admin.presentDocument.viewChildNoteSecondStepFirstPartOne')
+@endif
+
+
+<!--  end new code -->
+
+
 
 
 @endif

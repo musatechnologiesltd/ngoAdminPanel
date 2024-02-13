@@ -14,10 +14,17 @@ class SendNothiController extends Controller
 
         $senderNothiList = NothiDetail::where('sender',Auth::guard('admin')->user()->id)
         ->whereNull('back_nothi')
+        ->where('dakType','renew')
         ->latest()->get();
 
 
-            return view('admin.sendNothi.index',compact('senderNothiList'));
+        $senderNothiListRegistration = NothiDetail::where('sender',Auth::guard('admin')->user()->id)
+        ->whereNull('back_nothi')
+        ->where('dakType','registration')
+        ->latest()->get();
+
+
+            return view('admin.sendNothi.index',compact('senderNothiList','senderNothiListRegistration'));
 
 
 

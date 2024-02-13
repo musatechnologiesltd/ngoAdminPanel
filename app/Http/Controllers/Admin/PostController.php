@@ -264,28 +264,28 @@ class PostController extends Controller
             $nothiList = NothiList::latest()->get();
 
             $ngoStatusRenew = NgoRenewDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-            $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
-            $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
-            $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
 
 
-            $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
-            $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFcOneDak = FcOneDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-            $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-            $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
-            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
         $ngoStatusReg = NgoRegistrationDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
@@ -742,6 +742,9 @@ class PostController extends Controller
                         $regDakData->dak_detail_id = $dakDetailId;
                         $regDakData->status = 1;
                         $regDakData->save();
+
+
+                       
 
                     }
 
@@ -1568,7 +1571,7 @@ class PostController extends Controller
                        ->delete();
 
   $previousReceiver = NgoRegistrationDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
-                       ->where('renew_status_id',$request->main_id)
+                       ->where('registration_status_id',$request->main_id)
                        ->value('id');
 
                        if(empty($previousReceiver)){
@@ -1582,26 +1585,12 @@ class PostController extends Controller
                        }
 
                        NgoRegistrationDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
-                       ->where('renew_status_id',$request->main_id)
+                       ->where('registration_status_id',$request->main_id)
        ->update([
            'sent_status' => 1,
         ]);
             if($number >0){
                 for($i=0;$i<$number;$i++){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                  $regDakData = new NgoRegistrationDak();

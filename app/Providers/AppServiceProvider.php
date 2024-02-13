@@ -57,9 +57,17 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::guard('admin')->check()) {
 
 
-                $totalReceiveNothi = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-                ->distinct()
+                $totalReceiveNothiRe = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+                ->where('dakType','renew')->distinct()
             ->count('receiver');
+
+            $totalReceiveNothiRi = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+            ->where('dakType','registration')->distinct()
+        ->count('receiver');
+
+
+        $totalReceiveNothi = $totalReceiveNothiRe + $totalReceiveNothiRi;
+
 
 
 
@@ -141,7 +149,16 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-                    $ngoStatusRenew = NgoRenewDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusRenew = NgoRenewDak::where('status',1)->
+                    where('nothi_jat_status',0)->whereNull('sent_status')
+                    ->whereNull('present_status')
+                    ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                    ->latest() ->count();
+
+
+
+
+
                     $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
                     $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
                     $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
@@ -150,7 +167,11 @@ class AppServiceProvider extends ServiceProvider
                     $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
                     $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
                     $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
-                    $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+                    $ngoStatusReg = NgoRegistrationDak::where('status',1)
+                    ->where('nothi_jat_status',0)->whereNull('sent_status')
+                    ->whereNull('present_status')
+                    ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                    ->latest() ->count();
 
                     $mainCodeCountHeader2 =$ngoStatusReg+$ngoStatusFDNineOneDak+$ngoStatusFdThreeDak+$ngoStatusFcTwoDak+$ngoStatusFcOneDak+$ngoStatusFdSevenDak+$ngoStatusFdSixDak+$ngoStatusFDNineDak+$ngoStatusNameChange+$ngoStatusRenew;
 

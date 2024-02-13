@@ -178,15 +178,11 @@ $getAlldesignationName = DB::table('designation_lists')
                             অনুমতি সংশোধন
                         </a>
 
-                        @if(empty($receiverId))
+
                         <button  class="btn btn-primary"  name="button_value" value="send" type="submit">
                             প্রেরণ
                         </button>
-                        @else
-                        <button  class="btn btn-danger" name="button_value" value="return" type="submit">
-                            ফেরত আনুন
-                        </button>
-                        @endif
+                       
                     </div>
                 </div>
 				@endif

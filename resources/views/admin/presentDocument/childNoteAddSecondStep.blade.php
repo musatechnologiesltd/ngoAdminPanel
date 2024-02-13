@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4 col-xs-4">
             <div class="d-flex flex-row-reverse">
-                {{-- <a  href ="" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+                <a target="_blank" href ="{{ route('printAllParagraphFromSend', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id]) }}" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a>
             </div>
         </div>
     </div>
@@ -42,6 +42,8 @@ $creatorNAme = DB::table('admins')
      @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
 
      @else
+
+
      <?php
      $multipleCheck = DB::table('seal_statuses')
      ->where('noteId',$id)
@@ -56,8 +58,60 @@ $creatorNAme = DB::table('admins')
     @if($multipleCheck == 1)
 
     @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
+    @else
+
+    @endif
+    <!-- new code when other send but have permission-->
+    <?php
+    $paraSentStatusNewOneTwo = DB::table('seal_statuses')
+                                ->where('nothiId',$nothiId)
+                                ->where('status',$status)
+                                ->where('receiver',Auth::guard('admin')->user()->id)
+                                //->orderBy('id','asc')
+                                //->where('seal_status',1)
+                                ->value('nothiId');
+
+                                $paraSentStatusNewOneTwoThree = DB::table('seal_statuses')
+                                ->where('nothiId',$nothiId)
+                                ->where('status',$status)
+                              //  ->where('receiver',Auth::guard('admin')->user()->id)
+                               // ->orderBy('id','asc')
+                                //->where('seal_status',1)
+
+                                ->where('childId',$childNoteNewLists->id)
+                                ->value('nothiId');
+
+    ?>
+
+    <!-- new code  start-->
+
+
+
+    @if($paraSentStatusNewOneTwo  == $paraSentStatusNewOneTwoThree)
+
+    <?php
+    $multipleCheck = DB::table('seal_statuses')
+    ->where('noteId',$id)
+    ->where('nothiId',$nothiId)
+    ->where('status',$status)
+    ->where('childId',$childNoteNewLists->id)
+    ->where('receiver',Auth::guard('admin')->user()->id)
+    ->value('seal_status');
+
+    ?>
+
+   @if($multipleCheck == 1)
+
+   @else
+
+    @include('admin.presentDocument.viewChildNoteSecondStepFirstPartOne')
+
+    @endif
     @endif
 
+
+    <!--  end new code -->
+    <!-- new code when other send but have permission end -->
      @endif
 
 

@@ -62,6 +62,9 @@ class DashBoardController extends Controller
                $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
                ->whereNull('sent_status')->latest()->get();
 
+               $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+        ->where('dakType','registration')->latest()->get();
+
                $count_admin = Admin::where('id','!=',1)->count();
 
                $totalRegisteredNgo = DB::table('ngo_statuses')->count();
@@ -154,6 +157,7 @@ class DashBoardController extends Controller
 
 
     return view('admin.dashboard.dashboard',compact(
+        'senderNothiListRegistration',
         'senderNothiList',
         'dataFromFd3Form',
         'dataFromFc2Form',
@@ -221,6 +225,7 @@ class DashBoardController extends Controller
 
 
                return view('admin.dashboard.dashboardOne',compact(
+                'senderNothiListRegistration',
                 'senderNothiList',
                 'nothiList',
                 'ngoStatusFdThreeDak',

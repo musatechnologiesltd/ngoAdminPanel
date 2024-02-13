@@ -54,6 +54,13 @@
 
 
         @endif
+
+        <a target="_blank" href ="{{ route('printParagraphViewSingle', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'childIdNew'=>$childNoteNewLists->id]) }}" class="btn-sm btn btn-primary"  >
+
+
+            <i class="fa fa-print" aria-hidden="true"></i>
+
+        </a>
       </h5>
     </div>
     @if(count($childNoteNewList)  == ($key+1))
@@ -217,13 +224,13 @@ $mainSenderIdNews21=DB::table('admins')->where('id',$mainSenderIdNewss44->receiv
 
 ?>
 
-@foreach($mainSenderIdNews21 as $mainSenderIdNews22 )
+
 
 <?php
 $desiName1 = DB::table('designation_lists')
-    ->where('id',$mainSenderIdNews22->designation_list_id)
+    ->where('id',$mainSenderIdNewss44->e_designation)
     ->value('designation_name');
-$branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)->value('branch_name');
+$branchName1 = DB::table('branches')->where('id',$mainSenderIdNewss44->e_branch)->value('branch_name');
 
 ?>
 
@@ -242,7 +249,7 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)
 
 <div class="text-center">
     @if($mainSenderIdNewss44->seal_status == 1)
-<img src="{{ asset('/') }}{{ $mainSenderIdNews22->admin_sign }}" alt="" height="50" width="180">
+<img src="{{ asset('/') }}{{ $mainSenderIdNewss44->e_sign }}" alt="" height="50" width="180">
 @else
 
 @endif
@@ -256,13 +263,13 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)
 
 
 @endif
-{{ $mainSenderIdNews22->admin_name_ban }} <br>
+{{ $mainSenderIdNewss44->e_name }} <br>
 {{ $desiName1 }} <br>
 {{ $branchName1 }}</p>
 </div>
 </div>
 
-        @endforeach
+
 
         @endforeach
 
@@ -308,6 +315,25 @@ $unsentAtt = DB::table('note_attachments')
 
 @include('admin.presentDocument.newReturnModal')
 <!-- end nothi sender list -->
+@else
+
+<!--  new code 11 february  start -->
+@if(Auth::guard('admin')->user()->id == $childNoteNewLists->admin_id )
+<button data-bs-toggle="modal"
+        data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
+            <i class="fa fa-send"></i>
+            নথি প্রেরণ
+        </button>
+
+        <!-- nothi sender list -->
+@include('admin.presentDocument.retunModal')
+
+@include('admin.presentDocument.newReturnModal')
+<!-- end nothi sender list -->
+
+@endif
+
+<!-- new code 11 february end-->
         @endif
 
         @else
@@ -319,11 +345,11 @@ $unsentAtt = DB::table('note_attachments')
         </button> --}}
 
         @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
-        <button type="button" class="btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+        <button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
             <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
           </button>
           @else
-          <button type="button" class=" ob2 btn btn-danger ms-3"" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
+          <button type="button" class=" ob2 btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#exampleModalr4r{{ $childNoteNewLists->id }}">
             <i class="btn-sm fa fa-arrow-circle-left"></i>ফেরত আনুন
           </button>
 
@@ -346,6 +372,8 @@ data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id 
 
 
 @endif
+
+
 <!-- nothi sender list -->
 @include('admin.presentDocument.retunModal')
 
@@ -357,9 +385,28 @@ data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id 
 @if($childNoteNewLists->receiver_id == $childNoteNewLists->admin_id )
 
 @else
+
+<!--- code 11 february start --->
+<?php
+$paraSentStatusOne = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('childId',$childNoteNewLists->id)
+                            ->orderBy('id','desc')
+                            ->where('sender',Auth::guard('admin')->user()->id)
+                            ->value('view_status');
+?>
+@if($paraSentStatusOne== 1)
+
+@else
 <a class="btn-sm btn btn-primary editButtonFirst" id="dataMain{{ $childNoteNewLists->id }}"  data-eid="{{ $childNoteNewLists->id }}">
     সংশোধন করুন
     </a>
+    @endif
+
+    <!--- code 11 february end --->
 
 
     <button class="btn-sm btn btn-primary editButtonSecond{{ $childNoteNewLists->id }}" style="display: none;"  value="সংশোধন" name="final_button" type="submit"
