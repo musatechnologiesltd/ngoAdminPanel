@@ -19,7 +19,7 @@
         .pdf_back {
             height: 8.5in;
             width: 11in;
-            background-image: url('public/cer.jpg');
+            /* background-image: url('public/cer.jpg'); */
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100% 100%;
@@ -80,12 +80,29 @@
     </style>
 </head>
 <body>
+<?php
+  $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
 
+?>
 <div class="pdf_back">
     <div class="content">
         <table class="first_table">
             <tr>
-                <td style="padding-left:32%;">{{ $form_one_data->registration_number }}</td>
+                <td style="padding-left:32%;">
+
+
+                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+{{ $ngoTypeData->registration }}
+
+                    @else
+
+                    {{ $form_one_data->registration_number }}
+
+                    @endif
+
+
+                </td>
                 <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($mainDate ))}}</td>
             </tr>
         </table>
@@ -104,18 +121,17 @@
             </tr>
         </table>
         <table class="forth_table">
-
             @if($ngoTypeData->ngo_type_new_old == 'Old')
             <?php
 
-            $lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+            $lastDate = date('Y-m-d', strtotime($duration_list_all->ngo_duration_end_date ));
             $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
             ?>
 
             <tr>
                 <td style="padding-left: 7%">{{date('d/m/Y', strtotime($newdate ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($ngoTypeData->last_renew_date ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
             </tr>
 
 
@@ -128,7 +144,7 @@
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 60%">
+                <td style="width: 50%; padding-left: 55%">
                     <p>{{ $word1 }}</p>
                 </td>
                 <td style="width: 50%; padding-left: 22%">

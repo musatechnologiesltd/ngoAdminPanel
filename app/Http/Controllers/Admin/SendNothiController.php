@@ -11,7 +11,7 @@ class SendNothiController extends Controller
     public function index(){
 
 //dd()
-
+try{
         $senderNothiList = NothiDetail::where('sender',Auth::guard('admin')->user()->id)
         ->whereNull('back_nothi')
         ->where('dakType','renew')
@@ -26,7 +26,9 @@ class SendNothiController extends Controller
 
             return view('admin.sendNothi.index',compact('senderNothiList','senderNothiListRegistration'));
 
-
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
 
     }
 }

@@ -35,7 +35,7 @@ class PostController extends Controller
 {
 
     public function all_dak_list(){
-//dd(12);
+        try{
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
@@ -43,10 +43,7 @@ class PostController extends Controller
             $all_data_for_renew_list = DB::table('ngo_renews')->latest()->get();
             $all_data_for_name_changes_list = DB::table('ngo_name_changes')->latest()->get();
 
-            // $dataFdNine = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-            // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-            // ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
-            // ->whereNull('fd9_forms.status')->orderBy('fd9_forms.id','desc')->get();
+
 
             $dataFdNineOne = DB::table('fd9_one_forms')
             ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
@@ -174,8 +171,12 @@ class PostController extends Controller
     $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
     return view('admin.post.allDak.all_dak_list',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
-
         }
+
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
+
         //return view('admin.post.allDak.all_dak_list');
 
     }
@@ -191,7 +192,7 @@ class PostController extends Controller
 
 //         dd($invID);
 
-
+try{
 
         \LogActivity::addToLog('view dak list.');
 
@@ -302,14 +303,16 @@ class PostController extends Controller
 
         }
 
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
 
     }
 
 
     public function sent_dak(){
-
+        try{
 
            $nothiList = NothiList::latest()->get();
 
@@ -373,13 +376,16 @@ class PostController extends Controller
 
         return view('admin.post.sentDak.sentDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
 
     public function dakListSecondStep(Request $request){
-
+        try{
+            DB::beginTransaction();
         //dd($request->all());
 
         \LogActivity::addToLog('add dak detail.');
@@ -744,7 +750,7 @@ class PostController extends Controller
                         $regDakData->save();
 
 
-                       
+
 
                     }
 
@@ -808,14 +814,7 @@ class PostController extends Controller
                     }
 
 
-                    // $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
-                    // $regDakData->original_recipient =$mainPrapok;
-                    // $regDakData->copy_of_work =$karjoOnulipi;
-                    // $regDakData->informational_purposes =$infoOnulipi;
-                    // $regDakData->attraction_attention =$eyeOnulipi;
-                    // $regDakData->dak_detail_id = $dakDetailId;
-                    // $regDakData->status = 1;
-                    // $regDakData->save();
+
 
 
                     if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
@@ -922,14 +921,7 @@ class PostController extends Controller
                     }
 
 
-                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
-                    // $regDakData->original_recipient =$mainPrapok;
-                    // $regDakData->copy_of_work =$karjoOnulipi;
-                    // $regDakData->informational_purposes =$infoOnulipi;
-                    // $regDakData->attraction_attention =$eyeOnulipi;
-                    // $regDakData->dak_detail_id = $dakDetailId;
-                    // $regDakData->status = 1;
-                    // $regDakData->save();
+
 
 
                     if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
@@ -1551,8 +1543,15 @@ class PostController extends Controller
         }
 
         //end seven code end
-
+        DB::commit();
         return redirect()->route('dakBranchList.index')->with('success','Send Successfully!');
+
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
     public function dakListFirstStep(Request $request){
@@ -1668,6 +1667,32 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+                       //<--- 13 february code -->
+
+
+                       $previousReceiver = NgoNameChangeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('name_change_status_id',$request->main_id)
+                       ->value('id');
+
+                       if(empty($previousReceiver)){
+
+
+                           $sentStatus = 0;
+
+                       }else{
+                           $sentStatus = 1;
+
+                       }
+
+                       NgoNameChangeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('name_change_status_id',$request->main_id)
+       ->update([
+           'sent_status' => 1,
+        ]);
+
+
+                       //13 february code end
+
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
@@ -1705,6 +1730,34 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+
+
+                           //<--- 13 february code -->
+
+
+                           $previousReceiver = NgoFDNineDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                           ->where('f_d_nine_status_id',$request->main_id)
+                           ->value('id');
+
+                           if(empty($previousReceiver)){
+
+
+                               $sentStatus = 0;
+
+                           }else{
+                               $sentStatus = 1;
+
+                           }
+
+                           NgoFDNineDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                           ->where('f_d_nine_status_id',$request->main_id)
+           ->update([
+               'sent_status' => 1,
+            ]);
+
+
+                           //13 february code end
+
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
@@ -1737,6 +1790,33 @@ class PostController extends Controller
                        ->where('f_d_nine_one_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+
+                         //<--- 13 february code -->
+
+
+                         $previousReceiver = NgoFDNineOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('f_d_nine_one_status_id',$request->main_id)
+                         ->value('id');
+
+                         if(empty($previousReceiver)){
+
+
+                             $sentStatus = 0;
+
+                         }else{
+                             $sentStatus = 1;
+
+                         }
+
+                         NgoFDNineOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('f_d_nine_one_status_id',$request->main_id)
+         ->update([
+             'sent_status' => 1,
+          ]);
+
+
+                         //13 february code end
 
 
             if($number >0){
@@ -1777,6 +1857,33 @@ class PostController extends Controller
                        ->delete();
 
 
+                         //<--- 13 february code -->
+
+
+                         $previousReceiver = NgoFdSixDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_six_status_id',$request->main_id)
+                         ->value('id');
+
+                         if(empty($previousReceiver)){
+
+
+                             $sentStatus = 0;
+
+                         }else{
+                             $sentStatus = 1;
+
+                         }
+
+                         NgoFdSixDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_six_status_id',$request->main_id)
+         ->update([
+             'sent_status' => 1,
+          ]);
+
+
+                         //13 february code end
+
+
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
@@ -1812,6 +1919,32 @@ class PostController extends Controller
                        ->where('fd_seven_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+                         //<--- 13 february code -->
+
+
+                         $previousReceiver = NgoFdSevenDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_seven_status_id',$request->main_id)
+                         ->value('id');
+
+                         if(empty($previousReceiver)){
+
+
+                             $sentStatus = 0;
+
+                         }else{
+                             $sentStatus = 1;
+
+                         }
+
+                         NgoFdSevenDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_seven_status_id',$request->main_id)
+         ->update([
+             'sent_status' => 1,
+          ]);
+
+
+                         //13 february code end
 
 
             if($number >0){
@@ -1850,7 +1983,31 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+     //<--- 13 february code -->
 
+
+     $previousReceiver = FcOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+     ->where('fc_one_status_id',$request->main_id)
+     ->value('id');
+
+     if(empty($previousReceiver)){
+
+
+         $sentStatus = 0;
+
+     }else{
+         $sentStatus = 1;
+
+     }
+
+     FcOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+     ->where('fc_one_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+     //13 february code end
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
@@ -1886,7 +2043,31 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+   //<--- 13 february code -->
 
+
+   $previousReceiver = FcTwoDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fc_two_status_id',$request->main_id)
+   ->value('id');
+
+   if(empty($previousReceiver)){
+
+
+       $sentStatus = 0;
+
+   }else{
+       $sentStatus = 1;
+
+   }
+
+   FcTwoDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fc_two_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+   //13 february code end
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
@@ -1919,6 +2100,33 @@ class PostController extends Controller
                        ->where('fd_three_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+
+                       //<--- 13 february code -->
+
+
+   $previousReceiver = FdThreeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fd_three_status_id',$request->main_id)
+   ->value('id');
+
+   if(empty($previousReceiver)){
+
+
+       $sentStatus = 0;
+
+   }else{
+       $sentStatus = 1;
+
+   }
+
+   FdThreeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fd_three_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+   //13 february code end
 
 
             if($number >0){
@@ -2050,6 +2258,8 @@ if($mainDataStatus == 'registration'){
 
     public function showDataAll($status,$id){
 
+        try{
+
         \LogActivity::addToLog('show dak detail.');
         $mainstatus = $status;
         $id = $id;
@@ -2156,10 +2366,14 @@ if($mainDataStatus == 'registration'){
         $newMainDaKId = $id;
 //dd($id);
         return view('admin.post.show',compact('newMainDaKId','totalBranchList','totalEmptyDesignation','totalDesignationId','totalDesignationWorking','totaluser','totalDesignation','totalBranch','mainstatus','id','allRegistrationDak'));
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
     public function createSeal($status , $id){
+
+        try{
 
         \LogActivity::addToLog('create seal.');
 
@@ -2188,6 +2402,10 @@ if($mainDataStatus == 'registration'){
 
         return view('admin.post.createSeal',compact('mainstatus','id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
 
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
 
@@ -2382,6 +2600,8 @@ $data = FdThreeDak::count();
 
     public function deleteMemberList($status, $id){
 
+        try{
+
         \LogActivity::addToLog('delete memeber list.');
 
        // NgoRegistrationDak::where('id',$id)->delete();
@@ -2444,12 +2664,19 @@ $data = FdThreeDak::count();
 
 
         return redirect()->back();
+
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
 
 
 
     public function main_doc_download($id){
+
+        try{
 
         \LogActivity::addToLog('dak pdf download.');
 
@@ -2471,6 +2698,11 @@ $file=$data->system_admin_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
 

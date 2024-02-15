@@ -120,7 +120,8 @@ class NothiCopyController extends Controller
    public function copyStatusUpdate(Request $request){
 
 
-
+    try{
+        DB::beginTransaction();
 
        NothiCopy::where('nothiId', $request->fnothiId)
        ->where('noteId', $request->fnoteId)
@@ -130,6 +131,10 @@ class NothiCopyController extends Controller
        ]);
 
        return redirect()->back()->with('success','সফলভাবে  বাছাই সম্পন্ন হয়েছে');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
    }
 }

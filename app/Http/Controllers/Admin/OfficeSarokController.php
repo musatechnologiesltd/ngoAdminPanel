@@ -28,7 +28,8 @@ class OfficeSarokController extends Controller
     public function store(Request $request){
 
 
-
+        try{
+            DB::beginTransaction();
 
        //dd($request->all());
 
@@ -213,7 +214,7 @@ class OfficeSarokController extends Controller
 
 
     }
-
+    DB::commit();
     if($request->updateOrSubmit == 1){
 
 
@@ -252,5 +253,12 @@ class OfficeSarokController extends Controller
         // }
    // return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
+
+
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
+
     }
 }

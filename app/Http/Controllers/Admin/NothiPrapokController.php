@@ -124,15 +124,20 @@ class NothiPrapokController extends Controller
 
 
 
-
+        try{
+            DB::beginTransaction();
         NothiPrapok::where('nothiId', $request->fnothiId)
         ->where('noteId', $request->fnoteId)
         ->where('nijOfficeId', $request->fstatus)
        ->update([
            'status' => 1
         ]);
-
+        DB::commit();
         return redirect()->back()->with('success','সফলভাবে  বাছাই সম্পন্ন হয়েছে');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 }

@@ -97,7 +97,8 @@ class SettingController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
-
+               try{
+                DB::beginTransaction();
 
                \LogActivity::addToLog('Profile Update.');
 
@@ -139,6 +140,12 @@ class SettingController extends Controller
         $admin->save();
 
         return redirect()->back()->with('success','Updated Succesfully');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
 
@@ -150,7 +157,8 @@ class SettingController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
-
+               try{
+                DB::beginTransaction();
 
                \LogActivity::addToLog('Profile Update.');
 
@@ -171,8 +179,14 @@ class SettingController extends Controller
 
 
         $admin->save();
-
+        DB::commit();
         return redirect()->back()->with('success','Updated Succesfully');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
 
@@ -184,6 +198,9 @@ class SettingController extends Controller
             'old_password' => 'required',
             'password' => 'required|confirmed',
         ]);
+
+        try{
+            DB::beginTransaction();
         $hashedPassword = Auth::guard('admin')->user()->password;
         if (Hash::check($request->old_password,$hashedPassword))
         {
@@ -193,7 +210,7 @@ class SettingController extends Controller
                 $user->password = Hash::make($request->password);
                 $user->save();
                 // Toastr::success('Password Successfully Changed','Success');
-
+                DB::commit();
                 \LogActivity::addToLog('Logged Out.');
                 Auth::guard('admin')->logout();
                 return redirect()->route('login.index')->with('success','Updated Succesfully');
@@ -206,6 +223,10 @@ class SettingController extends Controller
             return redirect()->back()->with('error','Current password not match');
         }
 
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
 
 
@@ -216,7 +237,8 @@ class SettingController extends Controller
 
     public function digitalSignatureUpdate(Request $request){
 
-
+        try{
+            DB::beginTransaction();
         //dd($request->all());
 
         $time_dy = time().date("Ymd");
@@ -246,9 +268,13 @@ class SettingController extends Controller
 
 
         $admin->save();
-
+        DB::commit();
         return redirect()->back()->with('success','Updated Succesfully');
 
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
 
 

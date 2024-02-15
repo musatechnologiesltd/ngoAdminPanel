@@ -29,12 +29,18 @@ class SystemInformationController extends Controller
             return redirect()->route('mainLogin');
                }
 
-
+               try{
                \LogActivity::addToLog('View System Information.');
 
 
         $systemInformation = SystemInformation::all();
         return view('admin.systemInformation.index',compact('systemInformation'));
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
+
     }
 
 
@@ -46,7 +52,8 @@ class SystemInformationController extends Controller
             return redirect()->route('mainLogin');
                }
 
-
+               try{
+                DB::beginTransaction();
                \LogActivity::addToLog('System  Info Update.');
 
         $request->validate([
@@ -100,10 +107,14 @@ class SystemInformationController extends Controller
         }
         $systemInformation->save();
 
-
+        DB::commit();
     return redirect()->back()->with('success','Added Succesfully');
 
 
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
     }
 
@@ -115,7 +126,8 @@ class SystemInformationController extends Controller
             return redirect()->route('mainLogin');
                }
 
-
+               try{
+                DB::beginTransaction();
                \LogActivity::addToLog('System  Info Update.');
 
         $time_dy = time().date("Ymd");
@@ -158,8 +170,14 @@ class SystemInformationController extends Controller
         }
         $systemInformation->save();
 
-
+        DB::commit();
     return redirect()->back()->with('success','Updated Succesfully');
+
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
+
 
     }
 }

@@ -330,6 +330,7 @@
     }
 </script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 <script>
   $(document).on('click', '#pp', function(e) {
 
@@ -402,11 +403,17 @@ $(document).ready(function() {
 <script>
     $(document).ready(function(){
   $("#form").on("submit", function(){
+
+
     //alert(123);
     $("#pageloader").fadeIn();
+
+
   });//submit
 });//document ready
 </script>
+
+
 
 <script>
     setTimeout(function(){

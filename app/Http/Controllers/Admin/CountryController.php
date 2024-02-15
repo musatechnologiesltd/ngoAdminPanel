@@ -27,13 +27,17 @@ class CountryController extends Controller
             return redirect()->route('mainLogin');
         }
 
+        try{
+
         \LogActivity::addToLog('country list ');
 
 
         $country_list = DB::table('countries')->orderBy('id','desc')->get();
 
         return view('admin.country.index',compact('country_list'));
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
@@ -44,7 +48,8 @@ class CountryController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('country store ');
 
         DB::table('countries')->insert(
@@ -52,8 +57,13 @@ class CountryController extends Controller
             );
 
 
-
+            DB::commit();
             return redirect()->back()->with('success','Created Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
 
 
     }
@@ -64,15 +74,21 @@ class CountryController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to view !');
            return redirect()->route('mainLogin');
         }
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('update country ');
 
 
         DB::table('countries')
             ->where('id', $id)
             ->update(['country_name_english' =>$request->name, 'country_name_bangla' =>$request->name_bn,'country_people_english' =>$request->city_eng, 'country_people_bangla' =>$request->city_bangla]);
-
+            DB::commit();
             return redirect()->back()->with('info','Updated Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
     }
 
 
@@ -84,14 +100,20 @@ class CountryController extends Controller
             return redirect()->route('mainLogin');
         }
 
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('country delete');
 
 
         $admins = DB::table('countries')->where('id',$id)->delete();
 
 
-
+        DB::commit();
         return back()->with('error','Deleted successfully!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 }

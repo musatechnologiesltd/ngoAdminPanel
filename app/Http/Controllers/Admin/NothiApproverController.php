@@ -11,7 +11,8 @@ use DB;
 class NothiApproverController extends Controller
 {
     public function store(Request $request){
-
+        try{
+            DB::beginTransaction();
 
         $nothiApproverList = NothiApprover::orderBy('id','desc')->value('id');
 
@@ -35,6 +36,10 @@ class NothiApproverController extends Controller
 
         return redirect()->back()->with('success','সফলভাবে সংরক্ষণ হয়েছে');
 
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 }

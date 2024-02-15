@@ -412,6 +412,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/updateStatusRegForm', 'updateStatusRegForm')->name('updateStatusRegForm');
         Route::get('/printCertificateView','printCertificateView')->name('printCertificateView');
         Route::get('/printCertificateViewDemo','printCertificateViewDemo')->name('printCertificateViewDemo');
+
+
+
+        Route::get('/printCertificateViewRenew','printCertificateViewRenew')->name('printCertificateViewRenew');
+        Route::get('/printCertificateViewDemoRenew','printCertificateViewDemoRenew')->name('printCertificateViewDemoRenew');
+
+
+
         Route::get('/formOnePdfMain/{id}', 'formOnePdfMain')->name('formOnePdfMain');
         Route::get('/formOnePdfMainForeign/{id}','formOnePdfMainForeign')->name('formOnePdfMainForeign');
         Route::get('/formOnePdf/{main_id}/{id}','formOnePdf')->name('formOnePdf');

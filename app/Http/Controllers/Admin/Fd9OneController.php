@@ -30,7 +30,7 @@ class Fd9OneController extends Controller
 
 
     public function verified_fd_nine_one_download($id){
-
+        try{
         \LogActivity::addToLog('verified_fd_nine_one_download');
 
 
@@ -82,7 +82,9 @@ $mpdf->WriteHTML($data);
 $mpdf->Output($pdfFilePath, "I");
 die();
 
-
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
         // $form_one_data = DB::table('fd9_one_forms')->where('id',$id)->value('verified_fd_nine_one_form');
 
@@ -93,7 +95,7 @@ die();
     }
     public function index(){
 
-
+        try{
         \LogActivity::addToLog('view fdNineOne List ');
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
@@ -139,12 +141,15 @@ die();
 
        //dd($dataFromNVisaFd9Fd1);
            return view('admin.fd9Oneform.index',compact('dataFromNVisaFd9Fd1'));
-
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
        }
 
 
        public function statusUpdateForFd9One(Request $request){
-
+        try{
+            DB::beginTransaction();
 
         \LogActivity::addToLog('update fdNineOne status update ');
 
@@ -163,14 +168,19 @@ die();
             });
 
         }
+        DB::commit();
         return redirect()->back()->with('success','Updated successfully!');
 
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
 
        }
 
        public function show($id){
-
+        try{
         \LogActivity::addToLog('view fdNineOne detail ');
 
 
@@ -281,12 +291,14 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
             ));
 
-
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
        }
 
        public function fd9OneDownload($cat,$id){
 
-
+        try{
         \LogActivity::addToLog('download fdNineOne pdf ');
 
 
@@ -323,12 +335,14 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
        }
 
 
        public function forwardingLetterForNothi($id){
-
+        try{
 
         \LogActivity::addToLog('download forwardingLetterForNothi');
 
@@ -360,7 +374,9 @@ $file=$data->system_admin_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
        }
 }

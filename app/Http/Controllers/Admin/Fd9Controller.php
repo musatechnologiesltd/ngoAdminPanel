@@ -36,6 +36,8 @@ class Fd9Controller extends Controller
 
     public function verified_fd_nine_download($id){
 
+        try{
+
         \LogActivity::addToLog('verified_fd_nine_download');
 
         $form_one_data = DB::table('fd9_forms')->where('id',$id)->value('verified_fd_nine_form');
@@ -127,7 +129,9 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
         $mpdf->Output($pdfFilePath, "I");
         die();
 
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
 
     }
@@ -137,7 +141,8 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
 
     public function statusUpdateForFd9(Request $request){
 
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('update fdNine Status ');
 
 
@@ -160,16 +165,21 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
 
 
 
-
+        DB::commit();
         return redirect()->back()->with('success','Updated successfully!');
 
-
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
        }
 
 
 
     public function index(){
+
+        try{
 
         \LogActivity::addToLog('view fdNine List ');
 
@@ -205,11 +215,13 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
 
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd9form.index',compact('dataFromNVisaFd9Fd1'));
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
     public function downloadForwardingLetter($id){
-
+        try{
         \LogActivity::addToLog('download forwarding Letter');
 
 
@@ -336,14 +348,15 @@ if($checkOldorNew == 'Old'){
             array('forwarding_letter' =>'uploads/forwardingLetter/'.$file_Name_Custome.'.pdf')
         );
 
-
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
 
     public function show($id){
-
+        try{
         \LogActivity::addToLog('view fdNine detail ');
 
 $mainIdFdNine = $id;
@@ -426,11 +439,14 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
          return view('admin.fd9form.show_new',compact('get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
-
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
     }
 
     public function postForwardingLetterForEdit(Request $request){
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('store forwarding Letter ');
 
 //dd($request->all());
@@ -478,13 +494,19 @@ if(empty($editCheck)){
 }
 
     $uploadForwardingLetter = $this->downloadForwardingLetter($request->fd9_id);
+    DB::commit();
     return redirect()->back()->with('success','Updated successfully!');
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
     }
 
 
     public function postForwardingLetter(Request $request){
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('store forwarding letter');
 
         //dd($request->all());
@@ -507,14 +529,18 @@ if(empty($editCheck)){
 
 
 
-
+        DB::commit();
         return redirect()->back()->with('success','Update Successfully');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
 
     public function fdNinePdfDownload($id){
-
+        try{
         \LogActivity::addToLog('download fdNine pdf ');
 
 
@@ -611,7 +637,9 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
  return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
-
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
 
 
@@ -637,7 +665,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
     }
 
     public function nVisaDocumentDownload($cat,$id){
-
+        try{
         \LogActivity::addToLog('nVisa Document Download');
 
 
@@ -781,13 +809,16 @@ $file=url('public/'.$get_file_data);
             'content-type'=>'application/pdf',
         ]);
 
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
             }
 
 
 
 public function forwardingLetterPost(Request $request){
-
+    try{
+        DB::beginTransaction();
     \LogActivity::addToLog('forwardingLetterPost');
 
 //dd(234);
@@ -824,7 +855,12 @@ public function forwardingLetterPost(Request $request){
 
     }
     $uploadForwardingLetter = $this->downloadForwardingLetter($request->fd9_id);
+    DB::commit();
     return redirect()->back()->with('success','Created successfully!');
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
 }
 

@@ -46,6 +46,7 @@ class DesignationController extends Controller
             return redirect()->route('mainLogin');
                }
 
+               try{
 
                \LogActivity::addToLog('designation  list ');
 
@@ -70,6 +71,11 @@ class DesignationController extends Controller
 
 
                return view('admin.designationList.index',compact('branchLists','designationLists'));
+
+
+            } catch (\Exception $e) {
+                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            }
            }
 
 
@@ -106,6 +112,9 @@ class DesignationController extends Controller
                 'branch_id' => 'required',
                 'designation_name' => 'required',
               ]);
+
+              try{
+                DB::beginTransaction();
               \LogActivity::addToLog('designation store ');
 
               //dd($request->all());
@@ -122,9 +131,12 @@ class DesignationController extends Controller
              $dataInsert->save();
 
 
-
+             DB::commit();
     return redirect()->route('designationList.index')->with('success','Added successfully!');
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
 
         }
@@ -139,7 +151,8 @@ class DesignationController extends Controller
                // abort(403, 'Sorry !! You are Unauthorized to Update !');
                return redirect()->route('mainLogin');
             }
-
+            try{
+                DB::beginTransaction();
             \LogActivity::addToLog('designation update ');
            // dd($request->all());
 
@@ -148,9 +161,12 @@ class DesignationController extends Controller
             $input = $request->all();
 
             $medicine->fill($input)->save();
-
+            DB::commit();
     return redirect()->route('designationList.index')->with('success','Updated successfully!');
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
 
         }
@@ -163,9 +179,16 @@ class DesignationController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to Delete !');
             return redirect()->route('mainLogin');
         }
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('designation delete ');
         DesignationList::destroy($id);
+        DB::commit();
         return redirect()->route('designationList.index')->with('error','Deleted successfully!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 }

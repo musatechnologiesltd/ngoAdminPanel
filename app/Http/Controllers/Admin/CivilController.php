@@ -26,11 +26,14 @@ class CivilController extends Controller
             return redirect()->route('mainLogin');
         }
 
-
+try{
         $country_list = DB::table('civilinfos')->orderBy('id','desc')->get();
 
         return view('backend.civil_info.index',compact('country_list'));
 
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
@@ -41,7 +44,8 @@ class CivilController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
-
+        try{
+            DB::beginTransaction();
         DB::table('civilinfos')->insert(
             [
                 'division' =>$request->division,
@@ -54,9 +58,12 @@ class CivilController extends Controller
             );
 
 
-
+            DB::commit();
             return redirect()->back()->with('success','Created Successfully');
-
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
 
     }
 
@@ -66,6 +73,8 @@ class CivilController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
+        try{
+            DB::beginTransaction();
         DB::table('civilinfos')
             ->where('id', $request->id)
             ->update([
@@ -76,8 +85,13 @@ class CivilController extends Controller
                 'thana' =>$request->thana,
                 'thana_bn' =>$request->thana_bn
             ]);
-
+            DB::commit();
             return redirect()->back()->with('info','Updated Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
     }
 
 
@@ -88,10 +102,17 @@ class CivilController extends Controller
            // abort(403, 'Sorry !! You are Unauthorized to view any country !');
            return redirect()->route('mainLogin');
         }
+        try{
+            DB::beginTransaction();
         $admins = DB::table('civilinfos')->where('id',$id)->delete();
 
 
-
+        DB::commit();
         return back()->with('error','Deleted successfully!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 }

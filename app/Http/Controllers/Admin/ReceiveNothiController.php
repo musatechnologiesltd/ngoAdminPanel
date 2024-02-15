@@ -10,7 +10,7 @@ class ReceiveNothiController extends Controller
 {
     public function index(){
 
-
+        try{
 
         $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
         ->where('dakType','renew')->latest()->get();
@@ -22,7 +22,9 @@ class ReceiveNothiController extends Controller
 
             return view('admin.receiveNothi.index',compact('senderNothiList','senderNothiListRegistration'));
 
-
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
 
     }
 }

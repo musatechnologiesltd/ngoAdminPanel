@@ -8,6 +8,7 @@
 @section('body')
  <!-- Container-fluid starts-->
  <div class="container-fluid dashboard-default-sec">
+    @include('flash_message')
     <div class="row">
         <div class="col-xl-5 box-col-12 des-xl-100">
             <div class="row">
@@ -155,7 +156,7 @@
 <div class="card-header">
     <b>আগত ডাকের তালিকা</b>
               </div>
-            
+
                @include('admin.dashboard.otherdashboardOne')
          </div>
       </div>

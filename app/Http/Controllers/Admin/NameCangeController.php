@@ -37,6 +37,8 @@ class NameCangeController extends Controller
            return redirect()->route('mainLogin');
         }
 
+        try{
+
         \LogActivity::addToLog('new name change list ');
 
 
@@ -65,6 +67,11 @@ class NameCangeController extends Controller
 
 
       return view('admin.name_change_list.new_name_change_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
 
@@ -74,6 +81,8 @@ class NameCangeController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
+
+        try{
 
         \LogActivity::addToLog('revision name change list ');
 
@@ -105,6 +114,11 @@ class NameCangeController extends Controller
 
 
       return view('admin.name_change_list.revision_name_change_list',compact('all_data_for_new_list'));
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
+
     }
 
 
@@ -114,7 +128,7 @@ class NameCangeController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
-
+        try{
         \LogActivity::addToLog('already name changed list ');
 
 
@@ -143,6 +157,11 @@ class NameCangeController extends Controller
 
 
       return view('admin.name_change_list.already_name_change_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
 
@@ -220,23 +239,21 @@ class NameCangeController extends Controller
         ->get();
 
 
-            //dd($users_info);
-        } catch (Exception $e) {
-
-
-
-            return $e->getMessage();
-
-        }
+        
 
 
 
         return view('admin.name_change_list.name_change_view',compact('allNameChangeDoc','getformOneId','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
 
     public function updateStatusNameChangeForm(Request $request){
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('update name change status');
 
         $data_save = DB::table('ngo_name_changes')->where('id',$request->id)
@@ -269,6 +286,12 @@ class NameCangeController extends Controller
         });
 
         return redirect()->back()->with('success','Updated Successfully');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
+
     }
 
 

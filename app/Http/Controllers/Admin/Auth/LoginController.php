@@ -48,13 +48,11 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->check()) {
 
-
-            //\LogActivity::addToLog('Logged In.');
-
             return Redirect::to('/admin');
-       } else {
-        return view('admin.auth.login');
-       }
+
+        }else {
+             return view('admin.auth.login');
+        }
 
 
     }
@@ -64,26 +62,26 @@ class LoginController extends Controller
 
     public function store(Request $request){
 
-  // Validate Login Data
-  $request->validate([
-    'email' => 'required|max:50',
-    'password' => 'required',
-]);
+        // Validate Login Data
+        $request->validate([
+            'email' => 'required|max:50',
+            'password' => 'required',
+        ]);
 
-// Attempt to login
-if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-    // Redirect to dashboard
-    \LogActivity::addToLog('Logged In.');
-    return redirect()->intended(route('admin.dashboard'))->with('success','Successully login');
-} else {
-    // Search using username
-    if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-        return back()->with('error','Access Denied,Call Administrator');
-    }
+        // Attempt to login
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // Redirect to dashboard
+            \LogActivity::addToLog('Logged In.');
+            return redirect()->intended(route('admin.dashboard'))->with('success','Successully login');
+        } else {
+            // Search using username
+            if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+                return back()->with('error','Access Denied,Call Administrator');
+            }
 
 
-    return back()->with('error','Invalid email and password :)');;
-}
+            return back()->with('error','Invalid email and password :)');;
+        }
 
     }
 

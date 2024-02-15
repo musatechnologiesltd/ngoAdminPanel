@@ -121,7 +121,8 @@ class NothiAttractController extends Controller
 
    public function attractStatusUpdate(Request $request){
 
-
+    try{
+        DB::beginTransaction();
 
 
        NothiAttarct::where('nothiId', $request->fnothiId)
@@ -132,6 +133,10 @@ class NothiAttractController extends Controller
        ]);
 
        return redirect()->back()->with('success','সফলভাবে  বাছাই সম্পন্ন হয়েছে');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
    }
 }

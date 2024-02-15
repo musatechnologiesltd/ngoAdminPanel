@@ -58,17 +58,22 @@ return $designationCount;
             return redirect()->route('mainLogin');
                }
 
-
+try{
                \LogActivity::addToLog('branch list ');
 
 
           $branchLists = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
 
           $stepValue = Branch::orderBy('id','desc')->max('branch_step');
+          return view('admin.branchList.index',compact('branchLists','stepValue'));
+
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
 
           //dd($stepValue);
 
-               return view('admin.branchList.index',compact('branchLists','stepValue'));
+
            }
 
 
@@ -84,7 +89,8 @@ return $designationCount;
                 'branch_code' => 'required',
               ]);
 
-
+              try{
+                DB::beginTransaction();
               \LogActivity::addToLog('branch store ');
 
 
@@ -95,10 +101,13 @@ return $designationCount;
              Branch::create($input);
 
 
-
+             DB::commit();
 
     return redirect()->route('branchList.index')->with('success','Added successfully!');
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
 
         }
@@ -113,7 +122,8 @@ return $designationCount;
                 //abort(403, 'Sorry !! You are Unauthorized to Update !');
                 return redirect()->route('mainLogin');
             }
-
+            try{
+                DB::beginTransaction();
             \LogActivity::addToLog('branch update ');
 
             $medicine = Branch::findOrFail($id);
@@ -121,10 +131,13 @@ return $designationCount;
             $input = $request->all();
 
             $medicine->fill($input)->save();
-
+            DB::commit();
     return redirect()->route('branchList.index')->with('success','Updated successfully!');
 
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
         }
 
@@ -136,11 +149,18 @@ return $designationCount;
            // abort(403, 'Sorry !! You are Unauthorized to Delete !');
            return redirect()->route('mainLogin');
         }
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('branch delete ');
 
 
         Branch::destroy($id);
+        DB::commit();
         return redirect()->route('branchList.index')->with('error','Deleted successfully!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 }

@@ -151,15 +151,22 @@ class ChildNoteController extends Controller
 
     public function deleteAttachment($id){
 
+        try{
   $dataDelete = NoteAttachment::where('id',$id)->delete();
 
+
+
   return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে ');
+
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
     }
 
 
     public function deleteAllParagraph($id,$status){
 
-
+try{
 
         if($status == 'registration'){
 
@@ -238,6 +245,10 @@ class ChildNoteController extends Controller
 
 
             return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে');
+
+        } catch (\Exception $e) {
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
     }
 
 
@@ -261,6 +272,8 @@ class ChildNoteController extends Controller
 
 
     public function printPotrangsoPdfForEmail($status,$parentId,$nothiId,$id){
+
+        try{
         if($status == 'registration'){
 
 
@@ -440,12 +453,16 @@ $mpdf->WriteHTML($data);
 
 $mpdf->Output();
 die();
+
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
     }
 
 
     public function printPotrangso($status,$parentId,$nothiId,$id,$sarokCode){
 
-
+try{
         if($status == 'registration'){
 
 
@@ -627,13 +644,15 @@ $mpdf->Output();
 die();
 
 
-
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
 
     }
 
 
     public function addChildNoteFromView($status,$parentId,$nothiId,$id,$activeCode){
-
+try{
         if($status == 'registration'){
 
 
@@ -789,7 +808,9 @@ die();
 
 
         return view('admin.presentDocument.addParentNoteFromView',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
     ///code for 11 february
@@ -797,7 +818,7 @@ die();
 
     public function printAllParagraph($status,$parentId,$nothiId,$id){
 
-
+try{
         if($status == 'registration'){
 
 
@@ -2096,7 +2117,9 @@ $mainIdFdNineOne =0;
 
         $mpdf->Output();
         die();
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
     //end code for 11 february
@@ -2105,7 +2128,7 @@ $mainIdFdNineOne =0;
 
 
     public function printAllParagraphFromSend($status,$parentId,$nothiId,$id){
-
+try{
         if($status == 'registration'){
 
 
@@ -3390,7 +3413,9 @@ $mainIdFdNineOne =0;
         $mpdf->Output();
         die();
 
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
         //end new code december 23
     }
     //end new start 11
@@ -3398,7 +3423,7 @@ $mainIdFdNineOne =0;
 
     public function printParagraphViewSingle($status,$parentId,$nothiId,$id,$childIdNew){
 
-
+try{
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
 
@@ -3696,14 +3721,16 @@ $mainIdFdNineOne =0;
 
         $mpdf->Output();
         die();
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
 
     public function printParagraphAddSingle($status,$parentId,$nothiId,$id,$childIdNew){
 
 
-
+try{
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
 
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
@@ -4000,13 +4027,15 @@ $mainIdFdNineOne =0;
 
         $mpdf->Output();
         die();
-
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
     public function addChildNote($status,$parentId,$nothiId,$id,$activeCode){
 
 //dd(bangla_date(time(),"bn","d-m-y"));
-
+try{
         if($status == 'registration'){
 
 
@@ -5284,13 +5313,17 @@ $mainIdFdNineOne =0;
             'parentId',
             'activeCode'
         ));
+
+    } catch (\Exception $e) {
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
     }
 
 
     public function viewChildNote($status,$parentId,$nothiId,$id,$activeCode){
 
         //dd($status. $parentId. $id);
-
+try{
                 if($status == 'registration'){
 
 
@@ -6575,7 +6608,13 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
         'parentId',
         'activeCode'
 ));
-            }
+
+} catch (\Exception $e) {
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
+
+
+}
 
 
             public function givePermissionToNote($status,$parentId,$nothiId,$id,$childnote){
@@ -6587,7 +6626,9 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                 // ->where('dakId',$parentId)
                 // ->where('dakType',$status)->value('id'));
 //dd(12)
-
+try {
+    //start the transaction
+    DB::beginTransaction();
                 DB::table('nothi_details')
                 ->where('noteId',$id)
                 ->where('nothId',$nothiId)
@@ -6597,10 +6638,15 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
                     'permission_status' =>1
                  ]);
+                 DB::commit();
                  return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
-            }
+            }catch (\Exception $e) {
+                DB::rollBack();
+                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
 
 
+        }
             public function givePermissionForPotroZari($status,$parentId,$nothiId,$id,$childnote){
 
 // dd($getCopylIst = DB::table('nothi_copies')
@@ -6615,7 +6661,7 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                 // ->where('dakId',$parentId)
                 // ->where('dakType',$status)->value('id'));
 
-
+try{
                 $getPrapokLIst = DB::table('nothi_prapoks')
                 ->where('nothiId',$nothiId)
                 ->where('noteId',$id)
@@ -6917,12 +6963,18 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 
 
                  return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
+
+                }catch (\Exception $e) {
+                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                }
             }
 
 
  public function saveNothiPermission($data){
 
    // dd($data);
+
+
     $dt = new DateTime();
     $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
     $created_at = $dt->format('Y-m-d h:i:s ');
@@ -7074,6 +7126,9 @@ if($data['first_sender'] == 'first_sender'){
 
 if($data['button_value'] == 'return'){
 
+    try{
+        DB::beginTransaction();
+
 
             $mainId = DB::table('nothi_details')
             ->where('childId',$data['child_note_id'])
@@ -7120,11 +7175,108 @@ if($data['button_value'] == 'return'){
                  ]);
 
 
+            }elseif($data['status'] == 'nameChange'){
+
+                DB::table('child_note_for_name_changes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'fdNine'){
+
+                DB::table('child_note_for_fd_nines')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+
+            }elseif($data['status'] == 'fdNineOne'){
+
+                DB::table('child_note_for_fd_nine_ones')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'fdSix'){
+
+                DB::table('child_note_for_fd_sixes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'fdSeven'){
+
+                DB::table('child_note_for_fd_sevens')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'fcOne'){
+
+                DB::table('child_note_for_fc_ones')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'fcTwo'){
+
+                DB::table('child_note_for_fc_twos')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
+
+            }elseif($data['status'] == 'fdThree'){
+
+                DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                  //  'receiver_id'=> DB::raw('NULL'),
+                    'sent_status'=> DB::raw('NULL'),
+                    'view_status'=> DB::raw('NULL'),
+                    'back_sign_status' => 1
+                 ]);
+
             }
-
+            DB::commit();
             return redirect()->back()->with('error','সফলভাবে ফেরত আনা হয়েছে');
-
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        }
         }elseif($data['button_value'] == 'returnOther'){
+
+
+            try{
+                DB::beginTransaction();
 
 
             $mainId = DB::table('nothi_details')
@@ -7169,6 +7321,38 @@ if($data['button_value'] == 'return'){
                 $getCreatorValue =  DB::table('child_note_for_registrations')
                 ->where('id',$data['child_note_id'])->value('admin_id');
 
+            }elseif($data['status'] == 'nameChange'){
+
+                $getCreatorValue =  DB::table('child_note_for_name_changes')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'fdNine'){
+
+                $getCreatorValue =  DB::table('child_note_for_fd_nines')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'fdNineOne'){
+
+                $getCreatorValue = DB::table('child_note_for_fd_nine_ones')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'fdSix'){
+
+                $getCreatorValue = DB::table('child_note_for_fd_sixes')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'fdSeven'){
+
+                $getCreatorValue =  DB::table('child_note_for_fd_sevens')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'fcOne'){
+
+                $getCreatorValue =  DB::table('child_note_for_fc_ones')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'fcTwo'){
+
+                $getCreatorValue = DB::table('child_note_for_fc_twos')  ->where('id',$data['child_note_id'])->value('admin_id');
+
+
+            }elseif($data['status'] == 'fdThree'){
+
+                $getCreatorValue =  DB::table('child_note_for_fd_threes')  ->where('id',$data['child_note_id'])->value('admin_id');
             }
 
 
@@ -7227,6 +7411,72 @@ if($data['button_value'] == 'return'){
                     // 'back_sign_status' => 1
                  ]);
 
+            }elseif($data['status'] == 'nameChange'){
+
+                DB::table('child_note_for_name_changes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'fdNine'){
+
+                DB::table('child_note_for_fd_nines')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+
+            }elseif($data['status'] == 'fdNineOne'){
+
+                DB::table('child_note_for_fd_nine_ones')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'fdSix'){
+
+                DB::table('child_note_for_fd_sixes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'fdSeven'){
+
+                DB::table('child_note_for_fd_sevens')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'fcOne'){
+
+                DB::table('child_note_for_fc_ones')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'fcTwo'){
+
+                DB::table('child_note_for_fc_twos')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+
+            }elseif($data['status'] == 'fdThree'){
+
+                DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
             }
 
 
@@ -7251,12 +7501,16 @@ if($data['button_value'] == 'return'){
      ->where('sender',Auth::guard('admin')->user()->id)->delete();
 
 
-
+     DB::commit();
      return redirect()->route('receiveNothi.index')->with('error','সফলভাবে ফেরত আনা হয়েছে');
-
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
         }else{
 
-
+            try{
+                DB::beginTransaction();
             ///start new code
 
       $firstNothiSenderNew = NothiDetail::where('childId',$data['child_note_id'])
@@ -7433,6 +7687,64 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
                 'back_sign_status' => DB::raw('NULL')
              ]);
 
+        }elseif($data['status'] == 'nameChange'){
+
+            DB::table('child_note_for_name_changes')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'fdNine'){
+
+            DB::table('child_note_for_fd_nines')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+
+        }elseif($data['status'] == 'fdNineOne'){
+
+            DB::table('child_note_for_fd_nine_ones')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'fdSix'){
+
+            DB::table('child_note_for_fd_sixes')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'fdSeven'){
+
+            DB::table('child_note_for_fd_sevens')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'fcOne'){
+
+            DB::table('child_note_for_fc_ones')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'fcTwo'){
+
+            DB::table('child_note_for_fc_twos')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+
+        }elseif($data['status'] == 'fdThree'){
+
+            DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
         }
 
         //new code 12 february  start
@@ -7456,6 +7768,78 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
                 'present_status' => 1
              ]);
 
+
+        }elseif($data['status'] == 'nameChange'){
+
+            DB::table('ngo_name_change_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'fdNine'){
+
+            DB::table('ngo_f_d_nine_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'fdNineOne'){
+
+            DB::table('ngo_f_d_nine_one_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'fdSix'){
+
+            DB::table('ngo_fd_six_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'fdSeven'){
+
+            DB::table('ngo_fd_seven_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'fcOne'){
+
+            DB::table('fc_one_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+        }elseif($data['status'] == 'fcTwo'){
+
+            DB::table('fc_two_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+
+        }elseif($data['status'] == 'fdThree'){
+
+            DB::table('fd_three_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
 
         }
         //new code 12 february end
@@ -7485,6 +7869,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForNameChange::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7492,6 +7878,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFdNine::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7499,6 +7887,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFdNineOne::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7506,6 +7896,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFdSix::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7513,6 +7905,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFdSeven::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7520,6 +7914,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFcOne::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7527,6 +7923,8 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFcTwo::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
@@ -7534,11 +7932,18 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
          $saveNewData = ChildNoteForFdThree::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
     }
-
+    DB::commit();
         return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
@@ -7548,7 +7953,9 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
     public function saveNothiPermissionReturn($data){
 
+try{
 
+    DB::beginTransaction();
       $dt = new DateTime();
       $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
       $created_at = $dt->format('Y-m-d h:i:s ');
@@ -7733,6 +8140,64 @@ if($data['status'] == 'renew'){
 
         'back_sign_status' => DB::raw('NULL')
      ]);
+}elseif($data['status'] == 'nameChange'){
+
+    DB::table('child_note_for_name_changes')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'fdNine'){
+
+    DB::table('child_note_for_fd_nines')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+
+}elseif($data['status'] == 'fdNineOne'){
+
+    DB::table('child_note_for_fd_nine_ones')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'fdSix'){
+
+    DB::table('child_note_for_fd_sixes')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'fdSeven'){
+
+    DB::table('child_note_for_fd_sevens')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'fcOne'){
+
+    DB::table('child_note_for_fc_ones')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'fcTwo'){
+
+    DB::table('child_note_for_fc_twos')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+
+}elseif($data['status'] == 'fdThree'){
+
+    DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
 }
 
 
@@ -7899,7 +8364,7 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForRegistration::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
-            $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
@@ -7907,8 +8372,9 @@ $mainSaveData->save();
         }elseif($data['status'] == 'renew'){
 
             $saveNewData = ChildNoteForRenew::find($data['child_note_id']);
-            $saveNewData ->updated_at= $created_at;
+
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
@@ -7917,6 +8383,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForNameChange::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
 
@@ -7924,6 +8392,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForFdNine::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
 
@@ -7931,6 +8401,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForFdNineOne::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
 
@@ -7938,6 +8410,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForFdSix::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
 
@@ -7945,6 +8419,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForFdSeven::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
 
@@ -7952,6 +8428,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForFcOne::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
 
@@ -7959,6 +8437,8 @@ $mainSaveData->save();
 
             $saveNewData = ChildNoteForFcTwo::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
 
@@ -7966,14 +8446,19 @@ $mainSaveData->save();
 
          $saveNewData = ChildNoteForFdThree::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
         }
      }
-
+     DB::commit();
     return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
     }
 
 
@@ -7982,7 +8467,8 @@ $mainSaveData->save();
     public function store(Request $request){
 
         //dd($request->all());
-
+        try{
+            DB::beginTransaction();
         $dt = new DateTime();
         $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
         $created_at = $dt->format('Y-m-d h:i:s ');
@@ -8115,7 +8601,7 @@ $childDataId = $saveNewData->id;
 ->update(array('child_id' => $childDataId));
 
 
-
+DB::commit();
      if($request->final_button == 'সংরক্ষন ও খসড়া'){
 
         return redirect('admin/createPotro/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
@@ -8124,14 +8610,18 @@ $childDataId = $saveNewData->id;
         return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
      }
 
-
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    }
 
     }
 
 
     public function update(Request $request,$id){
 //dd(34);
-
+try{
+    DB::beginTransaction();
         $data = $request->all();
 
     //dd($data);
@@ -8353,7 +8843,7 @@ $childDataId = $saveNewData->id;
     ->where('admin_id',Auth::guard('admin')->user()->id)
     ->whereNull('child_id')
     ->update(array('child_id' => $childDataId));
-
+    DB::commit();
      if($request->final_button == 'সংশোধন ও খসড়া'){
 
         return redirect('admin/createPotro/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংশোধন করা হয়েছে');
@@ -8364,6 +8854,12 @@ $childDataId = $saveNewData->id;
     }
     }
     }
+
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+}
+
 
 }
 }
