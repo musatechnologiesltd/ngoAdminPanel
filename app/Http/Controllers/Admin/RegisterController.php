@@ -8,6 +8,7 @@ use Auth;
 use Hash;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
+use DateTime;
 use Mail;
 use DB;
 use PDF;
@@ -416,10 +417,16 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
             $ngoTypeData = DB::table('ngo_type_and_languages')
             ->where('user_id',$form_one_data->user_id)->first();
             $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+            $lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+            $newdateR = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate1 ) )) ;
 
-            //dd($user_id);
+
+
+
 
             $newyear = date('y', strtotime($request->main_date));
+
+            //dd($newyear);
 
             $newmonth = date('F', strtotime($request->main_date));
 

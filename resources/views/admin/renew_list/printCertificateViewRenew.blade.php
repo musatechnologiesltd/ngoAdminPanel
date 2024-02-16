@@ -3,16 +3,13 @@
 <head>
     <title>PDF</title>
     <style>
-        @font-face {
-            font-family: myFirstFont;
-            src: url('public/Mtcorsva.ttf');
-        }
+
         body {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             font-size: 16px;
-            font-family: myFirstFont, serif;
+            font-family: mcFont, serif;
             font-weight: bold;
         }
 
@@ -84,6 +81,13 @@
   $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$form_one_data->user_id)->first();
 
 ?>
+<?php
+
+$lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+$newdateR = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate1 ) )) ;
+$tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
+//dd($tomorrow);
+?>
 <div class="pdf_back">
     <div class="content">
         <table class="first_table">
@@ -103,13 +107,13 @@
 
 
                 </td>
-                <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($mainDate ))}}</td>
+                <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date ))}}</td>
             </tr>
         </table>
         <table class="second_table">
             <tr>
                 <td class="para_first">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->organization_name }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->organization_name }}.
                 </td>
             </tr>
         </table>
@@ -121,38 +125,33 @@
             </tr>
         </table>
         <table class="forth_table">
-            @if($ngoTypeData->ngo_type_new_old == 'Old')
+
             <?php
 
             $lastDate = date('Y-m-d', strtotime($duration_list_all->ngo_duration_end_date ));
-            $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
-
+            $newdate = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
+           // $newyear = date('y', strtotime($newdate));
             ?>
 
             <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($newdate ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
+                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($tomorrow ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($newdate ))}}</td>
             </tr>
 
 
-            @else
-            <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
-            </tr>
-            @endif
+
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 55%">
+                <td style="width: 50%; padding-left: 60%">
                     <p>{{ $word1 }}</p>
                 </td>
                 <td style="width: 50%; padding-left: 22%">
-                    {{ $word }}
+                    {{ $newmonth }}
                 </td>
             </tr>
             <tr>
-                <td style="padding-left: 50px">{{ $newmonth }}</td>
+                <td style="padding-left: 70px">{{ $word }}</td>
             </tr>
         </table>
     </div>

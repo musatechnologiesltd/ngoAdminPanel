@@ -132,11 +132,12 @@
                     <p>{{ $word1 }}</p>
                 </td>
                 <td style="width: 50%; padding-left: 22%">
-                    {{ $word }}
+                    {{ $newmonth }}
+
                 </td>
             </tr>
             <tr>
-                <td style="padding-left: 50px">{{ $newmonth }}</td>
+                <td style="padding-left: 50px">  {{ $word }}</td>
             </tr>
         </table>
     </div>

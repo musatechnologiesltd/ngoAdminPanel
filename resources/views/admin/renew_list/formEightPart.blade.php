@@ -36,7 +36,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
         <tr>
             <td></td>
             <td>(iii)</td>
-            <td>ডাইরি নম্বর </td>
+            <td>নিবন্ধন নম্বর </td>
             <td>:
 
                 @if($ngoTypeData->ngo_type_new_old == 'Old')
@@ -383,8 +383,8 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                 @endif
 @endif</td>
         </tr>
-		
-	
+
+
 	<tr>
                             <td>৯.</td>
                             <td colspan="3">অন্য কোন গুরুত্বপূর্ণ তথ্য যা আবেদনকারী
@@ -395,7 +395,7 @@ $reg_name = DB::table('fd_one_forms')->where('user_id',$form_one_data->user_id)-
                         </tr>
 
                         @foreach($get_all_data_other as $key=>$all_get_all_data_other)
-                   
+
 
                          <tr>
                              <td></td>

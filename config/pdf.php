@@ -28,7 +28,15 @@ return[
             'BI' => 'Nikosh.ttf', // optional: bold-italic font
             'useOTL' => 0xFF,
             'useKashida' => 75,
-        ]
+         ],
+         'mcFont' => [
+            'R'  => 'Monotype Corsiva.ttf',    // regular font
+            'B'  => 'Monotype Corsiva.ttf',       // optional: bold font
+            'I'  => 'Monotype Corsiva.ttf',     // optional: italic font
+            'BI' => 'Monotype Corsiva.ttf', // optional: bold-italic font
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+         ],
         // ...add as many as you want.
     ]
 ];
