@@ -57,10 +57,83 @@ class DashBoardController extends Controller
         \LogActivity::addToLog('view dashboard');
 
         $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
-        ->whereNull('sent_status')->latest()->get();
+        ->whereNull('sent_status')
+        ->limit(5)
+        ->where('dakType','renew')->latest()->get();
 
-        $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+        $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+        ->whereNull('sent_status')
+        ->limit(5)
         ->where('dakType','registration')->latest()->get();
+
+
+        $senderNothiListfdNine = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+        ->whereNull('sent_status')
+        ->limit(5)
+        ->where('dakType','fdNine')->latest()->get();
+
+
+         $senderNothiListnameChange = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','nameChange')->latest()->get();
+
+
+         $senderNothiListfdNineOne = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','fdNineOne')->latest()->get();
+
+
+
+
+         $senderNothiListfdSix= NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','fdSix')->latest()->get();
+
+         $senderNothiListfdSeven = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','fdSeven')->latest()->get();
+
+
+         $senderNothiListfcOne = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','fcOne')->latest()->get();
+
+
+         $senderNothiListfctwo = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','fcTwo')->latest()->get();
+
+
+         $senderNothiListfdThree = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','fdThree')->latest()->get();
+
+
+         $senderNothiListduplicate = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','duplicate')->latest()->get();
+
+
+         $senderNothiListconstitution = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','constitution')->latest()->get();
+
+
+         $senderNothiListcommittee = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+         ->limit(5)
+        ->where('dakType','committee')->latest()->get();
+
+
 
         $count_admin = Admin::where('id','!=',1)->count();
 
@@ -136,7 +209,29 @@ class DashBoardController extends Controller
            ->get();
 
 
+           $ngoStatusConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')->where('status','Ongoing')->latest() ->get();
+           $ngoStatusDuplicateCertificate = DB::table('document_for_duplicate_certificates')->where('status','Ongoing')->latest() ->get();
+
+           $ngoStatusExecutiveCommittee = DB::table('document_for_executive_committee_approvals')->where('status','Ongoing')->latest() ->get();
+
+
             return view('admin.dashboard.dashboard',compact(
+                'ngoStatusConstitution',
+                'ngoStatusDuplicateCertificate',
+                'ngoStatusExecutiveCommittee',
+                'senderNothiListfdNine',
+                'senderNothiListnameChange',
+                'senderNothiListfdNineOne',
+                'senderNothiListfdSix',
+
+                'senderNothiListfdSeven',
+
+                'senderNothiListfcOne',
+                'senderNothiListfctwo',
+                'senderNothiListfdThree',
+                'senderNothiListduplicate',
+                'senderNothiListconstitution',
+                'senderNothiListcommittee',
                 'senderNothiListRegistration',
                 'senderNothiList',
                 'dataFromFd3Form',
@@ -171,10 +266,38 @@ class DashBoardController extends Controller
             $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
             $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
             $ngoStatusReg = NgoRegistrationDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+
+            $ngoStatusDuplicateCertificate = DB::table('duplicate_certificate_daks')
+            ->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+
+
+            $ngoStatusConstitution = DB::table('constitution_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+
+            $ngoStatusExecutiveCommittee = DB::table('executive_committee_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
+
+
+
+
             $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
 
 
             return view('admin.dashboard.dashboardOne',compact(
+                'ngoStatusConstitution',
+                'ngoStatusDuplicateCertificate',
+                'ngoStatusExecutiveCommittee',
+                'senderNothiListfdNine',
+                'senderNothiListnameChange',
+                'senderNothiListfdNineOne',
+                'senderNothiListfdSix',
+
+                'senderNothiListfdSeven',
+
+                'senderNothiListfcOne',
+                'senderNothiListfctwo',
+                'senderNothiListfdThree',
+                'senderNothiListduplicate',
+                'senderNothiListconstitution',
+                'senderNothiListcommittee',
             'senderNothiListRegistration',
             'senderNothiList',
             'nothiList',

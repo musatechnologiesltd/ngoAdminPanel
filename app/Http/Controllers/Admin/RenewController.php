@@ -309,16 +309,15 @@ class RenewController extends Controller
 
     public function updateStatusRenewForm(Request $request){
 
-        try{
-            DB::beginTransaction();
-        //dd(12);
+
 
         \LogActivity::addToLog('Update Renew Status.');
 
         // $data_save = Renew::find($request->id);
         // $data_save->status = $request->status;
         // $data_save->save();
-
+        try{
+            DB::beginTransaction();
         DB::table('ngo_renews')->where('id',$request->id)
         ->update([
             'status' => $request->status,
@@ -326,19 +325,30 @@ class RenewController extends Controller
         ]);
 
 $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_form_id');
+$getUserId = DB::table('fd_one_forms')->where('id',$get_user_id)->value('user_id');
 
+
+$ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$getUserId)->first();
+
+
+
+$lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+$tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
 
         if($request->status == 'Accepted'){
 
+
+         
+
             $date = date('Y-m-d');
-    $newDate = date('Y-m-d', strtotime($date. ' + 10 years'));
+    $newDate = date('Y-m-d', strtotime($tomorrow. ' + 10 years'));
 
     DB::table('ngo_durations')->insert(
         [
         'fd_one_form_id' =>$get_user_id,
         'ngo_status' =>$request->status,
         'ngo_duration_end_date' =>$newDate,
-        'ngo_duration_start_date' =>date('Y-m-d'),
+        'ngo_duration_start_date' =>$tomorrow,
         'created_at' =>Carbon::now(),
         'updated_at' =>Carbon::now(),
     ]);
@@ -350,7 +360,13 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
         // $data_save->start_date =date('Y-m-d');
         // $data_save->save();
 
+        $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$getUserId)
+        ->update(
+            [
 
+            'last_renew_date' =>$newDate,
+
+        ]);
 
 
         }

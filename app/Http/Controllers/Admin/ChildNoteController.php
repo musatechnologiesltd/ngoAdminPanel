@@ -59,6 +59,16 @@ use Mpdf\Mpdf;
 use App\Models\PotrangshoDraft;
 use App\Models\DesignationList;
 use App\Models\SealStatus;
+
+use App\Models\DuplicateCertificateOfficeSarok;
+use App\Models\ExecutiveCommitteeOfficeSarok;
+use App\Models\ConstitutionOfficeSarok;
+use App\Models\DuplicateCertificateDak;
+use App\Models\ConstitutionDak;
+use App\Models\ExecutiveCommitteeDak;
+use App\Models\ParentNotForExecutiveCommittee;
+use App\Models\ParentNoteForConstitution;
+use App\Models\ParentNoteForDuplicateCertificate;
 class ChildNoteController extends Controller
 {
 	 public function getdataforNothiList(Request $request){
@@ -138,6 +148,30 @@ class ChildNoteController extends Controller
 
             $childNoteNewList = DB::table('child_note_for_fd_threes')
             ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'duplicate'){
+
+
+                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+                ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'constitution'){
+
+
+                    $childNoteNewList = DB::table('child_note_for_constitutions')
+                    ->where('id',$request->getFinalValue)->first();
+
+
+
+            }elseif($request->mmStatus == 'committee'){
+
+
+                        $childNoteNewList = DB::table('child_note_for_executive_committees')
+                        ->where('id',$request->getFinalValue)->first();
 
 
 
@@ -238,6 +272,30 @@ try{
 
             $childNoteNewList = DB::table('child_note_for_fd_threes')
             ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'duplicate'){
+
+
+                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+                ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'constitution'){
+
+
+                    $childNoteNewList = DB::table('child_note_for_constitutions')
+                    ->where('id',$id)->delete();
+
+
+
+            }elseif($status == 'committee'){
+
+
+                        $childNoteNewList = DB::table('child_note_for_executive_committees')
+                        ->where('id',$id)->delete();
 
 
 
@@ -397,6 +455,43 @@ try{
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+
+        }elseif($status == 'duplicate'){
+
+            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'constitution'){
+
+            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'committee'){
+
+            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+
+
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -590,6 +685,42 @@ try{
             ->get();
 
 
+        }elseif($status == 'duplicate'){
+
+            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'constitution'){
+
+            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'committee'){
+
+            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+
+
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
         }
 
 
@@ -773,6 +904,42 @@ try{
             ->get();
 
 
+        }elseif($status == 'duplicate'){
+
+            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'constitution'){
+
+            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'committee'){
+
+            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+
+
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
         }
 
 
@@ -821,7 +988,12 @@ try{
 try{
         if($status == 'registration'){
 
-
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
             $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
             $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
@@ -1012,7 +1184,22 @@ $nVisaAuthPerson=0;
 
          $dataFromFd7Form=0;
          $dataFromFc2Form=0;
+
+         $committeeStatusId=0;
+         $dataFromCommittee=0;
+         $constitutionStatusId = 0;
+         $dataFromConstitution = 0;
+         $duplicateCertificateStatusId = 0;
+         $dataFromDuplicateCertificate = 0;
         }elseif($status == 'nameChange'){
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
             $dataFromFd3Form = 0;
             $renewInfoData='';
             $ngoTypeData = '';
@@ -1127,10 +1314,23 @@ $nVisaAuthPerson=0;
             $dataFromFc1Form=0;
             $dataFromFc2Form=0;
             $dataFromFd7Form=0;
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
         }elseif($status == 'fdNine'){
 
 
-
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
             $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
 
@@ -1261,6 +1461,13 @@ $dataFromFd6Form =0;
             $get_all_data_adviser_bank=0;
             $dataFromFc1Form=0;
             $dataFromFc2Form=0;
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
             $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
 
@@ -1408,6 +1615,13 @@ $mainIdFdNineOne =0;
             $dataFromFc1Form=0;
             $dataFromFc2Form=0;
 
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
             $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
 
 
@@ -1491,6 +1705,13 @@ $mainIdFdNineOne =0;
             $dataFromFc2Form=0;
             $dataFromFc1Form=0;
 
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
             $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
 
 
@@ -1573,6 +1794,13 @@ $mainIdFdNineOne =0;
             $get_all_data_other=0;
             $get_all_data_adviser_bank=0;
 
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
 
             $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
 
@@ -1649,6 +1877,13 @@ $mainIdFdNineOne =0;
             $get_all_data_other=0;
             $get_all_data_adviser_bank=0;
 
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
 
             $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
 
@@ -1681,50 +1916,25 @@ $mainIdFdNineOne =0;
 
         }elseif($status == 'fdThree'){
 
-            $dataFromFc2Form =0;
-            $dataFromFc1Form =0;
-            $prokolpoAreaList=0;
-            $dataFromFd6Form = 0;
-            $dataFromFd7Form = 0;
-            $ngoStatus=0;
-            $ngoTypeData=0;
-            $nVisaDocs=0;
-            $dataFromNVisaFd9Fd1=0;
-            $nVisabasicInfo=0;
-$forwardingLetterOnulipi=0;
-$editCheck1=0;
-$editCheck=0;
-$statusData=0;
-$nVisaWorkPlace=0;
-$nVisaSponSor=0;
-$nVisaForeignerInfo=0;
-$nVisaManPower=0;
-$nVisaEmploye=0;
-$nVisaCompensationAndBenifits=0;
-$nVisaAuthPerson=0;
-            $mainIdR=0;
-            $renewInfoData=0;
-$mainIdFdNineOne =0;
-            $form_one_data=0;
-            $all_data_for_new_list_all=0;
-            $form_eight_data=0;
-            $form_member_data=0;
-            $form_member_data_doc=0;
-            $form_ngo_data_doc=0;
-            $users_info=0;
-            $all_source_of_fund=0;
-            $all_partiw=0;
-            $allNameChangeDoc = 0;
-            $getformOneId= 0;
-            $duration_list_all1 =0;
-            $duration_list_all = 0;
-            $renew_status = 0;
-            $name_change_status = 0;
-            $r_status = 0;
-            $form_member_data_doc_renew =0;
-            $get_all_data_adviser=0;
-            $get_all_data_other=0;
-            $get_all_data_adviser_bank=0;
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
 
             $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
 
@@ -1756,6 +1966,175 @@ $mainIdFdNineOne =0;
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'duplicate'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = DB::table('duplicate_certificate_daks')
+            ->where('id',$parentId)
+            ->value('duplicate_certificate_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = DB::table('document_for_duplicate_certificates')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_duplicate_certificates.fd_one_form_id')
+           ->select('fd_one_forms.*','document_for_duplicate_certificates.*','document_for_duplicate_certificates.id as mainId')
+           ->where('document_for_duplicate_certificates.id',$duplicateCertificateStatusId)
+          ->orderBy('document_for_duplicate_certificates.id','desc')
+          ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromDuplicateCertificate->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+
+
+        }elseif($status == 'constitution'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = 0;
+
+            $constitutionStatusId = DB::table('constitution_daks')
+            ->where('id',$parentId)
+            ->value('constitution_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = 0;
+
+
+          $dataFromConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_amendment_or_approval_of_constitutions.fdId')
+           ->select('fd_one_forms.*','document_for_amendment_or_approval_of_constitutions.*','document_for_amendment_or_approval_of_constitutions.id as mainId')
+           ->where('document_for_amendment_or_approval_of_constitutions.id',$constitutionStatusId)
+          ->orderBy('document_for_amendment_or_approval_of_constitutions.id','desc')
+          ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromConstitution->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+        }elseif($status == 'committee'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = 0;
+
+            $constitutionStatusId = 0;
+
+            $committeeStatusId = DB::table('executive_committee_daks')
+            ->where('id',$parentId)
+            ->value('executive_committee_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = 0;
+
+
+          $dataFromConstitution = 0;
+
+          $dataFromCommittee = DB::table('document_for_executive_committee_approvals')
+          ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_executive_committee_approvals.fdId')
+          ->select('fd_one_forms.*','document_for_executive_committee_approvals.*','document_for_executive_committee_approvals.id as mainId')
+          ->where('document_for_executive_committee_approvals.id',$committeeStatusId)
+         ->orderBy('document_for_executive_committee_approvals.id','desc')
+         ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromCommittee->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -2014,7 +2393,73 @@ $mainIdFdNineOne =0;
                    ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
-        }
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+
+            ->where('pnote_dupid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_constitutions')
+
+            ->where('pnote_conid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')
+            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_executive_committees')
+
+            ->where('pnote_exeid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
+            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
+            }
 
 
 
@@ -2035,6 +2480,13 @@ $mainIdFdNineOne =0;
 
 
         $data = view('admin.presentDocument.printAllParagraph',compact(
+
+            'committeeStatusId',
+            'dataFromCommittee',
+            'constitutionStatusId',
+            'dataFromConstitution',
+            'duplicateCertificateStatusId',
+            'dataFromDuplicateCertificate',
 
             'get_email_from_user',
             'dataFromFd6Form',
@@ -2131,7 +2583,12 @@ $mainIdFdNineOne =0;
 try{
         if($status == 'registration'){
 
-
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
             $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
             $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
@@ -2229,6 +2686,12 @@ $dataFromFd6Form =0;
                              //new code
 
         }elseif($status == 'renew'){
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $allNameChangeDoc = '';
             $getformOneId='';
@@ -2323,6 +2786,13 @@ $nVisaAuthPerson=0;
          $dataFromFd7Form=0;
          $dataFromFc2Form=0;
         }elseif($status == 'nameChange'){
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $renewInfoData='';
             $ngoTypeData = '';
@@ -2439,7 +2909,12 @@ $nVisaAuthPerson=0;
             $dataFromFd7Form=0;
         }elseif($status == 'fdNine'){
 
-
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
 
             $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
@@ -2674,6 +3149,12 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
         }elseif($status == 'fdSix'){
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFd7Form=0;
             $ngoStatus=0;
@@ -2756,6 +3237,12 @@ $mainIdFdNineOne =0;
 
 
         }elseif($status == 'fdSeven'){
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFd6Form = 0;
             $ngoStatus=0;
@@ -2838,6 +3325,13 @@ $mainIdFdNineOne =0;
 
 
         }elseif($status == 'fcOne'){
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFc2Form=0;
             $prokolpoAreaList=0;
@@ -2914,6 +3408,13 @@ $mainIdFdNineOne =0;
 
 
         }elseif($status == 'fcTwo'){
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFc1Form =0;
             $prokolpoAreaList=0;
@@ -2991,6 +3492,13 @@ $mainIdFdNineOne =0;
 
         }elseif($status == 'fdThree'){
 
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
             $dataFromFc2Form =0;
             $dataFromFc1Form =0;
             $prokolpoAreaList=0;
@@ -3066,6 +3574,175 @@ $mainIdFdNineOne =0;
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'duplicate'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = DB::table('duplicate_certificate_daks')
+            ->where('id',$parentId)
+            ->value('duplicate_certificate_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = DB::table('document_for_duplicate_certificates')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_duplicate_certificates.fd_one_form_id')
+           ->select('fd_one_forms.*','document_for_duplicate_certificates.*','document_for_duplicate_certificates.id as mainId')
+           ->where('document_for_duplicate_certificates.id',$duplicateCertificateStatusId)
+          ->orderBy('document_for_duplicate_certificates.id','desc')
+          ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromDuplicateCertificate->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+
+
+        }elseif($status == 'constitution'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = 0;
+
+            $constitutionStatusId = DB::table('constitution_daks')
+            ->where('id',$parentId)
+            ->value('constitution_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = 0;
+
+
+          $dataFromConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_amendment_or_approval_of_constitutions.fdId')
+           ->select('fd_one_forms.*','document_for_amendment_or_approval_of_constitutions.*','document_for_amendment_or_approval_of_constitutions.id as mainId')
+           ->where('document_for_amendment_or_approval_of_constitutions.id',$constitutionStatusId)
+          ->orderBy('document_for_amendment_or_approval_of_constitutions.id','desc')
+          ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromConstitution->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+        }elseif($status == 'committee'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = 0;
+
+            $constitutionStatusId = 0;
+
+            $committeeStatusId = DB::table('executive_committee_daks')
+            ->where('id',$parentId)
+            ->value('executive_committee_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = 0;
+
+
+          $dataFromConstitution = 0;
+
+          $dataFromCommittee = DB::table('document_for_executive_committee_approvals')
+          ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_executive_committee_approvals.fdId')
+          ->select('fd_one_forms.*','document_for_executive_committee_approvals.*','document_for_executive_committee_approvals.id as mainId')
+          ->where('document_for_executive_committee_approvals.id',$committeeStatusId)
+         ->orderBy('document_for_executive_committee_approvals.id','desc')
+         ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromCommittee->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -3324,12 +4001,85 @@ $mainIdFdNineOne =0;
                    ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
-        }
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+
+            ->where('pnote_dupid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_constitutions')
+
+            ->where('pnote_conid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')
+            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_executive_committees')
+
+            ->where('pnote_exeid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
+            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
+            }
 
 
 
 
         $data = view('admin.presentDocument.printAllParagraphSend',compact(
+
+        'committeeStatusId',
+            'dataFromCommittee',
+            'constitutionStatusId',
+            'dataFromConstitution',
+            'duplicateCertificateStatusId',
+            'dataFromDuplicateCertificate',
 
             'get_email_from_user',
             'dataFromFd6Form',
@@ -3687,7 +4437,73 @@ try{
                    ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
-        }
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+            ->where('id',$childIdNew)
+            ->where('pnote_dupid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_constitutions')
+            ->where('id',$childIdNew)
+            ->where('pnote_conid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')
+            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_executive_committees')
+            ->where('id',$childIdNew)
+            ->where('pnote_exeid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
+            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
+            }
 
 
 
@@ -3993,7 +4809,73 @@ try{
                    ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
-        }
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+            ->where('id',$childIdNew)
+            ->where('pnote_dupid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_constitutions')
+            ->where('id',$childIdNew)
+            ->where('pnote_conid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')
+            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_executive_committees')
+            ->where('id',$childIdNew)
+            ->where('pnote_exeid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
+            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
+            }
 
 
 
@@ -4037,6 +4919,13 @@ try{
 //dd(bangla_date(time(),"bn","d-m-y"));
 try{
         if($status == 'registration'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
 
 
@@ -4136,6 +5025,12 @@ $dataFromFd6Form =0;
                              //new code
 
         }elseif($status == 'renew'){
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $allNameChangeDoc = '';
             $getformOneId='';
@@ -4230,6 +5125,13 @@ $nVisaAuthPerson=0;
          $dataFromFd7Form=0;
          $dataFromFc2Form=0;
         }elseif($status == 'nameChange'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $renewInfoData='';
             $ngoTypeData = '';
@@ -4346,7 +5248,12 @@ $nVisaAuthPerson=0;
             $dataFromFd7Form=0;
         }elseif($status == 'fdNine'){
 
-
+ $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
 
             $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
@@ -4446,6 +5353,13 @@ $dataFromFd6Form =0;
             $dataFromFc1Form=0;
             $dataFromFc2Form=0;
         }elseif($status == 'fdNineOne'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFd6Form =0;
             $fd2FormList=0;
@@ -4581,6 +5495,13 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
         }elseif($status == 'fdSix'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFd7Form=0;
             $ngoStatus=0;
@@ -4663,6 +5584,13 @@ $mainIdFdNineOne =0;
 
 
         }elseif($status == 'fdSeven'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFd6Form = 0;
             $ngoStatus=0;
@@ -4745,6 +5673,13 @@ $mainIdFdNineOne =0;
 
 
         }elseif($status == 'fcOne'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFc2Form=0;
             $prokolpoAreaList=0;
@@ -4821,6 +5756,13 @@ $mainIdFdNineOne =0;
 
 
         }elseif($status == 'fcTwo'){
+
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
             $dataFromFd3Form = 0;
             $dataFromFc1Form =0;
             $prokolpoAreaList=0;
@@ -4898,6 +5840,13 @@ $mainIdFdNineOne =0;
 
         }elseif($status == 'fdThree'){
 
+         $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
             $dataFromFc2Form =0;
             $dataFromFc1Form =0;
             $prokolpoAreaList=0;
@@ -4973,6 +5922,175 @@ $mainIdFdNineOne =0;
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'duplicate'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = DB::table('duplicate_certificate_daks')
+            ->where('id',$parentId)
+            ->value('duplicate_certificate_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = DB::table('document_for_duplicate_certificates')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_duplicate_certificates.fd_one_form_id')
+           ->select('fd_one_forms.*','document_for_duplicate_certificates.*','document_for_duplicate_certificates.id as mainId')
+           ->where('document_for_duplicate_certificates.id',$duplicateCertificateStatusId)
+          ->orderBy('document_for_duplicate_certificates.id','desc')
+          ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromDuplicateCertificate->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+
+
+        }elseif($status == 'constitution'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = 0;
+
+            $constitutionStatusId = DB::table('constitution_daks')
+            ->where('id',$parentId)
+            ->value('constitution_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = 0;
+
+
+          $dataFromConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')
+           ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_amendment_or_approval_of_constitutions.fdId')
+           ->select('fd_one_forms.*','document_for_amendment_or_approval_of_constitutions.*','document_for_amendment_or_approval_of_constitutions.id as mainId')
+           ->where('document_for_amendment_or_approval_of_constitutions.id',$constitutionStatusId)
+          ->orderBy('document_for_amendment_or_approval_of_constitutions.id','desc')
+          ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromConstitution->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->get();
+            $committeeStatusId=0;
+            $dataFromCommittee=0;
+        }elseif($status == 'committee'){
+
+            $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+            $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+            $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+            $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+            $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+            $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+            $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+            $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+            $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+            $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+            $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+            $fd_three_status_id =0;
+
+
+            $duplicateCertificateStatusId = 0;
+
+            $constitutionStatusId = 0;
+
+            $committeeStatusId = DB::table('executive_committee_daks')
+            ->where('id',$parentId)
+            ->value('executive_committee_id');
+
+            $dataFromFd3Form = 0;
+
+           $dataFromDuplicateCertificate = 0;
+
+
+          $dataFromConstitution = 0;
+
+          $dataFromCommittee = DB::table('document_for_executive_committee_approvals')
+          ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_executive_committee_approvals.fdId')
+          ->select('fd_one_forms.*','document_for_executive_committee_approvals.*','document_for_executive_committee_approvals.id as mainId')
+          ->where('document_for_executive_committee_approvals.id',$committeeStatusId)
+         ->orderBy('document_for_executive_committee_approvals.id','desc')
+         ->first();
+
+//dd($dataFromFd3Form);
+
+
+           $get_email_from_user = DB::table('users')->where('id',$dataFromCommittee->user_id)->value('email');
+
+           $fd2FormList = 0;
+
+           $fd2OtherInfo = 0;
+
+
+
+
+            $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -5231,7 +6349,70 @@ $mainIdFdNineOne =0;
                    ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
-        }
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+            ->where('pnote_dupid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_constitutions')
+            ->where('pnote_conid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')
+            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+            ->where('serial_number',$nothiId)
+            ->where('id',$id)
+            ->first();
+
+
+            $childNoteNewList = DB::table('child_note_for_executive_committees')
+            ->where('pnote_exeid',$id)->get();
+
+
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
+            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
+            }
 
 
 
@@ -5245,6 +6426,13 @@ $mainIdFdNineOne =0;
 
 
         return view('admin.presentDocument.addChildNote',compact(
+
+        'committeeStatusId',
+            'dataFromCommittee',
+            'constitutionStatusId',
+            'dataFromConstitution',
+            'duplicateCertificateStatusId',
+            'dataFromDuplicateCertificate',
 
             'get_email_from_user',
             'dataFromFd6Form',
@@ -5325,6 +6513,13 @@ $mainIdFdNineOne =0;
         //dd($status. $parentId. $id);
 try{
                 if($status == 'registration'){
+
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
 
 
@@ -5426,6 +6621,13 @@ try{
 
 
                 }elseif($status == 'renew'){
+
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
                     $dataFromFd3Form = 0;
                     $allNameChangeDoc = '';
@@ -5531,6 +6733,13 @@ try{
 
 
                 }elseif($status == 'nameChange'){
+
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
                     $dataFromFd3Form = 0;
                     $renewInfoData='';
@@ -5653,6 +6862,13 @@ if($checkOldorNew == 'Old'){
 
                 }elseif($status == 'fdNine'){
 
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
                     $dataFromFd3Form = 0;
                     $get_email_from_user=0;
                     $mainIdFdNineOne=0;
@@ -5756,6 +6972,13 @@ $fd_nine_status_id = DB::table('ngo_f_d_nine_daks')
 
 
                 }elseif($status == 'fdNineOne'){
+
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
 
 
@@ -5897,6 +7120,13 @@ $fd_nine_status_id = DB::table('ngo_f_d_nine_daks')
 
                 }elseif($status == 'fdSix'){
 
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
                     $dataFromFd3Form = 0;
                     $dataFromFd7Form=0;
                     $ngoStatus=0;
@@ -5982,6 +7212,13 @@ $fd_nine_status_id = DB::table('ngo_f_d_nine_daks')
 
                 }elseif($status == 'fdSeven'){
 
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
 
                     $dataFromFd3Form = 0;
                     $dataFromFd6Form = 0;
@@ -6065,6 +7302,13 @@ $fd_nine_status_id = DB::table('ngo_f_d_nine_daks')
 
                 }elseif($status == 'fcOne'){
 
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
 
                     $dataFromFd3Form = 0;
             $dataFromFc2Form=0;
@@ -6138,6 +7382,13 @@ $mainIdFdNineOne =0;
 
 
                 }elseif($status == 'fcTwo'){
+
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
 
                     $dataFromFd3Form = 0;
                     $dataFromFc1Form =0;
@@ -6215,6 +7466,13 @@ $mainIdFdNineOne =0;
 
                 }elseif($status == 'fdThree'){
 
+                 $committeeStatusId=0;
+            $dataFromCommittee=0;
+            $constitutionStatusId = 0;
+            $dataFromConstitution = 0;
+            $duplicateCertificateStatusId = 0;
+            $dataFromDuplicateCertificate = 0;
+
                     $dataFromFc2Form =0;
             $dataFromFc1Form =0;
             $prokolpoAreaList=0;
@@ -6291,6 +7549,175 @@ $statusData=0;
 
 
                     $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+                }elseif($status == 'duplicate'){
+
+                    $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+                    $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+                    $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+                    $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+                    $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+                    $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+                    $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+                    $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+                    $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+                    $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+                    $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+                    $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+                    $fd_three_status_id =0;
+
+
+                    $duplicateCertificateStatusId = DB::table('duplicate_certificate_daks')
+                    ->where('id',$parentId)
+                    ->value('duplicate_certificate_id');
+
+                    $dataFromFd3Form = 0;
+
+                   $dataFromDuplicateCertificate = DB::table('document_for_duplicate_certificates')
+                   ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_duplicate_certificates.fd_one_form_id')
+                   ->select('fd_one_forms.*','document_for_duplicate_certificates.*','document_for_duplicate_certificates.id as mainId')
+                   ->where('document_for_duplicate_certificates.id',$duplicateCertificateStatusId)
+                  ->orderBy('document_for_duplicate_certificates.id','desc')
+                  ->first();
+
+        //dd($dataFromFd3Form);
+
+
+                   $get_email_from_user = DB::table('users')->where('id',$dataFromDuplicateCertificate->user_id)->value('email');
+
+                   $fd2FormList = 0;
+
+                   $fd2OtherInfo = 0;
+
+
+
+
+                    $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+                    $committeeStatusId=0;
+                    $dataFromCommittee=0;
+                    $constitutionStatusId = 0;
+                    $dataFromConstitution = 0;
+
+
+                }elseif($status == 'constitution'){
+
+                    $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+                    $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+                    $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+                    $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+                    $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+                    $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+                    $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+                    $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+                    $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+                    $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+                    $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+                    $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+                    $fd_three_status_id =0;
+
+
+                    $duplicateCertificateStatusId = 0;
+
+                    $constitutionStatusId = DB::table('constitution_daks')
+                    ->where('id',$parentId)
+                    ->value('constitution_id');
+
+                    $dataFromFd3Form = 0;
+
+                   $dataFromDuplicateCertificate = 0;
+
+
+                  $dataFromConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')
+                   ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_amendment_or_approval_of_constitutions.fdId')
+                   ->select('fd_one_forms.*','document_for_amendment_or_approval_of_constitutions.*','document_for_amendment_or_approval_of_constitutions.id as mainId')
+                   ->where('document_for_amendment_or_approval_of_constitutions.id',$constitutionStatusId)
+                  ->orderBy('document_for_amendment_or_approval_of_constitutions.id','desc')
+                  ->first();
+
+        //dd($dataFromFd3Form);
+
+
+                   $get_email_from_user = DB::table('users')->where('id',$dataFromConstitution->user_id)->value('email');
+
+                   $fd2FormList = 0;
+
+                   $fd2OtherInfo = 0;
+
+
+
+
+                    $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+                    $committeeStatusId=0;
+                    $dataFromCommittee=0;
+                }elseif($status == 'committee'){
+
+                    $dataFromFc2Form =0;$dataFromFc1Form =0; $prokolpoAreaList=0;$dataFromFd6Form = 0;
+                    $dataFromFd7Form = 0;$ngoStatus=0;$ngoTypeData=0;$nVisaDocs=0;
+                    $dataFromNVisaFd9Fd1=0;$nVisabasicInfo=0;$forwardingLetterOnulipi=0;$editCheck1=0;
+                    $editCheck=0;$statusData=0;$nVisaWorkPlace=0;$nVisaSponSor=0;$nVisaForeignerInfo=0;
+                    $nVisaManPower=0;$nVisaEmploye=0;$nVisaCompensationAndBenifits=0;$nVisaAuthPerson=0;
+                    $mainIdR=0;$renewInfoData=0;$mainIdFdNineOne =0;$form_one_data=0;
+                    $all_data_for_new_list_all=0;$form_eight_data=0;$form_member_data=0;$form_member_data_doc=0;
+                    $form_ngo_data_doc=0;$users_info=0;$all_source_of_fund=0;$all_partiw=0;
+                    $allNameChangeDoc = 0;$getformOneId= 0;$duration_list_all1 =0;$duration_list_all = 0;
+                    $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
+                    $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
+
+                    $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+                    $fd_three_status_id =0;
+
+
+                    $duplicateCertificateStatusId = 0;
+
+                    $constitutionStatusId = 0;
+
+                    $committeeStatusId = DB::table('executive_committee_daks')
+                    ->where('id',$parentId)
+                    ->value('executive_committee_id');
+
+                    $dataFromFd3Form = 0;
+
+                   $dataFromDuplicateCertificate = 0;
+
+
+                  $dataFromConstitution = 0;
+
+                  $dataFromCommittee = DB::table('document_for_executive_committee_approvals')
+                  ->join('fd_one_forms', 'fd_one_forms.id', '=', 'document_for_executive_committee_approvals.fdId')
+                  ->select('fd_one_forms.*','document_for_executive_committee_approvals.*','document_for_executive_committee_approvals.id as mainId')
+                  ->where('document_for_executive_committee_approvals.id',$committeeStatusId)
+                 ->orderBy('document_for_executive_committee_approvals.id','desc')
+                 ->first();
+
+        //dd($dataFromFd3Form);
+
+
+                   $get_email_from_user = DB::table('users')->where('id',$dataFromCommittee->user_id)->value('email');
+
+                   $fd2FormList = 0;
+
+                   $fd2OtherInfo = 0;
+
+
+
+
+                    $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
                     ->where('serial_number',$nothiId)
                     ->get();
 
@@ -6526,7 +7953,70 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
 ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
-}
+}elseif($status == 'duplicate'){
+
+
+
+
+
+
+    $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+    ->where('serial_number',$nothiId)
+    ->where('id',$id)
+    ->first();
+
+
+    $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+    ->where('pnote_dupid',$id)->get();
+
+
+    $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+    ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'constitution'){
+
+
+
+
+
+
+    $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+    ->where('serial_number',$nothiId)
+    ->where('id',$id)
+    ->first();
+
+
+    $childNoteNewList = DB::table('child_note_for_constitutions')
+    ->where('pnote_conid',$id)->get();
+
+
+    $childNoteNewListValue = DB::table('child_note_for_constitutions')
+    ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'committee'){
+
+
+
+
+
+
+    $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+    ->where('serial_number',$nothiId)
+    ->where('id',$id)
+    ->first();
+
+
+    $childNoteNewList = DB::table('child_note_for_executive_committees')
+    ->where('pnote_exeid',$id)->get();
+
+
+    $childNoteNewListValue = DB::table('child_note_for_executive_committees')
+    ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
+    }
 
 
 
@@ -6540,7 +8030,12 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
     return view('admin.presentDocument.viewChildNote',
     compact(
 
-
+'committeeStatusId',
+            'dataFromCommittee',
+            'constitutionStatusId',
+            'dataFromConstitution',
+            'duplicateCertificateStatusId',
+            'dataFromDuplicateCertificate',
         'get_email_from_user',
         'dataFromFd6Form',
         'fd2FormList',
@@ -6870,6 +8365,42 @@ try{
                     ->get();
 
 
+                }elseif($status == 'duplicate'){
+
+                    $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+
+
+
+
+                    $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+                }elseif($status == 'constitution'){
+
+                    $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
+
+
+
+
+                    $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
+                }elseif($status == 'committee'){
+
+                    $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+
+
+
+
+                    $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
+                    ->where('serial_number',$nothiId)
+                    ->get();
+
+
                 }
 
 
@@ -7103,6 +8634,39 @@ try{
                     $saveNewData->save();
 
 
+                 }elseif($data['status'] == 'duplicate'){
+
+                    $saveNewData = DuplicateCertificateOfficeSarok::find($lastSarokValue->sarokId);
+                    $saveNewData->office_subject = $lastSarokValue->office_subject;
+                    $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                    $saveNewData->description =$lastSarokValue->description;
+                    $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                    $saveNewData->extra_text =$lastSarokValue->extra_text;
+                    $saveNewData->save();
+
+
+                 }elseif($data['status'] == 'constitution'){
+
+                    $saveNewData = ConstitutionOfficeSarok::find($lastSarokValue->sarokId);
+                    $saveNewData->office_subject = $lastSarokValue->office_subject;
+                    $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                    $saveNewData->description =$lastSarokValue->description;
+                    $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                    $saveNewData->extra_text =$lastSarokValue->extra_text;
+                    $saveNewData->save();
+
+
+                 }elseif($data['status'] == 'committee'){
+
+                    $saveNewData = ExecutiveCommitteeOfficeSarok::find($lastSarokValue->sarokId);
+                    $saveNewData->office_subject = $lastSarokValue->office_subject;
+                    $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+                    $saveNewData->description =$lastSarokValue->description;
+                    $saveNewData->sarok_number =$lastSarokValue->sarok_number;
+                    $saveNewData->extra_text =$lastSarokValue->extra_text;
+                    $saveNewData->save();
+
+
                  }
 
 
@@ -7265,6 +8829,39 @@ if($data['button_value'] == 'return'){
                     'back_sign_status' => 1
                  ]);
 
+            }elseif($data['status'] == 'duplicate'){
+
+                DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                    //  'receiver_id'=> DB::raw('NULL'),
+                      'sent_status'=> DB::raw('NULL'),
+                      'view_status'=> DB::raw('NULL'),
+                      'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'constitution'){
+
+                DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                    //  'receiver_id'=> DB::raw('NULL'),
+                      'sent_status'=> DB::raw('NULL'),
+                      'view_status'=> DB::raw('NULL'),
+                      'back_sign_status' => 1
+                 ]);
+
+            }elseif($data['status'] == 'committee'){
+
+                DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> DB::raw('NULL'),
+                    //  'receiver_id'=> DB::raw('NULL'),
+                      'sent_status'=> DB::raw('NULL'),
+                      'view_status'=> DB::raw('NULL'),
+                      'back_sign_status' => 1
+                 ]);
+
             }
             DB::commit();
             return redirect()->back()->with('error','সফলভাবে ফেরত আনা হয়েছে');
@@ -7352,7 +8949,24 @@ if($data['button_value'] == 'return'){
 
             }elseif($data['status'] == 'fdThree'){
 
-                $getCreatorValue =  DB::table('child_note_for_fd_threes')  ->where('id',$data['child_note_id'])->value('admin_id');
+                $getCreatorValue =  DB::table('child_note_for_fd_threes')
+                ->where('id',$data['child_note_id'])->value('admin_id');
+
+            }elseif($data['status'] == 'duplicate'){
+
+                DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])
+                ->value('admin_id');
+
+            }elseif($data['status'] == 'constitution'){
+
+                DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])
+                ->value('admin_id');
+
+            }elseif($data['status'] == 'committee'){
+
+                DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])
+                ->value('admin_id');
+
             }
 
 
@@ -7472,6 +9086,30 @@ if($data['button_value'] == 'return'){
             }elseif($data['status'] == 'fdThree'){
 
                 DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'duplicate'){
+
+                DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'constitution'){
+
+                DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])
+                ->update([
+                    'sender_id'=> $mainIdSender,
+                    'receiver_id'=>Auth::guard('admin')->user()->id,
+                 ]);
+
+            }elseif($data['status'] == 'committee'){
+
+                DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])
                 ->update([
                     'sender_id'=> $mainIdSender,
                     'receiver_id'=>Auth::guard('admin')->user()->id,
@@ -7745,6 +9383,27 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
                 'back_sign_status' => DB::raw('NULL')
              ]);
 
+        }elseif($data['status'] == 'duplicate'){
+
+            DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'constitution'){
+
+            DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
+        }elseif($data['status'] == 'committee'){
+
+            DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])
+            ->update([
+                'back_sign_status' => DB::raw('NULL')
+             ]);
+
         }
 
         //new code 12 february  start
@@ -7835,6 +9494,33 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         }elseif($data['status'] == 'fdThree'){
 
             DB::table('fd_three_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'duplicate'){
+
+            DB::table('duplicate_certificate_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'constitution'){
+
+            DB::table('constitution_daks')->where('id',$data['dakId'])
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->update([
+
+                'present_status' => 1
+             ]);
+
+        }elseif($data['status'] == 'committee'){
+
+            DB::table('executive_committee_daks')->where('id',$data['dakId'])
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->update([
 
@@ -7936,6 +9622,40 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
+    }elseif($request->status == 'duplicate'){
+
+        $saveNewData = ChildNoteForDuplicateCertificate::find($data['child_note_id']);
+        $saveNewData->sent_status = 1;
+        $saveNewData ->updated_at= $created_at;
+        $saveNewData->sender_id = Auth::guard('admin')->user()->id;
+        $saveNewData->receiver_id = $data['nothiPermissionId'];
+
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'constitution'){
+
+        $saveNewData = ChildNoteForConstitution::find($data['child_note_id']);
+        $saveNewData->sent_status = 1;
+     $saveNewData ->updated_at= $created_at;
+     $saveNewData->sender_id = Auth::guard('admin')->user()->id;
+     $saveNewData->receiver_id = $data['nothiPermissionId'];
+
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'committee'){
+
+        $saveNewData = ChildNoteForExecutiveCommittee::find($data['child_note_id']);
+        $saveNewData->sent_status = 1;
+        $saveNewData ->updated_at= $created_at;
+        $saveNewData->sender_id = Auth::guard('admin')->user()->id;
+        $saveNewData->receiver_id = $data['nothiPermissionId'];
+
+
+        $saveNewData->save();
+
+
     }
     DB::commit();
         return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
@@ -8198,6 +9918,27 @@ if($data['status'] == 'renew'){
         'back_sign_status' => DB::raw('NULL')
      ]);
 
+}elseif($data['status'] == 'duplicate'){
+
+    DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'constitution'){
+
+    DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
+}elseif($data['status'] == 'committee'){
+
+    DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])
+    ->update([
+        'back_sign_status' => DB::raw('NULL')
+     ]);
+
 }
 
 
@@ -8347,6 +10088,30 @@ $mainSaveData->save();
             $saveNewData->description =$lastSarokValue->description;
             $saveNewData->save();
 
+        }elseif($data['status'] == 'duplicate'){
+
+            $saveNewData = DuplicateCertificateOfficeSarok::find($lastSarokValue->sarokId);
+            $saveNewData->office_subject = $lastSarokValue->office_subject;
+            $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+            $saveNewData->description =$lastSarokValue->description;
+            $saveNewData->save();
+
+        }elseif($data['status'] == 'constitution'){
+
+            $saveNewData = ConstitutionOfficeSarok::find($lastSarokValue->sarokId);
+            $saveNewData->office_subject = $lastSarokValue->office_subject;
+            $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+            $saveNewData->description =$lastSarokValue->description;
+            $saveNewData->save();
+
+        }elseif($data['status'] == 'committee'){
+
+            $saveNewData = ExecutiveCommitteeOfficeSarok::find($lastSarokValue->sarokId);
+            $saveNewData->office_subject = $lastSarokValue->office_subject;
+            $saveNewData->office_sutro = $lastSarokValue->office_sutro;
+            $saveNewData->description =$lastSarokValue->description;
+            $saveNewData->save();
+
         }
 
  }
@@ -8450,6 +10215,40 @@ $mainSaveData->save();
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
+
+        }elseif($request->status == 'duplicate'){
+
+            $saveNewData = ChildNoteForDuplicateCertificate::find($data['child_note_id']);
+            $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
+            $saveNewData->receiver_id = $data['nothiPermissionId'];
+
+            $saveNewData->save();
+
+
+        }elseif($request->status == 'constitution'){
+
+            $saveNewData = ChildNoteForConstitution::find($data['child_note_id']);
+            $saveNewData->sent_status = 1;
+         $saveNewData ->updated_at= $created_at;
+         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
+         $saveNewData->receiver_id = $data['nothiPermissionId'];
+
+            $saveNewData->save();
+
+
+        }elseif($request->status == 'committee'){
+
+            $saveNewData = ChildNoteForExecutiveCommittee::find($data['child_note_id']);
+            $saveNewData->sent_status = 1;
+            $saveNewData ->updated_at= $created_at;
+            $saveNewData->sender_id = Auth::guard('admin')->user()->id;
+            $saveNewData->receiver_id = $data['nothiPermissionId'];
+
+
+            $saveNewData->save();
+
 
         }
      }
@@ -8588,7 +10387,49 @@ $mainSaveData->save();
          $saveNewData->save();
 
 
-     }
+
+
+
+     }elseif($request->status == 'duplicate'){
+
+        $saveNewData = new ChildNoteForDuplicateCertificate();
+        $saveNewData->pnote_dupid = $request->parentNoteId;
+        $saveNewData->serial_number = 0;
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->created_at =$created_at;
+
+        $saveNewData->admin_id =Auth::guard('admin')->user()->id;
+
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'constitution'){
+
+        $saveNewData = new ChildNoteForConstitution();
+        $saveNewData->pnote_conid  = $request->parentNoteId;
+        $saveNewData->serial_number = 0;
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->created_at =$created_at;
+
+        $saveNewData->admin_id =Auth::guard('admin')->user()->id;
+
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'committee'){
+
+        $saveNewData = new ChildNoteForExecutiveCommittee();
+        $saveNewData->pnote_exeid = $request->parentNoteId;
+        $saveNewData->serial_number = 0;
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->created_at =$created_at;
+
+        $saveNewData->admin_id =Auth::guard('admin')->user()->id;
+
+        $saveNewData->save();
+
+
+    }
 
 $childDataId = $saveNewData->id;
 
@@ -8707,7 +10548,31 @@ try{
          $saveNewData->save();
 
 
-     }
+     }elseif($request->status == 'duplicate'){
+
+        $saveNewData = ChildNoteForDuplicateCertificate::find($id);
+
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'constitution'){
+
+        $saveNewData = ChildNoteForConstitution::find($id);
+
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'committee'){
+
+        $saveNewData = ChildNoteForExecutiveCommittee::find($id);
+
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->save();
+
+
+    }
 
      $childDataId = $saveNewData->id;
 
@@ -8832,7 +10697,31 @@ try{
          $saveNewData->save();
 
 
-     }
+     }elseif($request->status == 'duplicate'){
+
+        $saveNewData = ChildNoteForDuplicateCertificate::find($id);
+
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'constitution'){
+
+        $saveNewData = ChildNoteForConstitution::find($id);
+
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->save();
+
+
+    }elseif($request->status == 'committee'){
+
+        $saveNewData = ChildNoteForExecutiveCommittee::find($id);
+
+        $saveNewData->description = $request->mainPartNote;
+        $saveNewData->save();
+
+
+    }
 
      $childDataId = $saveNewData->id;
 

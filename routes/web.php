@@ -40,6 +40,9 @@ use App\Http\Controllers\Admin\SendNothiController;
 use App\Http\Controllers\Admin\ReceiveNothiController;
 use App\Http\Controllers\NGO\PotroController;
 use App\Http\Controllers\Admin\NothiJatController;
+use App\Http\Controllers\Admin\ExecutiveCommitteeController;
+use App\Http\Controllers\Admin\ConstitutionController;
+use App\Http\Controllers\Admin\DuplicateCertificateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +133,35 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('sendNothi', SendNothiController::class);
     Route::resource('receiveNothi', ReceiveNothiController::class);
+
+
+    Route::resource('executiveCommitteeInfo', ExecutiveCommitteeController::class);
+    Route::resource('constitutionInfo', ConstitutionController::class);
+    Route::resource('duplicateCertificate', DuplicateCertificateController::class);
+
+
+    Route::controller(DuplicateCertificateController::class)->group(function () {
+
+        Route::post('/updateStatusDuplicateCertificate','updateStatusDuplicateCertificate')->name('updateStatusDuplicateCertificate');
+        Route::get('/duplicateCertificatePdf/{id}/{title}','duplicateCertificatePdf')->name('duplicateCertificatePdf');
+
+    });
+
+
+
+    Route::controller(ConstitutionController::class)->group(function () {
+
+        Route::post('/updateStatusconstitutionInfoPdf','updateStatusconstitutionInfoPdf')->name('updateStatusconstitutionInfoPdf');
+        Route::get('/constitutionInfoPdf/{id}/{title}','constitutionInfoPdf')->name('constitutionInfoPdf');
+
+    });
+
+    Route::controller(ExecutiveCommitteeController::class)->group(function () {
+
+        Route::post('/updateStatusexecutiveCommittee','updateStatusexecutiveCommittee')->name('updateStatusexecutiveCommittee');
+        Route::get('/executiveCommitteeInfoPdf/{id}/{title}','executiveCommitteeInfoPdf')->name('executiveCommitteeInfoPdf');
+
+    });
 
 
 
@@ -438,6 +470,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::controller(NameCangeController::class)->group(function () {
+
+        Route::get('/printCertificateViewName','printCertificateViewName')->name('printCertificateViewName');
+        Route::get('/printCertificateViewDemoName','printCertificateViewDemoName')->name('printCertificateViewDemoName');
 
         Route::get('/nameChangeDoc/{id}','nameChangeDoc')->name('nameChangeDoc');
         Route::get('/newNameChangeList','newNameChangeList')->name('newNameChangeList');

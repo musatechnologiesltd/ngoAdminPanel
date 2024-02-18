@@ -370,6 +370,35 @@
 </li>
 @endif
 
+@if ($usr->can('duplicateCertificateAdd') || $usr->can('duplicateCertificateView') || $usr->can('duplicateCertificateDelete') || $usr->can('duplicateCertificateUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('duplicateCertificate.index') || Route::is('duplicateCertificate.show') ? 'active' : '' }}" href="{{ route('duplicateCertificate.index') }}">
+        <i data-feather="airplay"></i>
+        <span>ডুপ্লিকেট সনদপত্রের আবেদন</span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('constitutionAdd') || $usr->can('constitutionView') || $usr->can('constitutionDelete') || $usr->can('constitutionUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('constitutionInfo.index') || Route::is('constitutionInfo.show') ? 'active' : '' }}" href="{{ route('constitutionInfo.index') }}">
+        <i data-feather="airplay"></i>
+        <span>গঠনতন্ত্র পরিবর্তন/অনুমোদনের আবেদন </span>
+    </a>
+</li>
+@endif
+
+
+@if ($usr->can('executiveCommitteeAdd') || $usr->can('executiveCommitteeView') || $usr->can('executiveCommitteeDelete') || $usr->can('executiveCommitteeUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('executiveCommitteeInfo.index') || Route::is('executiveCommitteeInfo.show') ? 'active' : '' }}" href="{{ route('executiveCommitteeInfo.index') }}">
+        <i data-feather="airplay"></i>
+        <span> নির্বাহী কমিটি অনুমোদনের আবেদন</span>
+    </a>
+</li>
+@endif
+
 
 
 

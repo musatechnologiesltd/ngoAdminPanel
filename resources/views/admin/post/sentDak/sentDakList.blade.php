@@ -62,6 +62,14 @@
 
                                  @include('admin.post.sentDak.sentFdThreeDakList')
 
+
+                                 @include('admin.post.sentDak.sentDuplicateCertificateList')
+
+
+                                 @include('admin.post.sentDak.sentConstitutionList')
+
+                                 @include('admin.post.sentDak.sentExecutiveCommitteeList')
+
                                     </tbody>
                                 </table>
                             </div>

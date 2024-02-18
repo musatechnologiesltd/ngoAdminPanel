@@ -359,15 +359,33 @@
         <td>(iii)</td>
         <td>মেয়াদ শুরু </td>
         <td>:
-<?php
+            @if($ngoTypeData->ngo_type_new_old == 'Old')
 
-$lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date));
-$newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+            <?php
 
-?>
+            $lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+            $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
+            $newdate1 = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
+
+            ?>
+          @if(empty($duration_list_all))
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($tomorrow )))}}
+
+          @else
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all )))}}
+          @endif
+            @else
+
+          @if(empty($duration_list_all))
 
 
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate)))}}
+          @else
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all )))}}
+          @endif
+
+          @endif
 
 
       </td>
@@ -382,7 +400,25 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
 
 
 
-          {{App\Http\Controllers\Admin\CommonController::englishToBangla($ngoTypeData->last_renew_date)}}
+            @if($ngoTypeData->ngo_type_new_old == 'Old')
+            @if(empty($duration_list_all1))
+            {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate1 )))}}
+
+          @else
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
+      @endif
+
+
+@else
+
+            @if(empty($duration_list_all))
+
+
+          @else
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
+      @endif
+
+      @endif
 
 
       </td>
@@ -432,12 +468,32 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td>মেয়াদ শুরু </td>
         <td>:
 
+            @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+            <?php
+
+            $lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+            $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
+            $newdate1 = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
+
+            ?>
+          @if(empty($duration_list_all))
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($tomorrow )))}}
+
+          @else
+
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all )))}}
+          @endif
+            @else
+
           @if(empty($duration_list_all))
 
 
           @else
 
           {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all )))}}
+          @endif
+
           @endif
 
       </td>
@@ -449,11 +505,25 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
         <td>:
+
+            @if($ngoTypeData->ngo_type_new_old == 'Old')
+            @if(empty($duration_list_all1))
+            {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate1 )))}}
+
+          @else
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
+      @endif
+
+
+@else
+
             @if(empty($duration_list_all))
 
 
           @else
           {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
+      @endif
+
       @endif
       </td>
     </tr>
@@ -471,7 +541,16 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                 প্রিন্ট করুন
             </button>
           @endif
+          <form action="{{ route('printCertificateViewDemoName') }}" method="get" id="form">
 
+            <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
+
+            <input type="hidden" name="main_date" value="<?php   echo  date('Y-m-d'); ?>" class="form-control"/>
+
+            <button type="submit" class="btn btn-primary mt-4" type="submit">
+                ডেমো
+              </button>
+        </form>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -482,7 +561,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                   </div>
                   <div class="modal-body">
 
-                    <form id="form" action="{{ route('printCertificateView') }}" method="get">
+                    <form id="form" action="{{ route('printCertificateViewName') }}" method="get">
 
                         <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
 
@@ -492,6 +571,7 @@ $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
                             প্রিন্ট করুন
                           </button>
                     </form>
+
                   </div>
 
                 </div>

@@ -72,7 +72,7 @@
         }
         .fifth_table
         {
-            margin-top: 48px;
+            margin-top: 62px;
         }
     </style>
 </head>
@@ -143,7 +143,7 @@ $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 60%">
+                <td style="width: 50%; padding-left: 65%">
                     <p>{{ $word1 }}</p>
                 </td>
                 <td style="width: 50%; padding-left: 22%">

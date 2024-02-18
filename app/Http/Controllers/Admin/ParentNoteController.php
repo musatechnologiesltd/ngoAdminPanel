@@ -18,6 +18,9 @@ use App\Models\ParentNoteForFdThree;
 use App\Models\ParentNoteForNameChange;
 use App\Models\ParentNoteForRegistration;
 use App\Models\ParentNoteForRenew;
+use App\Models\ParentNotForExecutiveCommittee;
+use App\Models\ParentNoteForConstitution;
+use App\Models\ParentNoteForDuplicateCertificate;
 use DateTime;
 use DateTimezone;
 use App\Models\NoteAttachment;
@@ -168,6 +171,42 @@ return 1;
             ->get();
 
 
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
         }
 
         return view('admin.presentDocument.sheetAndNotes',compact('checkParent','nothiId','status','dakId'));
@@ -298,6 +337,42 @@ return 1;
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'duplicate'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'constitution'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'committee'){
+
+
+
+
+
+
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$dakId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -470,6 +545,54 @@ return 1;
         $saveNewData->save();
 
         $totalCount = ParentNoteForFdThree::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'duplicate'){
+
+
+
+
+        $saveNewData = new ParentNoteForDuplicateCertificate();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'constitution'){
+
+        $saveNewData = new ParentNoteForConstitution();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForConstitution::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'committee'){
+
+        $saveNewData = new ParentNotForExecutiveCommittee();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNotForExecutiveCommittee::where('nothi_detail_id',$request->dakId)
         ->where('serial_number',$request->nothiId)->count();
             $pId = $saveNewData->id;
 
@@ -651,6 +774,53 @@ return 1;
         $saveNewData->save();
 
         $totalCount = ParentNoteForFdThree::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'duplicate'){
+
+        
+
+        $saveNewData = new ParentNoteForDuplicateCertificate();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'constitution'){
+
+        $saveNewData = new ParentNoteForConstitution();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForConstitution::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'committee'){
+
+        $saveNewData = new ParentNotForExecutiveCommittee();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNotForExecutiveCommittee::where('nothi_detail_id',$request->dakId)
         ->where('serial_number',$request->nothiId)->count();
             $pId = $saveNewData->id;
 

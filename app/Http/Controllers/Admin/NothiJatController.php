@@ -39,7 +39,9 @@ use App\Models\NothiFirstSenderList;
 use DB;
 use DateTime;
 use DateTimezone;
-
+use App\Models\DuplicateCertificateDak;
+use App\Models\ConstitutionDak;
+use App\Models\ExecutiveCommitteeDak;
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -67,6 +69,7 @@ use App\Models\FcOneDak;
 use App\Models\FcTwoDak;
 use App\Models\NgoRegistrationDak;
 use App\Models\FdThreeDak;
+
 class NothiJatController extends Controller
 {
 
@@ -154,11 +157,41 @@ class NothiJatController extends Controller
             $updateDataInsert->nothi_jat_status = 0;
             $updateDataInsert->save();
 
-
+        
 
           }elseif(status == 'fdThree'){
 
             $updateDataInsert = FdThreeDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
+
+
+
+
+          }elseif(status == 'duplicate'){
+
+            $updateDataInsert = DuplicateCertificateDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
+
+
+
+
+          }elseif(status == 'constitution'){
+
+            $updateDataInsert = ConstitutionDak::find($id);
+            $updateDataInsert->nothi_jat_id = 0;
+            $updateDataInsert->nothi_jat_status = 0;
+            $updateDataInsert->save();
+
+
+
+
+          }elseif(status == 'committee'){
+
+            $updateDataInsert = ExecutiveCommitteeDak::find($id);
             $updateDataInsert->nothi_jat_id = 0;
             $updateDataInsert->nothi_jat_status = 0;
             $updateDataInsert->save();
@@ -268,7 +301,40 @@ class NothiJatController extends Controller
                 $updateDataInsert->save();
 
 
-            }
+            }elseif(status == 'duplicate'){
+
+                $updateDataInsert = DuplicateCertificateDak::find($id);
+                $updateDataInsert->nothi_jat_id = $request->nothiId;
+                $updateDataInsert->nothi_jat_status = 1;
+
+                $updateDataInsert->save();
+
+
+
+
+              }elseif(status == 'constitution'){
+
+                $updateDataInsert = ConstitutionDak::find($id);
+                $updateDataInsert->nothi_jat_id = $request->nothiId;
+                $updateDataInsert->nothi_jat_status = 1;
+
+                $updateDataInsert->save();
+
+
+
+
+              }elseif(status == 'committee'){
+
+                $updateDataInsert = ExecutiveCommitteeDak::find($id);
+                $updateDataInsert->nothi_jat_id = $request->nothiId;
+                $updateDataInsert->nothi_jat_status = 1;
+
+                $updateDataInsert->save();
+
+
+
+
+              }
 
   return 1;
     }
@@ -577,6 +643,25 @@ class NothiJatController extends Controller
 
 
 
+    $ngoStatusDuplicateCertificate = DB::table('duplicate_certificate_daks')
+    ->where('nothi_jat_status',1)
+    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get()->unique('duplicate_certificate_id');
+
+
+    $ngoStatusConstitution = DB::table('constitution_daks')->where('nothi_jat_status',1)
+    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get()->unique('constitution_id');
+
+    $ngoStatusExecutiveCommittee = DB::table('executive_committee_daks')->where('nothi_jat_status',1)
+    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get()->unique('executive_committee_id');
+
+
+
 
 
 
@@ -584,7 +669,7 @@ class NothiJatController extends Controller
 
     $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-    return view('admin.post.allDak.nothiJatDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+    return view('admin.post.allDak.nothiJatDakList',compact('ngoStatusDuplicateCertificate','ngoStatusConstitution','ngoStatusExecutiveCommittee','nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
     }
 }

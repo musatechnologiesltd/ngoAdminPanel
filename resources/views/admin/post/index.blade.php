@@ -71,7 +71,11 @@
 
                                       @include('admin.post.fdThreeDakFirstStep')
 
+                                      @include('admin.post.duplicateCertificateDakFirstStep')
 
+                                      @include('admin.post.contitutionDakFirstStep')
+
+                                      @include('admin.post.executiveCommitteeDakFirstStep')
 
                                     </tbody>
                                 </table>

@@ -23,6 +23,11 @@ use App\Models\FdThreeOfficeSarok;
 use App\Models\PotrangshoDraft;
 
 
+use App\Models\DuplicateCertificateOfficeSarok;
+use App\Models\ExecutiveCommitteeOfficeSarok;
+use App\Models\ConstitutionOfficeSarok;
+
+
 class OfficeSarokController extends Controller
 {
     public function store(Request $request){
@@ -192,8 +197,43 @@ class OfficeSarokController extends Controller
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
+         
 
-     }
+
+     }elseif($request->statusForPotrangso == 'duplicate'){
+
+        $saveNewData = new DuplicateCertificateOfficeSarok();
+        $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+    }elseif($request->statusForPotrangso == 'constitution'){
+
+        $saveNewData = new ConstitutionOfficeSarok();
+        $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+    }elseif($request->statusForPotrangso == 'committee'){
+
+        $saveNewData = new ExecutiveCommitteeOfficeSarok();
+        $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+    }
 
      $sarokId = $saveNewData->id;
 

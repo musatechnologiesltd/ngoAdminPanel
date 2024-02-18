@@ -57,7 +57,9 @@ use App\Models\ParentNoteForNameChange;
 use App\Models\ParentNoteForRegistration;
 use App\Models\ParentNoteForRenew;
 
-
+use App\Models\ParentNotForExecutiveCommittee;
+use App\Models\ParentNoteForConstitution;
+use App\Models\ParentNoteForDuplicateCertificate;
 use App\Http\Controllers\Admin\CommonController;
 
 class DocumentPresentController extends Controller
