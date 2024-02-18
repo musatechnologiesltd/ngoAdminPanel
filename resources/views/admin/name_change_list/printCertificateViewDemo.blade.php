@@ -95,7 +95,7 @@
 
                     @else
 
-                    {{date('d/m/Y', strtotime($mainDate ))}}
+                    {{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}
 
                     @endif
 
@@ -106,50 +106,47 @@
         <table class="second_table">
             <tr>
                 <td class="para_first">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->organization_name }}.
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $nameChangeDetail->previous_name_ban }}.
                 </td>
             </tr>
         </table>
         <table class="third_table">
             <tr>
                 <td class="para_first1">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->address_of_head_office_eng }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $nameChangeDetail->present_name_ban }}.
                 </td>
             </tr>
         </table>
         <table class="forth_table">
 
-            @if($ngoTypeData->ngo_type_new_old == 'Old')
-            <?php
-
-
-
-$lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
-$newdateR = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate1 ) )) ;
-$tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
-$newdate1 = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
-//dd($tomorrow);
-
-
-            ?>
 
             <tr>
-                <td style="padding-left: 50%">{{date('d/m/Y', strtotime($tomorrow ))}}</td>
+                <td style="padding-left: 50%">
+                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+                    {{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date ))}}
+
+                    @else
+
+                    {{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}
+
+                    @endif
+
+                </td>
 
             </tr>
 
-
-            @else
-            <tr>
-                <td style="padding-left: 50%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
-
-            </tr>
-            @endif
         </table>
+
+        <?php
+
+           $signDate = date('Y-m-d');
+
+        ?>
         <table class="fifth_table">
             <tr>
                 <td style="padding-left: 29%">
-                    <p>{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</p>
+                    <p>{{date('d/m/Y', strtotime($signDate ))}}</p>
                 </td>
 
             </tr>

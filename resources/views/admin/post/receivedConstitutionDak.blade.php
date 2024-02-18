@@ -24,7 +24,8 @@ $orginalReceverName= DB::table('admins')
 
 //end new code
 
-$formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')->where('id',$allStatusData->constitution_id)->value('fd_one_form_id');
+$formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')
+->where('id',$allStatusData->constitution_id)->value('fdId');
 
  $form_one_data = DB::table('fd_one_forms')
  ->where('id',$formOneDataId)->first();

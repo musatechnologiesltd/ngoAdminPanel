@@ -365,7 +365,29 @@
                         aria-selected="false"><i
                 class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
 
+                @elseif($status == 'duplicate')
 
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-file-document"></i>ডুপ্লিকেট সনদপত্রের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
+
+                @elseif($status == 'constitution')
+
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-file-document"></i>গঠনতন্ত্র পরিবর্তন/অনুমোদনের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
+
+                @elseif($status == 'committee')
+
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-file-document"></i>নির্বাহী কমিটি অনুমোদনের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
 
                                                 @endif
 
@@ -1139,6 +1161,27 @@ $potroZariListValue =  DB::table('nothi_details')
 
        </div>
 
+       @elseIf($status == 'duplicate')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.duplicateCertificate.docListNothi')
+       </div>
+       @elseIf($status == 'constitution')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.constitution.docListNothi')
+       </div>
+
+       @elseIf($status == 'committee')
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.executiveCommittee.docListNothi')
+       </div>
        @endif
 
        <!-- end new code-->

@@ -513,6 +513,10 @@ $branchNames = DB::table('branches')
 
                 @foreach($ngoStatusNameChange as $k=>$allStatusData)
 
+                @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
+
+                @else
+
                 <?php
 
                                         //new code
@@ -761,10 +765,15 @@ $branchNames = DB::table('branches')
              <!--end new code -->
                 </td>
             </tr>
+            @endif
             @endforeach
 
 
             @foreach($ngoStatusFDNineDak as $m=>$allStatusData)
+
+            @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
+
+            @else
 
             <?php
 
@@ -1014,11 +1023,14 @@ $branchNames = DB::table('branches')
              <!--end new code -->
             </td>
         </tr>
+        @endif
         @endforeach
 
 
         @foreach($ngoStatusFDNineOneDak as $f=>$allStatusData)
+        @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+        @else
         <?php
 
                                                                                                //new code
@@ -1281,12 +1293,17 @@ $branchNames = DB::table('branches')
 
         </td>
     </tr>
+    @endif
     @endforeach
 
 
     <!--fdsix code start--->
 
     @foreach($ngoStatusFdSixDak as $p=>$allStatusData)
+
+    @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
+
+    @else
 
     <?php
 
@@ -1531,6 +1548,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fdsix code end ---->
@@ -1539,7 +1557,9 @@ $branchNames = DB::table('branches')
 
 
     @foreach($ngoStatusFdSevenDak as $p=>$allStatusData)
+    @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+    @else
     <?php
 
 
@@ -1784,6 +1804,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fdseven code end ---->
@@ -1791,7 +1812,9 @@ $branchNames = DB::table('branches')
     <!-- fc one code start -->
 
     @foreach($ngoStatusFcOneDak as $p=>$allStatusData)
+    @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+    @else
     <?php
 
                                                                    //new code
@@ -2033,6 +2056,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fc one code end-->
@@ -2042,7 +2066,9 @@ $branchNames = DB::table('branches')
 
 
     @foreach($ngoStatusFcTwoDak as $p=>$allStatusData)
+    @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+    @else
     <?php
 
                                                                      //new code
@@ -2286,6 +2312,7 @@ $branchNames = DB::table('branches')
      <!--end new code -->
     </td>
 </tr>
+@endif
 @endforeach
 
     <!--fc two code end-->
@@ -2294,7 +2321,9 @@ $branchNames = DB::table('branches')
 
 
      @foreach($ngoStatusFdThreeDak as $p=>$allStatusData)
+     @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+     @else
      <?php
 
                                                                                                    //new code
@@ -2537,6 +2566,7 @@ $branchNames = DB::table('branches')
       <!--end new code -->
      </td>
  </tr>
+ @endif
  @endforeach
 
       <!-- fd three form end -->
@@ -2545,7 +2575,9 @@ $branchNames = DB::table('branches')
       <!-- duplicate certificate start -->
 
       @foreach($ngoStatusDuplicateCertificate as $p=>$allStatusData)
+      @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+      @else
      <?php
 
                                                                                                    //new code
@@ -2788,6 +2820,7 @@ $branchNames = DB::table('branches')
       <!--end new code -->
      </td>
  </tr>
+ @endif
  @endforeach
 
       <!-- duplicate certificate end -->
@@ -2796,7 +2829,9 @@ $branchNames = DB::table('branches')
      <!-- constitution start -->
 
      @foreach($ngoStatusConstitution as $p=>$allStatusData)
+     @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+     @else
      <?php
 
                                                                                                    //new code
@@ -2811,7 +2846,8 @@ $orginalReceverName= DB::table('admins')
 
 //end new code
 
-$formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')->where('id',$allStatusData->constitution_id)->value('fd_one_form_id');
+$formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')
+->where('id',$allStatusData->constitution_id)->value('fdId');
 
   $form_one_data = DB::table('fd_one_forms')
   ->where('id',$formOneDataId)->first();
@@ -3039,6 +3075,7 @@ $branchNames = DB::table('branches')
       <!--end new code -->
      </td>
  </tr>
+ @endif
  @endforeach
 
       <!-- constitution end -->
@@ -3048,7 +3085,9 @@ $branchNames = DB::table('branches')
          <!-- executive committee start -->
 
          @foreach($ngoStatusExecutiveCommittee as $p=>$allStatusData)
+         @if($allStatusData->nothi_jat_status == 1  || $allStatusData->present_status == 1)
 
+         @else
          <?php
 
                                                                                                        //new code
@@ -3063,7 +3102,8 @@ $branchNames = DB::table('branches')
 
     //end new code
 
-    $formOneDataId = DB::table('document_for_executive_committee_approvals')->where('id',$allStatusData->executive_committee_id)->value('fd_one_form_id');
+    $formOneDataId = DB::table('document_for_executive_committee_approvals')
+    ->where('id',$allStatusData->executive_committee_id)->value('fdId');
 
       $form_one_data = DB::table('fd_one_forms')
       ->where('id',$formOneDataId)->first();
@@ -3291,6 +3331,7 @@ $branchNames = DB::table('branches')
           <!--end new code -->
          </td>
      </tr>
+     @endif
      @endforeach
 
       <!-- executive committee end -->

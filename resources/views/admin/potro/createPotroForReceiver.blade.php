@@ -26,7 +26,7 @@
             max-width: 80%;
             margin: 20px auto;
         }
-		
+
 		thead, tbody, tfoot, tr, td, th
 		{
 			border-width: 1px !important;
@@ -254,6 +254,72 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
            ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
+}elseif($status == 'duplicate'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+
+->where('pnote_dupid',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'constitution'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_constitutions')
+
+->where('pnote_conid',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_constitutions')
+->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'committee'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_executive_committees')
+
+->where('pnote_exeid',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_executive_committees')
+->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
 }
 
 
@@ -434,7 +500,7 @@ $branchName = DB::table('branches')
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
  {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
-			<td style="width: 50%; text-align:center; border-width:0 !important">				
+			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
 					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
 					এনজিও বিষয়ক ব্যুরো  <br>
@@ -449,7 +515,7 @@ $branchName = DB::table('branches')
 		</tr>
 	</tbody>
 	</table>
-                                                                           
+
                                                                         </div>
 
                                                                         <?php
@@ -667,7 +733,7 @@ $branchName = DB::table('branches')
 			<td style="width: 25%; vertical-align: top; border-width:0 !important">
 			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
 			</td>
-			<td style="width: 50%; text-align:center; border-width:0 !important">				
+			<td style="width: 50%; text-align:center; border-width:0 !important">
 				<p>
 					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
 					এনজিও বিষয়ক ব্যুরো  <br>

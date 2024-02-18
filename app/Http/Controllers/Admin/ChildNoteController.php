@@ -69,6 +69,10 @@ use App\Models\ExecutiveCommitteeDak;
 use App\Models\ParentNotForExecutiveCommittee;
 use App\Models\ParentNoteForConstitution;
 use App\Models\ParentNoteForDuplicateCertificate;
+
+use App\Models\ChildNoteForConstitution;
+use App\Models\ChildNoteForDuplicateCertificate;
+use App\Models\ChildNoteForExecutiveCommittee;
 class ChildNoteController extends Controller
 {
 	 public function getdataforNothiList(Request $request){
@@ -2039,7 +2043,7 @@ $mainIdFdNineOne =0;
             $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
             $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
 
-            $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
 
 
             $fd_three_status_id =0;
@@ -2134,7 +2138,7 @@ $mainIdFdNineOne =0;
 
 
 
-            $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -3647,7 +3651,7 @@ $mainIdFdNineOne =0;
             $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
             $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
 
-            $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
 
 
             $fd_three_status_id =0;
@@ -3742,7 +3746,7 @@ $mainIdFdNineOne =0;
 
 
 
-            $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -5995,7 +5999,7 @@ $mainIdFdNineOne =0;
             $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
             $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
 
-            $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
 
 
             $fd_three_status_id =0;
@@ -6090,7 +6094,7 @@ $mainIdFdNineOne =0;
 
 
 
-            $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -7622,7 +7626,7 @@ $statusData=0;
                     $renew_status = 0;$name_change_status = 0;$r_status = 0;$form_member_data_doc_renew =0;
                     $get_all_data_adviser=0; $get_all_data_other=0;$get_all_data_adviser_bank=0;
 
-                    $officeDetail = ConsttutionOfficeSarok::where('pnote_conid',$id)->get();
+                    $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
 
 
                     $fd_three_status_id =0;
@@ -7717,7 +7721,7 @@ $statusData=0;
 
 
 
-                    $checkParent = ParentNoteForExecutiveCommittee::where('nothi_detail_id',$parentId)
+                    $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
                     ->where('serial_number',$nothiId)
                     ->get();
 
@@ -8503,7 +8507,7 @@ try{
 
  public function saveNothiPermission($data){
 
-   // dd($data);
+    //dd($data);
 
 
     $dt = new DateTime();
@@ -8691,7 +8695,7 @@ if($data['first_sender'] == 'first_sender'){
 if($data['button_value'] == 'return'){
 
     try{
-        DB::beginTransaction();
+
 
 
             $mainId = DB::table('nothi_details')
@@ -8863,17 +8867,17 @@ if($data['button_value'] == 'return'){
                  ]);
 
             }
-            DB::commit();
+
             return redirect()->back()->with('error','সফলভাবে ফেরত আনা হয়েছে');
         } catch (\Exception $e) {
-            DB::rollBack();
+
             return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
         }
         }elseif($data['button_value'] == 'returnOther'){
 
 
             try{
-                DB::beginTransaction();
+
 
 
             $mainId = DB::table('nothi_details')
@@ -9139,16 +9143,16 @@ if($data['button_value'] == 'return'){
      ->where('sender',Auth::guard('admin')->user()->id)->delete();
 
 
-     DB::commit();
+
      return redirect()->route('receiveNothi.index')->with('error','সফলভাবে ফেরত আনা হয়েছে');
     } catch (\Exception $e) {
-        DB::rollBack();
+
         return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
     }
         }else{
 
             try{
-                DB::beginTransaction();
+
             ///start new code
 
       $firstNothiSenderNew = NothiDetail::where('childId',$data['child_note_id'])
@@ -9622,7 +9626,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
-    }elseif($request->status == 'duplicate'){
+    }elseif($data['status'] == 'duplicate'){
 
         $saveNewData = ChildNoteForDuplicateCertificate::find($data['child_note_id']);
         $saveNewData->sent_status = 1;
@@ -9633,7 +9637,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         $saveNewData->save();
 
 
-    }elseif($request->status == 'constitution'){
+    }elseif($data['status'] == 'constitution'){
 
         $saveNewData = ChildNoteForConstitution::find($data['child_note_id']);
         $saveNewData->sent_status = 1;
@@ -9644,7 +9648,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         $saveNewData->save();
 
 
-    }elseif($request->status == 'committee'){
+    }elseif($data['status'] == 'committee'){
 
         $saveNewData = ChildNoteForExecutiveCommittee::find($data['child_note_id']);
         $saveNewData->sent_status = 1;
@@ -9657,11 +9661,12 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
 
     }
-    DB::commit();
+
         return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
 
     } catch (\Exception $e) {
-        DB::rollBack();
+
+        //return $e->getMessage();
         return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
     }
 
@@ -9675,7 +9680,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
 try{
 
-    DB::beginTransaction();
+
       $dt = new DateTime();
       $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
       $created_at = $dt->format('Y-m-d h:i:s ');
@@ -10216,7 +10221,7 @@ $mainSaveData->save();
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
 
-        }elseif($request->status == 'duplicate'){
+        }elseif($data['status'] == 'duplicate'){
 
             $saveNewData = ChildNoteForDuplicateCertificate::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
@@ -10227,7 +10232,7 @@ $mainSaveData->save();
             $saveNewData->save();
 
 
-        }elseif($request->status == 'constitution'){
+        }elseif($data['status'] == 'constitution'){
 
             $saveNewData = ChildNoteForConstitution::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
@@ -10238,7 +10243,7 @@ $mainSaveData->save();
             $saveNewData->save();
 
 
-        }elseif($request->status == 'committee'){
+        }elseif($data['status'] == 'committee'){
 
             $saveNewData = ChildNoteForExecutiveCommittee::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
@@ -10252,10 +10257,10 @@ $mainSaveData->save();
 
         }
      }
-     DB::commit();
+
     return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
 } catch (\Exception $e) {
-    DB::rollBack();
+  
     return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
 }
     }
@@ -10462,7 +10467,7 @@ DB::commit();
     public function update(Request $request,$id){
 //dd(34);
 try{
-    DB::beginTransaction();
+
         $data = $request->all();
 
     //dd($data);
@@ -10732,7 +10737,7 @@ try{
     ->where('admin_id',Auth::guard('admin')->user()->id)
     ->whereNull('child_id')
     ->update(array('child_id' => $childDataId));
-    DB::commit();
+
      if($request->final_button == 'সংশোধন ও খসড়া'){
 
         return redirect('admin/createPotro/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$request->noteId.'/'.$request->activeCode)->with('success','সফলভাবে সংশোধন করা হয়েছে');
@@ -10745,8 +10750,8 @@ try{
     }
 
 } catch (\Exception $e) {
-    DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+
+    return redirect('/admin')->with('error','323some thing went wrong ,this is why you redirect to dashboard');
 }
 
 

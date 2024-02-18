@@ -1,4 +1,98 @@
 <script>
+    $("[id^=nothiSearchcommittee]").keyup(function(){
+
+
+                var main_id = $(this).attr('id');
+                var result = main_id.slice(20);
+                var main_value = $(this).val();
+
+
+                var status = 'committee'
+
+                //alert(result);
+
+
+
+                $.ajax({
+                url: "{{ route('searchResultForDak') }}",
+                method: 'GET',
+                data: {main_value:main_value,result:result,status:status},
+                success: function(data) {
+
+                     $("#nothiSearchResultcommittee"+result).html(data);
+                }
+                });
+
+
+
+    });
+
+    </script>
+
+
+<script>
+    $("[id^=nothiSearchconstitution]").keyup(function(){
+
+
+                var main_id = $(this).attr('id');
+                var result = main_id.slice(23);
+                var main_value = $(this).val();
+
+
+                var status = 'constitution'
+
+                //alert(result);
+
+
+
+                $.ajax({
+                url: "{{ route('searchResultForDak') }}",
+                method: 'GET',
+                data: {main_value:main_value,result:result,status:status},
+                success: function(data) {
+
+                     $("#nothiSearchResultconstitution"+result).html(data);
+                }
+                });
+
+
+
+    });
+
+    </script>
+
+<script>
+    $("[id^=nothiSearchduplicate]").keyup(function(){
+
+
+                var main_id = $(this).attr('id');
+                var result = main_id.slice(20);
+                var main_value = $(this).val();
+
+
+                var status = 'duplicate'
+
+                //alert(main_id);
+
+
+
+                $.ajax({
+                url: "{{ route('searchResultForDak') }}",
+                method: 'GET',
+                data: {main_value:main_value,result:result,status:status},
+                success: function(data) {
+
+                     $("#nothiSearchResultduplicate"+result).html(data);
+                }
+                });
+
+
+
+    });
+
+    </script>
+
+<script>
     $("[id^=nothiSearchFdth]").keyup(function(){
 
 
@@ -915,6 +1009,184 @@ alertify.success('সফলভাবে কপি হয়েছে');
 });
 
 //fdthree end
+
+
+//duplicate start
+
+$("[id^=nothiJatSearchDuplicate]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(23);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatDuplicateCertificate') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultDuplicate"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatDuplicateFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+//duplicate end
+
+
+
+//constitution start
+
+$("[id^=nothiJatSearchConstitution]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(26);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatConstitution') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultConstitution"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatConstitutionFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+//constitution end
+
+
+//committee start
+
+$("[id^=nothiJatSearchCommittee]").keyup(function(){
+
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(23);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatCommittee') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultCommittee"+result).html(data);
+}
+});
+
+
+
+});
+
+$("[id^=nothijatCommitteeFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
+
+//committee end
 
 
 

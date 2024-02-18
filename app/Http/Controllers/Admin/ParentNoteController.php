@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Image;
 use Auth;
 use Hash;
-
+use DB;
 use App\Models\ParentNoteForFcOne;
 use App\Models\ParentNoteForFcTwo;
 use App\Models\ParentNoteForFdNine;
@@ -780,7 +780,7 @@ return 1;
 
     }elseif($request->status == 'duplicate'){
 
-        
+
 
         $saveNewData = new ParentNoteForDuplicateCertificate();
         $saveNewData->nothi_detail_id = $request->dakId;

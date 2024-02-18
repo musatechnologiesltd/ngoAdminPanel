@@ -2468,6 +2468,8 @@ $branchNames = DB::table('branches')
 
       @foreach($ngoStatusDuplicateCertificate as $p=>$allStatusData)
 
+      @if($allStatusData->nothi_jat_status == 1)
+
       <?php
 
                                                                                                     //new code
@@ -2698,6 +2700,9 @@ $branchNames = DB::table('branches')
        <!--end new code -->
       </td>
   </tr>
+  @else
+
+  @endif
   @endforeach
 
        <!-- duplicate certificate end -->
@@ -2706,7 +2711,7 @@ $branchNames = DB::table('branches')
       <!-- constitution start -->
 
       @foreach($ngoStatusConstitution as $p=>$allStatusData)
-
+      @if($allStatusData->nothi_jat_status == 1)
       <?php
 
                                                                                                     //new code
@@ -2721,7 +2726,8 @@ $branchNames = DB::table('branches')
 
  //end new code
 
- $formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')->where('id',$allStatusData->constitution_id)->value('fd_one_form_id');
+ $formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')
+ ->where('id',$allStatusData->constitution_id)->value('fdId');
 
    $form_one_data = DB::table('fd_one_forms')
    ->where('id',$formOneDataId)->first();
@@ -2750,7 +2756,7 @@ $branchNames = DB::table('branches')
 
 
 
-          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('constitutionInfo.show',$allStatusData->duplicate_certificate_id) }}';">দেখুন</button>
+          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('constitutionInfo.show',$allStatusData->constitution_id) }}';">দেখুন</button>
 
           <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'constitution']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
@@ -2937,6 +2943,10 @@ $branchNames = DB::table('branches')
        <!--end new code -->
       </td>
   </tr>
+  @else
+
+
+  @endif
   @endforeach
 
        <!-- constitution end -->
@@ -2946,7 +2956,7 @@ $branchNames = DB::table('branches')
           <!-- executive committee start -->
 
           @foreach($ngoStatusExecutiveCommittee as $p=>$allStatusData)
-
+          @if($allStatusData->nothi_jat_status == 1)
           <?php
 
                                                                                                         //new code
@@ -2961,7 +2971,8 @@ $branchNames = DB::table('branches')
 
      //end new code
 
-     $formOneDataId = DB::table('document_for_executive_committee_approvals')->where('id',$allStatusData->executive_committee_id)->value('fd_one_form_id');
+     $formOneDataId = DB::table('document_for_executive_committee_approvals')
+     ->where('id',$allStatusData->executive_committee_id)->value('fdId');
 
        $form_one_data = DB::table('fd_one_forms')
        ->where('id',$formOneDataId)->first();
@@ -2988,7 +2999,7 @@ $branchNames = DB::table('branches')
           <td style="text-align:right;">
 
 
-              <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->duplicate_certificate_id) }}';">দেখুন</button>
+              <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->executive_committee_id) }}';">দেখুন</button>
 
               <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('returnToAgotoDak',['id'=>$allStatusData->id,'status'=>'committee']) }}';"><i class="icofont icofont-undo"></i> ফেরত আনুন </button>
 
@@ -3174,6 +3185,10 @@ $branchNames = DB::table('branches')
            <!--end new code -->
           </td>
       </tr>
+
+      @else
+
+      @endif
       @endforeach
 
        <!-- executive committee end -->

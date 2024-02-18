@@ -30,7 +30,8 @@ $orginalReceverId= DB::table('duplicate_certificate_daks')
 //end new code
 
 
-                 $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fd_one_form_id)->first();
+                 $form_one_data = DB::table('fd_one_forms')
+                 ->where('id',$allStatusData->fd_one_form_id)->first();
 
                  $decesionNameId = DB::table('duplicate_certificate_daks')
     ->where('duplicate_certificate_id',$allStatusData->id)->value('dak_detail_id');

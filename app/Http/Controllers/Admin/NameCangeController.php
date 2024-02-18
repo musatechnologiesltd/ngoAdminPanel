@@ -321,6 +321,14 @@ class NameCangeController extends Controller
            ->where('user_id',$form_one_data->user_id)->first();
            $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
 
+
+           ///////new code 19 february
+
+$nameChangeDetail = DB::table('ngo_name_changes')
+->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+///end new code 19 february
            //dd($user_id);
 
            $newyear = date('y', strtotime($request->main_date));
@@ -338,7 +346,7 @@ class NameCangeController extends Controller
 $mainDate = $request->main_date;
            $file_Name_Custome = 'certificate';
            $pdf=PDF::loadView('admin.name_change_list.print_certificate_view',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
-'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
+           'nameChangeDetail'=>$nameChangeDetail,'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
 
@@ -418,7 +426,20 @@ try{
         $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
         $ngoTypeData = DB::table('ngo_type_and_languages')
         ->where('user_id',$form_one_data->user_id)->first();
-        $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+        $duration_list_all = DB::table('ngo_durations')
+        ->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+
+///////new code 19 february
+
+$nameChangeDetail = DB::table('ngo_name_changes')
+->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+///end new code 19 february
+
+
 
         //dd($user_id);
 
@@ -437,7 +458,7 @@ try{
 $mainDate = $request->main_date;
         $file_Name_Custome = 'certificate';
         $pdf=PDF::loadView('admin.name_change_list.printCertificateViewDemo',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
-'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
+        'nameChangeDetail'=>$nameChangeDetail,'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
 'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
 return $pdf->stream($file_Name_Custome.''.'.pdf');
 

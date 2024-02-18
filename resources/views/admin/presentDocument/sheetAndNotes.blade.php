@@ -227,7 +227,47 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                        ->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
                        $officeDetail = DB::table('fd_three_office_saroks')->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
 
+                    }elseif($status == 'duplicate'){
+
+$checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+                       ->where('pnote_dupid',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('duplicate_certificate_office_saroks')
+->where('pnote_dupid',$checkParentFirst->id)->get();
+
+}elseif($status == 'constitution'){
+
+$checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_constitutions')
+                       ->where('pnote_conid',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('constitution_office_saroks')
+->where('pnote_conid',$checkParentFirst->id)->get();
+
+}elseif($status == 'committee'){
+
+$checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_executive_committees')
+                       ->where('pnote_exeid',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('executive_committee_office_saroks')
+->where('pnote_exeid',$checkParentFirst->id)->get();
+
 }
+
 
  ?>
 

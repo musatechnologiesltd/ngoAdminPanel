@@ -16,7 +16,8 @@ $orginalReceverName= DB::table('admins')
 
 //end new code
 
-$formOneDataId = DB::table('document_for_executive_committee_approvals')->where('id',$allStatusData->executive_committee_id)->value('fd_one_form_id');
+$formOneDataId = DB::table('document_for_executive_committee_approvals')
+->where('id',$allStatusData->executive_committee_id)->value('fdId');
 
 $form_one_data = DB::table('fd_one_forms')
 ->where('id',$formOneDataId)->first();
@@ -44,7 +45,7 @@ $decesionName = DB::table('dak_details')
 
 
      <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->executive_committee_id) }}';">দেখুন</button>
-     
+
 
 
           <!--new code-->

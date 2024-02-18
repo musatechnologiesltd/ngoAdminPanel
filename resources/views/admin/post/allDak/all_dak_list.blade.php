@@ -2464,25 +2464,11 @@ $branchNames = DB::table('branches')
       </td>
       <td style="text-align:right;">
 
-          @if($allStatusData->original_recipient == 1)
-
-          <button type="button" class="btn-xs btn btn-primary"
-                         data-toggle="tooltip" data-placement="top"
-                         title="নথিতে উপস্থাপন করুন"
-                         data-bs-toggle="modal"
-                         data-original-title="" data-bs-target="#fdthreemyModalduplicate{{ $allStatusData->id }}">
-                     <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
-                 </button>
-
-                 @include('admin.post.duplicateNothiModal')
 
 
-          {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdThree','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'duplicate','id'=>$allStatusData->duplicate_certificate_id]) }}';">প্রেরণ</button>
+
           <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('duplicateCertificate.show',$allStatusData->duplicate_certificate_id) }}';">দেখুন</button>
-          @else
-          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('duplicateCertificate.show',$allStatusData->duplicate_certificate_id) }}';">দেখুন</button>
-          @endif
+
 
 
                <!--new code-->
@@ -2689,7 +2675,8 @@ $branchNames = DB::table('branches')
 
  //end new code
 
- $formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')->where('id',$allStatusData->constitution_id)->value('fd_one_form_id');
+ $formOneDataId = DB::table('document_for_amendment_or_approval_of_constitutions')
+ ->where('id',$allStatusData->constitution_id)->value('fdId');
 
    $form_one_data = DB::table('fd_one_forms')
    ->where('id',$formOneDataId)->first();
@@ -2715,25 +2702,9 @@ $branchNames = DB::table('branches')
       </td>
       <td style="text-align:right;">
 
-          @if($allStatusData->original_recipient == 1)
 
-          <button type="button" class="btn-xs btn btn-primary"
-                         data-toggle="tooltip" data-placement="top"
-                         title="নথিতে উপস্থাপন করুন"
-                         data-bs-toggle="modal"
-                         data-original-title="" data-bs-target="#fdthreemyModalconstitution{{ $allStatusData->id }}">
-                     <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
-                 </button>
-
-                 @include('admin.post.constitutionNothiModal')
-
-
-          {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdThree','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'constitution','id'=>$allStatusData->constitution_id]) }}';">প্রেরণ</button>
           <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('constitutionInfo.show',$allStatusData->constitution_id) }}';">দেখুন</button>
-          @else
-          <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('constitutionInfo.show',$allStatusData->constitution_id) }}';">দেখুন</button>
-          @endif
+
 
 
                <!--new code-->
@@ -2941,7 +2912,8 @@ $branchNames = DB::table('branches')
 
      //end new code
 
-     $formOneDataId = DB::table('document_for_executive_committee_approvals')->where('id',$allStatusData->executive_committee_id)->value('fd_one_form_id');
+     $formOneDataId = DB::table('document_for_executive_committee_approvals')
+     ->where('id',$allStatusData->executive_committee_id)->value('fdId');
 
        $form_one_data = DB::table('fd_one_forms')
        ->where('id',$formOneDataId)->first();
@@ -2967,25 +2939,8 @@ $branchNames = DB::table('branches')
           </td>
           <td style="text-align:right;">
 
-              @if($allStatusData->original_recipient == 1)
-
-              <button type="button" class="btn-xs btn btn-primary"
-                             data-toggle="tooltip" data-placement="top"
-                             title="নথিতে উপস্থাপন করুন"
-                             data-bs-toggle="modal"
-                             data-original-title="" data-bs-target="#fdthreemyModalcommittee{{ $allStatusData->id }}">
-                         <i class="fa fa-reply"></i> নথিতে উপস্থাপন করুন
-                     </button>
-
-                     @include('admin.post.committeeNothiModal')
-
-
-              {{-- <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('presentDocument',['status'=>'fdThree','id'=>$allStatusData->id]) }}';">নথিতে উপস্থাপন করুন</button> --}}
-              <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'committee','id'=>$allStatusData->executive_committee_id]) }}';">প্রেরণ</button>
               <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->executive_committee_id) }}';">দেখুন</button>
-              @else
-              <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->executive_committee_id) }}';">দেখুন</button>
-              @endif
+              
 
 
                    <!--new code-->
