@@ -44,6 +44,34 @@
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_registrations')->where('parent_note_regid',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                         <tr>
                             <td>
                                 <div class="accordion-item">
@@ -58,6 +86,7 @@
                                                                 <span style="text-align:left;"> <span
                                                                             style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                                 <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
+                                                                <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
                                                                 </span>
                                         </div>
                                     </h2>
@@ -273,6 +302,37 @@ $allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id
 @if(!$nothiLists)
 
 @else
+
+<?php
+$getLastId = DB::table('parent_note_for_renews')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+
+
+
+
+?>
                         <tr>
                             <td>
                                 <div class="accordion-item">
@@ -287,7 +347,9 @@ $allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id
                                                                 <span style="text-align:left;"> <span
                                                                             style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                                 <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
+                                                                <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
                                                                 </span>
+
                                         </div>
                                     </h2>
                                     <div id="flush-collapse{{ $nothiLists1->id }}"
@@ -500,6 +562,33 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+<?php
+$getLastId = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -514,14 +603,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsenameChange{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -590,6 +680,34 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -604,14 +722,16 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefdNine{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -681,6 +801,34 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -695,14 +843,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefdNineOne{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -771,6 +920,33 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+<?php
+$getLastId = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -785,14 +961,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefdSeven{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -861,6 +1038,33 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+<?php
+$getLastId = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -875,14 +1079,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefdSix{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -949,6 +1154,34 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -963,14 +1196,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefcon{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -1038,6 +1272,34 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -1052,14 +1314,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefctw{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -1127,6 +1390,34 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -1141,14 +1432,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsefdt{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -1216,6 +1508,34 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+
+<?php
+$getLastId = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -1230,14 +1550,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsedup{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -1304,6 +1625,33 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+<?php
+$getLastId = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_constitutions')->where('pnote_conid',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -1318,14 +1666,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapsecon{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>
@@ -1395,6 +1744,33 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
 @if(!$nothiLists)
 
 @else
+
+<?php
+$getLastId = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$nothiLists1->dakId)
+->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->value('id');
+
+
+
+$getLastIdDate = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$getLastId)
+//->where('serial_number',$nothiLists1->nothId)
+->orderBy('id','desc')
+->first();
+
+if(!$getLastIdDate){
+
+$mainCodeDate ='';
+
+}else{
+
+
+    $mainCodeDate =App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($getLastIdDate->created_at))).' '.$getLastIdDate->amPmValue;
+
+}
+
+
+?>
                 <tr>
                     <td>
                         <div class="accordion-item">
@@ -1409,14 +1785,15 @@ $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first(
                                                         <span style="text-align:left;"> <span
                                                                     style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
                                                         <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                        </span>
+                                                        <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+                                                    </span>
                                 </div>
                             </h2>
                             <div id="flush-collapseccc{{ $key+1 }}"
                                  class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="d-flex mt-3">
-                                        <button onclick="location.href = '{{ route('addParentNoteFromView',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                        <button onclick="location.href = '{{ route('addParentNote',['status'=>$nothiLists1->dakType,'dakId'=>$nothiLists1->dakId,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                             <i class="fa fa-plus"></i>
                                             নতুন নোট
                                         </button>

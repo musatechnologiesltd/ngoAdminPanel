@@ -16,7 +16,7 @@
       <h5 class="mb-0">
         <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapse{{ $key+1 }}" aria-expanded="true" aria-controls="collapseFour">
 
-            অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($activeCode.'.'.$key+1) }}</span> <span style="padding-right:40px;"><span style="font-size: 10px;padding-right:60px;">({{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->created_at))).')'  }}</span>
+            অনুচ্ছেদ#<span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($activeCode.'.'.$key+1) }}</span> <span style="padding-right:40px;"><span style="font-size: 10px;padding-right:60px;">({{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->created_at))).' '.$childNoteNewLists->amPmValue.')'  }}</span>
         </button>
 
         @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
@@ -31,13 +31,22 @@
 
 
 @else
-<!-- new delete code -->
-<a class="btn-sm btn btn-primary"  onclick="deleteTag({{ $childNoteNewLists->id}})">
+
+@if($childNoteNewLists->sent_status == 1)
+
+@else
+    <!-- new delete code -->
+    <a class="btn-sm btn btn-primary"  onclick="deleteTag({{ $childNoteNewLists->id}})">
 
 
     <i class="fa fa-trash" aria-hidden="true"></i>
 
 </a>
+@endif
+
+
+
+
 
 
 <form id="delete-form-{{ $childNoteNewLists->id }}" action="{{ route('deleteAllParagraph',['id'=>$childNoteNewLists->id,'status'=>$status]) }}" method="POST" style="display: none;">
@@ -121,7 +130,7 @@
             <img src="{{ asset('/') }}{{ $backSignDetail->admin_sign }}" alt="" height="50" width="180">
             <div style="height:1px; width:100%; background-color: #BC1133"></div>
             <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
-            {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($childNoteNewLists->updated_at))) }}<br>
+                <span style="font-size: 12px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->updated_at))).' '.$childNoteNewLists->amPmValueUpdate }}</span><br>
             {{ $backSignDetail->admin_name_ban }} <br>
             {{ $desiName1 }} <br>
             {{ $branchName1 }}</p>
@@ -201,7 +210,7 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)
     <img src="{{ asset('/') }}{{ $mainSenderIdNews22->admin_sign }}" alt="" height="50" width="180">
     <div style="height:1px; width:100%; background-color: #BC1133"></div>
     <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
-    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($childNoteNewLists->updated_at))) }}<br>
+        <span style="font-size: 12px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->updated_at))).' '.$childNoteNewLists->amPmValueUpdate }}</span><br>
     {{ $mainSenderIdNews22->admin_name_ban }} <br>
     {{ $desiName1 }} <br>
     {{ $branchName1 }}</p>
@@ -257,15 +266,23 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNewss44->e_branch)
 <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
 
     @if($mainSenderIdNewss44->seal_status == 1)
-{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($mainSenderIdNewss44->updated_at))) }}<br>
+    <span style="font-size: 12px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($mainSenderIdNewss44->updated_at))).' '.$mainSenderIdNewss44->amPmValueUpdate }}</span><br>
 
 @else
 
 
 @endif
+<!-- code for delete status --->
+@if($mainSenderIdNewss44->delete_status == 1)
+<del>{{ $mainSenderIdNewss44->e_name }} <br>
+{{ $desiName1 }} <br>
+{{ $branchName1 }}</del></p>
+@else
 {{ $mainSenderIdNewss44->e_name }} <br>
 {{ $desiName1 }} <br>
 {{ $branchName1 }}</p>
+@endif
+<!-- code for delete status -->
 </div>
 </div>
 
@@ -296,6 +313,53 @@ $unsentAtt = DB::table('note_attachments')
     <li><a target="_blank" href="{{ $unsentAtts->link }}"><i class="fa fa-paperclip"></i></a> {{ $unsentAtts->title }}</li>
     @endforeach
  </ul>
+
+ <!-- sarok number-->
+
+<?php
+$potroZariListValueNew =  DB::table('nothi_details')
+                ->where('noteId',$id)
+                ->where('nothId',$nothiId)
+                ->where('dakId',$parentId)
+                ->where('dakType',$status)
+
+                ->value('zari_permission_status');
+
+
+?>
+@if($potroZariListValueNew == 1)
+ @if(count($childNoteNewList) == ($key+1))
+ @foreach($officeDetail as $officeDetails)
+ <?php
+$potrangshoDraft =  DB::table('potrangsho_drafts')
+->where('sarokId',$officeDetails->id)->where('status',$status)
+  ->orderBy('id','desc')->first();
+
+ ?>
+ <style>
+    .mCss p{
+        color: #BC1133 !important;
+    }
+ </style>
+
+                 <span style="font-size: 15px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->updated_at))).' '.$childNoteNewLists->amPmValueUpdate }}</span>
+ @if(!$potrangshoDraft)
+ <p style="color: #BC1133 !important;"><span >অফিস স্মারক নম্বর:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}, <span style="color: #BC1133 !important;">প্রেরণের তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($childNoteNewLists->updated_at)))}}</span></p>
+ @else
+ <div style="display: flex;" class="mCss">
+ @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+ <p style="color: #BC1133 !important;"><span >অফিস স্মারক নম্বর:</span> {!! $potrangshoDraft->sarok_number !!}, <span style="color: #BC1133 !important;">প্রেরণের তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($childNoteNewLists->updated_at)))}}</span></p>
+ @else
+ <p style="color: #BC1133 !important;">অফিস স্মারক নম্বর:{!! $officeDetails->sarok_number !!}, <span style="color: #BC1133 !important;">প্রেরণের তারিখ: {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y', strtotime($childNoteNewLists->updated_at)))}}</span></p>
+ @endif
+ </div>
+
+ @endif
+
+@endforeach
+@endif
+@endif
+ <!-- sarok number -->
     <div class="d-flex flex-row-reverse mt-3">
 
 
@@ -304,11 +368,33 @@ $unsentAtt = DB::table('note_attachments')
 
         @if($childNoteNewLists->receiver_id == $childNoteNewLists->admin_id )
 
+
+        <!-- code for  delete status ---->
+
+
+<?php
+
+
+$checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
+->where('nothiId',$nothiId)
+->where('childId',$childNoteNewLists->id)
+->where('receiver',Auth::guard('admin')->user()->id)
+->where('status',$status)
+->orderBy('id','desc')
+->where('seal_status',2) ->value('delete_status');
+
+?>
+
+<!-- code for delete status-->
+@if($checkPreviousCodeDupdateBlade == 1)
+
+@else
         <button data-bs-toggle="modal"
         data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
             <i class="fa fa-send"></i>
             নথি প্রেরণ
         </button>
+        @endif
 
         <!-- nothi sender list -->
 @include('admin.presentDocument.retunModal')
@@ -319,11 +405,33 @@ $unsentAtt = DB::table('note_attachments')
 
 <!--  new code 11 february  start -->
 @if(Auth::guard('admin')->user()->id == $childNoteNewLists->admin_id )
+
+<!-- code for  delete status ---->
+
+
+<?php
+
+
+$checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
+->where('nothiId',$nothiId)
+->where('childId',$childNoteNewLists->id)
+->where('receiver',Auth::guard('admin')->user()->id)
+->where('status',$status)
+->orderBy('id','desc')
+->where('seal_status',2) ->value('delete_status');
+
+?>
+
+<!-- code for delete status-->
+@if($checkPreviousCodeDupdateBlade == 1)
+
+@else
 <button data-bs-toggle="modal"
         data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
             <i class="fa fa-send"></i>
             নথি প্রেরণ
         </button>
+        @endif
 
         <!-- nothi sender list -->
 @include('admin.presentDocument.retunModal')
@@ -363,13 +471,33 @@ $unsentAtt = DB::table('note_attachments')
 @endif
         @else
 
+<!-- code for  delete status ---->
 
+
+<?php
+
+
+$checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
+->where('nothiId',$nothiId)
+->where('childId',$childNoteNewLists->id)
+->where('receiver',Auth::guard('admin')->user()->id)
+->where('status',$status)
+->orderBy('id','desc')
+->where('seal_status',2) ->value('delete_status');
+
+?>
+
+<!-- code for delete status-->
+
+@if($checkPreviousCodeDupdateBlade == 1)
+
+@else
 <button data-bs-toggle="modal"
 data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
     <i class="fa fa-send"></i>
     নথি প্রেরণ
 </button>
-
+@endif
 
 @endif
 

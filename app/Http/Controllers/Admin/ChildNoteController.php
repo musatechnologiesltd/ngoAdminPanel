@@ -8124,10 +8124,31 @@ $childNoteNewListValue = DB::table('child_note_for_fd_threes')
                 // ->where('nothId',$nothiId)
                 // ->where('dakId',$parentId)
                 // ->where('dakType',$status)->value('id'));
-//dd(12)
+//dd(12);
 try {
     //start the transaction
     DB::beginTransaction();
+
+
+    //new code 24 february
+
+
+    $senderIdNews = DB::table('seal_statuses')
+->where('noteId',$id)
+->where('nothiId',$nothiId)
+->where('receiver',Auth::guard('admin')->user()->id)
+->where('status',$status)
+->where('seal_status',2)
+->where('childId',$childnote)
+->update([
+
+    'seal_status' =>1
+ ]);
+
+
+    // end new code 24 february
+
+
                 DB::table('nothi_details')
                 ->where('noteId',$id)
                 ->where('nothId',$nothiId)
@@ -8513,6 +8534,16 @@ try{
     $dt = new DateTime();
     $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
     $created_at = $dt->format('Y-m-d h:i:s ');
+
+    $amPmValue = $dt->format('a');
+   // $amPmValueFinal = 0;
+    if($amPmValue == 'pm'){
+
+        $amPmValueFinal = 'অপরাহ্ন';
+    }else{
+        $amPmValueFinal = 'পূর্বাহ্ন';
+
+    }
 
 
         $lastSarokValue = PotrangshoDraft::where('nothiId',$data['nothiId'])
@@ -9237,7 +9268,7 @@ if($data['button_value'] == 'return'){
       $mainSaveData ->seal_status = 2;
       $mainSaveData ->receiver = $data['nothiPermissionId'];
       $mainSaveData ->created_at= $created_at;
-
+      $mainSaveData ->amPmValue = $amPmValueFinal;
       $mainSaveData ->e_name= $adminName;
       $mainSaveData ->e_designation= $adminNameDesi;
       $mainSaveData ->e_branch= $adminNamebran;
@@ -9256,7 +9287,7 @@ if($data['button_value'] == 'return'){
       ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
       ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
       ->orderBy('id','desc')
-      ->update(array('seal_status' => 1,'updated_at'=>$created_at));
+      ->update(array('seal_status' => 1,'updated_at'=>$created_at,'amPmValueUpdate'=>$amPmValueFinal));
 
 
 
@@ -9293,7 +9324,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
     $mainSaveData ->seal_status = 2;
     $mainSaveData ->created_at= $created_at;
     $mainSaveData ->receiver = $data['nothiPermissionId'];
-
+    $mainSaveData ->amPmValue = $amPmValueFinal;
     $mainSaveData ->e_name= $adminName;
       $mainSaveData ->e_designation= $adminNameDesi;
       $mainSaveData ->e_branch= $adminNamebran;
@@ -9540,6 +9571,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
             $saveNewData = ChildNoteForRegistration::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
@@ -9551,6 +9583,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         $saveNewData = ChildNoteForRenew::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9560,6 +9593,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForNameChange::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9569,6 +9603,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFdNine::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9578,6 +9613,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFdNineOne::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9587,6 +9623,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFdSix::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9596,6 +9633,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFdSeven::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9605,6 +9643,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFcOne::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9614,6 +9653,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFcTwo::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9623,6 +9663,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
          $saveNewData = ChildNoteForFdThree::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -9631,6 +9672,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         $saveNewData = ChildNoteForDuplicateCertificate::find($data['child_note_id']);
         $saveNewData->sent_status = 1;
         $saveNewData ->updated_at= $created_at;
+        $saveNewData ->amPmValueUpdate=$amPmValueFinal;
         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
         $saveNewData->receiver_id = $data['nothiPermissionId'];
 
@@ -9642,6 +9684,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         $saveNewData = ChildNoteForConstitution::find($data['child_note_id']);
         $saveNewData->sent_status = 1;
      $saveNewData ->updated_at= $created_at;
+     $saveNewData ->amPmValueUpdate=$amPmValueFinal;
      $saveNewData->sender_id = Auth::guard('admin')->user()->id;
      $saveNewData->receiver_id = $data['nothiPermissionId'];
 
@@ -9653,6 +9696,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
         $saveNewData = ChildNoteForExecutiveCommittee::find($data['child_note_id']);
         $saveNewData->sent_status = 1;
         $saveNewData ->updated_at= $created_at;
+        $saveNewData ->amPmValueUpdate=$amPmValueFinal;
         $saveNewData->sender_id = Auth::guard('admin')->user()->id;
         $saveNewData->receiver_id = $data['nothiPermissionId'];
 
@@ -9685,12 +9729,67 @@ try{
       $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
       $created_at = $dt->format('Y-m-d h:i:s ');
 
+      $amPmValue = $dt->format('a');
+      //$amPmValueFinal = 0;
+      if($amPmValue == 'pm'){
+
+          $amPmValueFinal = 'অপরাহ্ন';
+      }else{
+          $amPmValueFinal = 'পূর্বাহ্ন';
+
+      }
+
          $secondLastValue = ArticleSign::orderBy('id','desc')->value('back_status');
 
 
 
 
+//dd($data);
 
+//23 february did not work
+$getPreviusIdForDelete = DB::table('nothi_details')
+//->where('childId',$data['child_note_id'])
+->where('noteId',$data['noteId'])
+->where('nothId',$data['nothiId'])
+->where('dakId',$data['dakId'])
+->where('dakType',$data['status'])
+->whereNull('sent_status')
+->where('view_status',1)
+->where('sender',$data['nothiPermissionId'])
+->where('receiver',Auth::guard('admin')->user()->id)
+->orderBy('id','desc')
+->value('childId');
+//dd($getPreviusIdForDelete);
+
+
+$getPreviusIdForDeleteUpdate = DB::table('nothi_details')
+->where('childId',$getPreviusIdForDelete)
+->where('noteId',$data['noteId'])
+->where('nothId',$data['nothiId'])
+->where('dakId',$data['dakId'])
+->where('dakType',$data['status'])
+->whereNull('sent_status')
+->where('view_status',1)
+->where('sender',$data['nothiPermissionId'])
+->where('receiver',Auth::guard('admin')->user()->id)
+//->orderBy('id','desc')
+->update([
+
+    'sent_status' =>1
+ ]);
+
+
+$checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])
+->where('nothiId',$data['nothiId'])->where('childId',$getPreviusIdForDelete)
+->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+->orderBy('id','desc')
+->where('seal_status',2) ->update([
+
+    'delete_status' =>1
+ ]);
+
+
+//23 february did not work
 
 
          $senderIdNew = DB::table('nothi_details')
@@ -9710,6 +9809,7 @@ try{
         ->where('noteId',$data['noteId'])
  ->where('nothId',$data['nothiId'])
  ->where('dakId',$data['dakId'])
+ ->where('receiver',Auth::guard('admin')->user()->id )
  ->where('dakType',$data['status'])->orderBy('id','desc')->value('receiver');
 
         //dd($senderIdNewPre);
@@ -9779,13 +9879,11 @@ $mainSaveData ->status = $data['status'];
 $mainSaveData ->seal_status = 2;
 $mainSaveData ->created_at= $created_at;
 $mainSaveData ->receiver = $data['nothiPermissionId'];
-
+$mainSaveData ->amPmValue = $amPmValueFinal;
 $mainSaveData ->e_name= $adminName;
-      $mainSaveData ->e_designation= $adminNameDesi;
-      $mainSaveData ->e_branch= $adminNamebran;
-      $mainSaveData ->e_sign= $adminNameSign;
-
-
+$mainSaveData ->e_designation= $adminNameDesi;
+$mainSaveData ->e_branch= $adminNamebran;
+$mainSaveData ->e_sign= $adminNameSign;
 $mainSaveData->save();
 
 
@@ -9798,7 +9896,7 @@ if($checkPreviousCode == 2){
 ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
 ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
 ->orderBy('id','desc')
-->update(array('seal_status' => 1,'updated_at'=>$created_at));
+->update(array('seal_status' => 1,'updated_at'=>$created_at,'amPmValueUpdate' => $amPmValueFinal));
 
 
 //more code start
@@ -9831,7 +9929,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
     $mainSaveData ->seal_status = 2;
     $mainSaveData ->created_at= $created_at;
     $mainSaveData ->receiver = $data['nothiPermissionId'];
-
+    $mainSaveData ->amPmValue = $amPmValueFinal;
     $mainSaveData ->e_name= $adminName;
       $mainSaveData ->e_designation= $adminNameDesi;
       $mainSaveData ->e_branch= $adminNamebran;
@@ -10135,6 +10233,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForRegistration::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
@@ -10145,6 +10244,7 @@ $mainSaveData->save();
 
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
@@ -10163,6 +10263,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForFdNine::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
@@ -10172,6 +10273,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForFdNineOne::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
@@ -10181,6 +10283,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForFdSix::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
@@ -10190,6 +10293,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForFdSeven::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
@@ -10199,6 +10303,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForFcOne::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];;
             $saveNewData->save();
@@ -10208,6 +10313,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForFcTwo::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
             $saveNewData->save();
@@ -10217,6 +10323,7 @@ $mainSaveData->save();
          $saveNewData = ChildNoteForFdThree::find($data['child_note_id']);
          $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
          $saveNewData->save();
@@ -10226,6 +10333,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForDuplicateCertificate::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
 
@@ -10237,6 +10345,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForConstitution::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
          $saveNewData ->updated_at= $created_at;
+         $saveNewData ->amPmValueUpdate=$amPmValueFinal;
          $saveNewData->sender_id = Auth::guard('admin')->user()->id;
          $saveNewData->receiver_id = $data['nothiPermissionId'];
 
@@ -10248,6 +10357,7 @@ $mainSaveData->save();
             $saveNewData = ChildNoteForExecutiveCommittee::find($data['child_note_id']);
             $saveNewData->sent_status = 1;
             $saveNewData ->updated_at= $created_at;
+            $saveNewData ->amPmValueUpdate=$amPmValueFinal;
             $saveNewData->sender_id = Auth::guard('admin')->user()->id;
             $saveNewData->receiver_id = $data['nothiPermissionId'];
 
@@ -10260,7 +10370,7 @@ $mainSaveData->save();
 
     return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
 } catch (\Exception $e) {
-  
+
     return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
 }
     }
@@ -10275,8 +10385,19 @@ $mainSaveData->save();
             DB::beginTransaction();
         $dt = new DateTime();
         $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
-        $created_at = $dt->format('Y-m-d h:i:s ');
+        $created_at = $dt->format('Y-m-d h:i:s');
 
+        //$amPmValueFinal = 0;
+        $amPmValue = $dt->format('a');
+
+        if($amPmValue == 'pm'){
+
+            $amPmValueFinal = 'অপরাহ্ন';
+        }else{
+            $amPmValueFinal = 'পূর্বাহ্ন';
+
+        }
+//dd($amPmValueFinal);
 
         if($request->status == 'registration'){
 
@@ -10285,7 +10406,8 @@ $mainSaveData->save();
             $saveNewData->parent_note_regid = $request->parentNoteId;
             $saveNewData->serial_number = 0;
             $saveNewData->description = $request->mainPartNote;
-            $saveNewData->created_at =$created_at;
+            $saveNewData->created_at = $created_at;
+            $saveNewData->amPmValue = $amPmValueFinal;
             $saveNewData->admin_id =Auth::guard('admin')->user()->id;
             $saveNewData->save();
 
@@ -10298,6 +10420,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10310,6 +10433,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10322,6 +10446,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10333,6 +10458,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10343,6 +10469,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10353,6 +10480,7 @@ $mainSaveData->save();
   $saveNewData->serial_number = 0;
   $saveNewData->description = $request->mainPartNote;
   $saveNewData->created_at =$created_at;
+  $saveNewData->amPmValue = $amPmValueFinal;
   $saveNewData->admin_id =Auth::guard('admin')->user()->id;
   $saveNewData->save();
 
@@ -10364,6 +10492,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10375,6 +10504,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
          $saveNewData->save();
 
@@ -10386,7 +10516,7 @@ $mainSaveData->save();
          $saveNewData->serial_number = 0;
          $saveNewData->description = $request->mainPartNote;
          $saveNewData->created_at =$created_at;
-
+         $saveNewData->amPmValue = $amPmValueFinal;
          $saveNewData->admin_id =Auth::guard('admin')->user()->id;
 
          $saveNewData->save();
@@ -10402,7 +10532,7 @@ $mainSaveData->save();
         $saveNewData->serial_number = 0;
         $saveNewData->description = $request->mainPartNote;
         $saveNewData->created_at =$created_at;
-
+        $saveNewData->amPmValue = $amPmValueFinal;
         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
 
         $saveNewData->save();
@@ -10415,7 +10545,7 @@ $mainSaveData->save();
         $saveNewData->serial_number = 0;
         $saveNewData->description = $request->mainPartNote;
         $saveNewData->created_at =$created_at;
-
+        $saveNewData->amPmValue = $amPmValueFinal;
         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
 
         $saveNewData->save();
@@ -10428,7 +10558,7 @@ $mainSaveData->save();
         $saveNewData->serial_number = 0;
         $saveNewData->description = $request->mainPartNote;
         $saveNewData->created_at =$created_at;
-
+        $saveNewData->amPmValue = $amPmValueFinal;
         $saveNewData->admin_id =Auth::guard('admin')->user()->id;
 
         $saveNewData->save();

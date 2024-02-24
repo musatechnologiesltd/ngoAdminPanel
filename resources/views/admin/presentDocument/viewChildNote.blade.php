@@ -280,7 +280,7 @@
             aria-selected="false"><i
     class="icofont icofont-file-document"></i>নির্বাহী কমিটি অনুমোদনের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
 
-                                        @endif
+                                        
 
                                                   @endif
 
@@ -1078,7 +1078,7 @@ $potroZariListValue =  DB::table('nothi_details')
        </div>
        @endif
 
-       @endif
+
 
        <!-- end new code-->
                             </div>

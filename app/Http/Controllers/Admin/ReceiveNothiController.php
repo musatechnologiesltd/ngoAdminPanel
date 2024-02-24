@@ -16,11 +16,83 @@ class ReceiveNothiController extends Controller
         ->where('dakType','renew')->latest()->get();
 
 
-        $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+        $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+        ->whereNull('sent_status')
         ->where('dakType','registration')->latest()->get();
 
 
-            return view('admin.receiveNothi.index',compact('senderNothiList','senderNothiListRegistration'));
+
+        $senderNothiListfdNine = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+        ->whereNull('sent_status')
+        ->where('dakType','fdNine')->latest()->get();
+
+
+         $senderNothiListnameChange = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','nameChange')->latest()->get();
+
+
+         $senderNothiListfdNineOne = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','fdNineOne')->latest()->get();
+
+
+
+
+         $senderNothiListfdSix= NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','fdSix')->latest()->get();
+
+         $senderNothiListfdSeven = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','fdSeven')->latest()->get();
+
+
+         $senderNothiListfcOne = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','fcOne')->latest()->get();
+
+
+         $senderNothiListfctwo = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','fcTwo')->latest()->get();
+
+
+         $senderNothiListfdThree = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','fdThree')->latest()->get();
+
+
+         $senderNothiListduplicate = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','duplicate')->latest()->get();
+
+
+         $senderNothiListconstitution = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','constitution')->latest()->get();
+
+
+         $senderNothiListcommittee = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+         ->whereNull('sent_status')
+        ->where('dakType','committee')->latest()->get();
+
+
+            return view('admin.receiveNothi.index',compact('senderNothiListfdNine',
+            'senderNothiListnameChange',
+            'senderNothiListfdNineOne',
+            'senderNothiListfdSix',
+
+            'senderNothiListfdSeven',
+
+            'senderNothiListfcOne',
+            'senderNothiListfctwo',
+            'senderNothiListfdThree',
+            'senderNothiListduplicate',
+            'senderNothiListconstitution',
+            'senderNothiListcommittee',
+            'senderNothiListRegistration',
+            'senderNothiList'));
 
         } catch (\Exception $e) {
             return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');

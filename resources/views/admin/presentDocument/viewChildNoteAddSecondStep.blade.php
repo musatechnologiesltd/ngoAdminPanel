@@ -92,6 +92,8 @@ $paraSentStatusNewOneTwo = DB::table('seal_statuses')
 
 
  @endif
+
+
       @endforeach
 
 

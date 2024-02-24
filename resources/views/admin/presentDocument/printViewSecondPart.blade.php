@@ -43,7 +43,7 @@ $branchName1 = DB::table('branches')->where('id',$backSignDetail->branch_id)->va
     <img src="{{ asset('/') }}{{ $backSignDetail->admin_sign }}" alt="" height="50" width="180">
     <div style="height:1px; width:100%; background-color: #BC1133"></div>
     <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
-    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($childNoteNewLists->updated_at))) }}<br>
+        <span style="font-size: 12px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->updated_at))).' '.$childNoteNewLists->amPmValueUpdate }}</span><br>
     {{ $backSignDetail->admin_name_ban }} <br>
     {{ $desiName1 }} <br>
     {{ $branchName1 }}</p>
@@ -134,7 +134,7 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNews22->branch_id)
     <img src="{{ asset('/') }}{{ $mainSenderIdNews22->admin_sign }}" alt="" height="50" width="180">
     <div style="height:1px; width:100%; background-color: #BC1133"></div>
     <p style="line-height:1.4; color: #BC1133; font-size: 14px;text-align: center;">
-    {{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($childNoteNewLists->updated_at))) }}<br>
+        <span style="font-size: 12px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($childNoteNewLists->updated_at))).' '.$childNoteNewLists->amPmValueUpdate }}</span><br>
     {{ $mainSenderIdNews22->admin_name_ban }} <br>
     {{ $desiName1 }} <br>
     {{ $branchName1 }}</p>
@@ -190,15 +190,23 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNewss44->e_branch)
 <p style="line-height:1.4; color: #BC1133; font-size: 14px;">
 
     @if($mainSenderIdNewss44->seal_status == 1)
-{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y H:i:s', strtotime($mainSenderIdNewss44->updated_at))) }}<br>
+    <span style="font-size: 12px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/y h:i:s', strtotime($mainSenderIdNewss44->updated_at))).' '.$mainSenderIdNewss44->amPmValueUpdate }}</span><br>
 
 @else
 
 
 @endif
+<!-- code for delete status --->
+@if($mainSenderIdNewss44->delete_status == 1)
+<del>{{ $mainSenderIdNewss44->e_name }} <br>
+{{ $desiName1 }} <br>
+{{ $branchName1 }}</del></p>
+@else
 {{ $mainSenderIdNewss44->e_name }} <br>
 {{ $desiName1 }} <br>
 {{ $branchName1 }}</p>
+@endif
+<!-- code for delete status -->
 </div>
 </div>
 
