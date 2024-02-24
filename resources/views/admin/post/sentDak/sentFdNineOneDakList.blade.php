@@ -116,8 +116,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_f_d_nine_one_daks')
 ->where('f_d_nine_one_status_id',$allStatusData->f_d_nine_one_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)
+
 ->orderBy('id','asc')->get();
 
           ?>

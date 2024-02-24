@@ -120,8 +120,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('fc_two_daks')
 ->where('fc_two_status_id',$allStatusData->fc_two_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
           ?>
 

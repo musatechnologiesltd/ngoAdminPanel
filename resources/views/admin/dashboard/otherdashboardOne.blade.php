@@ -622,8 +622,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_name_change_daks')
 ->where('name_change_status_id',$allStatusData->name_change_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)
+
 
 
 
@@ -884,8 +883,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_f_d_nine_daks')
 ->where('f_d_nine_status_id',$allStatusData->f_d_nine_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
                     ?>
 
@@ -1149,8 +1147,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_f_d_nine_one_daks')
 ->where('f_d_nine_one_status_id',$allStatusData->f_d_nine_one_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)
+
 ->orderBy('id','asc')->get();
 
 ?>
@@ -1409,8 +1406,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_fd_six_daks')
 ->where('fd_six_status_id',$allStatusData->fd_six_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
             ?>
 
@@ -1665,8 +1661,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_fd_seven_daks')
 ->where('fd_seven_status_id',$allStatusData->fd_seven_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
             ?>
 
@@ -1917,8 +1912,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('fc_one_daks')
 ->where('fc_one_status_id',$allStatusData->fc_one_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
             ?>
 
@@ -2173,8 +2167,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('fc_two_daks')
 ->where('fc_two_status_id',$allStatusData->fc_two_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
             ?>
 
@@ -2427,8 +2420,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('fd_three_daks')
 ->where('fd_three_status_id',$allStatusData->fd_three_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
              ?>
 
@@ -2681,8 +2673,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('duplicate_certificate_daks')
 ->where('duplicate_certificate_id',$allStatusData->duplicate_certificate_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
              ?>
 
@@ -2936,8 +2927,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('constitution_daks')
 ->where('constitution_id',$allStatusData->constitution_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
              ?>
 
@@ -3192,8 +3182,7 @@ $branchNames = DB::table('branches')
 
     $mainDetail = DB::table('executive_committee_daks')
     ->where('executive_committee_id',$allStatusData->executive_committee_id)
-    ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-    ->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+    ->orderBy('id','asc')->get();
 
                  ?>
 

@@ -118,8 +118,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('fc_one_daks')
 ->where('fc_one_status_id',$allStatusData->fc_one_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
           ?>
 

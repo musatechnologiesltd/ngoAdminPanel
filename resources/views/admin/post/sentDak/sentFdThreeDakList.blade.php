@@ -102,8 +102,7 @@ $orginalReceverId= DB::table('fd_three_daks')
 
  $mainDetail = DB::table('fd_three_daks')
  ->where('fd_three_status_id',$allStatusData->fd_three_status_id)
- ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
- ->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
                              ?>
 

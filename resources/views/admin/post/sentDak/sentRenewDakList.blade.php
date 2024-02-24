@@ -100,8 +100,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_renew_daks')
 ->where('renew_status_id',$allStatusData->renew_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
 
 //dd($mainDetail);

@@ -126,7 +126,8 @@ $dakDetail = DB::table('dak_details')
 
                                     <?php
 
-$mainDetail = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)->orderBy('id','asc')->get();
+$mainDetail = DB::table('ngo_registration_daks')->where('registration_status_id',$allStatusData->id)
+->orderBy('id','asc')->get();
 
                                     ?>
 
@@ -2882,7 +2883,7 @@ $orginalReceverId= DB::table('executive_committee_daks')
                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                     </td>
                     <td style="text-align:right;">
-                       
+
                         <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->id) }}';">দেখুন</button>
 
 

@@ -115,8 +115,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('duplicate_certificate_daks')
 ->where('duplicate_certificate_id',$allStatusData->duplicate_certificate_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
             ?>
 

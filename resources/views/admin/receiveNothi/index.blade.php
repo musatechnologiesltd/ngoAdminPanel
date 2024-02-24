@@ -79,15 +79,33 @@
                                                       <div class="accordion-button collapsed"
                                                            data-bs-toggle="collapse"
                                                            data-bs-target="#flush-collapse{{ $nothiLists1->id }}">
-                                                                              <span>
-                                                                                                                                                              <span style="line-height:3">
-                                                                  <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                              <br>
-                                                                              <span style="text-align:left;"> <span
-                                                                                          style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                              <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                              <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                              </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalreg{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.regModal')
+
+                                                           <!-- end new code for movement button -->
                                                       </div>
                                                   </h2>
                                                   <div id="flush-collapse{{ $nothiLists1->id }}"
@@ -123,147 +141,11 @@
 
 
 
-              }elseif($nothiLists1->dakType == 'renew'){
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_renews')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'nameChange'){
-
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType== 'fdNine'){
-
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdNineOne'){
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdSix'){
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdSeven'){
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fcOne'){
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fcTwo'){
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdThree'){
-
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
               }
+
+
+
+
 
 
 
@@ -340,15 +222,34 @@
                                                       <div class="accordion-button collapsed"
                                                            data-bs-toggle="collapse"
                                                            data-bs-target="#flush-collapse{{ $nothiLists1->id }}">
-                                                                              <span>
-                                                                                                                                                              <span style="line-height:3">
-                                                                  <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                              <br>
-                                                                              <span style="text-align:left;"> <span
-                                                                                          style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                              <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                              <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                              </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalrenew{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.renewModal')
+
+                                                           <!-- end new code for movement button -->
+
 
                                                       </div>
                                                   </h2>
@@ -373,19 +274,7 @@
 
 
 
-              if($nothiLists1->dakType == 'registration'){
-
-
-              $allNoteListNew = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'renew'){
+             if($nothiLists1->dakType == 'renew'){
 
 
 
@@ -395,131 +284,6 @@
               // ->where('id',$nothiLists1->noteId)
               ->get();
 
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'nameChange'){
-
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType== 'fdNine'){
-
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdNineOne'){
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdSix'){
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdSeven'){
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fcOne'){
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fcTwo'){
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
-
-
-
-
-
-
-
-              }elseif($nothiLists1->dakType == 'fdThree'){
-
-
-
-
-
-
-              $allNoteListNew = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$nothiLists1->dakId)
-              ->where('serial_number',$nothiLists1->nothId)
-              // ->where('id',$nothiLists1->noteId)
-              ->get();
 
 
 
@@ -596,15 +360,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsenameChange{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalnamechange{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.namechangeModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsenameChange{{ $key+1 }}"
@@ -715,16 +497,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefdNine{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
 
-                                                                  </span>
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfdnine{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fdnineModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefdNine{{ $key+1 }}"
@@ -836,15 +635,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefdNineOne{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfdnineone{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fdnineoneModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefdNineOne{{ $key+1 }}"
@@ -954,15 +771,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefdSeven{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfdseven{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fdsevenModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefdSeven{{ $key+1 }}"
@@ -1072,15 +907,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefdSix{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfdsix{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fdsixModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefdSix{{ $key+1 }}"
@@ -1189,15 +1042,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefcon{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfcone{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fconeModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefcon{{ $key+1 }}"
@@ -1307,15 +1178,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefctw{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfctwo{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fctwoModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefctw{{ $key+1 }}"
@@ -1425,15 +1314,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsefdt{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalfdthree{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.fdthreeModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsefdt{{ $key+1 }}"
@@ -1543,15 +1450,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsedup{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalduplicate{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.duplicateModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsedup{{ $key+1 }}"
@@ -1659,15 +1584,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapsecon{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalconstitution{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.constitutionModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapsecon{{ $key+1 }}"
@@ -1778,15 +1721,33 @@
                                               <div class="accordion-button collapsed"
                                                    data-bs-toggle="collapse"
                                                    data-bs-target="#flush-collapseccc{{ $key+1 }}">
-                                                                      <span>
-                                                                                                                                                      <span style="line-height:3">
-                                                          <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
-                                                                      <br>
-                                                                      <span style="text-align:left;"> <span
-                                                                                  style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-                                                                      <span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span>
-                                                                      <br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
-                                                                  </span>
+
+                                                           <!-- new code for movement button --->
+
+
+                                                                <span>
+                                                                    <span style="line-height:3">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথিঃ</span>  {{ $nothiLists->document_subject }}</span>
+<br>
+<span style="text-align:left;"> <span
+style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+
+    <button type="button" class="btn btn-primary btn-xs"
+    data-bs-toggle="modal"
+    data-original-title="" data-bs-target="#myModalcommittee{{ $key+1 }}">
+    নথি গতিবিধি
+</button>
+
+</span>
+<br><br><span style="padding:5px; background-color:#879dd9; border-radius: 10px;">নোটের সর্বশেষ তারিখ: {{ $mainCodeDate }}</span>
+</span>
+                                                            </div>
+
+
+@include('admin.documentMovementModal.committeeModal')
+
+                                                           <!-- end new code for movement button -->
                                               </div>
                                           </h2>
                                           <div id="flush-collapseccc{{ $key+1 }}"

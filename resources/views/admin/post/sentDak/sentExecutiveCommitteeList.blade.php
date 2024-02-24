@@ -89,9 +89,7 @@ $dakDetail = DB::table('dak_details')
          <?php
 
 $mainDetail = DB::table('executive_committee_daks')
-->where('executive_committee_id',$allStatusData->executive_committee_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->where('executive_committee_id',$allStatusData->executive_committee_id)->orderBy('id','asc')->get();
 
          ?>
 

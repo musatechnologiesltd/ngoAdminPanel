@@ -44,7 +44,7 @@
 
 
                   <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('duplicateCertificate.show',$allStatusData->duplicate_certificate_id) }}';">দেখুন</button>
-                
+
 
 
                        <!--new code-->
@@ -89,8 +89,7 @@
 
          $mainDetail = DB::table('duplicate_certificate_daks')
          ->where('duplicate_certificate_id',$allStatusData->duplicate_certificate_id)
-         ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-         ->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+       ->orderBy('id','asc')->get();
 
                       ?>
 

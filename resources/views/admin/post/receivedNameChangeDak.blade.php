@@ -114,8 +114,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_name_change_daks')
 ->where('name_change_status_id',$allStatusData->name_change_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)
+
 
 
 
