@@ -72,16 +72,16 @@
         }
         .fifth_table
         {
-            margin-top: 62px;
+            margin-top: 45px;
         }
     </style>
 </head>
 <body>
     <?php
 
-    $lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
-    $newdateR = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate1 ) )) ;
-    $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
+    // $lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+    // $newdateR = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate1 ) )) ;
+    // $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
 //dd($tomorrow);
     ?>
 <div class="pdf_back">
@@ -89,7 +89,21 @@
         <table class="first_table">
             <tr>
                 <td style="padding-left:32%;">{{ $form_one_data->registration_number }}</td>
-                <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date))}}</td>
+                <td style="padding-left: 32%;">
+
+
+                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+                    {{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date ))}}
+
+                    @else
+
+                    {{date('d/m/Y', strtotime($mainDate ))}}
+
+                    @endif
+
+
+                </td>
             </tr>
         </table>
         <table class="second_table">
@@ -109,34 +123,27 @@
         <table class="forth_table">
 
 
-            <?php
-
-            $lastDate = date('Y-m-d', strtotime($duration_list_all->ngo_duration_end_date ));
-            $newdate = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
-           // $newyear = date('y', strtotime($newdate));
-            ?>
-
             <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($tomorrow ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($newdate ))}}</td>
+               <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
             </tr>
-
-
 
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 65%">
+                <td style="width: 50%; padding-left: 60%">
                     <p>{{ $word1 }}</p>
                 </td>
-                <td style="width: 50%; padding-left: 22%">
-                     {{ $newmonth }}
+                <td style="width: 50%; padding-left: 20%">
+                    {{ $newmonth }}
+
                 </td>
             </tr>
             <tr>
-                <td style="padding-left: 70px;">{{ $word }}</td>
+                <td style="padding-left: 50px">  {{ $word }}</td>
             </tr>
         </table>
+
     </div>
 </div>
 

@@ -5,6 +5,35 @@
 @endsection
 
 
+@section('css')
+<style>
+
+@media only screen and (max-width: 1900px) {
+    .movement {
+        padding-left: 320px
+    }
+  }
+
+@media only screen and (max-width: 1500px) {
+    .movement {
+        padding-left: 80px
+    }
+  }
+
+
+@media only screen and (max-width: 1280px) {
+    .movement {
+        padding-left: 25px
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .movement {
+        padding-left: 210px
+    }
+  }
+</style>
+  @endsection
 @section('body')
 
 <div class="container-fluid">
@@ -89,7 +118,7 @@
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -232,7 +261,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -370,7 +399,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -507,7 +536,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -645,7 +674,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -781,7 +810,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -917,7 +946,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -1052,7 +1081,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -1188,7 +1217,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -1324,7 +1353,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -1460,7 +1489,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -1594,7 +1623,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
@@ -1731,7 +1760,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 <br>
 <span style="text-align:left;"> <span
 style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি নম্বরঃ</span> {{ $nothiLists->main_sarok_number }}
-<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span style="padding-left: 290px">
+<span style="padding:5px; background-color:#879dd9; border-radius: 10px;">শাখাঃ</span> {{ $nothiLists->document_branch }}</span><span class="movement">
 
     <button type="button" class="btn btn-primary btn-xs"
     data-bs-toggle="modal"
