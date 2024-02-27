@@ -75,7 +75,7 @@
         }
         .fifth_table
         {
-            margin-top: 62px;
+            margin-top: 45px;
         }
     </style>
 </head>
@@ -164,15 +164,16 @@ $newdate1 = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 65%">
+                <td style="width: 75%; padding-left: 53%">
                     <p>{{ $word1 }}</p>
                 </td>
-                <td style="width: 50%; padding-left: 22%">
+                <td style="width: 25%; padding-left: 0%">
                     {{ $newmonth }}
+
                 </td>
             </tr>
             <tr>
-                <td style="padding-left: 70px">{{ $word }}</td>
+                <td style="padding-left: 50px">  {{ $word }}</td>
             </tr>
         </table>
     </div>

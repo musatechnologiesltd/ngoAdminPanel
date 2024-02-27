@@ -3,23 +3,20 @@
 <head>
     <title>PDF</title>
     <style>
-        @font-face {
-            font-family: myFirstFont;
-            src: url('public/Mtcorsva.ttf');
-        }
+
         body {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             font-size: 16px;
-            font-family: myFirstFont, serif;
+           /* font-family: bangla, serif; */
             font-weight: bold;
         }
 
         .pdf_back {
             height: 8.5in;
             width: 11in;
-            /* background-image: url('public/namechange.jpg'); */
+           /* background-image: url('public/namechange.jpg'); */
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100% 100%;
@@ -40,7 +37,7 @@
 
         .second_table
         {
-            margin-top: .39in;
+            margin-top: .35in;
         }
 
         .para_first
@@ -53,7 +50,7 @@
 
         .third_table
         {
-            margin-top:-20px;
+            margin-top:-22px;
         }
 
         .para_first1
@@ -75,7 +72,7 @@
         }
         .fifth_table
         {
-            margin-top: 30px;
+            margin-top: 27px;
         }
     </style>
 </head>
@@ -85,17 +82,17 @@
     <div class="content">
         <table class="first_table">
             <tr>
-                <td style="padding-left:24%;">{{ $form_one_data->registration_number }}</td>
-                <td style="padding-left: 32%;">
+                <td style="padding-left:24%;font-size:20px;">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($form_one_data->registration_number) }}</td>
+                <td style="padding-left: 20%;font-size:20px;">
 
 
                     @if($ngoTypeData->ngo_type_new_old == 'Old')
 
-                    {{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date ))}}
+                    {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date )))}}
 
                     @else
 
-                    {{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}
+                    {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date )))}}
 
                     @endif
 
@@ -106,14 +103,14 @@
         <table class="second_table">
             <tr>
                 <td class="para_first">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $nameChangeDetail->previous_name_ban }}.
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bolder;font-size:20px;">{{ $nameChangeDetail->previous_name_ban }}.</span>
                 </td>
             </tr>
         </table>
         <table class="third_table">
             <tr>
                 <td class="para_first1">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $nameChangeDetail->present_name_ban }}.
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bolder;font-size:20px;">{{ $nameChangeDetail->present_name_ban }}.</span>
                 </td>
             </tr>
         </table>
@@ -121,25 +118,32 @@
 
 
             <tr>
-                <td style="padding-left: 50%">
+                <td style="padding-left: 50%;font-size:20px;">
                     @if($ngoTypeData->ngo_type_new_old == 'Old')
 
-                    {{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date ))}}
+                    {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date )))}}
 
                     @else
 
-                    {{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}
+                    {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date )))}}
 
                     @endif
+
                 </td>
 
             </tr>
 
         </table>
+
+        <?php
+
+           $signDate = date('Y-m-d');
+
+        ?>
         <table class="fifth_table">
             <tr>
-                <td style="padding-left: 29%">
-                    <p>{{date('d/m/Y', strtotime($mainDate ))}}</p>
+                <td style="padding-left: 29%;font-size:20px;">
+                    <p>{{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d/m/Y', strtotime($signDate )))}}</p>
                 </td>
 
             </tr>

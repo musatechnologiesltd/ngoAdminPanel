@@ -8,6 +8,7 @@ use Auth;
 Use DB;
 use PDF;
 use Mail;
+use Mpdf\Mpdf;
 use Carbon\Carbon;
 use App\Models\NgoFDNineDak;
 use App\Models\NgoFDNineOneDak;
@@ -345,10 +346,33 @@ $nameChangeDetail = DB::table('ngo_name_changes')
            //dd($newdate);
 $mainDate = $request->main_date;
            $file_Name_Custome = 'certificate';
-           $pdf=PDF::loadView('admin.name_change_list.print_certificate_view',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
+
+
+           $data=view('admin.name_change_list.print_certificate_view',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
            'nameChangeDetail'=>$nameChangeDetail,'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
-'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
-return $pdf->stream($file_Name_Custome.''.'.pdf');
+'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all]);
+
+
+
+$mpdf = new Mpdf(
+[
+    'default_font' => 'nikosh',
+    'mode' => 'utf-8',
+    'format' => 'A4-L',
+    'orientation' => 'L'
+]
+);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output();
+die();
+
+
 
 
 } catch (\Exception $e) {
@@ -457,10 +481,43 @@ $nameChangeDetail = DB::table('ngo_name_changes')
         //dd($newdate);
 $mainDate = $request->main_date;
         $file_Name_Custome = 'certificate';
-        $pdf=PDF::loadView('admin.name_change_list.printCertificateViewDemo',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
-        'nameChangeDetail'=>$nameChangeDetail,'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
-'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all],[],['orientation' => 'L'],['format' => [279.4,215.9]]);
-return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+        $data =view('admin.name_change_list.printCertificateViewDemo',[
+        'newyear'=>$newyear,
+        'ngoTypeData'=>$ngoTypeData,
+        'nameChangeDetail'=>$nameChangeDetail,
+        'newmonth'=>$newmonth,
+        'newdate'=>$newdate,
+        'word'=>$word,
+        'word1'=>$word1,
+        'mainDate'=>$mainDate,
+       'form_one_data'=>$form_one_data,
+       'duration_list_all'=>$duration_list_all]);
+
+
+
+
+
+$mpdf = new Mpdf(
+[
+    'default_font' => 'nikosh',
+    'mode' => 'utf-8',
+    'format' => 'A4-L',
+    'orientation' => 'L'
+]
+);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output();
+die();
+
+
+
 
 
 } catch (\Exception $e) {

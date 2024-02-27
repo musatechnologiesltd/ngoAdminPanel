@@ -131,10 +131,10 @@
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 60%">
+                <td style="width: 75%; padding-left: 53%">
                     <p>{{ $word1 }}</p>
                 </td>
-                <td style="width: 50%; padding-left: 20%">
+                <td style="width: 25%; padding-left: 0%">
                     {{ $newmonth }}
 
                 </td>

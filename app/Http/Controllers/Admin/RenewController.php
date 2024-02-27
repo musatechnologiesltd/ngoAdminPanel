@@ -309,7 +309,7 @@ class RenewController extends Controller
 
     public function updateStatusRenewForm(Request $request){
 
-
+//dd(23);
 
         \LogActivity::addToLog('Update Renew Status.');
 
@@ -338,7 +338,7 @@ $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
         if($request->status == 'Accepted'){
 
 
-         
+
 
             $date = date('Y-m-d');
     $newDate = date('Y-m-d', strtotime($tomorrow. ' + 10 years'));
