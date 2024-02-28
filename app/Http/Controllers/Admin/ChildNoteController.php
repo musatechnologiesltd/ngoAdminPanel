@@ -9218,6 +9218,7 @@ if($data['button_value'] == 'return'){
         $mainSaveData ->sender = Auth::guard('admin')->user()->id;
         $mainSaveData ->receiver = $data['nothiPermissionId'];
         $mainSaveData ->created_at= $created_at;
+        $mainSaveData ->amPmValue = $amPmValueFinal;
         $mainSaveData->save();
 
         $mainId = $mainSaveData->id;
@@ -10079,6 +10080,7 @@ $mainSaveData ->sent_status_other = 1;
 $mainSaveData ->created_at= $created_at;
 $mainSaveData ->sender = Auth::guard('admin')->user()->id;
 $mainSaveData ->receiver = $data['nothiPermissionId'];
+$mainSaveData ->amPmValue = $amPmValueFinal;
 $mainSaveData->save();
 
 $mainId = $mainSaveData ->id;

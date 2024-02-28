@@ -234,7 +234,7 @@ $branchNames = DB::table('branches')
                                         <li>প্রাপক : {{ $receiverName }}</li>
                                     </ul>
                                     <hr>
-                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                       <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                                 </div>
                             </div>
                         </div>
@@ -488,7 +488,7 @@ $branchNames = DB::table('branches')
                                         <li>প্রাপক : {{ $receiverName }}</li>
                                     </ul>
                                     <hr>
-                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                       <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                                 </div>
                             </div>
                         </div>
@@ -745,7 +745,7 @@ $branchNames = DB::table('branches')
                                         <li>প্রাপক : {{ $receiverName }}</li>
                                     </ul>
                                     <hr>
-                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                       <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1002,7 +1002,7 @@ $branchNames = DB::table('branches')
                                         <li>প্রাপক : {{ $receiverName }}</li>
                                     </ul>
                                     <hr>
-                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                       <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1267,7 +1267,7 @@ $branchNames = DB::table('branches')
               <li>প্রাপক : {{ $receiverName }}</li>
           </ul>
           <hr>
-          <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                             <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
       </div>
   </div>
 </div>
@@ -1525,7 +1525,7 @@ $branchNames = DB::table('branches')
                                 <li>প্রাপক : {{ $receiverName }}</li>
                             </ul>
                             <hr>
-                            <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                               <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                         </div>
                     </div>
                 </div>
@@ -1780,7 +1780,7 @@ $branchNames = DB::table('branches')
                                 <li>প্রাপক : {{ $receiverName }}</li>
                             </ul>
                             <hr>
-                            <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                               <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                         </div>
                     </div>
                 </div>
@@ -2031,7 +2031,7 @@ $branchNames = DB::table('branches')
                                 <li>প্রাপক : {{ $receiverName }}</li>
                             </ul>
                             <hr>
-                            <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                               <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                         </div>
                     </div>
                 </div>
@@ -2286,7 +2286,7 @@ $branchNames = DB::table('branches')
                                 <li>প্রাপক : {{ $receiverName }}</li>
                             </ul>
                             <hr>
-                            <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                               <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                         </div>
                     </div>
                 </div>
@@ -2539,7 +2539,7 @@ $branchNames = DB::table('branches')
                                  <li>প্রাপক : {{ $receiverName }}</li>
                              </ul>
                              <hr>
-                             <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                          </div>
                      </div>
                  </div>
@@ -2792,7 +2792,7 @@ $branchNames = DB::table('branches')
                                  <li>প্রাপক : {{ $receiverName }}</li>
                              </ul>
                              <hr>
-                             <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                          </div>
                      </div>
                  </div>
@@ -3046,7 +3046,7 @@ $branchNames = DB::table('branches')
                                  <li>প্রাপক : {{ $receiverName }}</li>
                              </ul>
                              <hr>
-                             <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                          </div>
                      </div>
                  </div>
@@ -3301,7 +3301,7 @@ $branchNames = DB::table('branches')
                                      <li>প্রাপক : {{ $receiverName }}</li>
                                  </ul>
                                  <hr>
-                                 <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                                    <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                              </div>
                          </div>
                      </div>

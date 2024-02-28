@@ -1958,6 +1958,22 @@ try{
        // dd($request->all());
         \LogActivity::addToLog('add dak detail.');
 
+
+        $dt = new DateTime();
+        $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+        $created_at = $dt->format('Y-m-d h:i:s ');
+
+        $amPmValue = $dt->format('a');
+       // $amPmValueFinal = 0;
+        if($amPmValue == 'pm'){
+
+            $amPmValueFinal = 'অপরাহ্ন';
+        }else{
+            $amPmValueFinal = 'পূর্বাহ্ন';
+
+        }
+
+
          $number=count($request->admin_id);
 
          if($request->mainStatusNew == 'registration'){
@@ -1997,7 +2013,7 @@ try{
                  $regDakData->registration_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
-
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2052,6 +2068,7 @@ try{
                  $regDakData->renew_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2112,6 +2129,7 @@ try{
                  $regDakData->name_change_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2175,6 +2193,7 @@ try{
                  $regDakData->f_d_nine_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2239,6 +2258,7 @@ try{
                  $regDakData->f_d_nine_one_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2304,6 +2324,7 @@ try{
                  $regDakData->fd_six_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2367,6 +2388,7 @@ try{
                  $regDakData->fd_seven_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2427,6 +2449,7 @@ try{
                  $regDakData->fc_one_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2485,6 +2508,7 @@ try{
                  $regDakData->fc_two_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2545,6 +2569,7 @@ try{
                  $regDakData->fd_three_status_id =$request->main_id;
                  $regDakData->status = 0;
                  $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -2608,6 +2633,7 @@ DuplicateCertificateDak::where('receiver_admin_id',Auth::guard('admin')->user()-
            $regDakData->duplicate_certificate_id =$request->main_id;
            $regDakData->status = 0;
            $regDakData->nothi_jat_status = 0;
+           $regDakData->amPmValue = $amPmValueFinal;
            $regDakData->save();
 
           }
@@ -2671,6 +2697,7 @@ if($number >0){
    $regDakData->constitution_id =$request->main_id;
    $regDakData->status = 0;
    $regDakData->nothi_jat_status = 0;
+   $regDakData->amPmValue = $amPmValueFinal;
    $regDakData->save();
 
   }
@@ -2734,6 +2761,7 @@ if($number >0){
    $regDakData->executive_committee_id =$request->main_id;
    $regDakData->status = 0;
    $regDakData->nothi_jat_status = 0;
+   $regDakData->amPmValue = $amPmValueFinal;
    $regDakData->save();
 
   }
