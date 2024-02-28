@@ -370,6 +370,18 @@
 </li>
 @endif
 
+
+@if ($usr->can('fd5_formsAdd') || $usr->can('fd5_formsView') || $usr->can('fd5_formsDelete') || $usr->can('fd5_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd5Form.index') || Route::is('fd5Form.show') ? 'active' : '' }}" href="{{ route('fd5Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৫ </span>
+    </a>
+</li>
+@endif
+
+
+
 @if ($usr->can('duplicateCertificateAdd') || $usr->can('duplicateCertificateView') || $usr->can('duplicateCertificateDelete') || $usr->can('duplicateCertificateUpdate'))
 {{-- <li class="dropdown">
     <a class="nav-link menu-title link-nav {{ Route::is('duplicateCertificate.index') || Route::is('duplicateCertificate.show') ? 'active' : '' }}" href="{{ route('duplicateCertificate.index') }}">

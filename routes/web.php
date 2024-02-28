@@ -43,6 +43,7 @@ use App\Http\Controllers\Admin\NothiJatController;
 use App\Http\Controllers\Admin\ExecutiveCommitteeController;
 use App\Http\Controllers\Admin\ConstitutionController;
 use App\Http\Controllers\Admin\DuplicateCertificateController;
+use App\Http\Controllers\Admin\Fd5Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 
+
+Route::resource('fd5Form', Fd5Controller::class);
+
+Route::controller(Fd5Controller::class)->group(function () {
+
+    Route::post('/fd5FormStatus','fd5FormStatus')->name('fd5FormStatus');
+    Route::get('/fd5FormPdf/{id}','fd5FormPdf')->name('fd5FormPdf');
+
+});
 
     Route::resource('documentPresent', DocumentPresentController::class);
     Route::resource('documentType', DocumentTypeController::class);
