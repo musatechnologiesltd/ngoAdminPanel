@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal right fade bd-example-modal-lg"
-     id="fdthreemyModalcommittee{{ $allStatusData->id }}" tabindex="-1" role="dialog"
+     id="fdthreemyModalfdfive{{ $allStatusData->id }}" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-lg-custom"
          role="document">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body">
-                <h5>একশনঃ নথিতে উপস্থাপনঃ নির্বাহী কমিটি অনুমোদনের জন্য আবেদন  </h5>
+                <h5>একশনঃ নথিতে উপস্থাপনঃ বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত ফরম </h5>
                 <div class="row">
                     <div class="col-lg-6">
                         <h5>সকল নথি</h5>
@@ -26,14 +26,14 @@
                     </div>
                     <div class="col-lg-12 mt-3">
                         <div class="input-group">
-                            <input class="form-control"  id="nothiSearchcommittee{{ $allStatusData->id }}" type="text" placeholder="নথি খুজুন"><span
+                            <input class="form-control"  id="nothiSearchfdFive{{ $allStatusData->id }}" type="text" placeholder="নথি খুজুন"><span
                                     class="input-group-text" ><i class="fa fa-search"> </i></span>
                         </div>
                     </div>
                     <div class="col-lg-12 mt-3">
                         <div class="table-responsive">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <table class="table table-striped" id="nothiSearchResultcommittee{{ $allStatusData->id }}">
+                                <table class="table table-striped" id="nothiSearchResultfdFive{{ $allStatusData->id }}">
                                     <tbody>
 
                                         @foreach ($nothiList as $key=>$nothiLists)
@@ -58,7 +58,7 @@
                                                      class="accordion-collapse collapse">
                                                     <div class="accordion-body">
                                                         <div class="d-flex mt-3">
-                                                            <button onclick="location.href = '{{ route('addParentNote',['status'=>'committee','dakId'=>$allStatusData->id,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
+                                                            <button onclick="location.href = '{{ route('addParentNote',['status'=>'fdFive','dakId'=>$allStatusData->id,'nothiId'=>$nothiLists->id]) }}';" class="btn btn-transparent ms-3" type="button">
                                                                 <i class="fa fa-plus"></i>
                                                                 নতুন নোট
                                                             </button>
@@ -72,7 +72,7 @@
 <?php
 
 
-  $allNoteListNew = DB::table('parent_not_for_executive_committees')
+  $allNoteListNew = DB::table('parent_note_for_fd_fives')
   ->where('serial_number',$nothiLists->id)
   ->where('nothi_detail_id',$allStatusData->id)->get();
 
@@ -82,7 +82,7 @@
     @if(count($allNoteListNew) > 0)
     <ul>
         @foreach($allNoteListNew as $key=>$allNoteListNews)
-                                                          <li>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla(($key+1)) }} .   <a href="{{ route('addChildNote', ['status' =>'committee','parentId'=>$allStatusData->id,'nothiId'=>$nothiLists->id,'id' =>$allNoteListNews->id,'activeCode' => ($key+1)]) }}">{{ $allNoteListNews->subject }}</a> </li>
+                                                          <li>  {{ App\Http\Controllers\Admin\CommonController::englishToBangla(($key+1)) }} .   <a href="{{ route('addChildNote', ['status' =>'fdFive','parentId'=>$allStatusData->id,'nothiId'=>$nothiLists->id,'id' =>$allNoteListNews->id,'activeCode' => ($key+1)]) }}">{{ $allNoteListNews->subject }}</a> </li>
                                                                 @endforeach
                                                             </ul>
 

@@ -255,6 +255,26 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
            ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
+}elseif($status == 'fdFive'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_fives')
+           ->where('pnote_fd_five',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_fives')
+           ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
+
+
 }elseif($status == 'duplicate'){
 
 

@@ -30,6 +30,7 @@ use App\Models\DesignationList;
 use App\Models\DesignationStep;
 use App\Models\AdminDesignationHistory;
 use App\Models\FdThreeDak;
+use App\Models\FdFiveDak;
 use App\Models\NothiList;
 use Mpdf\Mpdf;
 use App\Models\NothiDetail;
@@ -114,6 +115,12 @@ class DashBoardController extends Controller
          ->whereNull('sent_status')
          ->limit(5)
         ->where('dakType','fdThree')->latest()->get();
+
+
+        $senderNothiListfdFive = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
+        ->whereNull('sent_status')
+        ->limit(5)
+       ->where('dakType','fdFive')->latest()->get();
 
 
          $senderNothiListduplicate = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
@@ -209,13 +216,16 @@ class DashBoardController extends Controller
            ->get();
 
 
-           $ngoStatusConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')->where('status','Ongoing')->latest() ->get();
-           $ngoStatusDuplicateCertificate = DB::table('document_for_duplicate_certificates')->where('status','Ongoing')->latest() ->get();
+           $ngoStatusConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')->where('status','Ongoing')->latest()->limit(5)->get();
+           $ngoStatusDuplicateCertificate = DB::table('document_for_duplicate_certificates')->where('status','Ongoing')->latest()->limit(5) ->get();
 
-           $ngoStatusExecutiveCommittee = DB::table('document_for_executive_committee_approvals')->where('status','Ongoing')->latest() ->get();
+           $ngoStatusExecutiveCommittee = DB::table('document_for_executive_committee_approvals')->where('status','Ongoing')->latest()->limit(5) ->get();
 
-
+           $ngoStatusFdFive = DB::table('fd_five_forms')->where('status','Ongoing')->latest()->limit(5)->get();
+//dd($ngoStatusFdFive);
             return view('admin.dashboard.dashboard',compact(
+                'ngoStatusFdFive',
+                'senderNothiListfdFive',
                 'ngoStatusConstitution',
                 'ngoStatusDuplicateCertificate',
                 'ngoStatusExecutiveCommittee',
@@ -276,12 +286,14 @@ class DashBoardController extends Controller
             $ngoStatusExecutiveCommittee = DB::table('executive_committee_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
 
 
+            $ngoStatusFdFive = DB::table('fd_five_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->limit(5)->get();
 
 
             $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
 
 
             return view('admin.dashboard.dashboardOne',compact(
+                'ngoStatusFdFive',
                 'ngoStatusConstitution',
                 'ngoStatusDuplicateCertificate',
                 'ngoStatusExecutiveCommittee',

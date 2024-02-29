@@ -20,6 +20,7 @@ use App\Models\FdSevenOfficeSarok;
 use App\Models\FcOneOfficeSarok;
 use App\Models\FcTwoOfficeSarok;
 use App\Models\FdThreeOfficeSarok;
+use App\Models\FdFiveOfficeSarok;
 use App\Models\PotrangshoDraft;
 
 
@@ -197,10 +198,23 @@ class OfficeSarokController extends Controller
          $saveNewData->created_at =$created_at;
          $saveNewData->save();
 
-         
 
 
-     }elseif($request->statusForPotrangso == 'duplicate'){
+
+     }elseif($request->statusForPotrangso == 'fdFive'){
+
+        $saveNewData = new FdFiveOfficeSarok();
+        $saveNewData->pnote_fd_five = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+
+
+    }elseif($request->statusForPotrangso == 'duplicate'){
 
         $saveNewData = new DuplicateCertificateOfficeSarok();
         $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;

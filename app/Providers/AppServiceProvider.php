@@ -14,6 +14,7 @@ use Mail;
 use PDF;
 use Response;
 use App\Models\Branch;
+use App\Models\FdFiveDak;
 use App\Models\ForwardingLetterOnulipi;
 use App\Models\DakDetail;
 use App\Models\NgoFDNineDak;
@@ -121,6 +122,11 @@ class AppServiceProvider extends ServiceProvider
              ->count('receiver');
 
 
+             $totalReceiveNothiRi12 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+             ->where('dakType','fdFive')->distinct()
+              ->count('receiver');
+
+
 
 
 
@@ -131,7 +137,7 @@ class AppServiceProvider extends ServiceProvider
 
         $totalReceiveNothi = $totalReceiveNothiRe + $totalReceiveNothiRi + $totalReceiveNothiRi1 + $totalReceiveNothiRi2+
         $totalReceiveNothiRi3 + $totalReceiveNothiRi4 + $totalReceiveNothiRi5 + $totalReceiveNothiRi6 + $totalReceiveNothiRi7 +
-        $totalReceiveNothiRi8 + $totalReceiveNothiRi9 + $totalReceiveNothiRi10 + $totalReceiveNothiRi11;
+        $totalReceiveNothiRi8 + $totalReceiveNothiRi9 + $totalReceiveNothiRi10 + $totalReceiveNothiRi11 + $totalReceiveNothiRi12;
 
 
 
@@ -159,6 +165,8 @@ class AppServiceProvider extends ServiceProvider
 
 
                     //dd($dataFdNineOne);
+
+                    $dataFdFive = DB::table('fd_five_forms')->where('status','Ongoing')->latest()->count();
 
                     $dataFdNine = DB::table('fd9_forms')->where('status','Ongoing')->latest()->count();
 
@@ -213,11 +221,15 @@ class AppServiceProvider extends ServiceProvider
                     $ngoStatusReg1 = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
 
 
-                    $mainCodeCountHeader1 =$ngoStatusExecutiveCommittee1+ $ngoStatusConstitution1+$ngoStatusDuplicateCertificate1+$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
+
+                    $ngoStatusFdFive1 = FdFiveDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
+
+
+                    $mainCodeCountHeader1 =$ngoStatusFdFive1 + $ngoStatusExecutiveCommittee1+ $ngoStatusConstitution1+$ngoStatusDuplicateCertificate1+$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
 
 //dd($mainCodeCountHeader1);
                    $mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne +
-                   $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+
+                   $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFdFive+
                    $dataFromFc2Form+$dataFromFd3Form+$all_data_for_name_changes_list1e+$all_data_for_name_changes_list2e+$all_data_for_name_changes_list3e ;
 
                    $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
@@ -281,8 +293,17 @@ class AppServiceProvider extends ServiceProvider
                     ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
                     ->latest() ->count();
 
-                    $mainCodeCountHeader2 =$ngoStatusExecutiveCommittee+ $ngoStatusConstitution+$ngoStatusDuplicateCertificate+$ngoStatusReg+$ngoStatusFDNineOneDak+$ngoStatusFdThreeDak+$ngoStatusFcTwoDak+$ngoStatusFcOneDak+$ngoStatusFdSevenDak+$ngoStatusFdSixDak+$ngoStatusFDNineDak+$ngoStatusNameChange+$ngoStatusRenew;
 
+                    $ngoStatusFdFive = FdFiveDak::where('status',1)
+                    ->where('nothi_jat_status',0)->whereNull('sent_status')
+                    ->whereNull('present_status')
+                    ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                    ->latest() ->count();
+
+                    $mainCodeCountHeader2 =$ngoStatusFdFive+$ngoStatusExecutiveCommittee+ $ngoStatusConstitution+$ngoStatusDuplicateCertificate+$ngoStatusReg+$ngoStatusFDNineOneDak+$ngoStatusFdThreeDak+$ngoStatusFcTwoDak+$ngoStatusFcOneDak+$ngoStatusFdSevenDak+$ngoStatusFdSixDak+$ngoStatusFDNineDak+$ngoStatusNameChange+$ngoStatusRenew;
+
+
+                    $ngoStatusFdFive1 = FdFiveDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
 
 
                     $ngoStatusDuplicateCertificate1 = DB::table('duplicate_certificate_daks')->where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
@@ -301,7 +322,7 @@ class AppServiceProvider extends ServiceProvider
                     $ngoStatusReg1 = NgoRegistrationDak::where('status',1)->where('nothi_jat_status',0)->where('nothi_jat_status','!=',1)->where('sender_admin_id',Auth::guard('admin')->user()->id)->latest() ->count();
 
 
-                    $mainCodeCountHeader1 =$ngoStatusExecutiveCommittee1+ $ngoStatusConstitution1+$ngoStatusDuplicateCertificate1+$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
+                    $mainCodeCountHeader1 =$ngoStatusFdFive1+$ngoStatusExecutiveCommittee1+ $ngoStatusConstitution1+$ngoStatusDuplicateCertificate1+$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
 
 
                    //$mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne + $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFromFc2Form+$dataFromFd3Form ;

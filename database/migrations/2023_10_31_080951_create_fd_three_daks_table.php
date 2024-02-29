@@ -21,9 +21,12 @@ return new class extends Migration
             $table->string('informational_purposes')->nullable();
             $table->string('attraction_attention')->nullable();
             $table->string('dak_detail_id')->nullable();
-            $table->string('status')->nullable();
-            $table->string('nothi_jat_id')->nullable();
-            $table->string('nothi_jat_status')->nullable();
+            $table->string('status',100)->nullable();
+            $table->string('nothi_jat_id',100)->nullable();
+            $table->string('nothi_jat_status',100)->nullable();
+            $table->string('sent_status',100)->nullable();
+            $table->string('present_status',100)->nullable();
+            $table->string('amPmValue',200)->nullable();
             $table->timestamps();
         });
     }

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('nothi_jat_status',100)->nullable();
             $table->string('sent_status',100)->nullable();
             $table->string('present_status',100)->nullable();
+            $table->string('amPmValue',200)->nullable();
             $table->timestamps();
         });
     }

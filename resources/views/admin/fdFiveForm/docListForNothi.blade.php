@@ -16,14 +16,14 @@
             <td>
 
 
-        <a target="_blank"  href="{{ route('fd5FormPdf',['id'=>$dataFromDuplicateCertificate->id]) }}" >
+        <a target="_blank"  href="{{ route('fd5FormPdf',['id'=>$dataFromFdFive->id]) }}" >
             বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত ফরম এর পিডিএফ
        </a>
     </td>
     @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 <td>
-<button  href="{{ route('fd5FormPdf',['id'=>$dataFromDuplicateCertificate->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত ফরম এর পিডিএফ"><i class="fa fa-paperclip"></i></button>
-<button  href="{{ route('fd5FormPdf',['id'=>$dataFromDuplicateCertificate->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+<button  href="{{ route('fd5FormPdf',['id'=>$dataFromFdFive->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত ফরম এর পিডিএফ"><i class="fa fa-paperclip"></i></button>
+<button  href="{{ route('fd5FormPdf',['id'=>$dataFromFdFive->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 </td>
 
 @else

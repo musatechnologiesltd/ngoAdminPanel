@@ -70,6 +70,8 @@
 
                                  @include('admin.post.sentDak.sentExecutiveCommitteeList')
 
+                                 @include('admin.post.sentDak.sentFdFiveDakList')
+
                                     </tbody>
                                 </table>
                             </div>

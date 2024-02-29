@@ -5,21 +5,21 @@
                     <!-- fd three form start -->
 
 
-                    @foreach($ngoStatusExecutiveCommittee as $ps=>$allStatusData)
+                    @foreach($ngoStatusFdFive as $ps=>$allStatusData)
 
                     <?php
 
 
-                      $checkDataAvailableOrNot = DB::table('executive_committee_daks')
-                                                        ->where('executive_committee_id',$allStatusData->id)
+                      $checkDataAvailableOrNot = DB::table('fd_five_daks')
+                                                        ->where('fd_five_status_id',$allStatusData->id)
                                                         ->where('sender_admin_id',Auth::guard('admin')->user()->id)
                                                         ->where('status',1)
                                                         ->value('id');
 
 
                                                                                                 //new code
-$orginalReceverId= DB::table('executive_committee_daks')
-                ->where('executive_committee_id',$allStatusData->id)
+$orginalReceverId= DB::table('fd_five_daks')
+                ->where('fd_five_status_id',$allStatusData->id)
                 ->where('original_recipient',1)
                 ->value('receiver_admin_id');
 
@@ -32,17 +32,17 @@ $orginalReceverId= DB::table('executive_committee_daks')
 
                  $form_one_data = DB::table('fd_one_forms')->where('id',$allStatusData->fdId)->first();
 
-                 $decesionNameId = DB::table('executive_committee_daks')
-    ->where('executive_committee_id',$allStatusData->id)->value('dak_detail_id');
+                 $decesionNameId = DB::table('fd_five_daks')
+    ->where('fd_five_status_id',$allStatusData->id)->value('dak_detail_id');
 
                  $decesionName = DB::table('dak_details')
-    ->where('id',$decesionNameId)->where('status','committee')->value('decision_list');
+    ->where('id',$decesionNameId)->where('status','fdFive')->value('decision_list');
 
                     ?>
 
                      @if(!empty($checkDataAvailableOrNot))
 
-                     @include('admin.post.receivedCommitteeDak')
+                     @include('admin.post.receivedFdFiveDak')
 
                                     @else
                 <tr>
@@ -50,7 +50,7 @@ $orginalReceverId= DB::table('executive_committee_daks')
                         উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
                         প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
                         মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-                        বিষয়ঃ <b> নির্বাহী কমিটি অনুমোদনের জন্য আবেদন    </b><br>
+                        বিষয়ঃ <b> বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত  আবেদন    </b><br>
                         @if(empty($decesionName))
 
                         @else
@@ -59,21 +59,21 @@ $orginalReceverId= DB::table('executive_committee_daks')
                         তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
                     </td>
                     <td style="text-align:right;">
-                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'committee','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
-                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('executiveCommitteeInfo.show',$allStatusData->id) }}';">দেখুন</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('showDataAll',['status'=>'fdFive','id'=>$allStatusData->id]) }}';">প্রেরণ</button>
+                        <button class="btn btn-primary btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="" onclick="location.href = '{{ route('fd5Form.show',$allStatusData->id) }}';">দেখুন</button>
 
 
                          <!--new code-->
                      <button type="button" class="btn btn-primary btn-xs"
                      data-bs-toggle="modal"
-                     data-original-title="" data-bs-target="#myModalfd3dupconsexe{{ $ps }}">
+                     data-original-title="" data-bs-target="#myModalfd5Form{{ $ps }}">
                      ডাক গতিবিধি
              </button>
 
 
              <!-- Modal -->
              <div class="modal right fade bd-example-modal-lg"
-             id="myModalfd3dupconsexe{{ $ps }}" tabindex="-1" role="dialog"
+             id="myModalfd5Form{{ $ps }}" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel2">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -103,8 +103,8 @@ $dakDetail = DB::table('dak_details')
 
                             <?php
 
-$mainDetail = DB::table('executive_committee_daks')
-->where('executive_committee_id',$allStatusData->id)->orderBy('id','asc')->get();
+$mainDetail = DB::table('fd_five_daks')
+->where('fd_five_status_id',$allStatusData->id)->orderBy('id','asc')->get();
 
                             ?>
 
@@ -204,7 +204,7 @@ $branchNames = DB::table('branches')
                                 <div class="card" style="border:2px solid #979797">
                                     <div class="card-body">
                                         <div class="tracking_box">
-                                            <h5>বিষয়ঃ নির্বাহী কমিটি অনুমোদনের জন্য আবেদন   </h5>
+                                            <h5>বিষয়ঃ বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত  আবেদন   </h5>
                                             @if(!$dakDetail->main_file)
 
                                             @else

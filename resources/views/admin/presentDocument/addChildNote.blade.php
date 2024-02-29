@@ -389,6 +389,16 @@
                     aria-selected="false"><i
             class="icofont icofont-file-document"></i>নির্বাহী কমিটি অনুমোদনের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
 
+            @elseif($status == 'fdFive')
+
+
+            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                aria-controls="profile-icon"
+                aria-selected="false"><i
+        class="icofont icofont-file-document"></i>বিদেশ থেকে প্রাপ্ত জিনিসপত্র /দ্রব্যসামগ্র্রীর সংরক্ষণ সংক্রান্ত কাগজপত্রাদি</a></li>
+
+
                                                 @endif
 
                                                 <!-- end new code --->
@@ -1181,6 +1191,13 @@ $potroZariListValue =  DB::table('nothi_details')
        aria-labelledby="profile-icon-tab_form_eight">
 
        @include('admin.executiveCommittee.docListNothi')
+       </div>
+
+       @elseIf($status == 'fdFive')
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fdFiveForm.docListForNothi')
        </div>
        @endif
 

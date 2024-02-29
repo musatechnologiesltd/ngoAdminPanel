@@ -15,6 +15,7 @@ use App\Models\ParentNoteForFdNineOne;
 use App\Models\ParentNoteForFdSeven;
 use App\Models\ParentNoteForFdsix;
 use App\Models\ParentNoteForFdThree;
+use App\Models\ParentNoteForFdFive;
 use App\Models\ParentNoteForNameChange;
 use App\Models\ParentNoteForRegistration;
 use App\Models\ParentNoteForRenew;
@@ -167,6 +168,18 @@ return 1;
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'fdFive'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$dakId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -337,6 +350,18 @@ return 1;
 
 
             $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$dakId)
+            ->where('serial_number',$nothiId)
+            ->get();
+
+
+        }elseif($status == 'fdFive'){
+
+
+
+
+
+
+            $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$dakId)
             ->where('serial_number',$nothiId)
             ->get();
 
@@ -545,6 +570,21 @@ return 1;
         $saveNewData->save();
 
         $totalCount = ParentNoteForFdThree::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'fdFive'){
+
+        $saveNewData = new ParentNoteForFdFive();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFdFive::where('nothi_detail_id',$request->dakId)
         ->where('serial_number',$request->nothiId)->count();
             $pId = $saveNewData->id;
 
@@ -774,6 +814,21 @@ return 1;
         $saveNewData->save();
 
         $totalCount = ParentNoteForFdThree::where('nothi_detail_id',$request->dakId)
+        ->where('serial_number',$request->nothiId)->count();
+            $pId = $saveNewData->id;
+
+
+    }elseif($request->status == 'fdFive'){
+
+        $saveNewData = new ParentNoteForFdFive();
+        $saveNewData->nothi_detail_id = $request->dakId;
+        $saveNewData->serial_number = $request->nothiId;
+        $saveNewData->subject = $request->subject;
+        $saveNewData->name ='নোট';
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+        $totalCount = ParentNoteForFdFive::where('nothi_detail_id',$request->dakId)
         ->where('serial_number',$request->nothiId)->count();
             $pId = $saveNewData->id;
 

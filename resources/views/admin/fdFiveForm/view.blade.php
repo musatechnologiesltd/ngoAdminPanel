@@ -164,7 +164,7 @@
                                         <div class="text-end">
 
                                            @if($getformOneId->status == 'Ongoing')
-                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'fd5Form','id'=>$getformOneId->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
+                                            <button onclick="location.href = '{{ route('showDataAll',['status'=>'fdFive','id'=>$getformOneId->id]) }}';" type="button" class="btn btn-primary float-right">ডাক দেখুন</button>
 
                                             @else
 

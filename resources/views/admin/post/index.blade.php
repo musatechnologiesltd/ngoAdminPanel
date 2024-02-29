@@ -71,6 +71,8 @@
 
                                       @include('admin.post.fdThreeDakFirstStep')
 
+                                      @include('admin.post.fdFiveDakFirstStep')
+
                                       @include('admin.post.duplicateCertificateDakFirstStep')
 
                                       @include('admin.post.contitutionDakFirstStep')

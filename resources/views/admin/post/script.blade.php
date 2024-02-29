@@ -1,4 +1,34 @@
 <script>
+    $("[id^=nothiSearchfdFive]").keyup(function(){
+
+
+                var main_id = $(this).attr('id');
+                var result = main_id.slice(17);
+                var main_value = $(this).val();
+
+
+                var status = 'fdFive'
+
+                //alert(result);
+
+
+
+                $.ajax({
+                url: "{{ route('searchResultForDak') }}",
+                method: 'GET',
+                data: {main_value:main_value,result:result,status:status},
+                success: function(data) {
+
+                     $("#nothiSearchResultfdFive"+result).html(data);
+                }
+                });
+
+
+
+    });
+
+    </script>
+<script>
     $("[id^=nothiSearchcommittee]").keyup(function(){
 
 
@@ -1189,7 +1219,63 @@ alertify.success('সফলভাবে কপি হয়েছে');
 //committee end
 
 
+$("[id^=nothiJatSearchfdFive]").keyup(function(){
 
+
+var main_id = $(this).attr('id');
+var result = main_id.slice(20);
+var main_value = $(this).val();
+
+//alert(result);
+
+
+
+$.ajax({
+url: "{{ route('searchResultNothiJatFdFive') }}",
+method: 'GET',
+data: {main_value:main_value,result:result},
+success: function(data) {
+
+     $("#nothijatSearchResultfdFive"+result).html(data);
+}
+});
+
+
+
+});
+
+
+
+
+
+$("[id^=nothijatfdFiveFinal]").click(function(){
+
+
+var dakId = $(this).data('dakid');
+var nothiId = $(this).data('nothiid');
+var status = $(this).data('dakstatus');
+
+
+//alert(dakId+nothiId+status);
+
+
+$.ajax({
+    url: "{{ route('updateNothiJat') }}",
+    method: 'GET',
+    data: {dakId:dakId,nothiId:nothiId,status:status},
+    success: function(data) {
+
+         //$("#nothiSearchResultRegi"+result).html(data);
+
+
+         location.reload(true);
+alertify.set('notifier','position','top-center');
+alertify.success('সফলভাবে কপি হয়েছে');
+    }
+    });
+
+
+});
         </script>
 
     <!-- end nothi jat script -->
