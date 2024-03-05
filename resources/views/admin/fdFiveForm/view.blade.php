@@ -599,7 +599,7 @@
 
 
 
-                                            <form id="form" action="{{ route('updateStatusDuplicateCertificate') }}" method="post">
+                                            <form id="form" action="{{ route('fd5FormStatus') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" value="{{ $getformOneId->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />
