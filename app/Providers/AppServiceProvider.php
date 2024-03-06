@@ -227,11 +227,11 @@ class AppServiceProvider extends ServiceProvider
 
                     $mainCodeCountHeader1 =$ngoStatusFdFive1 + $ngoStatusExecutiveCommittee1+ $ngoStatusConstitution1+$ngoStatusDuplicateCertificate1+$ngoStatusReg1+$ngoStatusFDNineOneDak1+$ngoStatusFdThreeDak1+$ngoStatusFcTwoDak1+$ngoStatusFcOneDak1+$ngoStatusFdSevenDak1+$ngoStatusFdSixDak1+$ngoStatusFDNineDak1+$ngoStatusNameChange1+$ngoStatusRenew1;
 
-//dd($mainCodeCountHeader1);
+
                    $mainCodeCountHeader2 =  $all_data_for_name_changes_list + $all_data_for_renew_list + $all_data_for_new_list+ $dataFdNineOne +
                    $dataFdNine + $dataFromFd6Form + $dataFromFd7Form+$dataFromFc1Form+$dataFdFive+
                    $dataFromFc2Form+$dataFromFd3Form+$all_data_for_name_changes_list1e+$all_data_for_name_changes_list2e+$all_data_for_name_changes_list3e ;
-
+                  // dd($mainCodeCountHeader2);
                    $mainCodeCountHeader = $mainCodeCountHeader2 - $mainCodeCountHeader1;
 
                 }else{

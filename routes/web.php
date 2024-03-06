@@ -44,6 +44,7 @@ use App\Http\Controllers\Admin\ExecutiveCommitteeController;
 use App\Http\Controllers\Admin\ConstitutionController;
 use App\Http\Controllers\Admin\DuplicateCertificateController;
 use App\Http\Controllers\Admin\Fd5Controller;
+use App\Http\Controllers\Admin\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,12 @@ Route::get('/printPotrangsoPdfForEmail/{status}/{parentId}/{nothiId}/{id}', 'pri
 Route::group(['prefix' => 'admin'], function () {
 
 
+    Route::controller(ReportController::class)->group(function () {
+        Route::get('/districtWiseListResult', 'districtWiseListResult')->name('districtWiseListResult');
+        Route::get('/districtWiseList', 'districtWiseList')->name('districtWiseList');
+        Route::get('/districtWiseListSearch', 'districtWiseListSearch')->name('districtWiseListSearch');
+
+    });
 
     Route::controller(NothiJatController::class)->group(function () {
 

@@ -517,6 +517,55 @@
 @endif
 <!-- employee info --->
 
+<!-- report start  -->
+@if ($usr->can('reportAdd') || $usr->can('reportView') ||  $usr->can('reportDelete') ||  $usr->can('reportUpdate'))
+
+                    <li class="sidebar-main-title">
+                        <div>
+                          <h6>রিপোর্ট</h6>
+                        </div>
+                      </li>
+
+                      @if (Route::is('districtWiseListSearch') || Route::is('districtWiseList') || Route::is('districtWiseListResult'))
+
+                      <li class="dropdown">
+                        <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="settings"></i><span>রিপোর্ট </span></a>
+                        <ul class="nav-submenu menu-content" style="display: block;">
+
+
+                            <li class="">
+                                <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList') ? 'active' : '' }}" data-key="t-calendar">জেলাভিত্তিক এনজিও তালিকা</a>
+                            </li>
+
+
+
+
+
+                        </ul>
+                    </li>
+@else
+<li class="dropdown">
+    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="settings"></i><span>রিপোর্ট </span></a>
+    <ul class="nav-submenu menu-content">
+
+
+
+        <li class="">
+            <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList')  ? 'active' : '' }}" data-key="t-nft-landing">জেলাভিত্তিক এনজিও তালিকা</a>
+        </li>
+
+
+
+
+    </ul>
+</li>
+
+@endif
+
+
+@endif
+<!-- report end-->
+
 @if ($usr->can('noticeAdd') || $usr->can('noticeView') ||  $usr->can('noticeDelete') ||  $usr->can('noticeUpdate') || $usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate') || $usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate') || $usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate') || $usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
 
                     <li class="sidebar-main-title">
