@@ -244,7 +244,7 @@ ff
                         @else
                         <tr>
 
-                            <td>যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (নিয়োগপত্র কপি ও চুক্তিপত্র সংযুক্ত করতে হবে)
+                            <td>যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (চুক্তিপত্র কপি সংযুক্ত করতে হবে)
                             </td>
                             <td>:
 
@@ -254,13 +254,38 @@ ff
 
                                 @if(Route::is('addChildNote') || Route::is('viewChildNote'))
 
-                                <button  href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (নিয়োগপত্র কপি ও চুক্তিপত্র সংযুক্ত করতে হবে)"><i class="fa fa-paperclip"></i></button>
+                                <button  href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (চুক্তিপত্র কপি সংযুক্ত করতে হবে)"><i class="fa fa-paperclip"></i></button>
                                 <button  href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPost','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
 
                                 @endif
                                  </td>
                         </tr>
                         @endif
+
+                        @if(!$dataFromNVisaFd9Fd1->fd9_offered_post_niyog)
+
+                        @else
+                        <tr>
+
+                            <td>যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (নিয়োগপত্র কপি সংযুক্ত করতে হবে)
+                            </td>
+                            <td>:
+
+
+                                <a target="_blank" href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPostNiyog','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-outline-success"><i class="fa fa-file-pdf-o"></i> দেখুন  </a>
+
+
+                                @if(Route::is('addChildNote') || Route::is('viewChildNote'))
+
+                                <button  href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPostNiyog','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-secondary" id="attLink1"  data-name="যে পদের জন্য নিয়োগ প্রস্তাব দেয়া হয়েছে : (নিয়োগপত্র কপি সংযুক্ত করতে হবে)"><i class="fa fa-paperclip"></i></button>
+                                <button  href="{{ route('nVisaDocumentDownload',['cat'=>'offeredPostNiyog','id'=>$dataFromNVisaFd9Fd1->id]) }}" class="btn btn-danger" id="copyLink1"><i class="fa fa-copy"></i></button>
+
+                                @endif
+                                 </td>
+                        </tr>
+                        @endif
+
+
                         @if(!$dataFromNVisaFd9Fd1->fd9_name_of_proposed_project)
 
                                 @else

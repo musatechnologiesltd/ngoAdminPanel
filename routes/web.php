@@ -431,6 +431,8 @@ Route::controller(Fd5Controller::class)->group(function () {
 
     Route::controller(Fd9Controller::class)->group(function () {
 
+        Route::get('/singlePdfDownload/{id}','singlePdfDownload')->name('singlePdfDownload');
+
 
         Route::get('/verified_fd_nine_download/{id}','verified_fd_nine_download')->name('verified_fd_nine_download');
         Route::post('/statusUpdateForFd9', 'statusUpdateForFd9')->name('statusUpdateForFd9');

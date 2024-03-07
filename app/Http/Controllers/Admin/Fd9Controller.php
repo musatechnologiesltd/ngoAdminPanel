@@ -436,9 +436,10 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
                    ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 
+                   $fdNineOtherFileList = DB::table('fd_nine_other_files')
+                   ->where('fd9_form_id',$id)->get();
 
-
-         return view('admin.fd9form.show_new',compact('get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+         return view('admin.fd9form.show_new',compact('fdNineOtherFileList','get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
         } catch (\Exception $e) {
             return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
         }
@@ -754,6 +755,16 @@ $file=$data->system_url.'public/'.$get_file_data;
 
             $get_file_data = DB::table('fd9_forms')
             ->where('id',$id)->value('fd9_offered_post');
+
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+
+        }elseif($cat == 'offeredPostNiyog'){
+
+            $get_file_data = DB::table('fd9_forms')
+            ->where('id',$id)->value('fd9_offered_post_niyog');
 
              $file_path =$data->system_url.'public/'.$get_file_data;
         $filename  = pathinfo($file_path, PATHINFO_FILENAME);
