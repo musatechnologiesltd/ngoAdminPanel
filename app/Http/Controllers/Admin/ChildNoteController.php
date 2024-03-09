@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use Mpdf\Mpdf;
+use DB;
+use DateTime;
+use DateTimezone;
 use Image;
 use Auth;
 use Hash;
@@ -39,10 +43,6 @@ use App\Models\NothiPrapok;
 use App\Models\NothiCopy;
 use App\Models\NoteAttachment;
 use App\Models\NothiFirstSenderList;
-use DB;
-use DateTime;
-use DateTimezone;
-
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -58,11 +58,9 @@ use App\Models\NothiPermission;
 use App\Models\Branch;
 use App\Models\NothiDetail;
 use App\Models\ArticleSign;
-use Mpdf\Mpdf;
 use App\Models\PotrangshoDraft;
 use App\Models\DesignationList;
 use App\Models\SealStatus;
-
 use App\Models\DuplicateCertificateOfficeSarok;
 use App\Models\ExecutiveCommitteeOfficeSarok;
 use App\Models\ConstitutionOfficeSarok;
@@ -72,125 +70,75 @@ use App\Models\ExecutiveCommitteeDak;
 use App\Models\ParentNotForExecutiveCommittee;
 use App\Models\ParentNoteForConstitution;
 use App\Models\ParentNoteForDuplicateCertificate;
-
 use App\Models\ChildNoteForConstitution;
 use App\Models\ChildNoteForDuplicateCertificate;
 use App\Models\ChildNoteForExecutiveCommittee;
+
 class ChildNoteController extends Controller
 {
-	 public function getdataforNothiList(Request $request){
+	public function getdataforNothiList(Request $request){
 
-        //dd(12);
+
         $nothiCopyListId=$request->getFinalValue;
-
         $eid=$request->eid;
 
         if($request->mmStatus == 'registration'){
 
-            $childNoteNewList = DB::table('child_note_for_registrations')
-            ->where('id',$request->getFinalValue)->first();
+            $childNoteNewList = DB::table('child_note_for_registrations')->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'renew'){
 
-            }elseif($request->mmStatus == 'renew'){
+            $childNoteNewList = DB::table('child_note_for_renews')->where('id',$request->getFinalValue)->first();
 
-            $childNoteNewList = DB::table('child_note_for_renews')
-            ->where('id',$request->getFinalValue)->first();
+        }elseif($request->mmStatus == 'nameChange'){
 
+            $childNoteNewList = DB::table('child_note_for_name_changes')->where('id',$request->getFinalValue)->first();
 
-            }elseif($request->mmStatus == 'nameChange'){
+        }elseif($request->mmStatus == 'fdNine'){
 
-            $childNoteNewList = DB::table('child_note_for_name_changes')
-            ->where('id',$request->getFinalValue)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nines')->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'fdNineOne'){
 
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('id',$request->getFinalValue)->first();
 
-            }elseif($request->mmStatus == 'fdNine'){
+        }elseif($request->mmStatus == 'fdSix'){
 
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('id',$request->getFinalValue)->first();
 
-            $childNoteNewList = DB::table('child_note_for_fd_nines')
-            ->where('id',$request->getFinalValue)->first();
+        }elseif($request->mmStatus == 'fdSeven'){
 
+            $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('id',$request->getFinalValue)->first();
 
-            }elseif($request->mmStatus == 'fdNineOne'){
+        }elseif($request->mmStatus == 'fcOne'){
 
+            $childNoteNewList = DB::table('child_note_for_fc_ones')->where('id',$request->getFinalValue)->first();
 
-            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-            ->where('id',$request->getFinalValue)->first();
+        }elseif($request->mmStatus == 'fcTwo'){
 
+            $childNoteNewList = DB::table('child_note_for_fc_twos')->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'fdThree'){
 
-            }elseif($request->mmStatus == 'fdSix'){
+            $childNoteNewList = DB::table('child_note_for_fd_threes')->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'fdFive'){
 
-            $childNoteNewList = DB::table('child_note_for_fd_sixes')
-            ->where('id',$request->getFinalValue)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_fives')->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'duplicate'){
 
-            }elseif($request->mmStatus == 'fdSeven'){
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'constitution'){
 
-            $childNoteNewList = DB::table('child_note_for_fd_sevens')
-            ->where('id',$request->getFinalValue)->first();
+            $childNoteNewList = DB::table('child_note_for_constitutions') ->where('id',$request->getFinalValue)->first();
 
+        }elseif($request->mmStatus == 'committee'){
 
-            }elseif($request->mmStatus == 'fcOne'){
+            $childNoteNewList = DB::table('child_note_for_executive_committees')->where('id',$request->getFinalValue)->first();
 
-
-            $childNoteNewList = DB::table('child_note_for_fc_ones')
-            ->where('id',$request->getFinalValue)->first();
-
-
-
-            }elseif($request->mmStatus == 'fcTwo'){
-
-
-
-            $childNoteNewList = DB::table('child_note_for_fc_twos')
-            ->where('id',$request->getFinalValue)->first();
-
-
-
-            }elseif($request->mmStatus == 'fdThree'){
-
-
-            $childNoteNewList = DB::table('child_note_for_fd_threes')
-            ->where('id',$request->getFinalValue)->first();
-
-
-
-            }elseif($request->mmStatus == 'fdFive'){
-
-
-                $childNoteNewList = DB::table('child_note_for_fd_fives')
-                ->where('id',$request->getFinalValue)->first();
-
-
-
-                }elseif($request->mmStatus == 'duplicate'){
-
-
-                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-                ->where('id',$request->getFinalValue)->first();
-
-
-
-            }elseif($request->mmStatus == 'constitution'){
-
-
-                    $childNoteNewList = DB::table('child_note_for_constitutions')
-                    ->where('id',$request->getFinalValue)->first();
-
-
-
-            }elseif($request->mmStatus == 'committee'){
-
-
-                        $childNoteNewList = DB::table('child_note_for_executive_committees')
-                        ->where('id',$request->getFinalValue)->first();
-
-
-
-            }
+        }
 
         $data = view('admin.presentDocument.getdataforTest',compact('eid','nothiCopyListId','childNoteNewList'))->render();
             return response()->json(['data'=>$data]);
@@ -201,129 +149,80 @@ class ChildNoteController extends Controller
     public function deleteAttachment($id){
 
         try{
-  $dataDelete = NoteAttachment::where('id',$id)->delete();
 
+            $dataDelete = NoteAttachment::where('id',$id)->delete();
 
+            return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে ');
 
-  return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে ');
+        } catch (\Exception $e) {
 
-} catch (\Exception $e) {
-    return redirect()->back()->with('error','some thing went wrong ');
-}
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
     }
 
 
     public function deleteAllParagraph($id,$status){
 
-try{
+        try{
 
         if($status == 'registration'){
 
-            $childNoteNewList = DB::table('child_note_for_registrations')
-            ->where('id',$id)->delete();
+            $childNoteNewList = DB::table('child_note_for_registrations')->where('id',$id)->delete();
 
+        }elseif($status == 'renew'){
 
-            }elseif($status == 'renew'){
+            $childNoteNewList = DB::table('child_note_for_renews')->where('id',$id)->delete();
 
-            $childNoteNewList = DB::table('child_note_for_renews')
-            ->where('id',$id)->delete();
+        }elseif($status == 'nameChange'){
 
+            $childNoteNewList = DB::table('child_note_for_name_changes')->where('id',$id)->delete();
 
-            }elseif($status == 'nameChange'){
+        }elseif($status == 'fdNine'){
 
-            $childNoteNewList = DB::table('child_note_for_name_changes')
-            ->where('id',$id)->delete();
+            $childNoteNewList = DB::table('child_note_for_fd_nines')->where('id',$id)->delete();
 
+        }elseif($status == 'fdNineOne'){
 
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('id',$id)->delete();
 
-            }elseif($status == 'fdNine'){
+        }elseif($status == 'fdSix'){
 
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('id',$id)->delete();
 
-            $childNoteNewList = DB::table('child_note_for_fd_nines')
-            ->where('id',$id)->delete();
+        }elseif($status == 'fdSeven'){
 
+            $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('id',$id)->delete();
 
-            }elseif($status == 'fdNineOne'){
+        }elseif($status == 'fcOne'){
 
+            $childNoteNewList = DB::table('child_note_for_fc_ones')->where('id',$id)->delete();
 
-            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-            ->where('id',$id)->delete();
+        }elseif($status == 'fcTwo'){
 
+            $childNoteNewList = DB::table('child_note_for_fc_twos') ->where('id',$id)->delete();
 
+        }elseif($status == 'fdThree'){
 
-            }elseif($status == 'fdSix'){
+            $childNoteNewList = DB::table('child_note_for_fd_threes')->where('id',$id)->delete();
 
+        }elseif($status == 'fdFive'){
 
-            $childNoteNewList = DB::table('child_note_for_fd_sixes')
-            ->where('id',$id)->delete();
+            $childNoteNewList = DB::table('child_note_for_fd_fives')->where('id',$id)->delete();
 
+        }elseif($status == 'duplicate'){
 
-            }elseif($status == 'fdSeven'){
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('id',$id)->delete();
 
+        }elseif($status == 'constitution'){
 
-            $childNoteNewList = DB::table('child_note_for_fd_sevens')
-            ->where('id',$id)->delete();
+            $childNoteNewList = DB::table('child_note_for_constitutions')->where('id',$id)->delete();
 
+        }elseif($status == 'committee'){
 
-            }elseif($status == 'fcOne'){
+            $childNoteNewList = DB::table('child_note_for_executive_committees')->where('id',$id)->delete();
 
-
-            $childNoteNewList = DB::table('child_note_for_fc_ones')
-            ->where('id',$id)->delete();
-
-
-
-            }elseif($status == 'fcTwo'){
-
-
-
-            $childNoteNewList = DB::table('child_note_for_fc_twos')
-            ->where('id',$id)->delete();
-
-
-
-            }elseif($status == 'fdThree'){
-
-
-            $childNoteNewList = DB::table('child_note_for_fd_threes')
-            ->where('id',$id)->delete();
-
-
-
-            }elseif($status == 'fdFive'){
-
-
-                $childNoteNewList = DB::table('child_note_for_fd_fives')
-                ->where('id',$id)->delete();
-
-
-
-            }elseif($status == 'duplicate'){
-
-
-                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-                ->where('id',$id)->delete();
-
-
-
-            }elseif($status == 'constitution'){
-
-
-                    $childNoteNewList = DB::table('child_note_for_constitutions')
-                    ->where('id',$id)->delete();
-
-
-
-            }elseif($status == 'committee'){
-
-
-                        $childNoteNewList = DB::table('child_note_for_executive_committees')
-                        ->where('id',$id)->delete();
-
-
-
-            }
-
+        }
 
             return redirect()->back()->with('error','সফলভাবে মুছে ফেলা হয়েছে');
 
@@ -333,214 +232,85 @@ try{
     }
 
 
-    public function dd(){
-
-        $mpdf = new Mpdf([
-            'default_font_size' => 14,
-            'default_font' => 'nikosh'
-        ]);
-
-        $mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
-        $mpdf->WriteHTML('এর ক্ষতিপূরণ নির্ধারণ সংক্রান্ত প্রতিবেদন।');
-
-
-
-        $mpdf->Output();
-        die();
-
-    }
-
-
     public function printPotrangsoPdfForEmail($status,$parentId,$nothiId,$id){
 
         try{
         if($status == 'registration'){
 
-
-
             $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
-            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-                           ->get();
-
-
+            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'renew'){
 
-
-
             $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
-            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-
-
-
-
-
-
+            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'nameChange'){
 
-
-
             $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
-
-
-            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
+            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fdNine'){
 
-
-
-
             $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
-
-            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-//dd($checkParent);
-
+            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fdNineOne'){
 
-
             $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
+            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fdSix'){
 
-
             $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
-
-            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
+            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fdSeven'){
 
-
-
             $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
-
-            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
+            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fcOne'){
 
-
             $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
-            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
-            ->get();
-
-
-
+            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)->get();
 
         }elseif($status == 'fcTwo'){
 
-
             $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
-
-            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-
+            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fdThree'){
 
             $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
+            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'fdFive'){
 
             $officeDetail = FdFiveOfficeSarok::where('pnote_fd_five',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
+            $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'duplicate'){
 
             $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
+            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'constitution'){
 
             $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
+            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }elseif($status == 'committee'){
 
             $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
-
-
-
-
-            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
+            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
         }
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
-
         $user = Admin::where('id','!=',1)->get();
-
 
         $nothiPropokListUpdate = NothiPrapok::
         where('nothiId',$nothiId)
@@ -550,234 +320,112 @@ try{
         $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
 
-
-
         $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
 
         $convert_name_title = $permissionNothiList->implode("branchId", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 
-
-
         $branchListForSerial = Branch::whereIn('id',$separated_data_title)
         ->orderBy('branch_step','asc')->get();
 
-$sarokCode = 1;
+        $sarokCode = 1;
 
-        //$file_Name_Custome = 'printPotrangso';
+
         $data = view('admin.presentDocument.printPotrangso',['nothiYear'=>$nothiYear,'sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate])->render();
-//return $pdf->stream($file_Name_Custome.''.'.pdf');
 
-//dd(11);
+        $mpdf = new Mpdf([
+            'default_font' => 'nikosh'
+        ]);
 
-$mpdf = new Mpdf([
-    //'default_font_size' => 14,
-    'default_font' => 'nikosh'
-]);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output();
+        die();
 
-//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
-$mpdf->WriteHTML($data);
-
-
-
-$mpdf->Output();
-die();
-
-} catch (\Exception $e) {
-    return redirect()->back()->with('error','some thing went wrong ');
-}
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
     }
 
 
     public function printPotrangso($status,$parentId,$nothiId,$id,$sarokCode){
 
-try{
-        if($status == 'registration'){
+        try{
+            if($status == 'registration'){
 
+                $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+                $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'renew'){
 
-            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
-            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-                           ->get();
+                $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+                $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'nameChange'){
 
+                $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+                $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-        }elseif($status == 'renew'){
+            }elseif($status == 'fdNine'){
 
+                $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+                $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdNineOne'){
 
-            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
-            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
+                $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+                $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdSix'){
 
+                $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+                $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdSeven'){
 
+                $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+                $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fcOne'){
 
+                $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+                $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)->get();
 
+            }elseif($status == 'fcTwo'){
 
+                $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+                $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdThree'){
 
-        }elseif($status == 'nameChange'){
+                $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+                $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdFive'){
 
+                $officeDetail = FdFiveOfficeSarok::where('pnote_fd_five',$id)->get();
+                $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-            $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+            }elseif($status == 'duplicate'){
 
+                $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+                $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
+            }elseif($status == 'constitution'){
 
+                $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
+                $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'committee'){
 
-        }elseif($status == 'fdNine'){
+                $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+                $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-
-
-
-            $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
-
-            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-//dd($checkParent);
-
-
-        }elseif($status == 'fdNineOne'){
-
-
-            $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-
-        }elseif($status == 'fdSix'){
-
-
-            $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
-
-            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-        }elseif($status == 'fdSeven'){
-
-
-
-            $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
-
-            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-        }elseif($status == 'fcOne'){
-
-
-            $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
-            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
-            ->get();
-
-
-
-
-        }elseif($status == 'fcTwo'){
-
-
-            $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
-
-            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-
-
-        }elseif($status == 'fdThree'){
-
-            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'fdFive'){
-
-            $officeDetail = FdFiveOfficeSarok::where('pnote_fd_five',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'duplicate'){
-
-            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'constitution'){
-
-            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'committee'){
-
-            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
-
-
-
-
-            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }
+            }
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
-
         $user = Admin::where('id','!=',1)->get();
-
 
         $nothiPropokListUpdate = NothiPrapok::
         where('nothiId',$nothiId)
@@ -787,590 +435,229 @@ try{
         $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
 
-
-
         $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
 
         $convert_name_title = $permissionNothiList->implode("branchId", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 
+        $branchListForSerial = Branch::whereIn('id',$separated_data_title)->orderBy('branch_step','asc')->get();
 
-
-        $branchListForSerial = Branch::whereIn('id',$separated_data_title)
-        ->orderBy('branch_step','asc')->get();
-
-
-
-        //$file_Name_Custome = 'printPotrangso';
         $data = view('admin.presentDocument.printPotrangso',['nothiYear'=>$nothiYear,'sarokCode'=>$sarokCode,'parentId'=>$parentId,'id'=>$id,'status'=>$status,'checkParent'=>$checkParent,'officeDetail'=>$officeDetail,'nothiNumber'=>$nothiNumber,'nothiId'=>$nothiId,'user'=>$user,'nothiPropokListUpdate'=>$nothiPropokListUpdate,'nothiAttractListUpdate'=>$nothiAttractListUpdate,'branchListForSerial'=>$branchListForSerial,'permissionNothiList'=>$permissionNothiList,'nothiCopyListUpdate'=>$nothiCopyListUpdate])->render();
-//return $pdf->stream($file_Name_Custome.''.'.pdf');
 
-//dd(11);
+        $mpdf = new Mpdf([
+            'default_font' => 'nikosh'
+        ]);
 
-$mpdf = new Mpdf([
-    //'default_font_size' => 14,
-    'default_font' => 'nikosh'
-]);
-
-//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
-$mpdf->WriteHTML($data);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output();
+        die();
 
 
-
-$mpdf->Output();
-die();
-
-
-} catch (\Exception $e) {
-    return redirect()->back()->with('error','some thing went wrong ');
-}
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
 
     }
 
 
     public function addChildNoteFromView($status,$parentId,$nothiId,$id,$activeCode){
-try{
-        if($status == 'registration'){
 
+        try{
 
+            if($status == 'registration'){
 
-            $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
-            $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-                           ->get();
+                $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
+                $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'renew'){
 
+                $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
+                $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-        }elseif($status == 'renew'){
+            }elseif($status == 'nameChange'){
 
+                $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+                $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdNine'){
 
-            $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
-            $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
+                $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+                $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdNineOne'){
 
+                $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
+                $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-        }elseif($status == 'nameChange'){
+            }elseif($status == 'fdSix'){
 
+                $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
+                $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdSeven'){
 
-            $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
+                $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
+                $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fcOne'){
 
-            $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
+                $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
+                $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)>get();
 
+            }elseif($status == 'fcTwo'){
 
+                $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
+                $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-        }elseif($status == 'fdNine'){
+            }elseif($status == 'fdThree'){
 
+                $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
+                $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
+            }elseif($status == 'fdFive'){
 
+                $officeDetail = FdFiveOfficeSarok::where('pnote_fd_five',$id)->get();
+                $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-            $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
+            }elseif($status == 'duplicate'){
 
-            $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
+                $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
+                $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId) ->get();
 
-//dd($checkParent);
+            }elseif($status == 'constitution'){
 
+                $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
+                $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-        }elseif($status == 'fdNineOne'){
+            }elseif($status == 'committee'){
 
+                $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
+                $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
-            $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-            $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-
-        }elseif($status == 'fdSix'){
-
-
-            $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
-
-            $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-        }elseif($status == 'fdSeven'){
-
-
-
-            $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
-
-            $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-        }elseif($status == 'fcOne'){
-
-
-            $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
-            $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
-            ->get();
-
-
-
-
-        }elseif($status == 'fcTwo'){
-
-
-            $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
-
-            $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-
-
-
-        }elseif($status == 'fdThree'){
-
-            $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'fdFive'){
-
-            $officeDetail = FdFiveOfficeSarok::where('pnote_fd_five',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'duplicate'){
-
-            $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'constitution'){
-
-            $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
-
-
-
-
-            $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }elseif($status == 'committee'){
-
-            $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
-
-
-
-
-            $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->get();
-
-
-        }
+            }
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
-
         $user = Admin::where('id','!=',1)->get();
 
 
-        $nothiPropokListUpdate = NothiPrapok::
-        where('nothiId',$nothiId)
+        $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
 
-
-
         $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
 
         $convert_name_title = $permissionNothiList->implode("branchId", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 
-
-
-        $branchListForSerial = Branch::whereIn('id',$separated_data_title)
-        ->orderBy('branch_step','asc')->get();
-
-
-
+        $branchListForSerial = Branch::whereIn('id',$separated_data_title)->orderBy('branch_step','asc')->get();
 
         return view('admin.presentDocument.addParentNoteFromView',compact('nothiYear','branchListForSerial','permissionNothiList','nothiCopyListUpdate','nothiAttractListUpdate','nothiPropokListUpdate','user','nothiId','nothiNumber','officeDetail','checkParent','status','id','parentId','activeCode'));
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error','some thing went wrong ');
-    }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
     }
 
-    ///code for 11 february
+
 
 
     public function printAllParagraph($status,$parentId,$nothiId,$id){
 
-try{
+        try{
 
 
         if($status == 'registration'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-           ->first();
-
-
-           $childNoteNewList = DB::table('child_note_for_registrations')
-                   ->where('parent_note_regid',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_registrations')
-                   ->where('parent_note_regid',$id)
-                   ->whereNull('sent_status')
-
-                   ->orwhere('sent_status',1)
-                   ->value('id');
-
+                $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'renew'){
 
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_renews')
-                   ->where('parent_note_for_renew_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_renews')
-                   ->where('parent_note_for_renew_id',$id)
-                   ->whereNull('sent_status')
-->orwhere('sent_status',1)
-                   ->value('id');
-
-
-
-
-
-
-
-
+                $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'nameChange'){
 
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_name_changes')
-                   ->where('parentnote_name_change_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
-                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
-
+                $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNine'){
 
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_nines')
-                   ->where('p_note_for_fd_nine_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-        //dd($checkParent);
-
+                $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNineOne'){
 
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-                   ->where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
+                $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSix'){
 
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sixes')
-                   ->where('parent_note_for_fdsix_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-
+                $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId) ->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSeven'){
 
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
+                $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcOne'){
 
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
+                $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcTwo'){
 
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
+                $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdThree'){
 
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
+                $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdFive'){
 
+                $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+        }elseif($status == 'duplicate'){
 
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->get();
-
-                       $childNoteNewListValue = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
-
-
-            }elseif($status == 'duplicate'){
-
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-
-            ->where('pnote_dupid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
-            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
-
+                $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'constitution'){
 
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_constitutions')
-
-            ->where('pnote_conid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_constitutions')
-            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
-
+                $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'committee'){
 
+                $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-
-
-
-
-            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_executive_committees')
-
-            ->where('pnote_exeid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
-            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
-
-
-            }
-
-
-
-
-
-
-
-        //end new code december 23
-
+        }
 
         $sarokCode = 1;
-
-
-
-
-
-
-
-
         $data = view('admin.presentDocument.printAllParagraph',compact(
             'childNoteNewListValue',
             'childNoteNewList',
@@ -1383,26 +670,15 @@ try{
         ));
 
         $mpdf = new Mpdf([
-            //'default_font_size' => 14,
             'default_font' => 'nikosh'
         ]);
-
-        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
         $mpdf->WriteHTML($data);
-
-
-
         $mpdf->Output();
         die();
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error','some thing went wrong ');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
     }
-    }
-
-    //end code for 11 february
-
-    //new start 11
 
 
     public function printAllParagraphFromSend($status,$parentId,$nothiId,$id){
@@ -1413,207 +689,90 @@ try{
 
         if($status == 'registration'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)->where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_registrations')
-        ->where('parent_note_regid',$id)->whereNull('sent_status')
-        ->orwhere('sent_status',1)->value('id');
+            $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'renew'){
 
-        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)->where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)
-        ->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'nameChange'){
 
-        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)->where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)
-        ->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
-
-
+            $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNine'){
 
-        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)>where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)
-        ->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
-
-        //dd($checkParent);
-
+            $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)>where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNineOne'){
 
-        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)->where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)
-        ->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
+            $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSix'){
 
-        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)->where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)
-        ->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSeven'){
 
-        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
+            $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_sevens') ->where('parent_note_for_fd_seven_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_sevens') ->where('parent_note_for_fd_seven_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcOne'){
 
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+            $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
 
         }elseif($status == 'fcTwo'){
 
-        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fc_twos') ->where('parent_note_for_fc_two_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdThree'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdFive'){
 
-            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
+            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+        }elseif($status == 'duplicate'){
 
-            $childNoteNewList = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->get();
-
-                       $childNoteNewListValue = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
-
-
-            }elseif($status == 'duplicate'){
-
-            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-
-            ->where('pnote_dupid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
-            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates') ->where('pnote_dupid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'constitution'){
 
-            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_constitutions')
-
-            ->where('pnote_conid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_constitutions')
-            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id) ->first();
+            $childNoteNewList = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_constitutions') ->where('pnote_conid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'committee'){
 
-            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-
-            $childNoteNewList = DB::table('child_note_for_executive_committees')
-
-            ->where('pnote_exeid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
-            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
-
-
-            }
-
-
-
+        }
 
         $data = view('admin.presentDocument.printAllParagraphSend',compact(
             'childNoteNewListValue',
@@ -1627,384 +786,131 @@ try{
         ));
 
         $mpdf = new Mpdf([
-            //'default_font_size' => 14,
             'default_font' => 'nikosh'
         ]);
 
-        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
         $mpdf->WriteHTML($data);
-
-
-
         $mpdf->Output();
         die();
 
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error','some thing went wrong ');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
     }
-        //end new code december 23
-    }
-    //end new start 11
+
 
 
     public function printParagraphViewSingle($status,$parentId,$nothiId,$id,$childIdNew){
 
-try{
+        try{
 
-        $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+            $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
+            $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+            $user = Admin::where('id','!=',1)->get();
 
-        $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
+            $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
+            ->where('noteId',$id)->where('status',1)->get();
+            $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
+            ->where('noteId',$id)->where('status',1)->get();
+            $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
+            ->where('noteId',$id)->where('status',1)->get();
 
-        $user = Admin::where('id','!=',1)->get();
+            $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
 
+            $convert_name_title = $permissionNothiList->implode("designationId", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
 
-        $nothiPropokListUpdate = NothiPrapok::
-        where('nothiId',$nothiId)
-        ->where('noteId',$id)->where('status',1)->get();
-        $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
-        ->where('noteId',$id)->where('status',1)->get();
-        $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
-        ->where('noteId',$id)->where('status',1)->get();
+            $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)->orderBy('designation_serial','asc')->get();
 
+            if($status == 'registration'){
 
+                $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_registrations')->where('id',$childIdNew)->where('parent_note_regid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-        $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
+            }elseif($status == 'renew'){
 
+                $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId) ->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_renews')->where('id',$childIdNew)->where('parent_note_for_renew_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-        $convert_name_title = $permissionNothiList->implode("designationId", " ");
-        $separated_data_title = explode(" ", $convert_name_title);
+            }elseif($status == 'nameChange'){
 
+                $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$childIdNew)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_name_changes')->where('id',$childIdNew)->where('parentnote_name_change_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fdNine'){
 
-        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
-        ->orderBy('designation_serial','asc')->get();
+                $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_nines')->where('id',$childIdNew)->where('p_note_for_fd_nine_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fdNineOne'){
 
-        //new code december 23
+                $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('id',$childIdNew)->where('p_note_for_fd_nine_one_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fdSix'){
 
+                $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('id',$childIdNew)->where('parent_note_for_fdsix_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fdSeven'){
 
-        if($status == 'registration'){
+                $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('id',$childIdNew)->where('parent_note_for_fd_seven_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_sevens') ->where('parent_note_for_fd_seven_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fcOne'){
 
-        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-           ->first();
+                $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fc_ones')->where('id',$childIdNew)->where('parent_note_for_fc_one_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fcTwo'){
 
-           $childNoteNewList = DB::table('child_note_for_registrations')
-           ->where('id',$childIdNew)
-                   ->where('parent_note_regid',$id)->get();
+                $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fc_twos')->where('id',$childIdNew)->where('parent_note_for_fc_two_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'fdThree'){
 
-                   $childNoteNewListValue = DB::table('child_note_for_registrations')
-                   ->where('parent_note_regid',$id)
-                   ->whereNull('sent_status')
+                $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_threes')->where('id',$childIdNew)->where('parent_note_for_fd_three_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-                   ->orwhere('sent_status',1)
-                   ->value('id');
+            }elseif($status == 'fdFive'){
 
-
-        }elseif($status == 'renew'){
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_renews')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_renew_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_renews')
-                   ->where('parent_note_for_renew_id',$id)
-                   ->whereNull('sent_status')
-->orwhere('sent_status',1)
-                   ->value('id');
-
-
-
-        }elseif($status == 'nameChange'){
-
-
-        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$childIdNew)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_name_changes')
-        ->where('id',$childIdNew)
-                   ->where('parentnote_name_change_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
-                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-        }elseif($status == 'fdNine'){
-
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_nines')
-        ->where('id',$childIdNew)
-                   ->where('p_note_for_fd_nine_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-        //dd($checkParent);
-
-
-        }elseif($status == 'fdNineOne'){
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-        ->where('id',$childIdNew)
-                   ->where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-        }elseif($status == 'fdSix'){
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sixes')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fdsix_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-
-
-        }elseif($status == 'fdSeven'){
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sevens')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-        }elseif($status == 'fcOne'){
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fc_ones')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fc_one_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-        }elseif($status == 'fcTwo'){
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fc_twos')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-
-        }elseif($status == 'fdThree'){
-
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_threes')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fd_three_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
-
-        }elseif($status == 'fdFive'){
-
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->get();
-
-                       $childNoteNewListValue = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
-
+                $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_fives')->where('id',$childIdNew)->where('pnote_fd_five',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
             }elseif($status == 'duplicate'){
 
+                $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('id',$childIdNew)->where('pnote_dupid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'constitution'){
 
+                $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_constitutions')->where('id',$childIdNew) ->where('pnote_conid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+            }elseif($status == 'committee'){
 
-
-            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-            ->where('id',$childIdNew)
-            ->where('pnote_dupid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
-            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
-
-
-        }elseif($status == 'constitution'){
-
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_constitutions')
-            ->where('id',$childIdNew)
-            ->where('pnote_conid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_constitutions')
-            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
-
-
-        }elseif($status == 'committee'){
-
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_executive_committees')
-            ->where('id',$childIdNew)
-            ->where('pnote_exeid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
-            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
-
+                $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_executive_committees')->where('id',$childIdNew)->where('pnote_exeid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
             }
 
 
-
-
-
-
-
-        //end new code december 23
-
-
-
-       $data = view('admin.presentDocument.printParagraphViewSingle',compact(
-
-'status','parentId','nothiId','id','childIdNew',
+       $data = view('admin.presentDocument.printParagraphViewSingle',compact('status','parentId','nothiId','id','childIdNew',
             'childNoteNewListValue',
             'childNoteNewList',
             'checkParentFirst',
@@ -2012,387 +918,130 @@ try{
         ));
 
         $mpdf = new Mpdf([
-            //'default_font_size' => 14,
             'default_font' => 'nikosh'
         ]);
 
-        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
         $mpdf->WriteHTML($data);
-
-
-
         $mpdf->Output();
         die();
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error','some thing went wrong ');
-    }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
     }
 
 
     public function printParagraphAddSingle($status,$parentId,$nothiId,$id,$childIdNew){
 
 
-try{
+        try{
+
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
-
         $user = Admin::where('id','!=',1)->get();
 
-
-        $nothiPropokListUpdate = NothiPrapok::
-        where('nothiId',$nothiId)
+        $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
 
-
-
         $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
 
         $convert_name_title = $permissionNothiList->implode("designationId", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 
-
-
-        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
-        ->orderBy('designation_serial','asc')->get();
-
-
-        //new code december 23
-
-
-
+        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)->orderBy('designation_serial','asc')->get();
 
         if($status == 'registration'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-           ->first();
-
-
-           $childNoteNewList = DB::table('child_note_for_registrations')
-           ->where('id',$childIdNew)
-                   ->where('parent_note_regid',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_registrations')
-                   ->where('parent_note_regid',$id)
-                   ->whereNull('sent_status')
-
-                   ->orwhere('sent_status',1)
-                   ->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_registrations')->where('id',$childIdNew)->where('parent_note_regid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'renew'){
 
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_renews')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_renew_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_renews')
-                   ->where('parent_note_for_renew_id',$id)
-                   ->whereNull('sent_status')
-->orwhere('sent_status',1)
-                   ->value('id');
-
-
-
-
-
-
-
-
+            $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_renews')->where('id',$childIdNew)->where('parent_note_for_renew_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'nameChange'){
 
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$childIdNew)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_name_changes')
-        ->where('id',$childIdNew)
-                   ->where('parentnote_name_change_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
-                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
-
+            $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$childIdNew)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_name_changes')->where('id',$childIdNew)->where('parentnote_name_change_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNine'){
 
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_nines')
-        ->where('id',$childIdNew)
-                   ->where('p_note_for_fd_nine_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-        //dd($checkParent);
-
+            $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nines')->where('id',$childIdNew)->where('p_note_for_fd_nine_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNineOne'){
 
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-        ->where('id',$childIdNew)
-                   ->where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
+            $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('id',$childIdNew)->where('p_note_for_fd_nine_one_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSix'){
 
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sixes')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fdsix_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
-
+            $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('id',$childIdNew)->where('parent_note_for_fdsix_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSeven'){
 
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sevens')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-
+            $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('id',$childIdNew)->where('parent_note_for_fd_seven_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcOne'){
 
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fc_ones')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fc_one_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-
+            $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fc_ones') ->where('id',$childIdNew)->where('parent_note_for_fc_one_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcTwo'){
 
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fc_twos')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
-
-
-
+            $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fc_twos')->where('id',$childIdNew)->where('parent_note_for_fc_two_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdThree'){
 
-
-
-
-
-
-        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_threes')
-        ->where('id',$childIdNew)
-                   ->where('parent_note_for_fd_three_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_threes')->where('id',$childIdNew)->where('parent_note_for_fd_three_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdFive'){
 
+            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_fives')->where('id',$childIdNew)->where('pnote_fd_five',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
+        }elseif($status == 'duplicate'){
 
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->get();
-
-                       $childNoteNewListValue = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
-
-
-            }elseif($status == 'duplicate'){
-
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-            ->where('id',$childIdNew)
-            ->where('pnote_dupid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
-            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('id',$childIdNew)->where('pnote_dupid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'constitution'){
 
-
-
-
-
-
-            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_constitutions')
-            ->where('id',$childIdNew)
-            ->where('pnote_conid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_constitutions')
-            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_constitutions')->where('id',$childIdNew)->where('pnote_conid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'committee'){
 
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_executive_committees')->where('id',$childIdNew)->where('pnote_exeid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
+
+        }
 
 
-
-
-
-            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_executive_committees')
-            ->where('id',$childIdNew)
-            ->where('pnote_exeid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
-            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
-
-
-            }
-
-
-
-        //end new code december 23
-
-
-
-       $data = view('admin.presentDocument.printParagraphAddSingle',compact(
-
-'status','parentId','nothiId','id','childIdNew',
+       $data = view('admin.presentDocument.printParagraphAddSingle',compact('status','parentId','nothiId','id','childIdNew',
             'childNoteNewListValue',
             'childNoteNewList',
             'checkParentFirst',
@@ -2400,21 +1049,16 @@ try{
         ));
 
         $mpdf = new Mpdf([
-            //'default_font_size' => 14,
             'default_font' => 'nikosh'
         ]);
 
-        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
         $mpdf->WriteHTML($data);
-
-
-
         $mpdf->Output();
         die();
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error','some thing went wrong ');
-    }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
     }
 
     public function addChildNote($status,$parentId,$nothiId,$id,$activeCode){
@@ -2959,269 +1603,119 @@ try{
 
 
         $nothiNumber = NothiList::where('id',$nothiId)->value('main_sarok_number');
-
         $nothiYear = NothiList::where('id',$nothiId)->value('document_year');
-
         $user = Admin::where('id','!=',1)->get();
 
 
-        $nothiPropokListUpdate = NothiPrapok::
-        where('nothiId',$nothiId)
+        $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
         $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
         ->where('noteId',$id)->where('status',1)->get();
 
-
-
         $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
 
         $convert_name_title = $permissionNothiList->implode("designationId", " ");
         $separated_data_title = explode(" ", $convert_name_title);
 
-
-
-        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)
-        ->orderBy('designation_serial','asc')->get();
+        $branchListForSerial = DesignationList::whereIn('id',$separated_data_title) ->orderBy('designation_serial','asc')->get();
 
 
         //new code december 23
 
         if($status == 'registration'){
 
-        $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)->where('id',$id)->first();
-
-        $childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
-
-        $childNoteNewListValue = DB::table('child_note_for_registrations')
-                   ->where('parent_note_regid',$id)->whereNull('sent_status')
-                   ->orwhere('sent_status',1)
-                   ->value('id');
+            $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'renew'){
 
-        $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_renews')
-                   ->where('parent_note_for_renew_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_renews')
-                   ->where('parent_note_for_renew_id',$id)
-                   ->whereNull('sent_status')
-->orwhere('sent_status',1)
-                   ->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'nameChange'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_name_changes')
-                   ->where('parentnote_name_change_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_name_changes')
-                   ->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
-
-
+            $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNine'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_nines')
-                   ->where('p_note_for_fd_nine_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nines')
-                   ->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-        //dd($checkParent);
-
+            $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdNineOne'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-                   ->where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-                   ->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSix'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sixes')
-                   ->where('parent_note_for_fdsix_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-                   ->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdSeven'){
 
-        $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-                   ->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcOne'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_ones')
-                   ->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fcTwo'){
 
-
-        $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-        $childNoteNewList = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->get();
-
-
-                   $childNoteNewListValue = DB::table('child_note_for_fc_twos')
-                   ->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fc_twos') ->where('parent_note_for_fc_two_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdThree'){
 
-        $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-        ->where('serial_number',$nothiId)
-        ->where('id',$id)
-        ->first();
-
-
-        $childNoteNewList = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->get();
-
-                   $childNoteNewListValue = DB::table('child_note_for_fd_threes')
-                   ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'fdFive'){
 
+            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-            $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
+        }elseif($status == 'duplicate'){
 
-
-            $childNoteNewList = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->get();
-
-                       $childNoteNewListValue = DB::table('child_note_for_fd_fives')
-                       ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
-
-
-            }elseif($status == 'duplicate'){
-
-
-            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-            ->where('pnote_dupid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
-            ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'constitution'){
 
-            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
-
-
-            $childNoteNewList = DB::table('child_note_for_constitutions')
-            ->where('pnote_conid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_constitutions')
-            ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
-
+            $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
         }elseif($status == 'committee'){
 
-            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
-            ->where('serial_number',$nothiId)
-            ->where('id',$id)
-            ->first();
+            $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+            $childNoteNewList = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->get();
+            $childNoteNewListValue = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->whereNull('sent_status')->orwhere('sent_status',1)->value('id');
 
-
-            $childNoteNewList = DB::table('child_note_for_executive_committees')
-            ->where('pnote_exeid',$id)->get();
-
-
-            $childNoteNewListValue = DB::table('child_note_for_executive_committees')
-            ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
-
-
-            }
+        }
 
         return view('admin.presentDocument.addChildNote',compact(
 
             'fdNineOtherFileList',
             'dataFromFdFive',
             'fdFiveStatusId',
-        'committeeStatusId',
+            'committeeStatusId',
             'dataFromCommittee',
             'constitutionStatusId',
             'dataFromConstitution',
@@ -3859,376 +2353,300 @@ try{
                 $branchListForSerial = DesignationList::whereIn('id',$separated_data_title)->orderBy('designation_serial','asc')->get();
 
 
-if($status == 'registration'){
+            if($status == 'registration'){
 
+                $checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_registrations') ->where('parent_note_regid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_registrations')->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
 
-$checkParentFirst = DB::table('parent_note_for_registrations')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
+                $childNoteNewListUpdate = DB::table('child_note_for_registrations')
+                ->where('parent_note_regid',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
+            }elseif($status == 'renew'){
 
-$childNoteNewList = DB::table('child_note_for_registrations')
-->where('parent_note_regid',$id)->get();
+                $checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_renews')->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
 
-$childNoteNewListValue = DB::table('child_note_for_registrations')
-->where('parent_note_regid',$id)->orderBy('id','desc')->value('id');
+                $childNoteNewListUpdate = DB::table('child_note_for_renews')
+                ->where('parent_note_for_renew_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
-}elseif($status == 'renew'){
+            }elseif($status == 'nameChange'){
 
+                $checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_name_changes')->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
 
-$checkParentFirst = DB::table('parent_note_for_renews')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
+                $childNoteNewListUpdate = DB::table('child_note_for_name_changes')
+                ->where('parentnote_name_change_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
+            }elseif($status == 'fdNine'){
 
-$childNoteNewList = DB::table('child_note_for_renews')
-->where('parent_note_for_renew_id',$id)->get();
+                $checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId) ->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_nines')->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
 
-$childNoteNewListValue = DB::table('child_note_for_renews')
-->where('parent_note_for_renew_id',$id)->orderBy('id','desc')->value('id');
+                $childNoteNewListUpdate = DB::table('child_note_for_fd_nines')
+                ->where('p_note_for_fd_nine_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
+            }elseif($status == 'fdNineOne'){
 
-$childNoteNewListUpdate = DB::table('child_note_for_renews')
-->where('parent_note_for_renew_id',$id)
-->where('receiver_id',Auth::guard('admin')->user()->id)
-->update(array('view_status' => 1));
+                $checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
 
-}elseif($status == 'nameChange'){
+                $childNoteNewListUpdate = DB::table('child_note_for_fd_nine_ones')
+                ->where('p_note_for_fd_nine_one_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
+            }elseif($status == 'fdSix'){
 
-$checkParentFirst = DB::table('parent_note_for_name_changes')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
+                $checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_sixes')->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
 
-$childNoteNewList = DB::table('child_note_for_name_changes')
-->where('parentnote_name_change_id',$id)->get();
+                $childNoteNewListUpdate = DB::table('child_note_for_fd_sixes')
+                ->where('parent_note_for_fdsix_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
-$childNoteNewListValue = DB::table('child_note_for_name_changes')
-->where('parentnote_name_change_id',$id)->orderBy('id','desc')->value('id');
+            }elseif($status == 'fdSeven'){
 
+                $checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId) ->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_sevens')->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
 
-}elseif($status == 'fdNine'){
+                $childNoteNewListUpdate = DB::table('child_note_for_fd_sevens')
+                ->where('parent_note_for_fd_seven_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
 
-
-$checkParentFirst = DB::table('parent_note_for_fd_nines')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_fd_nines')
-->where('p_note_for_fd_nine_id',$id)->get();
-
-
-$childNoteNewListValue = DB::table('child_note_for_fd_nines')
-->where('p_note_for_fd_nine_id',$id)->orderBy('id','desc')->value('id');
-
-}elseif($status == 'fdNineOne'){
-
-$checkParentFirst = DB::table('parent_note_for_fd_nine_ones')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fd_nine_ones')
-->where('p_note_for_fd_nine_one_id',$id)->get();
-
-$childNoteNewListValue = DB::table('child_note_for_fd_nine_ones')
-->where('p_note_for_fd_nine_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'fdSix'){
-
-$checkParentFirst = DB::table('parent_note_for_fdsixes')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fd_sixes')
-->where('parent_note_for_fdsix_id',$id)->get();
-
-$childNoteNewListValue = DB::table('child_note_for_fd_sixes')
-->where('parent_note_for_fdsix_id',$id)->orderBy('id','desc')->value('id');
-
-}elseif($status == 'fdSeven'){
-
-$checkParentFirst = DB::table('parent_note_for_fd_sevens')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fd_sevens')
-->where('parent_note_for_fd_seven_id',$id)->get();
-
-$childNoteNewListValue = DB::table('child_note_for_fd_sevens')
-->where('parent_note_for_fd_seven_id',$id)->orderBy('id','desc')->value('id');
-
-}elseif($status == 'fcOne'){
-
-$checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fc_ones')
-->where('parent_note_for_fc_one_id',$id)->get();
-
-$childNoteNewListValue = DB::table('child_note_for_fc_ones')
-->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'fcTwo'){
-
-$checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-$childNoteNewList = DB::table('child_note_for_fc_twos')
-->where('parent_note_for_fc_two_id',$id)->get();
-
-$childNoteNewListValue = DB::table('child_note_for_fc_twos')
-->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'fdThree'){
-
-
-$checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)
-->where('serial_number',$nothiId)
-->where('id',$id)
-->first();
-
-
-$childNoteNewList = DB::table('child_note_for_fd_threes')
-->where('parent_note_for_fd_three_id',$id)->get();
-
-
-$childNoteNewListValue = DB::table('child_note_for_fd_threes')
-->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'fdFive'){
-
-    $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
-    ->where('serial_number',$nothiId)
-    ->where('id',$id)
-    ->first();
-
-
-    $childNoteNewList = DB::table('child_note_for_fd_fives')
-    ->where('pnote_fd_five',$id)->get();
-
-
-    $childNoteNewListValue = DB::table('child_note_for_fd_fives')
-    ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
-
-
-    }elseif($status == 'duplicate'){
-
-
-    $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
-    ->where('serial_number',$nothiId)
-    ->where('id',$id)
-    ->first();
-
-
-    $childNoteNewList = DB::table('child_note_for_duplicate_certificates')
-    ->where('pnote_dupid',$id)->get();
-
-
-    $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
-    ->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'constitution'){
-
-    $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
-    ->where('serial_number',$nothiId)
-    ->where('id',$id)
-    ->first();
-
-    $childNoteNewList = DB::table('child_note_for_constitutions')
-    ->where('pnote_conid',$id)->get();
-
-
-    $childNoteNewListValue = DB::table('child_note_for_constitutions')
-    ->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
-
-
-}elseif($status == 'committee'){
-
-    $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
-    ->where('serial_number',$nothiId)
-    ->where('id',$id)
-    ->first();
-
-    $childNoteNewList = DB::table('child_note_for_executive_committees')
-    ->where('pnote_exeid',$id)->get();
-
-
-    $childNoteNewListValue = DB::table('child_note_for_executive_committees')
-    ->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+            }elseif($status == 'fcOne'){
+
+                $checkParentFirst = DB::table('parent_note_for_fc_ones')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fc_ones')->where('parent_note_for_fc_one_id',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_fc_ones')
+                ->where('parent_note_for_fc_one_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+            }elseif($status == 'fcTwo'){
+
+                $checkParentFirst = DB::table('parent_note_for_fc_twos')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fc_twos')->where('parent_note_for_fc_two_id',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_fc_twos')
+                ->where('parent_note_for_fc_two_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+            }elseif($status == 'fdThree'){
+
+                $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_threes')->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_fd_threes')
+                ->where('parent_note_for_fd_three_id',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+            }elseif($status == 'fdFive'){
+
+                $checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_fd_fives')->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_fd_fives')
+                ->where('pnote_fd_five',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+            }elseif($status == 'duplicate'){
+
+                $checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_duplicate_certificates')
+                ->where('pnote_dupid',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+            }elseif($status == 'constitution'){
+
+                $checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_constitutions')->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_constitutions')
+                ->where('pnote_conid',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+            }elseif($status == 'committee'){
+
+                $checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->where('id',$id)->first();
+                $childNoteNewList = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->get();
+                $childNoteNewListValue = DB::table('child_note_for_executive_committees')->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+                $childNoteNewListUpdate = DB::table('child_note_for_executive_committees')
+                ->where('pnote_exeid',$id)
+                ->where('receiver_id',Auth::guard('admin')->user()->id)
+                ->update(array('view_status' => 1));
+
+
+            }
+
+            return view('admin.presentDocument.viewChildNote',
+            compact(
+                'fdNineOtherFileList',
+                'dataFromFdFive',
+                'fdFiveStatusId',
+                'committeeStatusId',
+                'dataFromCommittee',
+                'constitutionStatusId',
+                'dataFromConstitution',
+                'duplicateCertificateStatusId',
+                'dataFromDuplicateCertificate',
+                'get_email_from_user',
+                'dataFromFd6Form',
+                'fd2FormList',
+                'fd2OtherInfo',
+                'prokolpoAreaList',
+                'dataFromFd7Form',
+                'dataFromFc1Form',
+                'dataFromFc2Form',
+                'dataFromFd3Form',
+                'mainIdFdNineOne',
+                'nVisabasicInfo',
+                'forwardingLetterOnulipi',
+                'editCheck1',
+                'editCheck',
+                'statusData',
+                'ngoStatus',
+                'nVisaWorkPlace',
+                'nVisaSponSor',
+                'nVisaForeignerInfo',
+                'nVisaManPower',
+                'nVisaEmploye',
+                'nVisaCompensationAndBenifits',
+                'nVisaAuthPerson',
+                'nVisaDocs',
+                'dataFromNVisaFd9Fd1',
+                'allNameChangeDoc',
+                'getformOneId',
+                'duration_list_all1',
+                'duration_list_all',
+                'r_status',
+                'ngoTypeData',
+                'renewInfoData',
+                'mainIdR',
+                'renew_status',
+                'name_change_status',
+                'form_member_data_doc_renew',
+                'get_all_data_adviser',
+                'get_all_data_other',
+                'get_all_data_adviser_bank',
+                'all_partiw',
+                'all_source_of_fund',
+                'users_info',
+                'form_ngo_data_doc',
+                'form_member_data_doc',
+                'form_member_data',
+                'form_eight_data',
+                'all_data_for_new_list_all',
+                'form_one_data',
+                'childNoteNewListValue',
+                'childNoteNewList',
+                'checkParentFirst',
+                'nothiYear',
+                'branchListForSerial',
+                'permissionNothiList',
+                'nothiCopyListUpdate',
+                'nothiAttractListUpdate',
+                'nothiPropokListUpdate',
+                'user',
+                'nothiId',
+                'nothiNumber',
+                'officeDetail',
+                'checkParent',
+                'status',
+                'id',
+                'parentId',
+                'activeCode'
+        ));
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
+    }
+
+
+    public function givePermissionToNote($status,$parentId,$nothiId,$id,$childnote){
+
+
+        try {
+            //start the transaction
+            DB::beginTransaction();
+
+            //new code 24 february
+
+
+            $senderIdNews = DB::table('seal_statuses')
+            ->where('noteId',$id)
+            ->where('nothiId',$nothiId)
+            ->where('receiver',Auth::guard('admin')->user()->id)
+            ->where('status',$status)
+            ->where('seal_status',2)
+            ->where('childId',$childnote)
+            ->update([
+
+                'seal_status' =>1
+            ]);
+
+
+            // end new code 24 february
+
+            DB::table('nothi_details')
+            ->where('noteId',$id)
+            ->where('nothId',$nothiId)
+            ->where('dakId',$parentId)
+            ->where('dakType',$status)
+            ->update([
+
+                'permission_status' =>1
+             ]);
+
+                 DB::commit();
+
+                 return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
+
+            }catch (\Exception $e) {
+
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
 
 
     }
 
-    return view('admin.presentDocument.viewChildNote',
-    compact(
-        'fdNineOtherFileList',
-        'dataFromFdFive',
-        'fdFiveStatusId',
-'committeeStatusId',
-            'dataFromCommittee',
-            'constitutionStatusId',
-            'dataFromConstitution',
-            'duplicateCertificateStatusId',
-            'dataFromDuplicateCertificate',
-        'get_email_from_user',
-        'dataFromFd6Form',
-        'fd2FormList',
-        'fd2OtherInfo',
-        'prokolpoAreaList',
-        'dataFromFd7Form',
-        'dataFromFc1Form',
-        'dataFromFc2Form',
-        'dataFromFd3Form',
-        'mainIdFdNineOne',
-        'nVisabasicInfo',
-        'forwardingLetterOnulipi',
-        'editCheck1',
-        'editCheck',
-        'statusData',
-        'ngoStatus',
-        'nVisaWorkPlace',
-        'nVisaSponSor',
-        'nVisaForeignerInfo',
-        'nVisaManPower',
-        'nVisaEmploye',
-        'nVisaCompensationAndBenifits',
-        'nVisaAuthPerson',
-        'nVisaDocs',
-        'dataFromNVisaFd9Fd1',
-        'allNameChangeDoc',
-        'getformOneId',
-        'duration_list_all1',
-        'duration_list_all',
-        'r_status',
-        'ngoTypeData',
-        'renewInfoData',
-        'mainIdR',
-        'renew_status',
-        'name_change_status',
-        'form_member_data_doc_renew',
-        'get_all_data_adviser',
-        'get_all_data_other',
-        'get_all_data_adviser_bank',
-        'all_partiw',
-        'all_source_of_fund',
-        'users_info',
-        'form_ngo_data_doc',
-        'form_member_data_doc',
-        'form_member_data',
-        'form_eight_data',
-        'all_data_for_new_list_all',
-        'form_one_data',
-        'childNoteNewListValue',
-        'childNoteNewList',
-        'checkParentFirst',
-        'nothiYear',
-        'branchListForSerial',
-        'permissionNothiList',
-        'nothiCopyListUpdate',
-        'nothiAttractListUpdate',
-        'nothiPropokListUpdate',
-        'user',
-        'nothiId',
-        'nothiNumber',
-        'officeDetail',
-        'checkParent',
-        'status',
-        'id',
-        'parentId',
-        'activeCode'
-));
+    public function givePermissionForPotroZari($status,$parentId,$nothiId,$id,$childnote){
 
-} catch (\Exception $e) {
-    return redirect()->back()->with('error','some thing went wrong ');
-}
-
-
-}
-
-
-            public function givePermissionToNote($status,$parentId,$nothiId,$id,$childnote){
-
-
-                // dd(DB::table('nothi_details')
-                // ->where('noteId',$id)
-                // ->where('nothId',$nothiId)
-                // ->where('dakId',$parentId)
-                // ->where('dakType',$status)->value('id'));
-//dd(12);
-try {
-    //start the transaction
-    DB::beginTransaction();
-
-
-    //new code 24 february
-
-
-    $senderIdNews = DB::table('seal_statuses')
-->where('noteId',$id)
-->where('nothiId',$nothiId)
-->where('receiver',Auth::guard('admin')->user()->id)
-->where('status',$status)
-->where('seal_status',2)
-->where('childId',$childnote)
-->update([
-
-    'seal_status' =>1
- ]);
-
-
-    // end new code 24 february
-
-
-                DB::table('nothi_details')
-                ->where('noteId',$id)
-                ->where('nothId',$nothiId)
-                ->where('dakId',$parentId)
-                ->where('dakType',$status)
-                ->update([
-
-                    'permission_status' =>1
-                 ]);
-                 DB::commit();
-                 return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
-            }catch (\Exception $e) {
-                DB::rollBack();
-                return redirect()->back()->with('error','some thing went wrong ');
-        }
-
-
-        }
-            public function givePermissionForPotroZari($status,$parentId,$nothiId,$id,$childnote){
-
-// dd($getCopylIst = DB::table('nothi_copies')
-// ->where('nothiId',$nothiId)
-// ->where('noteId',$id)
-// ->where('nijOfficeId',$status)
-// ->whereNotNull('otherOfficerEmail')
-// ->get());
-                // dd(DB::table('nothi_details')
-                // ->where('noteId',$id)
-                // ->where('nothId',$nothiId)
-                // ->where('dakId',$parentId)
-                // ->where('dakType',$status)->value('id'));
-
-try{
+        try{
                 $getPrapokLIst = DB::table('nothi_prapoks')
                 ->where('nothiId',$nothiId)
                 ->where('noteId',$id)
@@ -4249,8 +2667,6 @@ try{
                 ->where('nijOfficeId',$status)
                 ->whereNotNull('otherOfficerEmail')
                 ->get();
-
-
 
 
                 if(count($getPrapokLIst) == 0){
@@ -4311,179 +2727,75 @@ try{
 
                 }
 
-
-
-
-
-
-
                 if($status == 'registration'){
 
-
-
                     $officeDetail = RegistrationOfficeSarok::where('parent_note_regid',$id)->get();
-                    $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                                   ->get();
-
-
+                    $checkParent = ParentNoteForRegistration::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'renew'){
 
-
-
                     $officeDetail = RenewOfficeSarok::where('parent_note_for_renew_id',$id)->get();
-                    $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-
+                    $checkParent = ParentNoteForRenew::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'nameChange'){
 
-
-
                     $officeDetail = NameChangeOfficeSarok::where('parentnote_name_change_id',$id)->get();
-
-
-                    $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-
+                    $checkParent = ParentNoteForNameChange::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fdNine'){
 
-
-
-
                     $officeDetail = FdNineOfficeSarok::where('p_note_for_fd_nine_id',$id)->get();
-
-                    $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-        //dd($checkParent);
-
+                    $checkParent = ParentNoteForFdNine::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fdNineOne'){
 
-
                     $officeDetail = FdNineOneOfficeSarok::where('p_note_for_fd_nine_one_id',$id)->get();
-
-
-                    $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-
-
+                    $checkParent = ParentNoteForFdNineOne::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fdSix'){
 
-
                     $officeDetail = FdSixOfficeSarok::where('parent_note_for_fdsix_id',$id)->get();
-
-                    $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-
+                    $checkParent = ParentNoteForFdsix::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fdSeven'){
 
-
-
                     $officeDetail = FdSevenOfficeSarok::where('parent_note_for_fd_seven_id',$id)->get();
-
-                    $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-
+                    $checkParent = ParentNoteForFdSeven::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fcOne'){
 
-
                     $officeDetail = FcOneOfficeSarok::where('parent_note_for_fc_one_id',$id)->get();
-                    $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)
-                    ->get();
-
-
-
+                    $checkParent = ParentNoteForFcOne::where('nothi_detail_id',$parentId)->get();
 
                 }elseif($status == 'fcTwo'){
 
-
                     $officeDetail = FcTwoOfficeSarok::where('parent_note_for_fc_two_id',$id)->get();
-
-                    $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
-
-
-
+                    $checkParent = ParentNoteForFcTwo::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fdThree'){
 
                     $officeDetail = FdThreeOfficeSarok::where('parent_note_for_fd_three_id',$id)->get();
-
-
-
-
-                    $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
+                    $checkParent = ParentNoteForFdThree::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'fdFive'){
 
                     $officeDetail = FdFiveOfficeSarok::where('pnote_fd_five',$id)->get();
-
-
-
-
-                    $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
+                    $checkParent = ParentNoteForFdFive::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'duplicate'){
 
                     $officeDetail = DuplicateCertificateOfficeSarok::where('pnote_dupid',$id)->get();
-
-
-
-
-                    $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
+                    $checkParent = ParentNoteForDuplicateCertificate::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'constitution'){
 
                     $officeDetail = ConstitutionOfficeSarok::where('pnote_conid',$id)->get();
-
-
-
-
-                    $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
+                    $checkParent = ParentNoteForConstitution::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }elseif($status == 'committee'){
 
                     $officeDetail = ExecutiveCommitteeOfficeSarok::where('pnote_exeid',$id)->get();
-
-
-
-
-                    $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)
-                    ->where('serial_number',$nothiId)
-                    ->get();
-
+                    $checkParent = ParentNotForExecutiveCommittee::where('nothi_detail_id',$parentId)->where('serial_number',$nothiId)->get();
 
                 }
 
@@ -4494,38 +2806,25 @@ try{
                 $user = Admin::where('id','!=',1)->get();
 
 
-                $nothiPropokListUpdate = NothiPrapok::
-                where('nothiId',$nothiId)
+                $nothiPropokListUpdate = NothiPrapok::where('nothiId',$nothiId)
                 ->where('noteId',$id)->where('status',1)->get();
                 $nothiAttractListUpdate = NothiAttarct::where('nothiId',$nothiId)
                 ->where('noteId',$id)->where('status',1)->get();
                 $nothiCopyListUpdate = NothiCopy::where('nothiId',$nothiId)
                 ->where('noteId',$id)->where('status',1)->get();
 
-
-
                 $permissionNothiList = NothiPermission::where('nothId',$nothiId)->get();
-
 
                 $convert_name_title = $permissionNothiList->implode("branchId", " ");
                 $separated_data_title = explode(" ", $convert_name_title);
 
-
-
-                $branchListForSerial = Branch::whereIn('id',$separated_data_title)
-                ->orderBy('branch_step','asc')->get();
-
-
+                $branchListForSerial = Branch::whereIn('id',$separated_data_title)->orderBy('branch_step','asc')->get();
 
                 $file_Name_Custome ='IssuedPaper-'.date('d').date('F').date('Y').'-'.time().CommonController::generateRandomInteger();
 
                 $url = public_path('uploads\IssuedPaper');
-                //dd($url);
 
-
-                    File::makeDirectory($url, 0777, true, true);
-
-
+                File::makeDirectory($url, 0777, true, true);
 
                 $data =view('admin.presentDocument.issuedPaper',[
                     'nothiYear'=>$nothiYear,
@@ -4543,10 +2842,8 @@ try{
                     'branchListForSerial'=>$branchListForSerial,
                     'permissionNothiList'=>$permissionNothiList,
                     'nothiCopyListUpdate'=>$nothiCopyListUpdate])->render();
-                     //return $pdf->stream($file_Name_Custome.''.'.pdf');
 
-
-                     DB::table('nothi_details')
+                DB::table('nothi_details')
                 ->where('noteId',$id)
                 ->where('nothId',$nothiId)
                 ->where('dakId',$parentId)
@@ -4556,53 +2853,39 @@ try{
                     'zari_permission_status' =>1
                  ]);
 
-
-
-                 $pdfFilePath =$file_Name_Custome.'.pdf';
-
+                $pdfFilePath =$file_Name_Custome.'.pdf';
 
                      $mpdf = new Mpdf([
-                        //'default_font_size' => 14,
                         'default_font' => 'nikosh'
                     ]);
 
-                    //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-
                     $mpdf->WriteHTML($data);
-
-
-
                     $mpdf->Output("./public/uploads/IssuedPaper/".$pdfFilePath, "F");
-                    //die();
 
-
-
-                 return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
+                return redirect()->back()->with('success','সফলভাবে অনুমতি দেওয়া হয়েছে');
 
                 }catch (\Exception $e) {
                     return redirect()->back()->with('error','some thing went wrong ');
                 }
-            }
-
-
- public function saveNothiPermission($data){
-
-    //dd($data);
-
-
-    $dt = new DateTime();
-    $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
-    $created_at = $dt->format('Y-m-d h:i:s ');
-
-    $amPmValue = $dt->format('a');
-   // $amPmValueFinal = 0;
-    if($amPmValue == 'pm'){
-
-        $amPmValueFinal = 'অপরাহ্ন';
-    }else{
-        $amPmValueFinal = 'পূর্বাহ্ন';
-
     }
+
+
+    public function saveNothiPermission($data){
+
+
+        $dt = new DateTime();
+        $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+        $created_at = $dt->format('Y-m-d h:i:s ');
+
+        $amPmValue = $dt->format('a');
+        
+        if($amPmValue == 'pm'){
+
+            $amPmValueFinal = 'অপরাহ্ন';
+        }else{
+            $amPmValueFinal = 'পূর্বাহ্ন';
+
+        }
 
 
         $lastSarokValue = PotrangshoDraft::where('nothiId',$data['nothiId'])

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Auth;
 use Hash;
-use Illuminate\Support\Str;
 use Mail;
 use DB;
 use Session;
