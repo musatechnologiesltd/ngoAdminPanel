@@ -99,7 +99,7 @@ try{
         $documentTypeList = DocumentType::latest()->get();
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
          return view('admin.presentDocument.create',compact('documentTypeList'));
 
@@ -112,7 +112,7 @@ try{
        $documentTypeList = DocumentType::latest()->get();
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
         return view('admin.presentDocument.index',compact('status','id','documentTypeList'));
 
@@ -236,7 +236,7 @@ try{
         return view('admin.presentDocument.sheetAndNotes',compact('checkParent','nothiId','status','id'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -287,7 +287,7 @@ try{
         return view('admin.presentDocument.index',compact('nothiList','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -362,7 +362,7 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
 
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 }
 
@@ -399,7 +399,7 @@ public function givePermissionToNothi($id){
      return view('admin.presentDocument.givePermissionToNothi',compact('id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 }
 
@@ -509,7 +509,7 @@ public function savePermissionNothi(Request $request){
         return view('admin.presentDocument.edit',compact('nothiList','documentTypeList'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -557,7 +557,7 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
 
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
     }
 
@@ -573,7 +573,7 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
         return back()->with('error','সফলভাবে মুছে ফেলা হয়েছে!');
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 

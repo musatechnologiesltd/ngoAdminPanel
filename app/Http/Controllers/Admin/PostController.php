@@ -221,7 +221,7 @@ class PostController extends Controller
         }
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
         //return view('admin.post.allDak.all_dak_list');
@@ -373,7 +373,7 @@ try{
         }
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -469,7 +469,7 @@ try{
         return view('admin.post.sentDak.sentDakList',compact('ngoStatusFdFiveDak','ngoStatusDuplicateCertificate','ngoStatusConstitution','ngoStatusExecutiveCommittee','nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -2073,7 +2073,7 @@ try{
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -3225,7 +3225,7 @@ if($mainDataStatus == 'registration'){
 //dd($id);
         return view('admin.post.show',compact('newMainDaKId','totalBranchList','totalEmptyDesignation','totalDesignationId','totalDesignationWorking','totaluser','totalDesignation','totalBranch','mainstatus','id','allRegistrationDak'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -3262,7 +3262,7 @@ if($mainDataStatus == 'registration'){
 
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -3566,7 +3566,7 @@ $data = ExecutiveCommitteeDak::count();
 
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -3600,7 +3600,7 @@ $file=$data->system_admin_url.'public/'.$get_file_data;
 
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 

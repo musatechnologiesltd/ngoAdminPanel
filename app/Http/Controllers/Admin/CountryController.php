@@ -36,7 +36,7 @@ class CountryController extends Controller
 
         return view('admin.country.index',compact('country_list'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -62,7 +62,7 @@ class CountryController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
 
@@ -87,7 +87,7 @@ class CountryController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
     }
 
@@ -113,7 +113,7 @@ class CountryController extends Controller
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 }

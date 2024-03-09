@@ -88,7 +88,7 @@ class RenewController extends Controller
 
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
 
 
@@ -135,7 +135,7 @@ class RenewController extends Controller
       return view('admin.renew_list.new_renew_list',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -182,7 +182,7 @@ class RenewController extends Controller
       return view('admin.renew_list.revision_renew_list',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -229,7 +229,7 @@ class RenewController extends Controller
       return view('admin.renew_list.already_renew_list',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -301,7 +301,7 @@ class RenewController extends Controller
         return view('admin.renew_list.view',compact('renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -380,7 +380,7 @@ $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -410,7 +410,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -443,7 +443,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -473,7 +473,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -503,7 +503,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -534,7 +534,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -565,7 +565,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -595,7 +595,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -625,7 +625,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -654,7 +654,7 @@ $file=$data->system_url.'public/'.$get_file_data;
             ]);
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
         }
@@ -684,7 +684,7 @@ $file=$data->system_url.'public/'.$get_file_data;
             ]);
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
         }
@@ -722,7 +722,7 @@ $file=$data->system_url.'public/'.$get_file_data;
             ]);
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
         }
@@ -761,7 +761,7 @@ $file=$data->system_url.'public/'.$get_file_data;
             ]);
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
         }
@@ -841,7 +841,7 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 

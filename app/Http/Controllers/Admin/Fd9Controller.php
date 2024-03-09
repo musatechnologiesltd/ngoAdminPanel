@@ -130,7 +130,7 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
         die();
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -170,7 +170,7 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
        }
@@ -216,7 +216,7 @@ $pdfFilePath =$file_Name_Custome.'.pdf';
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd9form.index',compact('dataFromNVisaFd9Fd1'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -349,7 +349,7 @@ if($checkOldorNew == 'Old'){
         );
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -441,7 +441,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
          return view('admin.fd9form.show_new',compact('fdNineOtherFileList','get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
     }
 
@@ -499,7 +499,7 @@ if(empty($editCheck)){
     return redirect()->back()->with('success','Updated successfully!');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
     }
@@ -534,7 +534,7 @@ if(empty($editCheck)){
         return redirect()->back()->with('success','Update Successfully');
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -639,7 +639,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
 
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 
@@ -821,7 +821,7 @@ $file=url('public/'.$get_file_data);
         ]);
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
             }
 
@@ -870,7 +870,7 @@ public function forwardingLetterPost(Request $request){
     return redirect()->back()->with('success','Created successfully!');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 }

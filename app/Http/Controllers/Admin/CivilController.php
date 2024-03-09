@@ -32,7 +32,7 @@ try{
         return view('backend.civil_info.index',compact('country_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -62,7 +62,7 @@ try{
             return redirect()->back()->with('success','Created Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
     }
@@ -90,7 +90,7 @@ try{
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
     }
 
@@ -112,7 +112,7 @@ try{
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 }

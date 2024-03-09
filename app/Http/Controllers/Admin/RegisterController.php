@@ -77,7 +77,7 @@ class RegisterController extends Controller
 
       return view('admin.registration_list.new_registration_list',compact('all_data_for_new_list'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -128,7 +128,7 @@ class RegisterController extends Controller
       return view('admin.registration_list.revision_registration_list',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -178,7 +178,7 @@ class RegisterController extends Controller
       return view('admin.registration_list.already_registration_list',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -250,7 +250,7 @@ class RegisterController extends Controller
 
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 
@@ -358,7 +358,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
     }
 
@@ -399,7 +399,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
  }
 
@@ -447,7 +447,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
      }
 
@@ -488,7 +488,7 @@ return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
          }
 
@@ -586,7 +586,7 @@ if($request->ngotype == 'old'){
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -709,7 +709,7 @@ if($request->ngotype == 'old'){
 
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
 
 
@@ -747,7 +747,7 @@ if($request->ngotype == 'old'){
         return view('admin.registration_list.form_one_pdf',compact('form_one_data'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -762,7 +762,7 @@ if($request->ngotype == 'old'){
         return view('admin.registration_list.form_eight_pdf',compact('form_one_data'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -775,7 +775,7 @@ if($request->ngotype == 'old'){
          return view('admin.registration_list.source_of_fund',compact('form_one_data'));
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
         }
@@ -788,7 +788,7 @@ if($request->ngotype == 'old'){
          return view('admin.registration_list.other_pdf_view',compact('form_one_data'));
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
         }
@@ -804,7 +804,7 @@ if($request->ngotype == 'old'){
 
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
     }
 
@@ -817,7 +817,7 @@ if($request->ngotype == 'old'){
          return view('admin.registration_list.ngo_doc__pdf_view',compact('form_one_data'));
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
 
@@ -851,7 +851,7 @@ if($request->ngotype == 'old'){
         return view('admin.registration_list.renew_pdf_list',compact('form_one_data'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }

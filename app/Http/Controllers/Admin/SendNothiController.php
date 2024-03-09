@@ -114,7 +114,7 @@ try{
             'senderNothiList',));
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
     }

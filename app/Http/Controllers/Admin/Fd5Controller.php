@@ -67,7 +67,7 @@ class Fd5Controller extends Controller
       return view('admin.fdFiveForm.index',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -134,7 +134,7 @@ class Fd5Controller extends Controller
         'renew_status','name_change_status','r_status',
        'users_info','all_data_for_new_list_all','form_one_data'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }

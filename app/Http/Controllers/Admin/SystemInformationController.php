@@ -37,7 +37,7 @@ class SystemInformationController extends Controller
         return view('admin.systemInformation.index',compact('systemInformation'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -113,7 +113,7 @@ class SystemInformationController extends Controller
 
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
     }
@@ -175,7 +175,7 @@ class SystemInformationController extends Controller
 
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 

@@ -225,7 +225,7 @@ return 1;
         return view('admin.presentDocument.sheetAndNotes',compact('checkParent','nothiId','status','dakId'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -406,7 +406,7 @@ return 1;
 
         return view('admin.presentDocument.addParentNoteFromView',compact('checkParent','nothiId','status','dakId'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -647,7 +647,7 @@ return 1;
     // return redirect('admin/addParentNoteFromView/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 
@@ -890,7 +890,7 @@ return 1;
     return redirect('admin/addChildNote/'.$request->status.'/'.$request->dakId.'/'.$request->nothiId.'/'.$pId.'/'.$totalCount)->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
     }

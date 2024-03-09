@@ -66,7 +66,7 @@ class Fc2Controller extends Controller
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fc2form.index',compact('dataFromFc2Form'));
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
          }
 
@@ -98,7 +98,7 @@ class Fc2Controller extends Controller
 
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
              }
 
@@ -114,7 +114,7 @@ class Fc2Controller extends Controller
                  return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
              }
 
@@ -132,7 +132,7 @@ class Fc2Controller extends Controller
 
                  return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
                 }
 
@@ -146,7 +146,7 @@ class Fc2Controller extends Controller
 
                  return view('admin.fc2form.fc2fd2PdfDownload',compact('form_one_data'));
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
 
                 }
@@ -161,7 +161,7 @@ try{
 
                  return view('admin.fc2form.fc2fd2OtherPdfDownload',compact('form_one_data'));
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
 
              }
@@ -200,7 +200,7 @@ try{
 
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
              }
 }

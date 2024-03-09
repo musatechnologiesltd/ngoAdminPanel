@@ -18,8 +18,8 @@ use App\Models\NgoRegistrationDak;
 use App\Models\ConstitutionDak;
 class ConstitutionController extends Controller
 {
-    public $user;
 
+    public $user;
 
     public function __construct()
     {
@@ -28,11 +28,14 @@ class ConstitutionController extends Controller
             return $next($request);
         });
     }
+
+
     public function index(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('constitutionView')) {
-           // abort(403, 'Sorry !! You are Unauthorized to view !');
+
            return redirect()->route('mainLogin');
+
         }
 
         try{
@@ -67,7 +70,7 @@ class ConstitutionController extends Controller
       return view('admin.constitution.index',compact('all_data_for_new_list'));
 
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -79,8 +82,6 @@ class ConstitutionController extends Controller
 
 
              try {
-
-
 
                 $getformOneId = DB::table('document_for_amendment_or_approval_of_constitutions')->where('id',$id)->first();
 
@@ -113,26 +114,16 @@ class ConstitutionController extends Controller
 
 
 
-     $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
-                $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
-
-
-
-                $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
-
-
-
-
-
-
-
+    $duration_list_all1 = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_end_date');
+    $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->value('ngo_duration_start_date');
+    $users_info = DB::table('users')->where('id',$form_one_data->user_id)->first();
 
         return view('admin.constitution.view',compact('getformOneId',
         'duration_list_all1','duration_list_all',
         'renew_status','name_change_status','r_status',
        'users_info','all_data_for_new_list_all','form_one_data'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -167,11 +158,7 @@ class ConstitutionController extends Controller
 
         $get_user_id = DB::table('document_for_amendment_or_approval_of_constitutions')->where('id',$request->id)->value('fdId');
 
-
-
         $form_one_data = DB::table('fd_one_forms')->where('id',$get_user_id)->first();
-
-
 
         Mail::send('emails.constitution', ['comment'=>$request->comment,'id' => $request->status,'ngoId'=>$form_one_data->id], function($message) use($request){
             $message->to($request->email);

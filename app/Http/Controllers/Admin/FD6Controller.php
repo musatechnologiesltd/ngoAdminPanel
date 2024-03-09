@@ -66,7 +66,7 @@ class FD6Controller extends Controller
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd6form.index',compact('dataFromFd6Form'));
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 
@@ -95,7 +95,7 @@ class FD6Controller extends Controller
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fd6form.show',compact('get_email_from_user','dataFromFd6Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
          }
 
@@ -108,7 +108,7 @@ class FD6Controller extends Controller
 
              return view('admin.fd6form.fd6PdfDownload',compact('form_one_data'));
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
          }
 
@@ -122,7 +122,7 @@ class FD6Controller extends Controller
              return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
 
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
 
             }
@@ -138,7 +138,7 @@ class FD6Controller extends Controller
              return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
 
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
          }
 
@@ -176,7 +176,7 @@ class FD6Controller extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
          }
 }

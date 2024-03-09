@@ -74,7 +74,7 @@ class DesignationController extends Controller
 
 
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
            }
 
@@ -135,7 +135,7 @@ class DesignationController extends Controller
     return redirect()->route('designationList.index')->with('success','Added successfully!');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 
@@ -165,7 +165,7 @@ class DesignationController extends Controller
     return redirect()->route('designationList.index')->with('success','Updated successfully!');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 
@@ -188,7 +188,7 @@ class DesignationController extends Controller
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 }

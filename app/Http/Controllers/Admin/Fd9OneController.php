@@ -83,7 +83,7 @@ $mpdf->Output($pdfFilePath, "I");
 die();
 
 } catch (\Exception $e) {
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
         // $form_one_data = DB::table('fd9_one_forms')->where('id',$id)->value('verified_fd_nine_one_form');
@@ -142,7 +142,7 @@ die();
        //dd($dataFromNVisaFd9Fd1);
            return view('admin.fd9Oneform.index',compact('dataFromNVisaFd9Fd1'));
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
        }
 
@@ -173,7 +173,7 @@ die();
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
 
@@ -292,7 +292,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
             ));
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
        }
 
@@ -336,7 +336,7 @@ $file=$data->system_url.'public/'.$get_file_data;
             'content-type'=>'application/pdf',
         ]);
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
        }
 
@@ -375,7 +375,7 @@ $file=$data->system_admin_url.'public/'.$get_file_data;
             'content-type'=>'application/pdf',
         ]);
     } catch (\Exception $e) {
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
        }

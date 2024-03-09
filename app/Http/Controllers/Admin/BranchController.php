@@ -68,7 +68,7 @@ try{
           return view('admin.branchList.index',compact('branchLists','stepValue'));
 
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
           //dd($stepValue);
@@ -106,13 +106,11 @@ try{
     return redirect()->route('branchList.index')->with('success','Added successfully!');
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
 
         }
-
-
 
 
 
@@ -136,7 +134,7 @@ try{
 
 } catch (\Exception $e) {
     DB::rollBack();
-    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+    return redirect()->back()->with('error','some thing went wrong ');
 }
 
         }
@@ -160,7 +158,7 @@ try{
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
     }
 }

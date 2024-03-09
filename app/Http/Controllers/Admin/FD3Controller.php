@@ -66,7 +66,7 @@ class FD3Controller extends Controller
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fd3form.index',compact('dataFromFd3Form'));
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
          }
 
@@ -102,7 +102,7 @@ class FD3Controller extends Controller
 
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
              }
 
@@ -119,7 +119,7 @@ class FD3Controller extends Controller
                  return view('admin.fd3form.verified_fd_three_form',compact('form_one_data'));
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
                 }
 
@@ -132,7 +132,7 @@ class FD3Controller extends Controller
 
                  return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
 
 
@@ -150,7 +150,7 @@ class FD3Controller extends Controller
 
 
                 } catch (\Exception $e) {
-                    return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                    return redirect()->back()->with('error','some thing went wrong ');
                 }
              }
 
@@ -189,7 +189,7 @@ class FD3Controller extends Controller
 
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
              }
 }

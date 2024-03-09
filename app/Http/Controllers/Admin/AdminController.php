@@ -121,7 +121,7 @@ class AdminController extends Controller
            return view('admin.user.index', compact('users','roles'));
 
               } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
               }
 
 
@@ -203,7 +203,7 @@ class AdminController extends Controller
        } catch (\Exception $e) {
         DB::rollBack();
 
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
        }
     }
 
@@ -285,7 +285,7 @@ class AdminController extends Controller
                 }
                 return redirect()->route('user.index')->with('error','Deleted successfully!');
             } catch (\Exception $e) {
-                return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+                return redirect()->back()->with('error','some thing went wrong ');
             }
 
 
@@ -309,7 +309,7 @@ class AdminController extends Controller
         $users = Admin::where('id','!=',1)->latest()->get();
         return view('admin.user.employeeEndDate',compact('users'));
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
 
     }
@@ -350,7 +350,7 @@ class AdminController extends Controller
 
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+        return redirect()->back()->with('error','some thing went wrong ');
     }
 
     }
@@ -382,7 +382,7 @@ class AdminController extends Controller
         return redirect()->route('mainLogin')->with('success','Successfully Changed!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
     }
 }

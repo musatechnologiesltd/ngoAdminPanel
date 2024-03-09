@@ -213,7 +213,7 @@ class NothiJatController extends Controller
 
           return redirect()->back()->with('success','সফলভাবে ফেরত আনা দেওয়া হয়েছে');
         } catch (\Exception $e) {
-            return redirect('/admin')->with('error','some thing went wrong ,this is why you redirect to dashboard');
+            return redirect()->back()->with('error','some thing went wrong ');
         }
     }
     public function updateNothiJat(Request $request){
