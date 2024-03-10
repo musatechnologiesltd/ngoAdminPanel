@@ -421,7 +421,7 @@
     </div>
   </li>
 <!--empoyee info --->
-@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('assignedEmployee.index'))
+@if ( Route::is('checkWorkingDay') || Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('assignedEmployee.index'))
 
 <li class="dropdown">
   <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>কর্মকর্তাদের তালিকা</span></a>
@@ -462,7 +462,11 @@
           @endif
 
 
-
+          @if ($usr->can('officialWorkingDayView'))
+          <li class="">
+              <a href="{{ route('checkWorkingDay') }}" class="{{ Route::is('checkWorkingDay') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের কর্ম দিবস</a>
+          </li>
+          @endif
 
 
 
@@ -508,6 +512,20 @@
               <a href="{{ route('employeeEndDate') }}" class="{{ Route::is('employeeEndDate') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের শেষ কর্মদিবস </a>
           </li>
           @endif
+
+
+
+          @if ($usr->can('officialWorkingDayView'))
+          <li class="">
+              <a href="{{ route('checkWorkingDay') }}" class="{{ Route::is('checkWorkingDay') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের কর্ম দিবস</a>
+          </li>
+          @endif
+
+
+
+
+
+
 
 
 </ul>

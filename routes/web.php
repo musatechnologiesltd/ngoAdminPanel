@@ -547,6 +547,8 @@ Route::controller(Fd5Controller::class)->group(function () {
 
   Route::controller(AdminController::class)->group(function () {
 
+        Route::get('/checkWorkingDay', 'checkWorkingDay')->name('checkWorkingDay');
+
         Route::get('/getAdminDetail', 'getAdminDetail')->name('getAdminDetail');
         Route::post('/employeeEndDatePost', 'employeeEndDatePost')->name('employeeEndDatePost');
         Route::get('/employeeEndDate', 'employeeEndDate')->name('employeeEndDate');

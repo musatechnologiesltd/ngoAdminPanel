@@ -146,7 +146,9 @@
 @endif
 
 {{-- <button type="button" class="btn btn-primary waves-light waves-effect  btn-sm" onclick="window.location.href='{{ route('admin.users.view',$AllBranchLists->id) }}'"><i class="fa fa-eye"></i></button> --}}
+@if($AllBranchLists->id == 2)
 
+@else
                             @if (Auth::guard('admin')->user()->can('branchDelete'))
 
 <button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm" onclick="deleteTag({{ $AllBranchLists->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
@@ -155,6 +157,7 @@
                                               @csrf
 
                                           </form>
+                                          @endif
                                           @endif
                                 </td>
                             </tr>

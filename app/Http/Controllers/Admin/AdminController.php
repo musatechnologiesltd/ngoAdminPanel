@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use File;
 use App\Models\Branch;
+use App\Models\EmployeeJobHistory;
 use App\Models\DesignationList;
 use App\Models\DesignationStep;
 use Mail;
@@ -343,6 +344,27 @@ class AdminController extends Controller
         $jobHistory->designation_list_id  =$getTheAdminValue->designation_list_id;
         $jobHistory->start_date  = $getTheAdminValue->admin_job_start_date;
         $jobHistory->end_date  = $admin_job_end_date;
+        $jobHistory->save();
+
+        $branchName = Branch::where('id',$getTheAdminValue->branch_id)
+                      ->value('branch_name');
+
+
+        $DesignationNAme = DesignationList::where('id',$getTheAdminValue->designation_list_id)
+                      ->value('designation_name');
+
+
+        $jobHistoryReport = new EmployeeJobHistory();
+        $jobHistoryReport->admin_id  = $request->id;
+        $jobHistoryReport->designation_list_id  =$getTheAdminValue->designation_list_id;
+        $jobHistoryReport->admin_name  =$getTheAdminValue->admin_name_ban;
+        $jobHistoryReport->admin_phone  =$getTheAdminValue->admin_mobile;
+        $jobHistoryReport->admin_email  =$getTheAdminValue->email;
+        $jobHistoryReport->admin_designation_name  =$DesignationName;
+        $jobHistoryReport->admin_branch_name  =$branchName;
+        $jobHistoryReport->start_date  = $getTheAdminValue->admin_job_start_date;
+        $jobHistoryReport->end_date  = $admin_job_end_date;
+        $jobHistoryReport->save();
 
         AdminDesignationHistory::where('id',$request->desi_id)->delete();
         DB::commit();
@@ -384,5 +406,14 @@ class AdminController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error','some thing went wrong ');
         }
+    }
+
+
+    public function checkWorkingDay(){
+
+        $adminDesignationHistory = AdminDesignationHistory::latest()->get();
+        $employeeJobHistory = EmployeeJobHistory::get();
+
+      return view('admin.user.checkWorkingDay',compact('adminDesignationHistory','employeeJobHistory'));
     }
 }
