@@ -39,6 +39,7 @@
                     <div class="card">
 
                         <div class="card-body">
+                        @include('flash_message')
                             <form class="custom-validation" action="{{ route('user.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                 @csrf
                                   <div class="row">

@@ -138,7 +138,7 @@ class AdminController extends Controller
            return redirect()->route('mainLogin');
 
         }
-
+//dd(12);
         \LogActivity::addToLog(' employee store');
 
 
@@ -153,8 +153,8 @@ class AdminController extends Controller
         [
             'name.required' => 'Name is required',
             'phone.required' => 'Phone is required',
-            'sign.required' => 'Sign is required',
-            'image.required' => 'Image is required',
+            'sign.nullable' => 'Sign is required',
+            'image.nullable' => 'Image is required',
             'email.required' => 'Email is required'
         ]);
 
@@ -198,7 +198,7 @@ class AdminController extends Controller
             $message->subject('NGOAB Password Set');
         });
 
-        DB::commit();
+       DB::commit();
         return redirect()->route('user.index')->with('success','Created successfully!');
 
        } catch (\Exception $e) {
