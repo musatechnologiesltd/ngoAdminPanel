@@ -116,7 +116,7 @@ class SettingController extends Controller
             $directory = 'public/uploads/';
             $imageUrl = $directory.$imageName;
 
-            $img=Image::make($productImage)->resize(100,100);
+            $img=Image::make($productImage)->resize(300,300);
             $img->save($imageUrl);
 
              $admin->admin_image =  'public/uploads/'.$imageName;
@@ -131,7 +131,7 @@ class SettingController extends Controller
             $directory = 'public/uploads/';
             $imageUrl = $directory.$imageName;
 
-            $img=Image::make($productImage)->resize(100,100);
+            $img=Image::make($productImage)->resize(300,80);
             $img->save($imageUrl);
 
              $admin->admin_sign =  'public/uploads/'.$imageName;
@@ -154,38 +154,41 @@ class SettingController extends Controller
         $time_dy = time().date("Ymd");
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
-               }
-               try{
-                DB::beginTransaction();
+            }
+
+
 
                \LogActivity::addToLog('Profile Update.');
 
 
-        $admin =  Admin::find($request->id);
+               $image = $request->image;
+
+        list($type, $image) = explode(';', $image);
+        list(, $image)      = explode(',', $image);
+
+        $image = base64_decode($image);
+        $image_name= 'er'.time().'.png';
+        $path = public_path('uploads/'.$image_name);
+
+        file_put_contents($path, $image);
 
 
 
-            $productImage = $request->file('admin_image');
-            $imageName = $time_dy.$productImage->getClientOriginalName();
-            $directory = 'public/uploads/';
-            $imageUrl = $directory.$imageName;
 
-            $img=Image::make($productImage)->resize(300,300);
-            $img->save($imageUrl);
-
-             $admin->admin_image =  'public/uploads/'.$imageName;
-
-
+        $admin =  Admin::find($request->mainId);
+        $admin->admin_image =  'public/uploads/'.$image_name;
         $admin->save();
-        DB::commit();
-        return redirect()->back()->with('success','Updated Succesfully');
 
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect()->back()->with('error','some thing went wrong ');
-    }
+            // $productImage = $request->file('admin_image');
+            // $imageName = $time_dy.$productImage->getClientOriginalName();
+            // $directory = 'public/uploads/';
+            // $imageUrl = $directory.$imageName;
+
+            // $img=Image::make($productImage)->resize(300,300);
+            // $img->save($imageUrl);
+
+            return response()->json(['status'=>true]);
 
     }
 
@@ -237,44 +240,38 @@ class SettingController extends Controller
 
     public function digitalSignatureUpdate(Request $request){
 
-        try{
-            DB::beginTransaction();
-        //dd($request->all());
+
 
         $time_dy = time().date("Ymd");
 
         if (is_null($this->user) || !$this->user->can('profile.edit')) {
-            //abort(403, 'Sorry !! You are Unauthorized to View !');
+
             return redirect()->route('mainLogin');
+
                }
 
 
                \LogActivity::addToLog('Profile Update.');
 
 
-        $admin =  Admin::find($request->id);
+               $image = $request->image;
+
+               list($type, $image) = explode(';', $image);
+               list(, $image)      = explode(',', $image);
+
+               $image = base64_decode($image);
+               $image_name= 'er'.time().'.png';
+               $path = public_path('uploads/'.$image_name);
+
+               file_put_contents($path, $image);
 
 
 
-            $productImage = $request->file('admin_sign');
-            $imageName = $time_dy.$productImage->getClientOriginalName();
-            $directory = 'public/uploads/';
-            $imageUrl = $directory.$imageName;
 
-            $img=Image::make($productImage)->resize(300,80);
-            $img->save($imageUrl);
+               $admin =  Admin::find($request->mainId);
+               $admin->admin_sign =  'public/uploads/'.$image_name;
+               $admin->save();
 
-             $admin->admin_sign =  'public/uploads/'.$imageName;
-
-
-        $admin->save();
-        DB::commit();
-        return redirect()->back()->with('success','Updated Succesfully');
-
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect()->back()->with('error','some thing went wrong ');
-    }
 
 
 

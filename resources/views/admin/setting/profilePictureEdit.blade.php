@@ -3,8 +3,10 @@
 @section('title')
 প্রোফাইল ফটো
 @endsection
-
-
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+@endsection
 @section('body')
 <style>
 .image-preview-container {
@@ -122,7 +124,7 @@
                   </div>
                   <div class="card-body">
                     @include('flash_message')
-                                            <form action="{{ route('profilePictureUpdate') }}" method="post" enctype="multipart/form-data" id="form">
+                                            {{-- <form action="{{ route('profilePictureUpdate') }}" method="post" enctype="multipart/form-data" id="form">
                                                 @csrf
 
 
@@ -155,7 +157,40 @@
                                                   </div>
 
 
-                    </form>
+                    </form> --}}
+
+
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div id="upload-demo"></div>
+                        </div>
+                        <div class="col-md-4" style="padding:5%;">
+                            <strong>Select image for crop:</strong>
+                            <input type="file" id="images" name="image">
+                            <button class="btn btn-primary btn-block image-upload" style="margin-top:2%">Upload Image</button>
+                        </div>
+                        <div class="col-md-4">
+
+
+
+
+
+                            @if(empty(Auth::guard('admin')->user()->admin_image))
+                            <div id="show-crop-image" style="background:#e2e2e2;width:400px;padding:60px 60px;height:400px;"></div>
+                            @else
+                            <div id="show-crop-image" style="background:#e2e2e2;width:400px;padding:60px 60px;height:400px;"><img src="{{ asset('/') }}{{ Auth::guard('admin')->user()->admin_image }}" alt="" id="output"></div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning d-flex align-items-center mt-3" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div style="color:black !important">
+                            প্রোফাইল স্বাক্ষর অবশ্যই ৩০০ X ৩০০ পিক্সেল (প্রস্থ X উচ্চতা ) এবং ফাইল এর আকার অবশ্যই ৫০ কিলো বাইটের কম এবং JPG বা JPEG ফরমেটে হতে হবে
+                        </div>
+                      </div>
+
+                    <input type="hidden" value="{{ Auth::guard('admin')->user()->id }}" id="mainid" name="id" />
                   </div>
                 </div>
               </div>
@@ -173,50 +208,68 @@
 @endsection
 
 @section('script')
-<script>
-    var loadFile = function (event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function () {
-            URL.revokeObjectURL(output.src) // free memory
+
+<script type="text/javascript">
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    var resize = $('#upload-demo').croppie({
+        enableExif: true,
+        enableOrientation: true,
+        viewport: {
+            width: 300,
+            height: 300,
+            type: 'square'
+        },
+
+        boundary: {
+            width: 400,
+            height: 400
         }
-    };
-</script>
-<script>
-    /**
- * Create an arrow function that will be called when an image is selected.
- */
-const previewImage = (event) => {
-    /**
-     * Get the selected files.
-     */
-    const imageFiles = event.target.files;
-    /**
-     * Count the number of files selected.
-     */
-    const imageFilesLength = imageFiles.length;
-    /**
-     * If at least one image is selected, then proceed to display the preview.
-     */
-    if (imageFilesLength > 0) {
-        /**
-         * Get the image path.
-         */
-        const imageSrc = URL.createObjectURL(imageFiles[0]);
-        /**
-         * Select the image preview element.
-         */
-        const imagePreviewElement = document.querySelector("#preview-selected-image");
-        /**
-         * Assign the path to the image preview element.
-         */
-        imagePreviewElement.src = imageSrc;
-        /**
-         * Show the element by changing the display value to "block".
-         */
-        imagePreviewElement.style.display = "block";
-    }
-};
-</script>
+    });
+
+    $('#images').on('change', function () {
+      var reader = new FileReader();
+        reader.onload = function (e) {
+          resize.croppie('bind',{
+            url: e.target.result
+          }).then(function(){
+            console.log('success bind image');
+          });
+
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+
+    $('.image-upload').on('click', function (ev) {
+
+
+        var mainId = $('#mainid').val();
+       // alert(mainId);
+
+      resize.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+
+      }).then(function (img) {
+        $.ajax({
+          url: '{{ route('profilePictureUpdate') }}',
+          type: "post",
+          data: {"image":img,"mainId":mainId},
+          success: function (data) {
+            html = '<img src="' + img + '" />';
+            $("#show-crop-image").html('');
+            $("#show-crop-image").html(html);
+          }
+        });
+      });
+    });
+ </script>
+
+
+
 @endsection
 

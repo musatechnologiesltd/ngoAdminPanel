@@ -57,20 +57,16 @@ class PostController extends Controller
             ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
-            // ->whereNull('fd9_one_forms.status')
             ->orderBY('fd9_one_forms.id','desc')
             ->get();
-
-
-            //dd($dataFdNineOne);
 
             $dataFdNine = DB::table('fd9_forms')->latest()->get();
 
             $dataFromFd6Form = DB::table('fd6_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
-           ->orderBy('fd6_forms.id','desc')
-           ->get();
+            ->orderBy('fd6_forms.id','desc')
+            ->get();
 
 
            $dataFromFd7Form = DB::table('fd7_forms')
@@ -3327,21 +3323,7 @@ $mainStatusNew = $request->mainStatusNew;
       $mainStatusNew = $request->mainStatusNew;
       $id = $request->mainId;
       $newMainDakIdOne = $request->mainId;
-        //dd($totalDesi);
 
-    //     if(!empty($totalBranch) && !empty($totalDesi)){
-
-    //      dd($totalBranch);
-
-    //     }elseif(!empty($totalBranch)){
-
-    // dd(2);
-
-    //     }elseif(!empty($totalDesi)){
-
-    //     dd(3);
-
-    //     }
 
     if(empty($totalDesi)){
 
