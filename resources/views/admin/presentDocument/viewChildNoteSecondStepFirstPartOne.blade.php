@@ -256,9 +256,17 @@ $branchName1 = DB::table('branches')->where('id',$mainSenderIdNewss44->e_branch)
 
 
 @endif
+<!-- code for delete status --->
+@if($mainSenderIdNewss44->delete_status == 1)
+<del>{{ $mainSenderIdNewss44->e_name }} <br>
+{{ $desiName1 }} <br>
+{{ $branchName1 }}</del></p>
+@else
 {{ $mainSenderIdNewss44->e_name }} <br>
 {{ $desiName1 }} <br>
 {{ $branchName1 }}</p>
+@endif
+<!-- code for delete status -->
 </div>
 </div>
 

@@ -30,7 +30,7 @@ $creatorNAme = DB::table('admins')
 
             ?>
 
-@if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id || $childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id )
+@if( $childNoteNewLists->admin_id == Auth::guard('admin')->user()->id || $childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id )
 
      @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
 
@@ -58,6 +58,7 @@ $creatorNAme = DB::table('admins')
     @if($multipleCheck == 1)
 
     @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
+
     @else
 
     @endif

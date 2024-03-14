@@ -2872,13 +2872,13 @@ class ChildNoteController extends Controller
 
     public function saveNothiPermission($data){
 
-
+//dd($data);
         $dt = new DateTime();
         $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
         $created_at = $dt->format('Y-m-d h:i:s ');
 
         $amPmValue = $dt->format('a');
-        
+
         if($amPmValue == 'pm'){
 
             $amPmValueFinal = 'অপরাহ্ন';

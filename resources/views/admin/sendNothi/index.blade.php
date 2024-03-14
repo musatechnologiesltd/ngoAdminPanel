@@ -303,7 +303,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 
 
 
-             if($nothiLists1->dakType == 'renew'){
+
 
 
 
@@ -318,7 +318,7 @@ style="padding:5px; background-color:#879dd9; border-radius: 10px;">নথি �
 
 
 
-              }
+
 
 
 
