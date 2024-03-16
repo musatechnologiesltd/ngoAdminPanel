@@ -59,78 +59,86 @@ class AppServiceProvider extends ServiceProvider
 
 
                 $totalReceiveNothiRe = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+                ->whereNull('list_status')
                 ->where('dakType','renew')->distinct()
             ->count('receiver');
 
             $totalReceiveNothiRi = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+            ->whereNull('list_status')
             ->where('dakType','registration')->distinct()
              ->count('receiver');
 
 
 
              $totalReceiveNothiRi1 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fdNine')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fdNine')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi2 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','nameChange')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','nameChange')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi3 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fdNineOne')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fdNineOne')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi4 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fdSix')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fdSix')->distinct()
              ->count('receiver');
 
              $totalReceiveNothiRi5 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fdSeven')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fdSeven')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi6 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fcOne')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fcOne')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi7 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fcTwo')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fcTwo')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi8 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','fdThree')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','fdThree')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi9 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','duplicate')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','duplicate')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi10 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','constitution')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','constitution')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi11 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-            ->where('dakType','committee')->distinct()
+             ->whereNull('list_status')
+             ->where('dakType','committee')->distinct()
              ->count('receiver');
 
 
              $totalReceiveNothiRi12 = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
+             ->whereNull('list_status')
              ->where('dakType','fdFive')->distinct()
               ->count('receiver');
-
-
-
-
-
-
 
 
 

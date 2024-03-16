@@ -39,7 +39,7 @@ $creatorNAme = DB::table('admins')
      @if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->sender_id == Auth::guard('admin')->user()->id))
 
 
-     @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
+      @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
 
      @else
 
@@ -53,6 +53,16 @@ $creatorNAme = DB::table('admins')
      ->where('receiver',Auth::guard('admin')->user()->id)
      ->value('seal_status');
 
+
+     $multipleCheckDelete = DB::table('seal_statuses')
+     ->where('noteId',$id)
+     ->where('nothiId',$nothiId)
+     ->where('status',$status)
+     ->where('childId',$childNoteNewLists->id)
+     //->where('seal_status',2)
+     //->where('receiver',Auth::guard('admin')->user()->id)
+     ->value('seal_status');
+ //dd(Auth::guard('admin')->user()->id);
      ?>
 
     @if($multipleCheck == 1)

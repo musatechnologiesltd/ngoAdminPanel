@@ -64,7 +64,7 @@
 
 
                                           @foreach ($senderNothiListRegistration->unique('sender') as $key=>$nothiLists1)
-
+                                          
                                           <?php
 
                $nothiLists = DB::table('nothi_lists')->where('id',$nothiLists1->nothId)->first();

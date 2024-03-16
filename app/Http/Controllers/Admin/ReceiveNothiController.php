@@ -13,27 +13,31 @@ class ReceiveNothiController extends Controller
         try{
 
         $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)->whereNull('sent_status')
-        ->where('dakType','renew')->latest()->get();
+        ->whereNull('list_status')->where('dakType','renew')->latest()->get();
 
 
         $senderNothiListRegistration = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
         ->whereNull('sent_status')
+        ->whereNull('list_status')
         ->where('dakType','registration')->latest()->get();
 
 
 
         $senderNothiListfdNine = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
         ->whereNull('sent_status')
+        ->whereNull('list_status')
         ->where('dakType','fdNine')->latest()->get();
 
 
          $senderNothiListnameChange = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','nameChange')->latest()->get();
 
 
          $senderNothiListfdNineOne = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','fdNineOne')->latest()->get();
 
 
@@ -41,45 +45,54 @@ class ReceiveNothiController extends Controller
 
          $senderNothiListfdSix= NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','fdSix')->latest()->get();
 
          $senderNothiListfdSeven = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','fdSeven')->latest()->get();
 
 
          $senderNothiListfcOne = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','fcOne')->latest()->get();
 
 
          $senderNothiListfctwo = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','fcTwo')->latest()->get();
 
 
          $senderNothiListfdThree = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','fdThree')->latest()->get();
 
 
         $senderNothiListfdFive = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
         ->whereNull('sent_status')
+        ->whereNull('list_status')
        ->where('dakType','fdFive')->latest()->get();
 
 
          $senderNothiListduplicate = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','duplicate')->latest()->get();
 
 
          $senderNothiListconstitution = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','constitution')->latest()->get();
 
 
          $senderNothiListcommittee = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
          ->whereNull('sent_status')
+         ->whereNull('list_status')
         ->where('dakType','committee')->latest()->get();
 
 

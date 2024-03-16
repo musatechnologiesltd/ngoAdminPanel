@@ -2872,7 +2872,7 @@ class ChildNoteController extends Controller
 
     public function saveNothiPermission($data){
 
-//dd($data);
+
         $dt = new DateTime();
         $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
         $created_at = $dt->format('Y-m-d h:i:s ');
@@ -4124,7 +4124,7 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
 
     public function saveNothiPermissionReturn($data){
-
+     //dd($data);
 try{
 
 
@@ -4162,7 +4162,66 @@ $getPreviusIdForDelete = DB::table('nothi_details')
 ->where('receiver',Auth::guard('admin')->user()->id)
 ->orderBy('id','desc')
 ->value('childId');
+
+
+// get data for status
+
+
+$getPreviusIdForDeleteForNew = DB::table('nothi_details')
+//->where('childId',$data['child_note_id'])
+->where('noteId',$data['noteId'])
+->where('nothId',$data['nothiId'])
+->where('dakId',$data['dakId'])
+->where('dakType',$data['status'])
+->whereNull('sent_status')
+->where('view_status',1)
+//->where('sender',$data['nothiPermissionId'])
+->where('receiver',Auth::guard('admin')->user()->id)
+->orderBy('id','desc')
+->value('childId');
 //dd($getPreviusIdForDelete);
+// end get data for status
+
+
+
+//dd($data['child_note_id']);
+
+if(empty($getPreviusIdForDelete)){
+
+
+    $getPreviusIdForDeleteUpdate = DB::table('nothi_details')
+//->where('childId',$getPreviusIdForDelete)
+->where('noteId',$data['noteId'])
+->where('nothId',$data['nothiId'])
+->where('dakId',$data['dakId'])
+->where('dakType',$data['status'])
+->whereNull('sent_status')
+->where('view_status',1)
+//->where('sender',$data['nothiPermissionId'])
+->where('receiver',Auth::guard('admin')->user()->id)
+//->orderBy('id','desc')
+->update([
+
+    'list_status' =>1
+ ]);
+//dd($getPreviusIdForDeleteForNew);
+ if($data['child_note_id'] == $getPreviusIdForDeleteForNew ){
+
+ }else{
+ $checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])
+->where('nothiId',$data['nothiId'])
+//->where('childId',$getPreviusIdForDelete)
+->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+->orderBy('id','desc')
+->where('seal_status',2) ->update([
+
+    'delete_status' =>1
+ ]);
+
+ }
+
+}else{
+
 
 
 $getPreviusIdForDeleteUpdate = DB::table('nothi_details')
@@ -4180,7 +4239,7 @@ $getPreviusIdForDeleteUpdate = DB::table('nothi_details')
 
     'sent_status' =>1
  ]);
-
+}
 
 $checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])
 ->where('nothiId',$data['nothiId'])->where('childId',$getPreviusIdForDelete)

@@ -491,11 +491,13 @@ $checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
 @if($checkPreviousCodeDupdateBlade == 1)
 
 @else
+
                 <button data-bs-toggle="modal"
                 data-original-title="" data-bs-target="#modalforsenderpp{{ $childNoteNewLists->id }}" class="btn-sm btn btn-info ms-3" type="button">
                     <i class="fa fa-send"></i>
                     নথি প্রেরণ
                 </button>
+             
                 @endif
 
 

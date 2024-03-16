@@ -387,7 +387,7 @@ $checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
 
 <!-- code for delete status-->
 @if($checkPreviousCodeDupdateBlade == 1)
-
+1
 @else
         <button data-bs-toggle="modal"
         data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
@@ -424,7 +424,7 @@ $checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
 
 <!-- code for delete status-->
 @if($checkPreviousCodeDupdateBlade == 1)
-
+2
 @else
 <button data-bs-toggle="modal"
         data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
@@ -490,7 +490,7 @@ $checkPreviousCodeDupdateBlade = DB::table('seal_statuses')->where('noteId',$id)
 <!-- code for delete status-->
 
 @if($checkPreviousCodeDupdateBlade == 1)
-
+3
 @else
 <button data-bs-toggle="modal"
 data-original-title="" data-bs-target="#myModal22stumm{{ $childNoteNewLists->id }}" class="btn btn-danger ms-3" type="button">
