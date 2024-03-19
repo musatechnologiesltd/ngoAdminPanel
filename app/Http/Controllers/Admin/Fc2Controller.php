@@ -26,6 +26,8 @@ class Fc2Controller extends Controller
 {
     public function index(){
 
+        try{
+
         \LogActivity::addToLog('view fcOne List ');
 
 
@@ -42,7 +44,7 @@ class Fc2Controller extends Controller
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get();
 
-            $convert_name_title = $ngoStatusFdSevenDak->implode("fd_seven_status_id", " ");
+            $convert_name_title = $ngoStatusFdSevenDak->implode("fc_two_status_id", " ");
              $separated_data_title = explode(" ", $convert_name_title);
 
 
@@ -63,11 +65,15 @@ class Fc2Controller extends Controller
 
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fc2form.index',compact('dataFromFc2Form'));
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function show($id){
+
+            try{
 
             \LogActivity::addToLog('view fdSeven List Detail');
 
@@ -90,10 +96,16 @@ class Fc2Controller extends Controller
              //dd($dataFromNVisaFd9Fd1);
                  return view('admin.fc2form.show',compact('get_email_from_user','dataFromFc2Form','fd2FormList','fd2OtherInfo'));
 
+
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
              public function fc2PdfDownload($id){
+
+                try{
 
                 \LogActivity::addToLog('organization name of the job amount of money and duration pdf');
 
@@ -101,10 +113,16 @@ class Fc2Controller extends Controller
 
                  return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
 
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
+
              public function verified_fc_two_form($id){
+
+                try{
 
                 \LogActivity::addToLog('verified_fc_two_form pdf');
 
@@ -113,27 +131,38 @@ class Fc2Controller extends Controller
                 //dd($form_one_data);
 
                  return view('admin.fc2form.fc2PdfDownload',compact('form_one_data'));
-             }
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+                }
 
              public function fc2fd2PdfDownload($id){
+
+                try{
 
                 \LogActivity::addToLog('fd2 pdf download.');
 
                 $form_one_data = DB::table('fd2_form_for_fc2_forms')->where('id',$id)->value('fd_2_form_pdf');
 
                  return view('admin.fc2form.fc2fd2PdfDownload',compact('form_one_data'));
-             }
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+
+                }
 
 
              public function fc2fd2OtherPdfDownload($id){
 
-
+try{
                 \LogActivity::addToLog('fd2 other pdf download.');
 
                 $form_one_data = DB::table('fd2_fc2_other_infos')->where('id',$id)->value('file');
 
                  return view('admin.fc2form.fc2fd2OtherPdfDownload',compact('form_one_data'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
 
              }
 
@@ -141,7 +170,8 @@ class Fc2Controller extends Controller
              public function statusUpdateForFc2(Request $request){
 
            // dd($request->all());
-
+           try{
+            DB::beginTransaction();
 
                 \LogActivity::addToLog('update fcTwo Status ');
 
@@ -165,7 +195,12 @@ class Fc2Controller extends Controller
 
 
 
-
+                    DB::commit();
                 return redirect()->back()->with('success','Updated successfully!');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
              }
 }

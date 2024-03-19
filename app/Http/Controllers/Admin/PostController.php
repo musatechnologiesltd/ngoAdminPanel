@@ -9,6 +9,8 @@ use Hash;
 use Illuminate\Support\Str;
 use Mail;
 use DB;
+use DateTime;
+use DateTimezone;
 use PDF;
 use Carbon\Carbon;
 use Response;
@@ -23,6 +25,7 @@ use App\Models\NgoRenewDak;
 use App\Models\NgoFdSixDak;
 use App\Models\NgoFdSevenDak;
 use App\Models\FcOneDak;
+use App\Models\FdFiveDak;
 use App\Models\FcTwoDak;
 use App\Models\NgoRegistrationDak;
 use App\Models\DesignationList;
@@ -31,11 +34,16 @@ use App\Models\AdminDesignationHistory;
 use App\Models\FdThreeDak;
 use App\Models\NothiList;
 use Mpdf\Mpdf;
+use App\Models\DuplicateCertificateDak;
+use App\Models\ConstitutionDak;
+use App\Models\ExecutiveCommitteeDak;
+
+
 class PostController extends Controller
 {
 
     public function all_dak_list(){
-
+        try{
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
@@ -43,29 +51,22 @@ class PostController extends Controller
             $all_data_for_renew_list = DB::table('ngo_renews')->latest()->get();
             $all_data_for_name_changes_list = DB::table('ngo_name_changes')->latest()->get();
 
-            // $dataFdNine = DB::table('fd9_forms')->join('n_visas', 'n_visas.id', '=', 'fd9_forms.n_visa_id')
-            // ->join('fd_one_forms', 'fd_one_forms.id', '=', 'n_visas.fd_one_form_id')
-            // ->select('fd_one_forms.*','fd9_forms.*','fd9_forms.status as mainStatus','n_visas.*','n_visas.id as nVisaId')
-            // ->whereNull('fd9_forms.status')->orderBy('fd9_forms.id','desc')->get();
+
 
             $dataFdNineOne = DB::table('fd9_one_forms')
             ->join('n_visas', 'n_visas.fd9_one_form_id', '=', 'fd9_one_forms.id')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_one_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd9_one_forms.*','n_visas.*','n_visas.id as nVisaId')
-            // ->whereNull('fd9_one_forms.status')
             ->orderBY('fd9_one_forms.id','desc')
             ->get();
-
-
-            //dd($dataFdNineOne);
 
             $dataFdNine = DB::table('fd9_forms')->latest()->get();
 
             $dataFromFd6Form = DB::table('fd6_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
-           ->orderBy('fd6_forms.id','desc')
-           ->get();
+            ->orderBy('fd6_forms.id','desc')
+            ->get();
 
 
            $dataFromFd7Form = DB::table('fd7_forms')
@@ -96,14 +97,29 @@ class PostController extends Controller
            ->get();
 
 
+           $ngoStatusConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')->latest() ->get();
+           $ngoStatusDuplicateCertificate = DB::table('document_for_duplicate_certificates')->latest() ->get();
+
+           $ngoStatusExecutiveCommittee = DB::table('document_for_executive_committee_approvals')->latest() ->get();
 
 
+
+           $ngoStatusFdFive = DB::table('fd_five_forms')->latest()->get();
           // dd($dataFromFd6Form);
 
-            return view('admin.post.allDak.dakListForDg',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
+            return view('admin.post.allDak.dakListForDg',compact('ngoStatusFdFive','ngoStatusExecutiveCommittee','ngoStatusDuplicateCertificate','ngoStatusConstitution','dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
         }else{
 
         $nothiList = NothiList::latest()->get();
+
+
+        $ngoStatusFdFive = FdFiveDak::where('status',1)
+        ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+        ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->latest()->get()->unique('fd_five_status_id');
+
+
+        //dd($ngoStatusFdFive);
 
         $ngoStatusRenew = NgoRenewDak::where('status',1)
         ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
@@ -166,6 +182,29 @@ class PostController extends Controller
 
 
 
+    $ngoStatusDuplicateCertificate = DB::table('duplicate_certificate_daks')
+    ->where('status',1)
+    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get()->unique('duplicate_certificate_id');
+
+
+    $ngoStatusConstitution = DB::table('constitution_daks')->where('status',1)
+    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get()->unique('constitution_id');
+
+    $ngoStatusExecutiveCommittee = DB::table('executive_committee_daks')->
+    where('status',1)
+    ->orWhere('receiver_admin_id',Auth::guard('admin')->user()->id)
+    ->orWhere('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->latest()->get()->unique('executive_committee_id');
+
+
+
+
+
+
 
 
 
@@ -173,9 +212,13 @@ class PostController extends Controller
 
     $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-    return view('admin.post.allDak.all_dak_list',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
-
+    return view('admin.post.allDak.all_dak_list',compact('ngoStatusFdFive','ngoStatusExecutiveCommittee','ngoStatusDuplicateCertificate','ngoStatusConstitution','nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
         }
+
+} catch (\Exception $e) {
+    return redirect()->back()->with('error','some thing went wrong ');
+}
+
         //return view('admin.post.allDak.all_dak_list');
 
     }
@@ -183,7 +226,7 @@ class PostController extends Controller
 
 
 
-
+//dd(12);
 
 
 // $invID = 1211;
@@ -191,7 +234,7 @@ class PostController extends Controller
 
 //         dd($invID);
 
-
+try{
 
         \LogActivity::addToLog('view dak list.');
 
@@ -218,7 +261,7 @@ class PostController extends Controller
             //dd($dataFdNineOne);
 
             $dataFdNine = DB::table('fd9_forms')->where('status','Ongoing')->latest()->get();
-
+            $dataFdFiveForm = DB::table('fd_five_forms')->where('status','Ongoing')->latest()->get();
             $dataFromFd6Form = DB::table('fd6_forms')
             ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd6_forms.fd_one_form_id')
             ->select('fd_one_forms.*','fd6_forms.*','fd6_forms.id as mainId')
@@ -254,62 +297,86 @@ class PostController extends Controller
            ->get();
 
 
+           $ngoStatusConstitution = DB::table('document_for_amendment_or_approval_of_constitutions')->where('status','Ongoing')->latest() ->get();
+           $ngoStatusDuplicateCertificate = DB::table('document_for_duplicate_certificates')->where('status','Ongoing')->latest() ->get();
 
+           $ngoStatusExecutiveCommittee = DB::table('document_for_executive_committee_approvals')->where('status','Ongoing')->latest() ->get();
 
           // dd($dataFromFd6Form);
-
-            return view('admin.post.index',compact('dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
+          $ngoStatusFdFive = DB::table('fd_five_forms')->where('status','Ongoing')->latest()->get();
+            return view('admin.post.index',compact( 'ngoStatusConstitution',
+            'ngoStatusDuplicateCertificate','dataFdFiveForm','ngoStatusFdFive',
+            'ngoStatusExecutiveCommittee','dataFromFd3Form','dataFromFc2Form','dataFromFc1Form','dataFromFd7Form','dataFromFd6Form','dataFdNineOne','dataFdNine','all_data_for_name_changes_list','all_data_for_renew_list','all_data_for_new_list'));
         }else{
 
             $nothiList = NothiList::latest()->get();
 
-            $ngoStatusRenew = NgoRenewDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-            $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusRenew = NgoRenewDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusNameChange = NgoNameChangeDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
-            $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFDNineDak = NgoFDNineDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
-            $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-
-
-
-
-            $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-
-
-            $ngoStatusFcOneDak = FcOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-
-            $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-
-            $ngoStatusFdThreeDak = FdThreeDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-
-
-            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
-
-
-        $ngoStatusReg = NgoRegistrationDak::where('status',1)->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+            $ngoStatusFdSixDak = NgoFdSixDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
 
 
 
+            $ngoStatusFdSevenDak = NgoFdSevenDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
+
+            $ngoStatusFcOneDak = FcOneDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $ngoStatusFcTwoDak = FcTwoDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+            $ngoStatusFdThreeDak = FdThreeDak::where('status',1)
+            ->whereNull('sent_status')
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->latest()->get();
+
+            $ngoStatusFdFiveDak = FdFiveDak::where('status',1)
+            ->whereNull('sent_status')
+            ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
+            ->latest()->get();
+
+
+            $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+        $ngoStatusReg = NgoRegistrationDak::where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+        $ngoStatusDuplicateCertificate = DB::table('duplicate_certificate_daks')
+        ->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest() ->get();
+
+
+        $ngoStatusConstitution = DB::table('constitution_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+        $ngoStatusExecutiveCommittee = DB::table('executive_committee_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
+
+
+        $ngoStatusFdFive = DB::table('fd_five_daks')->where('status',1)->whereNull('sent_status')->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
         $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-        return view('admin.post.otherMemberIndex',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+        return view('admin.post.otherMemberIndex',compact( 'ngoStatusConstitution',
+        'ngoStatusDuplicateCertificate','ngoStatusFdFiveDak','ngoStatusFdFive',
+        'ngoStatusExecutiveCommittee','nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
 
         }
 
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
 
     }
 
 
     public function sent_dak(){
-
+        try{
 
            $nothiList = NothiList::latest()->get();
 
@@ -355,6 +422,11 @@ class PostController extends Controller
             ->get()->unique('fd_three_status_id');
 
 
+            $ngoStatusFdFiveDak = FdFiveDak::where('status',1)
+            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+            ->get()->unique('fd_five_status_id');
+
+
             $ngoStatusFDNineOneDak = NgoFDNineOneDak::where('status',1)
             ->where('sender_admin_id',Auth::guard('admin')->user()->id)
             ->get()->unique('f_d_nine_one_status_id');
@@ -368,18 +440,39 @@ class PostController extends Controller
 
 
 
+        $ngoStatusDuplicateCertificate = DB::table('duplicate_certificate_daks')
+        ->where('status',1)
+        ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->get()->unique('duplicate_certificate_id');
+
+
+        $ngoStatusConstitution = DB::table('constitution_daks')->where('status',1)
+        ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->get()->unique('constitution_id');
+
+        $ngoStatusExecutiveCommittee = DB::table('executive_committee_daks')->where('status',1)
+        ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+        ->get()->unique('executive_committee_id');
+
+
+
+
+
 
         $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest()->get();
 
-        return view('admin.post.sentDak.sentDakList',compact('nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
+        return view('admin.post.sentDak.sentDakList',compact('ngoStatusFdFiveDak','ngoStatusDuplicateCertificate','ngoStatusConstitution','ngoStatusExecutiveCommittee','nothiList','ngoStatusFdThreeDak','ngoStatusFcTwoDak','ngoStatusFcOneDak','ngoStatusFdSevenDak','ngoStatusFdSixDak','ngoStatusFDNineOneDak','ngoStatusFDNineDak','ngoStatusNameChange','ngoStatusRenew','ngoStatusReg'));
 
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
     }
 
 
     public function dakListSecondStep(Request $request){
-
+        try{
+            DB::beginTransaction();
         //dd($request->all());
 
         \LogActivity::addToLog('add dak detail.');
@@ -743,6 +836,9 @@ class PostController extends Controller
                         $regDakData->status = 1;
                         $regDakData->save();
 
+
+
+
                     }
 
 
@@ -805,14 +901,7 @@ class PostController extends Controller
                     }
 
 
-                    // $regDakData = NgoFDNineDak::find($inputAllData['receiverId'][$key]);
-                    // $regDakData->original_recipient =$mainPrapok;
-                    // $regDakData->copy_of_work =$karjoOnulipi;
-                    // $regDakData->informational_purposes =$infoOnulipi;
-                    // $regDakData->attraction_attention =$eyeOnulipi;
-                    // $regDakData->dak_detail_id = $dakDetailId;
-                    // $regDakData->status = 1;
-                    // $regDakData->save();
+
 
 
                     if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
@@ -919,14 +1008,7 @@ class PostController extends Controller
                     }
 
 
-                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
-                    // $regDakData->original_recipient =$mainPrapok;
-                    // $regDakData->copy_of_work =$karjoOnulipi;
-                    // $regDakData->informational_purposes =$infoOnulipi;
-                    // $regDakData->attraction_attention =$eyeOnulipi;
-                    // $regDakData->dak_detail_id = $dakDetailId;
-                    // $regDakData->status = 1;
-                    // $regDakData->save();
+
 
 
                     if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
@@ -1481,16 +1563,6 @@ class PostController extends Controller
                     }
 
 
-                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
-                    // $regDakData->original_recipient =$mainPrapok;
-                    // $regDakData->copy_of_work =$karjoOnulipi;
-                    // $regDakData->informational_purposes =$infoOnulipi;
-                    // $regDakData->attraction_attention =$eyeOnulipi;
-                    // $regDakData->dak_detail_id = $dakDetailId;
-                    // $regDakData->status = 1;
-                    // $regDakData->save();
-
-
                     if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
 
                         //dd(22);
@@ -1545,17 +1617,482 @@ class PostController extends Controller
 
             ///new code
 
+        }elseif($request->mainstatus == 'fdFive'){
+
+            ////new code
+
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = FdFiveDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = FdFiveDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+
+
+            ///new code
+
+        }elseif($request->mainstatus == 'duplicate'){
+
+            ////new code
+
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = DuplicateCertificateDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = DuplicateCertificateDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+
+
+            ///new code
+
+        }elseif($request->mainstatus == 'constitution'){
+
+            ////new code
+
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = ConstitutionDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = ConstitutionDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+
+
+            ///new code
+
+        }elseif($request->mainstatus == 'committee'){
+
+            ////new code
+
+
+            if(count($receiverId) >0){
+
+                foreach($receiverId as $key => $allReceiverId){
+
+                    if (array_key_exists('karjo_onulipi'.$key, $inputAllData)){
+
+
+                        $karjoOnulipi = $inputAllData['karjo_onulipi'.$key][$key];
+                    }else{
+
+                        $karjoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('main_prapok'.$key, $inputAllData)){
+
+
+                        $mainPrapok = $inputAllData['main_prapok'.$key][$key];
+                    }else{
+
+                        $mainPrapok = '';
+                    }
+
+
+                    if (array_key_exists('info_onulipi'.$key, $inputAllData)){
+
+
+                        $infoOnulipi = $inputAllData['info_onulipi'.$key][$key];
+                    }else{
+
+                        $infoOnulipi = '';
+                    }
+
+
+                    if (array_key_exists('eye_onulipi'.$key, $inputAllData)){
+
+
+                        $eyeOnulipi = $inputAllData['eye_onulipi'.$key][$key];
+                    }else{
+
+                        $eyeOnulipi = '';
+                    }
+
+
+                    // $regDakData = NgoFDNineOneDak::find($inputAllData['receiverId'][$key]);
+                    // $regDakData->original_recipient =$mainPrapok;
+                    // $regDakData->copy_of_work =$karjoOnulipi;
+                    // $regDakData->informational_purposes =$infoOnulipi;
+                    // $regDakData->attraction_attention =$eyeOnulipi;
+                    // $regDakData->dak_detail_id = $dakDetailId;
+                    // $regDakData->status = 1;
+                    // $regDakData->save();
+
+
+                    if(empty($karjoOnulipi) && empty($infoOnulipi) && empty($eyeOnulipi) ){
+
+                        //dd(22);
+
+                        if($mainPrapok == 1){
+
+                            //dd(1);
+
+                            $regDakData = ExecutiveCommitteeDak::find($inputAllData['receiverId'][$key]);
+                            $regDakData->original_recipient =$mainPrapok;
+                            $regDakData->copy_of_work =$karjoOnulipi;
+                            $regDakData->informational_purposes =$infoOnulipi;
+                            $regDakData->attraction_attention =$eyeOnulipi;
+                            $regDakData->dak_detail_id = $dakDetailId;
+                            $regDakData->status = 1;
+                            $regDakData->save();
+
+                        }else{
+
+                            //dd(2);
+
+                            return redirect()->back()->with('error','মূল-প্রাপক/কার্যার্থে অনুলিপি/জ্ঞাতার্থে অনুলিপি/দৃষ্টি আকর্ষণ নির্বাচনে ভুল ছিল   !');
+                        }
+
+                    }else{
+
+                       // dd(3);
+
+                        $regDakData = ExecutiveCommitteeDak::find($inputAllData['receiverId'][$key]);
+                        $regDakData->original_recipient =$mainPrapok;
+                        $regDakData->copy_of_work =$karjoOnulipi;
+                        $regDakData->informational_purposes =$infoOnulipi;
+                        $regDakData->attraction_attention =$eyeOnulipi;
+                        $regDakData->dak_detail_id = $dakDetailId;
+                        $regDakData->status = 1;
+                        $regDakData->save();
+
+                    }
+
+
+
+                    //dd($main_prapok);
+                }
+
+
+
+
+
+
+            }
+
+
+            ///new code
+
         }
 
         //end seven code end
-
+        DB::commit();
         return redirect()->route('dakBranchList.index')->with('success','Send Successfully!');
+
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
     public function dakListFirstStep(Request $request){
 
        // dd($request->all());
         \LogActivity::addToLog('add dak detail.');
+
+
+        $dt = new DateTime();
+        $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+        $created_at = $dt->format('Y-m-d h:i:s ');
+
+        $amPmValue = $dt->format('a');
+       // $amPmValueFinal = 0;
+        if($amPmValue == 'pm'){
+
+            $amPmValueFinal = 'অপরাহ্ন';
+        }else{
+            $amPmValueFinal = 'পূর্বাহ্ন';
+
+        }
+
 
          $number=count($request->admin_id);
 
@@ -1567,23 +2104,27 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+  $previousReceiver = NgoRegistrationDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('registration_status_id',$request->main_id)
+                       ->value('id');
 
+                       if(empty($previousReceiver)){
+
+
+                           $sentStatus = 0;
+
+                       }else{
+                           $sentStatus = 1;
+
+                       }
+
+                       NgoRegistrationDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('registration_status_id',$request->main_id)
+       ->update([
+           'sent_status' => 1,
+        ]);
             if($number >0){
                 for($i=0;$i<$number;$i++){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                  $regDakData = new NgoRegistrationDak();
@@ -1591,6 +2132,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->registration_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1605,7 +2148,25 @@ class PostController extends Controller
                        ->where('renew_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+ $previousReceiver = NgoRenewDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('renew_status_id',$request->main_id)
+                       ->value('id');
 
+                       if(empty($previousReceiver)){
+
+
+                           $sentStatus = 0;
+
+                       }else{
+                           $sentStatus = 1;
+
+                       }
+
+                       NgoRenewDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('renew_status_id',$request->main_id)
+       ->update([
+           'sent_status' => 1,
+        ]);
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
@@ -1626,6 +2187,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->renew_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1639,6 +2202,32 @@ class PostController extends Controller
                        ->where('name_change_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+                       //<--- 13 february code -->
+
+
+                       $previousReceiver = NgoNameChangeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('name_change_status_id',$request->main_id)
+                       ->value('id');
+
+                       if(empty($previousReceiver)){
+
+
+                           $sentStatus = 0;
+
+                       }else{
+                           $sentStatus = 1;
+
+                       }
+
+                       NgoNameChangeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                       ->where('name_change_status_id',$request->main_id)
+       ->update([
+           'sent_status' => 1,
+        ]);
+
+
+                       //13 february code end
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
@@ -1659,6 +2248,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->name_change_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1675,6 +2266,34 @@ class PostController extends Controller
                        ->where('f_d_nine_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+
+
+                           //<--- 13 february code -->
+
+
+                           $previousReceiver = NgoFDNineDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                           ->where('f_d_nine_status_id',$request->main_id)
+                           ->value('id');
+
+                           if(empty($previousReceiver)){
+
+
+                               $sentStatus = 0;
+
+                           }else{
+                               $sentStatus = 1;
+
+                           }
+
+                           NgoFDNineDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                           ->where('f_d_nine_status_id',$request->main_id)
+           ->update([
+               'sent_status' => 1,
+            ]);
+
+
+                           //13 february code end
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
@@ -1693,6 +2312,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->f_d_nine_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1707,6 +2328,33 @@ class PostController extends Controller
                        ->where('f_d_nine_one_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+
+                         //<--- 13 february code -->
+
+
+                         $previousReceiver = NgoFDNineOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('f_d_nine_one_status_id',$request->main_id)
+                         ->value('id');
+
+                         if(empty($previousReceiver)){
+
+
+                             $sentStatus = 0;
+
+                         }else{
+                             $sentStatus = 1;
+
+                         }
+
+                         NgoFDNineOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('f_d_nine_one_status_id',$request->main_id)
+         ->update([
+             'sent_status' => 1,
+          ]);
+
+
+                         //13 february code end
 
 
             if($number >0){
@@ -1729,6 +2377,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->f_d_nine_one_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1744,6 +2394,33 @@ class PostController extends Controller
                        ->where('fd_six_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+
+                         //<--- 13 february code -->
+
+
+                         $previousReceiver = NgoFdSixDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_six_status_id',$request->main_id)
+                         ->value('id');
+
+                         if(empty($previousReceiver)){
+
+
+                             $sentStatus = 0;
+
+                         }else{
+                             $sentStatus = 1;
+
+                         }
+
+                         NgoFdSixDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_six_status_id',$request->main_id)
+         ->update([
+             'sent_status' => 1,
+          ]);
+
+
+                         //13 february code end
 
 
             if($number >0){
@@ -1766,6 +2443,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fd_six_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1780,6 +2459,32 @@ class PostController extends Controller
                        ->where('fd_seven_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+                         //<--- 13 february code -->
+
+
+                         $previousReceiver = NgoFdSevenDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_seven_status_id',$request->main_id)
+                         ->value('id');
+
+                         if(empty($previousReceiver)){
+
+
+                             $sentStatus = 0;
+
+                         }else{
+                             $sentStatus = 1;
+
+                         }
+
+                         NgoFdSevenDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+                         ->where('fd_seven_status_id',$request->main_id)
+         ->update([
+             'sent_status' => 1,
+          ]);
+
+
+                         //13 february code end
 
 
             if($number >0){
@@ -1802,6 +2507,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fd_seven_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1817,7 +2524,31 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+     //<--- 13 february code -->
 
+
+     $previousReceiver = FcOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+     ->where('fc_one_status_id',$request->main_id)
+     ->value('id');
+
+     if(empty($previousReceiver)){
+
+
+         $sentStatus = 0;
+
+     }else{
+         $sentStatus = 1;
+
+     }
+
+     FcOneDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+     ->where('fc_one_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+     //13 february code end
             if($number >0){
                 for($i=0;$i<$number;$i++){
 
@@ -1837,6 +2568,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fc_one_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1852,7 +2585,31 @@ class PostController extends Controller
                        ->where('status',0)
                        ->delete();
 
+   //<--- 13 february code -->
 
+
+   $previousReceiver = FcTwoDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fc_two_status_id',$request->main_id)
+   ->value('id');
+
+   if(empty($previousReceiver)){
+
+
+       $sentStatus = 0;
+
+   }else{
+       $sentStatus = 1;
+
+   }
+
+   FcTwoDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fc_two_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+   //13 february code end
 
             if($number >0){
                 for($i=0;$i<$number;$i++){
@@ -1870,6 +2627,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fc_two_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1884,6 +2643,33 @@ class PostController extends Controller
                        ->where('fd_three_status_id',$request->main_id)
                        ->where('status',0)
                        ->delete();
+
+
+                       //<--- 13 february code -->
+
+
+   $previousReceiver = FdThreeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fd_three_status_id',$request->main_id)
+   ->value('id');
+
+   if(empty($previousReceiver)){
+
+
+       $sentStatus = 0;
+
+   }else{
+       $sentStatus = 1;
+
+   }
+
+   FdThreeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+   ->where('fd_three_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+   //13 february code end
 
 
             if($number >0){
@@ -1902,6 +2688,8 @@ class PostController extends Controller
                  $regDakData->receiver_admin_id = $request->admin_id[$i];
                  $regDakData->fd_three_status_id =$request->main_id;
                  $regDakData->status = 0;
+                 $regDakData->nothi_jat_status = 0;
+                 $regDakData->amPmValue = $amPmValueFinal;
                  $regDakData->save();
 
                 }
@@ -1909,7 +2697,260 @@ class PostController extends Controller
 
             }
 
-         }
+         }elseif($request->mainStatusNew == 'fdFive'){
+
+            $deleteData = FdFiveDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+
+                 ->where('fd_five_status_id',$request->main_id)
+                 ->where('status',0)
+                 ->delete();
+
+
+                 //<--- 13 february code -->
+
+
+$previousReceiver = FdFiveDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('fd_five_status_id',$request->main_id)
+->value('id');
+
+if(empty($previousReceiver)){
+
+
+ $sentStatus = 0;
+
+}else{
+ $sentStatus = 1;
+
+}
+
+FdFiveDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('fd_five_status_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+//13 february code end
+
+
+      if($number >0){
+          for($i=0;$i<$number;$i++){
+
+
+
+
+
+
+
+
+
+           $regDakData = new FdFiveDak();
+           $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+           $regDakData->receiver_admin_id = $request->admin_id[$i];
+           $regDakData->fd_five_status_id =$request->main_id;
+           $regDakData->status = 0;
+           $regDakData->nothi_jat_status = 0;
+           $regDakData->amPmValue = $amPmValueFinal;
+           $regDakData->save();
+
+          }
+
+
+      }
+
+   }elseif($request->mainStatusNew == 'duplicate'){
+
+
+
+
+            $deleteData = DuplicateCertificateDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+
+                 ->where('duplicate_certificate_id',$request->main_id)
+                 ->where('status',0)
+                 ->delete();
+
+
+                 //<--- 13 february code -->
+
+
+$previousReceiver = DuplicateCertificateDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('duplicate_certificate_id',$request->main_id)
+->value('id');
+
+if(empty($previousReceiver)){
+
+
+ $sentStatus = 0;
+
+}else{
+ $sentStatus = 1;
+
+}
+
+DuplicateCertificateDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('duplicate_certificate_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+//13 february code end
+
+
+      if($number >0){
+          for($i=0;$i<$number;$i++){
+
+
+
+
+
+
+
+
+
+           $regDakData = new DuplicateCertificateDak();
+           $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+           $regDakData->receiver_admin_id = $request->admin_id[$i];
+           $regDakData->duplicate_certificate_id =$request->main_id;
+           $regDakData->status = 0;
+           $regDakData->nothi_jat_status = 0;
+           $regDakData->amPmValue = $amPmValueFinal;
+           $regDakData->save();
+
+          }
+
+
+      }
+
+   }elseif($request->mainStatusNew == 'constitution'){
+
+
+
+
+    $deleteData = ConstitutionDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+
+         ->where('constitution_id',$request->main_id)
+         ->where('status',0)
+         ->delete();
+
+
+         //<--- 13 february code -->
+
+
+$previousReceiver = ConstitutionDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('constitution_id',$request->main_id)
+->value('id');
+
+if(empty($previousReceiver)){
+
+
+$sentStatus = 0;
+
+}else{
+$sentStatus = 1;
+
+}
+
+ConstitutionDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('constitution_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+//13 february code end
+
+
+if($number >0){
+  for($i=0;$i<$number;$i++){
+
+
+
+
+
+
+
+
+
+   $regDakData = new ConstitutionDak();
+   $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+   $regDakData->receiver_admin_id = $request->admin_id[$i];
+   $regDakData->constitution_id =$request->main_id;
+   $regDakData->status = 0;
+   $regDakData->nothi_jat_status = 0;
+   $regDakData->amPmValue = $amPmValueFinal;
+   $regDakData->save();
+
+  }
+
+
+}
+
+}elseif($request->mainStatusNew == 'committee'){
+
+
+
+
+    $deleteData = ExecutiveCommitteeDak::where('sender_admin_id',Auth::guard('admin')->user()->id)
+
+         ->where('executive_committee_id',$request->main_id)
+         ->where('status',0)
+         ->delete();
+
+
+         //<--- 13 february code -->
+
+
+$previousReceiver = ExecutiveCommitteeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('executive_committee_id',$request->main_id)
+->value('id');
+
+if(empty($previousReceiver)){
+
+
+$sentStatus = 0;
+
+}else{
+$sentStatus = 1;
+
+}
+
+ExecutiveCommitteeDak::where('receiver_admin_id',Auth::guard('admin')->user()->id)
+->where('executive_committee_id',$request->main_id)
+->update([
+'sent_status' => 1,
+]);
+
+
+//13 february code end
+
+
+if($number >0){
+  for($i=0;$i<$number;$i++){
+
+
+
+
+
+
+
+
+
+   $regDakData = new ExecutiveCommitteeDak();
+   $regDakData->sender_admin_id =Auth::guard('admin')->user()->id;
+   $regDakData->receiver_admin_id = $request->admin_id[$i];
+   $regDakData->executive_committee_id =$request->main_id;
+   $regDakData->status = 0;
+   $regDakData->nothi_jat_status = 0;
+   $regDakData->amPmValue = $amPmValueFinal;
+   $regDakData->save();
+
+  }
+
+
+}
+
+}
 
           $mainDataStatus = $request->mainStatusNew;
           $mainIdNewStatus = $request->main_id;
@@ -1989,6 +3030,34 @@ if($mainDataStatus == 'registration'){
     ->where('fd_three_status_id',$mainIdNewStatus)->get();
 
 
+}elseif($mainDataStatus == 'fdFive'){
+
+    $allRegistrationDak = FdFiveDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('fd_five_status_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'duplicate'){
+
+    $allRegistrationDak = DuplicateCertificateDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('duplicate_certificate_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'constitution'){
+
+    $allRegistrationDak = ConstitutionDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('constitution_id',$mainIdNewStatus)->get();
+
+
+}elseif($mainDataStatus == 'committee'){
+
+    $allRegistrationDak = ExecutiveCommitteeDak::where('status',0)
+    ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+    ->where('executive_committee_id',$mainIdNewStatus)->get();
+
+
 }
 
 
@@ -2013,6 +3082,8 @@ if($mainDataStatus == 'registration'){
     }
 
     public function showDataAll($status,$id){
+
+        try{
 
         \LogActivity::addToLog('show dak detail.');
         $mainstatus = $status;
@@ -2089,6 +3160,34 @@ if($mainDataStatus == 'registration'){
             ->where('fd_three_status_id',$id)->get();
 
 
+        }elseif($mainstatus == 'fdFive'){
+
+            $allRegistrationDak = FdFiveDak::where('status',0)
+            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+            ->where('fd_five_status_id',$id)->get();
+
+
+        }elseif($mainstatus == 'duplicate'){
+
+            $allRegistrationDak = DB::table('duplicate_certificate_daks')->where('status',0)
+            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+            ->where('duplicate_certificate_id',$id)->get();
+
+
+        }elseif($mainstatus == 'constitution'){
+
+            $allRegistrationDak =DB::table('constitution_daks')->where('status',0)
+            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+            ->where('constitution_id',$id)->get();
+
+
+        }elseif($mainstatus == 'committee'){
+
+            $allRegistrationDak = DB::table('executive_committee_daks')->where('status',0)
+            ->where('sender_admin_id',Auth::guard('admin')->user()->id)
+            ->where('executive_committee_id',$id)->get();
+
+
         }
 
 
@@ -2113,17 +3212,21 @@ if($mainDataStatus == 'registration'){
 
         //dd($totalEmptyDesignation);
 
-        $totalBranchList = Branch::where('id','!=',1)->get();
+        $totalBranchList = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
 
 
         //end new code for seal
         $newMainDaKId = $id;
 //dd($id);
         return view('admin.post.show',compact('newMainDaKId','totalBranchList','totalEmptyDesignation','totalDesignationId','totalDesignationWorking','totaluser','totalDesignation','totalBranch','mainstatus','id','allRegistrationDak'));
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
     public function createSeal($status , $id){
+
+        try{
 
         \LogActivity::addToLog('create seal.');
 
@@ -2148,10 +3251,14 @@ if($mainDataStatus == 'registration'){
 
          //dd($totalEmptyDesignation);
 
-         $totalBranchList = Branch::where('id','!=',1)->get();
+         $totalBranchList = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
 
         return view('admin.post.createSeal',compact('mainstatus','id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
 
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
@@ -2194,7 +3301,7 @@ $mainStatusNew = $request->mainStatusNew;
     $separated_data_title = explode(" ", $convert_name_title);
 
 
-    $totalBranchList = Branch::whereIn('id',$separated_data_title)->get();
+    $totalBranchList = Branch::whereIn('id',$separated_data_title)->orderBy('branch_step','asc')->get();
 
     $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
 
@@ -2216,21 +3323,7 @@ $mainStatusNew = $request->mainStatusNew;
       $mainStatusNew = $request->mainStatusNew;
       $id = $request->mainId;
       $newMainDakIdOne = $request->mainId;
-        //dd($totalDesi);
 
-    //     if(!empty($totalBranch) && !empty($totalDesi)){
-
-    //      dd($totalBranch);
-
-    //     }elseif(!empty($totalBranch)){
-
-    // dd(2);
-
-    //     }elseif(!empty($totalDesi)){
-
-    //     dd(3);
-
-    //     }
 
     if(empty($totalDesi)){
 
@@ -2245,7 +3338,7 @@ $mainStatusNew = $request->mainStatusNew;
     $separated_data_title = explode(" ", $convert_name_title);
 
 
-    $totalBranchList = Branch::whereIn('id',$separated_data_title)->get();
+    $totalBranchList = Branch::whereIn('id',$separated_data_title)->orderBy('branch_step','asc')->get();
 
     $adminDesignationHistory = AdminDesignationHistory::whereIn('designation_list_id',$totalDesi)->get();
 
@@ -2337,7 +3430,28 @@ $mainStatusNew = $request->mainStatusNew;
              $allRegistrationDak = FdThreeDak::where('id',$id)->delete();
 
 $data = FdThreeDak::count();
-         }
+         }elseif($status == 'fdFive'){
+
+            $allRegistrationDak = FdFiveDak::where('id',$id)->delete();
+
+$data = FdFiveDak::count();
+        }elseif($status == 'duplicate'){
+
+            $allRegistrationDak = DuplicateCertificateDak::where('id',$id)->delete();
+
+$data = DuplicateCertificateDak::count();
+        }elseif($status == 'constitution'){
+
+            $allRegistrationDak = ConstitutionDak::where('id',$id)->delete();
+
+$data = ConstitutionDak::count();
+        }elseif($status == 'committee'){
+
+            $allRegistrationDak = ExecutiveCommitteeDak::where('id',$id)->delete();
+
+$data = ExecutiveCommitteeDak::count();
+        }
+
 
 
          return response()->json($data);
@@ -2345,6 +3459,8 @@ $data = FdThreeDak::count();
 
 
     public function deleteMemberList($status, $id){
+
+        try{
 
         \LogActivity::addToLog('delete memeber list.');
 
@@ -2402,18 +3518,45 @@ $data = FdThreeDak::count();
             $allRegistrationDak = FdThreeDak::where('id',$id)->delete();
 
 
+        }elseif($status == 'fdFive'){
+
+            $allRegistrationDak = FdFiveDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'duplicate'){
+
+            $allRegistrationDak = DuplicateCertificateDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'constitution'){
+
+            $allRegistrationDak = ConstitutionDak::where('id',$id)->delete();
+
+
+        }elseif($status == 'committee'){
+
+            $allRegistrationDak = ExecutiveCommitteeDak::where('id',$id)->delete();
+
+
         }
 
 
 
 
         return redirect()->back();
+
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
 
 
     public function main_doc_download($id){
+
+        try{
 
         \LogActivity::addToLog('dak pdf download.');
 
@@ -2435,6 +3578,11 @@ $file=$data->system_admin_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 

@@ -17,6 +17,7 @@ class ChildNoteForRenew extends Model
         'description',
         'admin_id',
         'receiver_id',
+        'sender_id',
         'sent_status'
     ];
 

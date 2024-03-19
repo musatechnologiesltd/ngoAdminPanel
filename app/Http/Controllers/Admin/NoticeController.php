@@ -37,12 +37,16 @@ class NoticeController extends Controller
             return redirect()->route('mainLogin');
                }
 
-
+               try{
                \LogActivity::addToLog('notice list ');
 
           $noticeLists = Notice::latest()->get();
 
                return view('admin.noticeLists.index',compact('noticeLists'));
+
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
            }
 
 
@@ -54,7 +58,8 @@ class NoticeController extends Controller
                 return redirect()->route('mainLogin');
             }
 
-
+            try{
+                DB::beginTransaction();
             \LogActivity::addToLog(' create notice ');
 
 
@@ -70,8 +75,14 @@ class NoticeController extends Controller
            }
 
            $noticeLists->save();
-
+           DB::commit();
            return redirect()->back()->with('success','Created Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
            }
 
 
@@ -81,7 +92,8 @@ class NoticeController extends Controller
                 //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                 return redirect()->route('mainLogin');
             }
-
+            try{
+                DB::beginTransaction();
             \LogActivity::addToLog(' update notice ');
 
 
@@ -97,8 +109,14 @@ class NoticeController extends Controller
            }
 
            $noticeLists->save();
-
+           DB::commit();
            return redirect()->back()->with('success','Updated Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
            }
 
 
@@ -109,14 +127,21 @@ class NoticeController extends Controller
                    //abort(403, 'Sorry !! You are Unauthorized to view any country !');
                    return redirect()->route('mainLogin');
                }
-
+               try{
+                DB::beginTransaction();
                \LogActivity::addToLog(' delete notice ');
 
 
                $admins = Notice::where('id',$id)->delete();
 
 
-
+               DB::commit();
                return back()->with('error','Deleted successfully!');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
+
            }
 }

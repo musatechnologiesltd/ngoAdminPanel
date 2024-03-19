@@ -20,7 +20,13 @@ use App\Models\FdSevenOfficeSarok;
 use App\Models\FcOneOfficeSarok;
 use App\Models\FcTwoOfficeSarok;
 use App\Models\FdThreeOfficeSarok;
+use App\Models\FdFiveOfficeSarok;
 use App\Models\PotrangshoDraft;
+
+
+use App\Models\DuplicateCertificateOfficeSarok;
+use App\Models\ExecutiveCommitteeOfficeSarok;
+use App\Models\ConstitutionOfficeSarok;
 
 
 class OfficeSarokController extends Controller
@@ -28,9 +34,10 @@ class OfficeSarokController extends Controller
     public function store(Request $request){
 
 
+        try{
+            DB::beginTransaction();
 
-
-       // dd($request->all());
+       //dd($request->all());
 
 
         $request->validate([
@@ -52,6 +59,8 @@ class OfficeSarokController extends Controller
             $getAllData->sarokId = $request->sorkariUpdateId;
             $getAllData->noteId = $request->noteId;
             $getAllData->status = $request->status;
+            $getAllData->sarok_number = $request->sarok_number;
+            $getAllData->extra_text = $request->extra_text;
             $getAllData->SentStatus = 0;
             $getAllData->office_subject= $request->subject;
             $getAllData->office_sutro = $request->sutro;
@@ -190,7 +199,55 @@ class OfficeSarokController extends Controller
          $saveNewData->save();
 
 
-     }
+
+
+     }elseif($request->statusForPotrangso == 'fdFive'){
+
+        $saveNewData = new FdFiveOfficeSarok();
+        $saveNewData->pnote_fd_five = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+
+
+    }elseif($request->statusForPotrangso == 'duplicate'){
+
+        $saveNewData = new DuplicateCertificateOfficeSarok();
+        $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+    }elseif($request->statusForPotrangso == 'constitution'){
+
+        $saveNewData = new ConstitutionOfficeSarok();
+        $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+    }elseif($request->statusForPotrangso == 'committee'){
+
+        $saveNewData = new ExecutiveCommitteeOfficeSarok();
+        $saveNewData->parent_note_for_fd_three_id = $request->parentIdForPotrangso;
+       //  $saveNewData->office_subject = $request->subject;
+       //  $saveNewData->office_sutro = $request->sutro;
+       //  $saveNewData->description =$request->maindes;
+        $saveNewData->created_at =$created_at;
+        $saveNewData->save();
+
+
+    }
 
      $sarokId = $saveNewData->id;
 
@@ -200,6 +257,8 @@ class OfficeSarokController extends Controller
      $getAllData->sarokId = $sarokId;
      $getAllData->noteId = $request->noteId;
      $getAllData->status = $request->status;
+     $getAllData->sarok_number = $request->sarok_number;
+     $getAllData->extra_text = $request->extra_text;
      $getAllData->SentStatus = 0;
      $getAllData->office_subject= $request->subject;
      $getAllData->office_sutro = $request->sutro;
@@ -209,7 +268,7 @@ class OfficeSarokController extends Controller
 
 
     }
-
+    DB::commit();
     if($request->updateOrSubmit == 1){
 
 
@@ -248,5 +307,12 @@ class OfficeSarokController extends Controller
         // }
    // return redirect()->back()->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
+
+
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect()->back()->with('error','some thing went wrong ');
+}
+
     }
 }

@@ -33,11 +33,21 @@ class DesignationStepController extends Controller
     public function index(){
 
 
+
+
+       $getPreviousData =  AdminDesignationHistory::select('admin_id')->groupBy('admin_id')
+        ->get();
+
+        $convert_name_title = $getPreviousData->implode("admin_id", " ");
+        $separated_data_title = explode(" ", $convert_name_title);
+
+        //dd($getPreviousData);
+
         if (is_null($this->user) || !$this->user->can('assignedEmployee.view')) {
             //abort(403, 'Sorry !! You are Unauthorized to View !');
             return redirect()->route('mainLogin');
                }
-
+try{
                \LogActivity::addToLog('designation step list ');
 
                $branchLists = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
@@ -56,9 +66,13 @@ class DesignationStepController extends Controller
           $designationStepLists = DesignationStep::latest()->get();
           //$designationLists = DesignationList::latest()->get();
           $users = Admin::where('id','!=',1)->get();
-          $users_as = Admin::where('id','!=',1)->get();
+          $users_as = Admin::whereNotIn('id',$separated_data_title)->where('id','!=',1)->get();
 
                return view('admin.designationStepList.index',compact('users_as','users','branchLists','designationLists','designationStepLists'));
+
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
            }
 
 
@@ -79,7 +93,8 @@ class DesignationStepController extends Controller
 
 
 
-
+              try{
+                DB::beginTransaction();
              $dateFormate = date('Y-m-d', strtotime($request->admin_job_start_date));
 
 
@@ -109,9 +124,12 @@ class DesignationStepController extends Controller
 
 
 
-
+          DB::commit();
     return redirect()->route('assignedEmployee.index')->with('success','Added successfully!');
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 
 
         }
@@ -126,17 +144,21 @@ class DesignationStepController extends Controller
                 //abort(403, 'Sorry !! You are Unauthorized to Update !');
                 return redirect()->route('mainLogin');
             }
-
+            try{
+                DB::beginTransaction();
             \LogActivity::addToLog('designation step update ');
             $medicine = DesignationStep::findOrFail($id);
 
             $input = $request->all();
 
             $medicine->fill($input)->save();
-
+            DB::commit();
     return redirect()->route('designationStepList.index')->with('success','Updated successfully!');
 
-
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 
         }
 
@@ -148,9 +170,16 @@ class DesignationStepController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to Delete !');
             return redirect()->route('mainLogin');
         }
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('designation step delete ');
         DesignationStep::destroy($id);
+        DB::commit();
         return redirect()->route('designationStepList.index')->with('error','Deleted successfully!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 }

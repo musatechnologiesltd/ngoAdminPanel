@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 Use DB;
+use PDF;
 use Mail;
+use Mpdf\Mpdf;
 use Carbon\Carbon;
 use App\Models\NgoFDNineDak;
 use App\Models\NgoFDNineOneDak;
@@ -37,6 +39,8 @@ class NameCangeController extends Controller
            return redirect()->route('mainLogin');
         }
 
+        try{
+
         \LogActivity::addToLog('new name change list ');
 
 
@@ -51,7 +55,7 @@ class NameCangeController extends Controller
             $ngoStatusNameChange = NgoNameChangeDak::where('status',1)
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)->latest()->get();
 
-            $convert_name_title = $ngoStatusRenew->implode("name_change_status_id", " ");
+            $convert_name_title = $ngoStatusNameChange->implode("name_change_status_id", " ");
             $separated_data_title = explode(" ", $convert_name_title);
 
             $all_data_for_new_list = DB::table('ngo_name_changes')
@@ -65,6 +69,11 @@ class NameCangeController extends Controller
 
 
       return view('admin.name_change_list.new_name_change_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
@@ -74,6 +83,8 @@ class NameCangeController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
+
+        try{
 
         \LogActivity::addToLog('revision name change list ');
 
@@ -105,6 +116,11 @@ class NameCangeController extends Controller
 
 
       return view('admin.name_change_list.revision_name_change_list',compact('all_data_for_new_list'));
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
+
     }
 
 
@@ -114,7 +130,7 @@ class NameCangeController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
-
+        try{
         \LogActivity::addToLog('already name changed list ');
 
 
@@ -143,6 +159,11 @@ class NameCangeController extends Controller
 
 
       return view('admin.name_change_list.already_name_change_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
@@ -220,24 +241,23 @@ class NameCangeController extends Controller
         ->get();
 
 
-            //dd($users_info);
-        } catch (Exception $e) {
 
-
-
-            return $e->getMessage();
-
-        }
 
 
 
         return view('admin.name_change_list.name_change_view',compact('allNameChangeDoc','getformOneId','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
     public function updateStatusNameChangeForm(Request $request){
 
         \LogActivity::addToLog('update name change status');
+
+        //dd($request->status);
 
         $data_save = DB::table('ngo_name_changes')->where('id',$request->id)
         ->update([
@@ -269,6 +289,9 @@ class NameCangeController extends Controller
         });
 
         return redirect()->back()->with('success','Updated Successfully');
+
+
+
     }
 
 
@@ -283,4 +306,222 @@ class NameCangeController extends Controller
         return view('admin.name_change_list.nameChangeDoc',compact('form_one_data'));
 
     }
+
+
+    public function printCertificateViewName(Request $request){
+        try{
+
+        \LogActivity::addToLog('print ngo certificate.');
+
+        //dd(11);
+
+           $user_id = $request->user_id;
+
+           $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
+           $ngoTypeData = DB::table('ngo_type_and_languages')
+           ->where('user_id',$form_one_data->user_id)->first();
+           $duration_list_all = DB::table('ngo_durations')->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+           ///////new code 19 february
+
+$nameChangeDetail = DB::table('ngo_name_changes')
+->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+///end new code 19 february
+           //dd($user_id);
+
+           $newyear = date('y', strtotime($request->main_date));
+
+           $newmonth = date('F', strtotime($request->main_date));
+
+
+           $newdate = date('d', strtotime($request->main_date));
+
+           $word = $this->numberToWord($newyear);
+           $word1 = $this->numberToWord($newdate);
+           //dd($word1);
+
+           //dd($newdate);
+$mainDate = $request->main_date;
+           $file_Name_Custome = 'certificate';
+
+
+           $data=view('admin.name_change_list.print_certificate_view',['newyear'=>$newyear,'ngoTypeData'=>$ngoTypeData,
+           'nameChangeDetail'=>$nameChangeDetail,'newmonth'=>$newmonth,'newdate'=>$newdate,'word'=>$word,'word1'=>$word1,'mainDate'=>$mainDate,
+'form_one_data'=>$form_one_data,'duration_list_all'=>$duration_list_all]);
+
+
+
+$mpdf = new Mpdf(
+[
+    'default_font' => 'nikosh',
+    'mode' => 'utf-8',
+    'format' => 'A4-L',
+    'orientation' => 'L'
+]
+);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output();
+die();
+
+
+
+
+} catch (\Exception $e) {
+    return redirect()->back()->with('error','some thing went wrong ');
+}
+    }
+
+    public function numberToWord($num = '')
+    {
+        $num    = ( string ) ( ( int ) $num );
+
+        if( ( int ) ( $num ) && ctype_digit( $num ) )
+        {
+            $words  = array( );
+
+            $num    = str_replace( array( ',' , ' ' ) , '' , trim( $num ) );
+
+            $list1  = array('','one','two','three','four','five','six','seven',
+                'eight','nine','ten','eleven','twelve','thirteen','fourteen',
+                'fifteen','sixteen','seventeen','eighteen','nineteen');
+
+            $list2  = array('','ten','twenty','thirty','forty','fifty','sixty',
+                'seventy','eighty','ninety','hundred');
+
+            $list3  = array('','thousand','million','billion','trillion',
+                'quadrillion','quintillion','sextillion','septillion',
+                'octillion','nonillion','decillion','undecillion',
+                'duodecillion','tredecillion','quattuordecillion',
+                'quindecillion','sexdecillion','septendecillion',
+                'octodecillion','novemdecillion','vigintillion');
+
+            $num_length = strlen( $num );
+            $levels = ( int ) ( ( $num_length + 2 ) / 3 );
+            $max_length = $levels * 3;
+            $num    = substr( '00'.$num , -$max_length );
+            $num_levels = str_split( $num , 3 );
+
+            foreach( $num_levels as $num_part )
+            {
+                $levels--;
+                $hundreds   = ( int ) ( $num_part / 100 );
+                $hundreds   = ( $hundreds ? ' ' . $list1[$hundreds] . ' Hundred' . ( $hundreds == 1 ? '' : 's' ) . ' ' : '' );
+                $tens       = ( int ) ( $num_part % 100 );
+                $singles    = '';
+
+                if( $tens < 20 ) { $tens = ( $tens ? ' ' . $list1[$tens] . ' ' : '' ); } else { $tens = ( int ) ( $tens / 10 ); $tens = ' ' . $list2[$tens] . ' '; $singles = ( int ) ( $num_part % 10 ); $singles = ' ' . $list1[$singles] . ' '; } $words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_part ) ) ? ' ' . $list3[$levels] . ' ' : '' ); } $commas = count( $words ); if( $commas > 1 )
+            {
+                $commas = $commas - 1;
+            }
+
+            $words  = implode( ', ' , $words );
+
+            $words  = trim( str_replace( ' ,' , ',' , ucwords( $words ) )  , ', ' );
+            if( $commas )
+            {
+                $words  = str_replace( ',' , ' and' , $words );
+            }
+
+            return $words;
+        }
+        else if( ! ( ( int ) $num ) )
+        {
+            return 'Zero';
+        }
+        return '';
+    }
+    public function printCertificateViewDemoName(Request $request){
+
+try{
+\LogActivity::addToLog('view certificate demo.');
+
+
+        $user_id = $request->user_id;
+
+        $form_one_data = DB::table('fd_one_forms')->where('user_id',$user_id)->first();
+        $ngoTypeData = DB::table('ngo_type_and_languages')
+        ->where('user_id',$form_one_data->user_id)->first();
+        $duration_list_all = DB::table('ngo_durations')
+        ->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+
+///////new code 19 february
+
+$nameChangeDetail = DB::table('ngo_name_changes')
+->where('fd_one_form_id',$form_one_data->id)->latest()->first();
+
+
+///end new code 19 february
+
+
+
+        //dd($user_id);
+
+        $newyear = date('y', strtotime($request->main_date));
+
+        $newmonth = date('F', strtotime($request->main_date));
+
+
+        $newdate = date('d', strtotime($request->main_date));
+
+        $word = $this->numberToWord($newyear);
+        $word1 = $this->numberToWord($newdate);
+        //dd($word1);
+
+        //dd($newdate);
+$mainDate = $request->main_date;
+        $file_Name_Custome = 'certificate';
+
+        $data =view('admin.name_change_list.printCertificateViewDemo',[
+        'newyear'=>$newyear,
+        'ngoTypeData'=>$ngoTypeData,
+        'nameChangeDetail'=>$nameChangeDetail,
+        'newmonth'=>$newmonth,
+        'newdate'=>$newdate,
+        'word'=>$word,
+        'word1'=>$word1,
+        'mainDate'=>$mainDate,
+       'form_one_data'=>$form_one_data,
+       'duration_list_all'=>$duration_list_all]);
+
+
+
+
+
+$mpdf = new Mpdf(
+[
+    'default_font' => 'nikosh',
+    'mode' => 'utf-8',
+    'format' => 'A4-L',
+    'orientation' => 'L'
+]
+);
+
+//$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+$mpdf->WriteHTML($data);
+
+
+
+$mpdf->Output();
+die();
+
+
+
+
+
+} catch (\Exception $e) {
+    return redirect()->back()->with('error','some thing went wrong ');
+}
+ }
 }

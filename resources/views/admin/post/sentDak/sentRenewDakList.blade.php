@@ -1,5 +1,7 @@
 @foreach($ngoStatusRenew as $r=>$allStatusData)
+@if($allStatusData->nothi_jat_status == 1)
 
+@else
 <?php
 
 
@@ -39,7 +41,7 @@ $decesionName = DB::table('dak_details')
     উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
     প্রেরকঃ {{ $adminNamePrerok }}<span class="p-4"><i class="fa fa-user"></i>
     মূল - প্রাপক: {{ $orginalReceverName }}</span>  <br>
-    বিষয়ঃ <b> এনজিও নিবন্ধন নবায়নের নোটিশ  </b>  <br>
+    বিষয়ঃ <b> এনজিও নবায়ন</b>  <br>
     সিদ্ধান্ত: <span style="color:blue;">{{ $decesionName }}। </span><br>
     তারিখ:<b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-F-y', strtotime($allStatusData->created_at))) }} </b>
 </td>
@@ -98,8 +100,7 @@ $dakDetail = DB::table('dak_details')
 
 $mainDetail = DB::table('ngo_renew_daks')
 ->where('renew_status_id',$allStatusData->renew_status_id)
-->where('receiver_admin_id',Auth::guard('admin')->user()->id)
-->orwhere('sender_admin_id',Auth::guard('admin')->user()->id)->orderBy('id','asc')->get();
+->orderBy('id','asc')->get();
 
 
 //dd($mainDetail);
@@ -202,7 +203,7 @@ $branchNames = DB::table('branches')
     <div class="card" style="border:2px solid #979797">
         <div class="card-body">
             <div class="tracking_box">
-                <h5>বিষয়ঃ এনজিও নিবন্ধন নবায়নের নোটিশ  </h5>
+                <h5>বিষয়ঃ এনজিও নবায়ন</h5>
                 @if(!$dakDetail->main_file)
 
                 @else
@@ -221,7 +222,7 @@ $branchNames = DB::table('branches')
                     <li>প্রাপক : {{ $receiverName }}</li>
                 </ul>
                 <hr>
-                <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                   <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
             </div>
         </div>
     </div>
@@ -240,4 +241,5 @@ $branchNames = DB::table('branches')
 <!--end new code -->
 </td>
 </tr>
+@endif
 @endforeach

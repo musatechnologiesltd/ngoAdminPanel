@@ -81,9 +81,15 @@ class NothiCopyController extends Controller
    public function copyOtherOfficerAdd(Request $request){
 
        //dd($request->all());
-
+       $validator = Validator::make($request->all(), [
+        'organizationName' => 'required',
+        'otherOfficerDesignation' => 'required',
+        'otherOfficerAddress' => 'required',
+    ]);
+    if ($validator->passes()) {
 
        $nothiPrapok = new NothiCopy();
+       $nothiPrapok->organization_name = $request->organizationName;
        $nothiPrapok->nothiId = $request->snothiId;
        $nothiPrapok->nijOfficeId =  $request->sstatus;
        $nothiPrapok->noteId =  $request->snoteId;
@@ -104,14 +110,18 @@ class NothiCopyController extends Controller
 
 
        $data = view('admin.presentDocument.copySelfOfficerAdd',compact('nothiCopyList'))->render();
-       return response()->json($data);
+       return response()->json(['totalCopy'=>count($nothiCopyList),'data'=>$data]);
+    }
+
+    return response()->json(['error'=>$validator->errors()]);
    }
 
 
    public function copyStatusUpdate(Request $request){
 
 
-
+    try{
+        DB::beginTransaction();
 
        NothiCopy::where('nothiId', $request->fnothiId)
        ->where('noteId', $request->fnoteId)
@@ -121,6 +131,10 @@ class NothiCopyController extends Controller
        ]);
 
        return redirect()->back()->with('success','সফলভাবে  বাছাই সম্পন্ন হয়েছে');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
    }
 }

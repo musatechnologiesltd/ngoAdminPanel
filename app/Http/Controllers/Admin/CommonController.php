@@ -6,9 +6,41 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
 use DB;
+use Image;
 use Session;
 class CommonController extends Controller
 {
+
+    public static  function profileImageUpload($request,$file,$filePath){
+
+
+        $path = public_path('uploads/'.$filePath);
+
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+
+        $imageName = date('Y-d-m').time().mt_rand(1000000000, 9999999999).".".$file->getClientOriginalExtension();
+        $directory = 'public/uploads/';
+        $imageUrl = $directory.$imageName;
+
+        $img=Image::make($productImage)->resize(200,200);
+        //$img=Image::make($imageName);
+        $img->save($imageUrl);
+
+
+        // $extension = date('Y-d-m').time().mt_rand(1000000000, 9999999999).".".$file->getClientOriginalExtension();
+        // $filename = $extension;
+        // $file->move('public/uploads/'.$filePath.'/', $filename);
+        // $imageUrl =  'public/uploads/'.$filePath.'/'.$filename;
+
+
+    return $imageUrl;
+    //$imageUrl = $this->imageUpload($request);
+
+    }
+
     public static  function imageUpload($request,$file,$filePath){
 
 
@@ -179,7 +211,7 @@ class CommonController extends Controller
 
    $nVisaForeignerInfo = DB::table('n_visa_particulars_of_foreign_incumbnets')
                       ->where('n_visa_id',$dataFromNVisaFd9Fd1->nVisaId)->first();
-					  
+
 
 
     $nVisaSponSor = DB::table('n_visa_particular_of_sponsor_or_employers')

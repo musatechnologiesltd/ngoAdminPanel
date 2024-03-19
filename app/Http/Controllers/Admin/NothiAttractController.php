@@ -84,14 +84,14 @@ class NothiAttractController extends Controller
        //dd($request->all());
 
        $validator = Validator::make($request->all(), [
-        'otherOfficerName' => 'required',
+        'organizationName' => 'required',
         'otherOfficerDesignation' => 'required',
-        'otherOfficerBranch' => 'required',
         'otherOfficerAddress' => 'required',
     ]);
     if ($validator->passes()) {
 
        $nothiPrapok = new NothiAttarct();
+       $nothiPrapok->organization_name = $request->organizationName;
        $nothiPrapok->nothiId = $request->snothiId;
        $nothiPrapok->nijOfficeId =  $request->sstatus;
        $nothiPrapok->noteId =  $request->snoteId;
@@ -121,7 +121,8 @@ class NothiAttractController extends Controller
 
    public function attractStatusUpdate(Request $request){
 
-
+    try{
+        DB::beginTransaction();
 
 
        NothiAttarct::where('nothiId', $request->fnothiId)
@@ -132,6 +133,10 @@ class NothiAttractController extends Controller
        ]);
 
        return redirect()->back()->with('success','সফলভাবে  বাছাই সম্পন্ন হয়েছে');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
    }
 }

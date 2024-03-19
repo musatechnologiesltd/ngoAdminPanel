@@ -39,6 +39,12 @@ use App\Http\Controllers\Admin\NothiSenderController;
 use App\Http\Controllers\Admin\SendNothiController;
 use App\Http\Controllers\Admin\ReceiveNothiController;
 use App\Http\Controllers\NGO\PotroController;
+use App\Http\Controllers\Admin\NothiJatController;
+use App\Http\Controllers\Admin\ExecutiveCommitteeController;
+use App\Http\Controllers\Admin\ConstitutionController;
+use App\Http\Controllers\Admin\DuplicateCertificateController;
+use App\Http\Controllers\Admin\Fd5Controller;
+use App\Http\Controllers\Admin\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,8 +77,65 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::controller(ChildNoteController::class)->group(function () {
+
+Route::get('/printPotrangsoPdfForEmail/{status}/{parentId}/{nothiId}/{id}', 'printPotrangsoPdfForEmail')->name('printPotrangsoPdfForEmail');
+
+});
 
 Route::group(['prefix' => 'admin'], function () {
+
+
+    Route::controller(ReportController::class)->group(function () {
+
+        Route::get('/localNgoListReport', 'localNgoListReport')->name('localNgoListReport');
+        Route::get('/foreignNgoListReport', 'foreignNgoListReport')->name('foreignNgoListReport');
+
+
+
+        Route::get('/localNgoListSearch', 'localNgoListSearch')->name('localNgoListSearch');
+        Route::get('/foreignNgoListSearch', 'foreignNgoListSearch')->name('foreignNgoListSearch');
+
+
+
+
+
+        Route::get('/districtWiseListResult', 'districtWiseListResult')->name('districtWiseListResult');
+        Route::get('/districtWiseList', 'districtWiseList')->name('districtWiseList');
+        Route::get('/districtWiseListSearch', 'districtWiseListSearch')->name('districtWiseListSearch');
+
+    });
+
+    Route::controller(NothiJatController::class)->group(function () {
+
+        Route::get('/returnToAgotoDak/{id}/{status}', 'returnToAgotoDak')->name('returnToAgotoDak');
+        Route::get('/nothiJatDakList', 'nothiJatDakList')->name('nothiJatDakList');
+        Route::get('/updateNothiJat', 'updateNothiJat')->name('updateNothiJat');
+        Route::get('/searchResultNothiJat', 'searchResultNothiJat')->name('searchResultNothiJat');
+
+
+        Route::get('/searchResultNothiJatFdSix', 'searchResultNothiJatFdSix')->name('searchResultNothiJatFdSix');
+        Route::get('/searchResultNothiJatFdSeven', 'searchResultNothiJatFdSeven')->name('searchResultNothiJatFdSeven');
+        Route::get('/searchResultNothiJatFcOne', 'searchResultNothiJatFcOne')->name('searchResultNothiJatFcOne');
+        Route::get('/searchResultNothiJatFcTwo', 'searchResultNothiJatFcTwo')->name('searchResultNothiJatFcTwo');
+        Route::get('/searchResultNothiJatFdThree', 'searchResultNothiJatFdThree')->name('searchResultNothiJatFdThree');
+
+
+        Route::get('/searchResultNothiJatDuplicateCertificate', 'searchResultNothiJatDuplicateCertificate')->name('searchResultNothiJatDuplicateCertificate');
+        Route::get('/searchResultNothiJatConstitution', 'searchResultNothiJatConstitution')->name('searchResultNothiJatConstitution');
+        Route::get('/searchResultNothiJatCommittee', 'searchResultNothiJatCommittee')->name('searchResultNothiJatCommittee');
+
+
+        Route::get('/searchResultNothiJatFdFive', 'searchResultNothiJatFdFive')->name('searchResultNothiJatFdFive');
+        Route::get('/searchResultNothiJatFdNineOne', 'searchResultNothiJatFdNineOne')->name('searchResultNothiJatFdNineOne');
+
+        Route::get('/searchResultNothiJatFdNine', 'searchResultNothiJatFdNine')->name('searchResultNothiJatFdNine');
+        Route::get('/searchResultNothiJatNameChange', 'searchResultNothiJatNameChange')->name('searchResultNothiJatNameChange');
+        Route::get('/searchResultNothiJatRenew', 'searchResultNothiJatRenew')->name('searchResultNothiJatRenew');
+
+
+
+    });
 
 
     Route::resource('potroList', PotroController::class);
@@ -84,6 +147,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 
+
+Route::resource('fd5Form', Fd5Controller::class);
+
+Route::controller(Fd5Controller::class)->group(function () {
+
+    Route::post('/fd5FormStatus','fd5FormStatus')->name('fd5FormStatus');
+    Route::get('/fd5FormPdf/{id}','fd5FormPdf')->name('fd5FormPdf');
+
+});
 
     Route::resource('documentPresent', DocumentPresentController::class);
     Route::resource('documentType', DocumentTypeController::class);
@@ -98,6 +170,35 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('sendNothi', SendNothiController::class);
     Route::resource('receiveNothi', ReceiveNothiController::class);
+
+
+    Route::resource('executiveCommitteeInfo', ExecutiveCommitteeController::class);
+    Route::resource('constitutionInfo', ConstitutionController::class);
+    Route::resource('duplicateCertificate', DuplicateCertificateController::class);
+
+
+    Route::controller(DuplicateCertificateController::class)->group(function () {
+
+        Route::post('/updateStatusDuplicateCertificate','updateStatusDuplicateCertificate')->name('updateStatusDuplicateCertificate');
+        Route::get('/duplicateCertificatePdf/{id}/{title}','duplicateCertificatePdf')->name('duplicateCertificatePdf');
+
+    });
+
+
+
+    Route::controller(ConstitutionController::class)->group(function () {
+
+        Route::post('/updateStatusconstitutionInfoPdf','updateStatusconstitutionInfoPdf')->name('updateStatusconstitutionInfoPdf');
+        Route::get('/constitutionInfoPdf/{id}/{title}','constitutionInfoPdf')->name('constitutionInfoPdf');
+
+    });
+
+    Route::controller(ExecutiveCommitteeController::class)->group(function () {
+
+        Route::post('/updateStatusexecutiveCommittee','updateStatusexecutiveCommittee')->name('updateStatusexecutiveCommittee');
+        Route::get('/executiveCommitteeInfoPdf/{id}/{title}','executiveCommitteeInfoPdf')->name('executiveCommitteeInfoPdf');
+
+    });
 
 
 
@@ -166,6 +267,21 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(ChildNoteController::class)->group(function () {
 
+
+        Route::get('/printParagraphViewSingle/{status}/{parentId}/{nothiId}/{id}/{childIdNew}', 'printParagraphViewSingle')->name('printParagraphViewSingle');
+        Route::get('/printParagraphAddSingle/{status}/{parentId}/{nothiId}/{id}/{childIdNew}', 'printParagraphAddSingle')->name('printParagraphAddSingle');
+
+
+
+
+        Route::get('/printAllParagraph/{status}/{parentId}/{nothiId}/{id}', 'printAllParagraph')->name('printAllParagraph');
+        Route::get('/printAllParagraphFromSend/{status}/{parentId}/{nothiId}/{id}', 'printAllParagraphFromSend')->name('printAllParagraphFromSend');
+
+		Route::get('/getdataforNothiList', 'getdataforNothiList')->name('getdataforNothiList');
+
+        Route::get('/deleteAttachment/{id}', 'deleteAttachment')->name('deleteAttachment');
+
+        Route::delete('/deleteAllParagraph/{id}/{status}', 'deleteAllParagraph')->name('deleteAllParagraph');
         Route::get('/givePermissionForPotroZari/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionForPotroZari')->name('givePermissionForPotroZari');
         Route::get('/givePermissionToNote/{status}/{parentId}/{nothiId}/{id}/{childnote}', 'givePermissionToNote')->name('givePermissionToNote');
         Route::post('/saveNothiPermissionReturn', 'saveNothiPermissionReturn')->name('saveNothiPermissionReturn');
@@ -328,6 +444,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::controller(Fd9Controller::class)->group(function () {
 
+        Route::get('/singlePdfDownload/{id}','singlePdfDownload')->name('singlePdfDownload');
+
 
         Route::get('/verified_fd_nine_download/{id}','verified_fd_nine_download')->name('verified_fd_nine_download');
         Route::post('/statusUpdateForFd9', 'statusUpdateForFd9')->name('statusUpdateForFd9');
@@ -350,7 +468,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fd9OneForm', Fd9OneController::class);
 
     Route::controller(Fd9OneController::class)->group(function () {
-
+        Route::get('/forwardingLetterForNothi/{id}', 'forwardingLetterForNothi')->name('forwardingLetterForNothi');
         Route::get('/verified_fd_nine_one_download/{id}','verified_fd_nine_one_download')->name('verified_fd_nine_one_download');
         Route::post('/statusUpdateForFd9One', 'statusUpdateForFd9One')->name('statusUpdateForFd9One');
         Route::get('/fd9OneDownload/{cat}/{id}', 'fd9OneDownload')->name('fd9OneDownload');
@@ -365,6 +483,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/updateStatusRegForm', 'updateStatusRegForm')->name('updateStatusRegForm');
         Route::get('/printCertificateView','printCertificateView')->name('printCertificateView');
         Route::get('/printCertificateViewDemo','printCertificateViewDemo')->name('printCertificateViewDemo');
+
+
+
+        Route::get('/printCertificateViewRenew','printCertificateViewRenew')->name('printCertificateViewRenew');
+        Route::get('/printCertificateViewDemoRenew','printCertificateViewDemoRenew')->name('printCertificateViewDemoRenew');
+
+
+
         Route::get('/formOnePdfMain/{id}', 'formOnePdfMain')->name('formOnePdfMain');
         Route::get('/formOnePdfMainForeign/{id}','formOnePdfMainForeign')->name('formOnePdfMainForeign');
         Route::get('/formOnePdf/{main_id}/{id}','formOnePdf')->name('formOnePdf');
@@ -383,6 +509,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::controller(NameCangeController::class)->group(function () {
+
+        Route::get('/printCertificateViewName','printCertificateViewName')->name('printCertificateViewName');
+        Route::get('/printCertificateViewDemoName','printCertificateViewDemoName')->name('printCertificateViewDemoName');
 
         Route::get('/nameChangeDoc/{id}','nameChangeDoc')->name('nameChangeDoc');
         Route::get('/newNameChangeList','newNameChangeList')->name('newNameChangeList');
@@ -430,7 +559,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('user', AdminController::class);
 
   Route::controller(AdminController::class)->group(function () {
-    
+
+        Route::get('/checkWorkingDay', 'checkWorkingDay')->name('checkWorkingDay');
+
         Route::get('/getAdminDetail', 'getAdminDetail')->name('getAdminDetail');
         Route::post('/employeeEndDatePost', 'employeeEndDatePost')->name('employeeEndDatePost');
         Route::get('/employeeEndDate', 'employeeEndDate')->name('employeeEndDate');

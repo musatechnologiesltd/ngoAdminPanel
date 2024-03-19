@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-4 col-xs-4">
         <div class="d-flex flex-row-reverse">
-            {{-- <a  href ="" class="btn btn-outline-danger btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+             <a target="_blank" href ="{{ route('printAllParagraph', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id]) }}" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
 
 @foreach($childNoteNewList as $key=>$childNoteNewLists)
 <?php
-
+ //dd($childNoteNewLists->receiver);
 $creatorNAme = DB::table('admins')
 ->where('id',$childNoteNewLists->admin_id)
 ->value('admin_name_ban');
@@ -29,20 +29,71 @@ $creatorNAme = DB::table('admins')
 
 @if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
 
-     @include('admin.presentDocument.viewChildNoteSecondStepFirstPart')
+@include('admin.presentDocument.viewChildNoteSecondStepFirstPart')
 
-     @else
+@else
 
-     @if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id))
-     @include('admin.presentDocument.viewChildNoteSecondStepFirstPart')
-
-     @else
+@if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id))
 
 
-     @endif
+<?php
+$paraSentStatus = DB::table('nothi_details')
+                            ->where('noteId',$id)
+                            ->where('nothId',$nothiId)
+                            ->where('dakId',$parentId)
+                            ->where('dakType',$status)
+                            ->where('childId',$childNoteNewLists->id)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            ->update(array('view_status' => 1));
 
 
-      @endif
+?>
+@include('admin.presentDocument.viewChildNoteSecondStepFirstPart')
+
+@else
+
+<?php
+$paraSentStatusNewOneTwo = DB::table('seal_statuses')
+                            ->where('nothiId',$nothiId)
+                            ->where('status',$status)
+                            ->where('receiver',Auth::guard('admin')->user()->id)
+                            //->orderBy('id','asc')
+                            //->where('seal_status',1)
+                            ->value('nothiId');
+
+                            $paraSentStatusNewOneTwoThree = DB::table('seal_statuses')
+                            ->where('nothiId',$nothiId)
+                            ->where('status',$status)
+                          //  ->where('receiver',Auth::guard('admin')->user()->id)
+                           // ->orderBy('id','asc')
+                            //->where('seal_status',1)
+
+                            ->where('childId',$childNoteNewLists->id)
+                            ->value('nothiId');
+
+?>
+
+<!-- new code  start-->
+
+
+
+@if($paraSentStatusNewOneTwo  == $paraSentStatusNewOneTwoThree)
+
+@include('admin.presentDocument.viewChildNoteSecondStepFirstPartOne')
+@endif
+
+
+<!--  end new code -->
+
+
+
+
+@endif
+
+
+ @endif
+
+
       @endforeach
 
 

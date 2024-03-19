@@ -32,6 +32,8 @@ class FD6Controller extends Controller
 {
     public function index(){
 
+        try{
+
    \LogActivity::addToLog('view fdSix List ');
 
    if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
@@ -63,13 +65,15 @@ class FD6Controller extends Controller
    }
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd6form.index',compact('dataFromFd6Form'));
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
 
     public function show($id){
-
+        try{
         \LogActivity::addToLog('view fdSix List Detail');
 
           $dataFromFd6Form = DB::table('fd6_forms')
@@ -90,48 +94,60 @@ class FD6Controller extends Controller
 
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fd6form.show',compact('get_email_from_user','dataFromFd6Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function fd6PdfDownload($id){
-
+            try{
             \LogActivity::addToLog('fd6 pdf download.');
 
             $form_one_data = DB::table('fd6_forms')->where('id',$id)->value('project_proposal_form');
 
              return view('admin.fd6form.fd6PdfDownload',compact('form_one_data'));
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function fd2PdfDownload($id){
-
+            try{
             \LogActivity::addToLog('fd2 pdf download.');
 
             $form_one_data = DB::table('fd2_forms')->where('id',$id)->value('fd_2_form_pdf');
 
              return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
-         }
+
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
+
+            }
 
 
          public function fd2OtherPdfDownload($id){
 
-
+            try{
             \LogActivity::addToLog('fd2 other pdf download.');
 
             $form_one_data = DB::table('fd2_form_other_infos')->where('id',$id)->value('file');
 
              return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
 
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function statusUpdateForFd6(Request $request){
 
             //dd($request->all());
-
+            try{
+                DB::beginTransaction();
 
             \LogActivity::addToLog('update fdSix Status ');
 
@@ -155,7 +171,12 @@ class FD6Controller extends Controller
 
 
 
-
+                DB::commit();
             return redirect()->back()->with('success','Updated successfully!');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
          }
 }

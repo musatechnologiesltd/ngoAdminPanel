@@ -225,7 +225,48 @@ $checkParentFirst = DB::table('parent_note_for_fd_threes')->where('nothi_detail_
 
 $childNoteNewList = DB::table('child_note_for_fd_threes')
                        ->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
-                       $officeDetail = DB::table('fd_three_office_saroks')->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('fd_three_office_saroks')
+->where('parent_note_for_fd_three_id',$checkParentFirst->id)->get();
+
+}elseif($status == 'duplicate'){
+
+$checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+                       ->where('pnote_dupid',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('duplicate_certificate_office_saroks')
+->where('pnote_dupid',$checkParentFirst->id)->get();
+
+}elseif($status == 'constitution'){
+
+$checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_constitutions')
+                       ->where('pnote_conid',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('constitution_office_saroks')
+->where('pnote_conid',$checkParentFirst->id)->get();
+
+}elseif($status == 'committee'){
+
+$checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$dakId)
+->where('serial_number',$nothiId)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_executive_committees')
+                       ->where('pnote_exeid',$checkParentFirst->id)->get();
+
+$officeDetail = DB::table('executive_committee_office_saroks')
+->where('pnote_exeid',$checkParentFirst->id)->get();
 
 }
 
@@ -251,7 +292,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                     </div>
                                                     <div class="collapse" id="collapse{{ $key+1 }}" aria-labelledby="heading{{ $key+1 }}" data-bs-parent="#accordion1">
                                                       <div class="card-body">
-                                                        <form class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                        <form id="form" class="custom-validation" action="{{ route('childNote.update',$childNoteNewLists->id) }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                                             @csrf
                                                             @method('PUT')
                                                             <input type="hidden" value="{{ $status }}" name="status"/>
@@ -306,7 +347,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                                                       <div class="card-body">
 
 
-                                                        <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                        <form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                                             @csrf
                                                             <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
                                                             <input type="hidden" value="{{ $status }}" name="status"/>
@@ -353,7 +394,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
 
 
                                              @else
-                                                 <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                 <form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                                     @csrf
                                                     <input type="hidden" value="{{ $checkParentFirst->id }}" name="parentNoteId"/>
                                                     <input type="hidden" value="{{ $status }}" name="status"/>
@@ -669,7 +710,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                            <form id="form" class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                                 @csrf
 
                                 <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
@@ -741,7 +782,7 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
                 <button type="button" class="close newcl" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form  class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
 
                     <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>

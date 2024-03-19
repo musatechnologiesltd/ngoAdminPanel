@@ -4,6 +4,7 @@ aria-labelledby="myModalLabel22">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
 <div class="modal-header">
+<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
     <h4 class="modal-title" id="myModalLabel2">
         দৃষ্টি আকর্ষণ  </h4>
 </div>
@@ -56,7 +57,7 @@ $nothiAttractList = DB::table('nothi_attarcts')->where('nothiId',$nothiId)
             </div>
             <div class="tab-pane fade" id="profile-icon12" role="tabpanel" aria-labelledby="profile-icon-tab">
                 <div id="sms22a"></div>
-                <form action="" class="mt-4" id="registerSubmit2">
+                <form action="" class="mt-4" id="registerSubmit2" >
                     <div class="mb-3">
                         <label class="form-label" for="">অফিসার</label>
                          <input type="text" name="otherOfficerName" id="otherOfficerName2" class="form-control"/>
@@ -67,7 +68,10 @@ $nothiAttractList = DB::table('nothi_attarcts')->where('nothiId',$nothiId)
                          <input type="text" name="otherOfficerDesignation" id="otherOfficerDesignation2" class="form-control"/>
                     </div>
 
-
+                    <div class="mb-3">
+                        <label class="form-label" for="">সংস্থার নাম</label>
+                         <input type="text" name="organizationName" id="organizationName2" class="form-control"/>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label" for="">কার্যালয়/ঠিকানা</label>
                          <input type="text" name="otherOfficerAddress" id="otherOfficerAddress2" class="form-control"/>

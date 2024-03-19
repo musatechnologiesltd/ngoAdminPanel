@@ -1,6 +1,5 @@
 <?php
 return [
-  'nn'=>'Now Working At',
     'newscategory'=>'News Category',
      'newslist'=>'News List',
      'add'=>'Add',

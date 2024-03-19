@@ -7,6 +7,7 @@
     <div class="modal-dialog modal-lg-custom" role="document">
         <div class="modal-content">
             <div class="modal-header">
+			<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
                 <h4 class="modal-title">
                     ফেরত পাঠান
                     <br>
@@ -43,7 +44,7 @@
                             //dd($senderId );
 
                             ?>
-                        <form action="{{ route('saveNothiPermissionReturn') }}" method="post">
+                        <form action="{{ route('saveNothiPermissionReturn') }}" method="post" id="form">
 
                             @csrf
 
@@ -84,7 +85,7 @@
 
                                                <?php
                                             $adminList = DB::table('nothi_permissions')
-                                                             ->where('branchId',$branchListForSerials->id)->get();
+                                                             ->where('designationId',$branchListForSerials->id)->get();
 
                                                              $convert_name_title1 = $adminList->implode("adminId", " ");
                                                              $separated_data_title1 = explode(" ", $convert_name_title1);
@@ -108,9 +109,20 @@ $getAlldesignationName = DB::table('designation_lists')
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <div class="custom_checkbox">
-                                                                <input id="ccheck{{ $finalAdminLists->id }}" value="{{ $finalAdminLists->id }}"  {{ $senderId == $finalAdminLists->id ? 'checked':'' }} name="nothiPermissionId" class="custom_check chb" type="checkbox">
-                                                                <label for="ccheck{{ $finalAdminLists->id }}" style="--d: 30px">
+                                                            <div class="">
+                                                                @if(Auth::guard('admin')->user()->id == $finalAdminLists->id )
+
+                                                                @else
+                                                                <input style="
+                                                                border: 2px solid #333 !important;
+                                                                width: 30px;
+                                                                height: 30px;
+                                                                background-color: #1b4c43 !important;
+                                                                border-radius: 4px;
+                                                                " id="ccccheck{{ $finalAdminLists->id }}" value="{{ $finalAdminLists->id }}"  {{ $senderId == $finalAdminLists->id ? 'checked':'' }} name="nothiPermissionId" class="custom_checkbox chb" type="checkbox">
+
+                                                                @endif
+                                                                <label  for="ccccheck{{ $finalAdminLists->id }}" style="--d: 30px">
                                                                     <svg viewBox="0,0,50,50">
                                                                         <path d="M5 30 L 20 45 L 45 5"></path>
                                                                     </svg>
@@ -120,8 +132,7 @@ $getAlldesignationName = DB::table('designation_lists')
                                                     </td>
                                                     <td style="width:80%">
                                                         {{ $finalAdminLists->admin_name_ban }},
-                                                        {{ $getAlldesignationName }},{{ $branchListForSerials->branch_name }}, এঞ্জিও
-                                                        বিশয়ক ব্যুরো
+                                                        {{ $getAlldesignationName }},{{ $branchListForSerials->branch_name }}, এনজিও বিষয়ক ব্যুরো
                                                     </td>
                                                     <td>
                                                         <span style="color: #7e8ba8"><i class="fa fa-check-square-o"></i> স্বাক্ষরকারী ব্যাক্তি</span>

@@ -57,7 +57,9 @@ use App\Models\ParentNoteForNameChange;
 use App\Models\ParentNoteForRegistration;
 use App\Models\ParentNoteForRenew;
 
-
+use App\Models\ParentNotForExecutiveCommittee;
+use App\Models\ParentNoteForConstitution;
+use App\Models\ParentNoteForDuplicateCertificate;
 use App\Http\Controllers\Admin\CommonController;
 
 class DocumentPresentController extends Controller
@@ -93,8 +95,12 @@ class DocumentPresentController extends Controller
 
 
     public function create(){
-
+try{
         $documentTypeList = DocumentType::latest()->get();
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
          return view('admin.presentDocument.create',compact('documentTypeList'));
 
      }
@@ -102,8 +108,12 @@ class DocumentPresentController extends Controller
 
 
     public function presentDocument($status, $id){
-
+try{
        $documentTypeList = DocumentType::latest()->get();
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
         return view('admin.presentDocument.index',compact('status','id','documentTypeList'));
 
     }
@@ -111,7 +121,7 @@ class DocumentPresentController extends Controller
 
     public function sheetAndNotes($status,$nothiId,$id){
 
-
+try{
         if($status == 'registration'){
 
 
@@ -224,6 +234,10 @@ class DocumentPresentController extends Controller
         }
 
         return view('admin.presentDocument.sheetAndNotes',compact('checkParent','nothiId','status','id'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
@@ -239,6 +253,8 @@ class DocumentPresentController extends Controller
      */
     public function index()
     {
+
+        try{
         $nothiList = NothiList::latest()->get();
 
 
@@ -262,13 +278,17 @@ class DocumentPresentController extends Controller
 
         //dd($totalEmptyDesignation);
 
-        $totalBranchList = Branch::where('id','!=',1)->get();
+        $totalBranchList = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
 
         //for designation
 
 
 
         return view('admin.presentDocument.index',compact('nothiList','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
     /**
@@ -295,7 +315,8 @@ class DocumentPresentController extends Controller
         ]);
 
 
-
+        try{
+            DB::beginTransaction();
 
         $branchCode = DB::table('branches')
         ->where('id',Auth::guard('admin')->user()->branch_id)
@@ -321,14 +342,14 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
                 $documentType->document_year =$request->document_year;
                 $documentType->document_class =$request->document_class;
                 $documentType->document_subject =$request->document_subject;
-                $documentType->document_serial_number =$convertNumber;
+                $documentType->document_serial_number =$request->document_serial_number;
                 $documentType->main_sarok_number =$finalSarokNumber;
                 $documentType->save();
 
 
                 $mainId = $documentType->id;
 
-
+                DB::commit();
         if($request->buttonValue == 'নথি অনুমতি'){
 
 
@@ -338,11 +359,18 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
 
         return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংরক্ষণ করা হয়েছে');
     }
+
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 }
 
 
 
 public function givePermissionToNothi($id){
+
+    try{
 
     \LogActivity::addToLog('nothi permission.');
 
@@ -366,10 +394,13 @@ public function givePermissionToNothi($id){
 
      //dd($totalEmptyDesignation);
 
-     $totalBranchList = Branch::where('id','!=',1)->get();
+     $totalBranchList = Branch::where('id','!=',1)->orderBy('branch_step','asc')->get();
 
      return view('admin.presentDocument.givePermissionToNothi',compact('id','totalBranchList','totalEmptyDesignation','totalBranch','totalDesignation','totaluser','totalDesignationWorking'));
 
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 }
 
 
@@ -392,10 +423,16 @@ public function savePermissionNothi(Request $request){
                      ->value('branch_id');
 
 
+                     $designationId= DB::table('admins')
+                     ->where('id',$request->admin_id[$i])
+                     ->value('designation_list_id');
+
+
                  $regDakData = new NothiPermission();
                  $regDakData->adminId = $request->admin_id[$i];
                  $regDakData->nothId =$request->main_id;
                  $regDakData->branchId =$branchId;
+                 $regDakData->designationId =$designationId;
                  $regDakData->save();
 
                 }
@@ -465,9 +502,15 @@ public function savePermissionNothi(Request $request){
      */
     public function edit(string $id)
     {
+
+        try{
         $documentTypeList = DocumentType::latest()->get();
         $nothiList = NothiList::find($id);
         return view('admin.presentDocument.edit',compact('nothiList','documentTypeList'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
     /**
@@ -477,7 +520,8 @@ public function savePermissionNothi(Request $request){
     {
 
 
-
+        try{
+            DB::beginTransaction();
 
 $branchCode = DB::table('branches')
         ->where('id',Auth::guard('admin')->user()->branch_id)
@@ -508,8 +552,13 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
                 $documentType->main_sarok_number =$finalSarokNumber;
                 $documentType->save();
 
-
+                DB::commit();
                 return redirect()->route('documentPresent.index')->with('success','সফলভাবে সংশোধন করা হয়েছে');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
     }
 
     /**
@@ -517,10 +566,16 @@ $finalSarokNumber = CommonController::englishToBangla($main_sarok_number);
      */
     public function destroy(string $id)
     {
+        try{
+            DB::beginTransaction();
         $admins = NothiList::where('id',$id)->delete();
-
-
-
+        DB::commit();
         return back()->with('error','সফলভাবে মুছে ফেলা হয়েছে!');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
+
     }
 }

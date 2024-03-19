@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-4 col-xs-4">
             <div class="d-flex flex-row-reverse">
-                {{-- <a  href ="" class="btn btn-outline-danger btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a> --}}
+                <a target="_blank" href ="{{ route('printAllParagraphFromSend', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id]) }}" class="btn btn-primary btn-sm"aria-expanded="false"><i class="fa fa-print"></i></a>
             </div>
         </div>
     </div>
@@ -30,18 +30,99 @@ $creatorNAme = DB::table('admins')
 
             ?>
 
-@if($childNoteNewLists->admin_id == Auth::guard('admin')->user()->id)
+@if( $childNoteNewLists->admin_id == Auth::guard('admin')->user()->id || $childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id )
 
      @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
 
      @else
 
-     @if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->receiver_id == Auth::guard('admin')->user()->id))
-     @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
+     @if(($childNoteNewLists->sent_status == 1) && ($childNoteNewLists->sender_id == Auth::guard('admin')->user()->id))
+
+
+      @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
 
      @else
 
 
+     <?php
+     $multipleCheck = DB::table('seal_statuses')
+     ->where('noteId',$id)
+     ->where('nothiId',$nothiId)
+     ->where('status',$status)
+     ->where('childId',$childNoteNewLists->id)
+     ->where('receiver',Auth::guard('admin')->user()->id)
+     ->value('seal_status');
+
+
+     $multipleCheckDelete = DB::table('seal_statuses')
+     ->where('noteId',$id)
+     ->where('nothiId',$nothiId)
+     ->where('status',$status)
+     ->where('childId',$childNoteNewLists->id)
+     //->where('seal_status',2)
+     //->where('receiver',Auth::guard('admin')->user()->id)
+     ->value('seal_status');
+ //dd(Auth::guard('admin')->user()->id);
+     ?>
+
+    @if($multipleCheck == 1)
+
+    @include('admin.presentDocument.addChildNoteSecondStepFirstPart')
+
+    @else
+
+    @endif
+    <!-- new code when other send but have permission-->
+    <?php
+    $paraSentStatusNewOneTwo = DB::table('seal_statuses')
+                                ->where('nothiId',$nothiId)
+                                ->where('status',$status)
+                                ->where('receiver',Auth::guard('admin')->user()->id)
+                                //->orderBy('id','asc')
+                                //->where('seal_status',1)
+                                ->value('nothiId');
+
+                                $paraSentStatusNewOneTwoThree = DB::table('seal_statuses')
+                                ->where('nothiId',$nothiId)
+                                ->where('status',$status)
+                              //  ->where('receiver',Auth::guard('admin')->user()->id)
+                               // ->orderBy('id','asc')
+                                //->where('seal_status',1)
+
+                                ->where('childId',$childNoteNewLists->id)
+                                ->value('nothiId');
+
+    ?>
+
+    <!-- new code  start-->
+
+
+
+    @if($paraSentStatusNewOneTwo  == $paraSentStatusNewOneTwoThree)
+
+    <?php
+    $multipleCheck = DB::table('seal_statuses')
+    ->where('noteId',$id)
+    ->where('nothiId',$nothiId)
+    ->where('status',$status)
+    ->where('childId',$childNoteNewLists->id)
+    ->where('receiver',Auth::guard('admin')->user()->id)
+    ->value('seal_status');
+
+    ?>
+
+   @if($multipleCheck == 1)
+
+   @else
+
+    @include('admin.presentDocument.viewChildNoteSecondStepFirstPartOne')
+
+    @endif
+    @endif
+
+
+    <!--  end new code -->
+    <!-- new code when other send but have permission end -->
      @endif
 
 
@@ -60,7 +141,7 @@ $creatorNAme = DB::table('admins')
           <div class="card-body">
 
 
-            <form class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+            <form id="form" class="custom-validation" action="{{ route('childNote.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
                 @csrf
                 <input type="hidden" value="{{ $id }}" name="parentNoteId"/>
                 <input type="hidden" value="{{ $status }}" name="status"/>
@@ -71,7 +152,7 @@ $creatorNAme = DB::table('admins')
                 <input type="hidden" value="{{ $parentId }}" name="dakId"/>
 
             <div id="container">
-                <textarea class="maineditor" id="mainpeditor"  name="mainPartNote">
+                <textarea class="maineditorForAdd" id="mainpeditor"  name="mainPartNote">
                     <p>লিখুন</p>
                 </textarea>
             </div>

@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ডাক তালিকা | {{ $ins_name }}
+প্রেরিত ডাক তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,7 +14,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>ডাক তালিকা</h3>
+                <h3>প্রেরিত ডাক তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">ডাক </li>
@@ -61,6 +61,16 @@
                                  @include('admin.post.sentDak.sentFcTwoDakList')
 
                                  @include('admin.post.sentDak.sentFdThreeDakList')
+
+
+                                 @include('admin.post.sentDak.sentDuplicateCertificateList')
+
+
+                                 @include('admin.post.sentDak.sentConstitutionList')
+
+                                 @include('admin.post.sentDak.sentExecutiveCommitteeList')
+
+                                 @include('admin.post.sentDak.sentFdFiveDakList')
 
                                     </tbody>
                                 </table>

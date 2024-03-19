@@ -37,7 +37,7 @@
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('branchList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form class="custom-validation"  action="{{ route('branchList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">শাখার নাম <span style="color:red;">*</span></label>
@@ -108,7 +108,7 @@
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('branchList.update',$AllBranchLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                      <form  action="{{ route('branchList.update',$AllBranchLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="row">
@@ -146,7 +146,9 @@
 @endif
 
 {{-- <button type="button" class="btn btn-primary waves-light waves-effect  btn-sm" onclick="window.location.href='{{ route('admin.users.view',$AllBranchLists->id) }}'"><i class="fa fa-eye"></i></button> --}}
+@if($AllBranchLists->id == 2)
 
+@else
                             @if (Auth::guard('admin')->user()->can('branchDelete'))
 
 <button   type="button" class="btn btn-danger waves-light waves-effect  btn-sm" onclick="deleteTag({{ $AllBranchLists->id}})" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></button>
@@ -155,6 +157,7 @@
                                               @csrf
 
                                           </form>
+                                          @endif
                                           @endif
                                 </td>
                             </tr>

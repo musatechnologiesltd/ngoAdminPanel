@@ -11,6 +11,7 @@ use Mail;
 use DB;
 use Session;
 use PDF;
+use Mpdf\Mpdf;
 use File;
 use App\Models\NgoFDNineDak;
 use App\Models\NgoFDNineOneDak;
@@ -35,13 +36,102 @@ class Fd9Controller extends Controller
 
     public function verified_fd_nine_download($id){
 
+        try{
+
         \LogActivity::addToLog('verified_fd_nine_download');
 
         $form_one_data = DB::table('fd9_forms')->where('id',$id)->value('verified_fd_nine_form');
 
         //dd($form_one_data);
 
-         return view('admin.fd9form.verified_fd_nine_download',compact('form_one_data'));
+
+
+        $nVisaId = $id;
+            $fdNineData =DB::table('fd9_forms')->where('id',$nVisaId)->first();
+
+       $getCityzenshipData = DB::table('countries')->whereNotNull('country_people_english')
+       ->whereNotNull('country_people_bangla')->orderBy('id','asc')->get();
+
+
+$countryList = DB::table('countries')->orderBy('id','asc')->get();
+$ngo_list_all = DB::table('fd_one_forms')->where('id',$fdNineData->fd_one_form_id)->first();
+
+
+//$ngoStatus = NgoStatus::where('fd_one_form_id',$ngo_list_all->id)->first();
+
+
+$checkNgoTypeForForeginNgo = DB::table('ngo_type_and_languages')
+->where('user_id',$ngo_list_all->user_id)
+->first();
+
+
+ //new code for old  and new
+
+ $checkOldorNew = DB::table('ngo_type_and_languages')
+ ->where('user_id',$ngo_list_all->user_id)->value('ngo_type_new_old');
+
+//end new code for old and new
+
+if($checkOldorNew == 'Old'){
+
+$ngoStatus = DB::table('ngo_renews')
+->where('fd_one_form_id',$ngo_list_all->id)->first();
+
+}else{
+
+$ngoStatus = DB::table('ngo_statuses')
+->where('fd_one_form_id',$ngo_list_all->id)->first();
+}
+
+
+//$fdNineData =Fd9Form::where('id',$id)->first();
+
+// $file_Name_Custome = "Fd9_Form";
+//         $pdf=PDF::loadView('front.fdNineForm.mainFd9PdfDownload',[
+//             'checkNgoTypeForForeginNgo'=>$checkNgoTypeForForeginNgo,
+//             'fdNineData'=>$fdNineData,
+//             'fdNineData'=>$fdNineData,
+//             'getCityzenshipData'=>$getCityzenshipData,
+//             'countryList'=>$countryList,
+//             'ngo_list_all'=>$ngo_list_all,
+//             'ngoStatus'=>$ngoStatus
+
+//         ],[],['format' => 'A4']);
+//     return $pdf->stream($file_Name_Custome.''.'.pdf');
+
+$file_Name_Custome = 'fd_nine_form';
+$data =view('admin.fd9form.verified_fd_nine_download',[
+                 'checkNgoTypeForForeginNgo'=>$checkNgoTypeForForeginNgo,
+                 'fdNineData'=>$fdNineData,
+                 'fdNineData'=>$fdNineData,
+                 'getCityzenshipData'=>$getCityzenshipData,
+                 'countryList'=>$countryList,
+                 'ngo_list_all'=>$ngo_list_all,
+             'ngoStatus'=>$ngoStatus
+
+             ])->render();
+
+
+$pdfFilePath =$file_Name_Custome.'.pdf';
+
+
+         $mpdf = new Mpdf([
+            'default_font_size' => 14,
+            'default_font' => 'nikosh'
+        ]);
+
+        //$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+
+        $mpdf->WriteHTML($data);
+
+
+
+        $mpdf->Output($pdfFilePath, "I");
+        die();
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
 
     }
@@ -51,7 +141,8 @@ class Fd9Controller extends Controller
 
     public function statusUpdateForFd9(Request $request){
 
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('update fdNine Status ');
 
 
@@ -74,16 +165,21 @@ class Fd9Controller extends Controller
 
 
 
-
+        DB::commit();
         return redirect()->back()->with('success','Updated successfully!');
 
-
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
        }
 
 
 
     public function index(){
+
+        try{
 
         \LogActivity::addToLog('view fdNine List ');
 
@@ -108,7 +204,7 @@ class Fd9Controller extends Controller
             $dataFromNVisaFd9Fd1 = DB::table('fd9_forms')
      ->join('fd_one_forms', 'fd_one_forms.id', '=', 'fd9_forms.fd_one_form_id')
      ->select('fd_one_forms.*','fd9_forms.*')
-     ->whereIn('fd9_one_forms.id',$separated_data_title)
+     ->whereIn('fd9_forms.id',$separated_data_title)
     ->orderBy('fd9_forms.id','desc')
     ->get();
 
@@ -119,11 +215,13 @@ class Fd9Controller extends Controller
 
     //dd($dataFromNVisaFd9Fd1);
         return view('admin.fd9form.index',compact('dataFromNVisaFd9Fd1'));
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
     public function downloadForwardingLetter($id){
-
+        try{
         \LogActivity::addToLog('download forwarding Letter');
 
 
@@ -250,14 +348,15 @@ if($checkOldorNew == 'Old'){
             array('forwarding_letter' =>'uploads/forwardingLetter/'.$file_Name_Custome.'.pdf')
         );
 
-
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
     }
 
 
     public function show($id){
-
+        try{
         \LogActivity::addToLog('view fdNine detail ');
 
 $mainIdFdNine = $id;
@@ -337,14 +436,18 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
                    ->where('n_visa_id',$dataFromNVisaFd9Fd1->id)->first();
 
 
+                   $fdNineOtherFileList = DB::table('fd_nine_other_files')
+                   ->where('fd9_form_id',$id)->get();
 
-
-         return view('admin.fd9form.show_new',compact('get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
-
+         return view('admin.fd9form.show_new',compact('fdNineOtherFileList','get_email_from_user','mainIdFdNine','ngoTypeData','forwardingLetterOnulipi','editCheck1','editCheck','statusData','ngoStatus','nVisaWorkPlace','nVisaSponSor','nVisaForeignerInfo','nVisaDocs','nVisaManPower','nVisaEmploye','nVisaCompensationAndBenifits','dataFromNVisaFd9Fd1','nVisaAuthPerson'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
     }
 
     public function postForwardingLetterForEdit(Request $request){
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('store forwarding Letter ');
 
 //dd($request->all());
@@ -392,13 +495,19 @@ if(empty($editCheck)){
 }
 
     $uploadForwardingLetter = $this->downloadForwardingLetter($request->fd9_id);
+    DB::commit();
     return redirect()->back()->with('success','Updated successfully!');
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 
     }
 
 
     public function postForwardingLetter(Request $request){
-
+        try{
+            DB::beginTransaction();
         \LogActivity::addToLog('store forwarding letter');
 
         //dd($request->all());
@@ -421,14 +530,18 @@ if(empty($editCheck)){
 
 
 
-
+        DB::commit();
         return redirect()->back()->with('success','Update Successfully');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
 
     }
 
 
     public function fdNinePdfDownload($id){
-
+        try{
         \LogActivity::addToLog('download fdNine pdf ');
 
 
@@ -525,7 +638,9 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
  return $pdf->stream($file_Name_Custome.''.'.pdf');
 
 
-
+} catch (\Exception $e) {
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 
 
 
@@ -551,7 +666,7 @@ $nVisaWorkPlace = DB::table('n_visa_work_place_addresses')
     }
 
     public function nVisaDocumentDownload($cat,$id){
-
+        try{
         \LogActivity::addToLog('nVisa Document Download');
 
 
@@ -646,6 +761,16 @@ $file=$data->system_url.'public/'.$get_file_data;
 
 $file=$data->system_url.'public/'.$get_file_data;
 
+        }elseif($cat == 'offeredPostNiyog'){
+
+            $get_file_data = DB::table('fd9_forms')
+            ->where('id',$id)->value('fd9_offered_post_niyog');
+
+             $file_path =$data->system_url.'public/'.$get_file_data;
+        $filename  = pathinfo($file_path, PATHINFO_FILENAME);
+
+$file=$data->system_url.'public/'.$get_file_data;
+
         }elseif($cat == 'proposedProject'){
 
             $get_file_data = DB::table('fd9_forms')
@@ -695,13 +820,16 @@ $file=url('public/'.$get_file_data);
             'content-type'=>'application/pdf',
         ]);
 
-
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
             }
 
 
 
 public function forwardingLetterPost(Request $request){
-
+    try{
+        DB::beginTransaction();
     \LogActivity::addToLog('forwardingLetterPost');
 
 //dd(234);
@@ -738,7 +866,12 @@ public function forwardingLetterPost(Request $request){
 
     }
     $uploadForwardingLetter = $this->downloadForwardingLetter($request->fd9_id);
+    DB::commit();
     return redirect()->back()->with('success','Created successfully!');
+} catch (\Exception $e) {
+    DB::rollBack();
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 
 }
 

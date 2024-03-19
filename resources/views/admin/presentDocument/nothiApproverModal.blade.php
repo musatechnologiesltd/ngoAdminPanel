@@ -5,6 +5,7 @@ aria-labelledby="myModalLabel2">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
 <div class="modal-header">
+<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
     <h4 class="modal-title" id="myModalLabel2">
         অনুমোদনকারী</h4>
 </div>
@@ -12,7 +13,7 @@ aria-labelledby="myModalLabel2">
 <div class="modal-body">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('nothiApprover.store') }}" method="post">
+            <form action="{{ route('nothiApprover.store') }}" method="post" id="form">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label" for="">অফিসার খুজুন</label> <br>

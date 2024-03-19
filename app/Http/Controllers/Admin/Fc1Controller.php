@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Auth;
 use Hash;
-use Illuminate\Support\Str;
 use Mail;
 use DB;
 use Session;
@@ -26,6 +26,8 @@ class Fc1Controller extends Controller
 {
     public function index(){
 
+        try{
+
         \LogActivity::addToLog('view fcOne List ');
 
 
@@ -38,11 +40,13 @@ class Fc1Controller extends Controller
          ->get();
         }else{
 
+            //dd(12);
+
             $ngoStatusFdSevenDak = FcOneDak::where('status',1)
             ->where('receiver_admin_id',Auth::guard('admin')->user()->id)
             ->latest()->get();
 
-            $convert_name_title = $ngoStatusFdSevenDak->implode("fd_seven_status_id", " ");
+            $convert_name_title = $ngoStatusFdSevenDak->implode("fc_one_status_id", " ");
              $separated_data_title = explode(" ", $convert_name_title);
 
 
@@ -63,12 +67,14 @@ class Fc1Controller extends Controller
 
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fc1form.index',compact('dataFromFc1Form'));
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function show($id){
-
+try{
             \LogActivity::addToLog('view fdSeven List Detail');
 
               $dataFromFc1Form = DB::table('fc1_forms')
@@ -89,24 +95,28 @@ class Fc1Controller extends Controller
 
              //dd($dataFromNVisaFd9Fd1);
                  return view('admin.fc1form.show',compact('get_email_from_user','dataFromFc1Form','fd2FormList','fd2OtherInfo'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
              public function fc1PdfDownload($id){
-
+try{
                 \LogActivity::addToLog('organization name of the job amount of money and duration pdf');
 
                 $form_one_data = DB::table('fc1_forms')->where('id',$id)->value('organization_name_of_the_job_amount_of_money_and_duration_pdf');
 
                  return view('admin.fc1form.fc1PdfDownload',compact('form_one_data'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
 
              public function verified_fc_one_form($id){
-
+try{
                 \LogActivity::addToLog('verified_fc_one_form pdf');
 
                 $form_one_data = DB::table('fc1_forms')->where('id',$id)->value('verified_fc_one_form');
@@ -114,27 +124,39 @@ class Fc1Controller extends Controller
                 //dd($form_one_data);
 
                  return view('admin.fc1form.fc1PdfDownload',compact('form_one_data'));
-             }
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+
+                }
 
              public function fc1fd2PdfDownload($id){
+
+                try{
 
                 \LogActivity::addToLog('fd2 pdf download.');
 
                 $form_one_data = DB::table('fd2_form_for_fc1_forms')->where('id',$id)->value('fd_2_form_pdf');
 
                  return view('admin.fc1form.fc1fd2PdfDownload',compact('form_one_data'));
+
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
              public function fc1fd2OtherPdfDownload($id){
 
-
+try{
                 \LogActivity::addToLog('fd2 other pdf download.');
 
                 $form_one_data = DB::table('fd2_fc1_other_infos')->where('id',$id)->value('file');
 
                  return view('admin.fc1form.fc1fd2OtherPdfDownload',compact('form_one_data'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
 
              }
 
@@ -142,7 +164,8 @@ class Fc1Controller extends Controller
              public function statusUpdateForFc1(Request $request){
 
             //dd($request->all());
-
+            try{
+                DB::beginTransaction();
 
                 \LogActivity::addToLog('update fcOne Status ');
 
@@ -166,7 +189,14 @@ class Fc1Controller extends Controller
 
 
 
-
+                    DB::commit();
                 return redirect()->back()->with('success','Updated successfully!');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
+
+
              }
 }

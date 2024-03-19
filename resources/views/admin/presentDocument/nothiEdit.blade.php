@@ -6,7 +6,6 @@
 $adminIdList = DB::table('nothi_permissions')
    ->where('nothId',$nothiLists->id)->select('adminId')->get();
 
-
 $convert_name_title = $adminIdList->implode("adminId", " ");
 $separated_data_title = explode(" ", $convert_name_title);
 
@@ -18,11 +17,6 @@ $branchList = DB::table('admins')->whereIn('id',$separated_data_title)
 
 
 
-
-
-
-
-
 $convert_name_title1 = $branchList->implode("branch_id", " ");
 $separated_data_title1 = explode(" ", $convert_name_title1);
 
@@ -31,23 +25,17 @@ $getAllbranchName = DB::table('branches')
       ->whereIn('id',$separated_data_title1)->orderBy('branch_step','asc')->get();
 
 
-
-
-
-
-
-
-
-
-
 ?>
-
+<!--new code  -->
 <div class="modal right fade bd-example-modal-lg" id="myModal{{ $nothiLists->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-lg-custom" role="document">
     <div class="modal-content">
     <div class="modal-header">
+	    <a id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></a>
         <h4 class="modal-title" id="myModalLabel2">
             অনুমতিপ্রাপ্ত ব্যাক্তি বাছাই করুন </h4>
+
+            <input type="hidden" name="nothiMainId"  id="nothiMainId" value="{{ $nothiLists->id }}"/>
     </div>
 
     <div class="modal-body">
@@ -81,79 +69,79 @@ $getAllbranchName = DB::table('branches')
 
 
                                             <li>
-                                                <input disabled type="checkbox" class="passBranch1" value="{{ $allTotalBranchList->id }}" data-status="branch" name="branch_name[]" id="branch_name{{ $allTotalBranchList->id }}">
+                                                <input disabled type="checkbox" data-nid="{{ $nothiLists->id }}" class="passBranch1"  value="{{ $allTotalBranchList->id }}" data-status="branch" name="branch_name[]" id="branch_name{{ $allTotalBranchList->id }}">
                                                 <label for="branch_name{{ $allTotalBranchList->id }}" class="custom-unchecked">   {{ $allTotalBranchList->branch_name }}</label>
 
                                                 <ul>
+
+
+
                                                     @foreach($desiList as $key=>$allDesiList)
+
                                                     <?php
 
                                                     $checkDesiId = DB::table('admin_designation_histories')->where('designation_list_id',$allDesiList->id)->first();
+                                                    $nothiAdminId = DB::table('nothi_permissions')->where('nothId',$nothiLists->id)
+                                                           ->value('adminId');
 
 ?>
-                                                   @if(!$checkDesiId)
-                                                     <li>
-                                                         <input disabled type="checkbox" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
-                                                         <label for="designation{{ $allDesiList->id }}" class="custom-unchecked"> শূন্য পদ ({{ $allDesiList->designation_name }})</label>
-                                                     </li>
 
-                                                     @else
-                                                     <li>
+
+                                                    @if(!$checkDesiId)
+                                                    <li>
+                                                        <input disabled type="checkbox" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
+                                                        <label for="designation{{ $allDesiList->id }}" class="custom-unchecked"> শূন্য পদ ({{ $allDesiList->designation_name }})</label>
+                                                    </li>
+
+                                                    @else
+
+                                                    <li>
 
                                                         <input type="hidden" value="{{ $allTotalBranchList->id }}"  name="branchId[]" id="branchId{{ $allDesiList->id }}">
 
-
                                                         <?php
-                                                        $adminName = DB::table('admins')->where('id',$checkDesiId->admin_id)->value('admin_name_ban');
+
+                                                          $adminIdListCheckNew = DB::table('nothi_permissions')->where('nothId',$nothiLists->id)->where('adminId',$checkDesiId->admin_id)
+                                                                                        ->where('branchId',$allTotalBranchList->id)->value('id');
+                                                        ?>
+                                      <?php
+                                      $adminName = DB::table('admins')->where('id',$checkDesiId->admin_id)->value('admin_name_ban');
 ?>
+
 @if(Auth::guard('admin')->user()->id == $checkDesiId->admin_id)
-                                                        <input type="checkbox"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
-                                                        @else
+                                      <input  type="checkbox" data-nid="{{ $nothiLists->id }}" class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
+                                      @else
+                                                        @if(empty($adminIdListCheckNew))
 
-                                                        <?php
-
-
-                                                        $adminIdListCheckNew = DB::table('nothi_permissions')
-                                                        ->where('nothId',$nothiLists->id)
-                                                        ->where('adminId',$checkDesiId->admin_id)
-                                                                                               ->where('branchId',$allTotalBranchList->id)
-                                                                                               ->value('id');
-
-
-                                                                                                                ?>
-
-@if(empty($adminIdListCheckNew))
-
-<input type="checkbox"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
+                                                        <input type="checkbox" data-nid="{{ $nothiLists->id }}"  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
 
 
                                                         @else
                                                         <input type="checkbox" disabled  class="passBranch1" data-bId="{{ $allTotalBranchList->id }}" data-status="desi" value="{{ $allDesiList->id }}" name="designation[]" id="designation{{ $allDesiList->id }}">
                                                         @endif
-                                                        @endif
-                                                        <!-- new code -->
+@endif
+                                                        @if($nothiAdminId== $checkDesiId->admin_id)
 
-
-
-
-
-
-
-
-                                                         <label for="designation{{ $allDesiList->id }}" class="custom-checked">
+                                                        <label for="designation{{ $allDesiList->id }}" class="custom-checked">
 
                                                             {{ $adminName }} ({{ $allDesiList->designation_name }})</label>
 
+                                                        @else
+                                                        <label for="designation{{ $allDesiList->id }}" class="custom-unchecked">
 
-                                                         <!-- new code-->
+                                                            {{ $adminName }} ({{ $allDesiList->designation_name }})</label>
+
+                                                        @endif
+
                                                     </li>
-                                                     @endif
-                                                     @endforeach
+                                                    @endif
 
-                                                     {{-- <li class="last">
-                                                         <input type="checkbox" name="tall-3" id="tall-3">
-                                                         <label for="tall-3" class="custom-unchecked">Two sandwiches</label>
-                                                     </li> --}}
+
+
+                                                    @endforeach
+
+
+
                                                 </ul>
                                             </li>
                                             @endforeach
@@ -187,6 +175,9 @@ $getAllbranchName = DB::table('branches')
                                     <h5>নির্বাচিত পদসমূহ</h5>
                                 </div>
                                 <div class="card-body">
+								  @if(count($getAllbranchName) == 0)
+
+                                    @else
                                     <ul class="nav nav-dark" id="pills-darktab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active"
                                                                 id="pills-darkhome-tab"
@@ -288,25 +279,11 @@ $getAlldesignationName = DB::table('designation_lists')
                                             </div>
                                         </div>
                                     </div>
+@endif
 
-
-                                    <ul class="nav nav-dark" id="pills-darktab" role="tablist">
-                                        <li class="nav-item"><a class="nav-link active"
-                                                                id="pills-darkhome-tab"
-                                                                data-bs-toggle="pill" href="#pills-darkhome"
-                                                                role="tab" aria-controls="pills-darkhome"
-                                                                aria-selected="true"><i
-                                                        class="icofont icofont-ui-home"></i>নিজ অফিসের
-                                                পদসমূহ</a></li>
-                                    </ul>
-                                    <div class="tab-content" id="pills-darktabContent">
-                                        <div class="tab-pane fade show active" id="pills-darkhome"
-                                             role="tabpanel" aria-labelledby="pills-darkhome-tab">
-                                            <div class="podobi_tab mt-4" id="final_result">
+                                   <div class="podobi_tab mt-4" id="final_result{{ $nothiLists->id }}">
 
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 

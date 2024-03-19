@@ -46,7 +46,7 @@ $decesionName = DB::table('dak_details')
       উৎসঃ {{ $form_one_data->organization_name_ban }} <br>
       প্রেরকঃ {{ $form_one_data->organization_name_ban }}<span class="p-4"><i class="fa fa-user"></i>
       মূল-প্রাপক : {{ $orginalReceverName }}</span>  <br>
-      বিষয়ঃ <b> এফডি - ৬ নোটিশ </b><br>
+      বিষয়ঃ <b> এফডি - ৬   </b><br>
       @if(empty($decesionName))
 
       @else
@@ -200,7 +200,7 @@ $branchNames = DB::table('branches')
               <div class="card" style="border:2px solid #979797">
                   <div class="card-body">
                       <div class="tracking_box">
-                          <h5>বিষয়ঃ এফডি - ৬ নোটিশ </h5>
+                          <h5>বিষয়ঃ এফডি - ৬   </h5>
                           @if(!$dakDetail->main_file)
 
                           @else
@@ -219,7 +219,7 @@ $branchNames = DB::table('branches')
                               <li>প্রাপক : {{ $receiverName }}</li>
                           </ul>
                           <hr>
-                          <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime(\Carbon\Carbon::parse($dakDetail->created_at)->toDateString()))) }}</p>
+                                                                             <p>তারিখ : {{  App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y h:i:s', strtotime(\Carbon\Carbon::parse($allMainDetail->created_at)))).' '.$allMainDetail->amPmValue }}</p>
                       </div>
                   </div>
               </div>

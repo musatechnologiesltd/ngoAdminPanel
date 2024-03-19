@@ -26,6 +26,8 @@ class FD3Controller extends Controller
 {
     public function index(){
 
+        try{
+
         \LogActivity::addToLog('view fdThree List ');
 
 
@@ -63,12 +65,14 @@ class FD3Controller extends Controller
 
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fd3form.index',compact('dataFromFd3Form'));
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function show($id){
-
+            try{
             \LogActivity::addToLog('view fdThree List Detail');
 
               $dataFromFd3Form = DB::table('fd3_forms')
@@ -96,12 +100,16 @@ class FD3Controller extends Controller
              //dd($dataFromNVisaFd9Fd1);
                  return view('admin.fd3form.show',compact('get_email_from_user','dataFromFd3Form','fd2FormList','fd2OtherInfo'));
 
+
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
 
              public function verified_fd_three_form($id){
-
+                try{
                 \LogActivity::addToLog('verified_fd_three_form pdf');
 
                 $form_one_data = DB::table('fd3_forms')->where('id',$id)->value('verified_fd_three_form');
@@ -109,22 +117,31 @@ class FD3Controller extends Controller
                 //dd($form_one_data);
 
                  return view('admin.fd3form.verified_fd_three_form',compact('form_one_data'));
-             }
+
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+                }
 
 
              public function fd3fd2PdfDownload($id){
-
+                try{
                 \LogActivity::addToLog('fd2 pdf download.');
 
                 $form_one_data = DB::table('fd2_form_for_fd3_forms')->where('id',$id)->value('fd_2_form_pdf');
 
                  return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
-             }
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+
+
+                }
 
 
              public function fd3fd2OtherPdfDownload($id){
 
-
+                try{
                 \LogActivity::addToLog('fd2 other pdf download.');
 
                 $form_one_data = DB::table('fd2_fd3_other_infos')->where('id',$id)->value('file');
@@ -132,6 +149,9 @@ class FD3Controller extends Controller
                  return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
 
 
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
@@ -140,7 +160,8 @@ class FD3Controller extends Controller
 
                 //dd($request->all());
 
-
+                try{
+                    DB::beginTransaction();
                 \LogActivity::addToLog('update fdSeven Status ');
 
 
@@ -163,7 +184,12 @@ class FD3Controller extends Controller
 
 
 
-
+                    DB::commit();
                 return redirect()->back()->with('success','Updated successfully!');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
              }
 }

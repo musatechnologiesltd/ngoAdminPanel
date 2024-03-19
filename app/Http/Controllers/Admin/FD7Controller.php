@@ -25,7 +25,7 @@ use App\Http\Controllers\Admin\CommonController;
 class FD7Controller extends Controller
 {
     public function index(){
-
+        try{
         \LogActivity::addToLog('view fdSeven List ');
 
 
@@ -63,12 +63,14 @@ class FD7Controller extends Controller
 
          //dd($dataFromNVisaFd9Fd1);
              return view('admin.fd7form.index',compact('dataFromFd7Form'));
-
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
          }
 
 
          public function show($id){
-
+            try{
             \LogActivity::addToLog('view fdSeven List Detail');
 
               $dataFromFd7Form = DB::table('fd7_forms')
@@ -89,61 +91,77 @@ class FD7Controller extends Controller
 
              //dd($dataFromNVisaFd9Fd1);
                  return view('admin.fd7form.show',compact('get_email_from_user','dataFromFd7Form','fd2FormList','fd2OtherInfo','prokolpoAreaList'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
              public function authorizationLetter($id){
-
+                try{
                 \LogActivity::addToLog('authorizationLetter pdf download.');
 
                 $form_one_data = DB::table('fd7_forms')->where('id',$id)->value('bureau_approval_pdf');
 
                  return view('admin.fd7form.authorizationLetter',compact('form_one_data'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
              public function reliefAssistanceProjectProposalPdf($id){
-
+                try{
                 \LogActivity::addToLog('reliefAssistanceProjectProposalPdf download.');
 
                 $form_one_data = DB::table('fd7_forms')->where('id',$id)->value('relief_assistance_project_proposal_pdf');
 
                  return view('admin.fd7form.reliefAssistanceProjectProposalPdf',compact('form_one_data'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
              public function letterFromDonorAgency($id){
-
+                try{
                 \LogActivity::addToLog('letterFromDonorAgency pdf download.');
 
                 $form_one_data = DB::table('fd7_forms')->where('id',$id)->value('letter_from_donor_agency_pdf');
 
                  return view('admin.fd7form.letterFromDonorAgency',compact('form_one_data'));
 
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
              }
 
 
              public function fd7fd2PdfDownload($id){
-
+                try{
                 \LogActivity::addToLog('fd2 pdf download.');
 
                 $form_one_data = DB::table('fd2_form_for_fd7_forms')->where('id',$id)->value('fd_2_form_pdf');
 
                  return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
-             }
+
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+
+                }
 
 
              public function fd7fd2OtherPdfDownload($id){
-
+                try{
 
                 \LogActivity::addToLog('fd2 other pdf download.');
 
                 $form_one_data = DB::table('fd2_fd7_other_infos')->where('id',$id)->value('file');
 
                  return view('admin.fd6form.fd2PdfDownload',compact('form_one_data'));
-
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
 
              }
 
@@ -152,7 +170,8 @@ class FD7Controller extends Controller
 
                 //dd($request->all());
 
-
+                try{
+                    DB::beginTransaction();
                 \LogActivity::addToLog('update fdSeven Status ');
 
 
@@ -175,7 +194,12 @@ class FD7Controller extends Controller
 
 
 
-
+                    DB::commit();
                 return redirect()->back()->with('success','Updated successfully!');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->with('error','some thing went wrong ');
+            }
              }
 }

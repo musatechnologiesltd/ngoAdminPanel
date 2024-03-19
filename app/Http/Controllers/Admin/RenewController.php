@@ -36,7 +36,7 @@ class RenewController extends Controller
 
 
     public function viewFormEightPdf($id){
-
+        try{
         //dd(33);
         $get_all_data_new = DB::table('ngo_renew_infos')->where('id',$id)->first();
 
@@ -87,6 +87,11 @@ class RenewController extends Controller
                     die();
 
 
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error','some thing went wrong ');
+                }
+
+
     }
 
 
@@ -101,7 +106,7 @@ class RenewController extends Controller
             return redirect()->route('mainLogin');
         }
 
-
+        try{
         \LogActivity::addToLog('View New Renew List.');
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
@@ -128,6 +133,11 @@ class RenewController extends Controller
 
 
       return view('admin.renew_list.new_renew_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
@@ -138,7 +148,7 @@ class RenewController extends Controller
             return redirect()->route('mainLogin');
         }
 
-
+        try{
         \LogActivity::addToLog('View Revision Renew List.');
 
 
@@ -170,6 +180,12 @@ class RenewController extends Controller
 
 
       return view('admin.renew_list.revision_renew_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
+
     }
 
 
@@ -179,7 +195,7 @@ class RenewController extends Controller
             //abort(403, 'Sorry !! You are Unauthorized to view !');
             return redirect()->route('mainLogin');
         }
-
+        try{
         \LogActivity::addToLog('View Already Renew List.');
 
 
@@ -211,6 +227,11 @@ class RenewController extends Controller
 
 
       return view('admin.renew_list.already_renew_list',compact('all_data_for_new_list'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
@@ -273,32 +294,30 @@ class RenewController extends Controller
     ->get();
 
 
-            //dd($users_info);
-        } catch (Exception $e) {
 
-
-
-            return $e->getMessage();
-
-        }
 
 
 
         return view('admin.renew_list.view',compact('renewInfoData','mainIdR','duration_list_all1','duration_list_all','renew_status','name_change_status','r_status','form_member_data_doc_renew','get_all_data_adviser','get_all_data_other','get_all_data_adviser_bank','all_partiw','all_source_of_fund','users_info','form_ngo_data_doc','form_member_data_doc','form_member_data','form_eight_data','all_data_for_new_list_all','form_one_data'));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
     public function updateStatusRenewForm(Request $request){
 
-
-        //dd(12);
+//dd(23);
 
         \LogActivity::addToLog('Update Renew Status.');
 
         // $data_save = Renew::find($request->id);
         // $data_save->status = $request->status;
         // $data_save->save();
-
+        try{
+            DB::beginTransaction();
         DB::table('ngo_renews')->where('id',$request->id)
         ->update([
             'status' => $request->status,
@@ -306,19 +325,30 @@ class RenewController extends Controller
         ]);
 
 $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_form_id');
+$getUserId = DB::table('fd_one_forms')->where('id',$get_user_id)->value('user_id');
 
+
+$ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$getUserId)->first();
+
+
+
+$lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+$tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
 
         if($request->status == 'Accepted'){
 
+
+
+
             $date = date('Y-m-d');
-    $newDate = date('Y-m-d', strtotime($date. ' + 10 years'));
+    $newDate = date('Y-m-d', strtotime($tomorrow. ' + 10 years'));
 
     DB::table('ngo_durations')->insert(
         [
         'fd_one_form_id' =>$get_user_id,
         'ngo_status' =>$request->status,
         'ngo_duration_end_date' =>$newDate,
-        'ngo_duration_start_date' =>date('Y-m-d'),
+        'ngo_duration_start_date' =>$tomorrow,
         'created_at' =>Carbon::now(),
         'updated_at' =>Carbon::now(),
     ]);
@@ -330,7 +360,13 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
         // $data_save->start_date =date('Y-m-d');
         // $data_save->save();
 
+        $ngoTypeData = DB::table('ngo_type_and_languages')->where('user_id',$getUserId)
+        ->update(
+            [
 
+            'last_renew_date' =>$newDate,
+
+        ]);
 
 
         }
@@ -339,13 +375,19 @@ $get_user_id = DB::table('ngo_renews')->where('id',$request->id)->value('fd_one_
             $message->to($request->email);
             $message->subject('NGOAB Registration Service || Ngo Renew Status');
         });
-
+        DB::commit();
         return redirect()->back()->with('success','Updated Successfully');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
     public function foreginPdfDownload($id){
-
+        try{
         \LogActivity::addToLog('renew pdf download.');
 
         $data = DB::table('system_information')->first();
@@ -366,11 +408,15 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
     public function foreginPdfDownloadOld($id){
-
+        try{
         \LogActivity::addToLog('download renew pdf.');
 
         //dd(base64_decode($id));
@@ -395,12 +441,16 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
 
     public function yearlyBudgetPdfDownload($id){
-
+        try{
         \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
@@ -421,12 +471,16 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
 
     public function yearlyBudgetPdfDownloadOld($id){
-
+        try{
         \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
@@ -447,12 +501,16 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
 
     public function copyOfChalanPdfDownload($id){
-
+        try{
         \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
@@ -475,11 +533,15 @@ $file=$data->system_url.'public/'.$get_file_data;
             'content-type'=>'application/pdf',
         ]);
 
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
 
     public function copyOfChalanPdfDownloadOld($id){
-
+        try{
         \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
@@ -502,10 +564,14 @@ $file=$data->system_url.'public/'.$get_file_data;
             'content-type'=>'application/pdf',
         ]);
 
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
+
     }
 
     public function dueVatPdfDownload($id){
-
+        try{
         \LogActivity::addToLog('download renew pdf.');
 
         $data = DB::table('system_information')->first();
@@ -527,11 +593,15 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
     public function dueVatPdfDownloadOld($id){
-
+        try{
 
         \LogActivity::addToLog('download renew pdf.');
         $data = DB::table('system_information')->first();
@@ -553,11 +623,15 @@ $file=$data->system_url.'public/'.$get_file_data;
         return Response::make(file_get_contents($file), 200, [
             'content-type'=>'application/pdf',
         ]);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error','some thing went wrong ');
+    }
     }
 
 
         public function changeAcNumberDownload($id){
-
+            try{
             \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
@@ -579,11 +653,15 @@ $file=$data->system_url.'public/'.$get_file_data;
                 'content-type'=>'application/pdf',
             ]);
 
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
         }
 
 
         public function changeAcNumberDownloadOld($id){
-
+            try{
             \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
@@ -605,13 +683,17 @@ $file=$data->system_url.'public/'.$get_file_data;
                 'content-type'=>'application/pdf',
             ]);
 
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
         }
 
 
         public function verifiedFdEightDownload($id){
 
             //dd(11);
-
+            try{
             \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
@@ -639,6 +721,10 @@ $file=$data->system_url.'public/'.$get_file_data;
                 'content-type'=>'application/pdf',
             ]);
 
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
         }
 
 
@@ -646,7 +732,7 @@ $file=$data->system_url.'public/'.$get_file_data;
         public function verifiedFdEightDownloadOld($id){
 
             //dd(11);
-
+            try{
             \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
@@ -674,11 +760,17 @@ $file=$data->system_url.'public/'.$get_file_data;
                 'content-type'=>'application/pdf',
             ]);
 
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
         }
 
 
 
         public function renewalFileDownload($title, $id){
+
+            try{
             \LogActivity::addToLog('download renew pdf.');
 
             $data = DB::table('system_information')->first();
@@ -686,7 +778,15 @@ $file=$data->system_url.'public/'.$get_file_data;
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('list_of_board_of_directors_or_board_of_trustees');
             }elseif($title == 'laws_or_constitution'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('organization_by_laws_or_constitution');
-            }elseif($title == 'final_fd_eight_form'){
+            }elseif($title == 'form_eight_executive_committee_member'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('form_eight_executive_committee_member');
+            }elseif($title == 'last_ten_year_annual_report'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('last_ten_year_annual_reportwe');
+            }elseif($title == 'constitution_extra'){
+                $get_file_data = DB::table('renewal_files')->where('id',$id)->value('constitution_extra');
+            }
+
+			elseif($title == 'final_fd_eight_form'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('final_fd_eight_form');
             }elseif($title == 'work_procedure'){
                 $get_file_data = DB::table('renewal_files')->where('id',$id)->value('work_procedure_of_organization');
@@ -738,6 +838,11 @@ $file=$data->system_url.'public/'.$get_file_data;
     return Response::make(file_get_contents($file), 200, [
     'content-type'=>'application/pdf',
     ]);
+
+
+} catch (\Exception $e) {
+    return redirect()->back()->with('error','some thing went wrong ');
+}
 
 
         }

@@ -23,7 +23,7 @@
         <div class="col-sm-6 mt-5">
             @if (Auth::guard('admin')->user()->can('permissionAdd'))
             <button class="btn btn-primary add-btn" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="ri-add-line align-bottom me-1"></i>পারমিশন যোগ করুন 
+                <i class="ri-add-line align-bottom me-1"></i>পারমিশন যোগ করুন
                                                 </button>
 
 
@@ -35,7 +35,12 @@
                                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="post" action="{{ route('permission.store') }}" enctype="multipart/form-data">
+
+                                                            <div class="progress" style="display: none;">
+                                                                <div class="bar"></div >
+                                                                <div class="percent">0%</div >
+                                                            </div>
+                                                            <form id="form" method="post" action="{{ route('permission.store') }}" enctype="multipart/form-data">
                                                                 @csrf
 
                                                                 <div class="row">
@@ -142,7 +147,14 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" action="{{ route('permission.update',$allPermissionGroup->group_name)}}" enctype="multipart/form-data">
+
+                                                    <div class="progress" style="display: none;">
+                                                        <div class="bar"></div >
+                                                        <div class="percent">0%</div >
+                                                    </div>
+
+
+                                                    <form id="form" method="post" action="{{ route('permission.update',$allPermissionGroup->group_name)}}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="row">
@@ -235,6 +247,37 @@ $permissionList = DB::table('permissions')->where('group_name',$allPermissionGro
 @endsection
 
 @section('script')
+<script type="text/javascript">
+    $(function() {
+        $(document).ready(function()
+        {
+            var SITEURL = "{{route('permission.index')}}";
+            var bar = $('.bar');
+            var percent = $('.percent');
+              $('form').ajaxForm({
+                beforeSend: function() {
+                    //$("#div1").hide();
+                  $(".progress").show();
+
+                    var percentVal = '0%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                uploadProgress: function(event, position, total, percentComplete) {
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                complete: function(xhr) {
+                    //alert('File Has Been Uploaded Successfully');
+                    alertify.set('notifier','position','top-center');
+                   alertify.success('Uploaded Successfully');
+                    window.location.href = SITEURL;
+                }
+              });
+        });
+     });
+    </script>
 <script type="text/javascript">
     var i = 0;
     $("#dynamic-ar").click(function () {

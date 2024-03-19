@@ -5,13 +5,15 @@
     <div class="modal-dialog modal-lg-custom"
          role="document">
         <div class="modal-content">
+		
             <div class="modal-header">
+			<button id="pp" class="btn btn-outline-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button>
                 <h4 class="modal-title" id="myModalLabel2">
                     নথিসমূহ</h4>
             </div>
 
             <div class="modal-body">
-                <h5>একশনঃ নথিতে উপস্থাপনঃ এফডি৯ (এন-ভিসা) নোটিশ</h5>
+                <h5>একশনঃ নথিতে উপস্থাপনঃ এফডি৯ (এন-ভিসা)  </h5>
                 <div class="row">
                     <div class="col-lg-6">
                         <h5>সকল নথি</h5>

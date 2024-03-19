@@ -4,8 +4,8 @@
 
  <header class="main-nav">
     <div class="sidebar-user text-center">
-        @if ($usr->can('profile.edit'))
-        <a class="setting-primary" href="{{ route('setting.index') }}"><i data-feather="settings"></i>
+        @if ($usr->can('profile.view'))
+        <a class="setting-primary" href="{{ route('profile.index') }}"><i data-feather="settings"></i>
         </a>
         @else
         <a class="setting-primary" href="#"><i data-feather="settings"></i>
@@ -144,7 +144,9 @@
     <a class="nav-link menu-title link-nav {{ Route::is('addParentNote')  ||  Route::is('addChildNote') ||  Route::is('sheetAndNotes') || Route::is('presentDocument') || Route::is('dakBranchList.index') || Route::is('dakBranchList.show') || Route::is('createSeal') ? 'active' : '' }}" href="{{ route('dakBranchList.index') }}">
         <i data-feather="mail"></i>
         <span>আগত ডাক</span>
+        <sup>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($mainCodeCountHeader) }}</sup>
     </a>
+
 </li>
 
  <li class="dropdown">
@@ -159,6 +161,13 @@
     <a class="nav-link menu-title link-nav {{ Route::is('all_dak_list') ? 'active' : '' }}" href="{{ route('all_dak_list') }}">
         <i data-feather="mail"></i>
         <span>সকল ডাক</span>
+    </a>
+</li>
+
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('nothiJatDakList') ? 'active' : '' }}" href="{{ route('nothiJatDakList') }}">
+        <i data-feather="mail"></i>
+        <span>নথি জাত ডাক</span>
     </a>
 </li>
 
@@ -181,6 +190,7 @@
     <a class="nav-link menu-title link-nav {{  Route::is('receiveNothi.index')  ? 'active' : '' }}" href="{{ route('receiveNothi.index') }}">
         <i data-feather="mail"></i>
         <span>আগত নথি</span>
+        <sup>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($totalReceiveNothi) }}</sup>
     </a>
 </li>
 @endif
@@ -361,6 +371,47 @@
 @endif
 
 
+@if ($usr->can('fd5_formsAdd') || $usr->can('fd5_formsView') || $usr->can('fd5_formsDelete') || $usr->can('fd5_formsUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('fd5Form.index') || Route::is('fd5Form.show') ? 'active' : '' }}" href="{{ route('fd5Form.index') }}">
+        <i data-feather="airplay"></i>
+        <span>এফডি - ৫ </span>
+    </a>
+</li>
+@endif
+
+
+
+@if ($usr->can('duplicateCertificateAdd') || $usr->can('duplicateCertificateView') || $usr->can('duplicateCertificateDelete') || $usr->can('duplicateCertificateUpdate'))
+{{-- <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('duplicateCertificate.index') || Route::is('duplicateCertificate.show') ? 'active' : '' }}" href="{{ route('duplicateCertificate.index') }}">
+        <i data-feather="airplay"></i>
+        <span>ডুপ্লিকেট সনদপত্রের আবেদন</span>
+    </a>
+</li> --}}
+@endif
+
+
+@if ($usr->can('constitutionAdd') || $usr->can('constitutionView') || $usr->can('constitutionDelete') || $usr->can('constitutionUpdate'))
+{{-- <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('constitutionInfo.index') || Route::is('constitutionInfo.show') ? 'active' : '' }}" href="{{ route('constitutionInfo.index') }}">
+        <i data-feather="airplay"></i>
+        <span>গঠনতন্ত্র পরিবর্তন/অনুমোদনের আবেদন </span>
+    </a>
+</li> --}}
+@endif
+
+
+@if ($usr->can('executiveCommitteeAdd') || $usr->can('executiveCommitteeView') || $usr->can('executiveCommitteeDelete') || $usr->can('executiveCommitteeUpdate'))
+{{-- <li class="dropdown">
+    <a class="nav-link menu-title link-nav {{ Route::is('executiveCommitteeInfo.index') || Route::is('executiveCommitteeInfo.show') ? 'active' : '' }}" href="{{ route('executiveCommitteeInfo.index') }}">
+        <i data-feather="airplay"></i>
+        <span> নির্বাহী কমিটি অনুমোদনের আবেদন</span>
+    </a>
+</li> --}}
+@endif
+
+
 
 
 @if ($usr->can('employeeEndDate.view') || $usr->can('employeeEndDate.edit') || $usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit') || $usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate')|| $usr->can('designationAdd') || $usr->can('designationView') ||  $usr->can('designationDelete') ||  $usr->can('designationUpdate') || $usr->can('branchAdd') || $usr->can('branchView') ||  $usr->can('branchDelete') ||  $usr->can('branchUpdate'))
@@ -370,7 +421,7 @@
     </div>
   </li>
 <!--empoyee info --->
-@if (Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('assignedEmployee.index'))
+@if ( Route::is('checkWorkingDay') || Route::is('employeeEndDate') || Route::is('branchList.index') || Route::is('designationList.index') ||  Route::is('user.index') || Route::is('user.create') || Route::is('user.edit')   || Route::is('assignedEmployee.index'))
 
 <li class="dropdown">
   <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="users"></i><span>কর্মকর্তাদের তালিকা</span></a>
@@ -394,13 +445,13 @@
 
       @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
       <li class="">
-          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তার তথ্য যোগ করুন </a>
+          <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের তথ্য</a>
       </li>
       @endif
 
 @if ($usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit'))
 <li >
-<a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>কর্মকর্তাদের নিয়োগ দিন</span> </a>
+<a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>কর্মকর্তাদের নিয়োগ তথ্য </span> </a>
 </li>
 @endif
 
@@ -411,7 +462,11 @@
           @endif
 
 
-
+          @if ($usr->can('officialWorkingDayView'))
+          <li class="">
+              <a href="{{ route('checkWorkingDay') }}" class="{{ Route::is('checkWorkingDay') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের কর্ম দিবস</a>
+          </li>
+          @endif
 
 
 
@@ -442,13 +497,13 @@
 
           @if ($usr->can('userAdd') || $usr->can('userView') || $usr->can('userDelete') || $usr->can('userUpdate'))
           <li class="">
-              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তার তথ্য যোগ করুন </a>
+              <a href="{{ route('user.index') }}" class="{{ Route::is('user.index') || Route::is('user.create') || Route::is('user.edit') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের তথ্য </a>
           </li>
           @endif
 
           @if ($usr->can('assignedEmployee.view') || $usr->can('assignedEmployee.edit'))
           <li >
-          <a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>কর্মকর্তাদের নিয়োগ দিন</span> </a>
+          <a href="{{ route('assignedEmployee.index') }}" class="{{ Route::is('assignedEmployee.index')  ? 'active' : '' }}"><span>কর্মকর্তাদের নিয়োগ  তথ্য </span> </a>
           </li>
           @endif
 
@@ -459,12 +514,91 @@
           @endif
 
 
+
+          @if ($usr->can('officialWorkingDayView'))
+          <li class="">
+              <a href="{{ route('checkWorkingDay') }}" class="{{ Route::is('checkWorkingDay') ? 'active' : '' }}" data-key="t-one-page">কর্মকর্তাদের কর্ম দিবস</a>
+          </li>
+          @endif
+
+
+
+
+
+
+
+
 </ul>
 </li>
 
 @endif
 @endif
 <!-- employee info --->
+
+<!-- report start  -->
+@if ($usr->can('reportAdd') || $usr->can('reportView') ||  $usr->can('reportDelete') ||  $usr->can('reportUpdate'))
+
+                    <li class="sidebar-main-title">
+                        <div>
+                          <h6>রিপোর্ট</h6>
+                        </div>
+                      </li>
+
+                      @if (Route::is('foreignNgoListReport') || Route::is('localNgoListReport') || Route::is('districtWiseListSearch') || Route::is('districtWiseList') || Route::is('districtWiseListResult'))
+
+                      <li class="dropdown">
+                        <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="settings"></i><span>রিপোর্ট </span></a>
+                        <ul class="nav-submenu menu-content" style="display: block;">
+
+
+
+
+
+                            <li class="">
+                                <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList')  ? 'active' : '' }}" data-key="t-nft-landing">জেলাভিত্তিক এনজিও'র তালিকা</a>
+                            </li>
+
+                            <li class="">
+                                <a href="{{ route('localNgoListReport') }}" class="{{ Route::is('localNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">দেশি এনজিও'র তালিকা</a>
+                            </li>
+
+
+                            <li class="">
+                                <a href="{{ route('foreignNgoListReport') }}" class="{{ Route::is('foreignNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">বিদেশি এনজিও'র তালিকা </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+@else
+<li class="dropdown">
+    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="settings"></i><span>রিপোর্ট </span></a>
+    <ul class="nav-submenu menu-content">
+
+
+
+        <li class="">
+            <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList')  ? 'active' : '' }}" data-key="t-nft-landing">জেলাভিত্তিক এনজিও'র তালিকা</a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('localNgoListReport') }}" class="{{ Route::is('localNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">দেশি এনজিও'র তালিকা</a>
+        </li>
+
+
+        <li class="">
+            <a href="{{ route('foreignNgoListReport') }}" class="{{ Route::is('foreignNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">বিদেশি এনজিও'র তালিকা </a>
+        </li>
+
+
+    </ul>
+</li>
+
+@endif
+
+
+@endif
+<!-- report end-->
 
 @if ($usr->can('noticeAdd') || $usr->can('noticeView') ||  $usr->can('noticeDelete') ||  $usr->can('noticeUpdate') || $usr->can('countryAdd') || $usr->can('countryView') ||  $usr->can('countryDelete') ||  $usr->can('countryUpdate') || $usr->can('permissionAdd') || $usr->can('permissionView') || $usr->can('permissionDelete') || $usr->can('permissionUpdate') || $usr->can('roleAdd') || $usr->can('roleView') || $usr->can('roleDelete') || $usr->can('roleUpdate') || $usr->can('systemInformationAdd') || $usr->can('systemInformationView') || $usr->can('systemInformationDelete') || $usr->can('systemInformationUpdate'))
 

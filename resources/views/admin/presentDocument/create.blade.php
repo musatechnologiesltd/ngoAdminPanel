@@ -40,7 +40,7 @@
                             <div class="card-header pb-0">
                                 <h5>নথি তৈরি করুন</h5>
                             </div>
-                            <form class="form theme-form" action="{{ route('documentPresent.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                            <form  class="form theme-form" action="{{ route('documentPresent.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                  @csrf
 
 
@@ -98,7 +98,7 @@ $finalSerialNumber = App\Http\Controllers\Admin\CommonController::englishToBangl
                                                     <span class="input-group-text">০৩.০৭.২৬৬৬.{{ $branchCode }}.</span>
                                                     <input class="form-control" name="document_number" readonly id="document_number" type="text" placeholder="" required>
 
-                                                    <input class="form-control" name="document_serial_number" readonly id="document_serial_number" value="{{ $finalSerialNumber }}" type="text" placeholder="" required>
+                                                    <input class="form-control" name="document_serial_number"  id="document_serial_number" value="{{ $convertNumber }}" type="text" placeholder="" required>
 
                                                     <select class="form-control" name="document_year" id="" required>
                                                         <option value="">বছর বাছাই করুন</option>

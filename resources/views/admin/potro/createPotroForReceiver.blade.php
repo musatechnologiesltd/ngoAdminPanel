@@ -26,6 +26,12 @@
             max-width: 80%;
             margin: 20px auto;
         }
+
+		thead, tbody, tfoot, tr, td, th
+		{
+			border-width: 1px !important;
+			border-color: black !important;
+		}
     </style>
 
 
@@ -248,6 +254,92 @@ $childNoteNewList = DB::table('child_note_for_fd_threes')
            ->where('parent_note_for_fd_three_id',$id)->orderBy('id','desc')->value('id');
 
 
+}elseif($status == 'fdFive'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_fd_fives')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_fd_fives')
+           ->where('pnote_fd_five',$id)->get();
+
+           $childNoteNewListValue = DB::table('child_note_for_fd_fives')
+           ->where('pnote_fd_five',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'duplicate'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_duplicate_certificates')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_duplicate_certificates')
+
+->where('pnote_dupid',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_duplicate_certificates')
+->where('pnote_dupid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'constitution'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_note_for_constitutions')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_constitutions')
+
+->where('pnote_conid',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_constitutions')
+->where('pnote_conid',$id)->orderBy('id','desc')->value('id');
+
+
+}elseif($status == 'committee'){
+
+
+
+
+
+
+$checkParentFirst = DB::table('parent_not_for_executive_committees')->where('nothi_detail_id',$parentId)
+->where('serial_number',$nothiId)
+->where('id',$id)
+->first();
+
+
+$childNoteNewList = DB::table('child_note_for_executive_committees')
+
+->where('pnote_exeid',$id)->get();
+
+
+$childNoteNewListValue = DB::table('child_note_for_executive_committees')
+->where('pnote_exeid',$id)->orderBy('id','desc')->value('id');
+
+
 }
 
 
@@ -292,13 +384,24 @@ $branchName = DB::table('branches')
  <div class="row">
 
    <div class="col-sm-8 col-xs-8">
+    <div style="display: flex;">
+       <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>
 
-       <p style="font-size: 15px;"><b>শাখা:</b> {{ $branchName  }}, এনজিও বিষয়ক ব্যুরো; <b>নথি নম্বর:</b>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}; <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
 
+        @if(!$potrangshoDraftNew)
+        {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }};
+        @else
+
+        {!! $potrangshoDraftNew->sarok_number !!};
+
+        @endif
+
+        <b>বিষয়:</b> {{$checkParentFirst->subject }}</p>
+    </div>
    </div>
    <div class="col-sm-4 col-xs-4">
        <div class="d-flex flex-row-reverse">
-        <a  href ="{{  url('admin/viewChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-warning"aria-expanded="false">সংরক্ষন করুন</a>
+        <a  href ="{{  url('admin/viewChildNote/'.$status.'/'.$parentId.'/'.$nothiId.'/'.$id.'/'.$activeCode) }}" class="btn btn-primary"aria-expanded="false">সংরক্ষন করুন</a>
        </div>
    </div>
 </div>
@@ -362,6 +465,8 @@ $branchName = DB::table('branches')
                                                                                 $desiName = '';
                                                                                 $dateApp = '';
                                                                                 $dateAppBan ='';
+                                                                                $aphone = '';
+                                                                                $aemail = '';
                                                                         }else{
 
 
@@ -376,6 +481,8 @@ $branchName = DB::table('branches')
 
                                                                                 $appName = '';
                                                                                 $desiName = '';
+                                                                                $aphone = '';
+                                                                                $aemail = '';
 
                                                                                }else{
 
@@ -386,6 +493,8 @@ $branchName = DB::table('branches')
 
                                                                                 $appName = $nothiApproverLista->admin_name_ban;
                                                                                 $desiName = $designationName;
+                                                                                $aphone = $nothiApproverLista->admin_mobile;
+                                                                                $aemail = $nothiApproverLista->email;
 
                                                                                }
 
@@ -404,15 +513,29 @@ $branchName = DB::table('branches')
 
 
 
-                                                                        <div class="text-center mb-3 mt-2">
-                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
-                                                                            <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-                                                                                সরকার</h3>
-                                                                            <h5>এনজিও বিষয়ক ব্যুরো <br>
-                                                                                প্রধানমন্ত্রীর কার্যালয় <br>
-                                                                                প্লট-ই, ১৩/বি, আগারগাঁও <br>
-                                                                                শেরেবাংলা নগর, ঢাকা-১২০৭
-                                                                            </h5>
+                                                                        <div >
+																		<table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+ {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
+			</td>
+		</tr>
+	</tbody>
+	</table>
+
                                                                         </div>
 
                                                                         <?php
@@ -423,35 +546,18 @@ $branchName = DB::table('branches')
                                                                                         ->where('dakType',$status)
                                                                                         ->value('permission_status');
 
-
-
-                                                                            ?>
-
-                                                                        <div class="row" class="mt-4">
-                                                                            <div class="col-md-6">
-                                                                                <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
-                                                                            </div>
-                                                                            <div class="col-md-6" style="text-align: right;">
-                                                                                <div class="d-flex justify-content-end">
-                                                                                    <p style="font-weight:bold;">তারিখ: </p>
-                                                                                    <p>@if($potroZariListValue == 1)
-                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                            @else
-
-                                                                                            @endif</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                                 <!-- show save and unsaved potro -->
-                                                                                 <?php
-                                                                                 $potrangshoDraft =  DB::table('potrangsho_drafts')
+                                                                                        $potrangshoDraft =  DB::table('potrangsho_drafts')
                                                                                                    ->where('sarokId',$officeDetails->id)
                                                                                                    ->where('status',$status)
                                                                                                    ->orderBy('id','desc')
                                                                                                    ->first();
 
-                                                                                   ?>
+                                                                            ?>
+
+
+
+                                                                                 <!-- show save and unsaved potro -->
+
 
                                                                                    @if(!$potrangshoDraft)
 
@@ -461,7 +567,11 @@ $branchName = DB::table('branches')
                                                                                    @include('admin.potro.formReceiver')
 
                                                                                    @else
+                                                                                   @if(empty($officeDetails->sarok_number))
+                                                                                   @include('admin.potro.formReceiver')
+                                                                                   @else
                                                                                    @include('admin.potro.formReceiverMain')
+                                                                                   @endif
                                                                                    @endif
                                                                                    @endif
 
@@ -476,41 +586,28 @@ $branchName = DB::table('branches')
 
                                                                         <!-- approver start --->
 
-                                                                        <?php
-                                                                        $potroZariListValue =  DB::table('nothi_details')
-                                                                                        ->where('noteId',$id)
-                                                                                        ->where('nothId',$nothiId)
-                                                                                        ->where('dakId',$parentId)
-                                                                                        ->where('dakType',$status)
-                                                                                        ->value('permission_status');
 
 
 
-                                                                            ?>
-
-                                                                        <div class="mt-4" style="text-align: right;">
-
-                                                                            @if($potroZariListValue == 1)
-
-                                                                            @if(!$nothiApproverLista)
-
-                                                                            @else
-                                                                            <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
-                                                                            @endif
-
-                                                                            @else
-                                                                            @endif
-
-                                                                        <span>{{ $appName }}</span><br>
-                                                                        <span>{{ $desiName }}</span>
-                                                                        </div>
 
                                                                         <!-- approver end -->
 
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
-                                                                        @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                        @foreach($nothiPropokListUpdate as $key=>$nothiPropokLists)
+                                                                        <span> @if(empty($nothiPropokLists->organization_name))
+                                                                            @if(count($nothiPropokListUpdate) == ($key+1))
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
+                                                                            @else
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
+                                                                            @endif
+                                                                             @else
+                                                                             @if(count($nothiPropokListUpdate) == ($key+1))
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                            @else
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ;<br>
+                                                                            @endif
+                                                                            @endif
                                                                         @endforeach
                                                                     </div>
                                                                     <!--end prapok  --->
@@ -521,10 +618,22 @@ $branchName = DB::table('branches')
 
                                                                     @else
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
-                                                                    @foreach($nothiAttractListUpdate as $nothiPropokLists)
-                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
-                                                                    @endforeach
-                                                                    @endif
+                                                                    @foreach($nothiAttractListUpdate as $key=>$nothiPropokLists)
+                                                                    <span>@if(empty($nothiPropokLists->organization_name))
+                                                                        @if(count($nothiAttractListUpdate) == ($key+1))
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
+                                                                            @else
+
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
+                                                                            @endif
+                                                                             @else
+                                                                             @if(count($nothiAttractListUpdate) == ($key+1))
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                            @else
+
+                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ;<br>
+                                                                            @endif
+                                                                            @endif
 
                                                                     <!-- attracttion -->
 
@@ -532,9 +641,33 @@ $branchName = DB::table('branches')
                                                                     @if(count($nothiCopyListUpdate) == 0)
 
                                                                     @else
-                                                                    <div class="row" class="mt-4">
+                                                                    <div class="row" class="mt-5">
                                                                         <div class="col-md-6">
+                                                                            @if(!$potrangshoDraft)
+
+
                                                                             <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+
+                                                                            @else
+
+
+                                                                            <div class="d-flex justify-content-start">
+
+                                                                            @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+                                                                            <span style="font-weight:900;">স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}
+
+                                                                            @else
+                                                                            <span style="font-weight:900;">স্মারক নং:</span>  @if(empty($officeDetails->sarok_number))
+                                                                            {!! $potrangshoDraft->sarok_number !!}
+                                                                            @else
+                                                                            {!! $officeDetails->sarok_number !!}
+                                                                            @endif
+                                                                            @endif
+
+                                                                            </div>
+
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -561,34 +694,80 @@ $branchName = DB::table('branches')
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
+                                                                    @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
-            @else
-            <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
 
-            @endif
+                                                                    @endif
+                                                                    @else
+
+
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};<br>
+
+                                                                    @endif
+
+
+
+                                                                    @endif
                                                                     @endforeach
                                                                     @endif
 
                                                                     <!--end copy list -->
 <!--prapok-->
 <div class="mt-4" style="text-align: right;">
+    @if($potroZariListValue == 1)
 
+    @if(!$nothiApproverLista)
+
+    @else
+    <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
+    @endif
+
+    @else
+    @endif
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
+    @if(empty($potrangshoDraft->extra_text))
+<br>
+    @else
+
+    <span>{!! $potrangshoDraft->extra_text !!}</span>
+
+    @endif
+    <span>ফোন :{{ $aphone }}</span><br>
+                    <span>ইমেইল : {{ $aemail }}</span>
     </div>
 @endforeach
     @else
 
     <!-- no data available  -->
-    <div class="text-center mb-3 mt-2">
-        <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-            সরকার</h3>
-        <h5>এনজিও বিষয়ক ব্যুরো <br>
-            প্রধানমন্ত্রীর কার্যালয় <br>
-            প্লট-ই, ১৩/বি, আগারগাঁও <br>
-            শেরেবাংলা নগর, ঢাকা-১২০৭
-        </h5>
+    <div>
+<table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
+			</td>
+		</tr>
+	</tbody>
+	</table>
     </div>
 
     <?php
@@ -604,11 +783,11 @@ $branchName = DB::table('branches')
         ?>
     <div class="row" class="mt-4">
         <div class="col-md-6">
-            <span style="font-weight:900;">স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+            <span >স্মারক নং: </span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
         </div>
         <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
-                                                                                    <p style="font-weight:bold;">তারিখ: </p>
+                                                                                    <p >তারিখ: </p>
                                                                                     <p>@if($potroZariListValue == 1)
                                                                                             {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
                                                                                             @else
@@ -617,7 +796,7 @@ $branchName = DB::table('branches')
                                                                                 </div>
         </div>
     </div>
-    <form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+    <form id="form" class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data"  data-parsley-validate="">
         @csrf
 
         <input type="hidden" name="receiveEnd" value="1"/>
@@ -730,7 +909,7 @@ aria-expanded="false">
             @else
             <div class="row" class="mt-4">
                 <div class="col-md-6">
-                    <span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
+                    <span > নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}
                 </div>
                 <div class="col-md-6" style="text-align: right;">
 <div class="d-flex justify-content-end">
@@ -1334,6 +1513,21 @@ function onSelectedChanged(){
     //CKEDITOR.inline('ineditor2' );
     CKEDITOR.inline('ineditor1' );
 </script>
+
+<script>
+    // Turn off automatic editor creation first.
+    CKEDITOR.disableAutoInline = true;
+    //CKEDITOR.inline('ineditor2' );
+    CKEDITOR.inline('ineditor3' );
+</script>
+
+<script>
+    // Turn off automatic editor creation first.
+    CKEDITOR.disableAutoInline = true;
+    //CKEDITOR.inline('ineditor2' );
+    CKEDITOR.inline('ineditor4' );
+</script>
+
 
 
 <script>

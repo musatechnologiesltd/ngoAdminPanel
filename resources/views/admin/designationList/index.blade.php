@@ -37,7 +37,7 @@
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="custom-validation" action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                <form class="custom-validation"  action="{{ route('designationList.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="">শাখার নাম <span style="color:red;">*</span></label>
@@ -136,7 +136,7 @@
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
-                                                      <form action="{{ route('designationList.update',$AllDesignationLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+                                                      <form  action="{{ route('designationList.update',$AllDesignationLists->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                                           @method('PUT')
                                                           @csrf
                                                           <div class="mb-3">
@@ -154,14 +154,14 @@
                                                         </div>
                                                           <div class="mb-3">
                                                             <label class="form-label" for="">পদবী নাম <span style="color:red;">*</span></label>
-                                                            <input class="form-control" name="designation_name" value="{{ $AllDesignationLists->designation_name  }}" id="designation_name{{ $AllDesignationLists->id }}" type="text" placeholder="" required>
+                                                            <input class="form-control" name="designation_name" value="{{ $AllDesignationLists->designation_name  }}"  type="text" placeholder="" required>
                                                         </div>
 
 
 
                                                         <div class="mb-3">
                                                             <label class="form-label" for="">পদবীর ক্রম <span style="color:red;">*</span></label>
-                                                            <input class="form-control" name="designation_serial" value="{{ $AllDesignationLists->designation_serial }}" id="designation_serial{{ $AllDesignationLists->id  }}" type="number" step="0.01" placeholder="" required>
+                                                            <input class="form-control" name="designation_serial" value="{{ $AllDesignationLists->designation_serial }}"  type="number" step="0.01" placeholder="" required>
 
                                                         </div>
 

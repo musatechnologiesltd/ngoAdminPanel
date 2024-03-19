@@ -252,7 +252,7 @@
     <tr>
         <td></td>
         <td>(i)</td>
-        <td>ডাইরি নম্বর </td>
+        <td>নিবন্ধন নম্বর </td>
         <td>:
 
 
@@ -296,11 +296,17 @@
     <tr>
         <td></td>
         <td>(iv)</td>
-        <td>মেয়াদ শুরু </td>
+        <td>মেয়াদ শুরু</td>
         <td>:
+            <?php
 
+            $lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+            $tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
+            $newdate1 = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
+
+            ?>
           @if(empty($duration_list_all))
-
+          {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($tomorrow )))}}
 
           @else
 
@@ -316,8 +322,8 @@
         <td>(v)</td>
         <td>মেয়াদ শেষ </td>
         <td>:
-            @if(empty($duration_list_all))
-
+            @if(empty($duration_list_all1))
+            {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($newdate1 )))}}
 
           @else
           {{App\Http\Controllers\Admin\CommonController::englishToBangla(date('d-m-Y', strtotime($duration_list_all1 )))}}
@@ -337,7 +343,16 @@
                 প্রিন্ট করুন
             </button>
           @endif
+          <form action="{{ route('printCertificateViewDemoRenew') }}" method="get" id="form">
 
+            <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
+
+            <input type="hidden" name="main_date" value="<?php   echo  date('Y-m-d'); ?>" class="form-control"/>
+
+            <button type="submit" class="btn btn-primary mt-4" type="submit">
+                ডেমো
+              </button>
+        </form>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -348,7 +363,7 @@
                   </div>
                   <div class="modal-body">
 
-                    <form action="{{ route('printCertificateView') }}" method="get">
+                    <form action="{{ route('printCertificateViewRenew') }}" method="get" id="form">
 
                         <input type="hidden" name="user_id" value="{{ $form_one_data->user_id  }}"/>
 
@@ -358,6 +373,9 @@
                             প্রিন্ট করুন
                           </button>
                     </form>
+
+
+
                   </div>
 
                 </div>
@@ -383,7 +401,7 @@
                                         <div class="mb-0 m-t-30">
 
 
-                                            <form action="{{ route('updateStatusRenewForm') }}" method="post">
+                                            <form action="{{ route('updateStatusRenewForm') }}" method="post" id="form">
                                                 @csrf
                                                 <input type="hidden" value="{{ $mainIdR->id }}" name="id" />
                                                 <input type="hidden" value="{{ $get_email_from_user }}" name="email" />

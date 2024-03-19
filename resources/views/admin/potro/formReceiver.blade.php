@@ -1,5 +1,32 @@
-<form class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+<form  class="custom-validation" action="{{ route('officeSarok.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
     @csrf
+
+    <div class="row" class="mt-4">
+        <div class="col-md-6">
+
+        <div class="d-flex justify-content-start">
+            <span > স্মারক নং: </span>
+
+
+
+            <textarea id="ineditor3" name="sarok_number" contenteditable="true">
+                {!! $potrangshoDraft->sarok_number !!}
+                </textarea>
+            </div>
+
+
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <div class="d-flex justify-content-end">
+                <p >তারিখ: </p>
+                <p>@if($potroZariListValue == 1)
+                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                        @else
+
+                        @endif</p>
+            </div>
+        </div>
+    </div>
                                                                             <input type="hidden" value="{{ $id }}" name="noteId"/>
                                                                             <input type="hidden" value="{{ $activeCode }}" name="activeCode"/>
                                                                             <input type="hidden" value="{{ $nothiId }}" name="nothiId"/>
@@ -52,7 +79,41 @@
                                                                             </div>
                                                                         </div>
 
+                                                                        <div class="mt-4" style="text-align: right;">
+                                                                            <?php
+                                                                            $potroZariListValue =  DB::table('nothi_details')
+                                                                                            ->where('noteId',$id)
+                                                                                            ->where('nothId',$nothiId)
+                                                                                            ->where('dakId',$parentId)
+                                                                                            ->where('dakType',$status)
+                                                                                            ->value('permission_status');
 
+
+
+                                                                                ?>
+                                                                            @if($potroZariListValue == 1)
+
+                                                                            @if(!$nothiApproverLista)
+
+                                                                            @else
+                                                                            <img src="{{ asset('/') }}{{ $nothiApproverLista->admin_sign }}" style="height:30px;"/><br>
+                                                                            @endif
+
+                                                                            @else
+                                                                            @endif
+                                                                        <span>{{ $appName }}</span><br>
+                                                                        <span>{{ $desiName }}</span><br>
+
+                                                                        @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
+                                                                        <textarea id="ineditor4" name="extra_text" contenteditable="true">..........</textarea>
+                                                                        @else
+                                                                          <textarea id="ineditor4" name="extra_text" contenteditable="true">{!! $potrangshoDraft->extra_text !!}</textarea>
+                                                                         @endif
+                    <span>ফোন :{{ $aphone }}</span><br>
+                    <span>ইমেইল : {{ $aemail }}</span>
+                                                                        </div>
+
+                                                                        <!-- approver end -->
 
 
                                                                 </form>

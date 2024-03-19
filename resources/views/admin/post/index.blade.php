@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-ডাক তালিকা | {{ $ins_name }}
+আগত ডাক তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>ডাক তালিকা</h3>
+                <h3>আগত ডাক তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">ডাক </li>
-                    <li class="breadcrumb-item">ডাক তালিকা</li>
+                    <li class="breadcrumb-item">আগত ডাক তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -42,7 +42,7 @@
                             <div class="table-responsive product-table mb-0 m-t-30">
                                 <table class="display" id="basic-1">
                                     <tbody>
-                                        
+
 
                                       @include('admin.post.registrationDakFirstStep')
 
@@ -71,7 +71,13 @@
 
                                       @include('admin.post.fdThreeDakFirstStep')
 
+                                      @include('admin.post.fdFiveDakFirstStep')
 
+                                      @include('admin.post.duplicateCertificateDakFirstStep')
+
+                                      @include('admin.post.contitutionDakFirstStep')
+
+                                      @include('admin.post.executiveCommitteeDakFirstStep')
 
                                     </tbody>
                                 </table>

@@ -38,8 +38,145 @@
                         <?php
 
 
-  $allNoteListNew = DB::table('parent_note_for_name_changes')
+
+
+
+  if($status == 'registration'){
+
+
+    $allNoteListNew = DB::table('parent_note_for_registrations')
   ->where('nothi_detail_id',$dakId)->get();
+
+
+
+}elseif($status == 'renew'){
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_renews')
+  ->where('nothi_detail_id',$dakId)->get();
+
+
+
+}elseif($status == 'nameChange'){
+
+
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_name_changes')
+  ->where('nothi_detail_id',$dakId)->get();
+
+
+}elseif($status == 'fdNine'){
+
+
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_fd_nines')
+  ->where('nothi_detail_id',$dakId)->get();
+
+//dd($checkParent);
+
+
+}elseif($status == 'fdNineOne'){
+
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_fd_nine_ones')
+  ->where('nothi_detail_id',$dakId)->get();
+
+
+
+
+}elseif($status == 'fdSix'){
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_fdsixes')
+  ->where('nothi_detail_id',$dakId)->get();
+
+
+
+}elseif($status == 'fdSeven'){
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_fd_sevens')
+  ->where('nothi_detail_id',$dakId)->get();
+
+}elseif($status == 'fcOne'){
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_fc_ones')
+  ->where('nothi_detail_id',$dakId)->get();
+
+
+
+
+}elseif($status == 'fcTwo'){
+
+
+
+
+  $allNoteListNew = DB::table('parent_note_for_fc_twos')
+  ->where('nothi_detail_id',$dakId)->get();
+
+
+
+
+
+}elseif($status == 'duplicate'){
+
+
+
+
+
+
+    $allNoteListNew = DB::table('parent_note_for_duplicate_certificates')
+  ->where('nothi_detail_id',$dakId)->get();
+
+}elseif($status == 'constitution'){
+
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_constitutions')
+->where('nothi_detail_id',$dakId)->get();
+
+}elseif($status == 'committee'){
+
+
+
+
+
+
+$allNoteListNew = DB::table('parent_not_for_executive_committees')
+->where('nothi_detail_id',$dakId)->get();
+
+}elseif($status == 'fdThree'){
+
+
+
+
+
+
+$allNoteListNew = DB::table('parent_note_for_fd_threes')
+->where('nothi_detail_id',$dakId)->get();
+
+}
+
 
 
 

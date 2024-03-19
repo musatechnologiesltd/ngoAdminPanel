@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('admin_id',11);
             $table->string('receiver_id',11)->nullable();
             $table->string('sent_status',11)->nullable();
+            $table->string('sender_id',11)->nullable();
+            $table->string('view_status',11)->nullable();
+            $table->string('back_sign_status',11)->nullable();
+            $table->string('amPmValue',200)->nullable();
+            $table->string('amPmValueUpdate',200)->nullable();
             $table->timestamps();
         });
     }

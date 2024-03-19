@@ -26,6 +26,11 @@
             max-width: 80%;
             margin: 20px auto;
         }
+		thead, tbody, tfoot, tr, td, th
+		{
+			border-width: 1px !important;
+			border-color: black !important;
+		}
     </style>
 
 
@@ -77,9 +82,9 @@
 
 @if($activeCode == ($key+1))
 
-<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2 bactive"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->subject}}</button>
 @else
-<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->name }}</button>
+<button class="btn btn-transparent mt-2"  onclick="location.href = '{{ route('viewChildNote', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$checkParents->id,'activeCode' => ($key+1)]) }}';"><span class="me-2" style="padding:2px 5px; border-radius: 6px; border: 1px solid black">{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }}</span>{{ $checkParents->subject}}</button>
 @endif
 
                                         @if(count($checkParent) == ($key+1))
@@ -135,6 +140,147 @@
                                                 aria-controls="profile-icon"
                                                 aria-selected="false"><i
                                         class="icofont icofont-list"></i>নথিপত্র</a></li>
+
+                                        @elseif($status == 'nameChange')
+                                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                            data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                            aria-controls="profile-icon"
+                                            aria-selected="false"><i
+                                    class="icofont icofont-list"></i>নথিপত্র</a></li>
+
+                                    @elseif($status == 'fdNine')
+
+
+
+                                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                    data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                    aria-controls="profile-icon"
+                                    aria-selected="false"><i
+                            class="icofont icofont-list"></i>নথিপত্র</a></li>
+
+                            @elseif($status == 'fdNineOne')
+
+
+                            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                                data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                                aria-controls="profile-icon"
+                                aria-selected="false"><i
+                        class="icofont icofont-file-document"></i>নিরাপত্তা ছাড়পত্র</a></li>
+
+
+                            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                                data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                                aria-controls="profile-icon"
+                                aria-selected="false"><i
+                        class="icofont icofont-list"></i>নথিপত্র</a></li>
+                        @elseif($status == 'fdSix')
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-file-document"></i>এফডি - ৬ ফরম</a></li>
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+                    @elseif($status == 'fdSeven')
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-file-document"></i>এফডি - ৭ ফরম</a></li>
+
+
+                        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                            data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                            aria-controls="profile-icon"
+                            aria-selected="false"><i
+                    class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+
+                    @elseif($status == 'fcOne')
+
+
+                    <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                        data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                        aria-controls="profile-icon"
+                        aria-selected="false"><i
+                class="icofont icofont-file-document"></i>এফসি -১ ফরম</a></li>
+
+
+                    <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                        data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                        aria-controls="profile-icon"
+                        aria-selected="false"><i
+                class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+                @elseif($status == 'fcTwo')
+
+
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-file-document"></i>এফসি - ২ ফরম</a></li>
+
+
+                <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                    data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                    aria-controls="profile-icon"
+                    aria-selected="false"><i
+            class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+
+
+            @elseif($status == 'fdThree')
+
+
+            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+                data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+                aria-controls="profile-icon"
+                aria-selected="false"><i
+        class="icofont icofont-file-document"></i>এফডি - ৩ ফরম</a></li>
+
+
+            <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight_nothi"
+                data-bs-toggle="tab" href="#profile-icon_form_eight_nothi" role="tab"
+                aria-controls="profile-icon"
+                aria-selected="false"><i
+        class="icofont icofont-list"></i>এফডি - ২ ফরম</a></li>
+
+        @elseif($status == 'duplicate')
+
+        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+            aria-controls="profile-icon"
+            aria-selected="false"><i
+    class="icofont icofont-file-document"></i>ডুপ্লিকেট সনদপত্রের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
+
+        @elseif($status == 'constitution')
+
+        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+            aria-controls="profile-icon"
+            aria-selected="false"><i
+    class="icofont icofont-file-document"></i>গঠনতন্ত্র পরিবর্তন/অনুমোদনের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
+
+        @elseif($status == 'committee')
+
+        <li class="nav-item"><a class="nav-link" id="profile-icon-tab_form_eight"
+            data-bs-toggle="tab" href="#profile-icon_form_eight" role="tab"
+            aria-controls="profile-icon"
+            aria-selected="false"><i
+    class="icofont icofont-file-document"></i>নির্বাহী কমিটি অনুমোদনের জন্য প্রয়োজনীয় কাগজপত্রাদি</a></li>
+
+                                        
 
                                                   @endif
 
@@ -194,6 +340,8 @@
                                                                                 $desiName = '';
                                                                                 $dateApp = '';
                                                                                 $dateAppBan ='';
+                                                                                $aphone = '';
+                                                                                $aemail = '';
 
                                                                         }else{
 
@@ -210,6 +358,9 @@
                                                                                 $appName = '';
                                                                                 $desiName = '';
 
+                                                                                $aphone = '';
+                                                                                $aemail = '';
+
                                                                                }else{
 
                                                                                 $designationName = DB::table('designation_lists')
@@ -219,6 +370,9 @@
                                                                                 $appSignature =$nothiApproverLista->admin_sign;
                                                                                 $appName = $nothiApproverLista->admin_name_ban;
                                                                                 $desiName = $designationName;
+
+                                                                                $aphone = $nothiApproverLista->admin_mobile;
+                                                                                $aemail = $nothiApproverLista->email;
 
                                                                                }
 
@@ -247,7 +401,15 @@ $potroZariListValueZari =  DB::table('nothi_details')
                     ->where('dakId',$parentId)
                     ->where('dakType',$status)
                     ->value('potroPdf');
- ?>
+
+$potrangshoDraft =  DB::table('potrangsho_drafts')
+->where('sarokId',$officeDetails->id)
+                                                                                          ->where('status',$status)
+                                                                                          ->orderBy('id','desc')
+                                                                                          ->first();
+
+                                                                          ?>
+
  <!-- end new code potrangso -->
 
 
@@ -286,7 +448,7 @@ $potroZariListValueZari =  DB::table('nothi_details')
 
     <?php
 
-    $firstSenderId = DB::table('nothi_first_sender_lists')
+    $firstSenderId = DB::table('nothi_details')
     ->where('noteId',$id)
     ->where('nothId',$nothiId)
     ->where('dakId',$parentId)
@@ -309,7 +471,9 @@ $potroZariListValue =  DB::table('nothi_details')
                 ->value('permission_status');
 
 ?>
+@if($potroZariListValue == 1)
 
+@else
 <div class="dropdown me-2">
     <button class="btn btn-primary dropdown-toggle"
             type="button"
@@ -330,7 +494,7 @@ $potroZariListValue =  DB::table('nothi_details')
         </div>
     </div>
 </div>
-
+@endif
 @endif
 
     {{-- <div class="dropdown me-2">
@@ -357,7 +521,7 @@ $potroZariListValue =  DB::table('nothi_details')
     <a target="_blank"    class="btn btn-primary me-2" href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}'><i class="fa fa-print"></i> প্রিন্ট করুন</a>
 
 
-    <?php
+   <?php
 $potroZariListValue =  DB::table('nothi_details')
                 ->where('noteId',$id)
                 ->where('nothId',$nothiId)
@@ -368,7 +532,7 @@ $potroZariListValue =  DB::table('nothi_details')
 
 
     ?>
-@if(empty($firstSenderId))
+
 @if($potroZariListValue == 1)
     <button class="btn btn-primary me-2" data-bs-toggle="modal"
     data-original-title="" data-bs-target="#potroZariModal"><i class="fa fa-print"></i>পত্র জারি করুন </button>
@@ -376,56 +540,63 @@ $potroZariListValue =  DB::table('nothi_details')
 
 
     @endif
-@else
-
-    @endif
 </div>
 
  <!-- new button code end -->
-                                                                        <div class="text-center mb-3">
-                                                                            <img src="{{ asset('/') }}public/pdfLogo.png" alt="" style="height: 80px;width:80px;">
-                                                                            <h3>গণপ্রজাতন্ত্রী বাংলাদেশ
-                                                                                সরকার</h3>
-                                                                            <h5>এনজিও বিষয়ক ব্যুরো <br>
-                                                                                প্রধানমন্ত্রীর কার্যালয় <br>
-                                                                                প্লট-ই, ১৩/বি, আগারগাঁও <br>
-                                                                                শেরেবাংলা নগর, ঢাকা-১২০৭
-                                                                            </h5>
+                                                                        <div >
+                                                                            <table class="table table-borderless">
+	<tbody style="border-width:0 !important">
+			<tr style="border-width:0 !important">
+			<td style="width: 25%; vertical-align: top; border-width:0 !important">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
+			</td>
+			<td style="width: 50%; text-align:center; border-width:0 !important">
+				<p>
+					গণপ্রজাতন্ত্রী বাংলাদেশ সরকার <br>
+					এনজিও বিষয়ক ব্যুরো  <br>
+					প্রধানমন্ত্রীর কার্যালয় <br>
+					প্লট-ই-১৩/বি, আগারগাঁও, শেরেবাংলা নগর, ঢাকা-১২০৭। <br>
+					www:ngoab.gov.bd
+				</p>
+			</td>
+			<td style="width: 25%; text-align: right; vertical-align: top; border-width:0 !important;">
+			 {{-- <img src="{{ asset('/') }}public/bangladesh50.png" alt="" style="height: 60px;width:120px;"> --}}
+			</td>
+		</tr>
+	</tbody>
+	</table>
                                                                         </div>
                                                                         <div class="row" class="mt-4">
                                                                             <div class="col-md-6">
-                                                                                <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                                <p >@if(!$potrangshoDraft)
+                                                                                    <p ><span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                                    @else
+                                                                                    <div style="display: flex;">
+                                                                                    @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+                                                                                    <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                                    @else
+                                                                                    <p ><span > স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+                                                                                    @endif
+                                                                                    </div>
+
+                                                                                    @endif</p>
                                                                             </div>
                                                                             <div class="col-md-6" style="text-align: right;">
-                                                                                <table class="table table-borderless">
-                                                                                    <tr>
-                                                                                        <td style="width: 60%;">তারিখ:</td>
-                                                                                        <td style="text-align: left; padding-left: 10px;">
+                                                                               <div style="display:flex; justify-content:right;">
+                                                                                    <p>তারিখ:</p>
+                                                                                    <p>
+                                                                                    @if($potroZariListValue == 1)
+                                                                                                    {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                                    @else
 
-                                                                                            @if($potroZariListValue == 1)
-                                                                                            {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                            @else
-
-                                                                                            @endif
-
-                                                                                            {{-- {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ --}}
-
-
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </table>
+                                                                                                    @endif
+                                                                                    </p>
+                                                                                    </div>
                                                                             </div>
                                                                         </div>
 
 
-                                                                        <?php
-                                                                        $potrangshoDraft =  DB::table('potrangsho_drafts')
-                                                                                          ->where('sarokId',$officeDetails->id)
-                                                                                          ->where('status',$status)
-                                                                                          ->orderBy('id','desc')
-                                                                                          ->first();
 
-                                                                          ?>
 
 @if(!$potrangshoDraft)
 
@@ -530,14 +701,51 @@ $potroZariListValue =  DB::table('nothi_details')
 
                                                                         <span>{{ $appName }}</span><br>
                                                                         <span>{{ $desiName }}</span>
+                                                                        @if(!$potrangshoDraft)
+																			<br>
+
+    @else
+
+    @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+    @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
+<br>
+    @else
+    {!! $potrangshoDraft->extra_text !!}
+    @endif
+    @else
+    @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+
+    @else
+    {!! $officeDetails->extra_text !!}
+    @endif
+    @endif
+
+
+    @endif
+
+                                                                            <span>ফোন :{{ $aphone }}</span><br>
+                                                                            <span>ইমেইল : {{ $aemail }}</span>
                                                                         </div>
 
                                                                         <!-- approver end -->
 
                                                                    <!--prapok-->
                                                                     <div class="mt-4">
-                                                                        @foreach($nothiPropokListUpdate as $nothiPropokLists)
-                                                                        <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                        @foreach($nothiPropokListUpdate as $key=>$nothiPropokLists)
+                                                                          @if(empty($nothiPropokLists->organization_name))
+                                                                        @if(count($nothiPropokListUpdate) == ($key+1))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
+                                                                        @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
+                                                                        @endif
+                                                                         @else
+                                                                         @if(count($nothiPropokListUpdate) == ($key+1))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @else
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ;<br>
+                                                                        @endif
+                                                                        @endif
                                                                         @endforeach
                                                                     </div>
                                                                     <!--end prapok  --->
@@ -548,8 +756,22 @@ $potroZariListValue =  DB::table('nothi_details')
 
                                                                     @else
                                                                     <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
-                                                                    @foreach($nothiAttractListUpdate as $nothiPropokLists)
-                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }},{{ $nothiPropokLists->otherOfficerBranch }}</span> ।<br>
+                                                                    @foreach($nothiAttractListUpdate as $key=>$nothiPropokLists)
+                                                                    @if(empty($nothiPropokLists->organization_name))
+                                                                    @if(count($nothiAttractListUpdate) == ($key+1))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
+                                                                        @else
+
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
+                                                                        @endif
+                                                                         @else
+                                                                         @if(count($nothiAttractListUpdate) == ($key+1))
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
+                                                                        @else
+
+                                                                        {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ;<br>
+                                                                        @endif
+                                                                        @endif
                                                                     @endforeach
                                                                     @endif
 
@@ -561,23 +783,30 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     @else
                                                                     <div class="row" class="mt-4" style="margin-top:20px;">
                                                                         <div class="col-md-6">
-                                                                            <p ><span style="font-weight:900;">স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                            <p >@if(!$potrangshoDraft)
+                                                                                <p ><span > স্মারক নং:</span> {{ App\Http\Controllers\Admin\CommonController::englishToBangla($nothiNumber) }}</p>
+                                                                                @else
+                                                                                <div style="display: flex;">
+                                                                                @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+                                                                                <p ><span > স্মারক নং:</span> {!! $potrangshoDraft->sarok_number !!}</p>
+                                                                                @else
+                                                                                <p ><span > স্মারক নং:</span> {!! $officeDetails->sarok_number !!}</p>
+                                                                                @endif
+                                                                                </div>
+
+                                                                                @endif</p>
                                                                         </div>
                                                                         <div class="col-md-6" style="text-align: right;">
-                                                                            <table class="table table-borderless">
-                                                                                <tr>
-                                                                                    <td style="width: 60%;">তারিখ:</td>
-                                                                                    <td style="text-align: left; padding-left: 10px;">
+                                                                     <div style="display:flex; justify-content:right;">
+                                                                                    <p>তারিখ:</p>
+                                                                                    <p>
+                                                                                    @if($potroZariListValue == 1)
+                                                                                                    {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
+                                                                                                    @else
 
-                                                                                        @if($potroZariListValue == 1)
-                                                                                        {{ $dateAppBan }} বঙ্গাব্দ  <br> {{ $dateApp }} খ্রিস্টাব্দ
-                                                                                        @else
-
-                                                                                        @endif
-
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
+                                                                                                    @endif
+                                                                                    </p>
+                                                                                    </div>
                                                                         </div>
                                                                     </div>
 
@@ -594,10 +823,24 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
+                                                                    @if(empty($nothiPropokLists->organization_name))
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো।
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।
                                                                     @else
-                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span>,এনজিও বিষয়ক ব্যুরো;<br>
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
+
+                                                                    @endif
+                                                                    @else
+
+
+                                                                    @if(count($nothiCopyListUpdate) == ($key+1))
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }}।
+                                                                    @else
+                                                                    <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}</span>,{{ $nothiPropokLists->otherOfficerAddress }};<br>
+
+                                                                    @endif
+
+
 
                                                                     @endif
                                                                     @endforeach
@@ -606,9 +849,42 @@ $potroZariListValue =  DB::table('nothi_details')
                                                                     <!--end copy list -->
 <!--prapok-->
 <div class="mt-4" style="text-align: right;">
+    @if($potroZariListValue == 1)
 
+    @if(!$nothiApproverLista)
+
+    @else
+    <img src="{{ asset('/') }}{{ $appSignature }}" style="height:30px;"/><br>
+    @endif
+
+    @else
+    @endif
     <span>{{ $appName }}</span><br>
     <span>{{ $desiName }}</span>
+    @if(!$potrangshoDraft)
+
+    @else
+
+    @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
+    @if(empty($potrangshoDraft->extra_text ) || $potrangshoDraft->extra_text == '<p>..........</p>')
+<br>
+    @else
+    {!! $potrangshoDraft->extra_text !!}
+    @endif
+    @else
+    @if(empty($officeDetails->extra_text ) || $officeDetails->extra_text == '<p>..........</p>')
+<br>
+    @else
+    {!! $officeDetails->extra_text !!}
+    @endif
+    @endif
+
+
+    @endif
+
+                                                                            <span>ফোন :{{ $aphone }}</span><br>
+                                                                            <span>ইমেইল : {{ $aemail }}</span>
     </div>
     @endif
 @endforeach
@@ -672,7 +948,137 @@ $potroZariListValue =  DB::table('nothi_details')
 
        </div>
 
+       @elseIf($status == 'nameChange')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+
+
+       @include('admin.name_change_list.documentListForNothi')
+
+
+
+       </div>
+       @elseIf($status == 'fdNine')
+
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd9form.fd9formDoc')
+
+       </div>
+
+       @elseIf($status == 'fdNineOne')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd9Oneform.clearanceLetter')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd9Oneform.fd9OneDoc')
+
+       </div>
+
+       @elseIf($status == 'fdSix')
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd6form.fd6Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd6form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fdSeven')
+
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd7form.fd7Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd7form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fcOne')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fc1form.fc1Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fc1form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fcTwo')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fc2form.fc2Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fc2form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'fdThree')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.fd3form.fd3Form')
+       </div>
+
+       <div class="tab-pane fade" id="profile-icon_form_eight_nothi" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight_nothi">
+       @include('admin.fd3form.fd2Form')
+
+       </div>
+
+       @elseIf($status == 'duplicate')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.duplicateCertificate.docListNothi')
+       </div>
+       @elseIf($status == 'constitution')
+
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.constitution.docListNothi')
+       </div>
+
+       @elseIf($status == 'committee')
+       <div class="tab-pane fade" id="profile-icon_form_eight" role="tabpanel"
+       aria-labelledby="profile-icon-tab_form_eight">
+
+       @include('admin.executiveCommittee.docListNothi')
+       </div>
        @endif
+
+
 
        <!-- end new code-->
                             </div>
@@ -701,7 +1107,7 @@ $potroZariListValue =  DB::table('nothi_details')
                 <form class="custom-validation" action="{{ route('storeDataFromSenderView') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                     @csrf
 
-                    <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id=""/>
+                    <input type="hidden" value="{{ $status }}" placeholder="নোট এর বিষয়" class="form-control" name="status" id="mmStatus"/>
                     <input type="hidden" value="{{ $parentId }}" placeholder="নোট এর বিষয়" class="form-control" name="dakId" id=""/>
                     <input type="hidden" value="{{ $nothiId }}" placeholder="নোট এর বিষয়" class="form-control" name="nothiId" id=""/>
                     <div class="mb-3">
@@ -765,14 +1171,80 @@ $potroZariListValue =  DB::table('nothi_details')
 
 <!--code for ajax -->
 
-
+<input type="hidden" name=""  id="lastChild" value="{{ $childNoteNewListValue }}"/>
 <!--end code for ajax-->
 @endsection
 
 
 @section('script')
+<script>
+    $(document).ready(function(){
+  $("[id^=dataMain]").click(function(){
+
+    //alert(123);
+
+    var eid =   $(this).data("eid");
+
+    //mmStatus
+    var mmStatus = $('#mmStatus').val();
+    var value = $(this).attr('id');
+    var getFinalValue = value.slice(8);
 
 
+
+
+
+
+
+    $.ajax({
+    url: "{{ route('getdataforNothiList') }}",
+    method: 'get',
+    data: {mmStatus:mmStatus,getFinalValue:getFinalValue,eid:eid},
+    success: function(data) {
+
+
+
+        $('#tableListNnn'+getFinalValue).html(data.data);
+
+
+
+
+    },
+    beforeSend: function(){
+        $('#pageloader').show()
+    },
+    complete: function(){
+        $('#pageloader').hide()
+    }
+    });
+
+
+  });
+});
+
+
+$(document).on('change', '.chb', function () {
+                                      $(".chb").prop('checked',false);
+                                      $(this).prop('checked',true);
+                                  });
+
+</script>
+<script>
+
+    $(document).on('click', 'a.editButtonFirst', function () {
+
+        var id =   $(this).data("eid");
+
+         $(this).hide();
+
+         $(".editButtonSecond"+id).show();
+
+
+         $("#descriptionFirst"+id).hide();
+
+        });
+
+</script>
 <script>
     //jQuery('#copyLink1').on("click", function(event){
 
@@ -788,12 +1260,12 @@ var snoteId =$('#snoteId').val();
 
         //   alertify.set('notifier','position','top-center');
         //   alertify.success('সফলভাবে কপি হয়েছে');
-
+        var lastChild = $('#lastChild').val();
 
         $.ajax({
     url: "{{ route('addParentAttachment') }}",
     method: 'get',
-    data: {name:name,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,value:value},
+    data: {lastChild:lastChild,name:name,snoteId:snoteId,sstatus:sstatus,snothiId:snothiId,value:value},
     success: function(data) {
 
         location.reload(true);
@@ -815,6 +1287,7 @@ var snoteId =$('#snoteId').val();
 
     //event.preventDefault();
     value = $(this).attr('href');
+
     navigator.clipboard.writeText(value);
 
           alertify.set('notifier','position','top-center');
@@ -830,8 +1303,8 @@ var snoteId =$('#snoteId').val();
 
 <script>
 
-
-    $("#newPara").click(function(){
+$(document).on('click', 'a#newPara', function () {
+    // $("#newPara").click(function(){
 
          $(".mclose").removeClass("show");
 

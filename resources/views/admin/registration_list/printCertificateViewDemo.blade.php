@@ -75,7 +75,7 @@
         }
         .fifth_table
         {
-            margin-top: 48px;
+            margin-top: 45px;
         }
     </style>
 </head>
@@ -86,13 +86,27 @@
         <table class="first_table">
             <tr>
                 <td style="padding-left:32%;">{{ $form_one_data->registration_number }}</td>
-                <td style="padding-left: 32%;">{{date('d/m/Y', strtotime($mainDate ))}}</td>
+                <td style="padding-left: 32%;">
+
+
+                    @if($ngoTypeData->ngo_type_new_old == 'Old')
+
+                    {{date('d/m/Y', strtotime($ngoTypeData->ngo_registration_date ))}}
+
+                    @else
+
+                    {{date('d/m/Y', strtotime($mainDate ))}}
+
+                    @endif
+
+
+                </td>
             </tr>
         </table>
         <table class="second_table">
             <tr>
                 <td class="para_first">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->organization_name }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $form_one_data->organization_name }}.
                 </td>
             </tr>
         </table>
@@ -108,35 +122,42 @@
             @if($ngoTypeData->ngo_type_new_old == 'Old')
             <?php
 
-            $lastDate = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
-            $newdate = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate ) )) ;
+
+
+$lastDate1 = date('Y-m-d', strtotime($ngoTypeData->last_renew_date ));
+$newdateR = date("Y-m-d",strtotime ( '-10 year' , strtotime ( $lastDate1 ) )) ;
+$tomorrow = date('Y-m-d', strtotime($lastDate1 .' +1 day'));
+$newdate1 = date("Y-m-d",strtotime ( '+10 year' , strtotime ( $tomorrow ) )) ;
+//dd($tomorrow);
+
 
             ?>
 
             <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($newdate ))}}</td>
-                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($ngoTypeData->last_renew_date ))}}</td>
+                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($tomorrow ))}}</td>
+                <td style="padding-left: 5%">{{date('d/m/Y', strtotime($newdate1 ))}}</td>
             </tr>
 
 
             @else
             <tr>
-                <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
+               <td style="padding-left: 7%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_start_date ))}}</td>
                 <td style="padding-left: 5%">{{date('d/m/Y', strtotime($duration_list_all->ngo_duration_end_date ))}}</td>
             </tr>
             @endif
         </table>
         <table class="fifth_table">
             <tr>
-                <td style="width: 50%; padding-left: 55%">
+                <td style="width: 75%; padding-left: 53%">
                     <p>{{ $word1 }}</p>
                 </td>
-                <td style="width: 50%; padding-left: 22%">
-                    {{ $word }}
+                <td style="width: 25%; padding-left: 0%">
+                    {{ $newmonth }}
+
                 </td>
             </tr>
             <tr>
-                <td style="padding-left: 50px">{{ $newmonth }}</td>
+                <td style="padding-left: 50px">  {{ $word }}</td>
             </tr>
         </table>
     </div>

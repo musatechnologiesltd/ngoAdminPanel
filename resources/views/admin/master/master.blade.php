@@ -82,13 +82,14 @@
 
 
         </style>
-        @yield('css')
+
 
         {{-- <script src="{{ asset('/') }}public/admin/assets/js/jquery-3.5.1.min.js"></script> --}}
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
         <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'rel='stylesheet'>
 <script src="{{ asset('/')}}public/parsely1.js"></script>
+@yield('css')
 <style>
 
     .parsley-required{
@@ -196,6 +197,8 @@
 
 </head>
 <body>
+    @include('admin.include.loaderTwo')
+    @include('admin.include.newLoader')
 <!-- Loader starts-->
 
 @include('admin.include.loader')
@@ -312,6 +315,14 @@
     }
 </script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script>
+  $(document).on('click', '#pp', function(e) {
+
+
+        $('.bd-example-modal-lg').modal('hide');
+});
+</script>
   <script>
  $(function(){
     $("#datepicker").datepicker({
@@ -374,6 +385,40 @@ $(document).ready(function() {
   $('.summernote').summernote();
 });
         </script>
+<script>
+    $(document).ready(function(){
+  $("#form").on("submit", function(){
+
+
+    //alert(123);
+    //$("#pageloader").fadeIn();
+    $("#pageloaderOne").fadeIn();
+
+  });//submit
+});//document ready
+</script>
+
+<script>
+    var count = 0;
+var p = Promise.resolve();
+var fn = (perc) => {
+  p = p.then(() => new Promise(resolve => $("#load-perc").text(perc + "%").delay(200).fadeIn("slow", resolve)));
+};
+while (count < 100) {
+  fn(count + 1);
+  count++;
+}
+</script>
+
+<script>
+    setTimeout(function(){
+  $('#divID').remove();
+}, 3000);
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+
+
 
 @yield('script')
 <!-- login js-->
