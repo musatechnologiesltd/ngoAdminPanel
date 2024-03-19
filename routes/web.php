@@ -45,6 +45,7 @@ use App\Http\Controllers\Admin\ConstitutionController;
 use App\Http\Controllers\Admin\DuplicateCertificateController;
 use App\Http\Controllers\Admin\Fd5Controller;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\TaskManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,11 @@ Route::get('/printPotrangsoPdfForEmail/{status}/{parentId}/{nothiId}/{id}', 'pri
 
 Route::group(['prefix' => 'admin'], function () {
 
+
+    Route::resource('taskManager', TaskManagerController::class);
+
+    Route::controller(TaskManagerController::class)->group(function () {
+    });
 
     Route::controller(ReportController::class)->group(function () {
 
