@@ -40,6 +40,13 @@
 
                         <div class="card-body">
                         @include('flash_message')
+
+
+                        <div class="progress" style="display: none;">
+                            <div class="bar"></div >
+                            <div class="percent">0%</div >
+                        </div>
+                        
                             <form class="custom-validation" action="{{ route('user.store') }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
                                 @csrf
                                   <div class="row">
@@ -235,6 +242,40 @@
 @endsection
 
 @section('script')
+
+
+<script type="text/javascript">
+    $(function() {
+        $(document).ready(function()
+        {
+            var SITEURL = "{{route('user.index')}}";
+            var bar = $('.bar');
+            var percent = $('.percent');
+              $('form').ajaxForm({
+                beforeSend: function() {
+                    //$("#div1").hide();
+                  $(".progress").show();
+
+                    var percentVal = '0%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                uploadProgress: function(event, position, total, percentComplete) {
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                complete: function(xhr) {
+                    //alert('File Has Been Uploaded Successfully');
+                    alertify.set('notifier','position','top-center');
+                   alertify.success('Uploaded Successfully');
+                    window.location.href = SITEURL;
+                }
+              });
+        });
+     });
+    </script>
+
 <script>
 
     $('#branch_id').change(function(){

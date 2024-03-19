@@ -544,19 +544,28 @@
                         </div>
                       </li>
 
-                      @if (Route::is('districtWiseListSearch') || Route::is('districtWiseList') || Route::is('districtWiseListResult'))
+                      @if (Route::is('foreignNgoListReport') || Route::is('localNgoListReport') || Route::is('districtWiseListSearch') || Route::is('districtWiseList') || Route::is('districtWiseListResult'))
 
                       <li class="dropdown">
                         <a class="nav-link menu-title active" href="javascript:void(0)"><i data-feather="settings"></i><span>রিপোর্ট </span></a>
                         <ul class="nav-submenu menu-content" style="display: block;">
 
 
+
+
+
                             <li class="">
-                                <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList') ? 'active' : '' }}" data-key="t-calendar">জেলাভিত্তিক এনজিও তালিকা</a>
+                                <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList')  ? 'active' : '' }}" data-key="t-nft-landing">জেলাভিত্তিক এনজিও'র তালিকা</a>
+                            </li>
+
+                            <li class="">
+                                <a href="{{ route('localNgoListReport') }}" class="{{ Route::is('localNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">দেশি এনজিও'র তালিকা</a>
                             </li>
 
 
-
+                            <li class="">
+                                <a href="{{ route('foreignNgoListReport') }}" class="{{ Route::is('foreignNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">বিদেশি এনজিও'র তালিকা </a>
+                            </li>
 
 
                         </ul>
@@ -569,10 +578,17 @@
 
 
         <li class="">
-            <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList')  ? 'active' : '' }}" data-key="t-nft-landing">জেলাভিত্তিক এনজিও তালিকা</a>
+            <a href="{{ route('districtWiseList') }}" class="{{ Route::is('districtWiseList')  ? 'active' : '' }}" data-key="t-nft-landing">জেলাভিত্তিক এনজিও'র তালিকা</a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('localNgoListReport') }}" class="{{ Route::is('localNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">দেশি এনজিও'র তালিকা</a>
         </li>
 
 
+        <li class="">
+            <a href="{{ route('foreignNgoListReport') }}" class="{{ Route::is('foreignNgoListReport')  ? 'active' : '' }}" data-key="t-nft-landing">বিদেশি এনজিও'র তালিকা </a>
+        </li>
 
 
     </ul>

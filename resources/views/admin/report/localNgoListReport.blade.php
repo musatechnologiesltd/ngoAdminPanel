@@ -1,7 +1,7 @@
 @extends('admin.master.master')
 
 @section('title')
-জেলাভিত্তিক এনজিও'র তালিকা | {{ $ins_name }}
+দেশি এনজিও'র তালিকা | {{ $ins_name }}
 @endsection
 
 
@@ -14,11 +14,11 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>জেলাভিত্তিক এনজিও'র তালিকা</h3>
+                <h3>দেশি এনজিও'র তালিকা</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">হোম</a></li>
                     <li class="breadcrumb-item">রিপোর্ট</li>
-                    <li class="breadcrumb-item">জেলাভিত্তিক এনজিও'র তালিকা</li>
+                    <li class="breadcrumb-item">দেশি এনজিও'র তালিকা</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -76,18 +76,9 @@
                             </tr>
                             </thead>
                             <tbody id="searchTable">
+                                @foreach($localNgoListReport as $allFdOneDatas)
 
-                                @foreach($allFdOneData as $allFdOneDatas)
-                                <?php
-                                $ngoOldNew = DB::table('ngo_type_and_languages')
-                                                             ->where('user_id',$allFdOneDatas->user_id)
-                                                             ->value('ngo_type_new_old');
-
-                                                             $getngoForLanguageNewO = DB::table('ngo_type_and_languages')
-                                                             ->where('user_id',$allFdOneDatas->user_id)->value('registration');
-
-                                ?>
-                                @if($ngoOldNew == 'Old')
+                                @if($allFdOneDatas->ngo_type_new_old== 'Old')
 
 
                                     <?php
@@ -115,8 +106,8 @@
                                 <tr>
 
                                     <td>
-                                        @if($ngoOldNew == 'Old')
-                                        #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($getngoForLanguageNewO) }}
+                                        @if($allFdOneDatas->ngo_type_new_old== 'Old')
+                                        #{{ App\Http\Controllers\Admin\CommonController::englishToBangla($allFdOneDatas->registration) }}
                                         @else
 
                                     @if($allFdOneDatas->registration_number == 0)
@@ -138,25 +129,90 @@
                                     </h6><span>ঠিকানা: {{ $allFdOneDatas->organization_address }}</td>
 
 
-                                          <td>
+                                        <td>
                                             <?php
 
 
                                             $districtName = DB::table('districts')
                                             ->where('id',$allFdOneDatas->district_id)
                                             ->value('bn_name');
-                                ?>
+?>
+                                            {{-- @if($allFdOneDatas->ngo_type_new_old== 'Old')
+                                            পুরাতন
+                                            @else
 
+                                            নতুন
+                                            @endif --}}
 
-                                {{ $districtName }}
+{{ $districtName }}
                                         </td>
+
 
 
 
                                             <td>{{ $allFdOneDatas->phone }}</td>
                                             <td>{{ $allFdOneDatas->email }}</td>
-                                            <td>
-                                                {{ $allFdOneDatas->web_site_name }}
+                                <td>
+                                    {{ $allFdOneDatas->web_site_name }}
+                                    {{-- @if($allFdOneDatas->ngo_type_new_old== 'Old')
+
+
+                                    <?php
+                                $ngoOldNewRenew = DB::table('ngo_renews')
+                                                             ->where('fd_one_form_id',$allFdOneDatas->id)
+                                                             ->value('status');
+
+
+                                ?>
+
+
+                                @if($ngoOldNewRenew == 'Accepted')
+
+                                <button class="btn btn-secondary btn-xs" type="button">
+                                    গৃহীত
+
+                                </button>
+                                @elseif($ngoOldNewRenew == 'Ongoing')
+
+                                <button class="btn btn-secondary btn-xs" type="button">
+                                    চলমান
+
+                                </button>
+                                @else
+                                <button class="btn btn-secondary btn-xs" type="button">
+                                    প্রত্যাখ্যান
+
+                                </button>
+                                @endif
+
+                                    @else
+
+                                    <?php
+                                $ngoOldNewStatus = DB::table('ngo_statuses')
+                                                             ->where('fd_one_form_id',$allFdOneDatas->id)
+                                                             ->value('status');
+
+                                ?>
+
+                                @if($ngoOldNewStatus == 'Accepted')
+
+                                <button class="btn btn-secondary btn-xs" type="button">
+                                    গৃহীত
+
+                                </button>
+                                @elseif($ngoOldNewStatus == 'Ongoing' || empty($ngoOldNewStatus))
+
+                                <button class="btn btn-secondary btn-xs" type="button">
+                                    চলমান
+
+                                </button>
+                                @elseif($ngoOldNewStatus == 'Rejected')
+                                <button class="btn btn-secondary btn-xs" type="button">
+                                    প্রত্যাখ্যান
+
+                                </button>
+                                @endif
+                                    @endif --}}
 
                                 </td>
                                 </tr>
@@ -189,7 +245,7 @@ var district_id = $(this).val();
 
 
 $.ajax({
-    url: "{{ route('districtWiseListSearch') }}",
+    url: "{{ route('localNgoListSearch') }}",
     method: 'GET',
     data: {district_id:district_id},
     success: function(data) {

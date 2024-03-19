@@ -33,10 +33,10 @@ class ReportController extends Controller
 
         try{
             \LogActivity::addToLog('View districtWiseList.');
-
+            $allFdOneData = DB::table('fd_one_forms')->get();
             $allDistrictList = DB::table('districts')->get();
 
-            return view('admin.report.districtWiseList',compact('allDistrictList'));
+            return view('admin.report.districtWiseList',compact('allDistrictList','allFdOneData'));
 
         }catch (\Exception $e) {
             return redirect()->back()->with('error','some thing went wrong ');
@@ -60,6 +60,151 @@ class ReportController extends Controller
 
 
         return view('admin.report.districtWiseListSearch',compact('allFdOneData'));
+
+    }
+
+
+    public function localNgoListSearch(Request $request){
+
+
+        if($request->district_id == 'all'){
+
+            $localNgoListReport = DB::table('fd_one_forms')
+
+            ->join('ngo_type_and_languages','ngo_type_and_languages.user_id','=','fd_one_forms.user_id')
+
+            ->select('ngo_type_and_languages.id as lanId','ngo_type_and_languages.*','fd_one_forms.*')
+
+            ->where('ngo_type_and_languages.ngo_type','দেশিও')
+            ->orderBy('fd_one_forms.id','desc')
+            ->get();
+
+
+        }else{
+
+            $localNgoListReport =DB::table('fd_one_forms')
+
+            ->join('ngo_type_and_languages','ngo_type_and_languages.user_id','=','fd_one_forms.user_id')
+
+            ->select('ngo_type_and_languages.id as lanId','ngo_type_and_languages.*','fd_one_forms.*')
+
+            ->where('ngo_type_and_languages.ngo_type','দেশিও')
+            ->where('fd_one_forms.district_id',$request->district_id)
+
+            ->orderBy('fd_one_forms.id','desc')
+            ->get();
+        }
+
+
+        return view('admin.report.localNgoListSearch',compact('localNgoListReport'));
+
+    }
+
+
+    public function localNgoListReport(){
+
+
+        if (is_null($this->user) || !$this->user->can('reportView')) {
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
+        }
+
+        try{
+            \LogActivity::addToLog('View localNgoListReport.');
+
+            $allDistrictList = DB::table('districts')->get();
+
+
+            $localNgoListReport = DB::table('fd_one_forms')
+
+            ->join('ngo_type_and_languages','ngo_type_and_languages.user_id','=','fd_one_forms.user_id')
+
+            ->select('ngo_type_and_languages.id as lanId','ngo_type_and_languages.*','fd_one_forms.*')
+
+            ->where('ngo_type_and_languages.ngo_type','দেশিও')
+            ->orderBy('fd_one_forms.id','desc')
+            ->get();
+
+
+
+
+            return view('admin.report.localNgoListReport',compact('localNgoListReport','allDistrictList'));
+
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
+
+    }
+
+
+
+    public function foreignNgoListReport(){
+
+
+        if (is_null($this->user) || !$this->user->can('reportView')) {
+            //abort(403, 'Sorry !! You are Unauthorized to view !');
+            return redirect()->route('mainLogin');
+        }
+
+        try{
+            \LogActivity::addToLog('View foreignNgoListReport.');
+
+            $allDistrictList = DB::table('districts')->get();
+
+
+            $foreignNgoListReport = DB::table('fd_one_forms')
+
+            ->join('ngo_type_and_languages','ngo_type_and_languages.user_id','=','fd_one_forms.user_id')
+
+            ->select('ngo_type_and_languages.id as lanId','ngo_type_and_languages.*','fd_one_forms.*')
+
+            ->where('ngo_type_and_languages.ngo_type','Foreign')
+            ->orderBy('fd_one_forms.id','desc')
+            ->get();
+
+            return view('admin.report.foreignNgoListReport',compact('allDistrictList','foreignNgoListReport'));
+
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error','some thing went wrong ');
+        }
+
+
+    }
+
+    public function foreignNgoListSearch(Request $request){
+
+
+        if($request->district_id == 'all'){
+
+            $foreignNgoListReport = DB::table('fd_one_forms')
+
+            ->join('ngo_type_and_languages','ngo_type_and_languages.user_id','=','fd_one_forms.user_id')
+
+            ->select('ngo_type_and_languages.id as lanId','ngo_type_and_languages.*','fd_one_forms.*')
+
+            ->where('ngo_type_and_languages.ngo_type','Foreign')
+            ->orderBy('fd_one_forms.id','desc')
+            ->get();
+
+
+        }else{
+
+            $foreignNgoListReport =DB::table('fd_one_forms')
+
+            ->join('ngo_type_and_languages','ngo_type_and_languages.user_id','=','fd_one_forms.user_id')
+
+            ->select('ngo_type_and_languages.id as lanId','ngo_type_and_languages.*','fd_one_forms.*')
+
+            ->where('ngo_type_and_languages.ngo_type','Foreign')
+            ->where('fd_one_forms.district_id',$request->district_id)
+
+            ->orderBy('fd_one_forms.id','desc')
+            ->get();
+        }
+
+
+        return view('admin.report.foreignNgoListSearch',compact('localNgoListReport'));
 
     }
 }

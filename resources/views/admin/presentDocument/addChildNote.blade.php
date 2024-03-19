@@ -1414,7 +1414,7 @@ var snoteId =$('#snoteId').val();
 
         location.reload(true);
         alertify.set('notifier','position','top-center');
-          alertify.success('সফলভাবে কপি হয়েছে');
+        alertify.success('সফলভাবে কপি হয়েছে');
 
     }
     });

@@ -59,75 +59,25 @@ $mainCheckAll = DB::table('ngo_statuses')
     </h6><span>ঠিকানা: {{ $allFdOneDatas->organization_address }}</td>
 
 
-        <td> @if($ngoOldNew == 'Old')
-            পুরাতন
-            @else
+          <td>
+            <?php
 
-            নতুন
-            @endif</td>
+
+            $districtName = DB::table('districts')
+            ->where('id',$allFdOneDatas->district_id)
+            ->value('bn_name');
+?>
+
+
+{{ $districtName }}
+        </td>
+
+
+     
             <td>{{ $allFdOneDatas->phone }}</td>
-            <td>হ্যাঁ</td>
-<td>
-
-    @if($ngoOldNew == 'Old')
-
-
-    <?php
-$ngoOldNewRenew = DB::table('ngo_renews')
-                             ->where('fd_one_form_id',$allFdOneDatas->id)
-                             ->value('status');
-
-
-?>
-
-
-@if($ngoOldNewRenew == 'Accepted')
-
-<button class="btn btn-secondary btn-xs" type="button">
-    গৃহীত
-
-</button>
-@elseif($ngoOldNewRenew == 'Ongoing')
-
-<button class="btn btn-secondary btn-xs" type="button">
-    চলমান
-
-</button>
-@else
-<button class="btn btn-secondary btn-xs" type="button">
-    প্রত্যাখ্যান
-
-</button>
-@endif
-
-    @else
-
-    <?php
-$ngoOldNewStatus = DB::table('ngo_statuses')
-                             ->where('fd_one_form_id',$allFdOneDatas->id)
-                             ->value('status');
-
-?>
-
-@if($ngoOldNewStatus == 'Accepted')
-
-<button class="btn btn-secondary btn-xs" type="button">
-    গৃহীত
-
-</button>
-@elseif($ngoOldNewStatus == 'Ongoing' || empty($ngoOldNewStatus))
-
-<button class="btn btn-secondary btn-xs" type="button">
-    চলমান
-
-</button>
-@elseif($ngoOldNewStatus == 'Rejected')
-<button class="btn btn-secondary btn-xs" type="button">
-    প্রত্যাখ্যান
-
-</button>
-@endif
-    @endif
+            <td>{{ $allFdOneDatas->email }}</td>
+            <td>
+                {{ $allFdOneDatas->web_site_name }}
 
 </td>
 </tr>

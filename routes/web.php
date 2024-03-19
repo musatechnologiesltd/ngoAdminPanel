@@ -87,6 +87,19 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     Route::controller(ReportController::class)->group(function () {
+
+        Route::get('/localNgoListReport', 'localNgoListReport')->name('localNgoListReport');
+        Route::get('/foreignNgoListReport', 'foreignNgoListReport')->name('foreignNgoListReport');
+
+
+
+        Route::get('/localNgoListSearch', 'localNgoListSearch')->name('localNgoListSearch');
+        Route::get('/foreignNgoListSearch', 'foreignNgoListSearch')->name('foreignNgoListSearch');
+
+
+
+
+
         Route::get('/districtWiseListResult', 'districtWiseListResult')->name('districtWiseListResult');
         Route::get('/districtWiseList', 'districtWiseList')->name('districtWiseList');
         Route::get('/districtWiseListSearch', 'districtWiseListSearch')->name('districtWiseListSearch');

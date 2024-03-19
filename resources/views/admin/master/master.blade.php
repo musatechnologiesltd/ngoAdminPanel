@@ -79,24 +79,7 @@
 }
 
 
-#pageloader
-{
-  background: rgba( 255, 255, 255, 0.8 );
-  display: none;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
-}
 
-#pageloader img
-{
-  left: 50%;
-  margin-left: -32px;
-  margin-top: -32px;
-  position: absolute;
-  top: 50%;
-}
 
         </style>
 
@@ -215,6 +198,7 @@
 </head>
 <body>
     @include('admin.include.loaderTwo')
+    @include('admin.include.newLoader')
 <!-- Loader starts-->
 
 @include('admin.include.loader')
@@ -407,20 +391,35 @@ $(document).ready(function() {
 
 
     //alert(123);
-    $("#pageloader").fadeIn();
-
+    //$("#pageloader").fadeIn();
+    $("#pageloaderOne").fadeIn();
 
   });//submit
 });//document ready
 </script>
 
-
+<script>
+    var count = 0;
+var p = Promise.resolve();
+var fn = (perc) => {
+  p = p.then(() => new Promise(resolve => $("#load-perc").text(perc + "%").delay(200).fadeIn("slow", resolve)));
+};
+while (count < 100) {
+  fn(count + 1);
+  count++;
+}
+</script>
 
 <script>
     setTimeout(function(){
   $('#divID').remove();
 }, 3000);
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+
+
+
 @yield('script')
 <!-- login js-->
 <!-- Plugin used-->
