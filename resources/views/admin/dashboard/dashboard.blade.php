@@ -49,6 +49,11 @@
                 </div>
 
 
+                <!-- new code -->
+
+                <!-- end new start --->
+
+
             </div>
         </div>
         <div class="col-xl-7 box-col-12 des-xl-100 dashboard-sec">
@@ -163,6 +168,227 @@
                 </div>
                 </div>
 <!--e-->
+
+<!-- new code start -->
+<div class="container-fluid dashboard-default-sec">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <b>বরাদ্দকৃত কাজের তালিকা</b>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="table-responsive product-table" >
+
+                        <table class="display" id="basic-1">
+                            <thead>
+                            <tr>
+                                <th>ক্র: নং:</th>
+
+                                <th>কাজের নাম</th>
+                                <th>কাজ শেষ করার তারিখ</th>
+                                <th>স্টেটাস</th>
+                                <th>কার্যকলাপ</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="searchTable">
+
+                                @foreach($allTaskList as $key=>$allPermissionGroup)
+                                <tr>
+<td>{{ $key+1 }}</td>
+
+                                    <td>{{ $allPermissionGroup->task_name }}</td>
+                                    <td>
+
+@if(empty($allPermissionGroup->end_date))
+
+
+@else
+
+                                        {{ App\Http\Controllers\Admin\CommonController::englishToBangla($allPermissionGroup->end_date) }}
+@endif
+
+                                    </td>
+                                    <td>
+
+                                        <?php
+
+                                        $adminIdListStatus = DB::table('assaign_tasks')
+                                        ->where('admin_id',Auth::guard('admin')->user()->id)
+                                        ->where('task_id',$allPermissionGroup->id)
+                                        ->value('status');
+
+
+                                            ?>
+
+                                        {{ $adminIdListStatus }}
+
+
+
+                                    </td>
+                                    <td>
+
+                                        <div class="hstack gap-3 fs-15">
+
+
+                                            <a data-bs-toggle="modal" data-bs-target="#exampleModalnew{{ $key+1 }}" class="btn btn-primary waves-light waves-effect  btn-sm"><i class="fa fa-list"></i></a>
+
+
+
+                                            <!--new code start --->
+
+                                            <div class="modal fade" id="exampleModalnew{{ $key+1 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">কাজের বিবরণ</h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+
+
+
+
+
+
+    <form class="custom-validation" action="{{ route('taskManagerAssign',$allPermissionGroup->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+
+            <?php
+
+            $adminIdList = DB::table('assaign_tasks')
+                                                    ->where('task_id',$allPermissionGroup->id)
+                                                    ->get();
+
+
+                                                    $convert_name_title = $adminIdList->implode("admin_id", " ");
+
+
+            $separated_data_title = explode(" ", $convert_name_title);
+
+            //dd($separated_data_title);
+
+                                                    ?>
+
+                                                    <label  for="admin_id">কর্মকর্তার নাম </label>
+<br>
+                                                    <select class="form-control js-example-basic-single" required name="admin_id" id="admin_id" style="width:200px !important;">
+                                                        <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
+                                                        @foreach($users as $AllBranchLists)
+                                                        <option value="{{ $AllBranchLists->id }}" {{ (in_array($AllBranchLists->id,$separated_data_title)) ? 'selected' : '' }}>{{ $AllBranchLists->admin_name_ban }}</option>
+                                                        @endforeach
+                                                    </select>
+
+
+        </div>
+
+              <div class="col-lg-12">
+                  <div class="float-right d-none d-md-block">
+                      <div class="form-group mb-4">
+                          <div>
+                              <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
+                                হালনাগাদ করুন
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+    </form>
+
+
+
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            <!--- end new code -->
+
+                                        <a data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key+1 }}" class="btn btn-primary waves-light waves-effect  btn-sm"><i class="fa fa-eye"></i></a>
+
+
+                                        <div class="modal fade" id="exampleModal{{ $key+1 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">কাজের বিবরণ</h1>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+
+
+{!! $allPermissionGroup->description !!}
+
+
+@if($adminIdListStatus  == 'সম্পন্ন')
+
+
+@else
+
+<form class="custom-validation" action="{{ route('taskManagerTypeUpdate',$allPermissionGroup->id ) }}" method="post" enctype="multipart/form-data" id="form" data-parsley-validate="">
+    @csrf
+    @method('PUT')
+
+    <div class="mb-3">
+
+        <label for="status">স্টেটাস<span class="text-danger">*</span></label>
+        <select class="form-control" required name="status" id="status">
+            <option value="">--অনুগ্রহ করে নির্বাচন করুন--</option>
+
+            <option value="চলমান" {{ 'চলমান' == $adminIdListStatus ? 'selected':'' }}>চলমান</option>
+            <option value="সম্পন্ন" {{'সম্পন্ন' == $adminIdListStatus ? 'selected':'' }}>সম্পন্ন </option>
+        </select>
+
+    </div>
+
+          <div class="col-lg-12">
+              <div class="float-right d-none d-md-block">
+                  <div class="form-group mb-4">
+                      <div>
+                          <button type="submit" class="btn btn-primary btn-lg  waves-effect  btn-sm waves-light mr-1">
+                            হালনাগাদ করুন
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+</form>
+
+@endif
+
+                                                </div>
+
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+
+
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end new code start -->
 <!-- Container-fluid Ends-->
  <div class="container-fluid dashboard-default-sec">
     <div class="row">

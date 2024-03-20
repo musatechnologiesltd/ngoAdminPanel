@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nothi_first_sender_lists', function (Blueprint $table) {
+        Schema::create('assaign_tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('noteId');
-            $table->string('nothId');
-            $table->string('dakId');
-            $table->string('dakType');
-            $table->string('sender',11)->nullable();
-            $table->string('receiver',11)->nullable();
+            $table->bigInteger('task_id')->unsigned();
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+            $table->string('admin_id');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nothi_first_sender_lists');
+        Schema::dropIfExists('assaign_tasks');
     }
 };

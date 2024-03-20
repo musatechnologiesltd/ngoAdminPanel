@@ -42,7 +42,6 @@ use App\Models\NothiList;
 use App\Models\NothiPrapok;
 use App\Models\NothiCopy;
 use App\Models\NoteAttachment;
-use App\Models\NothiFirstSenderList;
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -57,7 +56,6 @@ use App\Models\NothiAttarct;
 use App\Models\NothiPermission;
 use App\Models\Branch;
 use App\Models\NothiDetail;
-use App\Models\ArticleSign;
 use App\Models\PotrangshoDraft;
 use App\Models\DesignationList;
 use App\Models\SealStatus;
@@ -3060,21 +3058,8 @@ class ChildNoteController extends Controller
 
 
                 }
-        //NothiFirstSenderList
-if($data['first_sender'] == 'first_sender'){
-//dd(13);
-    $mainSaveData = new NothiFirstSenderList();
-    $mainSaveData ->noteId = $data['noteId'];
-    $mainSaveData ->nothId = $data['nothiId'];
-    $mainSaveData ->childId = $data['child_note_id'];
-    $mainSaveData ->dakId = $data['dakId'];
-    $mainSaveData ->dakType = $data['status'];
-    $mainSaveData ->sender = Auth::guard('admin')->user()->id;
-    $mainSaveData ->receiver = $data['nothiPermissionId'];
-    $mainSaveData->save();
 
 
-    }
 
 if($data['button_value'] == 'return'){
 
@@ -3098,7 +3083,7 @@ if($data['button_value'] == 'return'){
 
             $deleteData = NothiDetail::where('nothId',$data['nothiId'])
             ->where('childId',$data['child_note_id'])->delete();
-            $deleteDataOne = ArticleSign::where('childId',$data['child_note_id'])->delete();
+
 
             $deleteDataOneTwo = DB::table('nothi_first_sender_lists')
             ->where('childId',$data['child_note_id'])->delete();
@@ -3600,13 +3585,6 @@ if($data['button_value'] == 'return'){
 
         $mainId = $mainSaveData->id;
 
-        $mainSaveData = new ArticleSign();
-        $mainSaveData ->dakDetailId = $mainId;
-        $mainSaveData ->childId = $data['child_note_id'];
-        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
-        $mainSaveData ->permissionId = $data['nothiPermissionId'];
-        $mainSaveData ->created_at= $created_at;
-        $mainSaveData->save();
 
       // new code-->
 
@@ -4124,454 +4102,262 @@ $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
 
 
     public function saveNothiPermissionReturn($data){
-     //dd($data);
-try{
 
+        try{
 
-      $dt = new DateTime();
-      $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
-      $created_at = $dt->format('Y-m-d h:i:s ');
+                $dt = new DateTime();
+                $dt->setTimezone(new DateTimezone('Asia/Dhaka'));
+                $created_at = $dt->format('Y-m-d h:i:s ');
 
-      $amPmValue = $dt->format('a');
-      //$amPmValueFinal = 0;
-      if($amPmValue == 'pm'){
+                $amPmValue = $dt->format('a');
 
-          $amPmValueFinal = 'অপরাহ্ন';
-      }else{
-          $amPmValueFinal = 'পূর্বাহ্ন';
+                if($amPmValue == 'pm'){
 
-      }
+                    $amPmValueFinal = 'অপরাহ্ন';
+                }else{
+                    $amPmValueFinal = 'পূর্বাহ্ন';
 
-         $secondLastValue = ArticleSign::orderBy('id','desc')->value('back_status');
+                }
 
 
+                $getPreviusIdForDelete = DB::table('nothi_details')->where('noteId',$data['noteId'])
+                ->where('nothId',$data['nothiId'])->where('dakId',$data['dakId'])
+                ->where('dakType',$data['status'])->whereNull('sent_status')
+                ->where('view_status',1)->where('sender',$data['nothiPermissionId'])
+                ->where('receiver',Auth::guard('admin')->user()->id)->orderBy('id','desc')
+                ->value('childId');
 
+                $getPreviusIdForDeleteForNew = DB::table('nothi_details')->where('noteId',$data['noteId'])
+                ->where('nothId',$data['nothiId'])->where('dakId',$data['dakId'])
+                ->where('dakType',$data['status'])->whereNull('sent_status')->where('view_status',1)
+                ->where('receiver',Auth::guard('admin')->user()->id)->orderBy('id','desc')
+                ->value('childId');
 
-//dd($data);
+            if(empty($getPreviusIdForDelete)){
 
-//23 february did not work
-$getPreviusIdForDelete = DB::table('nothi_details')
-//->where('childId',$data['child_note_id'])
-->where('noteId',$data['noteId'])
-->where('nothId',$data['nothiId'])
-->where('dakId',$data['dakId'])
-->where('dakType',$data['status'])
-->whereNull('sent_status')
-->where('view_status',1)
-->where('sender',$data['nothiPermissionId'])
-->where('receiver',Auth::guard('admin')->user()->id)
-->orderBy('id','desc')
-->value('childId');
 
+                $getPreviusIdForDeleteUpdate = DB::table('nothi_details')->where('noteId',$data['noteId'])
+                ->where('nothId',$data['nothiId'])->where('dakId',$data['dakId'])
+                ->where('dakType',$data['status'])->whereNull('sent_status')
+                ->where('view_status',1)->where('receiver',Auth::guard('admin')->user()->id)
+                ->update(['list_status' =>1]);
 
-// get data for status
 
+                if($data['child_note_id'] == $getPreviusIdForDeleteForNew ){
 
-$getPreviusIdForDeleteForNew = DB::table('nothi_details')
-//->where('childId',$data['child_note_id'])
-->where('noteId',$data['noteId'])
-->where('nothId',$data['nothiId'])
-->where('dakId',$data['dakId'])
-->where('dakType',$data['status'])
-->whereNull('sent_status')
-->where('view_status',1)
-//->where('sender',$data['nothiPermissionId'])
-->where('receiver',Auth::guard('admin')->user()->id)
-->orderBy('id','desc')
-->value('childId');
-//dd($getPreviusIdForDelete);
-// end get data for status
+                }else{
 
+                $checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])->where('nothiId',$data['nothiId'])
+                ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+                ->orderBy('id','desc')->where('seal_status',2) ->update(['delete_status' =>1]);
 
+                }
 
-//dd($data['child_note_id']);
 
-if(empty($getPreviusIdForDelete)){
+            }else{
 
+                $getPreviusIdForDeleteUpdate = DB::table('nothi_details')->where('childId',$getPreviusIdForDelete)
+                ->where('noteId',$data['noteId'])->where('nothId',$data['nothiId'])
+                ->where('dakId',$data['dakId'])->where('dakType',$data['status'])
+                ->whereNull('sent_status')->where('view_status',1)
+                ->where('sender',$data['nothiPermissionId'])->where('receiver',Auth::guard('admin')->user()->id)
+                ->update([
+                    'sent_status' =>1
+                ]);
+            }
 
-    $getPreviusIdForDeleteUpdate = DB::table('nothi_details')
-//->where('childId',$getPreviusIdForDelete)
-->where('noteId',$data['noteId'])
-->where('nothId',$data['nothiId'])
-->where('dakId',$data['dakId'])
-->where('dakType',$data['status'])
-->whereNull('sent_status')
-->where('view_status',1)
-//->where('sender',$data['nothiPermissionId'])
-->where('receiver',Auth::guard('admin')->user()->id)
-//->orderBy('id','desc')
-->update([
+                $checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])
+                ->where('nothiId',$data['nothiId'])->where('childId',$getPreviusIdForDelete)
+                ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+                ->orderBy('id','desc')->where('seal_status',2) ->update(['delete_status' =>1]);
 
-    'list_status' =>1
- ]);
-//dd($getPreviusIdForDeleteForNew);
- if($data['child_note_id'] == $getPreviusIdForDeleteForNew ){
 
- }else{
- $checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])
-->where('nothiId',$data['nothiId'])
-//->where('childId',$getPreviusIdForDelete)
-->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
-->orderBy('id','desc')
-->where('seal_status',2) ->update([
+                $senderIdNew = DB::table('nothi_details')->where('childId',$data['child_note_id'])
+                ->where('noteId',$data['noteId'])->where('nothId',$data['nothiId'])
+                ->where('dakId',$data['dakId'])->where('dakType',$data['status'])
+                ->where('receiver',Auth::guard('admin')->user()->id)->value('sender');
 
-    'delete_status' =>1
- ]);
 
- }
+                $senderIdNewPre = DB::table('nothi_details')->where('childId',$data['child_note_id'])
+                ->where('noteId',$data['noteId'])->where('nothId',$data['nothiId'])
+                ->where('dakId',$data['dakId'])->where('receiver',Auth::guard('admin')->user()->id )
+                ->where('dakType',$data['status'])->orderBy('id','desc')->value('receiver');
 
-}else{
 
+            if(Auth::guard('admin')->user()->id == $senderIdNewPre){
 
+                DB::table('nothi_details')->where('childId',$data['child_note_id'])->where('noteId',$data['noteId'])
+                ->where('nothId',$data['nothiId'])->where('dakId',$data['dakId'])
+                ->where('dakType',$data['status'])->where('receiver',Auth::guard('admin')->user()->id )
+                ->update(['sent_status' =>1]);
 
-$getPreviusIdForDeleteUpdate = DB::table('nothi_details')
-->where('childId',$getPreviusIdForDelete)
-->where('noteId',$data['noteId'])
-->where('nothId',$data['nothiId'])
-->where('dakId',$data['dakId'])
-->where('dakType',$data['status'])
-->whereNull('sent_status')
-->where('view_status',1)
-->where('sender',$data['nothiPermissionId'])
-->where('receiver',Auth::guard('admin')->user()->id)
-//->orderBy('id','desc')
-->update([
+            }else{
 
-    'sent_status' =>1
- ]);
-}
+            }
 
-$checkPreviousCodeDupdate = SealStatus::where('noteId',$data['noteId'])
-->where('nothiId',$data['nothiId'])->where('childId',$getPreviusIdForDelete)
-->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
-->orderBy('id','desc')
-->where('seal_status',2) ->update([
+                $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
+                ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
+                ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+                ->orderBy('id','desc')
+                ->value('seal_status');
 
-    'delete_status' =>1
- ]);
 
 
-//23 february did not work
 
+            if(empty($checkPreviousCode)){
 
-         $senderIdNew = DB::table('nothi_details')
-         ->where('childId',$data['child_note_id'])
-         ->where('noteId',$data['noteId'])
-         ->where('nothId',$data['nothiId'])
-         ->where('dakId',$data['dakId'])
-         ->where('dakType',$data['status'])
-         ->where('receiver',Auth::guard('admin')->user()->id)
-         ->value('sender');
+            $adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('admin_name_ban');
 
+            $adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('designation_list_id');
 
+            $adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('branch_id');
 
+            $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('admin_sign');
 
-        $senderIdNewPre = DB::table('nothi_details')
-          ->where('childId',$data['child_note_id'])
-        ->where('noteId',$data['noteId'])
- ->where('nothId',$data['nothiId'])
- ->where('dakId',$data['dakId'])
- ->where('receiver',Auth::guard('admin')->user()->id )
- ->where('dakType',$data['status'])->orderBy('id','desc')->value('receiver');
+            $mainSaveData = new SealStatus();
+            $mainSaveData ->noteId = $data['noteId'];
+            $mainSaveData ->nothiId = $data['nothiId'];
+            $mainSaveData ->childId = $data['child_note_id'];
+            $mainSaveData ->status = $data['status'];
+            $mainSaveData ->seal_status = 2;
+            $mainSaveData ->created_at= $created_at;
+            $mainSaveData ->receiver = $data['nothiPermissionId'];
+            $mainSaveData ->amPmValue = $amPmValueFinal;
+            $mainSaveData ->e_name= $adminName;
+            $mainSaveData ->e_designation= $adminNameDesi;
+            $mainSaveData ->e_branch= $adminNamebran;
+            $mainSaveData ->e_sign= $adminNameSign;
+            $mainSaveData->save();
 
-        //dd($senderIdNewPre);
 
+            }else{
 
-        if(Auth::guard('admin')->user()->id == $senderIdNewPre){
+            if($checkPreviousCode == 2){
 
-       DB::table('nothi_details')
-         ->where('childId',$data['child_note_id'])
-       ->where('noteId',$data['noteId'])
-       ->where('nothId',$data['nothiId'])
-       ->where('dakId',$data['dakId'])
-       ->where('dakType',$data['status'])
-                            ->where('receiver',Auth::guard('admin')->user()->id )
-                            ->update([
+            $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
+            ->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
+            ->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
+            ->orderBy('id','desc')->update(array('seal_status' => 1,'updated_at'=>$created_at,'amPmValueUpdate' => $amPmValueFinal));
 
-                                'sent_status' =>1
-                             ]);
-        }else{
 
+            $adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('admin_name_ban');
 
+            $adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('designation_list_id');
 
+            $adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('branch_id');
 
-        }
+            $adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])->value('admin_sign');
 
+                $mainSaveData = new SealStatus();
+                $mainSaveData ->noteId = $data['noteId'];
+                $mainSaveData ->nothiId = $data['nothiId'];
+                $mainSaveData ->childId = $data['child_note_id'];
+                $mainSaveData ->status = $data['status'];
+                $mainSaveData ->seal_status = 2;
+                $mainSaveData ->created_at= $created_at;
+                $mainSaveData ->receiver = $data['nothiPermissionId'];
+                $mainSaveData ->amPmValue = $amPmValueFinal;
+                $mainSaveData ->e_name= $adminName;
+                $mainSaveData ->e_designation= $adminNameDesi;
+                $mainSaveData ->e_branch= $adminNamebran;
+                $mainSaveData ->e_sign= $adminNameSign;
+                $mainSaveData->save();
 
+            }else{
 
-        if(empty($secondLastValue)){
+            }
 
+            }
 
 
+            if($data['status'] == 'renew'){
 
+                DB::table('child_note_for_renews')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'registration'){
 
-$checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
-->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
-->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
-->orderBy('id','desc')
-->value('seal_status');
+                DB::table('child_note_for_registrations')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'nameChange'){
 
-//dd($checkPreviousCode);
+                DB::table('child_note_for_name_changes')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
-if(empty($checkPreviousCode)){
-//dd(44);
+            }elseif($data['status'] == 'fdNine'){
 
-$adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('admin_name_ban');
+                DB::table('child_note_for_fd_nines')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'fdNineOne'){
 
-$adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('designation_list_id');
+                DB::table('child_note_for_fd_nine_ones')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'fdSix'){
 
-$adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('branch_id');
+                DB::table('child_note_for_fd_sixes')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'fdSeven'){
 
-$adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('admin_sign');
+                DB::table('child_note_for_fd_sevens')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
-$mainSaveData = new SealStatus();
-$mainSaveData ->noteId = $data['noteId'];
-$mainSaveData ->nothiId = $data['nothiId'];
-$mainSaveData ->childId = $data['child_note_id'];
-$mainSaveData ->status = $data['status'];
-$mainSaveData ->seal_status = 2;
-$mainSaveData ->created_at= $created_at;
-$mainSaveData ->receiver = $data['nothiPermissionId'];
-$mainSaveData ->amPmValue = $amPmValueFinal;
-$mainSaveData ->e_name= $adminName;
-$mainSaveData ->e_designation= $adminNameDesi;
-$mainSaveData ->e_branch= $adminNamebran;
-$mainSaveData ->e_sign= $adminNameSign;
-$mainSaveData->save();
+            }elseif($data['status'] == 'fcOne'){
 
+                DB::table('child_note_for_fc_ones')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
-}else{
+            }elseif($data['status'] == 'fcTwo'){
 
-if($checkPreviousCode == 2){
+                DB::table('child_note_for_fc_twos')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'fdThree'){
 
-    $checkPreviousCode = SealStatus::where('noteId',$data['noteId'])
-->where('nothiId',$data['nothiId'])->where('childId',$data['child_note_id'])
-->where('receiver',Auth::guard('admin')->user()->id)->where('status',$data['status'])
-->orderBy('id','desc')
-->update(array('seal_status' => 1,'updated_at'=>$created_at,'amPmValueUpdate' => $amPmValueFinal));
+                DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'fdFive'){
 
-//more code start
+                DB::table('child_note_for_fd_fives')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'duplicate'){
 
+                DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
+            }elseif($data['status'] == 'constitution'){
 
-//more code end
+                DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
-$adminName = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('admin_name_ban');
+            }elseif($data['status'] == 'committee'){
 
+                DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])->update(['back_sign_status' => DB::raw('NULL')]);
 
-$adminNameDesi = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('designation_list_id');
+            }
 
 
-$adminNamebran = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('branch_id');
+            $firstNothiSenderNew = NothiDetail::where('childId',$data['child_note_id'])
+            ->where('noteId',$data['noteId'])->where('nothId',$data['nothiId'])
+            ->where('dakId',$data['dakId'])->where('dakType',$data['status'])
+            ->whereNull('back_nothi')->where('sender',$data['nothiPermissionId'])->value('id');
 
+            $deleteData1 = NothiDetail::where('id',$firstNothiSenderNew)->update(['back_nothi'=> 1]);
 
-$adminNameSign = DB::table('admins')->where('id',$data['nothiPermissionId'])
-->value('admin_sign');
+            $mainSaveData = new NothiDetail();
+            $mainSaveData ->noteId = $data['noteId'];
+            $mainSaveData ->nothId = $data['nothiId'];
+            $mainSaveData ->childId = $data['child_note_id'];
+            $mainSaveData ->dakId = $data['dakId'];
+            $mainSaveData ->dakType = $data['status'];
+            $mainSaveData ->sent_status_other = 1;
+            $mainSaveData ->created_at= $created_at;
+            $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+            $mainSaveData ->receiver = $data['nothiPermissionId'];
+            $mainSaveData ->amPmValue = $amPmValueFinal;
+            $mainSaveData->save();
 
-    $mainSaveData = new SealStatus();
-    $mainSaveData ->noteId = $data['noteId'];
-    $mainSaveData ->nothiId = $data['nothiId'];
-    $mainSaveData ->childId = $data['child_note_id'];
-    $mainSaveData ->status = $data['status'];
-    $mainSaveData ->seal_status = 2;
-    $mainSaveData ->created_at= $created_at;
-    $mainSaveData ->receiver = $data['nothiPermissionId'];
-    $mainSaveData ->amPmValue = $amPmValueFinal;
-    $mainSaveData ->e_name= $adminName;
-      $mainSaveData ->e_designation= $adminNameDesi;
-      $mainSaveData ->e_branch= $adminNamebran;
-      $mainSaveData ->e_sign= $adminNameSign;
-    $mainSaveData->save();
-
-}else{
-
-
-
-}
-
-
-
-
-}
-
-
-if($data['status'] == 'renew'){
-
-    DB::table('child_note_for_renews')->where('id',$data['child_note_id'])
-    ->update([
-
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'registration'){
-
-    DB::table('child_note_for_registrations')->where('id',$data['child_note_id'])
-    ->update([
-
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-}elseif($data['status'] == 'nameChange'){
-
-    DB::table('child_note_for_name_changes')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'fdNine'){
-
-    DB::table('child_note_for_fd_nines')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-
-}elseif($data['status'] == 'fdNineOne'){
-
-    DB::table('child_note_for_fd_nine_ones')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'fdSix'){
-
-    DB::table('child_note_for_fd_sixes')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'fdSeven'){
-
-    DB::table('child_note_for_fd_sevens')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'fcOne'){
-
-    DB::table('child_note_for_fc_ones')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'fcTwo'){
-
-    DB::table('child_note_for_fc_twos')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-
-}elseif($data['status'] == 'fdThree'){
-
-    DB::table('child_note_for_fd_threes')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'fdFive'){
-
-    DB::table('child_note_for_fd_fives')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'duplicate'){
-
-    DB::table('child_note_for_duplicate_certificates')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'constitution'){
-
-    DB::table('child_note_for_constitutions')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}elseif($data['status'] == 'committee'){
-
-    DB::table('child_note_for_executive_committees')->where('id',$data['child_note_id'])
-    ->update([
-        'back_sign_status' => DB::raw('NULL')
-     ]);
-
-}
-
-
- ///start new code
-
- $firstNothiSenderNew = NothiDetail::where('childId',$data['child_note_id'])
- ->where('noteId',$data['noteId'])
- ->where('nothId',$data['nothiId'])
- ->where('dakId',$data['dakId'])
- ->where('dakType',$data['status'])
- ->whereNull('back_nothi')
- ->where('sender',$data['nothiPermissionId'])->value('id');
-
-
- $deleteData1 = NothiDetail::where('id',$firstNothiSenderNew)
- ->update([
-
-     'back_nothi'=> 1,
-
- ]);
-
-
-
-
-
-        //end new code
-//end new code -->
-$mainSaveData = new NothiDetail();
-$mainSaveData ->noteId = $data['noteId'];
-$mainSaveData ->nothId = $data['nothiId'];
-$mainSaveData ->childId = $data['child_note_id'];
-$mainSaveData ->dakId = $data['dakId'];
-$mainSaveData ->dakType = $data['status'];
-$mainSaveData ->sent_status_other = 1;
-$mainSaveData ->created_at= $created_at;
-$mainSaveData ->sender = Auth::guard('admin')->user()->id;
-$mainSaveData ->receiver = $data['nothiPermissionId'];
-$mainSaveData ->amPmValue = $amPmValueFinal;
-$mainSaveData->save();
-
-$mainId = $mainSaveData ->id;
-
-$mainSaveData = new ArticleSign();
-$mainSaveData ->dakDetailId = $mainId;
-$mainSaveData ->childId = $data['child_note_id'];
-$mainSaveData ->created_at= $created_at;
-$mainSaveData ->sender = Auth::guard('admin')->user()->id;
-$mainSaveData ->permissionId = $data['nothiPermissionId'];
-$mainSaveData->save();
-
-// new code-->
+            $mainId = $mainSaveData ->id;
 
             $lastSarokValue = PotrangshoDraft::where('nothiId',$data['nothiId'])
-            ->where('noteId',$data['noteId'])
-            ->where('status',$data['status'])
-            ->where('adminId',Auth::guard('admin')->user()->id)
-            ->where('SentStatus',0)
-            ->orderBy('id','desc')
-            ->first();
+            ->where('noteId',$data['noteId'])->where('status',$data['status'])
+            ->where('adminId',Auth::guard('admin')->user()->id)->where('SentStatus',0)
+            ->orderBy('id','desc')->first();
 
         if(!$lastSarokValue){
+
         }else{
 
             $newCode =PotrangshoDraft::find($lastSarokValue->id);
@@ -4695,15 +4481,8 @@ $mainSaveData->save();
 
         }
 
- }
- $secondLastValueLast=0;
-            // $mainSaveData = new ArticleSign();
-            // $mainSaveData ->dakDetailId = $mainId;
-            // $mainSaveData ->childId = $data['child_note_id'];
-            // $mainSaveData ->sender = Auth::guard('admin')->user()->id;
-            // $mainSaveData ->permissionId =$data['nothiPermissionId'];
-            // $mainSaveData ->back_status = $secondLastValueLast;
-            // $mainSaveData->save();
+    }
+
 
 
         if($data['status'] == 'registration'){
@@ -4854,7 +4633,7 @@ $mainSaveData->save();
 
 
         }
-     }
+
 
     return redirect()->route('sendNothi.index')->with('success','সফলভাবে পাঠানো হয়েছে');
 } catch (\Exception $e) {

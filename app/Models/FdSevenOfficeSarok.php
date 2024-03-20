@@ -18,9 +18,6 @@ class FdSevenOfficeSarok extends Model
         'office_sutro',
         'description',
         'extra_text',
-        'sarok_number',
-        'admin_id',
-        'receiver_id',
-        'sent_status'
+        'sarok_number'
     ];
 }

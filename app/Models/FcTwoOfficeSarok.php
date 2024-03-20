@@ -18,8 +18,5 @@ class FcTwoOfficeSarok extends Model
         'description',
         'extra_text',
         'sarok_number',
-        'admin_id',
-        'receiver_id',
-        'sent_status'
     ];
 }

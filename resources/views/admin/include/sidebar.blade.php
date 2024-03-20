@@ -411,6 +411,23 @@
 </li> --}}
 @endif
 
+@if ($usr->can('humanResoruceView'))
+<li class="sidebar-main-title">
+    <div>
+      <h6>হিউমান রিসোর্স</h6>
+    </div>
+  </li>
+
+
+  @if ($usr->can('taskManagerAdd') || $usr->can('taskManagerView') || $usr->can('taskManagerDelete') || $usr->can('taskManagerUpdate'))
+<li class="dropdown">
+    <a class="nav-link menu-title link-nav {{Route::is('taskManager.edit') || Route::is('taskManager.create') || Route::is('taskManager.index') || Route::is('taskManager.show') ? 'active' : '' }}" href="{{ route('taskManager.index') }}">
+        <i data-feather="airplay"></i>
+        <span>কার্য ব্যাবস্থাপনা</span>
+    </a>
+</li>
+@endif
+@endif
 
 
 

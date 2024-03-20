@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article_signs', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('dakDetailId')->nullable();
-            $table->string('childId')->nullable();
-            $table->string('sender')->nullable();
-            $table->string('permissionId')->nullable();
-            $table->string('back_status')->nullable();
+            $table->string('task_type');
+            $table->string('task_name');
+            $table->longText('description');
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
+            $table->string('status');
+            $table->string('admin_id');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_signs');
+        Schema::dropIfExists('tasks');
     }
 };

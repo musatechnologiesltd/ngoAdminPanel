@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FdFiveOfficeSarok extends Model
+class Task extends Model
 {
     use HasFactory;
-    protected $table = "fd_five_office_saroks";
 
+    protected $table = "tasks";
     protected $fillable = [
-        'pnote_fd_five',
-        'office_subject',
-        'office_sutro',
+        'task_type',
+        'task_name',
         'description',
-        'extra_text',
-        'sarok_number'
+        'start_date',
+        'end_date',
+        'status',
+        'admin_id',
     ];
 }
