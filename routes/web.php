@@ -90,6 +90,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('taskManager', TaskManagerController::class);
 
     Route::controller(TaskManagerController::class)->group(function () {
+
+        Route::put('/taskManagerAssign/{id}', 'taskManagerAssign')->name('taskManagerAssign');
+
+        Route::get('/taskManagerType', 'taskManagerType')->name('taskManagerType');
+        Route::put('/taskManagerTypeUpdate/{id}', 'taskManagerTypeUpdate')->name('taskManagerTypeUpdate');
+
     });
 
     Route::controller(ReportController::class)->group(function () {

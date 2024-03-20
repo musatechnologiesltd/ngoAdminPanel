@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->string('status');
+            $table->string('admin_id');
             $table->timestamps();
         });
     }

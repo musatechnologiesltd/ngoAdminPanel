@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('task_id')->unsigned();
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->string('admin_id');
+            $table->string('status');
             $table->timestamps();
         });
     }

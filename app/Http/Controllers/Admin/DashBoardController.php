@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Admin;
+use App\Models\Task;
 use DB;
 use Carbon\Carbon;
 use App\Models\SystemInformation;
@@ -56,6 +57,17 @@ class DashBoardController extends Controller
         }
 
         \LogActivity::addToLog('view dashboard');
+        $users = Admin::where('id','!=',1)->orderBy('id','asc')->get();
+        $adminTaskList = DB::table('assaign_tasks')
+            ->where('admin_id',Auth::guard('admin')->user()->id)
+            ->latest()
+            ->get();
+
+            $convert_name_title = $adminTaskList->implode("task_id", " ");
+            $separated_data_title = explode(" ", $convert_name_title);
+
+            $allTaskList = Task::whereIn('id',$separated_data_title)
+            ->latest()->get();
 
         $senderNothiList = NothiDetail::where('receiver',Auth::guard('admin')->user()->id)
         ->whereNull('sent_status')
@@ -171,6 +183,17 @@ class DashBoardController extends Controller
 
         if(Auth::guard('admin')->user()->designation_list_id == 2 || Auth::guard('admin')->user()->designation_list_id == 1){
 
+
+            // $adminTaskList = DB::table('assaign_tasks')
+            // ->latest()
+            // ->get();
+
+            // $convert_name_title = $adminTaskList->implode("task_id", " ");
+            // $separated_data_title = explode(" ", $convert_name_title);
+
+            // $allTaskList = Task::whereIn('id',$separated_data_title)
+            // ->latest()->get();
+
             $all_data_for_new_list = DB::table('ngo_statuses')->whereIn('status',['Ongoing','Old Ngo Renew'])->latest() ->limit(5)->get();
             $all_data_for_renew_list = DB::table('ngo_renews')->where('status','Ongoing')->latest() ->limit(5)->get();
             $all_data_for_name_changes_list = DB::table('ngo_name_changes')->where('status','Ongoing')->latest() ->limit(5)->get();
@@ -238,6 +261,8 @@ class DashBoardController extends Controller
            $ngoStatusFdFive = DB::table('fd_five_forms')->where('status','Ongoing')->latest()->limit(5)->get();
 //dd($ngoStatusFdFive);
             return view('admin.dashboard.dashboard',compact(
+                'users',
+                'allTaskList',
                 'ngoStatusFdFive',
                 'senderNothiListfdFive',
                 'ngoStatusConstitution',
@@ -274,9 +299,15 @@ class DashBoardController extends Controller
                 'totalRejectedRenewNgoRequest',
                 'totalNameChangeNgoRequest',
                 'totalRejectedNameChangeNgoRequest',
+                'adminTaskList',
                 'count_admin'));
 
         }else{
+
+
+
+
+
 
             $nothiList = NothiList::latest()->get();
 
@@ -307,6 +338,9 @@ class DashBoardController extends Controller
 
 
             return view('admin.dashboard.dashboardOne',compact(
+                'users',
+                'allTaskList',
+                'adminTaskList',
                 'ngoStatusFdFive',
                 'ngoStatusConstitution',
                 'ngoStatusDuplicateCertificate',
