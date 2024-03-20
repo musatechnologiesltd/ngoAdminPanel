@@ -18,7 +18,12 @@ class ChildNoteForRenew extends Model
         'admin_id',
         'receiver_id',
         'sender_id',
-        'sent_status'
+        'sent_status',
+        'sender_id',
+        'view_status',
+        'back_sign_status',
+        'amPmValue',
+        'amPmValueUpdate'
     ];
 
 

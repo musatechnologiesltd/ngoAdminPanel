@@ -16,10 +16,7 @@ class FcOneOfficeSarok extends Model
         'office_subject',
         'office_sutro',
         'description',
-        'admin_id',
-        'receiver_id',
         'extra_text',
         'sarok_number',
-        'sent_status'
     ];
 }

@@ -11,6 +11,18 @@ class DakDetail extends Model
 
     protected $table = "dak_details";
 
-    protected $fillable = ['comment','main_file','access_id','sender_id','decision_list','decision_list_detail','priority_list','secret_list','status'];
+    protected $fillable = [
+
+        'comment',
+        'main_file',
+        'access_id',
+        'sender_id',
+        'decision_list',
+        'decision_list_detail',
+        'priority_list',
+        'secret_list',
+        'status'
+
+    ];
 
 }

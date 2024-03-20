@@ -10,5 +10,21 @@ class SealStatus extends Model
     use HasFactory;
 
     protected $table = "seal_statuses";
-    protected $fillable = ['noteId','nothiId','childId','receiver','status','seal_status'];
+    protected $fillable = [
+
+        'noteId',
+        'nothiId',
+        'childId',
+        'receiver',
+        'status',
+        'seal_status',
+        'e_name',
+        'e_designation',
+        'e_branch',
+        'e_sign',
+        'amPmValue',
+        'amPmValueUpdate',
+        'delete_status',
+
+    ];
 }

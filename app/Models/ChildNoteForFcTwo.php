@@ -18,7 +18,12 @@ class ChildNoteForFcTwo extends Model
         'description',
         'admin_id',
         'receiver_id',
-        'sent_status'
+        'sent_status',
+        'sender_id',
+        'view_status',
+        'back_sign_status',
+        'amPmValue',
+        'amPmValueUpdate'
     ];
 
     public function parentNoteForFcTwo()
