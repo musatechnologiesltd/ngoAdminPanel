@@ -18,25 +18,32 @@ aria-labelledby="myModalLabel22">
  <div class="d-flex flex-wrap mb-4">
     <button class="btn  btn-outline-secondary me-2" onclick="location.href = '{{ route('printPotrangso', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'sarokCode'=>$officeDetails->id]) }}';"><i class="fa fa-print"></i> প্রিন্ট করুন</button>
     <div class="dropdown me-2">
-        <button class="btn btn-outline-primary dropdown-toggle"
+        <button class="btn btn-outline-primary  btnPotroZari"
                 type="button"
-                id="dropdownMenuButton12"
-                data-bs-toggle="dropdown"
+               {{-- // id="dropdownMenuButton12" --}}
+                {{-- data-bs-toggle="dropdown" --}}
                 aria-expanded="false">
                 <i class="fa fa-send"></i>পত্র জারি করুন
         </button>
-        <div class="dropdown-menu"
+
+
+        <div id="dropdown-menu" class="dropdown-menu"
              aria-labelledby="dropdownMenuButton12">
             <div>
                 <h3 class="popover-header">পত্র জারি </h3>
                 <div class="popover-body">আপনি কি পত্র জারি করতে চান</div>
                 <div class="d-flex justify-content-center p-2">
                     <button  onclick="location.href = '{{ route('givePermissionForPotroZari', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'childnote'=>$childNoteNewListValue]) }}';" class="btn btn-primary me-2">হ্যাঁ</button>
-                    <button class="btn btn-danger">না</button>
+                    <button id="btnPotroZari"  class="btn btn-danger btnPotroZari">না</button>
                 </div>
             </div>
         </div>
+
+
+
     </div>
+
+
     <button class="btn btn-outline-warning me-2" onclick="location.href = '{{ route('createPotro', ['status' => $status,'parentId'=>$parentId,'nothiId'=>$nothiId,'id' =>$id,'activeCode' =>$activeCode]) }}';"><i class="fa fa-pencil"></i> সংশোধন করুন</button>
 
 

@@ -42,6 +42,7 @@ use App\Models\NothiList;
 use App\Models\NothiPrapok;
 use App\Models\NothiCopy;
 use App\Models\NoteAttachment;
+use App\Models\NothiFirstSenderList;
 use App\Models\RegistrationOfficeSarok;
 use App\Models\RenewOfficeSarok;
 use App\Models\NameChangeOfficeSarok;
@@ -56,6 +57,7 @@ use App\Models\NothiAttarct;
 use App\Models\NothiPermission;
 use App\Models\Branch;
 use App\Models\NothiDetail;
+use App\Models\ArticleSign;
 use App\Models\PotrangshoDraft;
 use App\Models\DesignationList;
 use App\Models\SealStatus;
@@ -3059,7 +3061,20 @@ class ChildNoteController extends Controller
 
                 }
 
+                if($data['first_sender'] == 'first_sender'){
+                    //dd(13);
+                        $mainSaveData = new NothiFirstSenderList();
+                        $mainSaveData ->noteId = $data['noteId'];
+                        $mainSaveData ->nothId = $data['nothiId'];
+                        $mainSaveData ->childId = $data['child_note_id'];
+                        $mainSaveData ->dakId = $data['dakId'];
+                        $mainSaveData ->dakType = $data['status'];
+                        $mainSaveData ->sender = Auth::guard('admin')->user()->id;
+                        $mainSaveData ->receiver = $data['nothiPermissionId'];
+                        $mainSaveData->save();
 
+
+                        }
 
 if($data['button_value'] == 'return'){
 

@@ -418,7 +418,24 @@ while (count < 100) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
 
+<script>
+   $('.btnPotroZari').click(function() {
 
+    //alert(2);
+   $('#dropdown-menu').toggle()
+});
+
+
+// $(document).click(function(){
+//     $("#dropdown-menu").hide();
+// });
+
+
+// $('#btnFilter').click(function() {
+//   $(this).parents('.dropdown').find('button.dropdown-toggle').dropdown('toggle')
+// })
+
+    </script>
 
 @yield('script')
 <!-- login js-->

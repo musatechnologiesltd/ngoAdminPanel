@@ -564,15 +564,23 @@ $branchName = DB::table('branches')
                                                                                    @else
 
                                                                                    @if(($potrangshoDraft->SentStatus == 0)&&($potrangshoDraft->adminId == Auth::guard('admin')->user()->id))
+
                                                                                    @include('admin.potro.formReceiver')
 
                                                                                    @else
+
+
+
                                                                                    @if(empty($officeDetails->sarok_number))
                                                                                    @include('admin.potro.formReceiver')
                                                                                    @else
                                                                                    @include('admin.potro.formReceiverMain')
                                                                                    @endif
+
+
                                                                                    @endif
+
+
                                                                                    @endif
 
 
@@ -596,17 +604,25 @@ $branchName = DB::table('branches')
                                                                     <div class="mt-4">
                                                                         @foreach($nothiPropokListUpdate as $key=>$nothiPropokLists)
                                                                         <span> @if(empty($nothiPropokLists->organization_name))
+
+
                                                                             @if(count($nothiPropokListUpdate) == ($key+1))
                                                                             {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
                                                                             @else
                                                                             {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
                                                                             @endif
+
+
                                                                              @else
+
+
                                                                              @if(count($nothiPropokListUpdate) == ($key+1))
                                                                             {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
                                                                             @else
                                                                             {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ;<br>
                                                                             @endif
+
+
                                                                             @endif
                                                                         @endforeach
                                                                     </div>
@@ -617,23 +633,17 @@ $branchName = DB::table('branches')
                                                                     @if(count($nothiAttractListUpdate) == 0)
 
                                                                     @else
-                                                                    <h6 class="mt-4">দৃষ্টি আকর্ষণ</h6>
+                                                                    <p class="mt-4" style="font-weight:bold">দৃষ্টি আকর্ষণ</p>
                                                                     @foreach($nothiAttractListUpdate as $key=>$nothiPropokLists)
-                                                                    <span>@if(empty($nothiPropokLists->organization_name))
-                                                                        @if(count($nothiAttractListUpdate) == ($key+1))
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।<br>
-                                                                            @else
 
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
-                                                                            @endif
-                                                                             @else
-                                                                             @if(count($nothiAttractListUpdate) == ($key+1))
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ।<br>
-                                                                            @else
+                                                                    @if(count($nothiPropokListUpdate) == ($key+1))
+                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ।
+                                                                    @else
+                                                                    <span>{{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->otherOfficerBranch }}</span> ;<br>
 
-                                                                            {{ $nothiPropokLists->otherOfficerDesignation }}, {{ $nothiPropokLists->organization_name }}, {{ $nothiPropokLists->otherOfficerAddress }}</span> ;<br>
-                                                                            @endif
-                                                                            @endif
+                                                                    @endif
+                                                                    @endforeach
+                                                                    @endif
 
                                                                     <!-- attracttion -->
 
@@ -681,7 +691,7 @@ $branchName = DB::table('branches')
                                                                         </div>
                                                                     </div>
 
-@endif
+                                                                     @endif
 
 
 
@@ -693,14 +703,19 @@ $branchName = DB::table('branches')
 
                                                                     @else
                                                                     <h6 class="mt-4">সদয় জ্ঞাতার্থে/জ্ঞাতার্থে (জ্যেষ্ঠতার ক্রমানুসারে নয় ):</h6>
+
+
                                                                     @foreach($nothiCopyListUpdate as $key=>$nothiPropokLists)
                                                                     @if(empty($nothiPropokLists->organization_name))
+
                                                                     @if(count($nothiCopyListUpdate) == ($key+1))
                                                                     <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>।
                                                                     @else
                                                                     <span>{{ App\Http\Controllers\Admin\CommonController::englishToBangla($key+1) }} | {{ $nothiPropokLists->otherOfficerDesignation }}, এনজিও বিষয়ক ব্যুরো</span>;<br>
 
                                                                     @endif
+
+
                                                                     @else
 
 
@@ -714,6 +729,8 @@ $branchName = DB::table('branches')
 
 
                                                                     @endif
+
+
                                                                     @endforeach
                                                                     @endif
 
